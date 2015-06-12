@@ -1,0 +1,7 @@
+jms_translation:
+    configs:
+        interface:
+            dirs: [%kernel.root_dir%/Resources/views]
+            output_dir: %kernel.root_dir%/Resources/translations/
+            excluded_names: ["*Test.php"]
+            domains: [interface]
