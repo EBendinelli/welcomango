@@ -1,0 +1,6 @@
+{
+  "name": "welcomango/base",
+  "dependencies": {
+    "pages-assets": "git@github.com:jblanchon/pages-assets.git#v0.1.1"
+  }
+}
