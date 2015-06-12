@@ -3,9 +3,15 @@
 !app/cache/.gitkeep
 /app/config/parameters.yml
 /app/logs/*
+/components
 !app/logs/.gitkeep
 /app/phpunit.xml
 /bin/
 /composer.phar
 /vendor/
 /web/bundles/
+/node_modules/*
+/web/*
+
+# for phpStorm users - pretty ugly....
+.idea/*

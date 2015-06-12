@@ -61,6 +61,14 @@ gulp.task('assets-js', function() {
         .pipe(concat('plugins.js'))
         .pipe(gulp.dest(assets_js))
     ;
+
+    gulp.src([
+        'components/pages-assets/js/pages.js'
+    ])
+        .pipe(uglify())
+        .pipe(concat('pages.js'))
+        .pipe(gulp.dest(assets_js))
+    ;
 });
 
 

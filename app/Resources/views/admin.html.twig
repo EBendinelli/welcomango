@@ -12,7 +12,6 @@
         <link rel="stylesheet" href="{{ asset("css/bootstrap.min.css") }}"/>
         <link rel="stylesheet" href="{{ asset("css/plugins.css") }}"/>
         <link rel="stylesheet" href="{{ asset("css/pages.css") }}"/>
-        <link rel="stylesheet" href="{{ asset("css/admin.css") }}"/>
     {% endblock %}
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     {% block javascripts_head '' %}
@@ -188,9 +187,6 @@
 {% block javascripts %}
     <script src="{{ asset('js/plugins.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/pages.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/form.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset("js/messenger.min.js") }}" type="text/javascript"></script>
     <script type="text/javascript">
         $('[data-toggle="tooltip"]').tooltip({container: 'body'});
         $('[data-toggle="popover"]').popover({container: 'body'});
