@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Welcomango\Bundle\CrmBundle\WelcomangoCrmBundle(),
             new Welcomango\Bundle\CoreBundle\WelcomangoCoreBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
