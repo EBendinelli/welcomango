@@ -82,7 +82,6 @@ doctrine:
                         alias: Model
                         is_bundle: false
 
-
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"

@@ -4,6 +4,7 @@ namespace Welcomango\Model;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity
@@ -38,6 +39,7 @@ class User extends BaseUser
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
+     * @Gedmo\Timestampable(on="create")
      */
     private $createdAt;
 
@@ -45,6 +47,7 @@ class User extends BaseUser
      * @var \DateTime
      *
      * @ORM\Column(name="updated_at", type="datetime")
+     * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
 
