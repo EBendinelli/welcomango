@@ -67,9 +67,20 @@ doctrine:
         #     path:     "%database_path%"
 
     orm:
+        default_entity_manager: default
         auto_generate_proxy_classes: "%kernel.debug%"
-        naming_strategy: doctrine.orm.naming_strategy.underscore
-        auto_mapping: true
+        entity_managers:
+            default:
+                naming_strategy: doctrine.orm.naming_strategy.underscore
+                auto_mapping: true
+                mappings:
+                    model:
+                        type: annotation
+                        dir: %kernel.root_dir%/../src/Welcomango/Model
+                        prefix: Welcomango\Model
+                        alias: Model
+                        is_bundle: false
+
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -79,14 +90,8 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
+# app/config/config.yml
 fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
-    user_class: Acme\UserBundle\Entity\User
-
-services:
-    twig.text_extension:
-        class: Twig_Extensions_Extension_Text
-        tags:
-            - name: twig.extension
-
+    user_class: Welcomango\Model\User

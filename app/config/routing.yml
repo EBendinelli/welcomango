@@ -1,5 +1,5 @@
-welcomango_core:
-    resource: "@WelcomangoCoreBundle/Controller/"
+welcomango_crm:
+    resource: "@WelcomangoCrmBundle/Controller/"
     type:     annotation
     prefix:   /
 
