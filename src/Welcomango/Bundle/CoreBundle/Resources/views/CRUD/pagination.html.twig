@@ -1,0 +1,27 @@
+<div class="row navigation clearfix">
+    <div class="col-md-6">
+        {% if number_per_page is not sameas(false) %}
+            <form id="pagination-form-admin" action="{{ path }}" method="post" class="form-horizontal">
+                <label class="pull-left control-label">
+                    {{ 'interface.item_per_page.label'|trans({}, "interface") }}&nbsp;:&nbsp;
+                </label>
+                <div class="input-group input-small">
+                    <select id="pagination-values-items" name="max_per_page" class="form-control input-sm">
+                        <option value="15" {% if pagination.itemNumberPerPage == 15 %}selected="selected"{% endif %}>15</option>
+                        <option value="30" {% if pagination.itemNumberPerPage == 30 %}selected="selected"{% endif %}>30</option>
+                        <option value="50" {% if pagination.itemNumberPerPage == 50 %}selected="selected"{% endif %}>50</option>
+                        <option value="100" {% if pagination.itemNumberPerPage == 100 %}selected="selected"{% endif %}>100</option>
+                        <option value="200" {% if pagination.itemNumberPerPage == 200 %}selected="selected"{% endif %}>200</option>
+                        <option value="500" {% if pagination.itemNumberPerPage == 500 %}selected="selected"{% endif %}>500</option>
+                    </select>
+                </div>
+            </form>
+        {% endif %}
+    </div>
+
+    <div class="col-md-6">
+        <div class="paging_bootstrap pull-right">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </div>
+</div>
