@@ -1,3 +1,8 @@
+welcomango_core:
+    resource: "@WelcomangoCoreBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
