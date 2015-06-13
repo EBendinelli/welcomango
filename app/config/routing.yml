@@ -6,3 +6,6 @@ welcomango_crm:
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+user_bundle:
+   resource: "@WelcomangoCrmBundle/Resources/config/routing.yml"
