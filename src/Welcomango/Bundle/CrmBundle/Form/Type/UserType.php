@@ -46,64 +46,69 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $roles = array(
-            "roles" => array(
-                User::ROLE_SUPER_ADMIN => User::ROLE_SUPER_ADMIN,
-                User::ROLE_ADMIN       => User::ROLE_ADMIN,
-                User::ROLE_USER        => User::ROLE_USER,
-            ),
+            User::ROLE_SUPER_ADMIN => User::ROLE_SUPER_ADMIN,
+            User::ROLE_ADMIN       => User::ROLE_ADMIN,
+            User::ROLE_USER        => User::ROLE_USER,
         );
 
-        $builder->add('roles', 'choice', [
-            'label'    => 'form.user.roles',
-            'choices'  => $roles,
-            'multiple' => true,
-            'expanded' => true,
-            'required' => false
-        ]);
-
-/*        $builder->add('groups', 'genemu_jqueryselect2_entity', [
-            'label'    => 'form.user.groups',
-            'class'    => 'Ylly\CrmBundle\Entity\Group',
-            'multiple' => true,
-            'required' => false
-        ]);*/
-
-        $builder->add('email', 'email', ['label' => 'form.user.email', 'constraints' => [new NotBlank()]]);
+        $builder->add('email', 'text', ['label' => 'form.user.email',]);
         $builder->add('firstName', 'text', ['label' => 'form.user.firstname']);
         $builder->add('lastName', 'text', ['label' => 'form.user.lastname']);
         $builder->add('phone', 'text', ['label' => 'form.user.phone', 'required' => false]);
 
-        $builder->add('enabled', 'checkbox', [
-            'label'    => 'form.site_customer.enabled',
+        $builder->add('email', 'choice', array(
+            'choices'  => array('m' => 'Masculin', 'f' => 'Féminin'),
+            'required' => false,
+        ));
+
+        $builder->add('roles', 'choice', [
+            'label'    => 'form.user.roles',
+            'required' => false,
+            'choices'  => $roles,
+            'multiple' => true,
+        ]);
+
+        /*
+
+        $builder->add('email', 'welcomango_select2_entity', [
+            'label'    => 'form.user.groups',
+            'class'    => 'Welcomango\Model\User',
+            'multiple' => true,
             'required' => false
         ]);
 
-/*        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($companyRoles) {
-            if (isset($data['roles'])) {
-                $data       = $event->getData();
-                $finalRoles = array();
 
-                foreach ($data['roles'] as $role) {
-                    if (!in_array($role, $companyRoles)) {
-                        $finalRoles[] = $role;
+        $builder->add('enabled', 'checkbox', [
+            'label'    => 'form.site_customer.enabled',
+            'required' => false
+        ]);*/
+
+        /*        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($companyRoles) {
+                    if (isset($data['roles'])) {
+                        $data       = $event->getData();
+                        $finalRoles = array();
+
+                        foreach ($data['roles'] as $role) {
+                            if (!in_array($role, $companyRoles)) {
+                                $finalRoles[] = $role;
+                            }
+                        }
+                        $data['roles'] = $finalRoles;
+                        $event->setData($data);
                     }
-                }
-                $data['roles'] = $finalRoles;
-                $event->setData($data);
-            }
-        });*/
+                });*/
     }
 
     public function finishView(FormView $view, FormInterface $form, array $options)
     {
-/*        $companyRoles = $form->getData()->getCompany()->getDefaultRoles();
+        /*        $companyRoles = $form->getData()->getCompany()->getDefaultRoles();
 
-        foreach ($view->children['roles']->children as $role) {
-            if (in_array($role->vars['value'], $companyRoles)) {
-                $role->vars['attr']['disabled'] = 'disabled';
-                $role->vars['checked']          = true;
-            }
-        }*/
+                foreach ($view->children['roles']->children as $role) {
+                    if (in_array($role->vars['value'], $companyRoles)) {
+                        $role->vars['attr']['disabled'] = 'disabled';
+                        $role->vars['checked']          = true;
+                    }
+                }*/
     }
 
     /**

@@ -3,44 +3,48 @@
 {% trans_default_domain "crm" %}
 
 {% set listing = path('user_list') %}
-{#
-{% form_theme form with ["::theme.html.twig", "YproxAdminCrmBundle:User:theme.html.twig"] %}
-{% form_theme form.roles with "YproxAdminCoreBundle:Form:roles_widget.html.twig" %}#}
+{% form_theme form with ["::theme.html.twig"] %}
 
 {% block page_content %}
     <div class="col-md-12">
         <div class="panel panel-default portlet">
             <div class="panel-body">
                 {{ form_start(form, {'action': path('user_create'), 'attr': {'novalidate': 'novalidate' }}) }}
-                    {{ form_errors(form) }}
-                    <ul class="nav nav-tabs nav-tabs-fillup">
-                        <li class="active"><a data-toggle="tab" href="#general"><span>{{ "user.informations.tab"|trans }}</span></a></li>
-                        <li><a data-toggle="tab" href="#credentials"><span>{{ "user.credentials.tab"|trans }}</span></a></li>
-                        <li><a data-toggle="tab" href="#password"><span>{{ "user.password.tab"|trans }}</span></a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active slide-left" id="general">
-                            <div class="col-md-8">
+                {{ form_errors(form) }}
+                <ul class="nav nav-tabs nav-tabs-fillup">
+                    <li class="active"><a data-toggle="tab" href="#general"><span>{{ "user.informations.tab"|trans }}</span></a></li>
+                    <li><a data-toggle="tab" href="#credentials"><span>{{ "user.credentials.tab"|trans }}</span></a></li>
+                    <li><a data-toggle="tab" href="#password"><span>{{ "user.password.tab"|trans }}</span></a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active slide-left" id="general">
+                        <div class="row">
+                            <div class="col-sm-6">
                                 {{ form_row(form.email) }}
-                                {{ form_row(form.firstName) }}
-                                {{ form_row(form.lastName) }}
-                                {{ form_row(form.phone) }}}
-                            </div>
-                        </div>
-                        <div class="tab-pane slide-left" id="credentials">
-                            <div class="col-md-8">
-                                {{ form_row(form.roles, { 'label_helper' :  'user.helper.role'|trans }) }}
-                                {{ form_row(form.enabled) }}
-                            </div>
-                        </div>
-                        <div class="tab-pane slide-left" id="password">
-                            <div class="col-md-8">
-{#                                {{ form_row(form.plainPassword.first) }}
-                                {{ form_row(form.plainPassword.second) }}#}
-                            </div>
+                                <div class="row">
+                                    <div class="col-md-6">{{ form_row(form.firstName) }}</div>
+                                    <div class="col-md-6">{{ form_row(form.lastName) }}</div>
+                                </div>
+                                {{ form_row(form.roles, { 'label_helper' :  'admin.faq.email_sender.helper'|trans } ) }}
+                                {{ form_row(form.phone) }}
+
+
                         </div>
                     </div>
-{#                    {% include "YproxAdminCoreBundle:Form:form_footer.html.twig" with {listing : listing, update: true } only %}#}
+                    <div class="tab-pane slide-left" id="credentials">
+                        <div class="col-md-8">
+                            {#                                {{ form_row(form.roles, { 'label_helper' :  'user.helper.role'|trans }) }}
+                                                            {{ form_row(form.enabled) }}#}
+                        </div>
+                    </div>
+                    <div class="tab-pane slide-left" id="password">
+                        <div class="col-md-8">
+                            {#                                {{ form_row(form.plainPassword.first) }}
+                                                            {{ form_row(form.plainPassword.second) }}#}
+                        </div>
+                    </div>
+                </div>
+                {#                    {% include "YproxAdminCoreBundle:Form:form_footer.html.twig" with {listing : listing, update: true } only %}#}
                 {{ form_end(form) }}
             </div>
         </div>
@@ -49,10 +53,12 @@
 
 {% block stylesheets %}
     {{ parent() }}
-{#    {{ form_stylesheet(form) }}#}
+    {{ form_stylesheet(form) }}
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-{#    {{ form_javascript(form) }}#}
+    <script type="text/javascript">
+        $('select').select2();
+    </script>
 {% endblock %}

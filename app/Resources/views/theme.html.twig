@@ -1,0 +1,39 @@
+
+{% block text_widget %}
+    <div class="form-group form-group-default {% if required %}required{% endif %}">
+        <label>{{ form_label(form) }}</label>
+        <input class="form-control" {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    </div>
+{% endblock text_widget %}
+
+
+{% block choice_widget %}
+    <div class="form-group form-group-default form-group-default-select2">
+        <label>{{ form_label(form) }}</label>
+        {% if multiple %}
+        <select class="full-width select2-offscreen" data-init-plugin="select2" multiple="true" tabindex="-1">
+            {% for attrname, attrvalue in  form.vars.choices %}<option value="{{ attrvalue.value }}">{{ attrvalue.value }}</option>"{% endfor %}
+        </select>
+        {% endif %}
+    </div>
+{% endblock choice_widget %}
+
+{%- block form_row -%}
+    <div>
+        {{- form_errors(form) -}}
+        {{- form_widget(form) -}}
+    </div>
+{%- endblock form_row -%}
+
+{% block form_label %}
+    {% if not compound %}
+    {% set label_attr = label_attr|merge({'for': id}) %}
+{% endif %}
+    {% if required %}
+    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+{% endif %}
+    {% if label is empty %}
+    {% set label = name|humanize %}
+{% endif %}
+    <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
+{% endblock form_label %}

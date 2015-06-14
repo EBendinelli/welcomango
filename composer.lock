@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "862c32ae2b68c83670c5f783435aee13",
+    "hash": "c5cf7b4708b87d15841dccda694ff139",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -856,6 +856,62 @@
                 "orm"
             ],
             "time": "2014-12-16 13:45:01"
+        },
+        {
+            "name": "elao/theme-twitter-bootstrap-3-bundle",
+            "version": "v0.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Elao/ElaoThemeTwitterBootstrap3Bundle.git",
+                "reference": "89d940c711e4ffc84d77697731397caf8785fe49"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Elao/ElaoThemeTwitterBootstrap3Bundle/zipball/89d940c711e4ffc84d77697731397caf8785fe49",
+                "reference": "89d940c711e4ffc84d77697731397caf8785fe49",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.4"
+            },
+            "suggest": {
+                "elao/form-bundle": "~0.1@dev",
+                "elao/theme-bundle": "~0.1@dev"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Elao\\Bundle\\Theme\\TwitterBootstrap3Bundle\\": "."
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Elao",
+                    "homepage": "http://www.elao.com"
+                },
+                {
+                    "name": "Thomas Jarrand",
+                    "homepage": "https://github.com/Tom32i"
+                }
+            ],
+            "description": "Twitter Bootstrap 3 theme bundle for ElaoThemeBundle",
+            "homepage": "https://github.com/Elao/ElaoThemeTwitterBootstrap3Bundle",
+            "keywords": [
+                "bootstrap",
+                "elao",
+                "theme-bundle",
+                "twitter"
+            ],
+            "time": "2014-12-19 16:26:30"
         },
         {
             "name": "friendsofsymfony/user-bundle",
