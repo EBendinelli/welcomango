@@ -1,16 +1,18 @@
 <?xml version="1.0" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
     <services>
-        <service id="welcomango_core.example" class="Welcomango\Bundle\CoreBundle\Example">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+        <service id="welcomango.menu_builder" class="Welcomango\Bundle\CoreBundle\Menu\Builder">
+            <argument type="service" id="knp_menu.factory" />
+            <argument type="service" id="security.token_storage" />
+            <argument type="service" id="request_stack" />
+        </service>
+
+        <service id="welcomango.menu_builder.main" class="Knp\Menu\MenuItem" factory-service="welcomango.menu_builder" factory-method="createMainMenu">
+            <tag name="knp_menu.menu" alias="menu_admin" />
         </service>
     </services>
-    -->
 </container>
