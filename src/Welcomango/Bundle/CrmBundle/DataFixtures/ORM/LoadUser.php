@@ -47,10 +47,8 @@ class LoadUserData extends AbstractFixture  implements FixtureInterface, Contain
         $listNames = array('Alexandre', 'Marine', 'Anna', 'Jackie', 'Michel', 'Jaybe', 'Eliot');
 
         foreach ($listNames as $name) {
-            // On crée l'utilisateur
             $user = $userManager->createUser();
 
-            // Le nom d'utilisateur et le mot de passe sont identiques
             $user->setUsername($name);
             $user->setPassword($name);
             $user->setEmail($name.'@mail.com');
@@ -61,9 +59,8 @@ class LoadUserData extends AbstractFixture  implements FixtureInterface, Contain
             $user->setCreatedAt(new \DateTime());
             $user->setUpdatedAt(new \DateTime());
 
-            // On définit uniquement le role ROLE_USER qui est le role de base
             $user->setRoles(array('ROLE_USER'));
-            // On le persiste
+
             $manager->persist($user);
             $userManager->updateUser($user, true);
         }
@@ -74,6 +71,7 @@ class LoadUserData extends AbstractFixture  implements FixtureInterface, Contain
      */
     public function getOrder()
     {
-        return 1; // l'ordre dans lequel les fichiers sont chargés
+        //Define the order in which the fixtures are executed
+        return 1;
     }
 }

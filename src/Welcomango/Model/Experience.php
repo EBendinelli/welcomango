@@ -41,6 +41,7 @@ class Experience
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
+     * @Gedmo\Timestampable(on="create")
      */
     private $createdAt;
 
@@ -48,6 +49,7 @@ class Experience
      * @var \DateTime
      *
      * @ORM\Column(name="updated_at", type="datetime")
+     * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
 
@@ -80,18 +82,28 @@ class Experience
     private $pricePerHour;
 
     /**
-     * @var ArrayCollection
+     * @var integer
      *
-     * @ORM\Column(name="participations", type="integer")
-     * @ORM\OneToMany(targetEntity="Participation", mappedBy="user")
+     * @ORM\Column(name="maximum_participants", type="integer")
      */
+    private $maximumParticipants;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Participation", mappedBy="experience")
+     **/
     private $participations;
 
     /**
      * @ORM\ManyToMany(targetEntity="Tag", inversedBy="users")
-     * @ORM\JoinTable(name="wm_users_tags")
+     * @ORM\JoinTable(name="wm_experiences_tags")
      **/
     private $tags;
+
+    /**
+     * @ORM\OneToOne(targetEntity="City")
+     * @ORM\JoinColumn(name="city_id", referencedColumnName="id")
+     **/
+    private $city;
 
     /**
      * Get id
@@ -264,6 +276,22 @@ class Experience
     }
 
     /**
+     * @return int
+     */
+    public function getMaximumParticipants()
+    {
+        return $this->maximumParticipants;
+    }
+
+    /**
+     * @param int $maximumParticipants
+     */
+    public function setMaximumParticipants($maximumParticipants)
+    {
+        $this->maximumParticipants = $maximumParticipants;
+    }
+
+    /**
      * @return ArrayCollection
      */
     public function getParticipations()
@@ -293,6 +321,22 @@ class Experience
     public function setTags($tags)
     {
         $this->tags = $tags;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param mixed $city
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
     }
 
     /**
