@@ -2,14 +2,17 @@
 
 namespace Welcomango\CrmBundle\DataFixtures\ORM;
 
+use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+
 use Welcomango\Model\User;
 
-class LoadUserData implements FixtureInterface, ContainerAwareInterface{
+class LoadUserData extends AbstractFixture  implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface{
 
     private $container;
 
@@ -64,5 +67,13 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface{
             $manager->persist($user);
             $userManager->updateUser($user, true);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getOrder()
+    {
+        return 1; // l'ordre dans lequel les fichiers sont chargés
     }
 }

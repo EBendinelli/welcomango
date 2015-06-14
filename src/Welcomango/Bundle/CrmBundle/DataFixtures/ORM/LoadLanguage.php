@@ -2,12 +2,14 @@
 
 namespace Welcomango\Bundle\CrmBundle\DataFixtures\ORM;
 
+use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
 use Welcomango\Model\Language;
 
-class LoadLanguageData implements FixtureInterface
+class LoadLanguageData extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface
 {
     /**
     * {@inheritDoc}
@@ -26,5 +28,13 @@ class LoadLanguageData implements FixtureInterface
         }
         $manager->flush();
 
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getOrder()
+    {
+        return 2; // l'ordre dans lequel les fichiers sont chargés
     }
 }
