@@ -54,7 +54,7 @@ class UserController extends Controller
     public function createAction(Request $request)
     {
         $user = $this->get('fos_user.user_manager')->createUser();
-        $form = $this->createForm($this->get('yprox.form.user.create'), $user);
+        $form = $this->createForm($this->get('welcomango.form.user.create'), $user);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

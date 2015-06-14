@@ -108,3 +108,6 @@ knp_paginator:
     template:
         pagination: WelcomangoCoreBundle:CRUD:pagination_twitter_bootstrap_3_sliding.html.twig # sliding pagination controls template
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
+
+genemu_form:
+    select2: ~

@@ -8,6 +8,11 @@
         <service id="crm.display_role_icon_extension" class="Welcomango\Bundle\CrmBundle\Twig\DisplayRoleIconExtension">
             <tag name="twig.extension"/>
         </service>
+
+        <service id="welcomango.form.user.create" class="Welcomango\Bundle\CrmBundle\Form\Type\UserType">
+            <argument type="service" id="security.context" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
     </services>
 
 </container>
