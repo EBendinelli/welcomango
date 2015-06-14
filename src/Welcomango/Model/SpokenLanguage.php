@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * SpokenLanguage
  *
- * @ORM\Table()
+ * @ORM\Table(name="wm_spoken_language")
  * @ORM\Entity
  */
 class SpokenLanguage

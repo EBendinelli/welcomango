@@ -41,6 +41,7 @@ class LoadSpokenLanguageData extends AbstractFixture  implements FixtureInterfac
      */
     public function getOrder()
     {
-        return 3; // l'ordre dans lequel les fichiers sont chargés
+        //Define the order in which the fixtures are executed
+        return 3;
     }
 }
