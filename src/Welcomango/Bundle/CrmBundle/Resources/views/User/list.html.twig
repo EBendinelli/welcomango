@@ -24,7 +24,6 @@
     <tr>
         <th style="width: 30%;">{{ knp_pagination_sortable(pagination, 'user.username'|trans, 'u.username')|raw }}</th>
         <th>{{ "user.roles"|trans }}</th>
-        <th style="width: 10%">{{ "user.is_primary"|trans }}</th>
         <th>{{ knp_pagination_sortable(pagination, 'user.last_login'|trans, 'u.lastLogin')|raw }}</th>
         <th style="width: 8%">{{ knp_pagination_sortable(pagination, 'user.is_active'|trans, 'u.enabled')|raw }}</th>
         <th>{{ "interface.actions"|trans }}</th>
@@ -32,7 +31,7 @@
 {% endblock %}
 
 {% block table_body %}
-    {% include "YproxAdminCrmBundle:User:_userRow.html.twig" with { 'user' : entity } %}
+    {% include "WelcomangoCrmBundle:User:_userRow.html.twig" with { 'user' : entity } %}
 {% endblock %}
 
 
@@ -77,6 +76,7 @@
             });
         });
     </script>
+
 {% endblock %}
 
 {% block stylesheets %}

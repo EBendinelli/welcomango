@@ -12,6 +12,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class User extends BaseUser
 {
+    const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
+    const ROLE_ADMIN       = 'ROLE_ADMIN';
+    const ROLE_USER        = 'ROLE_USER';
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -19,6 +23,11 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="first_name", type="string", length=255)
+     */
     private $firstName;
 
     /**
@@ -66,7 +75,8 @@ class User extends BaseUser
      * Set firstName
      *
      * @param string $firstName
-     * @return Post
+     *
+     * @return string
      */
     public function setFirstName($firstName)
     {
@@ -89,7 +99,8 @@ class User extends BaseUser
      * Set lastName
      *
      * @param string $lastName
-     * @return Post
+     *
+     * @return string
      */
     public function setLastName($lastName)
     {
@@ -112,7 +123,8 @@ class User extends BaseUser
      * Set phone
      *
      * @param string $phone
-     * @return Post
+     *
+     * @return string
      */
     public function setPhone($phone)
     {
@@ -135,7 +147,8 @@ class User extends BaseUser
      * Set createdAt
      *
      * @param \DateTime $createdAt
-     * @return Post
+     *
+     * @return string
      */
     public function setCreatedAt($createdAt)
     {
@@ -158,7 +171,8 @@ class User extends BaseUser
      * Set updatedAt
      *
      * @param \DateTime $updatedAt
-     * @return Post
+     *
+     * @return string
      */
     public function setUpdatedAt($updatedAt)
     {
@@ -180,6 +194,21 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->firstName.' '.$this->lastName;
+    }
+
+    /**
+     * @return string
+     */
+    public function displayName()
+    {
+        return $this->firstName.' '.substr($this->lastName, 0, 1).'.';
     }
 }

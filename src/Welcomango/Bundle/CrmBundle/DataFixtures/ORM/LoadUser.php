@@ -29,19 +29,19 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface{
         $admin->setUsername('admin');
         $admin->setEmail('admin@welcomango.com');
         $admin->setPlainPassword('admin');
-        $admin->setLastName('Jack');
-        $admin->setFirstName('Palmer');
+        $admin->setLastName('Palmer');
+        $admin->setFirstName('Jack');
         $admin->setPhone('0680154251');
         $admin->setCreatedAt(new \DateTime());
         $admin->setUpdatedAt(new \DateTime());
         //$user->setPassword('3NCRYPT3D-V3R51ON');
         $admin->setEnabled(true);
-        $admin->setRoles(array('ROLE_ADMIN'));
+        $admin->setRoles(array('ROLE_SUPER_ADMIN', 'ROLE_ADMIN'));
 
         // Update the user
         $userManager->updateUser($admin, true);
 
-        $listNames = array('Alexandre', 'Marine', 'Anna');
+        $listNames = array('Alexandre', 'Marine', 'Anna', 'Jackie', 'Michel', 'Jaybe', 'Eliot');
 
         foreach ($listNames as $name) {
             // On crée l'utilisateur

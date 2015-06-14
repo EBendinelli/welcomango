@@ -44,34 +44,6 @@ class UserController extends Controller
     }
 
     /**
-     * Process and render form filters
-     *
-     * @param Request $request
-     *
-     * @Route("/users/filters/research", name="users_filters")s
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function filterFormAction(Request $request)
-    {
-        if ($request->request->has('_reset')) {
-            $this->removeFilters('userSearch');
-
-            return $this->redirect($this->generateUrl('user_list'));
-        }
-
-        $form = $this->createForm($this->get('yprox.form.user.filter'), null);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $datas = $form->getData();
-            $this->setFilters($datas, 'userSearch');
-        }
-
-        return $this->redirect($this->generateUrl('user_list'));
-    }
-
-    /**
      * @param Request $request
      *
      * @Route("/user/create", name="user_create")
@@ -138,39 +110,6 @@ class UserController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param User    $user
-     *
-     * @Route("/user/{user_id}/changePassword", name="user_change_password")
-     * @ParamConverter("user", options={"id" = "user_id"})
-     * @Template()
-     *
-     * @return array
-     */
-    public function changePasswordAction(Request $request, User $user)
-    {
-
-        $form = $this->createForm($this->get('yprox.form.user.change_password'), $user);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $data = $form->getData();
-            $this->get('fos_user.user_manager')->updateUser($user);
-
-            $this->addFlash('success', $this->trans('user.password.updated.success', array(), 'user'));
-
-            return $this->redirect($this->generateUrl('user_edit', array(
-                'user_id' => $user->getId()
-            )));
-        }
-
-        return array(
-            'form' => $form->createView(),
-            'user' => $user,
-        );
-    }
-
-    /**
      *
      * @Route("/user/{user_id}/delete", name="user_delete")
      * @ParamConverter("user", options={"id" = "user_id"})
@@ -202,26 +141,5 @@ class UserController extends Controller
         return array(
             'users' => $users
         );
-    }
-
-    /**
-     * @Template()
-     *
-     * @return array
-     */
-    public function usersByLastLoginAction()
-    {
-        $users = $this->getRepository('Yprox\Model\User')->findByLastLoggedIn(25);
-
-        return array(
-            'users' => $users
-        );
-    }
-
-    public function usersByGroupAction()
-    {
-        $groups = $this->getRepository('Ylly\CrmBundle\Entity\Group')->findJoinUsers();
-
-        return $this->render('YproxAdminCrmBundle:User:_usersByGroup.html.twig', array('groups' => $groups));
     }
 }
