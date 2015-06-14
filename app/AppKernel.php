@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Welcomango\Bundle\CrmBundle\WelcomangoCrmBundle(),
             new Welcomango\Bundle\CoreBundle\WelcomangoCoreBundle(),
+            new Welcomango\Bundle\ExperienceBundle\WelcomangoExperienceBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),

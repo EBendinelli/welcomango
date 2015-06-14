@@ -70,6 +70,14 @@ class User extends BaseUser
     private $spokenLanguages;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\Column(name="participations", type="integer")
+     * @ORM\OneToMany(targetEntity="Participation", mappedBy="user")
+     */
+    private $participations;
+
+    /**
      * Get id
      *
      * @return integer
@@ -194,6 +202,57 @@ class User extends BaseUser
         return $this->spokenLanguages;
     }
 
+
+    /**
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->firstName.' '.$this->lastName;
+    }
+
+    /**
+     * @return string
+     */
+    public function displayName()
+    {
+        return $this->firstName.' '.substr($this->lastName, 0, 1).'.';
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getParticipations()
+    {
+        return $this->participations;
+    }
+
+    /**
+     * @param ArrayCollection $participations
+     */
+    public function setParticipations($participations)
+    {
+        $this->participations = $participations;
+    }
+
+    /**
+     * @param Participation $participation
+     */
+    public function addParticipation(Participation $participation)
+    {
+        $this->participations[] = $participation;
+    }
+
+    /**
+     * @param Participation $participation
+     */
+    public function removeParticipation(Participation $participation)
+    {
+        $this->participations->removeElement($participation);
+        //If not working try this:
+        //$this->participation->remove($participation);
+    }
+
     /**
      * @param SpokenLanguage $spokenLanguage
      */
@@ -216,21 +275,6 @@ class User extends BaseUser
     {
         parent::__construct();
         $this->spokenLanguages = new ArrayCollection();
-    }
-
-    /**
-     * @return string
-     */
-    public function getFullName()
-    {
-        return $this->firstName.' '.$this->lastName;
-    }
-
-    /**
-     * @return string
-     */
-    public function displayName()
-    {
-        return $this->firstName.' '.substr($this->lastName, 0, 1).'.';
+        $this->participations = new ArrayCollection();
     }
 }
