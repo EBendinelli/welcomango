@@ -29,8 +29,9 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
+            new Welcomango\Bundle\ExperienceBundle\WelcomangoExperienceBundle(),
+            new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle()
         );
-
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
