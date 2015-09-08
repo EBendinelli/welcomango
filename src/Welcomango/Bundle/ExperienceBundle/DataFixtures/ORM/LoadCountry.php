@@ -16,14 +16,12 @@ class LoadCountryData extends AbstractFixture implements FixtureInterface, Order
      */
     public function load(ObjectManager $manager)
     {
-        $countries = array('France','England','Germany','Italy','Spain','Belgium','Austria','Finland','Netherlands','Switzerland');
-
+        $countries = array_map('str_getcsv', file('/home/eliot/www/welcomango/src/Welcomango/Data/GeodataSource_coutries.csv'));
 
         foreach($countries as $country){
             $entry = new Country();
-            $entry->setName($country);
-            $code = \strtoupper(\substr($country, 0, 2));
-            $entry->setCountryCode($code);
+            $entry->setName($country[1]);
+            $entry->setCountryCode($country[0]);
 
             $manager->persist($entry);
         }

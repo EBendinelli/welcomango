@@ -1,16 +1,23 @@
 <?xml version="1.0" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
-    <services>
-        <service id="welcomango_experience.example" class="Welcomango\Bundle\ExperienceBundle\Example">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
-        </service>
-    </services>
-    -->
+<services>
+    <service id="crm.display_role_icon_extension" class="Welcomango\Bundle\CrmBundle\Twig\DisplayRoleIconExtension">
+        <tag name="twig.extension"/>
+    </service>
+
+    <service id="welcomango.form.experience.create" class="Welcomango\Bundle\ExperienceBundle\Form\Type\ExperienceType">
+        <argument type="service" id="security.context" />
+        <argument type="service" id="doctrine.orm.entity_manager" />
+    </service>
+
+    <service id="welcomango.form.experience.edit" class="Welcomango\Bundle\ExperienceBundle\Form\Type\ExperienceEditType">
+        <argument type="service" id="security.context" />
+        <argument type="service" id="doctrine.orm.entity_manager" />
+    </service>
+</services>
+
 </container>

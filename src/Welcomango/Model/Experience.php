@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Experience
  *
  * @ORM\Table(name="wm_experience")
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity
  */
 class Experience
@@ -100,7 +101,7 @@ class Experience
     private $tags;
 
     /**
-     * @ORM\OneToOne(targetEntity="City")
+     * @ORM\ManyToOne(targetEntity="City")
      * @ORM\JoinColumn(name="city_id", referencedColumnName="id")
      **/
     private $city;
@@ -108,7 +109,7 @@ class Experience
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -160,7 +161,7 @@ class Experience
      *
      * @param \DateTime $createdAt
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
     }
@@ -188,12 +189,13 @@ class Experience
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
+
 
     /**
      * Set estimatedDuration
@@ -373,6 +375,20 @@ class Experience
         $this->participations->removeElement($participation);
         //If not working try this:
         //$this->participation->remove($participation);
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateDate(){
+        $this->setUpdatedAt(new \Datetime());
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function createDate(){
+        $this->setCreatedAt(new \Datetime());
     }
 
     public function __construct() {

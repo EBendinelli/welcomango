@@ -1,0 +1,147 @@
+<?php
+
+namespace Welcomango\Bundle\ExperienceBundle\Controller;
+
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
+use Welcomango\Bundle\CoreBundle\Controller\Controller;
+use Welcomango\Model\Experience;
+
+/**
+ *
+ */
+class ExperienceController extends Controller
+{
+    /**
+     * @param Request $request
+     *
+     * @Route("/experience/list", name="experience_list")
+     * @Template()
+     *
+     * @return array
+     */
+    public function listAction(Request $request)
+    {
+        $paginator = $this->get('knp_paginator');
+        $query     = $this->getRepository('Welcomango\Model\Experience')->findAll();
+
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1),
+            50
+        );
+
+        return array(
+            'pagination' => $pagination,
+        );
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @Route("/experience/create", name="experience_create")
+     * @Template()
+     *
+     * @return array
+     */
+    public function createAction(Request $request)
+    {
+        $experience = new Experience();
+
+        $form = $this->createForm($this->get('welcomango.form.experience.create'), $experience);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($experience);
+            $em->flush();
+
+//            $this->getRepository('Welcomango\Model\Experience')->updateExperience($experience);
+
+            $this->addFlash('success', $this->trans('experience.created.success', array(), 'user'));
+
+            return $this->redirect($this->generateUrl('experience_edit', array(
+                'experience_id' => $experience->getId(),
+            )));
+        }
+
+        return array(
+            'form' => $form->createView()
+        );
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @Route("/experience/edit", name="experience_edit")
+     * @Template()
+     *
+     * @return array
+     */
+    public function editAction(Request $request, Experience $experience)
+    {
+        $form = $this->createForm($this->get('welcomango.form.experience.edit'), $experience);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $this->getDoctrine()->getManager()->persist($experience);
+            $this->get('fos_user.user_manager')->updateUser($experience);
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', $this->trans('user.edit.success', array(), 'crm'));
+
+            return $this->redirect($this->generateUrl('user_edit', array(
+                'user_id'        => $experience->getId(),
+                'requested_user' => $experience,
+            )));
+        }
+
+        return array(
+            'form'           => $form->createView(),
+            'requested_user' => $experience
+        );
+
+
+    }
+
+    /**
+     *
+     * @Route("/experience/{experience_id}/delete", name="experience_delete")
+     * @ParamConverter("experience", options={"id" = "experience_id"})
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function deleteAction(Experience $experience)
+    {
+        $this->getDoctrine()->getManager()->remove($experience);
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirect($this->generateUrl('experience_list'));
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @Route("/experience/_experience_search_ajax", name="experience_search_ajax")
+     * @Method("POST")
+     * @Template("YproxAdminCrmBundle:Experience:_experience.html.twig")
+     *
+     * @return array
+     */
+    public function ajaxSearchAction(Request $request)
+    {
+        $query = $request->request->get('query');
+        $experiences = $this->getRepository('Welcomango\Model\Experience')->findByQuery($query);
+
+        return array(
+            'experience' => $experiences
+        );
+    }
+}
