@@ -46,10 +46,11 @@ class ExperienceEditType extends AbstractType
 
     /**
      * {@inheritdoc}
+     * @param FormBuilderInterface $builder
+     * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
 
     }
 
@@ -82,5 +83,9 @@ class ExperienceEditType extends AbstractType
     public function getName()
     {
         return 'admin_experience_edit';
+    }
+
+    public function getParent(){
+        return new ExperienceType($this->securityContext,$this->entityManager);
     }
 }

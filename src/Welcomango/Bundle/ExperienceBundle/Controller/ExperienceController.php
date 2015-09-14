@@ -78,10 +78,14 @@ class ExperienceController extends Controller
         );
     }
 
+
+
     /**
      * @param Request $request
+     * @param Experience $experience
      *
-     * @Route("/experience/edit", name="experience_edit")
+     * @Route("/experience/{experience_id}/edit", name="experience_edit")
+     * @ParamConverter("experience", options={"id" = "experience_id"})
      * @Template()
      *
      * @return array
@@ -93,13 +97,12 @@ class ExperienceController extends Controller
 
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->persist($experience);
-            $this->get('fos_user.user_manager')->updateUser($experience);
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success', $this->trans('user.edit.success', array(), 'crm'));
+            $this->addFlash('success', $this->trans('experience.edit.success', array(), 'crm'));
 
-            return $this->redirect($this->generateUrl('user_edit', array(
-                'user_id'        => $experience->getId(),
-                'requested_user' => $experience,
+            return $this->redirect($this->generateUrl('experience_edit', array(
+                'experience_id'        => $experience->getId(),
+                'requested_experience' => $experience,
             )));
         }
 

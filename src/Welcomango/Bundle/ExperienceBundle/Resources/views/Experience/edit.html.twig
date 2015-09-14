@@ -6,7 +6,8 @@
 {% form_theme form with ["::theme.html.twig"] %}
 
 {% block page_content %}
-    {{ include("WelcomangoExperienceBundle:Experience:form.html.twig", {'path': path('experience_create')}) }}
+    {{ include("WelcomangoExperienceBundle:Experience:form.html.twig", {'save_path': path('experience_edit', {'experience_id' : form.vars.value.id })}) }}
+
 {% endblock %}
 
 {% block stylesheets %}

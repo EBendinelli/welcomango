@@ -111,3 +111,16 @@ knp_paginator:
 
 genemu_form:
     select2: ~
+
+stof_doctrine_extensions:
+    # default_locale: fr
+    # this causes the translations to be BLANK when they dont exist.
+    # Don't know if this is the desired behavior or not
+    # translation_fallback: true
+    orm:
+        default:
+            timestampable: true
+            # this is now manually activated in Ylly\YllyTranslationBundle\DependencyInjection\YllyTranslationExtBundleExtension
+            # translatable: true
+            loggable: true
+            sortable: true
