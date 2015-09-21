@@ -1,15 +1,15 @@
 welcomango_front_bundle_crm:
-    resource: "@WelcomangoFrontBundleCrmBundle/Controller/"
+    resource: "@WelcomangoFrontCrmBundle/Controller/"
     type:     annotation
     prefix:   /front/
 
-welcomango_crm:
-    resource: "@WelcomangoCrmBundle/Controller/"
+welcomango_admin_crm:
+    resource: "@WelcomangoAdminCrmBundle/Controller/"
     type:     annotation
     prefix:   /
 
 welcomango_experience:
-    resource: "@WelcomangoExperienceBundle/Controller/"
+    resource: "@WelcomangoAdminExperienceBundle/Controller/"
     type:     annotation
     prefix:   /
 
@@ -18,4 +18,4 @@ app:
     type:     annotation
 
 user_bundle:
-   resource: "@WelcomangoCrmBundle/Resources/config/routing.yml"
+   resource: "@WelcomangoAdminCrmBundle/Resources/config/routing.yml"

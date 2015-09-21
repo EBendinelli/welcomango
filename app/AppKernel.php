@@ -22,9 +22,16 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new Welcomango\Bundle\CrmBundle\WelcomangoCrmBundle(),
-            new Welcomango\Bundle\CoreBundle\WelcomangoCoreBundle(),
-            new Welcomango\Bundle\ExperienceBundle\WelcomangoExperienceBundle(),
+
+            // Admin Side
+            new Welcomango\Bundle\Admin\CrmBundle\WelcomangoAdminCrmBundle(),
+            new Welcomango\Bundle\Admin\CoreBundle\WelcomangoAdminCoreBundle(),
+            new Welcomango\Bundle\Admin\ExperienceBundle\WelcomangoAdminExperienceBundle(),
+
+            // Front Side
+
+            new Welcomango\Bundle\Front\CrmBundle\WelcomangoFrontCrmBundle(),
+
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
