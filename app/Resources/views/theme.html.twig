@@ -2,19 +2,53 @@
 {% block text_widget %}
     <div class="form-group form-group-default {% if required %}required{% endif %}">
         <label>{{ form_label(form) }}</label>
-        <input class="form-control" {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        <input class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
     </div>
 {% endblock text_widget %}
 
+{% block textarea_widget %}
+{% spaceless %}
+    <div class="form-group form-group-default {% if required %}required{% endif %}">
+        <label>{{ form_label(form) }}</label>
+        {# !!!IMPORTANT!!!  #}
+        {# must remove the style tag and place it somewhere appropriate #}
+        <textarea class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %} style="height:200px" >
+        </textarea>
+    </div>
+{% endspaceless %}
+{% endblock textarea_widget %}
+
+{% block select_widget %}
+    <div class="form-group form-group-default form-group-default-select  {% if required %}required{% endif %}">
+        <label>{{ form_label(form) }}</label>
+        <select class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %} >
+        </select>
+    </div>
+{% endblock select_widget %}
 
 {% block choice_widget %}
     <div class="form-group form-group-default form-group-default-select2">
         <label>{{ form_label(form) }}</label>
         {% if multiple %}
-        <select class="full-width select2-offscreen" data-init-plugin="select2" multiple="true" tabindex="-1">
-            {% for attrname, attrvalue in  form.vars.choices %}<option value="{{ attrvalue.value }}">{{ attrvalue.value }}</option>"{% endfor %}
-        </select>
-        {% endif %}
+            <select class="full-width select2-offscreen" data-init-plugin="select2" multiple="true" tabindex="-1" {{ block('widget_attributes') }}>
+                {% for attrname, attrvalue in  form.vars.choices %}<option value="{{ attrvalue.label }}">{{ attrvalue.label }}</option>"{% endfor %}
+            </select>
+        {%  else %}
+            <select class="full-width select2-offscreen" data-init-plugin="select2" tabindex="-1" {{ block('widget_attributes') }}>
+                {%- if placeholder is not none -%}
+                    <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ placeholder != '' ? placeholder|trans({}, translation_domain) }}</option>
+                {%- endif -%}
+                {%- if preferred_choices|length > 0 -%}
+                    {% set options = preferred_choices %}
+                    {{- block('choice_widget_options') -}}
+                    {%- if choices|length > 0 and separator is not none -%}
+                        <option disabled="disabled">{{ separator }}</option>
+                    {%- endif -%}
+                {%- endif -%}
+                {%- set options = choices -%}
+                {{- block('choice_widget_options') -}}
+            </select>
+        {%  endif %}
     </div>
 {% endblock choice_widget %}
 
