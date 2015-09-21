@@ -51,6 +51,7 @@ class UserType extends AbstractType
             User::ROLE_USER        => User::ROLE_USER,
         );
 
+        $builder->add('username', 'text', ['label' => 'form.user.username',]);
         $builder->add('email', 'text', ['label' => 'form.user.email',]);
         $builder->add('firstName', 'text', ['label' => 'form.user.firstname']);
         $builder->add('lastName', 'text', ['label' => 'form.user.lastname']);
@@ -62,6 +63,16 @@ class UserType extends AbstractType
             'choices'  => $roles,
             'multiple' => true,
         ]);
+
+
+        $builder->add('password', 'repeated', array(
+            'label'            => 'password',
+            'type'            => 'password',
+            'invalid_message' => 'Les mots de passe doivent correspondre',
+            'options'         => array('required' => true),
+            'first_options'   => array('label' => 'Mot de passe'),
+            'second_options'  => array('label' => 'Mot de passe (validation)'),
+        ));
 
         $builder->add('spokenLanguages', 'entity', [
             'class' => 'Welcomango\Model\Language',

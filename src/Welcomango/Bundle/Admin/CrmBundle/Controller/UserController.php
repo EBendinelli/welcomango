@@ -15,7 +15,9 @@ use Welcomango\Bundle\Admin\CoreBundle\Controller\Controller;
 use Welcomango\Model\User;
 
 /**
+ * Class UserController
  *
+ * @ParamConverter("user", options={"id" = "user_id"})
  */
 class UserController extends Controller
 {
@@ -54,7 +56,7 @@ class UserController extends Controller
     public function createAction(Request $request)
     {
         $user = $this->get('fos_user.user_manager')->createUser();
-        $form = $this->createForm($this->get('welcomango.form.user.create'), $user);
+        $form = $this->createForm($this->get('welcomango.form.user.type'), $user);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -64,9 +66,7 @@ class UserController extends Controller
 
             $this->addFlash('success', $this->trans('user.created.success', array(), 'user'));
 
-            return $this->redirect($this->generateUrl('user_edit', array(
-                'user_id' => $user->getId(),
-            )));
+            return $this->redirect($this->generateUrl('user_list'));
         }
 
         return array(
@@ -79,16 +79,14 @@ class UserController extends Controller
      * @param User    $user
      *
      * @Route("/user/{user_id}/edit", name="user_edit")
-     * @ParamConverter("user", options={"id" = "user_id"})
      * @Template()
      *
      * @return array
      */
     public function editAction(Request $request, User $user)
     {
-        $form = $this->createForm($this->get('yprox.form.user.edit'), $user);
+        $form = $this->createForm($this->get('welcomango.form.user.type'), $user);
         $form->handleRequest($request);
-
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->persist($user);
             $this->get('fos_user.user_manager')->updateUser($user);
@@ -103,16 +101,14 @@ class UserController extends Controller
 
         return array(
             'form'           => $form->createView(),
-            'requested_user' => $user
+            'user' => $user
         );
-
-
     }
 
     /**
+     * @param User $user
      *
      * @Route("/user/{user_id}/delete", name="user_delete")
-     * @ParamConverter("user", options={"id" = "user_id"})
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

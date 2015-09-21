@@ -16,6 +16,8 @@ use Welcomango\Model\Experience;
 
 /**
  * Class ExperienceController
+ *
+ * @ParamConverter("experience", options={"id" = "experience_id"})
  */
 class ExperienceController extends Controller
 {
@@ -59,18 +61,13 @@ class ExperienceController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($experience);
             $em->flush();
 
-//            $this->getRepository('Welcomango\Model\Experience')->updateExperience($experience);
-
             $this->addFlash('success', $this->trans('experience.created.success', array(), 'user'));
 
-            return $this->redirect($this->generateUrl('experience_edit', array(
-                'experience_id' => $experience->getId(),
-            )));
+            return $this->redirect($this->generateUrl('experience_list'));
         }
 
         return array(
@@ -78,14 +75,11 @@ class ExperienceController extends Controller
         );
     }
 
-
-
     /**
-     * @param Request $request
+     * @param Request    $request
      * @param Experience $experience
      *
      * @Route("/experience/{experience_id}/edit", name="experience_edit")
-     * @ParamConverter("experience", options={"id" = "experience_id"})
      * @Template()
      *
      * @return array
@@ -110,14 +104,11 @@ class ExperienceController extends Controller
             'form'           => $form->createView(),
             'requested_user' => $experience
         );
-
-
     }
 
     /**
      *
      * @Route("/experience/{experience_id}/delete", name="experience_delete")
-     * @ParamConverter("experience", options={"id" = "experience_id"})
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -134,13 +125,12 @@ class ExperienceController extends Controller
      *
      * @Route("/experience/_experience_search_ajax", name="experience_search_ajax")
      * @Method("POST")
-     * @Template("YproxAdminCrmBundle:Experience:_experience.html.twig")
      *
      * @return array
      */
     public function ajaxSearchAction(Request $request)
     {
-        $query = $request->request->get('query');
+        $query       = $request->request->get('query');
         $experiences = $this->getRepository('Welcomango\Model\Experience')->findByQuery($query);
 
         return array(

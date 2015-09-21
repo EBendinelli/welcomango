@@ -1,0 +1,40 @@
+{{ form_errors(form) }}
+<ul class="nav nav-tabs nav-tabs-fillup">
+    <li class="active"><a data-toggle="tab" href="#general"><span>{{ "user.informations.tab"|trans }}</span></a></li>
+    <li><a data-toggle="tab" href="#credentials"><span>{{ "user.credentials.tab"|trans }}</span></a></li>
+    <li><a data-toggle="tab" href="#password"><span>{{ "user.password.tab"|trans }}</span></a></li>
+</ul>
+<div class="tab-content">
+    <div class="tab-pane active slide-left" id="general">
+        <div class="row">
+            <div class="col-sm-6">
+                {{ form_row(form.username) }}
+                {{ form_row(form.email) }}
+                <div class="row">
+                    <div class="col-md-6">{{ form_row(form.firstName) }}</div>
+                    <div class="col-md-6">{{ form_row(form.lastName) }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">{{ form_row(form.password.first) }}</div>
+                    <div class="col-md-6">{{ form_row(form.password.second) }}</div>
+                </div>
+                {{ form_row(form.roles, { 'label_helper' :  'admin.faq.email_sender.helper'|trans } ) }}
+                {{ form_row(form.phone) }}
+                {{ form_row(form.spokenLanguages) }}
+            </div>
+        </div>
+        <div class="tab-pane slide-left" id="credentials">
+            <div class="col-md-8">
+                {#                                {{ form_row(form.roles, { 'label_helper' :  'user.helper.role'|trans }) }}
+                                                {{ form_row(form.enabled) }}#}
+            </div>
+        </div>
+        <div class="tab-pane slide-left" id="password">
+            <div class="col-md-8">
+                {#                                {{ form_row(form.plainPassword.first) }}
+                                                {{ form_row(form.plainPassword.second) }}#}
+            </div>
+        </div>
+    </div>
+    {#                    {% include "YproxAdminCoreBundle:Form:form_footer.html.twig" with {listing : listing, update: true } only %}#}
+</div>

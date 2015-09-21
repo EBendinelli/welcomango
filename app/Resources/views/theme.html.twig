@@ -26,6 +26,13 @@
     </div>
 {% endblock select_widget %}
 
+{% block password_widget %}
+    <div class="form-group form-group-default {% if required %}required{% endif %}">
+        <label>{{ form_label(form) }}</label>
+        <input type="password" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    </div>
+{% endblock password_widget %}
+
 {% block choice_widget %}
     <div class="form-group form-group-default form-group-default-select2">
         <label>{{ form_label(form) }}</label>
