@@ -56,17 +56,22 @@ class UserType extends AbstractType
         $builder->add('lastName', 'text', ['label' => 'form.user.lastname']);
         $builder->add('phone', 'text', ['label' => 'form.user.phone', 'required' => false]);
 
-        $builder->add('email', 'choice', array(
-            'choices'  => array('m' => 'Masculin', 'f' => 'Féminin'),
-            'required' => false,
-        ));
-
         $builder->add('roles', 'choice', [
             'label'    => 'form.user.roles',
             'required' => false,
             'choices'  => $roles,
             'multiple' => true,
         ]);
+
+        $builder->add('spokenLanguages', 'entity', [
+            'class' => 'Welcomango\Model\Language',
+            'multiple' => 'true',
+            'query_builder' => function(EntityRepository $er) {
+                return $er->createQueryBuilder('l');
+            },
+        ]);
+
+
 
         /*
 

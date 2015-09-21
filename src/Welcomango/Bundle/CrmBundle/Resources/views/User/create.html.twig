@@ -27,25 +27,25 @@
                                 </div>
                                 {{ form_row(form.roles, { 'label_helper' :  'admin.faq.email_sender.helper'|trans } ) }}
                                 {{ form_row(form.phone) }}
-
-
+                                {{ form_row(form.spokenLanguages) }}
+                            </div>
+                        </div>
+                        <div class="tab-pane slide-left" id="credentials">
+                            <div class="col-md-8">
+                                {#                                {{ form_row(form.roles, { 'label_helper' :  'user.helper.role'|trans }) }}
+                                                                {{ form_row(form.enabled) }}#}
+                            </div>
+                        </div>
+                        <div class="tab-pane slide-left" id="password">
+                            <div class="col-md-8">
+                                {#                                {{ form_row(form.plainPassword.first) }}
+                                                                {{ form_row(form.plainPassword.second) }}#}
+                            </div>
                         </div>
                     </div>
-                    <div class="tab-pane slide-left" id="credentials">
-                        <div class="col-md-8">
-                            {#                                {{ form_row(form.roles, { 'label_helper' :  'user.helper.role'|trans }) }}
-                                                            {{ form_row(form.enabled) }}#}
-                        </div>
-                    </div>
-                    <div class="tab-pane slide-left" id="password">
-                        <div class="col-md-8">
-                            {#                                {{ form_row(form.plainPassword.first) }}
-                                                            {{ form_row(form.plainPassword.second) }}#}
-                        </div>
-                    </div>
+                    {#                    {% include "YproxAdminCoreBundle:Form:form_footer.html.twig" with {listing : listing, update: true } only %}#}
+                    {{ form_end(form) }}
                 </div>
-                {#                    {% include "YproxAdminCoreBundle:Form:form_footer.html.twig" with {listing : listing, update: true } only %}#}
-                {{ form_end(form) }}
             </div>
         </div>
     </div>
@@ -54,11 +54,4 @@
 {% block stylesheets %}
     {{ parent() }}
     {{ form_stylesheet(form) }}
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script type="text/javascript">
-        $('select').select2();
-    </script>
 {% endblock %}

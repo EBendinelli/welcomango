@@ -18,6 +18,17 @@
     </div>
 {% endblock choice_widget %}
 
+{% block entity_widget %}
+    <div class="form-group form-group-default form-group-default-select2">
+        <label>{{ form_label(form) }}</label>
+        {% if multiple %}
+            <select class="full-width select2-offscreen" data-init-plugin="select2" multiple="true" tabindex="-1">
+                {% for attrname, attrvalue in  form.vars.choices %}<option value="{{ attrvalue.value }}">{{ attrvalue.label }}</option>"{% endfor %}
+            </select>
+        {% endif %}
+    </div>
+{% endblock entity_widget %}
+
 {%- block form_row -%}
     <div>
         {{- form_errors(form) -}}
