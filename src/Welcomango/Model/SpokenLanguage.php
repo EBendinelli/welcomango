@@ -46,6 +46,7 @@ class SpokenLanguage
 
     /**
      * @var Language
+     *
      * @ORM\ManyToOne(targetEntity="Language")
      * @ORM\JoinColumn(name="language_id", referencedColumnName="id")
      */

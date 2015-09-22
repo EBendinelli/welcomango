@@ -17,29 +17,10 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Welcomango\Model\User;
 
 /**
- * UserType Form class
+ * SpokenLanguageType Form class
  */
-class UserType extends AbstractType
+class SpokenLanguageType extends AbstractType
 {
-    /**
-     * @var SecurityContextInterface security context
-     */
-    private $securityContext;
-
-    /**
-     * @var Doctrine\ORM\EntityManager entityManager
-     */
-    protected $entityManager;
-
-    /**
-     * __construct
-     */
-    public function __construct(SecurityContextInterface $securityContext, EntityManager $entityManager)
-    {
-        $this->securityContext = $securityContext;
-        $this->entityManager   = $entityManager;
-    }
-
     /**
      * {@inheritdoc}
      */
