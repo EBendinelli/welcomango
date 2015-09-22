@@ -50,6 +50,16 @@ class Builder extends ContainerAware
             'linkAttributes' => ['class' => 'fa fa-home']
         ));
 
+        $menu->addChild('menu.title.users', array(
+            'route'          => 'user_list',
+            'linkAttributes' => ['class' => 'fa fa-user']
+        ));
+
+        $menu->addChild('menu.title.experiences', array(
+            'route'          => 'experience_list',
+            'linkAttributes' => ['class' => 'fa fa-hand-peace-o']
+        ));
+
         return $menu;
     }
 }
