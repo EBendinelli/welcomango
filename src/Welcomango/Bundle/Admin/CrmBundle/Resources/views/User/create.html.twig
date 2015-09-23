@@ -22,3 +22,14 @@
     {{ parent() }}
     {{ form_stylesheet(form) }}
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ form_javascript(form) }}
+    <script>
+        $('.nav-tabs a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        })
+    </script>
+{% endblock %}

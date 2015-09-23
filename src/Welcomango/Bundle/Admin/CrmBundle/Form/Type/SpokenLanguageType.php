@@ -32,7 +32,7 @@ class SpokenLanguageType extends AbstractType
             User::ROLE_USER        => User::ROLE_USER,
         );
 
-        $builder->add('language', 'collection', [
+        $builder->add('language', 'entity', [
             'class' => 'Welcomango\Model\Language',
             'query_builder' => function(EntityRepository $er) {
                 return $er->createQueryBuilder('u');
