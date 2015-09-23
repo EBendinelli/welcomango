@@ -12,8 +12,7 @@
         <label>{{ form_label(form) }}</label>
         {# !!!IMPORTANT!!!  #}
         {# must remove the style tag and place it somewhere appropriate #}
-        <textarea class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %} style="height:200px" >
-        </textarea>
+        <textarea class="form-control" {{ block('widget_attributes') }} style="height:200px" >{% if value is not empty %}{{ value }} {% endif %}</textarea>
     </div>
 {% endspaceless %}
 {% endblock textarea_widget %}
