@@ -20,8 +20,12 @@
             <i title="{{ 'user.inactive'|trans({}, 'crm') }}" data-toggle="tooltip" data-placement="top" title="Tooltip on left" class="fa fa-times"></i>
         {% endif %}
     </td>
-    <td>
-{#        {{ button.edit(path('user_edit', { user_id : user.id }), false, "btn-xs") }}#}
+    <td>{% spaceless %}
+            <div class="btn-toolbar">
+                {{ button.edit(path('user_edit', {'user_id': user.id}), false, "btn-xs") }}
+                {{ button.delete(path('user_delete', {'user_id': user.id}), null, "btn-xs") }}
+            </div>
+        {% endspaceless %}
     </td>
 </tr>
 

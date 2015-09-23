@@ -32,30 +32,21 @@ class SpokenLanguageType extends AbstractType
             User::ROLE_USER        => User::ROLE_USER,
         );
 
-        $builder->add('username', 'text', ['label' => 'form.user.username',]);
-        $builder->add('email', 'text', ['label' => 'form.user.email',]);
-        $builder->add('firstName', 'text', ['label' => 'form.user.firstname']);
-        $builder->add('lastName', 'text', ['label' => 'form.user.lastname']);
-        $builder->add('phone', 'text', ['label' => 'form.user.phone', 'required' => false]);
+        $builder->add('language', 'collection', [
+            'class' => 'Welcomango\Model\Language',
+            'query_builder' => function(EntityRepository $er) {
+                return $er->createQueryBuilder('u');
+            },
+            'label'    => 'form.user.languages',
+        ]);
 
-        $builder->add('roles', 'choice', [
+        $builder->add('level', 'choice', [
             'label'    => 'form.user.roles',
             'required' => false,
             'choices'  => $roles,
             'multiple' => true,
         ]);
 
-        $builder->add('spokenLanguages', 'hidden', array(
-            'data' => '',
-        ));
-
-        $builder->add('password', 'repeated', array(
-            'type'            => 'password',
-            'invalid_message' => 'Les mots de passe doivent correspondre',
-            'options'         => array('required' => true),
-            'first_options'   => array('label' => 'form.user.password'),
-            'second_options'  => array('label' => 'form.user.password.validate'),
-        ));
     }
 
     /**
@@ -64,7 +55,7 @@ class SpokenLanguageType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class'         => 'Welcomango\Model\User',
+            'data_class'         => 'Welcomango\Model\SpokenLanguage',
             'translation_domain' => 'crm',
             'roles_user'         => null
         ]);

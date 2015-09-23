@@ -14,6 +14,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+use Welcomango\Bundle\Admin\CrmBundle\Form\Type\SpokenLanguageType;
+
 use Welcomango\Model\User;
 
 /**
@@ -64,8 +66,9 @@ class UserType extends AbstractType
             'multiple' => true,
         ]);
 
-        $builder->add('spokenLanguages', 'hidden', array(
-            'data' => '',
+        $builder->add('spokenLanguages', 'collection', array(
+            'type'         => new SpokenLanguageType(),
+            'allow_add'    => true,
         ));
 
         $builder->add('password', 'repeated', array(

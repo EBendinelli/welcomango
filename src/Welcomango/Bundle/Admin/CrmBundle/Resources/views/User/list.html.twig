@@ -3,7 +3,7 @@
 {% trans_default_domain "crm" %}
 
 {% block actions %}
-   {# {{ button.create(path('user_create'), 'user.create'|trans) }}#}
+   {{ button.create(path('user_create'), 'user.create'|trans) }}
 {% endblock %}
 
 {% set pager_url = path('user_list') %}

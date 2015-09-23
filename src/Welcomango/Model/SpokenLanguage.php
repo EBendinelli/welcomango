@@ -52,7 +52,6 @@ class SpokenLanguage
      */
     private $language;
 
-
     /**
      * Get id
      *
