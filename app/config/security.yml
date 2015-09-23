@@ -18,6 +18,7 @@ security:
                check_path: /login_check
                login_path: /login
                provider: fos_userbundle
+               default_target_path: /admin
            logout:
                path:    /logout
                target: /

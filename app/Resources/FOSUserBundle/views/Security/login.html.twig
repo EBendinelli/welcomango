@@ -1,0 +1,51 @@
+{% extends "::loginLayout.html.twig" %}
+
+{% block content %}
+
+    {% if error %}
+        <div class="alert alert-error">
+            <button class="close" data-dismiss="alert"></button>
+            {{ error|trans({}, 'admin') }}
+        </div>
+    {% endif %}
+
+    <form id="login-form" class="login-form" action="{{ path("fos_user_security_check") }}" method="post" novalidate="novalidate">
+        <div class="row">
+            <div class="form-group col-md-10">
+                <label class="form-label">{{ "username"|trans({}, "interface") }}</label>
+                <div class="controls">
+                    <div class="input-with-icon  right">
+                        <i class=""></i>
+                        <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-10">
+                <label class="form-label">{{ "password"|trans({}, "interface") }}</label>
+                <span class="help"></span>
+                <div class="controls">
+                    <div class="input-with-icon right">
+                        <i class=""></i>
+                        <input class="form-control" id="password" type="password" name="_password"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="control-group col-md-10">
+                <div class="checkbox check-default">
+                    <input type="checkbox" name="_remember_me" id="remember_me" value="1"/>
+                    <label for="remember_me">{{ "remember_me"|trans({}, "interface") }}</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+                <input type="submit" class="btn btn-primary btn-cons pull-right" value="{{ "login"|trans({}, "interface") }}" />
+            </div>
+        </div>
+    </form>
+
+{% endblock %}
