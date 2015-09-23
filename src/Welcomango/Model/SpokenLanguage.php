@@ -46,6 +46,7 @@ class SpokenLanguage
 
     /**
      * @var Language
+     *
      * @ORM\ManyToOne(targetEntity="Language")
      * @ORM\JoinColumn(name="language_id", referencedColumnName="id")
      */
@@ -161,6 +162,10 @@ class SpokenLanguage
     public function setLanguage($language)
     {
         $this->language = $language;
+    }
+
+    public function __toString() {
+        return $this->language->getLanguageCode();
     }
 
 }

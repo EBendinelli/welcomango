@@ -1,0 +1,18 @@
+<div class="btn-toolbar text-right m-t-20" role="toolbar">
+    <a href="{{ listing }}" class="btn pull-left">
+        <i class="fa fa-angle-left"></i>
+        &nbsp;
+        {{ 'interface.back'|trans({}, "interface") }}
+    </a>
+    <a href="" class="btn btn-default">{{ 'interface.cancel'|trans({}, "interface") }}</a>
+
+    <button type="submit" class="btn btn-success">
+        <i class="fa fa-save"></i>
+        &nbsp;
+        {% if update %}
+            {{ 'interface.save'|trans({}, "interface") }}
+        {% else %}
+            {{ 'interface.add'|trans({}, "interface") }}
+        {% endif %}
+    </button>
+</div>

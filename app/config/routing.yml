@@ -1,31 +1,32 @@
-welcomango_front_experience:
+welcomango_front_experience_bundle:
     resource: "@WelcomangoFrontExperienceBundle/Controller/"
     type:     annotation
     prefix:   /
 
-welcomango_front_core:
+welcomango_front_core_bundle:
     resource: "@WelcomangoFrontCoreBundle/Controller/"
     type:     annotation
     prefix:   /
 
-welcomango_front_bundle_crm:
+welcomango_front_crm_bundle:
     resource: "@WelcomangoFrontCrmBundle/Controller/"
     type:     annotation
     prefix:   /
 
-welcomango_admin_crm:
-    resource: "@WelcomangoCrmBundle/Controller/"
+welcomango_admin_core_bundle:
+    resource: "@WelcomangoAdminCoreBundle/Controller/"
     type:     annotation
     prefix:   /
 
-welcomango_admin_experience:
-    resource: "@WelcomangoExperienceBundle/Controller/"
+welcomango_admin_crm_bundle:
+    resource: "@WelcomangoAdminCrmBundle/Controller/"
     type:     annotation
     prefix:   /
 
-app:
-    resource: "@AppBundle/Controller/"
+welcomango_admin_experience_bundle:
+    resource: "@WelcomangoAdminExperienceBundle/Controller/"
     type:     annotation
+    prefix:   /
 
 user_bundle:
-   resource: "@WelcomangoCrmBundle/Resources/config/routing.yml"
+   resource: "@WelcomangoAdminCrmBundle/Resources/config/routing.yml"

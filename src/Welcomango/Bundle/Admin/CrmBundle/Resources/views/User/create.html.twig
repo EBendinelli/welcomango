@@ -1,0 +1,24 @@
+{% extends "::admin.html.twig" %}
+
+{% trans_default_domain "crm" %}
+
+{% set listing = path('user_list') %}
+{% form_theme form with ["::theme.html.twig"] %}
+
+{% block page_content %}
+    <div class="col-md-12">
+        <div class="panel panel-default portlet">
+            <div class="panel-body">
+                {{ form_start(form, {'action': path('user_create'), 'attr': {'novalidate': 'novalidate' }}) }}
+                {% include "WelcomangoAdminCrmBundle:User:form.html.twig" with { 'form': form } %}
+                {% include "WelcomangoAdminCoreBundle:Form:formFooter.html.twig" with {'listing' : listing, 'update': form.vars.id } only %}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ form_stylesheet(form) }}
+{% endblock %}

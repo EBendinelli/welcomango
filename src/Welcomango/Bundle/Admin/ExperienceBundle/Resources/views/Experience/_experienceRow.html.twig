@@ -1,0 +1,27 @@
+{# Complete with correct informations #}
+<tr>
+    <td>
+{#        {% include "YproxAdminCrmBundle:User:_userLink.html.twig" %}#}
+        {{ experience.getTitle }}
+    </td>
+    <td>
+        {{ experience.getDescription }}
+    </td>
+    <td>
+        {{ experience.getEstimatedDuration }}
+    </td>
+    <td>
+        {{ experience.getPricePerHour }}
+    </td>
+    <td>
+        {% if experience.getCity is not null %}
+            {{ experience.getCity.Name }}
+        {% endif %}
+    </td>
+    <td>
+        <a href="{{ path('experience_delete', {'experience_id' : experience.getId }) }}" onclick="return confirm('Do you really want to delete?')">Delete</a>
+        |
+        <a href="{{ path('experience_edit', {'experience_id' : experience.getId }) }}" >Edit</a>
+    </td>
+</tr>
+

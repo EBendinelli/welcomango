@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta content="" name="description"/>
     <meta content="" name="author"/>
-
+    <!-- We need this link because bootstrap uses fontAwesome 3.3.2 and we need the last one (4.4.0) -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset("css/bootstrap.min.css") }}"/>
         <link rel="stylesheet" href="{{ asset("css/plugins.css") }}"/>
@@ -35,7 +36,7 @@
     <!-- BEGIN MENU -->
     <div class="sidebar-menu">
         {% block sidebar %}
-            {{ knp_menu_render('menu_admin', {firstClass: 'start', lastClass: 'end', ancestorClass: 'open', currentClass: 'active'}) }}
+           {{ knp_menu_render('menu_admin', {firstClass: 'start', lastClass: 'end', ancestorClass: 'open', currentClass: 'active'}) }}
         {% endblock %}
         <div class="clearfix"></div>
     </div>
@@ -127,7 +128,6 @@
     <div class="page-content-wrapper {% block extra_class_page_content_wrapper ''%}">
         <!-- START PAGE CONTENT -->
         <div class="content {% block extra_class_content ''%}">
-
             {% block jumbotron %}
                 <!-- START JUMBOTRON -->
                 <div class="jumbotron" data-pages="parallax">

@@ -1,0 +1,8 @@
+/*
+Tweaks for administration, all things that we can't handle
+with page assets
+We need this file to be temporary... gonna be hard but we can make it !
+*/
+.table-responsive {
+    overflow: hidden;
+}

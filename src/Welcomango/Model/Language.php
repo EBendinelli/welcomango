@@ -49,6 +49,7 @@ class Language
      * Set languageCode
      *
      * @param string $languageCode
+     *
      * @return language
      */
     public function setLanguageCode($languageCode)
@@ -72,6 +73,7 @@ class Language
      * Set language
      *
      * @param string $language
+     *
      * @return language
      */
     public function setLanguage($language)
@@ -88,6 +90,10 @@ class Language
      */
     public function getLanguage()
     {
+        return $this->language;
+    }
+
+    public function __toString() {
         return $this->language;
     }
 

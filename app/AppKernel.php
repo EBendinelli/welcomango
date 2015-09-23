@@ -20,20 +20,26 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new AppBundle\AppBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new Welcomango\Bundle\CrmBundle\WelcomangoCrmBundle(),
-            new Welcomango\Bundle\CoreBundle\WelcomangoCoreBundle(),
-            new Welcomango\Front\CrmBundle\WelcomangoFrontCrmBundle(),
-            new Welcomango\Bundle\ExperienceBundle\WelcomangoExperienceBundle(),
+
+            // Admin Side
+            new Welcomango\Bundle\Admin\CrmBundle\WelcomangoAdminCrmBundle(),
+            new Welcomango\Bundle\Admin\CoreBundle\WelcomangoAdminCoreBundle(),
+            new Welcomango\Bundle\Admin\ExperienceBundle\WelcomangoAdminExperienceBundle(),
+
+            // Front Side
+
+            new Welcomango\Bundle\Front\CrmBundle\WelcomangoFrontCrmBundle(),
+            new Welcomango\Bundle\Front\CoreBundle\WelcomangoFrontCoreBundle(),
+            new Welcomango\Bundle\Front\ExperienceBundle\WelcomangoFrontExperienceBundle(),
+
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
-            new Welcomango\Front\CoreBundle\WelcomangoFrontCoreBundle(),
-            new Welcomango\Front\ExperienceBundle\WelcomangoFrontExperienceBundle(),
+
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
