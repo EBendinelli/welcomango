@@ -9,9 +9,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Experience
  *
+ * @ORM\Entity(repositoryClass="Welcomango\Model\Repository\ExperienceRepository")
  * @ORM\Table(name="wm_experience")
  * @ORM\HasLifecycleCallbacks()
- * @ORM\Entity
  */
 class Experience
 {
@@ -111,6 +111,13 @@ class Experience
      *
      * @return integer
      */
+
+    /**
+     * @ORM\Column(name="featured", type="boolean")
+     */
+    private $featured = false;
+
+
     public function getId()
     {
         return $this->id;
@@ -342,6 +349,29 @@ class Experience
     }
 
     /**
+     * Set featured
+     *
+     * @param boolean $featured
+     * @return Experience
+     */
+    public function setFeatured($featured)
+    {
+        $this->featured = $featured;
+
+        return $this;
+    }
+
+    /**
+     * Get featured
+     *
+     * @return boolean
+     */
+    public function getFeatured()
+    {
+        return $this->featured;
+    }
+
+    /**
      * @param Tag $tag
      */
     public function addTag(Tag $tag)
@@ -389,6 +419,15 @@ class Experience
      */
     public function createDate(){
         $this->setCreatedAt(new \Datetime());
+    }
+
+    public function getAuthor()
+    {
+        foreach ($this->participations as $participant) {
+            if ($participant->getIsCreator()) {
+                return $participant->getUser();
+            }
+        }
     }
 
     public function __construct() {

@@ -1,9 +1,14 @@
 // do not change the path since in the css file, we have path like /img/example.jpg
 var
-    assets_js  = 'web/js';
-    assets_css = 'web/css';
+    assets_js  = 'web/js'; // to rename assets_admin_js
+    assets_css = 'web/css'; // to rename assets_front_js
     font_path  = 'web/fonts';
     img_path   = 'web/img';
+
+    assets_front_js  = 'web/js';
+    assets_front_css = 'web/css';
+    font_front_path  = 'web/fonts';
+    img_front_path   = 'web/img';
 
 var
     notifier     = require('node-notifier');
@@ -35,6 +40,7 @@ gulp.task('default', function() {
 // Assets
 gulp.task('assets-js', function() {
 
+    //// ADMIN ////
     gulp.src([
         'components/pages-assets/plugins/pace/pace.min.js',
         'components/pages-assets/plugins/modernizr.custom.js',
@@ -69,11 +75,59 @@ gulp.task('assets-js', function() {
         .pipe(concat('pages.js'))
         .pipe(gulp.dest(assets_js))
     ;
+
+    //// FRONT ////
+    gulp.src([
+        'components/pages-front/plugins/jquery/jquery-1.11.1.min.js',
+        'components/pages-front/plugins/animateNumber/jquery.animateNumber.js',
+        'components/pages-front/plugins/swiper/js/swiper.jquery.min.js',
+        /*'components/pages-front/plugins/bootstrap/js/bootstrap.min.js',     
+        'components/pages-front/plugins/bootstrap/js/npm.js',*/
+        'components/pages-front/plugins/countdown/jquery.countdown.min.js',
+        'components/pages-front/plugins/fitjs/fit.min.js',
+        'components/pages-front/plugins/ftscroller/ftscroller.js',
+        'components/pages-front/plugins/imagesloaded/imagesloaded.pkgd.min.js',
+        'components/pages-front/plugins/imagesloaded/jquery-appear/jquery.appear.js',
+        'components/pages-front/plugins/pace/pace.min.js',
+        'components/pages-front/plugins/text-rotate/jquery.simple-text-rotator.min.js',
+        'components/pages-front/plugins/velocity/velocity.min.js',
+        'components/pages-front/plugins/velocity/velocity.ui.js',
+        'components/pages-front/plugins/vide/jquery.vide.min.js',
+        'components/pages-front/plugins/waypoints/jquery.waypoints.min.js',
+
+        'components/pages-front/plugins/jquery/jquery-easy.js',
+        'components/pages-front/plugins/jquery-appear/jquery.appear.js',
+        'components/pages-front/plugins/jquery-ui/jquery-ui.min.js',
+        'components/pages-front/plugins/jquery-fit-text/jquery.fittext.js',
+        'components/pages-front/plugins/jquery-isotope/isotope.pkgd.min.js',
+        'components/pages-front/plugins/jquery-isotope/masonry-horizontal.js',
+        'components/pages-front/plugins/jquery-scrollbar/jquery.scrollbar.min.js',
+        'components/pages-assets/plugins/jquery-unveil/jquery.unveil.min.js'
+    ])
+        .pipe(uglify())
+        .pipe(concat('plugins-front.js'))
+        .pipe(gulp.dest(assets_front_js))
+    ;
+
+    gulp.src([
+        'components/pages-front/js/pages.frontend.js',
+        'components/pages-front/js/pages.image.loader.js',
+        'components/pages-front/js/pages.init.js',
+        'components/pages-front/js/*',
+        'components/pages-front/js/ui/*',
+        'components/pages-front/assets/js/custom.js',
+        'components/pages-front/assets/js/gallery.js'
+    ])
+        .pipe(uglify())
+        .pipe(concat('pages-front.js'))
+        .pipe(gulp.dest(assets_front_js))
+    ;
 });
 
 
 gulp.task('assets-css', function() {
 
+    //// ADMIN ////
     gulp.src([
         'components/pages-assets/css/pages.min.css',
         'components/pages-assets/css/pages-icons.css'
@@ -113,9 +167,43 @@ gulp.task('assets-css', function() {
         .pipe(concat('bootstrap.min.css'))
         .pipe(gulp.dest(assets_css))
     ;
+
+    //// FRONT ////
+    gulp.src([
+        'components/pages-front/css/pages.min.css',
+        'components/pages-front/css/pages-icons.min.css'
+    ])
+        .pipe(minifyCSS())
+        .pipe(concat('pages-front.css'))
+        .pipe(gulp.dest(assets_front_css))
+    ;
+
+    gulp.src([
+        'components/pages-front/plugins/bootstrap/css/bootstrap-theme.min.css',
+        'components/pages-front/plugins/bootstrap/css/bootstrap.min.css'
+    ])
+        .pipe(minifyCSS())
+        .pipe(concat('bootstrap.css'))
+        .pipe(gulp.dest(assets_front_css))
+    ;
+
+    gulp.src([
+        'components/pages-front/plugins/font-awesome/css/font-awesome.css',
+        'components/pages-front/plugins/jquery-scrollbar/jquery.scrollbar.css',
+        'components/pages-front/plugins/pace/pace-theme-flash.css',
+        'components/pages-front/plugins/swiper/css/swiper.css',
+        'components/pages-front/plugins/text-rotate/simpletextrotator.css'
+    ])
+        .pipe(minifyCSS())
+        .pipe(concat('plugins-front.css'))
+        .pipe(gulp.dest(assets_front_css))
+    ;
+
 });
 
 gulp.task('fonts', function() {
+
+    //// ADMIN ////
     gulp.src([
         'components/pages-assets/fonts/**/*',
         'components/pages-assets/plugins/boostrapv3/fonts/*',
@@ -123,15 +211,39 @@ gulp.task('fonts', function() {
     ])
         .pipe(gulp.dest(font_path))
     ;
+
+    //// FRONT ////
+    gulp.src([
+        'components/pages-front/fonts/**/*',
+        'components/pages-front/plugins/boostrapv3/fonts/*',
+        'components/pages-front/plugins/font-awesome/fonts/*'
+    ])
+        .pipe(gulp.dest(font_front_path))
+    ;
+
+    gulp.src([
+        'components/pages-front/fonts/**/*',
+        'components/pages-front/plugins/boostrapv3/fonts/*',
+        'components/pages-front/plugins/font-awesome/fonts/*'
+    ])
+        .pipe(gulp.dest(font_front_path))
+    ;
+
 });
 
 gulp.task('img', function() {
 
+    //// ADMIN ////
     gulp.src('components/pages-assets/img/**/*')
         .pipe(gulp.dest(img_path))
     ;
 
     gulp.src('components/pages-assets/plugins/data-tables/images/*')
         .pipe(gulp.dest(img_path + '/data-tables/'))
+    ;
+
+    //// FRONT////
+    gulp.src('components/pages-front/images/**/*')
+        .pipe(gulp.dest(img_front_path))
     ;
 });

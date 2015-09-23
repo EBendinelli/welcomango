@@ -18,7 +18,7 @@ class LoadCityData extends AbstractFixture implements FixtureInterface, OrderedF
     {
         $countryRepo = $manager->getRepository('Welcomango\Model\Country');
 
-        /*$cities = array(
+        $cities = array(
             array('name' => 'Lyon', 'postcode' => 69001, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'France'))),
             array('name' => 'Paris', 'postcode' => 75001, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'France'))),
             array('name' => 'Helsinki', 'postcode' => 65450, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Finland'))),
@@ -32,9 +32,9 @@ class LoadCityData extends AbstractFixture implements FixtureInterface, OrderedF
             array('name' => 'Amsterdam', 'postcode' => 6544, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Netherlands'))),
             array('name' => 'Delft', 'postcode' => 4400, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Netherlands'))),
             array('name' => 'Geneva', 'postcode' => 4400, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Switzerland')))
-        );*/
+        );
 
-        $cities = array_map('str_getcsv', file('/home/eliot/www/welcomango/src/Welcomango/Data/newfile.csv'));
+        //$cities = array_map('str_getcsv', file('/home/eliot/www/welcomango/src/Welcomango/Data/newfile.csv'));
 
         /*$countries = $countryRepo->findAll();
         $country_codes = array();
@@ -54,12 +54,12 @@ class LoadCityData extends AbstractFixture implements FixtureInterface, OrderedF
 
         foreach($cities as $city){
             $entry = new City();
-            $entry->setName($city[1]);
+            $entry->setName($city['name']);
             $entry->setPostcode('00000');
             $entry->setGeolocation('00000');
 
-            ld($city);
-            $country = $countryRepo->findOneBy(array('countryCode' => $city[0]));
+            //ld($city);
+            $country = $countryRepo->findOneBy(array('countryCode' => $city['country']));
             $entry->setCountry($country);
 
             $manager->persist($entry);

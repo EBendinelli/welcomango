@@ -1,0 +1,4 @@
+services:
+#    welcomango_front_bundle_core.example:
+#        class: Welcomango\FrontBundle\CoreBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

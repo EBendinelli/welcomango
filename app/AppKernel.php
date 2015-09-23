@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Welcomango\Bundle\CrmBundle\WelcomangoCrmBundle(),
             new Welcomango\Bundle\CoreBundle\WelcomangoCoreBundle(),
+            new Welcomango\Front\CrmBundle\WelcomangoFrontCrmBundle(),
             new Welcomango\Bundle\ExperienceBundle\WelcomangoExperienceBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
@@ -31,6 +32,8 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
+            new Welcomango\Front\CoreBundle\WelcomangoFrontCoreBundle(),
+            new Welcomango\Front\ExperienceBundle\WelcomangoFrontExperienceBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

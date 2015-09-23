@@ -24,7 +24,7 @@ class LoadParticipationData extends AbstractFixture implements FixtureInterface,
         $creatorStatus = array('available', 'happened', 'booked');
         $ParticipantStatus = array('booked', 'validated', 'happened');
 
-        for($i=0;$i<10;$i++){
+        for($i=0;$i<20;$i++){
             $entry = new Participation();
             $entry->setUser($users[array_rand($users)]);
             $entry->setExperience($experiences[array_rand($experiences)]);
