@@ -126,10 +126,9 @@ gulp.task('assets-js', function() {
 
 
 gulp.task('assets-css', function() {
-
     //// ADMIN ////
     gulp.src([
-        'components/pages-assets/css/pages.min.css',
+        'components/pages-assets/css/pages.css',
         'components/pages-assets/css/pages-icons.css'
     ])
         .pipe(minifyCSS())

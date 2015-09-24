@@ -1,0 +1,21 @@
+{% macro create(url, label, id, size = false, color = false) %}
+    <a class="btn pull-right btn-{% if color %}{{ color }}{% else %}success{% endif %} btn-cons {% if size %}{{ size }}{% endif %}" href="{{ url }}">
+        <i class="fa fa-plus"></i>
+        {% if label is not sameas(false) %}{{ label }}{% else %}{{ 'interface.create'|trans({}, 'interface') }}{% endif %}
+    </a>
+{% endmacro %}
+
+{% macro delete(url, label, size = false, color = false, tooltip = true, cons = false) %}
+    <a class="deleteButtonMacro btn btn-{% if color %}{{ color }}{% else %}danger{% endif %} {% if cons %}btn-cons{% endif %} {% if size %}{{ size }}{% endif %}" href="{{ url }}" title="{{ 'interface.delete'|trans({}, 'interface') }}" data-text="<p class='p-t-30 font-montserrat'>{{ 'interface.delete.confirmation'|trans({}, 'interface') }}</p>" data-confirm-button="{{ 'interface.delete.confirmation_yes'|trans({}, 'interface') }}" data-cancel-button="{{ 'interface.delete.confirmation_no'|trans({}, 'interface') }}">
+        <i class="fa fa-trash-o"></i>
+        {% if label is not sameas(false) %}{{ label }}{% else %}{{ 'interface.delete'|trans({}, 'interface') }}{% endif %}
+    </a>
+{% endmacro %}
+
+{% macro edit(url, label, size = false, color = false, cons = false, tooltip = false, title = "interface.edit", addThumb = true) %}
+    <a class="btn btn-{% if color %}{{ color }}{% else %}primary{% endif %} {% if cons %}btn-cons{% endif %} {% if size %}{{ size }}{% endif %}" href="{{ url }}" title="{{ title|trans({}, "interface") }}">
+        {% if addThumb == true %}<i class="fa fa-pencil-square-o"></i>{% endif %}
+        {% if label is not sameas(false) %}{{ label }}{% else %}{{ 'interface.edit'|trans({}, 'interface') }}{% endif %}
+    </a>
+{% endmacro %}
+

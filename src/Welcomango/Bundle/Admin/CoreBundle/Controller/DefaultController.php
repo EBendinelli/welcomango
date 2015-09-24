@@ -7,10 +7,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use Welcomango\Bundle\Admin\CoreBundle\Controller\Controller;
 
+/**
+ * Class DefaultController
+ */
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/admin", name="homepage")
      * @Template()
      */
     public function indexAction()
