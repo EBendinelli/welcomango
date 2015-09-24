@@ -1,86 +1,109 @@
-{% extends "WelcomangoCoreBundle:CRUD:index.html.twig" %}
+{% extends "WelcomangoFrontCoreBundle:CRUD:index.html.twig" %}
 
-{% trans_default_domain "crm" %}
+    {% trans_default_domain "crm" %}
 
-{% block actions %}
-    {# {{ button.create(path('experience_create'), 'experience.create'|trans) }}#}
-{% endblock %}
+    {% block page_content %}
+        {% include("WelcomangoFrontCoreBundle:CRUD:subHeader.html.twig") %}
+        <section class="bg-master-lightest p-b-85 p-t-75">
+            <div class="container">
+                <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+                    <h5 class="block-title hint-text no-margin">Explore</h5>
+                    <div class="row">
+                        <div class="col-sm-5 col-md-4">
+                            <h1 class="m-t-5">Different ways to Organize your Content.</h1>
+                        </div>
+                        <div class="col-sm-7 col-md-8 no-padding xs-p-l-15 xs-p-r-15">
+                            <div class="p-t-20 p-l-35 md-p-l-5 md-p-t-15">
+                                <p>Our long standing vision has been to bypass the usual admin dashboard structure, and move forward with a more sophisticated yet simple framework that would create a credible impact on the many conventional dashboard users.</p>
+                                <p class="hint-text font-arial small-text col-md-7 no-padding">A product is accessible when all people regardless of ability can navigate it, understand it, and use it to achieve goals.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endblock page_content %}
 
-{% set pager_url = path('experience_list') %}
-{% set number_per_page = false %}
-{#{% set filter_url = path('experience_filters') %}#}
+    {% block actions %}
+        {# {{ button.create(path('experience_create'), 'experience.create'|trans) }}#}
+    {% endblock %}
 
-{% block filters %}
-    {# {% include "YproxAdminCrmBundle:Experience:filter.html.twig" %}#}
-{% endblock %}
+    {% set pager_url = path('experience_list') %}
+    {% set number_per_page = false %}
+    {#{% set filter_url = path('experience_filters') %}#}
 
-{% block no_results %}
-    <div class="alert">
-        <strong>{{ 'interface.noresult'|trans({}, "interface") }}</strong>
-    </div>
-{% endblock %}
+    {% block filters %}
+        {# {% include "YproxAdminCrmBundle:Experience:filter.html.twig" %}#}
+    {% endblock %}
 
-{% block table_head %}
-    <tr>
-        <th class="col-md-2">{{ knp_pagination_sortable(pagination, 'experience.title'|trans, 'e.title')|raw }}</th>
-        <th class="col-md-5">{{ "experience.description"|trans }}</th>
-        <th class="col-md-1">{{ knp_pagination_sortable(pagination, 'experience.estimated_duration'|trans, 'e.estimatedDuration')|raw }}</th>
-        <th style="width: 8%">{{ knp_pagination_sortable(pagination, 'experience.price_per_hour'|trans, 'e.pricePerHour')|raw }}</th>
-        <th>{{ "experience.city"|trans }}</th>
-        <th>{{ "interface.actions"|trans }}</th>
-    </tr>
-{% endblock %}
+    {% block no_results %}
+        <div class="alert">
+            <strong>{{ 'interface.noresult'|trans({}, "interface") }}</strong>
+        </div>
+    {% endblock %}
 
-{% block table_body %}
-    {% include "WelcomangoExperienceBundle:Experience:_experienceRow.html.twig" with { 'experience' : entity } %}
-{% endblock %}
+{# {% block table_head %}
+        <tr>
+            <th class="col-md-2">{{ knp_pagination_sortable(pagination, 'experience.title'|trans, 'e.title')|raw }}</th>
+            <th class="col-md-5">{{ "experience.description"|trans }}</th>
+            <th class="col-md-1">{{ knp_pagination_sortable(pagination, 'experience.estimated_duration'|trans, 'e.estimatedDuration')|raw }}</th>
+            <th style="width: 8%">{{ knp_pagination_sortable(pagination, 'experience.price_per_hour'|trans, 'e.pricePerHour')|raw }}</th>
+            <th>{{ "experience.city"|trans }}</th>
+            <th>{{ "interface.actions"|trans }}</th>
+        </tr>
+    {% endblock %}
 
+    {% block table_body %}
+        {% include "WelcomangoFrontExperienceBundle:Experience:_experienceRow.html.twig" with { 'experience' : entity } %}
+    {% endblock %}
+#}
 
-{% block additionnal_content %}
-    {# render(controller("YproxAdminCrmBundle:Experience:experiencesByLastLogin")) #}
-{% endblock %}
+    {% block additionnal_content %}
+        {# render(controller("YproxAdminCrmBundle:Experience:experiencesByLastLogin")) #}
+    {% endblock %}
 
-{% block dashboard_search %}
-    <input id="experience_search" name="" type="text" class="no-boarder" placeholder="{{ "search.experience"|trans }}" style="width:250px;">
-{% endblock %}
+    {% block dashboard_search %}
+        <input id="experience_search" name="" type="text" class="no-boarder" placeholder="{{ "search.experience"|trans }}" style="width:250px;">
+    {% endblock %}
 
-{% block search_results %}
-    <div id="experience_results"></div>
-{% endblock %}
+    {% block search_results %}
+        <div id="experience_results"></div>
+    {% endblock %}
 
-{% block extra_actions %}
-{% endblock %}
+    {% block extra_actions %}
+    {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    <script type="text/javascript">
-        var timeout;
-        $(document).ready(function () {
-            $('#experience_search').val('');
-            $('#experience_search').on('keyup', function (event) {
-                var query = $(this).val();
+    {% block javascripts %}
+        {{ parent() }}
+        <script type="text/javascript">
+            var timeout;
+            $(document).ready(function () {
+                $('#experience_search').val('');
+                $('#experience_search').on('keyup', function (event) {
+                    var query = $(this).val();
 
-                clearTimeout(timeout);
+                    clearTimeout(timeout);
 
-                if (query.length > 2) {
-                    timeout = setTimeout(function() {
-                        $('#spinner').css('display', 'inline');
-                        $.post("{{ path('experience_search_ajax') }}", {'query': query}, function (response) {
-                        $.post("{{ path('experience_search_ajax') }}", {'query': query}, function (response) {
-                            $('#spinner').css('display', 'none');
-                            $('#experience_results').html(response);
-                        }, 'html');
-                    }, 500);
-                }
+                    if (query.length > 2) {
+                        timeout = setTimeout(function() {
+                            $('#spinner').css('display', 'inline');
+                            $.post("{{ path('experience_search_ajax') }}", {'query': query}, function (response) {
+                            $.post("{{ path('experience_search_ajax') }}", {'query': query}, function (response) {
+                                $('#spinner').css('display', 'none');
+                                $('#experience_results').html(response);
+                            }, 'html');
+                        }, 500);
+                    }
+                });
+
+                $('.form-filter-select2').select2({
+                });
             });
+        </script>
 
-            $('.form-filter-select2').select2({
-            });
-        });
-    </script>
+    {% endblock %}
 
-{% endblock %}
+    {% block stylesheets %}
+        {{ parent() }}
+    {% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-{% endblock %}

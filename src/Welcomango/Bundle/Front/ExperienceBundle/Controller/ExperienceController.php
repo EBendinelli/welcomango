@@ -15,12 +15,17 @@ use Welcomango\Bundle\Front\CoreBundle\Controller\Controller;
 use Welcomango\Model\Experience;
 
 
+/**
+ * Class ExperienceController
+ *
+ * @ParamConverter("experience", options={"id" = "experience_id"})
+ */
 class ExperienceController extends Controller
 {
     /**
      * @param Request $request
      *
-     * @Route("/experience/list", name="front_experience_list")
+     * @Route("/experiences", name="front_experience_list")
      * @Template()
      *
      * @return array
@@ -29,7 +34,6 @@ class ExperienceController extends Controller
     {
         $paginator = $this->get('knp_paginator');
         $query     = $this->getRepository('Welcomango\Model\Experience')->findAll();
-
         $pagination = $paginator->paginate(
             $query,
             $request->query->get('page', 1),

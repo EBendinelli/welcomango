@@ -34,7 +34,6 @@ class ExperienceController extends Controller
     {
         $paginator = $this->get('knp_paginator');
         $query     = $this->getRepository('Welcomango\Model\Experience')->findAll();
-
         $pagination = $paginator->paginate(
             $query,
             $request->query->get('page', 1),

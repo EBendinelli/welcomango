@@ -1,7 +1,10 @@
 {% extends "::front.html.twig" %}
 
 {% block page_container %}
+
     {% block search_results '' %}
+
+
 
 {#
         {% block filter_block %}
@@ -32,7 +35,7 @@
         {% endblock %}
 
 ----
-
+#}
         {% block main_content %}
             <div class="container-fluid container-fixed-lg">
                 <div class="cold-md-12">
@@ -71,11 +74,6 @@
                                         {% endif %}
                                     </table>
 
-                                    {% include 'WelcomangoCoreBundle:CRUD:pagination.html.twig' with {
-                                    'path': pager_url,
-                                    'pagination': pagination,
-                                    'number_per_page': number_per_page|default(false)
-                                    } %}
                                 </div>
                             {% endblock %}
                         {% else %}
@@ -89,25 +87,19 @@
                     </div>
                 </div>
             </div>
-            {% endblock %}
+        {% endblock %}
 
-            {% block additionnal_content '' %}
-            {% endblock %}
+        {% block additionnal_content '' %}
+        {% endblock %}
 
-            {% block actions %}
-                <a href="{{ new_url }}" class="btn btn-success">
-                    <i class="fa fa-plus"></i>
-                    &nbsp;
-                    {{ 'interface.new'|trans({}, "admin") }}
-                </a>
-            {% endblock %}
 
-            {% block javascripts %}
-                {{ parent() }}
-                <script type="text/javascript">
-                    $(function(){
-                        $('.portlet').portlet();
-                    });
-                </script>
-            {% endblock %}
-#}
+        {% block javascripts %}
+            {{ parent() }}
+            <script type="text/javascript">
+                $(function(){
+                    $('.portlet').portlet();
+                });
+            </script>
+        {% endblock %}
+
+

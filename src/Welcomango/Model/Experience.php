@@ -113,6 +113,11 @@ class Experience
      */
 
     /**
+     * @ORM\Column(name="published", type="boolean")
+     */
+    private $published = true;
+
+    /**
      * @ORM\Column(name="featured", type="boolean")
      */
     private $featured = false;
@@ -346,6 +351,29 @@ class Experience
     public function setCity($city)
     {
         $this->city = $city;
+    }
+
+    /**
+     * Set published
+     *
+     * @param boolean $published
+     * @return Experience
+     */
+    public function setPublished($published)
+    {
+        $this->$published = $published;
+
+        return $this;
+    }
+
+    /**
+     * Get published
+     *
+     * @return boolean
+     */
+    public function getPublished()
+    {
+        return $this->published;
     }
 
     /**

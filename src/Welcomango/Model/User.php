@@ -64,6 +64,7 @@ class User extends BaseUser
     /**
      * @var ArrayCollection
      *
+     * @ORM\Column(name="spoken_languages", type="integer")
      * @ORM\OneToMany(targetEntity="SpokenLanguage", mappedBy="user")
      */
     private $spokenLanguages;
@@ -71,6 +72,7 @@ class User extends BaseUser
     /**
      * @var ArrayCollection
      *
+     * @ORM\Column(name="participations", type="integer")
      * @ORM\OneToMany(targetEntity="Participation", mappedBy="user")
      */
     private $participations;
