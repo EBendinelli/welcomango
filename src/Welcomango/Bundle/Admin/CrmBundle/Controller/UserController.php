@@ -17,7 +17,7 @@ use Welcomango\Model\User;
 /**
  * Class UserController
  *
- * @Route("/admin")
+ * @Route("/welcomadmin")
  * @ParamConverter("user", options={"id" = "user_id"})
  */
 class UserController extends Controller

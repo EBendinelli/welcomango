@@ -1,6 +1,6 @@
 {% extends "::front.html.twig" %}
 
-{% block page_container %}
+{% block page_content %}
 
     {% block search_results '' %}
 
@@ -36,53 +36,80 @@
 
 ----
 #}
-        {% block main_content %}
-            <div class="container-fluid container-fixed-lg">
-                <div class="cold-md-12">
-                    <div class="panel panel-default portlet">
-                        <div class="panel-heading">
-                            <div class="panel-title">
-                                {% block grid_title %}
-                                    {% block pagination_nb_item %}
-                                        {{ "interface.total.items"|trans({}, "admin") }}: {{ pagination.totalItemCount|number_format }}
-                                    {% endblock %}
-                                {% endblock %}
+        {% block page_header %}
+            {% include("WelcomangoFrontCoreBundle:CRUD:subHeader.html.twig") %}
+            {# MAIN DESCRIPTION #}
+            <section class="bg-master-lightest p-b-85 p-t-75">
+                <div class="container">
+                    <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+                        <h5 class="block-title hint-text no-margin">
+                            {% block element_title %}
+                            {% endblock element_title %}
+                        </h5>
+                        <div class="row">
+                            <div class="col-sm-5 col-md-4">
+                                <h1 class="m-t-5">
+                                    {% block element_main_sentence %}
+                                    {% endblock element_main_sentence %}
+                                </h1>
                             </div>
-                            <div class="btn-group pull-right m-b-10" role="group">
-                                {{ block('actions') }}
-                                {% block extra_actions '' %}
+                            <div class="col-sm-7 col-md-8 no-padding xs-p-l-15 xs-p-r-15">
+                                <div class="p-t-20 p-l-35 md-p-l-5 md-p-t-15">
+                                    <p>
+                                        {% block element_description %}
+                                        {% endblock element_description %}
+                                    </p>
+                                    <p class="hint-text font-arial small-text col-md-7 no-padding">
+                                        {% block element_last_description  %}
+                                        {% endblock element_last_description %}
+                                    </p>
+                                </div>
                             </div>
-                            <div class="clearfix"></div>
                         </div>
-                        <div class="panel-body">
-                        {% if pagination|length %}
-                            {% block table %}
-                                <div class="table-responsive">
-                                    <table class="{% block table_class %}entity-table table table-striped table-condensed{% endblock %}">
-                                        <thead>
-                                        {% block table_head %}{% endblock %}
-                                        </thead>
-                                        <tbody>
-                                        {% for entity in pagination %}
-                                            {% block table_body %}{% endblock %}
-                                        {% endfor %}
-                                        </tbody>
+                    </div>
+                </div>
+            </section>
+        {% endblock %}
 
-                                        {% set table_footer = block('table_footer')|default('') %}
-                                        {% if table_footer %}
-                                            <tfoot>{{ table_footer|raw }}</tfoot>
-                                        {% endif %}
-                                    </table>
 
-                                </div>
-                            {% endblock %}
-                        {% else %}
-                            {% block no_results %}
-                                <div class="alert text-center">
-                                    <strong>{{ 'interface.noresult'|trans({}, "admin") }}</strong>
-                                </div>
-                            {% endblock %}
-                        {% endif %}
+        {% block main_content %}
+            {# ELEMENT DISPLAY #}
+            <div class="container-fluid container-fixed-lg bg-master-lightest ">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-transparent">
+
+
+                            <div class="panel-body">
+                            {% if pagination|length %}
+                                {% block table %}
+                                    <div class="table-responsive">
+                                        <table class="{% block table_class %}entity-table table table-striped table-condensed{% endblock %}">
+                                            <thead>
+                                            {% block table_head %}{% endblock %}
+                                            </thead>
+                                            <tbody>
+                                            {% for entity in pagination %}
+                                                {% block table_body %}{% endblock %}
+                                            {% endfor %}
+                                            </tbody>
+
+                                            {% set table_footer = block('table_footer')|default('') %}
+                                            {% if table_footer %}
+                                                <tfoot>{{ table_footer|raw }}</tfoot>
+                                            {% endif %}
+                                        </table>
+
+                                    </div>
+                                {% endblock %}
+                            {% else %}
+                                {% block no_results %}
+                                    <div class="alert text-center">
+                                        <strong>{{ 'interface.noresult'|trans({}, "admin") }}</strong>
+                                    </div>
+                                {% endblock %}
+                            {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -101,5 +128,4 @@
                 });
             </script>
         {% endblock %}
-
 

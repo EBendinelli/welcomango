@@ -17,7 +17,7 @@ use Welcomango\Model\Experience;
 /**
  * Class ExperienceController
  *
- * @Route("/admin")
+ * @Route("/welcomadmin")
  * @ParamConverter("experience", options={"id" = "experience_id"})
  */
 class ExperienceController extends Controller
