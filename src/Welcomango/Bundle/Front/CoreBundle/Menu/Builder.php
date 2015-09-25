@@ -46,7 +46,7 @@ class Builder extends ContainerAware
         $menu->setExtra('toggler', true);
 
             $menu->addChild('menu.title.home', array(
-            'route'          => 'homepage',
+            'route'          => 'front_homepage',
         ));
 
         $menu->addChild('menu.title.experiences', array(
@@ -54,15 +54,15 @@ class Builder extends ContainerAware
         ));
 
         $menu->addChild('menu.title.people', array(
-            'route'          => 'experience_list',
+            'route'          => 'front_people_list',
         ));
 
         $menu->addChild('menu.title.about', array(
-            'route'          => 'experience_list',
+            'route'          => 'about',
         ));
 
-        $menu->addChild('menu.title.contactus', array(
-            'route'          => 'experience_list',
+        $menu->addChild('menu.title.contact_us', array(
+            'route'          => 'contact_us',
         ));
 
         return $menu;

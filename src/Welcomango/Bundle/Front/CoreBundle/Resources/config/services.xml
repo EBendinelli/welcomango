@@ -5,13 +5,13 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="welcomango.menu_builder" class="Welcomango\Bundle\Front\CoreBundle\Menu\Builder">
+        <service id="welcomango.front.menu_builder" class="Welcomango\Bundle\Front\CoreBundle\Menu\Builder">
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="security.token_storage" />
             <argument type="service" id="request_stack" />
         </service>
 
-        <service id="welcomango.menu_builder.main" class="Knp\Menu\MenuItem" factory-service="welcomango.menu_builder" factory-method="createMainMenu">
+        <service id="welcomango.front.menu_builder.main" class="Knp\Menu\MenuItem" factory-service="welcomango.front.menu_builder" factory-method="createMainMenu">
             <tag name="knp_menu.menu" alias="menu_front" />
         </service>
     </services>

@@ -18,7 +18,7 @@ class DefaultController extends Controller
 {
 
     /**
-     * @Route("/")
+     * @Route("/", name="front_homepage")
      * @Method({"GET", "POST"})
      */
     public function indexAction()

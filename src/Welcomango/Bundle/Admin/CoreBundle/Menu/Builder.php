@@ -46,17 +46,17 @@ class Builder extends ContainerAware
         $menu->setExtra('toggler', true);
 
         $menu->addChild('menu.title.home', array(
-            'route'          => 'homepage',
+            'route'          => 'admin_homepage',
             'linkAttributes' => ['class' => 'fa fa-home']
         ));
 
         $menu->addChild('menu.title.users', array(
-            'route'          => 'user_list',
+            'route'          => 'admin_user_list',
             'linkAttributes' => ['class' => 'fa fa-user']
         ));
 
         $menu->addChild('menu.title.experiences', array(
-            'route'          => 'experience_list',
+            'route'          => 'admin_experience_list',
             'linkAttributes' => ['class' => 'fa fa-hand-peace-o']
         ));
 
