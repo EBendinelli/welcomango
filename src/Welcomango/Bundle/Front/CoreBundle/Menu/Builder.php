@@ -1,6 +1,6 @@
 <?php
 
-namespace Welcomango\Bundle\Admin\CoreBundle\Menu;
+namespace Welcomango\Bundle\Front\CoreBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class Builder extends ContainerAware
 {
-    const ADMIN_NAME = "Welcomango";
+    const MENU_NAME = "Welcomango";
     /**
      * @var FactoryInterface $factory factory
      */
@@ -40,26 +40,31 @@ class Builder extends ContainerAware
 
     public function createMainMenu()
     {
-        $menu = $this->factory->createItem(self::ADMIN_NAME, array());
+        $menu = $this->factory->createItem(self::MENU_NAME, array());
 
-        $menu->setChildrenAttributes(array('class' => 'menu-items'));
+        $menu->setChildrenAttributes(array('class' => 'menu'));
         $menu->setExtra('toggler', true);
 
-        $menu->addChild('menu.title.home', array(
-            'route'          => 'admin_homepage',
-            'linkAttributes' => ['class' => 'fa fa-home']
-        ));
-
-        $menu->addChild('menu.title.users', array(
-            'route'          => 'admin_user_list',
-            'linkAttributes' => ['class' => 'fa fa-user']
+            $menu->addChild('menu.title.home', array(
+            'route'          => 'front_homepage',
         ));
 
         $menu->addChild('menu.title.experiences', array(
-            'route'          => 'admin_experience_list',
-            'linkAttributes' => ['class' => 'fa fa-hand-peace-o']
+            'route'          => 'front_experience_list',
+        ));
+/*
+        $menu->addChild('menu.title.people', array(
+            'route'          => 'front_people_list',
         ));
 
+        $menu->addChild('menu.title.about', array(
+            'route'          => 'about',
+        ));
+
+        $menu->addChild('menu.title.contact_us', array(
+            'route'          => 'contact_us',
+        ));
+*/
         return $menu;
     }
 }

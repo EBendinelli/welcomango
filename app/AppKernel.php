@@ -33,13 +33,15 @@ class AppKernel extends Kernel
             new Welcomango\Bundle\Front\CoreBundle\WelcomangoFrontCoreBundle(),
             new Welcomango\Bundle\Front\ExperienceBundle\WelcomangoFrontExperienceBundle(),
 
+            // Common
+            new Welcomango\Bundle\Common\BaseBundle\WelcomangoCommonBaseBundle(),
+
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
-
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

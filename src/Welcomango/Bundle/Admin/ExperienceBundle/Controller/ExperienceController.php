@@ -25,7 +25,7 @@ class ExperienceController extends Controller
     /**
      * @param Request $request
      *
-     * @Route("/experience/list", name="experience_list")
+     * @Route("/experience/list", name="admin_experience_list")
      * @Template()
      *
      * @return array
@@ -48,7 +48,7 @@ class ExperienceController extends Controller
     /**
      * @param Request $request
      *
-     * @Route("/experience/create", name="experience_create")
+     * @Route("/experience/create", name="admin_experience_create")
      * @Template()
      *
      * @return array
@@ -79,7 +79,7 @@ class ExperienceController extends Controller
      * @param Request    $request
      * @param Experience $experience
      *
-     * @Route("/experience/{experience_id}/edit", name="experience_edit")
+     * @Route("/experience/{experience_id}/edit", name="admin_experience_edit")
      * @Template()
      *
      * @return array
@@ -108,7 +108,7 @@ class ExperienceController extends Controller
 
     /**
      *
-     * @Route("/experience/{experience_id}/delete", name="experience_delete")
+     * @Route("/experience/{experience_id}/delete", name="admin_experience_delete")
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -123,7 +123,7 @@ class ExperienceController extends Controller
     /**
      * @param Request $request
      *
-     * @Route("/experience/_experience_search_ajax", name="experience_search_ajax")
+     * @Route("/experience/_experience_search_ajax", name="admin_experience_search_ajax")
      * @Method("POST")
      *
      * @return array

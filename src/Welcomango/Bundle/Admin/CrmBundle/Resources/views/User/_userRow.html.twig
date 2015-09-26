@@ -22,8 +22,8 @@
     </td>
     <td>{% spaceless %}
             <div class="btn-toolbar">
-                {{ button.edit(path('user_edit', {'user_id': user.id}), false, "btn-xs") }}
-                {{ button.delete(path('user_delete', {'user_id': user.id}), null, "btn-xs") }}
+                {{ button.edit(path('admin_user_edit', {'user_id': user.id}), false, "btn-xs") }}
+                {{ button.delete(path('admin_user_delete', {'user_id': user.id}), null, "btn-xs") }}
             </div>
         {% endspaceless %}
     </td>

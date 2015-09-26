@@ -6,7 +6,7 @@
     {# {{ button.create(path('user_create'), 'user.create'|trans) }}#}
 {% endblock %}
 
-{% set pager_url = path('user_list') %}
+{% set pager_url = path('admin_user_list') %}
 {% set number_per_page = false %}
 {#{% set filter_url = path('users_filters') %}#}
 
@@ -68,7 +68,7 @@
                 if (query.length > 2) {
                     timeout = setTimeout(function() {
                         $('#spinner').css('display', 'inline');
-                        $.post("{{ path('user_search_ajax') }}", {'query': query}, function (response) {
+                        $.post("{{ path('admin_user_search_ajax') }}", {'query': query}, function (response) {
                             $('#spinner').css('display', 'none');
                             $('#user_results').html(response);
                         }, 'html');

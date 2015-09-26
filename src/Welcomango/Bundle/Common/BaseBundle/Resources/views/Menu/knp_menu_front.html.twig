@@ -1,0 +1,124 @@
+{% extends 'knp_menu_base.html.twig' %}
+
+{% macro attributes(attributes) %}
+    {% for name, value in attributes %}
+        {%- if value is not none and value is not sameas(false) -%}
+            {{- ' %s="%s"'|format(name, value is sameas(true) ? name|e : value|e)|raw -}}
+        {%- endif -%}
+    {%- endfor -%}
+{% endmacro %}
+
+    {% block compressed_root %}
+        {% spaceless %}
+            {{ block('root') }}
+        {% endspaceless %}
+    {% endblock %}
+
+    {% block root %}
+        {% set listAttributes = item.childrenAttributes %}
+        {{ block('list') -}}
+    {% endblock %}
+
+    {% block list %}
+        {% if item.hasChildren and options.depth is not sameas(0) and item.displayChildren %}
+            {% import _self as knp_menu %}
+            <ul{{ knp_menu.attributes(listAttributes) }}>
+                {{ block('children') }}
+            </ul>
+        {% endif %}
+    {% endblock %}
+
+    {% block children %}
+        {# save current variables #}
+        {% set currentOptions = options %}
+        {% set currentItem = item %}
+        {# update the depth for children #}
+        {% if options.depth is not none %}
+            {% set options = currentOptions|merge({'depth': currentOptions.depth - 1}) %}
+        {% endif %}
+        {% for item in currentItem.children %}
+            {% if item.getExtra('display') is null %}
+                {{ block('item') }}
+            {% elseif  item.getExtra('display') is sameas(true)  %}
+                {{ block('item') }}
+            {% endif %}
+        {% endfor %}
+        {# restore current variables #}
+        {% set item = currentItem %}
+        {% set options = currentOptions %}
+    {% endblock %}
+
+    {% block item %}
+        {% if item.displayed %}
+            {# building the class of the item #}
+            {%- set classes = [] %}
+            {%- if matcher.isCurrent(item) %}
+                {%- set classes = classes|merge([options.currentClass]) %}
+            {%- elseif matcher.isAncestor(item, options.depth) %}
+                {%- set classes = classes|merge([options.ancestorClass]) %}
+            {%- endif %}
+            {%- if item.actsLikeFirst %}
+                {%- set classes = classes|merge([options.firstClass]) %}
+            {%- endif %}
+            {%- if item.actsLikeLast %}
+                {%- set classes = classes|merge([options.lastClass]) %}
+            {%- endif %}
+            {%- set attributes = item.attributes %}
+            {%- if classes is not empty %}
+                {%- set attributes = attributes|merge({'class': classes|join(' ')}) %}
+            {%- endif %}
+            {# displaying the item #}
+            {% import _self as knp_menu %}
+            <li{{ knp_menu.attributes(attributes) }}>
+                {%- if item.uri is not empty and (not matcher.isCurrent(item) or options.currentAsLink) and (not item.hasChildren() or item.displayChildren is sameas(false)) %}
+                    {{ block('linkElement') }}
+                {%- else %}
+                    {{ block('spanElement') }}
+                {%- endif %}
+                {# render the list of children#}
+                {%- set childrenClasses = item.childrenAttribute('class') is not empty ? [item.childrenAttribute('class')] : [] %}
+                {%- set childrenClasses = childrenClasses|merge(['menu_level_' ~ item.level, 'sub-menu']) %}
+                {%- set listAttributes = item.childrenAttributes|merge({'class': childrenClasses|join(' ') }) %}
+                {{ block('list') }}
+            </li>
+        {% endif %}
+    {% endblock %}
+
+    {% block linkElement %}
+        {% import _self as knp_menu %}
+        <a href="{{ item.uri }}" class='{{ options.currentClass }}'>
+            {{ block('label') }}
+        </a>
+        {{ block('extraElement') }}
+    {% endblock %}
+
+    {% block spanElement %}
+        <a href="javascript:;">{{ block('label') }}</a>
+        {{ block('extraElement') }}
+    {% endblock %}
+
+    {% block label %}
+        {# span removed to make the front menu usable #}
+        {# <span class="title"> #}
+        {% if options.allow_safe_labels and item.getExtra('safe_label', false) %}{{ item.label|raw }}{% else %}{{ item.label }}{% endif %}
+        {# </span> #}
+        {% if matcher.isAncestor(item) %}
+            <span class="selected"></span>
+        {% endif %}
+        {% if item.hasChildren and options.depth is not sameas(0) and item.displayChildren %}
+            <span class="arrow "></span>
+        {% endif %}
+    {% endblock %}
+
+    {% block extraElement %}
+        {% if item.linkAttributes.class|default("") %}
+            <span class="icon-thumbnail">
+        {# if - is found, it means that it's an fa-icon #}
+                {% if '-' in item.linkAttributes.class %}
+                    <i class="fa {{ item.linkAttributes.class|default('') }}"></i>
+                {% else %}
+                    {{ item.linkAttributes.class|default('') }}
+                {% endif %}
+        </span>
+        {% endif %}
+    {% endblock %}

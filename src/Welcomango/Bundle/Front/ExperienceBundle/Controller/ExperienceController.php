@@ -48,7 +48,7 @@ class ExperienceController extends Controller
     /**
      * @param Request $request
      *
-     * @Route("/experience/create", name="experience_create")
+     * @Route("/experience/create", name="front_experience_create")
      * @Template()
      *
      * @return array
@@ -86,7 +86,7 @@ class ExperienceController extends Controller
      * @param Request $request
      * @param Experience $experience
      *
-     * @Route("/experience/{experience_id}/edit", name="experience_edit")
+     * @Route("/experience/{experience_id}/edit", name="front_experience_edit")
      * @ParamConverter("experience", options={"id" = "experience_id"})
      * @Template()
      *
@@ -118,7 +118,7 @@ class ExperienceController extends Controller
 
     /**
      *
-     * @Route("/experience/{experience_id}/delete", name="experience_delete")
+     * @Route("/experience/{experience_id}/delete", name="front_experience_delete")
      * @ParamConverter("experience", options={"id" = "experience_id"})
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
@@ -134,7 +134,7 @@ class ExperienceController extends Controller
     /**
      * @param Request $request
      *
-     * @Route("/experience/_experience_search_ajax", name="experience_search_ajax")
+     * @Route("/experience/_experience_search_ajax", name="front_experience_search_ajax")
      * @Method("POST")
      * @Template("YproxAdminCrmBundle:Experience:_experience.html.twig")
      *

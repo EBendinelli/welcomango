@@ -25,7 +25,7 @@ class UserController extends Controller
     /**
      * @param Request $request
      *
-     * @Route("/user/list", name="user_list")
+     * @Route("/user/list", name="admin_user_list")
      * @Template()
      *
      * @return array
@@ -49,7 +49,7 @@ class UserController extends Controller
     /**
      * @param Request $request
      *
-     * @Route("/user/create", name="user_create")
+     * @Route("/user/create", name="admin_user_create")
      * @Template()
      *
      * @return array
@@ -79,7 +79,7 @@ class UserController extends Controller
      * @param Request $request
      * @param User    $user
      *
-     * @Route("/user/{user_id}/edit", name="user_edit")
+     * @Route("/user/{user_id}/edit", name="admin_user_edit")
      * @Template()
      *
      * @return array
@@ -109,7 +109,7 @@ class UserController extends Controller
     /**
      * @param User $user
      *
-     * @Route("/user/{user_id}/delete", name="user_delete")
+     * @Route("/user/{user_id}/delete", name="admin_user_delete")
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -124,7 +124,7 @@ class UserController extends Controller
     /**
      * @param Request $request
      *
-     * @Route("/user/_user_search_ajax", name="user_search_ajax")
+     * @Route("/user/_user_search_ajax", name="admin_user_search_ajax")
      * @Method("POST")
      * @Template("YproxAdminCrmBundle:User:_users.html.twig")
      *

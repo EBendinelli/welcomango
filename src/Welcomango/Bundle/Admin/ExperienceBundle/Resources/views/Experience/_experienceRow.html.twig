@@ -19,9 +19,9 @@
         {% endif %}
     </td>
     <td>
-        <a href="{{ path('experience_delete', {'experience_id' : experience.getId }) }}" onclick="return confirm('Do you really want to delete?')">Delete</a>
+        <a href="{{ path('admin_experience_delete', {'experience_id' : experience.getId }) }}" onclick="return confirm('Do you really want to delete?')">Delete</a>
         |
-        <a href="{{ path('experience_edit', {'experience_id' : experience.getId }) }}" >Edit</a>
+        <a href="{{ path('admin_experience_edit', {'experience_id' : experience.getId }) }}" >Edit</a>
     </td>
 </tr>
 

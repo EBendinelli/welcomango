@@ -6,7 +6,7 @@
     {# {{ button.create(path('experience_create'), 'experience.create'|trans) }}#}
 {% endblock %}
 
-{% set pager_url = path('experience_list') %}
+{% set pager_url = path('admin_experience_list') %}
 {% set number_per_page = false %}
 {#{% set filter_url = path('experience_filters') %}#}
 
@@ -64,8 +64,8 @@
                 if (query.length > 2) {
                     timeout = setTimeout(function() {
                         $('#spinner').css('display', 'inline');
-                        $.post("{{ path('experience_search_ajax') }}", {'query': query}, function (response) {
-                        $.post("{{ path('experience_search_ajax') }}", {'query': query}, function (response) {
+                        $.post("{{ path('admin_experience_search_ajax') }}", {'query': query}, function (response) {
+                        $.post("{{ path('admin_experience_search_ajax') }}", {'query': query}, function (response) {
                             $('#spinner').css('display', 'none');
                             $('#experience_results').html(response);
                         }, 'html');

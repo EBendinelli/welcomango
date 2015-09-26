@@ -70,23 +70,9 @@
                 <!-- END HEADER CLOSE TOGGLE FOR MOBILE -->
                 <!-- BEGIN MENU ITEMS -->
                 <div class="header-inner">
-                    <ul class="menu">
-                        <li>
-                            <a href="{{ app.request.getBaseURL() }}" class="active">Home </a>
-                        </li>
-                        <li>
-                            <a href="{{ path('front_experience_list') }}">Experiences </a>
-                        </li>
-                        <li>
-                            <a href="#">People </a>
-                        </li>
-                        <li>
-                            <a href="#">About </a>
-                        </li>
-                        <li>
-                            <a href="#">Contact Us</a>
-                        </li>
-                    </ul>
+                    {% block sidebar %}
+                        {{ knp_menu_render('menu_front', { ancestorClass: 'open', lastClass: 'end', ancestorClass: 'open', currentClass: 'active', callingView:'front'}) }}
+                    {% endblock %}
                     <a href="#" class="search-toggle hidden-xs hidden-sm" data-toggle="search"><i class="fs-14 pg-search"></i></a>
                 </div>
                 <!-- END MENU ITEMS -->

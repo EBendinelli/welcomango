@@ -2,11 +2,11 @@
 
 {% trans_default_domain "experience" %}
 
-{% set listing = path('experience_list') %}
+{% set listing = path('admin_experience_list') %}
 {% form_theme form with ["::theme.html.twig"] %}
 
 {% block page_content %}
-    {{ include("WelcomangoAdminExperienceBundle:Experience:form.html.twig", {'save_path': path('experience_edit', {'experience_id' : form.vars.value.id })}) }}
+    {{ include("WelcomangoAdminExperienceBundle:Experience:form.html.twig", {'save_path': path('admin_experience_edit', {'experience_id' : form.vars.value.id })}) }}
 
 {% endblock %}
 
