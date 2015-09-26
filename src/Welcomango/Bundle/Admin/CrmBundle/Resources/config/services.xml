@@ -13,6 +13,9 @@
             <argument type="service" id="security.context" />
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
+
+        <service id="welcomango.form.language.type" class="Welcomango\Bundle\Admin\CrmBundle\Form\Type\LanguageType">
+        </service>
     </services>
 
 </container>

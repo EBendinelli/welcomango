@@ -1,0 +1,19 @@
+<tr>
+    <td>
+        <div title="Canada" class="flag flag-md" role="image" aria-label="Canada" style="background: url({{ asset('img/countries/'~ language.flagLabel|lower ~'.svg') }});"></div>
+    </td>
+    <td>
+        {{ language.language }}
+    </td>
+    <td>
+        {{ language.languageCode }}
+    </td>
+    <td>{% spaceless %}
+            <div class="btn-toolbar">
+                {{ button.edit(path('admin_language_edit', {'language_id': language.id}), false, "btn-xs") }}
+                {{ button.delete(path('admin_language_delete', {'language_id': language.id}), null, "btn-xs") }}
+            </div>
+        {% endspaceless %}
+    </td>
+</tr>
+

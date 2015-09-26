@@ -31,6 +31,13 @@ class Language
     /**
      * @var string
      *
+     * @ORM\Column(name="flag_label", type="string", length=15)
+     */
+    private $flagLabel;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="language", type="string", length=255)
      */
     private $language;
@@ -38,7 +45,7 @@ class Language
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -62,7 +69,7 @@ class Language
     /**
      * Get languageCode
      *
-     * @return string 
+     * @return string
      */
     public function getLanguageCode()
     {
@@ -86,15 +93,34 @@ class Language
     /**
      * Get language
      *
-     * @return string 
+     * @return string
      */
     public function getLanguage()
     {
         return $this->language;
     }
 
-    public function __toString() {
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
         return $this->language;
     }
 
+    /**
+     * @return string
+     */
+    public function getFlagLabel()
+    {
+        return $this->flagLabel;
+    }
+
+    /**
+     * @param string $flagLabel
+     */
+    public function setFlagLabel($flagLabel)
+    {
+        $this->flagLabel = $flagLabel;
+    }
 }

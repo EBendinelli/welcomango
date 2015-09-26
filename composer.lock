@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "aae59e00ae3f7bdbf617b65deed024d2",
+    "hash": "f586f2ac2fc3ec50695bd86ca431aa30",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -45,6 +45,44 @@
                 "transliterator"
             ],
             "time": "2014-05-15 22:08:22"
+        },
+        {
+            "name": "components/flag-icon-css",
+            "version": "0.8.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lipis/flag-icon-css.git",
+                "reference": "63b89f891914b589d12c6e71989a0eb54d35a7a3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lipis/flag-icon-css/zipball/63b89f891914b589d12c6e71989a0eb54d35a7a3",
+                "reference": "63b89f891914b589d12c6e71989a0eb54d35a7a3",
+                "shasum": ""
+            },
+            "type": "component",
+            "extra": {
+                "component": {
+                    "name": "flag-icon-css",
+                    "files": [
+                        "less/**",
+                        "css/**",
+                        "flags/**"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Panayiotis Lipiridis (Lipis)",
+                    "email": "lipiridis@gmail.com"
+                }
+            ],
+            "description": "CSS for vector based country flags",
+            "time": "2015-09-05 08:34:56"
         },
         {
             "name": "doctrine/annotations",

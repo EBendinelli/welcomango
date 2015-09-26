@@ -9,6 +9,9 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
 use Welcomango\Model\Country;
 
+/**
+ * Class LoadCountryData
+ */
 class LoadCountryData extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface
 {
     /**
@@ -16,9 +19,9 @@ class LoadCountryData extends AbstractFixture implements FixtureInterface, Order
      */
     public function load(ObjectManager $manager)
     {
-        $countries = array_map('str_getcsv', file('/home/eliot/www/welcomango/src/Welcomango/Data/GeodataSource_coutries.csv'));
+        $countries = array_map('str_getcsv', file(__DIR__.'/../../../../../Data/GeodataSource_coutries.csv'));
 
-        foreach($countries as $country){
+        foreach ($countries as $country) {
             $entry = new Country();
             $entry->setName($country[1]);
             $entry->setCountryCode($country[0]);

@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta content="" name="description"/>
     <meta content="" name="author"/>
+    <script src="{{ asset('js/webcomponentsjs.min.js') }}" type="text/javascript"></script>
     <!-- We need this link because bootstrap uses fontAwesome 3.3.2 and we need the last one (4.4.0) -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     {% block stylesheets %}
@@ -16,6 +17,8 @@
         <link rel="stylesheet" href="{{ asset("css/plugins.css") }}"/>
         <link rel="stylesheet" href="{{ asset("css/pages.css") }}"/>
         <link rel="stylesheet" href="{{ asset("bundles/welcomangoadmincore/css/admin.css") }}"/>
+        <link rel="import" href="{{ asset("js/polymer.html") }}">
+        <link rel="import" href="{{ asset("js/flag-icon.html") }}">
     {% endblock %}
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     {% block javascripts_head '' %}

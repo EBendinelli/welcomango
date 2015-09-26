@@ -67,6 +67,6 @@ class SpokenLanguageType extends AbstractType
      */
     public function getName()
     {
-        return 'admin_user';
+        return 'admin_spoken_language';
     }
 }
