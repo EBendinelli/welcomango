@@ -8,8 +8,8 @@
     <div class="col-md-12">
         <div class="panel panel-default portlet">
             <div class="panel-body">
-                {{ form_start(form, {'action': path('admin_language_edit', {'language_id' : language.id}), 'attr': {'novalidate': 'novalidate' }}) }}
-                {% include "WelcomangoAdminCrmBundle:Language:form.html.twig" with { 'form': form } %}
+                {{ form_start(form, {'action': path('admin_media_edit', {'media_id' : media.id}), 'attr': {'novalidate': 'novalidate' }}) }}
+                {% include "WelcomangoAdminCoreBundle:Media:form.html.twig" with { 'form': form } %}
                 {% include "WelcomangoAdminCoreBundle:Form:formFooter.html.twig" with {'listing' : listing, 'update': form.vars.id } only %}
                 {{ form_end(form) }}
             </div>

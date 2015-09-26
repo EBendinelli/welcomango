@@ -34,8 +34,8 @@ class AppKernel extends Kernel
             new Welcomango\Bundle\Front\ExperienceBundle\WelcomangoFrontExperienceBundle(),
 
             // Common
+            new Gregwar\ImageBundle\GregwarImageBundle(),
             new Welcomango\Bundle\Common\BaseBundle\WelcomangoCommonBaseBundle(),
-
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),

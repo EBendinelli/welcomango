@@ -14,5 +14,8 @@
         <service id="welcomango.menu_builder.main" class="Knp\Menu\MenuItem" factory-service="welcomango.menu_builder" factory-method="createMainMenu">
             <tag name="knp_menu.menu" alias="menu_admin" />
         </service>
+
+        <service id="welcomango.form.media.type" class="Welcomango\Bundle\Admin\CoreBundle\Form\Type\MediaType">
+        </service>
     </services>
 </container>

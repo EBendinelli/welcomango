@@ -103,8 +103,9 @@ class LanguageController extends Controller
         }
 
         return array(
-            'form'     => $form->createView(),
-            'language' => $language,
+            'form'        => $form->createView(),
+            'language'    => $language,
+            'flagsImages' => $this->getFlagNames(),
         );
     }
 

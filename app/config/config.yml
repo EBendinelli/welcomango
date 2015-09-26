@@ -126,3 +126,5 @@ stof_doctrine_extensions:
             # translatable: true
             loggable: true
             sortable: true
+
+gregwar_image: ~
