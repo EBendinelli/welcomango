@@ -71,6 +71,11 @@ class Builder extends ContainerAware
             'linkAttributes' => ['class' => 'fa fa-flag-o'],
         ));
 
+        $menu->addChild('menu.title.medias', array(
+            'route'          => 'admin_media_list',
+            'linkAttributes' => ['class' => 'fa fa-picture-o'],
+        ));
+
         return $menu;
     }
 }

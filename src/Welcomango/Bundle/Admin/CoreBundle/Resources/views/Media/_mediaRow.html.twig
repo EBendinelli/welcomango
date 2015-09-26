@@ -1,0 +1,19 @@
+<tr>
+    <td>
+        <img src="{{ image(media.getUploadRootDir() ~ '/' ~ media.filename).resize(250,175).jpeg() }}" />
+    </td>
+    <td>
+        {{ media.title}}
+    </td>
+    <td>
+        {{ media.description }}
+    </td>
+    <td>{% spaceless %}
+            <div class="btn-toolbar">
+                {{ button.edit(path('admin_media_edit', {'media_id': media.id}), false, "btn-xs") }}
+                {{ button.delete(path('admin_media_delete', {'media_id': media.id}), null, "btn-xs") }}
+            </div>
+        {% endspaceless %}
+    </td>
+</tr>
+
