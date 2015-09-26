@@ -23,10 +23,8 @@
         </div>
     </div>
     <div class="tab-pane slide-left" id="spokenLanguages">
-        <div class="col-md-8">
-            <ul class="tags" data-prototype="{{ form_widget(form.spokenLanguages.vars.prototype)|e }}">
-                <!-- pause -->
-            </ul>
-        </div>
+            <ul id="languages" class="languages" data-prototype="{% filter escape %}{% include 'WelcomangoAdminCrmBundle:User:_spokenLanguages.html.twig' with {'form': form.spokenLanguages.vars.prototype } %}{% endfilter %}">
+        </ul>
     </div>
 </div>
+

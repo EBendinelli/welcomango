@@ -33,15 +33,16 @@ class SpokenLanguageType extends AbstractType
         );
 
         $builder->add('language', 'entity', [
-            'class' => 'Welcomango\Model\Language',
-            'query_builder' => function(EntityRepository $er) {
-                return $er->createQueryBuilder('u');
+            'label'         => 'form.user.languages',
+            'property'      => 'language',
+            'class'         => 'Welcomango\Model\Language',
+            'query_builder' => function (EntityRepository $er) {
+                return $er->createQueryBuilder('l');
             },
-            'label'    => 'form.user.languages',
         ]);
 
         $builder->add('level', 'choice', [
-            'label'    => 'form.user.roles',
+            'label'    => 'form.user.level',
             'required' => false,
             'choices'  => $roles,
             'multiple' => true,
@@ -57,7 +58,7 @@ class SpokenLanguageType extends AbstractType
         $resolver->setDefaults([
             'data_class'         => 'Welcomango\Model\SpokenLanguage',
             'translation_domain' => 'crm',
-            'roles_user'         => null
+            'roles_user'         => null,
         ]);
     }
 

@@ -35,6 +35,9 @@ class UserType extends AbstractType
 
     /**
      * __construct
+     *
+     * @param SecurityContextInterface $securityContext
+     * @param EntityManager            $entityManager
      */
     public function __construct(SecurityContextInterface $securityContext, EntityManager $entityManager)
     {
@@ -53,8 +56,8 @@ class UserType extends AbstractType
             User::ROLE_USER        => User::ROLE_USER,
         );
 
-        $builder->add('username', 'text', ['label' => 'form.user.username',]);
-        $builder->add('email', 'text', ['label' => 'form.user.email',]);
+        $builder->add('username', 'text', ['label' => 'form.user.username']);
+        $builder->add('email', 'text', ['label' => 'form.user.email']);
         $builder->add('firstName', 'text', ['label' => 'form.user.firstname']);
         $builder->add('lastName', 'text', ['label' => 'form.user.lastname']);
         $builder->add('phone', 'text', ['label' => 'form.user.phone', 'required' => false]);
@@ -69,6 +72,7 @@ class UserType extends AbstractType
         $builder->add('spokenLanguages', 'collection', array(
             'type'         => new SpokenLanguageType(),
             'allow_add'    => true,
+            'allow_delete' => true,
         ));
 
         $builder->add('password', 'repeated', array(
@@ -88,7 +92,7 @@ class UserType extends AbstractType
         $resolver->setDefaults([
             'data_class'         => 'Welcomango\Model\User',
             'translation_domain' => 'crm',
-            'roles_user'         => null
+            'roles_user'         => null,
         ]);
     }
 
