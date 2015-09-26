@@ -24,27 +24,37 @@ class LoadParticipationData extends AbstractFixture implements FixtureInterface,
         $creatorStatus = array('available', 'happened', 'booked');
         $ParticipantStatus = array('booked', 'validated', 'happened');
 
-        for($i=0;$i<20;$i++){
+        //Each experience has a creator
+        foreach($experiences as $experience){
+            $entry = new Participation();
+            $entry->setUser($users[array_rand($users)]);
+            $entry->setExperience($experience);
+            $entry->setDate(new \DateTime());
+            $entry->setStartTime(new \DateTime());
+            $entry->setEndTime(new \DateTime());
+            $entry->setNote(rand(1,5));
+
+            $entry->setIsCreator(true);
+            $entry->setIsParticipant(false);
+            $entry->setStatus(array_rand($creatorStatus));
+
+            $manager->persist($entry);
+        }
+
+        //Generate random participations participant
+        for($i=0;$i<30;$i++){
             $entry = new Participation();
             $entry->setUser($users[array_rand($users)]);
             $entry->setExperience($experiences[array_rand($experiences)]);
             $entry->setDate(new \DateTime());
             $entry->setStartTime(new \DateTime());
             $entry->setEndTime(new \DateTime());
-            $entry->setNote(rand(1,10));
+            $entry->setNote(rand(1,5));
 
-            $randomStatus = rand(0,1);
-            if($randomStatus == 1){
-                //Is Creator
-                $entry->setIsCreator(true);
-                $entry->setIsParticipant(false);
-                $entry->setStatus(array_rand($creatorStatus));
-            }else{
-                //Is participant
-                $entry->setIsCreator(false);
-                $entry->setIsParticipant(true);
-                $entry->setStatus(array_rand($ParticipantStatus));
-            }
+            $entry->setIsCreator(false);
+            $entry->setIsParticipant(true);
+            $entry->setStatus(array_rand($ParticipantStatus));
+
 
             $manager->persist($entry);
         }

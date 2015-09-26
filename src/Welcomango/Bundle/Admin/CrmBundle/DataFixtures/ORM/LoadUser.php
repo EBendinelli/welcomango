@@ -46,6 +46,7 @@ class LoadUserData extends AbstractFixture  implements FixtureInterface, Contain
 
         $listNames = array('Alexandre', 'Marine', 'Anna', 'Jackie', 'Michel', 'Jaybe', 'Eliot');
 
+        $i=0;
         foreach ($listNames as $name) {
             $user = $userManager->createUser();
 
@@ -58,6 +59,9 @@ class LoadUserData extends AbstractFixture  implements FixtureInterface, Contain
             $user->setPhone('0000000000');
             $user->setCreatedAt(new \DateTime());
             $user->setUpdatedAt(new \DateTime());
+            ($i%2 == 0 ? $user->setEnabled(true) : $user->setEnabled(false));
+            $i++;
+            $admin->setEnabled(true);
 
             $user->setRoles(array('ROLE_USER'));
 

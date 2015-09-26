@@ -86,7 +86,7 @@
 
     {% block linkElement %}
         {% import _self as knp_menu %}
-        <a href="{{ item.uri }}" class='{{ options.currentClass }}'>
+        <a href="{{ item.uri }}" {% if  matcher.isCurrent(item) %}class='{{ options.currentClass }}{% endif %}'>
             {{ block('label') }}
         </a>
         {{ block('extraElement') }}

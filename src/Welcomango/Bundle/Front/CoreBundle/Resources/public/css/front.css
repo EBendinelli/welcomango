@@ -1,0 +1,281 @@
+/* //////////////////////////////////////////////////////// */
+/* ////////////////////   DOTED LINE  ////////////////////// */
+/* //////////////////////////////////////////////////////// */
+
+
+div.dotted-line:after {
+    width: 100%;
+    height: 1px;
+    background: none repeat scroll 0% 0% #252525;
+    position: absolute;
+    top: 5px;
+    left: 0px;
+    content: "";
+}
+
+
+div.dotted-line {
+    width: 170px;
+    height: 1px;
+    margin: 0px auto 25px;
+    text-align: center;
+    position: relative;
+}
+
+div.dotted-line span {
+    width: 10px;
+    height: 10px;
+    border: 3px solid #FFF;
+    display: block;
+    margin: auto;
+    background: none repeat scroll 0% 0% #252525;
+    border-radius: 50%;
+    z-index: 2;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* //////////////////////////////////////////////////////// */
+/* ////////////////////   CARDS UI  /////////////////////// */
+/* //////////////////////////////////////////////////////// */
+
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizeLegibility;
+}
+
+*::-moz-selection {
+    color: #CFD8DC;
+    background: #009688;
+}
+
+*::selection {
+    color: #CFD8DC;
+    background: #009688;
+}
+
+*::-webkit-scrollbar {
+    width: 10px!important;
+    background: #FAFAFA;
+}
+
+*::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, .08);
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, .2);
+}
+/* End defaults*/
+.card {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    padding: 0px;
+    background: #FFF;
+    color: #272727;
+    border-radius: 2px;
+
+}
+.card .title {
+    line-height: 48px;
+    font-size: 24px;
+    font-weight: 300;
+}
+
+.card-content{
+    height:200px !important;
+}
+
+
+.card p {
+    margin: 0;
+}
+.card .action {
+    border-top: 1px solid rgba(160, 160, 160, 0.2);
+    padding: 20px;
+}
+
+.card .card-clickable{
+    position: absolute;
+    height: 300px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.card .image {
+    position: relative;
+    width:100%;
+}
+
+.card .image:after {
+    content: '\A';
+    position: absolute;
+    width: 100%; height:100%;
+    top:0; left:0;
+    background:rgba(0,0,0,0.6);
+    opacity: 0;
+    transition: all 1s;
+    -webkit-transition: all 0.5s;
+}
+
+.card:hover .image:after {
+    opacity: 1;
+}
+
+.card .image img {
+    border-radius: 2px 2px 0 0;
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    max-height: 150px;
+    vertical-align: top;
+}
+.card .image .title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+    color: #FFF;
+}
+
+/* //////////////////////////////////////////////////////// */
+/* ////////////////   USER IN CARD UI  //////////////////// */
+/* //////////////////////////////////////////////////////// */
+
+.user{
+    width: 120px;
+    height: 120px;
+    margin: -55px auto 0;
+    cursor: pointer;
+}
+
+.user-item {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+
+.user-info-wrap{
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    perspective: 800px;
+    transition: all 0.4s ease-in-out;
+    background: #f9f9f9 ;
+    box-shadow:
+    0 0 0 5px rgba(255,255,255,1);
+}
+
+.user-info{
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    transition: all 0.4s ease-in-out;
+    transform-style: preserve-3d;
+}
+
+.user-info > div {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-position: center center;
+    backface-visibility: hidden;
+}
+
+.user-info .user-info-back {
+    transform: rotate3d(0,1,0,180deg);
+}
+
+.user-item:hover .user-info-wrap {
+    box-shadow:
+    0 0 0 3px rgba(255,255,255,0.8);
+}
+
+.user-item:hover .user-info {
+    transform: rotate3d(0,1,0,-180deg);
+}
+
+.user-img-1{
+    background-size:   cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.user .user-info-back span{
+    color: white;
+    padding-bottom:2px;
+    border-bottom: solid 1px white;
+}
+
+
+/* //////////////////////////////////////////////////////// */
+/* ////////////////   EXPERIENCE VIEW  //////////////////// */
+/* //////////////////////////////////////////////////////// */
+
+.experience-city{
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+
+
+
+/* //// PAGES OVERRIDE FOR CARDS //// */
+.panel-title{
+    text-align: center;
+}
+
+/* //// BOOTSTRAP OVERRIDE FOR LARGER CONTAINER //// */
+@media (min-width: 1600px) {
+    .large-container{
+        width: 1470px;
+    }
+}
+
+
+.test {
+    background-color: #f87f73;
+    background-image: -webkit-linear-gradient(-28deg, #f87f73 0%, #f87f73 60%, #292423 60%, #292423 60%);
+    background-image: linear-gradient(-28deg, #f87f73 0%, #f87f73 60%, #292423 60%, #292423 60%);
+}
+
+/* ///// BOOTSTRAP OVERRIDE FOR PAGINATION ////// */
+.pagination>li>a, .pagination>li>span {
+    color: #F13F0F;
+}
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover{
+    background-color: #f4653f;
+    border-color: #f4653f;
+}
+
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+    color: #c3330c;
+}
+
+/* ///// BOOTSTRAP OVERRIDE FOR EXPERIENCE HEADER ////// */
+.col-min {
+    /* custom min width */
+    min-width:520px;
+    margin: 0 auto;
+    float: none;
+}
+
+

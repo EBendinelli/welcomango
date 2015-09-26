@@ -31,7 +31,8 @@ class LoadCityData extends AbstractFixture implements FixtureInterface, OrderedF
             array('name' => 'Vienna', 'postcode' => 780000, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Austria'))),
             array('name' => 'Amsterdam', 'postcode' => 6544, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Netherlands'))),
             array('name' => 'Delft', 'postcode' => 4400, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Netherlands'))),
-            array('name' => 'Geneva', 'postcode' => 4400, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Switzerland')))
+            array('name' => 'Geneva', 'postcode' => 4400, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Switzerland'))),
+            array('name' => 'Strasbourg', 'postcode' => 67000, 'geolocation' => '688468', 'country' => $countryRepo->findOneBy(array('name' => 'France')))
         );
 
         //$cities = array_map('str_getcsv', file('/home/eliot/www/welcomango/src/Welcomango/Data/newfile.csv'));

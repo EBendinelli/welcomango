@@ -37,7 +37,7 @@ class ExperienceController extends Controller
         $pagination = $paginator->paginate(
             $query,
             $request->query->get('page', 1),
-            50
+            6
         );
 
         return array(
@@ -113,6 +113,24 @@ class ExperienceController extends Controller
             'requested_user' => $experience
         );
 
+
+    }
+
+    /**
+     * @param Request $request
+     * @param Experience $experience
+     *
+     * @Route("/experience/{experience_id}", name="front_experience_view")
+     * @ParamConverter("experience", options={"id" = "experience_id"})
+     * @Template()
+     *
+     * @return array
+     */
+    public function viewAction(Request $request, Experience $experience)
+    {
+        return $this->render('WelcomangoFrontExperienceBundle:Experience:view.html.twig', array(
+            'experience' => $experience
+        ));
 
     }
 

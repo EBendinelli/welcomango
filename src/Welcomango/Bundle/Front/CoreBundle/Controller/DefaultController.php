@@ -28,8 +28,13 @@ class DefaultController extends Controller
             ->getRepository('Welcomango\Model\Experience')
             ->getFeatured(3);
 
+        $bestExperiences = $this
+            ->getRepository('Welcomango\Model\Experience')
+            ->getBestRated(4);
+
         return $this->render('WelcomangoFrontCoreBundle:Default:index.html.twig', array(
-            'featuredExperiences' => $featuredExperiences
+            'featuredExperiences' => $featuredExperiences,
+            'bestExperiences' => $bestExperiences
         ));
     }
 }

@@ -1,51 +1,42 @@
 {# Complete with correct informations #}
-<div class="col-sm-4">
-    <div id="experience_{{ experience.getId }}" class="panel panel-default">
-        <div class="panel-heading ">
-            <div class="panel-title">{{ experience.getTitle }}
+<div class="{% if column == 4 %}col-sm-3{% elseif column == 3  %}col-sm-4{% endif %}">
+    <div id="experience_{{ experience.getId }}" class="card" >
+        <a href="{{ path('front_experience_view', {'experience_id' : experience.getId }) }}" >
+            <div class="card-clickable"></div>
+            <div class="image">
+                <img class="" data-src="{{ asset("img/front/places-" ~ random(18) ~ ".jpg") }}" alt="Card image cap">
             </div>
-            <div class="panel-controls">
-                <ul>
-                    <li>
-                        <div class="dropdown">
-                            <a id="portlet-settings" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                                <i class="portlet-icon portlet-icon-settings "></i>
-                            </a>
+        </a>
 
-                            <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="portlet-settings">
-                                <li><a href="{{ path('front_experience_edit', {'experience_id' : experience.getId }) }}">Edit</a></li>
-                                <li><a href="{{ path('front_experience_delete', {'experience_id' : experience.getId }) }}">Delete</a></li>
-                            </ul>
+        <div class="user">
+            <div class="user-item user-img-1">
+                <div class="user-info-wrap">
+                    <div class="user-info">
+                        <div class="user-info-front user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(4) ~ ".jpg") }})"></div>
+                        <div class="user-info-back bg-primary-dark" onclick="location.href='{{ path('front_experience_list') }}'">
+                            <div class="m-t-45 text-center">
+                                <span>View Profile</span>
+                            </div>
                         </div>
-                    </li>
-                    <li><a href="#" class="portlet-collapse" data-toggle="collapse"><i class="portlet-icon portlet-icon-collapse"></i></a>
-                    </li>
-                    <li><a href="#" class="portlet-refresh" data-toggle="refresh"><i class="portlet-icon portlet-icon-refresh"></i></a>
-                    </li>
-                    <li><a href="#" class="portlet-maximize" data-toggle="maximize"><i class="portlet-icon portlet-icon-maximize"></i></a>
-                    </li>
-                    <li><a href="#" class="portlet-close" data-toggle="close"><i class="portlet-icon portlet-icon-close"></i></a>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="panel-body">
-            {{ experience.getDescription }}
+
+        <div class="panel-body p-t-0 card-content">
+            <div class="panel-title semi-bold">
+                {{ experience.getTitle }} with <span class="text-primary-light">{{ experience.getAuthor.firstname }}</span>
+            </div>
+            <div class="text-center m-b-10">
+                in <span class="semi-bold">{% if experience.getCity %}{{ experience.getCity.Name }}{% endif %}</span>
+            </div>
+            <div class="dotted-line"><span></span></div>
+            <div class="text-center">
+                {{ experience.getDescription }}
+            </div>
         </div>
+        <div class="test"></div>
     </div>
+
 </div>
 
-<script>
-    $(function(){
-        $('#experience_{{ experience.getId }}').portlet({
-            onRefresh: function() {
-                // Timeout to simulate AJAX response delay
-                setTimeout(function() {
-                    $('#experience_{{ experience.getId }}').portlet({
-                        refresh: false
-                    });
-                }, 2000);
-            }
-        });
-    });
-</script>

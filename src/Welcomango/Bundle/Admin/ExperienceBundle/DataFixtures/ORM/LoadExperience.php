@@ -25,7 +25,10 @@ class LoadExperienceData extends AbstractFixture implements FixtureInterface, Or
             array('title' => 'Football history', 'description' => 'Wanna discover what the country with best football club has to show? Follow me!', 'city' => $cityRepo->findOneBy(array('name' => 'Barcelona'))),
             array('title' => 'Prussian empire revival', 'description' => 'Back to the future for this small tour how a lost empire', 'city' => $cityRepo->findOneBy(array('name' => 'Vienna'))),
             array('title' => 'Green adventure', 'description' => 'Just stop behind considered as a tourist and get use to the local customs regarding weed', 'city' => $cityRepo->findOneBy(array('name' => 'Amsterdam'))),
-            array('title' => 'Undeground Geneva', 'description' => 'Behind the UN, Beneath the banks, geneva has a lot to offer', 'city' => $cityRepo->findOneBy(array('name' => 'Geneva')))
+            array('title' => 'Undeground Geneva', 'description' => 'Behind the UN, Beneath the banks, geneva has a lot to offer', 'city' => $cityRepo->findOneBy(array('name' => 'Geneva'))),
+            array('title' => 'Skate to die', 'description' => 'If you do not understand how one can visit a city just by walking, it\'s time to join me', 'city' => $cityRepo->findOneBy(array('name' => 'London'))),
+            array('title' => 'Geeky city', 'description' => 'You may have never think of this city as a place where something happen. Well, me neither', 'city' => $cityRepo->findOneBy(array('name' => 'Strasbourg'))),
+            array('title' => 'Best waffles', 'description' => 'Food lover, just pick my number and let\'s find out where we can eat until we die of foodgasm', 'city' => $cityRepo->findOneBy(array('name' => 'Brussels')))
         );
 
 
