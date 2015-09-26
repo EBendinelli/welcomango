@@ -1,3 +1,8 @@
+welcomango_common_base:
+    resource: "@WelcomangoCommonBaseBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 welcomango_front_experience_bundle:
     resource: "@WelcomangoFrontExperienceBundle/Controller/"
     type:     annotation

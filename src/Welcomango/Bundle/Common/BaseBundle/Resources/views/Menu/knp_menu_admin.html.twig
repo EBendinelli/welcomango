@@ -86,7 +86,7 @@
 
 {% block linkElement %}
     {% import _self as knp_menu %}
-    <a href="{{ item.uri }}"  {%- if matcher.isCurrent(item) and options.callingView == 'front' %}class='{{ options.currentClass }}'{% endif %}>
+    <a href="{{ item.uri }}">
         {{ block('label') }}
     </a>
     {{ block('extraElement') }}
@@ -100,7 +100,7 @@
 {% block label %}
     {# span removed to make the front menu usable #}
     {# <span class="title"> #}
-        {% if options.allow_safe_labels and item.getExtra('safe_label', false) %}{{ item.label|raw }}{% else %}{{ item.label }}{% endif %}
+    {% if options.allow_safe_labels and item.getExtra('safe_label', false) %}{{ item.label|raw }}{% else %}{{ item.label }}{% endif %}
     {# </span> #}
     {% if matcher.isAncestor(item) %}
         <span class="selected"></span>
@@ -113,12 +113,12 @@
 {% block extraElement %}
     {% if item.linkAttributes.class|default("") %}
         <span class="icon-thumbnail">
-        {# if - is found, it means that it's an fa-icon #}
+    {# if - is found, it means that it's an fa-icon #}
             {% if '-' in item.linkAttributes.class %}
                 <i class="fa {{ item.linkAttributes.class|default('') }}"></i>
             {% else %}
                 {{ item.linkAttributes.class|default('') }}
             {% endif %}
-        </span>
+    </span>
     {% endif %}
 {% endblock %}

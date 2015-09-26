@@ -52,7 +52,7 @@ class Builder extends ContainerAware
         $menu->addChild('menu.title.experiences', array(
             'route'          => 'front_experience_list',
         ));
-
+/*
         $menu->addChild('menu.title.people', array(
             'route'          => 'front_people_list',
         ));
@@ -64,7 +64,7 @@ class Builder extends ContainerAware
         $menu->addChild('menu.title.contact_us', array(
             'route'          => 'contact_us',
         ));
-
+*/
         return $menu;
     }
 }
