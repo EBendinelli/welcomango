@@ -64,7 +64,6 @@ class User extends BaseUser
     /**
      * @var ArrayCollection
      *
-     * @ORM\Column(name="spoken_languages", type="integer")
      * @ORM\OneToMany(targetEntity="SpokenLanguage", mappedBy="user")
      */
     private $spokenLanguages;
@@ -72,7 +71,6 @@ class User extends BaseUser
     /**
      * @var ArrayCollection
      *
-     * @ORM\Column(name="participations", type="integer")
      * @ORM\OneToMany(targetEntity="Participation", mappedBy="user")
      */
     private $participations;
@@ -271,10 +269,13 @@ class User extends BaseUser
         //$this->spokenLanguages->remove($spokenLanguage);
     }
 
+    /**
+     * __construct
+     */
     public function __construct()
     {
         parent::__construct();
         $this->spokenLanguages = new ArrayCollection();
-        $this->participations = new ArrayCollection();
+        $this->participations  = new ArrayCollection();
     }
 }

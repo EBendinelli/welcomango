@@ -1,0 +1,64 @@
+<script type="text/javascript">
+    $(function () {
+        $('.portlet').portlet();
+
+        var $collectionHolder;
+        $collectionHolder = $('ul.languages');
+
+        $collectionHolder.find('ul.languages').each(function () {
+            addSpokenLanguageFormDeleteLink($(this));
+        });
+
+        var $addTagLink = $('<a href="#" class="add_tag_link"><i class="fa fa-plus">form.add.language</i></a>');
+        var $newLinkLi = $('<li></li>').append($addTagLink);
+
+        jQuery(document).ready(function () {
+            $collectionHolder = $('ul.languages');
+            $collectionHolder.append($newLinkLi);
+
+            $collectionHolder.data('index', $collectionHolder.find(':input').length);
+            $addTagLink.on('click', function (e) {
+                e.preventDefault();
+                addSpokenLanguageForm($collectionHolder, $newLinkLi);
+            });
+        });
+    });
+
+    function addSpokenLanguageForm($collectionHolder, $newLinkLi) {
+        var prototype = $collectionHolder.data('prototype');
+
+        var index = $collectionHolder.data('index');
+
+        var newForm = prototype.replace(/__name__/g, index);
+
+        $collectionHolder.data('index', index + 1);
+
+        var $newFormLi = $('<div></div>').append(newForm);
+        $newLinkLi.before($newFormLi);
+        addSpokenLanguageFormDeleteLink($newFormLi);
+        initSelect2Plugin();
+    }
+
+    function addSpokenLanguageFormDeleteLink($tagFormLi) {
+        var $removeFormA = $('<a href="#">delete this tag</a>');
+        $tagFormLi.append($removeFormA);
+
+        $removeFormA.on('click', function (e) {
+            e.preventDefault();
+
+            $tagFormLi.remove();
+        });
+    }
+
+    var initSelect2Plugin = function () {
+        $.fn.select2 && $('[data-init-plugin="select2"]').each(function () {
+            $(this).select2({
+                minimumResultsForSearch: ($(this).attr('data-disable-search') == 'true' ? -1 : 1)
+            }).on('select2-opening', function () {
+                $.fn.scrollbar && $('.select2-results').scrollbar({
+                    ignoreMobile: false
+                })
+            });
+        });
+    }
+</script>

@@ -3,6 +3,7 @@
 {% trans_default_domain "crm" %}
 
 {% set listing = path('admin_user_list') %}
+{% form_theme form with ["::theme.html.twig"] %}
 
 {% block page_content %}
     <div class="col-md-12">
@@ -25,4 +26,11 @@
 {% block javascripts %}
     {{ parent() }}
     {{ form_javascript(form) }}
+    <script>
+        $('.nav-tabs a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        })
+    </script>
+    {% include "WelcomangoAdminCrmBundle:User:_baseJs.html.twig" %}
 {% endblock %}
