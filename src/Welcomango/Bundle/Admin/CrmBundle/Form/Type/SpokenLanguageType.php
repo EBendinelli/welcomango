@@ -26,28 +26,19 @@ class SpokenLanguageType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $roles = array(
-            User::ROLE_SUPER_ADMIN => User::ROLE_SUPER_ADMIN,
-            User::ROLE_ADMIN       => User::ROLE_ADMIN,
-            User::ROLE_USER        => User::ROLE_USER,
-        );
-
-        $builder->add('language', 'entity', [
-            'label'         => 'form.user.languages',
-            'property'      => 'language',
-            'class'         => 'Welcomango\Model\Language',
-            'query_builder' => function (EntityRepository $er) {
-                return $er->createQueryBuilder('l');
-            },
-        ]);
-
-        $builder->add('level', 'choice', [
-            'label'    => 'form.user.level',
-            'required' => false,
-            'choices'  => $roles,
-            'multiple' => true,
-        ]);
-
+        $builder
+            ->add('language', 'entity', [
+                'label'         => 'form.user.languages',
+                'property'      => 'language',
+                'class'         => 'Welcomango\Model\Language',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('l');
+                },
+            ])
+            ->add('level', 'mark', [
+                'label'    => 'form.user.level',
+                'required' => true,
+            ]);
     }
 
     /**
