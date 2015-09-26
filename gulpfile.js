@@ -169,7 +169,7 @@ gulp.task('assets-css', function() {
 
     //// FRONT ////
     gulp.src([
-        'components/pages-front/css/pages.min.css',
+        'components/pages-front/css/pages.css',
         'components/pages-front/css/pages-icons.min.css'
     ])
         .pipe(minifyCSS())
