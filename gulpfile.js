@@ -122,6 +122,32 @@ gulp.task('assets-js', function() {
         .pipe(concat('pages-front.js'))
         .pipe(gulp.dest(assets_front_js))
     ;
+
+    gulp.src([
+        'components/webcomponentsjs/webcomponents.min.js'
+    ])
+        .pipe(uglify())
+        .pipe(concat('webcomponentsjs.min.js'))
+        .pipe(gulp.dest(assets_js))
+    ;
+
+    gulp.src([
+        'components/flag-icon/flag-icon.html'
+    ])
+        .pipe(gulp.dest(assets_js))
+    ;
+
+    gulp.src([
+        'components/polymer/polymer.html'
+    ])
+        .pipe(gulp.dest(assets_js))
+    ;
+
+    gulp.src([
+        'components/polymer/polymer.js'
+    ])
+        .pipe(gulp.dest(assets_js))
+    ;
 });
 
 
@@ -239,6 +265,10 @@ gulp.task('img', function() {
 
     gulp.src('components/pages-assets/plugins/data-tables/images/*')
         .pipe(gulp.dest(img_path + '/data-tables/'))
+    ;
+
+    gulp.src('components/flag-icon/svg/country-4x3/*')
+        .pipe(gulp.dest(img_path + '/countries/'))
     ;
 
     //// FRONT////

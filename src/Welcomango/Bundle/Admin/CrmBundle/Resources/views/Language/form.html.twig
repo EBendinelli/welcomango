@@ -1,0 +1,24 @@
+{{ form_errors(form) }}
+<div class="tab-content">
+    <div class="tab-pane active slide-left" id="general">
+        <div class="row">
+            <div class="col-md-6">
+                {{ form_row(form.language) }}
+                {{ form_row(form.languageCode) }}
+                {{ form_row(form.flagLabel) }}
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Panel heading without title</div>
+                    <div class="panel-body">
+                        <h2>hgrtehr</h2>
+                        {% for flag in flagsImages %}
+                            <div  class="flag flag-xs" role="image" aria-label="Canada" style="background: url({{ asset('img/countries/'~ flag ~'.svg') }});"></div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

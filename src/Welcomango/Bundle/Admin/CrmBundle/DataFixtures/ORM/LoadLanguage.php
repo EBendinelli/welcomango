@@ -9,25 +9,33 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
 use Welcomango\Model\Language;
 
+/**
+ * Class LoadLanguageData
+ */
 class LoadLanguageData extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface
 {
     /**
-    * {@inheritDoc}
-    */
+     * {@inheritDoc}
+     */
     public function load(ObjectManager $manager)
     {
-        $languages = array('French', 'English', 'German', 'Italian', 'Spanish');
+        $languages = array(
+            ['French', 'FR', 'fr'],
+            ['English', 'EN', 'england'],
+            ['German', 'DE', 'de'],
+            ['Italian', 'IT', 'it'],
+            ['Spanish', 'ES', 'es'],
+        );
 
-        foreach($languages as $lang){
+        foreach ($languages as $lang) {
             $entry = new Language();
-            $entry->setLanguage($lang);
-            $code = \strtoupper(\substr($lang, 0, 2));
-            $entry->setLanguageCode($code);
+            $entry->setLanguage($lang[0]);
+            $entry->setLanguageCode($lang[1], 0, 2);
+            $entry->setFlagLabel($lang[2]);
 
             $manager->persist($entry);
         }
         $manager->flush();
-
     }
 
     /**

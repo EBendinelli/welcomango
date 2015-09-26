@@ -13,8 +13,10 @@ use Welcomango\Bundle\Admin\CoreBundle\Controller\Controller;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/admin", name="admin_homepage")
+     * @Route("/welcomadmin", name="admin_homepage")
      * @Template()
+     *
+     * @return array
      */
     public function indexAction()
     {

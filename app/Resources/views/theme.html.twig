@@ -34,7 +34,7 @@
 
 {% block choice_widget %}
     <div class="form-group form-group-default form-group-default-select2">
-        <label>{{ form_label(form) }}</label>
+        {{ form_label(form) }}
         {% if multiple %}
             <select class="full-width select2-offscreen" data-init-plugin="select2" multiple="true" tabindex="-1" {{ block('widget_attributes') }}>
                 {% for attrname, attrvalue in  form.vars.choices %}<option value="{{ attrvalue.label }}">{{ attrvalue.label }}</option>"{% endfor %}

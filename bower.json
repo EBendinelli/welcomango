@@ -1,6 +1,7 @@
 {
   "name": "welcomango/base",
   "dependencies": {
+    "flag-icon": "~0.11.1",
     "pages-assets": "git@github.com:jblanchon/pages-assets.git#v0.1.2"
   }
 }
