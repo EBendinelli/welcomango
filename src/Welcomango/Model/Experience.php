@@ -101,6 +101,12 @@ class Experience
     private $tags;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Media", inversedBy="experiences")
+     * @ORM\JoinTable(name="wm_experiences_medias")
+     **/
+    private $medias;
+
+    /**
      * @ORM\ManyToOne(targetEntity="City")
      * @ORM\JoinColumn(name="city_id", referencedColumnName="id")
      **/
@@ -141,7 +147,7 @@ class Experience
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -161,7 +167,7 @@ class Experience
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -181,7 +187,7 @@ class Experience
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -222,7 +228,7 @@ class Experience
     /**
      * Get estimatedDuration
      *
-     * @return integer 
+     * @return integer
      */
     public function getEstimatedDuration()
     {
@@ -242,7 +248,7 @@ class Experience
     /**
      * Get minimumDuration
      *
-     * @return integer 
+     * @return integer
      */
     public function getMinimumDuration()
     {
@@ -262,7 +268,7 @@ class Experience
     /**
      * Get maximumDuration
      *
-     * @return integer 
+     * @return integer
      */
     public function getMaximumDuration()
     {
@@ -282,7 +288,7 @@ class Experience
     /**
      * Get pricePerHour
      *
-     * @return integer 
+     * @return integer
      */
     public function getPricePerHour()
     {
@@ -357,6 +363,7 @@ class Experience
      * Set published
      *
      * @param boolean $published
+     *
      * @return Experience
      */
     public function setPublished($published)
@@ -380,6 +387,7 @@ class Experience
      * Set featured
      *
      * @param boolean $featured
+     *
      * @return Experience
      */
     public function setFeatured($featured)
@@ -438,14 +446,16 @@ class Experience
     /**
      * @ORM\PreUpdate
      */
-    public function updateDate(){
+    public function updateDate()
+    {
         $this->setUpdatedAt(new \Datetime());
     }
 
     /**
      * @ORM\PreUpdate
      */
-    public function createDate(){
+    public function createDate()
+    {
         $this->setCreatedAt(new \Datetime());
     }
 
@@ -458,8 +468,26 @@ class Experience
         }
     }
 
-    public function __construct() {
-        $this->tags = new ArrayCollection();
+    public function __construct()
+    {
+        $this->tags           = new ArrayCollection();
         $this->participations = new ArrayCollection();
+        $this->medias         = new ArrayCollection();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMedias()
+    {
+        return $this->medias;
+    }
+
+    /**
+     * @param mixed $medias
+     */
+    public function setMedias($medias)
+    {
+        $this->medias = $medias;
     }
 }

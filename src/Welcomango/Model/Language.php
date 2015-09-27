@@ -43,6 +43,13 @@ class Language
     private $language;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="SpokenLanguage", mappedBy="language", cascade={"persist", "remove"})
+     */
+    private $spokenLanguages;
+
+    /**
      * Get id
      *
      * @return integer
@@ -122,5 +129,21 @@ class Language
     public function setFlagLabel($flagLabel)
     {
         $this->flagLabel = $flagLabel;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getSpokenLanguages()
+    {
+        return $this->spokenLanguages;
+    }
+
+    /**
+     * @param ArrayCollection $spokenLanguages
+     */
+    public function setSpokenLanguages($spokenLanguages)
+    {
+        $this->spokenLanguages = $spokenLanguages;
     }
 }

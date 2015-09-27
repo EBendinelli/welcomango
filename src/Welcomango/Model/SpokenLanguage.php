@@ -25,13 +25,6 @@ class SpokenLanguage
     /**
      * @var integer
      *
-     * @ORM\Column(name="language_id", type="integer")
-     */
-    private $languageId;
-
-    /**
-     * @var integer
-     *
      * @ORM\Column(name="level", type="integer")
      */
     private $level;
@@ -47,7 +40,7 @@ class SpokenLanguage
     /**
      * @var Language
      *
-     * @ORM\ManyToOne(targetEntity="Language")
+     * @ORM\ManyToOne(targetEntity="Language", inversedBy="spokenLanguages")
      * @ORM\JoinColumn(name="language_id", referencedColumnName="id")
      */
     private $language;
@@ -55,7 +48,7 @@ class SpokenLanguage
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -63,55 +56,10 @@ class SpokenLanguage
     }
 
     /**
-     * Set languageId
-     *
-     * @param integer $languageId
-     * @return SpokenLanguage
-     */
-    public function setLanguageId($languageId)
-    {
-        $this->languageId = $languageId;
-
-        return $this;
-    }
-
-    /**
-     * Get languageId
-     *
-     * @return integer 
-     */
-    public function getLanguageId()
-    {
-        return $this->languageId;
-    }
-
-    /**
-     * Set userId
-     *
-     * @param integer $userId
-     * @return SpokenLanguage
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Get userId
-     *
-     * @return integer 
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    /**
      * Set level
      *
      * @param integer $level
+     *
      * @return SpokenLanguage
      */
     public function setLevel($level)
@@ -124,7 +72,7 @@ class SpokenLanguage
     /**
      * Get level
      *
-     * @return integer 
+     * @return integer
      */
     public function getLevel()
     {
@@ -163,8 +111,8 @@ class SpokenLanguage
         $this->language = $language;
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         return $this->language->getLanguageCode();
     }
-
 }
