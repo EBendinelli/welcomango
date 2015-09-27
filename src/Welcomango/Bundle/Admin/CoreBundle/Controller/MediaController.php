@@ -73,7 +73,7 @@ class MediaController extends Controller
         }
 
         return array(
-            'form' => $form->createView()
+            'form' => $form->createView(),
         );
     }
 
@@ -101,7 +101,7 @@ class MediaController extends Controller
 
         return array(
             'form'  => $form->createView(),
-            'media' => $media
+            'media' => $media,
         );
     }
 
