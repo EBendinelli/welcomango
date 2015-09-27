@@ -88,16 +88,12 @@ class ExperienceController extends Controller
     {
         $form = $this->createForm($this->get('welcomango.form.experience.edit'), $experience);
         $form->handleRequest($request);
-
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->persist($experience);
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', $this->trans('experience.edit.success', array(), 'crm'));
 
-            return $this->redirect($this->generateUrl('experience_edit', array(
-                'experience_id'        => $experience->getId(),
-                'requested_experience' => $experience,
-            )));
+            return $this->redirect($this->generateUrl('admin_experience_list'));
         }
 
         return array(

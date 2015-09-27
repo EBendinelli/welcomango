@@ -101,6 +101,8 @@ class Experience
     private $tags;
 
     /**
+     * @var ArrayCollection
+     *
      * @ORM\ManyToMany(targetEntity="Media", inversedBy="experiences")
      * @ORM\JoinTable(name="wm_experiences_medias")
      **/
@@ -510,7 +512,7 @@ class Experience
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getMedias()
     {
@@ -518,7 +520,7 @@ class Experience
     }
 
     /**
-     * @param mixed $medias
+     * @param ArrayCollection $medias
      */
     public function setMedias($medias)
     {

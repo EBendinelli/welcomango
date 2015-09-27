@@ -2,6 +2,12 @@
         <div class="col-md-6">{{ form_row(form.language) }}</div>
         <div class="col-md-6">{{ form_row(form.level) }}</div>
     {% if update is defined %}
-        <a onclick="this.parentNode.removeChild(this.parent" href="#">delete this tag</a>
+        <a onclick="deleteRow(this)" href="#">delete this tag</a>
+        <script type="application/javascript">
+            function deleteRow(element) {
+                console.log(element.parentNode);
+                element.parentNode.removeChild(element.parentNode);
+            }
+        </script>
 {% endif %}
 </div>
