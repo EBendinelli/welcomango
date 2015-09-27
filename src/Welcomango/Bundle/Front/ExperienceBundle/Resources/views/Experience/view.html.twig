@@ -19,23 +19,94 @@
     </section>
 
 
-    <section class="container-fluid container-fixed-lg bg-master-lightest">
+    <section class="container-fluid container-fixed-lg p-b-50">
         <div class="container">
-            <div class="col-md-8 p-t-40">
-                <div class="experience-city">
-                    <div class="m-l-20 p-b-20">
-                        <h1>{{ experience.getCity.name }}</h1>
+            <div class="panel col-md-8 p-t-40 ">
+                <ul class="nav nav-tabs nav-tabs-left nav-tabs-simple">
+                    <li class="active">
+                        <a data-toggle="tab" href="#experience-city">City</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#experience-description">Description</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#experience-pictures">Pictures</a>
+                    </li>
+                </ul>
+                <div class="experience-content">
+                    <div id="experience-city">
+                        <div class="experience-city">
+                            <div class="m-l-20 p-b-20">
+                                <h1>{{ experience.getCity.name }}</h1>
+                            </div>
+                        </div>
+                        <div class="experience-description m-t-20">
+                            <h3>{{  'experience.description'|trans }}</h3>
+                            <p>{{ experience.description }}</p>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="experience-description">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3>
+                                    “ Nothing is <span class="semi-bold">impossible</span>, the word
+                                    itself says 'I'm <span class="semi-bold">possible</span>'! ”
+                                </h3>
+                                <p>
+                                    A style represents visual customizations on top of a layout. By
+                                    editing a style, you can use Squarespace's visual interface to
+                                    customize your...
+                                </p><br>
+                                <p class="pull-right">
+                                    <button class="btn btn-white btn-cons" type="button">White</button>
+                                    <button class="btn btn-success btn-cons" type=
+                                    "button">Success</button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="experience-pictures">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3>
+                                    Follow us &amp; get updated!
+                                </h3>
+                                <p>
+                                    Instantly connect to what's most important to you. Follow your
+                                    friends, experts, favorite celebrities, and breaking news.
+                                </p><br>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="experience-description m-t-20">
-                    <h3>{{  'experience.description'|trans }}</h3>
-                    <p>{{ experience.description }}</p>
-                </div>
             </div>
-            <div class="col-md-4">
-                test
+            <div class="col-md-4 experience-user bg-master-lightest" >
+                <div class="user">
+                    <div class="user-item user-img-1">
+                        <div class="user-info-wrap">
+                            <div class="user-info">
+                                <div class="user-info-front user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(5) ~ ".jpg") }})"></div>
+                                <div class="user-info-back bg-master-dark" onclick="location.href='{{ path('front_experience_list') }}'">
+                                    <div class="m-t-55 text-center">
+                                        <span>View Profile</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="experience-user-info">
+                    <h2 class="text-center">{{ experience.getAuthor.firstname }}</h2>
+                    <div class="dotted-line"><span></span></div>
+                </div>
             </div>
         </div>
     </section>
     <!-- END CONTENT SECTION -->
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+
 {% endblock %}

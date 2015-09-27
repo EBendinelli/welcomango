@@ -235,11 +235,13 @@
     <!-- END OVERLAY -->
 </div>
 <!-- BEGIN VENDOR JS -->
+{% block javascripts %}
     <script type="text/javascript" src="{{ asset("js/plugins-front.js") }}"></script>
 <!-- END VENDOR JS -->
 <!-- BEGIN PAGES FRONTEND LIB -->
     <script type="text/javascript" src="{{ asset("js/pages-front.js") }}"></script>
     <!-- END PAGES LIB -->
+{% endblock %}
 {% endblock inner_body %}
 </body>
 {% endblock body %}

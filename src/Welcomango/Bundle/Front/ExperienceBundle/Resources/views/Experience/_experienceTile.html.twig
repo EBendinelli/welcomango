@@ -3,7 +3,7 @@
     <div id="experience_{{ experience.getId }}" class="card" >
         <a href="{{ path('front_experience_view', {'experience_id' : experience.getId }) }}" >
             <div class="card-clickable"></div>
-            <div class="image">
+            <div class="experience-image">
                 <img class="" data-src="{{ asset("img/front/places-" ~ random(18) ~ ".jpg") }}" alt="Card image cap">
             </div>
         </a>
@@ -12,7 +12,7 @@
             <div class="user-item user-img-1">
                 <div class="user-info-wrap">
                     <div class="user-info">
-                        <div class="user-info-front user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(4) ~ ".jpg") }})"></div>
+                        <div class="user-info-front user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(5) ~ ".jpg") }})"></div>
                         <div class="user-info-back bg-primary-dark" onclick="location.href='{{ path('front_experience_list') }}'">
                             <div class="m-t-45 text-center">
                                 <span>View Profile</span>
@@ -35,7 +35,6 @@
                 {{ experience.getDescription }}
             </div>
         </div>
-        <div class="test"></div>
     </div>
 
 </div>

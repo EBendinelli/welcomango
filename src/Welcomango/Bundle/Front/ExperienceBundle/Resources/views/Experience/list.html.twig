@@ -83,8 +83,8 @@
                     if (query.length > 2) {
                         timeout = setTimeout(function() {
                             $('#spinner').css('display', 'inline');
-                            $.post("{{ path('experience_search_ajax') }}", {'query': query}, function (response) {
-                            $.post("{{ path('experience_search_ajax') }}", {'query': query}, function (response) {
+                            $.post("{{ path('front_experience_search_ajax') }}", {'query': query}, function (response) {
+                            $.post("{{ path('front_experience_search_ajax') }}", {'query': query}, function (response) {
                                 $('#spinner').css('display', 'none');
                                 $('#experience_results').html(response);
                             }, 'html');
