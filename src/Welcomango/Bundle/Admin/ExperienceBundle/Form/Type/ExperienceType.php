@@ -76,7 +76,7 @@ class ExperienceType extends AbstractType
             'label' => 'form.experience.minimumDuration'
         ]);
 
-        $builder->add('maximum_duration', 'choice',[
+        $builder->add('maximum_duration', 'choice', [
             'choices' => $maximumDurations,
             'label' => 'form.experience.maximumDuration'
         ]);
@@ -88,50 +88,21 @@ class ExperienceType extends AbstractType
             'label' => 'form.experience.maximumParticipants'
         ]);
 
-        $builder->add('save', 'submit');
-
-
-        /*
-
-        $builder->add('email', 'welcomango_select2_entity', [
-            'label'    => 'form.user.groups',
-            'class'    => 'Welcomango\Model\User',
-            'multiple' => true,
-            'required' => false
+        $builder->add('maximum_participants', 'choice', [
+            'choices' => $maximumParticipants,
+            'label' => 'form.experience.maximumParticipants'
         ]);
 
+        $builder->add('medias', 'entity', array(
+            'class' => 'Welcomango\Model\Media',
+            'property' => 'title',
+            'multiple' => true,
+            'query_builder' => function (EntityRepository $er) {
+                return $er->createQueryBuilder('m');
+            },
+        ));
 
-        $builder->add('enabled', 'checkbox', [
-            'label'    => 'form.site_customer.enabled',
-            'required' => false
-        ]);*/
-
-        /*        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($companyRoles) {
-                    if (isset($data['roles'])) {
-                        $data       = $event->getData();
-                        $finalRoles = array();
-
-                        foreach ($data['roles'] as $role) {
-                            if (!in_array($role, $companyRoles)) {
-                                $finalRoles[] = $role;
-                            }
-                        }
-                        $data['roles'] = $finalRoles;
-                        $event->setData($data);
-                    }
-                });*/
-    }
-
-    public function finishView(FormView $view, FormInterface $form, array $options)
-    {
-        /*        $companyRoles = $form->getData()->getCompany()->getDefaultRoles();
-
-                foreach ($view->children['roles']->children as $role) {
-                    if (in_array($role->vars['value'], $companyRoles)) {
-                        $role->vars['attr']['disabled'] = 'disabled';
-                        $role->vars['checked']          = true;
-                    }
-                }*/
+        $builder->add('save', 'submit');
     }
 
     /**

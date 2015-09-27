@@ -71,6 +71,11 @@ class Media
     protected $file;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Experience", mappedBy="medias")
+     **/
+    protected $experiences;
+
+    /**
      * The constructor
      */
     public function __construct()

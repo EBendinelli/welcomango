@@ -64,7 +64,7 @@ class User extends BaseUser
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="SpokenLanguage", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="SpokenLanguage", mappedBy="user", cascade={"persist", "remove"})
      */
     private $spokenLanguages;
 

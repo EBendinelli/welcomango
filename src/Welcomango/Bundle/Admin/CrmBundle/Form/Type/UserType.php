@@ -73,6 +73,7 @@ class UserType extends AbstractType
             'type'         => new SpokenLanguageType(),
             'allow_add'    => true,
             'allow_delete' => true,
+            'by_reference' => false,
         ));
 
         $builder->add('password', 'repeated', array(

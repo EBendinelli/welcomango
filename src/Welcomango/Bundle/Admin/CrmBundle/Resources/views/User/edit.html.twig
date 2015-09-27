@@ -10,7 +10,7 @@
         <div class="panel panel-default portlet">
             <div class="panel-body">
                 {{ form_start(form, {'action': path('admin_user_edit', {'user_id' : user.id}), 'attr': {'novalidate': 'novalidate' }}) }}
-                {% include "WelcomangoAdminCrmBundle:User:form.html.twig" with { 'form': form } %}
+                {% include "WelcomangoAdminCrmBundle:User:form.html.twig" with { 'form': form, 'update': form.vars.id  } %}
                 {% include "WelcomangoAdminCoreBundle:Form:formFooter.html.twig" with {'listing' : listing, 'update': form.vars.id } only %}
                 {{ form_end(form) }}
             </div>
@@ -26,11 +26,5 @@
 {% block javascripts %}
     {{ parent() }}
     {{ form_javascript(form) }}
-    <script>
-        $('.nav-tabs a').click(function (e) {
-            e.preventDefault()
-            $(this).tab('show')
-        })
-    </script>
     {% include "WelcomangoAdminCrmBundle:User:_baseJs.html.twig" %}
 {% endblock %}

@@ -65,9 +65,16 @@ class UserController extends Controller
 
             $this->get('fos_user.user_manager')->updateUser($user);
 
+            foreach($user->getSpokenLanguages() as $spokenLanguage) {
+                $spokenLanguage->setUser($user);
+                $this->getDoctrine()->getManager()->persist($spokenLanguage);
+            }
+
+            $this->getDoctrine()->getManager()->flush();
+
             $this->addFlash('success', $this->trans('user.created.success', array(), 'user'));
 
-            return $this->redirect($this->generateUrl('user_list'));
+            return $this->redirect($this->generateUrl('admin_user_list'));
         }
 
         return array(
@@ -94,7 +101,7 @@ class UserController extends Controller
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', $this->trans('user.edit.success', array(), 'crm'));
 
-            return $this->redirect($this->generateUrl('user_edit', array(
+            return $this->redirect($this->generateUrl('admin_user_list', array(
                 'user_id'        => $user->getId(),
                 'requested_user' => $user,
             )));
@@ -118,7 +125,7 @@ class UserController extends Controller
         $this->getDoctrine()->getManager()->remove($user);
         $this->getDoctrine()->getManager()->flush();
 
-        return $this->redirect($this->generateUrl('user_list'));
+        return $this->redirect($this->generateUrl('admin_user_list'));
     }
 
     /**
