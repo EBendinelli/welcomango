@@ -26,9 +26,13 @@
 
     <section class="bg-master-lighter p-b-85 p-t-75">
         <div class="container">
+            <h3 class="text-center m-b-30">Here are our favorites experience</h3>
             {% for experience in featuredExperiences  %}
                 {{ include("WelcomangoFrontExperienceBundle:Experience:_experienceTile.html.twig", { 'experiences': featuredExperiences, 'column': 3 }) }}
             {% endfor %}
+            <div>
+                <h3 class="text-center m-b-30">And the ones people prefered</h3>
+            </div>
             {% for experience in bestExperiences  %}
                 {{ include("WelcomangoFrontExperienceBundle:Experience:_experienceTile.html.twig", { 'experiences': bestExperiences, 'column': 4 }) }}
             {% endfor %}
