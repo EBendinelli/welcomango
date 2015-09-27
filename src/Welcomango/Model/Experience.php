@@ -128,6 +128,10 @@ class Experience
      */
     private $featured = false;
 
+    /**
+     * @ORM\Column(name="average_note", type="float")
+     */
+    private $averageNote;
 
     public function getId()
     {
@@ -408,6 +412,30 @@ class Experience
     }
 
     /**
+     * Set averageNote
+     *
+     * @param boolean $averageNote
+     *
+     * @return Experience
+     */
+    public function setAverageNote($averageNote)
+    {
+        $this->averageNote = $averageNote;
+
+        return $this;
+    }
+
+    /**
+     * Get averageNote
+     *
+     * @return float
+     */
+    public function getAverageNote()
+    {
+        return $this->averageNote;
+    }
+
+    /**
      * @param Tag $tag
      */
     public function addTag(Tag $tag)
@@ -466,6 +494,12 @@ class Experience
                 return $participant->getUser();
             }
         }
+    }
+
+    public function updateAverageNote(){
+        /**
+         * @todo develop experience manager to handle this
+         */
     }
 
     public function __construct()

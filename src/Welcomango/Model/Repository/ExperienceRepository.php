@@ -38,5 +38,18 @@ class ExperienceRepository extends EntityRepository
             ->getQuery()
             ->getResult()
             ;
+
+        /* REPLACE ABOVE QUERY BY THIS ONE WHEN updateAverageNote() is dev in Experience Model
+        return $this
+            ->createQueryBuilder('a')
+            ->leftJoin('a.participations', 'b')
+            ->where('a.published = true')
+            ->groupBy('a.id')
+            ->orderBy('a.average_note', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+            ;
+        */
     }
 }
