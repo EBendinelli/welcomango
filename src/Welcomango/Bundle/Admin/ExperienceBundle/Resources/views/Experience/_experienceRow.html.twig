@@ -19,9 +19,12 @@
         {% endif %}
     </td>
     <td>
-        <a href="{{ path('admin_experience_delete', {'experience_id' : experience.getId }) }}" onclick="return confirm('Do you really want to delete?')">Delete</a>
-        |
-        <a href="{{ path('admin_experience_edit', {'experience_id' : experience.getId }) }}" >Edit</a>
+        {% spaceless %}
+            <div class="btn-toolbar">
+                {{ button.edit(path('admin_experience_edit', {'experience_id': experience.id}), false, "btn-xs") }}
+                {{ button.delete(path('admin_experience_delete', {'experience_id': experience.id}), null, "btn-xs") }}
+            </div>
+        {% endspaceless %}
     </td>
 </tr>
 

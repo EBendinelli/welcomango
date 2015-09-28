@@ -95,29 +95,32 @@
 {% block choice_widget %}
     <div class="form-group form-group-default form-group-default-select2">
         {{ form_label(form) }}
-        {% if multiple %}
-            <select class="full-width select2-offscreen" data-init-plugin="select2" multiple="true" tabindex="-1" {{ block('widget_attributes') }}>
-                {% for attrname, attrvalue in  form.vars.choices %}
-                    <option value="{{ attrvalue.label }}">{{ attrvalue.label }}</option>"{% endfor %}
-            </select>
-        {% else %}
-            <select class="full-width select2-offscreen" data-init-plugin="select2" tabindex="-1" {{ block('widget_attributes') }}>
-                {%- if placeholder is not none -%}
-                    <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ placeholder != '' ? placeholder|trans({}, translation_domain) }}</option>
-                {%- endif -%}
-                {%- if preferred_choices|length > 0 -%}
-                    {% set options = preferred_choices %}
-                    {{- block('choice_widget_options') -}}
-                    {%- if choices|length > 0 and separator is not none -%}
-                        <option disabled="disabled">{{ separator }}</option>
-                    {%- endif -%}
-                {%- endif -%}
-                {%- set options = choices -%}
+        <select class="full-width select2-offscreen" data-init-plugin="select2" {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+            {%- if placeholder is not none -%}
+                <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ placeholder != '' ? placeholder|trans({}, translation_domain) }}</option>
+            {%- endif -%}
+            {%- if preferred_choices|length > 0 -%}
+                {% set options = preferred_choices %}
                 {{- block('choice_widget_options') -}}
-            </select>
-        {% endif %}
+                {%- if choices|length > 0 and separator is not none -%}
+                    <option disabled="disabled">{{ separator }}</option>
+                {%- endif -%}
+            {%- endif -%}
+            {%- set options = choices -%}
+            {{- block('choice_widget_options') -}}
+        </select>
     </div>
 {% endblock choice_widget %}
+
+{% block file_widget %}
+    {% spaceless %}
+        <div class="dropzone">
+            <div class="fallback">{% set type = type|default('file') %}
+                <input type="{{ type }}" {{ block('widget_attributes') }}/>
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock %}
 
 
 {%- block form_row -%}

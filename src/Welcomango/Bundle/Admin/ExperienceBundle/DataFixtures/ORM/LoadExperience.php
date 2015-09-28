@@ -57,6 +57,9 @@ class LoadExperienceData extends AbstractFixture implements FixtureInterface, Or
             $entry->setPricePerHour(rand(5,50));
             $entry->setMaximumParticipants(rand(1,10));
 
+            //MUST BE REMOVED WHEN THE METHOD TO CALCULATE AVERAGE NOTE IS SET
+            $entry->setAverageNote(rand(1,5));
+
             $manager->persist($entry);
         }
         $manager->flush();

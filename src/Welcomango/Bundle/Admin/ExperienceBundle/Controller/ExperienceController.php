@@ -65,7 +65,7 @@ class ExperienceController extends Controller
             $em->persist($experience);
             $em->flush();
 
-            $this->addFlash('success', $this->trans('experience.created.success', array(), 'user'));
+            $this->addFlash('success', $this->trans('experience.created.success', array(), 'experience'));
 
             return $this->redirect($this->generateUrl('experience_list'));
         }
@@ -98,11 +98,12 @@ class ExperienceController extends Controller
 
         return array(
             'form'           => $form->createView(),
-            'requested_user' => $experience
+            'requested_experience' => $experience
         );
     }
 
     /**
+     * @param Experience $experience
      *
      * @Route("/experience/{experience_id}/delete", name="admin_experience_delete")
      *
@@ -110,10 +111,11 @@ class ExperienceController extends Controller
      */
     public function deleteAction(Experience $experience)
     {
+
         $this->getDoctrine()->getManager()->remove($experience);
         $this->getDoctrine()->getManager()->flush();
 
-        return $this->redirect($this->generateUrl('experience_list'));
+        return $this->redirect($this->generateUrl('admin_experience_list'));
     }
 
     /**

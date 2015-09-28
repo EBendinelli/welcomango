@@ -76,6 +76,13 @@ class User extends BaseUser
     private $participations;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="birthdate", type="datetime")
+     */
+    private $birthdate;
+
+    /**
      * Get id
      *
      * @return integer
@@ -231,6 +238,45 @@ class User extends BaseUser
     public function setParticipations($participations)
     {
         $this->participations = $participations;
+    }
+
+    /**
+     * Get birthdate
+     *
+     * @return \DateTime
+     */
+    public function getBirthdate()
+    {
+        return $this->birthdate;
+    }
+
+    /**
+     * Set birthdate
+     *
+     * @param \DateTime $birthdate
+     */
+    public function setBirthdate($birthdate)
+    {
+        $this->birthdate = $birthdate;
+    }
+
+    /**
+     * Get age
+     *
+     * @return integer
+     */
+    public function getAge()
+    {
+        $birthdateTimestamp = $this->birthdate->getTimestamp();
+        $birthDate = date('d/m/Y', $birthdateTimestamp);
+
+        $timeZone  = new \DateTimeZone('Europe/Brussels');
+        $age = \DateTime::createFromFormat('d/m/Y', $birthDate, $timeZone)
+            ->diff(new \DateTime('now', $timeZone))
+            ->y;
+
+        return $age;
+
     }
 
     /**

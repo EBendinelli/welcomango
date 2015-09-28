@@ -37,6 +37,8 @@ class LoadUserData extends AbstractFixture  implements FixtureInterface, Contain
         $admin->setPhone('0680154251');
         $admin->setCreatedAt(new \DateTime());
         $admin->setUpdatedAt(new \DateTime());
+        $birthdate = date_create(date("d-m-Y",636263535));
+        $admin->setBirthdate($birthdate);
         //$user->setPassword('3NCRYPT3D-V3R51ON');
         $admin->setEnabled(true);
         $admin->setRoles(array('ROLE_SUPER_ADMIN', 'ROLE_ADMIN'));
@@ -59,9 +61,11 @@ class LoadUserData extends AbstractFixture  implements FixtureInterface, Contain
             $user->setPhone('0000000000');
             $user->setCreatedAt(new \DateTime());
             $user->setUpdatedAt(new \DateTime());
+            $birthdate = date_create(date("d-m-Y",rand(293832465,915076335)));
+            $user->setBirthdate($birthdate );
             ($i%2 == 0 ? $user->setEnabled(true) : $user->setEnabled(false));
             $i++;
-            $admin->setEnabled(true);
+            $user->setEnabled(true);
 
             $user->setRoles(array('ROLE_USER'));
 

@@ -61,6 +61,7 @@ class UserType extends AbstractType
         $builder->add('firstName', 'text', ['label' => 'form.user.firstname']);
         $builder->add('lastName', 'text', ['label' => 'form.user.lastname']);
         $builder->add('phone', 'text', ['label' => 'form.user.phone', 'required' => false]);
+        $builder->add('birthdate', 'date', ['label' => 'form.user.birthdate', 'required' => false]);
 
         $builder->add('roles', 'choice', [
             'label'    => 'form.user.roles',

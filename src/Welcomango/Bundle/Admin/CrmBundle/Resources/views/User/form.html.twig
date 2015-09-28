@@ -18,7 +18,11 @@
                     <div class="col-md-6">{{ form_row(form.password.second) }}</div>
                 </div>
                 {{ form_row(form.roles, { 'label_helper' :  'admin.faq.email_sender.helper'|trans } ) }}
-                {{ form_row(form.phone) }}
+                <div class="row">
+                    <div class="col-md-6">{{ form_row(form.phone) }}</div>
+                    <div class="col-md-6">{{ form_row(form.birthdate) }}</div>
+                </div>
+
             </div>
         </div>
     </div>

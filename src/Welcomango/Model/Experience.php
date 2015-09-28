@@ -90,7 +90,7 @@ class Experience
     private $maximumParticipants;
 
     /**
-     * @ORM\OneToMany(targetEntity="Participation", mappedBy="experience")
+     * @ORM\OneToMany(targetEntity="Participation", mappedBy="experience", cascade={"persist", "remove"})
      **/
     private $participations;
 

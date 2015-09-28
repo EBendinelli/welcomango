@@ -2,7 +2,12 @@
 
 {% block page_content %}
     <!-- START CONTENT SECTION -->
-    <section class="p-b-50 bg-master-darkest m-t-100 sm-no-margin" data-pages-bg-image="{{ asset("img/front/experience/banner_2.jpg") }}" data-bg-overlay="black" data-overlay-opacity="0.3" data-pages="parallax">
+    {% if experience.getMedias.first %}
+        {% set imageBanner = asset(experience.getMedias.first.getWebPath) %}
+    {% else %}
+        {% set imageBanner = asset("img/front/places-" ~ random(18) ~ ".jpg") %}
+    {% endif %}
+    <section class="p-b-50 bg-master-darkest m-t-100 sm-no-margin" data-pages-bg-image="{{ asset(imageBanner) }}" data-bg-overlay="black" data-overlay-opacity="0.3" data-pages="parallax">
         <div class="container p-t-50">
             <div class="row">
                 <div class="col-lg-1 col-min">
@@ -40,28 +45,14 @@
                                 <h1>{{ experience.getCity.name }}</h1>
                             </div>
                         </div>
-                        <div class="experience-description m-t-20">
-                            <h3>{{  'experience.description'|trans }}</h3>
-                            <p>{{ experience.description }}</p>
-                        </div>
                     </div>
                     <div class="tab-pane" id="experience-description">
                         <div class="row">
                             <div class="col-md-12">
-                                <h3>
-                                    “ Nothing is <span class="semi-bold">impossible</span>, the word
-                                    itself says 'I'm <span class="semi-bold">possible</span>'! ”
-                                </h3>
-                                <p>
-                                    A style represents visual customizations on top of a layout. By
-                                    editing a style, you can use Squarespace's visual interface to
-                                    customize your...
-                                </p><br>
-                                <p class="pull-right">
-                                    <button class="btn btn-white btn-cons" type="button">White</button>
-                                    <button class="btn btn-success btn-cons" type=
-                                    "button">Success</button>
-                                </p>
+                                <div class="experience-description m-t-20">
+                                    <h3>{{  'experience.description'|trans }}</h3>
+                                    <p>{{ experience.description|raw }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -69,11 +60,10 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <h3>
-                                    Follow us &amp; get updated!
+                                    <h3>{{  'experience.pictures'|trans }}</h3>
                                 </h3>
                                 <p>
-                                    Instantly connect to what's most important to you. Follow your
-                                    friends, experts, favorite celebrities, and breaking news.
+
                                 </p><br>
                             </div>
                         </div>
@@ -96,7 +86,7 @@
                     </div>
                 </div>
                 <div class="experience-user-info">
-                    <h2 class="text-center">{{ experience.getAuthor.firstname }}</h2>
+                    <h2 class="text-center">{{ experience.getAuthor.firstname }}, {{ experience.getAuthor.getAge }}</h2>
                     <div class="dotted-line"><span></span></div>
                 </div>
             </div>
