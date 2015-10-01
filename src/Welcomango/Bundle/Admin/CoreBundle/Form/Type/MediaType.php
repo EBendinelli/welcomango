@@ -18,11 +18,11 @@ class MediaType extends AbstractType
     {
         $builder
             ->add('title', 'text', [
-                'label'    => 'form.language.language',
+                'label'    => 'form.media.title',
                 'required' => true,
             ])
-            ->add('description', 'text', [
-                'label'    => 'form.user.language_code',
+            ->add('description', 'textarea', [
+                'label'    => 'form.media.description',
                 'required' => true,
             ])
             ->add('file', 'file', [

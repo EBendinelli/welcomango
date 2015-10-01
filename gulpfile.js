@@ -45,6 +45,7 @@ gulp.task('assets-js', function() {
         'components/pages-assets/plugins/pace/pace.min.js',
         'components/pages-assets/plugins/modernizr.custom.js',
         'components/pages-assets/plugins/jquery-ui/jquery-ui.min.js',
+        'components/pages-assets/plugins/dropzone/dropzone.js',
         'components/pages-assets/plugins/boostrapv3/js/bootstrap.min.js',
         'components/pages-assets/plugins/jquery/jquery-easy.js',
         'components/pages-assets/plugins/jquery-unveil/jquery.unveil.min.js',
@@ -75,6 +76,7 @@ gulp.task('assets-js', function() {
         .pipe(concat('pages.js'))
         .pipe(gulp.dest(assets_js))
     ;
+
 
     //// FRONT ////
     gulp.src([
@@ -108,6 +110,7 @@ gulp.task('assets-js', function() {
         .pipe(concat('plugins-front.js'))
         .pipe(gulp.dest(assets_front_js))
     ;
+
 
     gulp.src([
         'components/pages-assets/pages-front/js/pages.frontend.js',
@@ -172,7 +175,9 @@ gulp.task('assets-css', function() {
         'components/pages-assets/plugins/bootstrap-datepicker/css/datepicker.css',
         'components/pages-assets/plugins/bootstrap-tag/bootstrap-tagsinput.css',
         'components/pages-assets/plugins/jquery-scrollbar/jquery.scrollbar.css',
-        'components/pages-assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.min.css'
+        'components/pages-assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.min.css',
+        'components/pages-assets/plugins/dropzone/css/dropzone.css',
+        'components/pages-assets/plugins/dropzone/css/base.css'
     ])
         .pipe(minifyCSS())
         .pipe(concat('plugins.css'))
