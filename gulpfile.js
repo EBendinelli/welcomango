@@ -85,6 +85,7 @@ gulp.task('assets-js', function() {
         'components/pages-assets/pages-front/plugins/swiper/js/swiper.jquery.min.js',
         /*'components/pages-assets/pages-front/plugins/bootstrap/js/bootstrap.min.js',
         'components/pages-assets/pages-front/plugins/bootstrap/js/npm.js',*/
+        'components/pages-assets/pages-front/plugins/jquery-sticky-kit/jquery.sticky-kit.js',
         'components/pages-assets/pages-front/plugins/countdown/jquery.countdown.min.js',
         'components/pages-assets/pages-front/plugins/fitjs/fit.min.js',
         'components/pages-assets/pages-front/plugins/ftscroller/ftscroller.js',

@@ -42,6 +42,7 @@ class LoadUserData extends AbstractFixture  implements FixtureInterface, Contain
         //$user->setPassword('3NCRYPT3D-V3R51ON');
         $admin->setEnabled(true);
         $admin->setRoles(array('ROLE_SUPER_ADMIN', 'ROLE_ADMIN'));
+        $admin->setDescription('I\'m the admin, don\'t fuck with me.');
 
         // Update the user
         $userManager->updateUser($admin, true);
@@ -68,6 +69,11 @@ class LoadUserData extends AbstractFixture  implements FixtureInterface, Contain
             $user->setEnabled(true);
 
             $user->setRoles(array('ROLE_USER'));
+
+            $user->setDescription('Hi there, I\'m '.$name.' and I\'ve been living in there for some time already!
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at imperdiet erat. Vivamus ut aliquam magna. Aenean vel mattis lorem, vel fringilla elit. Ut eu congue ligula, vel porta tellus. Maecenas tempor varius mauris, vitae imperdiet metus egestas in. Fusce ut suscipit ante. Mauris mattis purus sem, a gravida metus placerat id. Pellentesque quis nibh efficitur, venenatis orci semper, lobortis orci. Aliquam id condimentum justo. In feugiat enim nunc, et viverra nibh porttitor vel. Suspendisse finibus magna sed sapien commodo, eget dictum tellus pretium. Duis consequat bibendum semper. Curabitur fermentum mollis neque, nec ullamcorper magna interdum nec. Quisque eget finibus lacus, ut auctor libero. Donec efficitur ultrices nisi, in rutrum sapien feugiat sit amet. Suspendisse ullamcorper dignissim nulla, a blandit magna rhoncus vel.
+                ');
 
             $manager->persist($user);
             $userManager->updateUser($user, true);

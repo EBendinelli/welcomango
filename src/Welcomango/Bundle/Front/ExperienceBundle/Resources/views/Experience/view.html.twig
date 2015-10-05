@@ -7,42 +7,44 @@
     {% else %}
         {% set imageBanner = asset("img/front/places-" ~ random(18) ~ ".jpg") %}
     {% endif %}
-    <section class="p-b-50 bg-master-darkest m-t-100 sm-no-margin" data-pages-bg-image="{{ asset(imageBanner) }}" data-bg-overlay="black" data-overlay-opacity="0.3" data-pages="parallax">
+    <!-- START BANNER SECTION -->
+    <section class="p-b-100 bg-master-darkest m-t-100 sm-no-margin" data-pages-bg-image="{{ asset(imageBanner) }}" data-bg-overlay="black" data-overlay-opacity="0.3" data-pages="parallax">
         <div class="container p-t-50">
             <div class="row">
                 <div class="col-lg-1 col-min">
                     <div class="text-center">
                         <h1 class="text-white col-sm-12 p-b-10">{{ experience.title }}</h1>
-                        <button type="button" class="btn btn-lg btn-primary btn-cons btn-rounded m-t-20">Explore</button>
-                        <p class="fs-12 font-arial text-white m-t-30"><span class="hint-text">Go ahead, try clicking around<br>
-                        </span> Select a center of interest for a start
-                        </p>
+                        <p class="fs-12 font-arial text-white ">A {{ experience.estimatedDuration }}h adventure proposed by {{ experience.getAuthor.firstname }}</p>
+                        <button type="button" class="btn btn-lg btn-primary btn-cons btn-rounded m-t-20">Book</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <!-- END BANNER SECTION -->
 
-
+    <!-- START EXPERIENCE SECTION -->
     <section class="container-fluid container-fixed-lg p-b-50">
         <div class="container">
             <div class="panel col-md-8 p-t-40 ">
-                <ul class="nav nav-tabs nav-tabs-left nav-tabs-simple">
+                <ul class="nav nav-tabs nav-tabs-left nav-tabs-simple" id="experience-side-menu">
                     <li class="active">
-                        <a data-toggle="tab" href="#experience-city">City</a>
+                        <a data-toggle="tab" data-href="#experience-city" class="experience-side-menu-item">City</a>
                     </li>
                     <li>
-                        <a data-toggle="tab" href="#experience-description">Description</a>
+                        <a data-toggle="tab" data-href="#experience-description" class="experience-side-menu-item">Description</a>
                     </li>
                     <li>
-                        <a data-toggle="tab" href="#experience-pictures">Pictures</a>
+                        <a data-toggle="tab" data-href="#experience-pictures" class="experience-side-menu-item">Pictures</a>
                     </li>
                 </ul>
+                <div id="experience-side-menu-stickyalias"></div>
                 <div class="experience-content">
                     <div id="experience-city">
                         <div class="experience-city">
                             <div class="m-l-20 p-b-20">
                                 <h1>{{ experience.getCity.name }}</h1>
+                                <h4>{{ experience.getCity.getCountry.name }}</h4>
                             </div>
                         </div>
                     </div>
@@ -59,44 +61,138 @@
                     <div class="tab-pane" id="experience-pictures">
                         <div class="row">
                             <div class="col-md-12">
-                                <h3>
-                                    <h3>{{  'experience.pictures'|trans }}</h3>
-                                </h3>
+                                <h3>{{  'experience.pictures'|trans }}</h3>
                                 <p>
-
-                                </p><br>
+                                    {% if experience.getMedias.first %}
+                                        <div class="experience_container_pictures">
+                                            <div class="col-md-12 ">
+                                                <div class="experience_featured_picture_dark">
+                                                    <div class="experience_featured_pictures experience_featured_picture_large m-b-20" style="background-image:url({{ asset(experience.getMedias.first.getWebPath) }})">                                            </div>
+                                                </div>
+                                            </div>
+                                            {% for media in experience.getMedias.getValues %}
+                                                {% if experience.getMedias.first != media  %}
+                                                    <div class="col-md-6">
+                                                        <div class="experience_featured_picture_dark">
+                                                            <div class="experience_featured_pictures experience_featured_picture_small" style="background-image:url({{ asset(media.getWebPath) }})"></div>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 experience-user bg-master-lightest" >
-                <div class="user">
-                    <div class="user-item user-img-1">
-                        <div class="user-info-wrap">
-                            <div class="user-info">
-                                <div class="user-info-front user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(5) ~ ".jpg") }})"></div>
-                                <div class="user-info-back bg-master-dark" onclick="location.href='{{ path('front_experience_list') }}'">
-                                    <div class="m-t-60 text-center">
-                                        <span>View Profile</span>
+            <div class="col-md-4"   id="experience-user-container">
+                <div class="bg-master-lightest col-md-12" id="experience-user">
+                    <div class="user">
+                        <div class="user-item user-img-1">
+                            <div class="user-info-wrap">
+                                <div class="user-info">
+                                    <div class="user-info-front user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(5) ~ ".jpg") }})"></div>
+                                    <div class="user-info-back bg-master-dark" onclick="location.href='{{ path('front_experience_list') }}'">
+                                        <div class="m-t-60 text-center">
+                                            <span>View Profile</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="experience-user-info">
+                        <h2 class="text-center">{{ experience.getAuthor.firstname }}, {{ experience.getAuthor.getAge }}</h2>
+                        <div class="dotted-line"><span></span></div>
+                        <p>{{ experience.getAuthor.getDescription|truncate(200) }}</p>
+                    </div>
                 </div>
-                <div class="experience-user-info">
-                    <h2 class="text-center">{{ experience.getAuthor.firstname }}, {{ experience.getAuthor.getAge }}</h2>
-                    <div class="dotted-line"><span></span></div>
-                </div>
+            </div>
+            <div class="experience-force-size p-b-10"></div>
+        </div>
+    </section>
+    <!-- END EXPERIENCE SECTION -->
+
+    <!-- START COMMENT SECTION -->
+    <section class="container-fluid bg-master-light container-fixed-lg p-b-50">
+        <div class="row">
+            <div class="container">
+
             </div>
         </div>
     </section>
+    <!-- END COMMENT SECTION -->
+
     <!-- END CONTENT SECTION -->
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
+    <script type="text/javascript">
 
+        //Smooth scroll + update active element
+        $('.experience-side-menu-item').click(function(){
+            var anchor = $(this).attr('data-href');
+            var offset = $(anchor).offset().top;
+            $('html, body').animate( { scrollTop: offset - 50 }, 750 );
+
+            $('.experience-side-menu-item').parent().removeClass('active');
+            $(this).parent().toggleClass('active');
+        });
+
+        $("#experience-user-container").stick_in_parent({offset_top: 60});
+        $("#experience-side-menu").stick_in_parent({offset_top: 60});
+
+
+        /* //Update active menu on scroll
+        $(window).on("scroll", function() {
+            var scrollPosition = scrollY || pageYOffset;
+
+            if (scrollPosition > $("#experience-city").position().top - $(window).height()) {
+                $("#experience-city").parent().toggleClass('active');
+            }else if (scrollPosition > $("#experience-description").position().top - $(window).height()) {
+                $("#experience-description").parent().toggleClass('active');
+            }else if (scrollPosition > $("#experience-pictures").position().top - $(window).height()) {
+
+                $("#experience-pictures").parent().toggleClass('active');
+            }
+        }); */
+
+        /*
+        //make the side menu sticky
+        $(function(){
+            var stickySideMenuTop = $('#experience-side-menu').offset().top-60;
+            var stickySideMenuBottom = $('#experience-side-menu').position().top+$('#experience-side-menu').outerHeight(true)
+
+            $(window).scroll(function(){
+                if( $(window).scrollTop() > stickySideMenuTop ) {
+                    $('#experience-side-menu').css({position: 'fixed', top: '60px'});
+                }else if($(window).scrollTop() > stickySideMenuBottom){
+                    alert("ok");
+
+                } else {
+                    $('#experience-side-menu').css({position: 'static', top: '60px'});
+                }
+            });
+        });
+
+        //make the user card sticky
+        $(function(){
+            var stickyUserTop = $('#experience-user').offset().top-60;
+
+            $(window).scroll(function(){
+                if( $(window).scrollTop() > stickyUserTop ) {
+                    $('#experience-user').css({position: 'fixed', top: '60px', width: '350px', padding: '15px'}).removeClass('col-md-12');
+                    $('#experience-user-stickyalias').css('display', 'block');
+                } else {
+                    $('#experience-user').css({position: 'static', top: '60px'}).addClass('col-md-12');
+                    $('#experience-user-stickyalias').css('display', 'none');
+                }
+            });
+        });
+        */
+    </script>
 
 {% endblock %}

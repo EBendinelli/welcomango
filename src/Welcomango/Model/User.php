@@ -83,6 +83,13 @@ class User extends BaseUser
     private $birthdate;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+
+    /**
      * Get id
      *
      * @return integer
@@ -258,6 +265,26 @@ class User extends BaseUser
     public function setBirthdate($birthdate)
     {
         $this->birthdate = $birthdate;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 
     /**

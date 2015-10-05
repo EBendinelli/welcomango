@@ -60,7 +60,7 @@ class LoadCityData extends AbstractFixture implements FixtureInterface, OrderedF
             $entry->setGeolocation('00000');
 
             //ld($city);
-            $country = $countryRepo->findOneBy(array('countryCode' => $city['country']));
+            $country = $city['country'];
             $entry->setCountry($country);
 
             $manager->persist($entry);

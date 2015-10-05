@@ -145,6 +145,7 @@ div.dotted-line span {
     color: #FFF;
 }
 
+
 /* //////////////////////////////////////////////////////// */
 /* ////////////////   USER IN CARD UI  //////////////////// */
 /* //////////////////////////////////////////////////////// */
@@ -230,8 +231,8 @@ div.dotted-line span {
     border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
-.experience-user{
-    height: 500px;
+#experience-user{
+    height: 600px;
 
 }
 
@@ -239,7 +240,7 @@ div.dotted-line span {
     border-left: 1px solid rgba(0,0,0,.1);
 }
 
-.nav-tabs~.experience-content{
+.experience-content{
     overflow: hidden;
     padding: 15px;
     margin-left: 129px;
@@ -258,17 +259,17 @@ div.dotted-line span {
     border: 5px solid #fff;
 }
 
-.experience-user .user{
+#experience-user .user{
     width: 150px;
     height: 150px;
 }
 
-.experience-user .user-info {
+#experience-user .user-info {
     width: 150px;
     height: 150px;
 }
 
-.experience-user .user-info-wrap {
+#experience-user .user-info-wrap {
     width: 150px;
     height: 150px;
 }
@@ -276,6 +277,50 @@ div.dotted-line span {
 .experience-user-info{
     width:100%;
 }
+
+.experience-side-menu-item{
+    cursor:pointer;
+}
+
+.experience_featured_pictures{
+    background-size:   cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.experience_featured_picture_dark{
+    position: relative;
+}
+
+.experience_featured_picture_dark .experience_featured_pictures:after {
+    content: '\A';
+    position: absolute;
+    width: 100%; height:100%;
+    top:0; left:0;
+    background:rgba(0,0,0,0.6);
+    opacity: 0;
+    transition: all 1s;
+    -webkit-transition: all 0.5s;
+}
+
+.experience_featured_picture_dark:hover .experience_featured_pictures:after {
+    opacity: 1;
+}
+
+.experience_featured_picture_large{
+    height: 250px;
+}
+
+.experience_featured_picture_small{
+    height: 175px;
+}
+
+/* //////////////////////////////////////////////////////// */
+/* ////////////////   HACKS  ////////////////////////////// */
+/* //////////////////////////////////////////////////////// */
+
 
 /* //// PAGES OVERRIDE FOR CARDS //// */
 .panel-title{

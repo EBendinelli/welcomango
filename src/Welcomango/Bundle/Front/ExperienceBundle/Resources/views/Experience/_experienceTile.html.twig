@@ -36,7 +36,7 @@
             </div>
             <div class="dotted-line"><span></span></div>
             <div class="text-center">
-                {{ experience.getDescription }}
+                {{ experience.getDescription | truncate(200)}}
             </div>
         </div>
     </div>
