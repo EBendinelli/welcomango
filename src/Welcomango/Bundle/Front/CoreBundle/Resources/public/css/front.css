@@ -79,8 +79,12 @@ div.dotted-line span {
     background: #FFF;
     color: #272727;
     border-radius: 2px;
-
 }
+
+.card-bg-master-lightest{
+    background-color:#f0f0f0;
+}
+
 .card .title {
     line-height: 48px;
     font-size: 24px;
@@ -222,6 +226,13 @@ div.dotted-line span {
     border-bottom: solid 1px white;
 }
 
+.user-info-front-small{
+    width: 60px;
+    height:60px;
+    border-radius: 5px;
+    border: solid white 3px;
+}
+
 
 /* //////////////////////////////////////////////////////// */
 /* ////////////////   EXPERIENCE VIEW  //////////////////// */
@@ -232,7 +243,7 @@ div.dotted-line span {
 }
 
 #experience-user{
-    height: 600px;
+    height: 470px;
 
 }
 
@@ -316,6 +327,50 @@ div.dotted-line span {
 .experience_featured_picture_small{
     height: 175px;
 }
+
+
+a h2:hover{
+    font-weight: 400;
+}
+
+a h4:hover{
+    font-weight: 400;
+}
+
+
+/* //////////////////////////////////////////////////////// */
+/* ////////////////   FLAGS /////////////////////////////// */
+/* //////////////////////////////////////////////////////// */
+
+
+.flag {
+    background-size: 100% 100%!important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+.flag-lg {
+    width: 150px;
+    height: 113px;
+}
+
+.flag-md {
+    width: 100px;
+    height: 75px;
+}
+
+.flag-sm {
+    width: 75px;
+    height: 57px;
+}
+
+.flag-xs {
+    width: 27px;
+    height: 20px;
+}
+
+
 
 /* //////////////////////////////////////////////////////// */
 /* ////////////////   HACKS  ////////////////////////////// */

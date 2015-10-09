@@ -67,7 +67,7 @@ class ExperienceController extends Controller
 
             $this->addFlash('success', $this->trans('experience.created.success', array(), 'experience'));
 
-            return $this->redirect($this->generateUrl('experience_list'));
+            return $this->redirect($this->generateUrl('admin_experience_list'));
         }
 
         return array(

@@ -1,6 +1,6 @@
 {# Complete with correct informations #}
-<div class="{% if column == 4 %}col-sm-3{% elseif column == 3  %}col-sm-4{% endif %}">
-    <div id="experience_{{ experience.getId }}" class="card" >
+ <div class="{% if column == 4 %}col-sm-3{% elseif column == 3  %}col-sm-4{% endif %}">
+    <div id="experience_{{ experience.getId }}" class="card {% if darkBg is defined %}card-bg-master-lightest{% endif %}" >
         <a href="{{ path('front_experience_view', {'experience_id' : experience.getId }) }}" >
             <div class="card-clickable"></div>
             <div class="experience-image">

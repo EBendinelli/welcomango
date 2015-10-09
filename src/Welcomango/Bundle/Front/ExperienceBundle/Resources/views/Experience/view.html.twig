@@ -24,12 +24,15 @@
     <!-- END BANNER SECTION -->
 
     <!-- START EXPERIENCE SECTION -->
-    <section class="container-fluid container-fixed-lg p-b-50">
+    <section class="container-fluid container-fixed-lg p-b-50  bg-white">
         <div class="container">
-            <div class="panel col-md-8 p-t-40 ">
+            <div class="panel col-md-8 p-t-40">
                 <ul class="nav nav-tabs nav-tabs-left nav-tabs-simple" id="experience-side-menu">
                     <li class="active">
                         <a data-toggle="tab" data-href="#experience-city" class="experience-side-menu-item">City</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" data-href="#experience-details" class="experience-side-menu-item">Details</a>
                     </li>
                     <li>
                         <a data-toggle="tab" data-href="#experience-description" class="experience-side-menu-item">Description</a>
@@ -45,6 +48,32 @@
                             <div class="m-l-20 p-b-20">
                                 <h1>{{ experience.getCity.name }}</h1>
                                 <h4>{{ experience.getCity.getCountry.name }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="experience-details">
+                        <div class="row">
+                            <div class="col-md-12 m-t-20">
+                                <h3>{{  'experience.details'|trans }}</h3>
+                                <div class="col-md-6">
+                                    <div >
+                                        {{  'experience.estimatedDuration'|trans }}: <span class="text-black semi-bold">{{ experience.getEstimatedDuration}}h</span>
+                                    </div>
+                                    <div >
+                                        {{  'experience.minimunDuration'|trans }}: <span class="text-black semi-bold">{{ experience.getMinimumDuration}}h</span>
+                                    </div>
+                                    <div >
+                                        {{  'experience.maximumDuration'|trans }}: <span class="text-black semi-bold">{{ experience.getMaximumDuration}}h</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div >
+                                        {{  'experience.maximumParticipants'|trans }}: <span class="text-black semi-bold">{{ experience.getMaximumParticipants}}h</span>
+                                    </div>
+                                    <div >
+                                        {{  'experience.maximumDuration'|trans }}: <span class="text-black semi-bold">{{ experience.getMaximumDuration}}h</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -88,25 +117,58 @@
                 </div>
             </div>
             <div class="col-md-4"   id="experience-user-container">
-                <div class="bg-master-lightest col-md-12" id="experience-user">
-                    <div class="user">
-                        <div class="user-item user-img-1">
-                            <div class="user-info-wrap">
-                                <div class="user-info">
-                                    <div class="user-info-front user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(5) ~ ".jpg") }})"></div>
-                                    <div class="user-info-back bg-master-dark" onclick="location.href='{{ path('front_experience_list') }}'">
-                                        <div class="m-t-60 text-center">
-                                            <span>View Profile</span>
+                <div class="bg-master-lighter col-md-12" id="experience-user">
+                    <!-- MAIN USER DISPLAY -->
+                    <div id="user-main">
+                        <div class="user">
+                            <div class="user-item user-img-1">
+                                <div class="user-info-wrap">
+                                    <div class="user-info">
+                                        <div class="user-info-front user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(5) ~ ".jpg") }})"></div>
+                                        <div class="user-info-back bg-master-dark" onclick="location.href='{{ path('front_experience_list') }}'">
+                                            <div class="m-t-60 text-center">
+                                                <span>View Profile</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                            <a href="{{ path('front_experience_list') }}">
+                                <h2 class="text-center">{{ experience.getAuthor.firstname }}, {{ experience.getAuthor.getAge }}</h2>
+                            </a>
                     </div>
+                    <!-- MINI USER DISPLAY -->
+                    <div id="user-mini" class="row p-b-5 p-t-5 " style="display:none">
+                        <div class="col-md-12">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-3">
+                                <a href="{{ path('front_experience_list') }}">
+                                    <div class="user-info-front-small user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(5) ~ ".jpg") }})"></div>
+                                </a>
+                            </div>
+                            <div class="col-md-7 text-left">
+                                <a href="{{ path('front_experience_list') }}">
+                                    <h4>{{ experience.getAuthor.firstname }}, {{ experience.getAuthor.getAge }}</h4>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- USER INFO CONTENT-->
                     <div class="experience-user-info">
-                        <h2 class="text-center">{{ experience.getAuthor.firstname }}, {{ experience.getAuthor.getAge }}</h2>
                         <div class="dotted-line"><span></span></div>
+                        <div class="text-center m-b-15 ">
+                            {% for language in experience.getAuthor.getSpokenLanguages.getValues %}
+                                <div class="flag flag-xs" role="image"  style="background: url({{ asset('img/countries/'~ language.language.flagLabel|lower ~'.svg') }});"></div>
+                                {{ language }}
+                            {% endfor %}
+
+                        </div>
                         <p>{{ experience.getAuthor.getDescription|truncate(200) }}</p>
+                    </div>
+                    <!-- BOOKING PART -->
+                    <div class="text-center">
+                        <button type="button" class="btn btn-lg btn-primary btn-cons btn-rounded m-t-20">Book</button>
                     </div>
                 </div>
             </div>
@@ -119,11 +181,28 @@
     <section class="container-fluid bg-master-light container-fixed-lg p-b-50">
         <div class="row">
             <div class="container">
-
+                <div class="text-center m-b-40 m-t-40">
+                    <h2>Comments</h2>
+                </div>
             </div>
         </div>
     </section>
     <!-- END COMMENT SECTION -->
+
+    <!-- START RELATED SECTION -->
+    <section class="container-fluid bg-white container-fixed-lg p-b-50">
+        <div class="row">
+            <div class="container">
+                <div class="text-center m-b-40 m-t-40">
+                    <h2>Related experiences</h2>
+                </div>
+                {% for experience in relatedExperiences  %}
+                    {{ include("WelcomangoFrontExperienceBundle:Experience:_experienceTile.html.twig", { 'experiences': relatedExperiences, 'column': 3, 'darkBg': true }) }}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- END RELATED SECTION -->
 
     <!-- END CONTENT SECTION -->
 {% endblock %}
@@ -145,7 +224,6 @@
         $("#experience-user-container").stick_in_parent({offset_top: 60});
         $("#experience-side-menu").stick_in_parent({offset_top: 60});
 
-
         /* //Update active menu on scroll
         $(window).on("scroll", function() {
             var scrollPosition = scrollY || pageYOffset;
@@ -160,39 +238,22 @@
             }
         }); */
 
-        /*
-        //make the side menu sticky
-        $(function(){
-            var stickySideMenuTop = $('#experience-side-menu').offset().top-60;
-            var stickySideMenuBottom = $('#experience-side-menu').position().top+$('#experience-side-menu').outerHeight(true)
-
-            $(window).scroll(function(){
-                if( $(window).scrollTop() > stickySideMenuTop ) {
-                    $('#experience-side-menu').css({position: 'fixed', top: '60px'});
-                }else if($(window).scrollTop() > stickySideMenuBottom){
-                    alert("ok");
-
-                } else {
-                    $('#experience-side-menu').css({position: 'static', top: '60px'});
-                }
-            });
-        });
-
         //make the user card sticky
         $(function(){
             var stickyUserTop = $('#experience-user').offset().top-60;
 
             $(window).scroll(function(){
                 if( $(window).scrollTop() > stickyUserTop ) {
-                    $('#experience-user').css({position: 'fixed', top: '60px', width: '350px', padding: '15px'}).removeClass('col-md-12');
-                    $('#experience-user-stickyalias').css('display', 'block');
+                    //$('#user-main').animate({marginTop: '-200px'});
+                    $('#user-main').hide();
+                    $('#user-mini').show();
                 } else {
-                    $('#experience-user').css({position: 'static', top: '60px'}).addClass('col-md-12');
-                    $('#experience-user-stickyalias').css('display', 'none');
+                    //$('#user-main').animate({marginTop: '0px'});
+                    $('#user-main').show();
+                    $('#user-mini').hide();
                 }
             });
         });
-        */
     </script>
 
 {% endblock %}

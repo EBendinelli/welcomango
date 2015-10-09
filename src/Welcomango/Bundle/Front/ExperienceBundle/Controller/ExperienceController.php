@@ -128,8 +128,13 @@ class ExperienceController extends Controller
      */
     public function viewAction(Request $request, Experience $experience)
     {
+        $relatedExperiences = $this
+        ->getRepository('Welcomango\Model\Experience')
+        ->getFeatured(3);
+
         return $this->render('WelcomangoFrontExperienceBundle:Experience:view.html.twig', array(
-            'experience' => $experience
+            'experience' => $experience,
+            'relatedExperiences' => $relatedExperiences
         ));
 
     }

@@ -131,7 +131,7 @@ class Experience
     private $featured = false;
 
     /**
-     * @ORM\Column(name="average_note", type="float")
+     * @ORM\Column(name="average_note", type="float", nullable=true)
      */
     private $averageNote;
 
