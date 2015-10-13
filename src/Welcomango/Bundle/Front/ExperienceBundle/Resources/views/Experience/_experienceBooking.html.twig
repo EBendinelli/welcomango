@@ -1,0 +1,20 @@
+{{ form_start(form, {'action': path('front_experience_view', {'experience_id' : experience.id}), 'attr': {'novalidate': 'novalidate' }}) }}
+<div class="text-white text-center">
+    <p>Give <span class="text-primary">{{ experience.getAuthor.firstname }}</span> a bit more information about your request and send your message</p>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-6">{{ form_row(form.desired_duration) }}</div>
+            <div class="col-md-6">{{ form_row(form.desired_date) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">{{ form_row(form.desired_time) }}</div>
+            <div class="col-md-6">{{ form_row(form.number_of_participants) }}</div>
+        </div>
+        <div class="col-md-12 text-center m-t-10">{{ form_row(form.submit) }}</div>
+    </div>
+</div>
+<a href="#" onclick="$('#experience-booking').animate({height: '0px', overflow: 'hidden'});">close</a>
+{{ form_end(form) }}
+

@@ -1,5 +1,9 @@
 {% extends "::front.html.twig" %}
 
+{% trans_default_domain "experience" %}
+
+{#{% form_theme form with ["::frontTheme.html.twig"] %}#}
+
 {% block page_content %}
     <!-- START CONTENT SECTION -->
     {% if experience.getMedias.first %}
@@ -8,16 +12,21 @@
         {% set imageBanner = asset("img/front/places-" ~ random(18) ~ ".jpg") %}
     {% endif %}
     <!-- START BANNER SECTION -->
-    <section class="p-b-100 bg-master-darkest m-t-100 sm-no-margin" data-pages-bg-image="{{ asset(imageBanner) }}" data-bg-overlay="black" data-overlay-opacity="0.3" data-pages="parallax">
+    <section class="p-b-70 bg-master-darkest m-t-100 sm-no-margin" data-pages-bg-image="{{ asset(imageBanner) }}" data-bg-overlay="black" data-overlay-opacity="0.3" data-pages="parallax">
         <div class="container p-t-50">
             <div class="row">
                 <div class="col-lg-1 col-min">
                     <div class="text-center">
                         <h1 class="text-white col-sm-12 p-b-10">{{ experience.title }}</h1>
                         <p class="fs-12 font-arial text-white ">A {{ experience.estimatedDuration }}h adventure proposed by {{ experience.getAuthor.firstname }}</p>
-                        <button type="button" class="btn btn-lg btn-primary btn-cons btn-rounded m-t-20">Book</button>
+                        <button type="button" class="btn btn-lg btn-primary btn-cons btn-rounded m-t-20" onclick="$('#experience-booking').animate({height: '250px', overflow: 'auto'});;">
+                            {{ 'experience.sendQuery'|trans }}
+                        </button>
                     </div>
                 </div>
+            </div>
+            <div id="experience-booking" {% if formSubmitted == true %}style="height:250px"{% endif %}>
+                {{ include("WelcomangoFrontExperienceBundle:Experience:_experienceBooking.html.twig") }}
             </div>
         </div>
     </section>
@@ -168,7 +177,7 @@
                     </div>
                     <!-- BOOKING PART -->
                     <div class="text-center">
-                        <button type="button" class="btn btn-lg btn-primary btn-cons btn-rounded m-t-20">Book</button>
+                        <button type="button" class="btn btn-lg btn-primary btn-cons btn-rounded m-t-20">{{  'experience.sendQuery'|trans }}</button>
                     </div>
                 </div>
             </div>
@@ -254,6 +263,7 @@
                 }
             });
         });
+
     </script>
 
 {% endblock %}

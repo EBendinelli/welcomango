@@ -351,14 +351,4 @@ class User extends BaseUser
         $this->spokenLanguages = new ArrayCollection();
         $this->participations  = new ArrayCollection();
     }
-
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime 
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
 }

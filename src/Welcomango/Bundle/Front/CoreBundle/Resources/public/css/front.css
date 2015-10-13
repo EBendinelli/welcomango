@@ -337,6 +337,14 @@ a h4:hover{
     font-weight: 400;
 }
 
+#experience-booking{
+    height:0px;
+    overflow: hidden;
+    width:60%;
+    margin:auto;
+    margin-top: 30px;
+}
+
 
 /* //////////////////////////////////////////////////////// */
 /* ////////////////   FLAGS /////////////////////////////// */

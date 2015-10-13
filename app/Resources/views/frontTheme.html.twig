@@ -1,0 +1,144 @@
+{% block text_widget %}
+    <div class="form-group form-group-default {% if required %}required{% endif %}">
+        <label>{{ form_label(form) }}</label>
+        <input class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    </div>
+{% endblock text_widget %}
+
+{% block mark_widget %}
+    <div class="form-group form-group-default {% if required %}required{% endif %}">
+        <label>{{ form_label(form) }}</label>
+        <input style="display: none;" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+
+        <div class="container-mark">
+            {% for i in form.vars.attr.min..form.vars.attr.max %}
+                <i id="{{ form.vars.attr.class }}-{{ i }}" data-mark="{{ i }}" class="{{ form.vars.attr.class }} fa {{ form.vars.attr.unselected }}"></i>
+            {% endfor %}
+        </div>
+    </div>
+    <script type="text/javascript">
+        var currentMark = 0;
+        $(".{{ form.vars.attr.class }}").mouseover(function () {
+            var pos = $(this).data('mark');
+            for (i = 1; i <= pos; i++) {
+                $('#{{ form.vars.attr.class }}-' + i).removeClass('{{ form.vars.attr.unselected }}');
+                $('#{{ form.vars.attr.class }}-' + i).addClass('{{ form.vars.attr.selected }}');
+            }
+        });
+
+        $(".star").click(function () {
+            var mark = $(this).data('mark');
+            currentMark = mark;
+            $('#{{ form.vars.id }}').val(mark);
+            for (i = {{ form.vars.attr.min }}; i <= {{ form.vars.attr.max }}; i++) {
+                if (i <= currentMark) {
+                    $('#{{ form.vars.attr.class }}-' + i).removeClass('{{ form.vars.attr.unselected }}');
+                    $('#{{ form.vars.attr.class }}-' + i).addClass('{{ form.vars.attr.selected }}');
+                } else {
+                    $('#{{ form.vars.attr.class }}-' + i).addClass('{{ form.vars.attr.unselected }}');
+                    $('#{{ form.vars.attr.class }}-' + i).removeClass('{{ form.vars.attr.selected }}');
+                }
+            }
+            updateMark(currentMark)
+        });
+
+        $(".container-mark").mouseout(function () {
+            $('.{{ form.vars.attr.class }}').removeClass('{{ form.vars.attr.selected }}');
+            $('.{{ form.vars.attr.class }}').addClass('{{ form.vars.attr.unselected }}');
+            for (i = {{ form.vars.attr.min }}; i <= currentMark; i++) {
+                $('#{{ form.vars.attr.class }}-' + i).removeClass('{{ form.vars.attr.unselected }}');
+                $('#{{ form.vars.attr.class }}-' + i).addClass('{{ form.vars.attr.selected }}');
+            }
+        });
+
+        function updateMark(currentMark) {
+            for (i = {{ form.vars.attr.min }}; i <= {{ form.vars.attr.max }}; i++) {
+                if (i <= currentMark) {
+                    $('#{{ form.vars.attr.class }}-' + i).removeClass('{{ form.vars.attr.unselected }}');
+                    $('#{{ form.vars.attr.class }}-' + i).addClass('{{ form.vars.attr.selected }}');
+                } else {
+                    $('#{{ form.vars.attr.class }}-' + i).addClass('{{ form.vars.attr.unselected }}');
+                    $('#{{ form.vars.attr.class }}-' + i).removeClass('{{ form.vars.attr.selected }}');
+                }
+            }
+        }
+    </script>
+
+{% endblock mark_widget %}
+
+{% block textarea_widget %}
+    {% spaceless %}
+        <div class="form-group form-group-default {% if required %}required{% endif %}">
+            <label>{{ form_label(form) }}</label>
+            {# !!!IMPORTANT!!!  #}
+            {# must remove the style tag and place it somewhere appropriate #}
+            <textarea class="form-control" {{ block('widget_attributes') }} style="height:200px">{% if value is not empty %}{{ value }} {% endif %}</textarea>
+        </div>
+    {% endspaceless %}
+{% endblock textarea_widget %}
+
+{% block select_widget %}
+    <div class="form-group form-group-default form-group-default-select  {% if required %}required{% endif %}">
+        <label>{{ form_label(form) }}</label>
+        <select class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %} >
+        </select>
+    </div>
+{% endblock select_widget %}
+
+{% block password_widget %}
+    <div class="form-group form-group-default {% if required %}required{% endif %}">
+        <label>{{ form_label(form) }}</label>
+        <input type="password" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    </div>
+{% endblock password_widget %}
+
+{% block choice_widget %}
+    <div class="form-group form-group-default form-group-default-select2">
+        {{ form_label(form) }}
+        <select class="full-width select2-offscreen" data-init-plugin="select2" {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+            {%- if placeholder is not none -%}
+                <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ placeholder != '' ? placeholder|trans({}, translation_domain) }}</option>
+            {%- endif -%}
+            {%- if preferred_choices|length > 0 -%}
+                {% set options = preferred_choices %}
+                {{- block('choice_widget_options') -}}
+                {%- if choices|length > 0 and separator is not none -%}
+                    <option disabled="disabled">{{ separator }}</option>
+                {%- endif -%}
+            {%- endif -%}
+            {%- set options = choices -%}
+            {{- block('choice_widget_options') -}}
+        </select>
+    </div>
+{% endblock choice_widget %}
+
+{% block file_widget %}
+    {% spaceless %}
+        <div class="dropzone">
+            <div class="fallback">{% set type = type|default('file') %}
+                <input type="{{ type }}" {{ block('widget_attributes') }}/>
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock %}
+
+
+{%- block form_row -%}
+    <div>
+        {{- form_errors(form) -}}
+        {{- form_widget(form) -}}
+    </div>
+{%- endblock form_row -%}
+
+{% block form_label %}
+    {% if not compound %}
+    {% set label_attr = label_attr|merge({'for': id}) %}
+{% endif %}
+    {% if required %}
+    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+{% endif %}
+    {% if label is empty %}
+    {% set label = name|humanize %}
+{% endif %}
+    <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
+{% endblock form_label %}

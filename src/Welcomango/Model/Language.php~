@@ -146,34 +146,4 @@ class Language
     {
         $this->spokenLanguages = $spokenLanguages;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->spokenLanguages = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add spokenLanguages
-     *
-     * @param \Welcomango\Model\SpokenLanguage $spokenLanguages
-     * @return Language
-     */
-    public function addSpokenLanguage(\Welcomango\Model\SpokenLanguage $spokenLanguages)
-    {
-        $this->spokenLanguages[] = $spokenLanguages;
-
-        return $this;
-    }
-
-    /**
-     * Remove spokenLanguages
-     *
-     * @param \Welcomango\Model\SpokenLanguage $spokenLanguages
-     */
-    public function removeSpokenLanguage(\Welcomango\Model\SpokenLanguage $spokenLanguages)
-    {
-        $this->spokenLanguages->removeElement($spokenLanguages);
-    }
 }
