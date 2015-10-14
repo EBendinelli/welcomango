@@ -52,7 +52,7 @@ class ParticipationType extends AbstractType
         for($i=0;$i<48;$i++) $desiredDuration[$i] = $i;
         for($i=0;$i<20;$i++) $numberOfParticipants[$i] = $i;
         $desiredTime[] = "Morning";
-        $desiredTime[] = "LunchTime";
+        $desiredTime[] = "Lunchtime";
         $desiredTime[] = "Afternoon";
         $desiredTime[] = "Evening";
 
@@ -106,15 +106,16 @@ class ParticipationType extends AbstractType
 
     /**
      * {@inheritdoc}
-     *//*
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
             'data_class'         => 'Welcomango\Model\Participation',
             'translation_domain' => 'participation'
         ]);
+
     }
-*/
+
     /**
      * {@inheritdoc}
      */

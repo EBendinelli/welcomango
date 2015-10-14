@@ -11,5 +11,8 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
+        <service id="welcomango.front.participation.manager" class="Welcomango\Bundle\Front\ExperienceBundle\Manager\ParticipationManager">
+        </service>
+
     </services>
 </container>

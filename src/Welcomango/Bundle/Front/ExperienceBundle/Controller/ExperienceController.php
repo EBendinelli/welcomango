@@ -129,12 +129,16 @@ class ExperienceController extends Controller
      */
     public function viewAction(Request $request, Experience $experience)
     {
+        $user = $this->getUser();
+
         // Must create a related experience function
         $relatedExperiences = $this
         ->getRepository('Welcomango\Model\Experience')
         ->getFeatured(3);
 
         $participation = new Participation();
+        $participation->setUser($user);
+        $participation->setExperience($experience);
         $form = $this->createForm($this->get('welcomango.front.form.participation.type'), $participation);
         $form->handleRequest($request);
 
@@ -144,17 +148,15 @@ class ExperienceController extends Controller
         }
 
         if ($form->isValid()) {
-            $participationRequest = $this
-                ->getRepository('Welcomango\Model\Participation')
-                ->createParticipationRequest($form);
+            $participationManager = $this->get('welcomango.front.participation.manager');
 
+            $participation = $participationManager->processParticipationQuery($participation, $form);
 
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($participation);
+            $entityManager->flush();
 
-            /*
-            $this->getDoctrine()->getManager()->flush();
-
-            $this->addFlash('success', $this->trans('user.created.success', array(), 'user'));
-            */
+            return $this->render('WelcomangoFrontExperienceBundle:Experience:requestSent.html.twig');
         }
 
         return $this->render('WelcomangoFrontExperienceBundle:Experience:view.html.twig', array(

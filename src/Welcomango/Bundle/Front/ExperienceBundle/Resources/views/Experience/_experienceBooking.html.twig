@@ -1,7 +1,14 @@
+{% form_theme form with ["::frontTheme.html.twig"] %}
+
 {{ form_start(form, {'action': path('front_experience_view', {'experience_id' : experience.id}), 'attr': {'novalidate': 'novalidate' }}) }}
+{% if app.user %}
 <div class="text-white text-center">
     <p>Give <span class="text-primary">{{ experience.getAuthor.firstname }}</span> a bit more information about your request and send your message</p>
 </div>
+{% else %}
+    <div class="alert alert-danger">Looks like you are not logged, please <a class="bold" href="{{ path('fos_user_security_login') }}">login</a> before sending your request</div>
+{% endif %}
+
 <div class="row">
     <div class="col-md-12">
         <div class="row">
@@ -12,9 +19,10 @@
             <div class="col-md-6">{{ form_row(form.desired_time) }}</div>
             <div class="col-md-6">{{ form_row(form.number_of_participants) }}</div>
         </div>
-        <div class="col-md-12 text-center m-t-10">{{ form_row(form.submit) }}</div>
+        {% if app.user %}
+            <div class="col-md-12 text-right  m-t-10">{{ form_row(form.submit) }}</div>
+        {% endif %}
     </div>
 </div>
-<a href="#" onclick="$('#experience-booking').animate({height: '0px', overflow: 'hidden'});">close</a>
 {{ form_end(form) }}
 

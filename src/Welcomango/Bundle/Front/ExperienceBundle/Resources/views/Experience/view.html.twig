@@ -19,13 +19,13 @@
                     <div class="text-center">
                         <h1 class="text-white col-sm-12 p-b-10">{{ experience.title }}</h1>
                         <p class="fs-12 font-arial text-white ">A {{ experience.estimatedDuration }}h adventure proposed by {{ experience.getAuthor.firstname }}</p>
-                        <button type="button" class="btn btn-lg btn-primary btn-cons btn-rounded m-t-20" onclick="$('#experience-booking').animate({height: '250px', overflow: 'auto'});;">
-                            {{ 'experience.sendQuery'|trans }}
+                        <button id="experience-booking-btn" type="button" class="btn btn-lg btn-primary btn-cons btn-rounded m-t-20" onclick="toggleBooking()">
+                            {{ 'experience.sendRequest'|trans }}
                         </button>
                     </div>
                 </div>
             </div>
-            <div id="experience-booking" {% if formSubmitted == true %}style="height:250px"{% endif %}>
+            <div id="experience-booking" {% if formSubmitted == true %}style="height:250px"{% endif %} >
                 {{ include("WelcomangoFrontExperienceBundle:Experience:_experienceBooking.html.twig") }}
             </div>
         </div>
@@ -112,7 +112,7 @@
                                                 {% if experience.getMedias.first != media  %}
                                                     <div class="col-md-6">
                                                         <div class="experience_featured_picture_dark">
-                                                            <div class="experience_featured_pictures experience_featured_picture_small" style="background-image:url({{ asset(media.getWebPath) }})"></div>
+                                                            <div class="experience_featured_pictures experience_featured_picture_small m-b-20" style="background-image:url({{ asset(media.getWebPath) }})"></div>
                                                         </div>
                                                     </div>
                                                 {% endif %}
@@ -263,6 +263,16 @@
                 }
             });
         });
+
+        function toggleBooking(){
+            if($('#experience-booking').height() == 0){
+                $('#experience-booking').animate({height: '250px', overflow: 'auto'});
+                $('#experience-booking-btn').html('{{ 'experience.closeRequest'|trans }}')
+            }else{
+                $('#experience-booking').animate({height: '0px', overflow: 'hidden'});
+                $('#experience-booking-btn').html('{{ 'experience.sendRequest'|trans }}')
+            }
+        }
 
     </script>
 

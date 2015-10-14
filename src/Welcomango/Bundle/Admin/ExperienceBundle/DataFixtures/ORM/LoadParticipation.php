@@ -22,7 +22,7 @@ class LoadParticipationData extends AbstractFixture implements FixtureInterface,
         $users = $userRepo->findAll();
         $experiences = $experienceRepo->findAll();
         $creatorStatus = array('available', 'happened', 'booked');
-        $ParticipantStatus = array('booked', 'validated', 'happened');
+        $ParticipantStatus = array('requested', 'validated', 'happened');
 
         //Each experience has a creator
         foreach($experiences as $experience){
@@ -36,7 +36,7 @@ class LoadParticipationData extends AbstractFixture implements FixtureInterface,
 
             $entry->setIsCreator(true);
             $entry->setIsParticipant(false);
-            $entry->setStatus(array_rand($creatorStatus));
+            $entry->setStatus($creatorStatus[rand(0,2)]);
 
             $manager->persist($entry);
         }
@@ -53,7 +53,7 @@ class LoadParticipationData extends AbstractFixture implements FixtureInterface,
 
             $entry->setIsCreator(false);
             $entry->setIsParticipant(true);
-            $entry->setStatus(array_rand($ParticipantStatus));
+            $entry->setStatus($ParticipantStatus[rand(0,2)]);
 
 
             $manager->persist($entry);

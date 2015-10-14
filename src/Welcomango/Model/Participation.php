@@ -66,7 +66,7 @@ class Participation
     /**
      * @var integer
      *
-     * @ORM\Column(name="note", type="integer")
+     * @ORM\Column(name="note", type="integer", nullable=true)
      */
     private $note;
 
@@ -74,7 +74,7 @@ class Participation
      * @var User
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="participations")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
     private $user;
 
