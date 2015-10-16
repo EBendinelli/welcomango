@@ -108,15 +108,28 @@
                                                     <div class="experience_featured_pictures experience_featured_picture_large m-b-20" style="background-image:url({{ asset(experience.getMedias.first.getWebPath) }})">                                            </div>
                                                 </div>
                                             </div>
-                                            {% for media in experience.getMedias.getValues %}
-                                                {% if experience.getMedias.first != media  %}
+                                            {% for media in experience.getMedias.getValues|slice(1,2) %}
+                                                <div class="col-md-6">
+                                                    <div class="experience_featured_picture_dark">
+                                                        <div class="experience_featured_pictures experience_featured_picture_small m-b-20" style="background-image:url({{ asset(media.getWebPath) }})"></div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                            {% for media in experience.getMedias.getValues|slice(3,10) %}
+                                                <div id="experience-hidden-pictures">
                                                     <div class="col-md-6">
                                                         <div class="experience_featured_picture_dark">
                                                             <div class="experience_featured_pictures experience_featured_picture_small m-b-20" style="background-image:url({{ asset(media.getWebPath) }})"></div>
                                                         </div>
                                                     </div>
-                                                {% endif %}
+                                                </div>
                                             {% endfor %}
+                                            {% if experience.getMedias.getValues[3] %}
+                                                <div class="col-md-12 text-right">
+                                                    <button id="experience-pictures-btn" class="text-center btn btn-sm" onclick="togglePictures();">More</button>
+                                                </div>
+                                            {% endif %}
+
                                         </div>
                                     {% endif %}
                                 </p>
@@ -274,6 +287,20 @@
             }
         }
 
+        function togglePictures1(){
+            $('#experience-hidden-pictures').toggleClass('experience-pictures-visible');
+            $('#experience-pictures-btn').html('Less');
+        }
+
+        function togglePictures(){
+            if($('#experience-hidden-pictures:visible').length == 0){
+                $('#experience-hidden-pictures').show(400);
+                $('#experience-pictures-btn').html('Less')
+            }else{
+                $('#experience-hidden-pictures').hide(400);
+                $('#experience-pictures-btn').html('More')
+            }
+        }
     </script>
 
 {% endblock %}

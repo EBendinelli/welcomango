@@ -76,6 +76,11 @@ class Builder extends ContainerAware
             'linkAttributes' => ['class' => 'fa fa-picture-o'],
         ));
 
+        $menu->addChild('menu.title.participation', array(
+            'route'          => 'admin_participation_list',
+            'linkAttributes' => ['class' => 'fa fa-cloud'],
+        ));
+
         return $menu;
     }
 }

@@ -19,7 +19,7 @@ class ParticipationManager
 
         $date = $form->get('desired_date')->getData();
         $startDate = $date;
-        $endDate = new \DateTime;
+        $endDate = $startDate;
         if($form->get('desired_time')->getData() == 0) {
             $startDate->setTime(9, 0);
             $endDate = $endDate->setTime(9 + $form->get('desired_duration')->getData(),0);

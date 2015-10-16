@@ -43,6 +43,7 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
+            new Welcomango\Bundle\Admin\ParticipationBundle\WelcomangoAdminParticipationBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -29,14 +29,29 @@ class LoadParticipationData extends AbstractFixture implements FixtureInterface,
             $entry = new Participation();
             $entry->setUser($users[array_rand($users)]);
             $entry->setExperience($experience);
-            $entry->setDate(new \DateTime());
-            $entry->setStartTime(new \DateTime());
-            $entry->setEndTime(new \DateTime());
+            $randDate = new \DateTime;
+            $randTimestamp = mt_rand(1421406219,1476612219);
+            $randDate->setTimestamp($randTimestamp);
+            $randDate->setTime($randDate->format('G'), 0);
+            $entry->setDate($randDate);
+
+            $startTime = new \Datetime;
+            $startTime->setTimestamp($randTimestamp);
+            $startTime->setTime(9,0);
+            $entry->setStartTime($startTime);
+
+            $endTime = new \Datetime;
+            $endTime->setTimestamp($randTimestamp);
+            $endTime->setTime(23,0);
+            $entry->setEndTime($endTime);
+
+            $entry->setEndTime($endTime);
             $entry->setNote(rand(1,5));
 
             $entry->setIsCreator(true);
             $entry->setIsParticipant(false);
             $entry->setStatus($creatorStatus[rand(0,2)]);
+            $entry->setNumberOfParticipants(rand(1,10));
 
             $manager->persist($entry);
         }
@@ -46,11 +61,25 @@ class LoadParticipationData extends AbstractFixture implements FixtureInterface,
             $entry = new Participation();
             $entry->setUser($users[array_rand($users)]);
             $entry->setExperience($experiences[array_rand($experiences)]);
-            $entry->setDate(new \DateTime());
-            $entry->setStartTime(new \DateTime());
-            $entry->setEndTime(new \DateTime());
-            $entry->setNote(rand(1,5));
 
+            $randDate = new \DateTime;
+            $randTimestamp = mt_rand(1421406219,1476612219);
+            $randDate->setTimestamp($randTimestamp );
+            $entry->setDate($randDate);
+
+            $startTime = new \Datetime;
+            $startTime->setTimestamp($randTimestamp);
+            $randTime = rand(9, 19);
+            $startTime->setTime($randTime ,0);
+            $entry->setStartTime($startTime);
+
+            $endTime = new \Datetime;
+            $endTime->setTimestamp($randTimestamp);
+            $endTime->setTime($randTime+rand(1,5),0);
+            $entry->setEndTime($endTime);
+
+            $entry->setNote(rand(1,5));
+            $entry->setNumberOfParticipants(rand(1,10));
             $entry->setIsCreator(false);
             $entry->setIsParticipant(true);
             $entry->setStatus($ParticipantStatus[rand(0,2)]);

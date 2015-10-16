@@ -345,6 +345,15 @@ a h4:hover{
     margin-top: 30px;
 }
 
+#experience-hidden-pictures {
+    display:none;
+}
+
+#experience-hidden-pictures.experience-pictures-visible {
+    height: auto;
+    visibility: visible;
+    opacity: 1;
+}
 
 /* //////////////////////////////////////////////////////// */
 /* ////////////////   FLAGS /////////////////////////////// */

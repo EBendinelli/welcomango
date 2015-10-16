@@ -20,9 +20,9 @@
             <div class="col-md-6">{{ form_row(form.number_of_participants) }}</div>
         </div>
         {% if app.user %}
-            <div class="col-md-12 text-right  m-t-10">{{ form_row(form.submit) }}</div>
+            <div class="col-md-12 text-right m-t-10">{{ form_end(form) }}</div>
         {% endif %}
     </div>
 </div>
-{{ form_end(form) }}
+
 
