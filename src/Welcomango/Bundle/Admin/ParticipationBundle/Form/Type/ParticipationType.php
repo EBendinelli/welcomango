@@ -48,7 +48,13 @@ class ParticipationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-        $status = array('available','booked','happened','requested', 'validated');
+        $status = array(
+            'available' => 'available',
+            'booked' => 'booked',
+            'happened' =>'happened',
+            'requested' => 'requested',
+            'validated' => 'validated'
+        );
         $numberOfParticipants = array();
         for($i=0;$i<48;$i++) $numberOfParticipants [$i] = $i;
 

@@ -54,6 +54,9 @@ gulp.task('assets-js', function() {
         'components/pages-assets/plugins/jquery-actual/jquery.actual.min.js',
         'components/pages-assets/plugins/jquery-ios-list/jquery.ioslist.min.js',
         'components/pages-assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js',
+        'components/pages-assets/plugins/jquery-validation/js/jquery.validate.min.js',
+        'components/pages-assets/plugins/jquery-validation/js/additional-methods.min.js',
+        'components/pages-assets/plugins/jquery-validation/js/localization/*',
 
         'components/pages-assets/plugins/jquery-block-ui/jqueryblockui.min.js',
         'components/pages-assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js',
