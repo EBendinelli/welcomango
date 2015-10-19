@@ -52,4 +52,30 @@ class ExperienceRepository extends EntityRepository
             ;
         */
     }
+
+    public function findAllExperiencesCreatedByUser($user){
+        return $this
+            ->createQueryBuilder('a')
+            ->leftJoin('a.participations', 'b')
+            ->where('a.published = true')
+            ->andWhere('b.user ='.$user->getId())
+            ->andWhere('b.isCreator = 1')
+            ->groupBy('a.id')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findAllExperiencesAttendedByUser($user){
+        return $this
+            ->createQueryBuilder('a')
+            ->leftJoin('a.participations', 'b')
+            ->where('a.published = true')
+            ->andWhere('b.user ='.$user->getId())
+            ->andWhere('b.isParticipant = 1')
+            ->groupBy('a.id')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

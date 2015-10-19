@@ -75,6 +75,6 @@ class LoadCityData extends AbstractFixture implements FixtureInterface, OrderedF
     public function getOrder()
     {
         //Define the order in which the fixtures are executed
-        return 5;
+        return 2;
     }
 }

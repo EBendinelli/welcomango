@@ -25,7 +25,13 @@ class LoadUserData extends AbstractFixture  implements FixtureInterface, Contain
     public function load(ObjectManager $manager)
     {
         // Get our userManager, you must implement `ContainerAwareInterface`
+        $cities = array('Brussels', 'Lyon', 'Geneva', 'London', 'Rome', 'Amsterdam', 'Milan', 'Helsinki', 'Vienna', 'Barcelone');
+        $genders =  array("M","F","O");
+        $occupations = array("Student", "Teacher", "Photograph", "Traveler", "Taxi Driver", "Hacker", "HR", "Cleaning Lady", "Doctor", "Researcher","Communication Director", "Marketing addict", "Fashion Designer");
+
+
         $userManager = $this->container->get('fos_user.user_manager');
+        $cityRepo = $manager->getRepository('Welcomango\Model\City');
 
         // Create our user and set details
         $admin = $userManager->createUser();
@@ -43,6 +49,12 @@ class LoadUserData extends AbstractFixture  implements FixtureInterface, Contain
         $admin->setEnabled(true);
         $admin->setRoles(array('ROLE_SUPER_ADMIN', 'ROLE_ADMIN'));
         $admin->setDescription('I\'m the admin, don\'t fuck with me.');
+        $fromCity = $cityRepo->findOneBy(array('name' => $cities[rand(0,9)] ));
+        $currentCity = $cityRepo->findOneBy(array('name' => $cities[rand(0,9)] ));
+        $admin->setFromCity($fromCity);
+        $admin->setCurrentCity($currentCity);
+        $admin->setGender('M');
+        $admin->setOccupation('Business Manager');
 
         // Update the user
         $userManager->updateUser($admin, true);
@@ -67,6 +79,12 @@ class LoadUserData extends AbstractFixture  implements FixtureInterface, Contain
             ($i%2 == 0 ? $user->setEnabled(true) : $user->setEnabled(false));
             $i++;
             $user->setEnabled(true);
+            $fromCity = $cityRepo->findOneBy(array('name' => $cities[rand(0,9)] ));
+            $currentCity = $cityRepo->findOneBy(array('name' => $cities[rand(0,9)] ));
+            $user->setFromCity($fromCity);
+            $user->setCurrentCity($currentCity);
+            $user->setGender($genders[rand(0,2)]);
+            $user->setOccupation($occupations[rand(0,12)]);
 
             $user->setRoles(array('ROLE_USER'));
 
@@ -86,6 +104,6 @@ class LoadUserData extends AbstractFixture  implements FixtureInterface, Contain
     public function getOrder()
     {
         //Define the order in which the fixtures are executed
-        return 1;
+        return 3;
     }
 }

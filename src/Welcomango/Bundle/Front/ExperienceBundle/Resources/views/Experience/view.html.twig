@@ -91,7 +91,7 @@
                             <div class="col-md-12">
                                 <div class="experience-description m-t-20">
                                     <h3>{{  'experience.description'|trans }}</h3>
-                                    <p>{{ experience.description|raw }}</p>
+                                    <p>{{ experience.description|nl2br|raw }}</p>
                                 </div>
                             </div>
                         </div>
@@ -182,7 +182,6 @@
                         <div class="text-center m-b-15 ">
                             {% for language in experience.getAuthor.getSpokenLanguages.getValues %}
                                 <div class="flag flag-xs" role="image"  style="background: url({{ asset('img/countries/'~ language.language.flagLabel|lower ~'.svg') }});"></div>
-                                {{ language }}
                             {% endfor %}
 
                         </div>
