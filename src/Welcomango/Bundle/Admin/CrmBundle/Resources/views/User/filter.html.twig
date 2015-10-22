@@ -1,0 +1,14 @@
+{% trans_default_domain "crm" %}
+
+{{ form_errors(form) }}
+<div class="row">
+    <div class="col-md-3 col-vlg-4">
+        {{ form_row(form.username) }}
+    </div>
+    <div class="col-md-3 col-vlg-4">
+        {{ form_row(form.roles,  {'attr' : {'class' : 'form-filter-select2', 'multiple' : 'multiple'} }) }}
+    </div>
+    <div class="col-md-3 col-vlg-4">
+        {{ form_row(form.enabled) }}
+    </div>
+</div>

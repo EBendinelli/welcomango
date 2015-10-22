@@ -19,6 +19,18 @@ class User extends BaseUser
     const ROLE_USER        = 'ROLE_USER';
 
     /**
+     * @return array
+     */
+    public static function getAvailableRoles()
+    {
+        return array(
+            self::ROLE_SUPER_ADMIN => self::ROLE_SUPER_ADMIN,
+            self::ROLE_ADMIN       => self::ROLE_ADMIN,
+            self::ROLE_USER        => self::ROLE_USER,
+        );
+    }
+
+    /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")

@@ -5,7 +5,6 @@ namespace Welcomango\Bundle\Front\ExperienceBundle\Manager;
 
 class ParticipationManager
 {
-
     public function __construct()
     {
 

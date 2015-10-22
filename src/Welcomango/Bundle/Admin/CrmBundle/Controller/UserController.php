@@ -32,8 +32,11 @@ class UserController extends Controller
      */
     public function listAction(Request $request)
     {
+        $filters   = $this->getFilters(array(), 'userSearch');
         $paginator = $this->get('knp_paginator');
-        $query     = $this->getRepository('Welcomango\Model\User')->findAll();
+        $query     = $this->getRepository('Welcomango\Model\User')->createPagerQueryBuilder($filters);
+
+        $form = $this->createForm($this->get('welcomango.form.user.filter'), $filters);
 
         $pagination = $paginator->paginate(
             $query,
@@ -43,6 +46,7 @@ class UserController extends Controller
 
         return array(
             'pagination' => $pagination,
+            'form'       => $form->createView(),
         );
     }
 
@@ -145,5 +149,33 @@ class UserController extends Controller
         return array(
             'users' => $users
         );
+    }
+
+    /**
+     * Process and render form filters
+     *
+     * @param Request $request
+     *
+     * @Route("/users/filters/research", name="users_filters")
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function filterFormAction(Request $request)
+    {
+        if ($request->request->has('_reset')) {
+            $this->removeFilters('userSearch');
+
+            return $this->redirect($this->generateUrl('admin_user_list'));
+        }
+
+        $form = $this->createForm($this->get('welcomango.form.user.filter'), null);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $datas = $form->getData();
+            $this->setFilters($datas, 'userSearch');
+        }
+
+        return $this->redirect($this->generateUrl('admin_user_list'));
     }
 }

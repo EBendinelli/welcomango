@@ -17,5 +17,9 @@
 
         <service id="welcomango.form.media.type" class="Welcomango\Bundle\Admin\CoreBundle\Form\Type\MediaType">
         </service>
+
+        <service id="welcomango.form.type.yes_no" class="Welcomango\Bundle\Admin\CoreBundle\Form\Type\YesNoType">
+            <tag name="form.type" alias="yes_no" />
+        </service>
     </services>
 </container>

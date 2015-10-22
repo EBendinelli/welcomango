@@ -489,6 +489,9 @@ class Experience
         $this->setCreatedAt(new \Datetime());
     }
 
+    /**
+     * @return User
+     */
     public function getAuthor()
     {
         foreach ($this->participations as $participant) {

@@ -16,6 +16,9 @@
 
         <service id="welcomango.form.language.type" class="Welcomango\Bundle\Admin\CrmBundle\Form\Type\LanguageType">
         </service>
+
+        <service id="welcomango.form.user.filter" class="Welcomango\Bundle\Admin\CrmBundle\Form\Type\UserFilterType">
+        </service>
     </services>
 
 </container>
