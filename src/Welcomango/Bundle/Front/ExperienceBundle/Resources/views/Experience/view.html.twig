@@ -33,7 +33,7 @@
     <!-- END BANNER SECTION -->
 
     <!-- START EXPERIENCE SECTION -->
-    <section class="container-fluid container-fixed-lg p-b-50  bg-white">
+    <section class="container-fluid p-b-50  bg-white">
         <div class="container">
             <div class="panel col-md-8 p-t-40">
                 <ul class="nav nav-tabs nav-tabs-left nav-tabs-simple" id="experience-side-menu">
@@ -50,7 +50,6 @@
                         <a data-toggle="tab" data-href="#experience-pictures" class="experience-side-menu-item">Pictures</a>
                     </li>
                 </ul>
-                <div id="experience-side-menu-stickyalias"></div>
                 <div class="experience-content">
                     <div id="experience-city">
                         <div class="experience-city">
@@ -131,6 +130,11 @@
                                             {% endif %}
 
                                         </div>
+                                    {% else %}
+                                        <div>
+                                            {{ 'experience.SorryNoPictures'|trans }}
+                                            <i class="fa fa-meh-o"></i>
+                                        </div>
                                     {% endif %}
                                 </p>
                             </div>
@@ -138,6 +142,8 @@
                     </div>
                 </div>
             </div>
+
+
             <div class="col-md-4" id="experience-user-container" >
                 <div class="bg-master-lighter row" id="experience-user">
                     <!-- MAIN USER DISPLAY -->
@@ -246,7 +252,7 @@
     {{ parent() }}
     <script type="text/javascript">
 
-        //Smooth scroll + update active element
+        //Smooth scroll + update active menu item
         $('.experience-side-menu-item').click(function(){
             var anchor = $(this).attr('data-href');
             var offset = $(anchor).offset().top;
@@ -256,6 +262,7 @@
             $(this).parent().toggleClass('active');
         });
 
+        //Make the menu and user card sticky to top
         $("#experience-user-container").stick_in_parent({offset_top: 60});
         $("#experience-side-menu").stick_in_parent({offset_top: 60});
 
