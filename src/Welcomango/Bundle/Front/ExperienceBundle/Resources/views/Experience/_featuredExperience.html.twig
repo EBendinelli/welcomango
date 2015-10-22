@@ -1,0 +1,39 @@
+{# Complete with correct informations #}
+<div class="col-md-12 m-b-30">
+    <div id="experience_{{ experience.getId }}" class="card featured-card {% if darkBg is defined %}card-bg-master-lightest{% endif %}" >
+        <a href="{{ path('front_experience_view', {'experience_id' : experience.getId }) }}" >
+            <div class="row">
+                <div class="panel-body p-t-0 featured-card-content col-md-5 p-l-60">
+                    <div class="panel-title semi-bold">
+                        {{ experience.getTitle }}
+                    </div>
+                    <div class="text-center m-b-10">
+                        in <span class="semi-bold">{% if experience.getCity %}{{ experience.getCity.Name }}{% endif %}</span>
+                    </div>
+                    <div class="dotted-line"><span></span></div>
+                    <div class="text-center">
+                        {{ experience.getDescription | truncate(150)}}
+                    </div>
+                </div>
+
+                <div class="col-md-7">
+                    <div class="experience-image-separation">
+                        <div class="experience-image-triangle"></div>
+                    </div>
+
+                    <div class="card-clickable"></div>
+                    <div class="experience-image">
+                        {% if experience.getMedias.first %}
+                            <img class="" data-src="{{ asset(experience.getMedias.first.getWebPath) }}" alt="Card image cap">
+                        {% else %}
+                            <img class="" data-src="{{ asset("img/front/places-" ~ random(18) ~ ".jpg") }}" alt="Card image cap">
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+

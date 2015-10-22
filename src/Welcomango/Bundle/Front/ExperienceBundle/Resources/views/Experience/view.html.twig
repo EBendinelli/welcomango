@@ -138,16 +138,16 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4"   id="experience-user-container">
-                <div class="bg-master-lighter col-md-12" id="experience-user">
+            <div class="col-md-4" id="experience-user-container" >
+                <div class="bg-master-lighter row" id="experience-user">
                     <!-- MAIN USER DISPLAY -->
                     <div id="user-main">
-                        <div class="user">
+                        <div class="user" onclick="location.href='{{ path('front_user_view', {'user_id' : experience.getAuthor.id }) }}'">
                             <div class="user-item user-img-1">
                                 <div class="user-info-wrap">
                                     <div class="user-info">
                                         <div class="user-info-front user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(5) ~ ".jpg") }})"></div>
-                                        <div class="user-info-back bg-master-dark" onclick="location.href='{{ path('front_experience_list') }}'">
+                                        <div class="user-info-back bg-master-dark">
                                             <div class="m-t-60 text-center">
                                                 <span>View Profile</span>
                                             </div>
@@ -156,9 +156,9 @@
                                 </div>
                             </div>
                         </div>
-                            <a href="{{ path('front_experience_list') }}">
-                                <h2 class="text-center">{{ experience.getAuthor.firstname }}, {{ experience.getAuthor.getAge }}</h2>
-                            </a>
+                        <a href="{{ path('front_user_view', {'user_id' : experience.getAuthor.id }) }}">
+                            <h2 class="text-center">{{ experience.getAuthor.firstname }}, {{ experience.getAuthor.getAge }}</h2>
+                        </a>
                     </div>
                     <!-- MINI USER DISPLAY -->
                     <div id="user-mini" class="row p-b-5 p-t-5 " style="display:none">
@@ -187,9 +187,23 @@
                         </div>
                         <p>{{ experience.getAuthor.getDescription|truncate(200) }}</p>
                     </div>
-                    <!-- BOOKING PART -->
-                    <div class="text-center">
-                        <button type="button" class="btn btn-lg btn-primary btn-cons btn-rounded m-t-20">{{  'experience.sendQuery'|trans }}</button>
+                    <!-- BOOKING  AND PRICE PART -->
+                    <div class="bg-master-lighter experience-bottom-user">
+                        <div class="row experience-bottom-container">
+                            <div class="experience-bottom-contact col-md-5">
+                                <i class="fa fa-comments-o fa-5x text-primary m-l-40 m-t-30"></i>
+                            </div>
+                            <div class="col-md-7 experience-bottom-right">
+                                <div class="experience-image-separation">
+                                    <div class="experience-image-triangle"></div>
+                                </div>
+                                <div class="experience-bottom-price bg-master-light" onclick="userToggleBooking()">
+                                    <div class=" experience-price">
+                                        {{ experience.pricePerHour }}€/h
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -275,6 +289,15 @@
                 }
             });
         });
+
+        function userToggleBooking(){
+            if($('#experience-booking').height() == 0){
+                $("html, body").animate({ scrollTop: $('.page-wrappers').offset().top }, 500);
+                toggleBooking();
+            }else{
+                toggleBooking();
+            }
+        }
 
         function toggleBooking(){
             if($('#experience-booking').height() == 0){

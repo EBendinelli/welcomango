@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-md-3"><br/></div>
                 <div class="col-md-9">
-                    <h2 class="text-white">{{ user.fullname }}</h2>
+                    <h2 class="text-white">{{ user.firstname }} {{ user.lastname|upper }}</h2>
                     <h4 class="text-white">{{ user.currentCity.name}}, {{ user.currentCity.country.name}}</h4>
                     <h4 class="text-white">{{ user.getAge}}</h4>
                 </div>
@@ -21,6 +21,7 @@
 
     <section class="container-fluid container-fixed-lg p-b-50  bg-white">
         <div class="container">
+            <!-- START USER CARD -->
             <div class="panel col-md-3">
                 <div id="user-picture-container">
                     <div class="user-picture user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(5) ~ ".jpg") }})"></div>
@@ -29,7 +30,7 @@
                     <div id="user-info-details" class="m-b-10">
                         <div><span class="bold">Occupation:</span> {{ user.occupation }}</div>
                         <div><span class="bold">From:</span> {{ user.fromCity.name }}</div>
-                        <div><span class="bold">Current City:</span> {{ user.currentCity.name}}</div>
+                        <div><span class="bold">Currently living in:</span> {{ user.currentCity.name}}</div>
                         <div><span class="bold">Gender:</span> {{ user.gender}}</div>
                     </div>
                     <hr/>
@@ -40,9 +41,27 @@
                         {% endfor %}
 
                     </div>
-
                 </div>
             </div>
+            <!-- END USER CARD -->
+
+            <!-- START USER CONTENT -->
+            <div class="col-md-9">
+                <div id="user-content" class="m-t-30">
+                    <div id="user-proposed-experience" class="m-b-20">
+                        <h2 class="m-b-30">Adventure</h2>
+                        {% if proposedExperiences|first is not null %}
+                            {{ include("WelcomangoFrontExperienceBundle:Experience:_featuredExperience.html.twig", { 'experience': proposedExperiences|first}) }}
+                        {% endif %}
+                    </div>
+                    <div id="user-description">
+                        <h2>About {{ user.firstname}}</h2>
+                        <hr style="margin-top:25px"/>
+                        <p>{{ user.description|nl2br|raw }}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- END USER CONTENT -->
         </div>
     </section>
 

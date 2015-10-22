@@ -69,6 +69,7 @@ div.dotted-line span {
     background-color: rgba(0, 0, 0, .2);
 }
 /* End defaults*/
+
 .card {
     display: inline-block;
     vertical-align: top;
@@ -243,7 +244,7 @@ div.dotted-line span {
 }
 
 #experience-user{
-    height: 470px;
+    height: 400px;
 
 }
 
@@ -287,6 +288,7 @@ div.dotted-line span {
 
 .experience-user-info{
     width:100%;
+    padding:20px;
 }
 
 .experience-side-menu-item{
@@ -329,8 +331,13 @@ div.dotted-line span {
 }
 
 
-a h2:hover{
-    font-weight: 400;
+#user-main a h2{
+    -webkit-transition: text-shadow 0.2s; /* Safari */
+    transition: text-shadow 0.2s;
+}
+
+#user-main a h2:hover{
+    text-shadow: 2px 0px 3px rgba(150, 150, 150, 1);
 }
 
 a h4:hover{
@@ -355,6 +362,77 @@ a h4:hover{
     opacity: 1;
 }
 
+.experience-bottom-user{
+    border-top: solid 1px #e6e6e6;
+    width: 100%;
+    height:150px;
+    position: relative;
+    overflow:hidden
+}
+
+.experience-bottom-container{
+    width:100%;
+    margin:auto;
+    height: 100%;
+}
+
+.experience-bottom-contact{
+    cursor:pointer;
+    height:100%;
+    display: inline-block;
+    -webkit-transition: text-shadow 0.2s; /* Safari */
+    transition: text-shadow 0.2s;
+}
+
+.experience-bottom-contact:hover{
+    text-shadow: 2px 0px 3px rgba(150, 150, 150, 1);
+}
+
+.experience-bottom-price{
+    cursor:pointer;
+    padding-left:20%;
+    width: 120%;
+    height:100%;
+    display:inline-block;
+    margin-left:-6%;
+    -webkit-transition: text-shadow 0.2s; /* Safari */
+    transition: text-shadow 0.2s;
+}
+
+.experience-price{
+    font-size: 40px;
+    line-height: 55px;
+    letter-spacing: -.009em;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-left:30px;
+}
+
+.experience-bottom-price:hover{
+    text-shadow: 2px 0px 3px rgba(150, 150, 150, 1);
+}
+
+.experience-bottom-user .experience-image-separation{
+    width:20%;
+    height: 100%;
+    position: absolute;
+    z-index:1;
+    margin-left: -25px;
+}
+
+.experience-bottom-user .experience-image-triangle{
+    width:0px;
+    height:0px;
+    border-top:200px solid #f0f0f0;
+    border-right:60px solid transparent;
+}
+
+.experience-bottom-right{
+    height:100%;
+    background-color:#e6e6e6;
+}
+
+
 /* //////////////////////////////////////////////////////// */
 /* ////////////////////   USER VIEW  ////////////////////// */
 /* //////////////////////////////////////////////////////// */
@@ -365,6 +443,72 @@ a h4:hover{
     height: 250px;
     margin-top: -150px;
     border: solid white 3px;
+}
+
+.featured-card{
+    border: 1px solid #e6e6e6;
+    height:200px;
+    position: relative;
+}
+
+.featured-card a{
+    color: #272727;
+}
+
+.featured-card a:hover{
+    color: #272727;
+}
+
+.featured-card .experience-image {
+    position: relative;
+    width:100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.featured-card .experience-image:after {
+    content: '\A';
+    position: absolute;
+    width: 100%; height:100%;
+    top:0; left:0;
+    background:rgba(0,0,0,0.6);
+    opacity: 0;
+    transition: all 1s;
+    -webkit-transition: all 0.5s;
+}
+
+.featured-card:hover .experience-image:after {
+    opacity: 1;
+}
+
+.featured-card .experience-image img {
+    position: absolute;
+    top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
+}
+.featured-card .experience-image .title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+    color: #FFF;
+}
+
+.featured-card .experience-image-separation{
+    width:20%;
+    height: 100%;
+    position: absolute;
+    z-index:1;
+}
+
+.featured-card .experience-image-triangle{
+    width:0px;
+    height:0px;
+    border-top:200px solid white;
+    border-right:60px solid transparent;
 }
 
 /* //////////////////////////////////////////////////////// */
