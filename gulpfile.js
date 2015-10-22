@@ -54,6 +54,9 @@ gulp.task('assets-js', function() {
         'components/pages-assets/plugins/jquery-actual/jquery.actual.min.js',
         'components/pages-assets/plugins/jquery-ios-list/jquery.ioslist.min.js',
         'components/pages-assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js',
+        'components/pages-assets/plugins/jquery-validation/js/jquery.validate.min.js',
+        'components/pages-assets/plugins/jquery-validation/js/additional-methods.min.js',
+        'components/pages-assets/plugins/jquery-validation/js/localization/*',
 
         'components/pages-assets/plugins/jquery-block-ui/jqueryblockui.min.js',
         'components/pages-assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js',
@@ -85,6 +88,8 @@ gulp.task('assets-js', function() {
         'components/pages-assets/pages-front/plugins/swiper/js/swiper.jquery.min.js',
         /*'components/pages-assets/pages-front/plugins/bootstrap/js/bootstrap.min.js',
         'components/pages-assets/pages-front/plugins/bootstrap/js/npm.js',*/
+        'components/pages-assets/pages-front/plugins/Jquery-sticky-kit/jquery.sticky-kit.js',
+        'components/pages-assets/pages-front/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js',
         'components/pages-assets/pages-front/plugins/countdown/jquery.countdown.min.js',
         'components/pages-assets/pages-front/plugins/fitjs/fit.min.js',
         'components/pages-assets/pages-front/plugins/ftscroller/ftscroller.js',
@@ -222,7 +227,9 @@ gulp.task('assets-css', function() {
         'components/pages-assets/pages-front/plugins/jquery-scrollbar/jquery.scrollbar.css',
         'components/pages-assets/pages-front/plugins/pace/pace-theme-flash.css',
         'components/pages-assets/pages-front/plugins/swiper/css/swiper.css',
-        'components/pages-assets/pages-front/plugins/text-rotate/simpletextrotator.css'
+        'components/pages-assets/pages-front/plugins/text-rotate/simpletextrotator.css',
+        'components/pages-assets/pages-front/plugins/bootstrap-select2/select2.css',
+        'components/pages-assets/pages-front/plugins/bootstrap-select2/select2-bootstrap.css'
     ])
         .pipe(minifyCSS())
         .pipe(concat('plugins-front.css'))

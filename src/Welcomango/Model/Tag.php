@@ -157,4 +157,14 @@ class Tag
     public function __construct() {
         $this->experiences = new ArrayCollection();
     }
+
+    /**
+     * Remove experiences
+     *
+     * @param \Welcomango\Model\Experience $experiences
+     */
+    public function removeExperience(\Welcomango\Model\Experience $experiences)
+    {
+        $this->experiences->removeElement($experiences);
+    }
 }

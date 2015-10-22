@@ -1,6 +1,6 @@
 {# Complete with correct informations #}
-<div class="{% if column == 4 %}col-sm-3{% elseif column == 3  %}col-sm-4{% endif %}">
-    <div id="experience_{{ experience.getId }}" class="card" >
+ <div class="{% if column == 4 %}col-sm-3{% elseif column == 3  %}col-sm-4{% endif %}">
+    <div id="experience_{{ experience.getId }}" class="card {% if darkBg is defined %}card-bg-master-lightest{% endif %}" >
         <a href="{{ path('front_experience_view', {'experience_id' : experience.getId }) }}" >
             <div class="card-clickable"></div>
             <div class="experience-image">
@@ -12,12 +12,12 @@
             </div>
         </a>
 
-        <div class="user">
+        <div class="user" onclick="location.href='{{ path('front_user_view', {'user_id' : experience.getAuthor.id }) }}'">
             <div class="user-item user-img-1">
                 <div class="user-info-wrap">
                     <div class="user-info">
                         <div class="user-info-front user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(5) ~ ".jpg") }})"></div>
-                        <div class="user-info-back bg-primary-dark" onclick="location.href='{{ path('front_experience_list') }}'">
+                        <div class="user-info-back bg-primary-dark">
                             <div class="m-t-45 text-center">
                                 <span>View Profile</span>
                             </div>
@@ -36,7 +36,7 @@
             </div>
             <div class="dotted-line"><span></span></div>
             <div class="text-center">
-                {{ experience.getDescription }}
+                {{ experience.getDescription | truncate(200)}}
             </div>
         </div>
     </div>

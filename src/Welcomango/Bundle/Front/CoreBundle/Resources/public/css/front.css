@@ -69,6 +69,7 @@ div.dotted-line span {
     background-color: rgba(0, 0, 0, .2);
 }
 /* End defaults*/
+
 .card {
     display: inline-block;
     vertical-align: top;
@@ -79,8 +80,12 @@ div.dotted-line span {
     background: #FFF;
     color: #272727;
     border-radius: 2px;
-
 }
+
+.card-bg-master-lightest{
+    background-color:#f0f0f0;
+}
+
 .card .title {
     line-height: 48px;
     font-size: 24px;
@@ -144,6 +149,7 @@ div.dotted-line span {
     padding: 20px;
     color: #FFF;
 }
+
 
 /* //////////////////////////////////////////////////////// */
 /* ////////////////   USER IN CARD UI  //////////////////// */
@@ -221,6 +227,13 @@ div.dotted-line span {
     border-bottom: solid 1px white;
 }
 
+.user-info-front-small{
+    width: 60px;
+    height:60px;
+    border-radius: 5px;
+    border: solid white 3px;
+}
+
 
 /* //////////////////////////////////////////////////////// */
 /* ////////////////   EXPERIENCE VIEW  //////////////////// */
@@ -230,8 +243,8 @@ div.dotted-line span {
     border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
-.experience-user{
-    height: 500px;
+#experience-user{
+    height: 400px;
 
 }
 
@@ -239,7 +252,7 @@ div.dotted-line span {
     border-left: 1px solid rgba(0,0,0,.1);
 }
 
-.nav-tabs~.experience-content{
+.experience-content{
     overflow: hidden;
     padding: 15px;
     margin-left: 129px;
@@ -258,24 +271,284 @@ div.dotted-line span {
     border: 5px solid #fff;
 }
 
-.experience-user .user{
+#experience-user .user{
     width: 150px;
     height: 150px;
 }
 
-.experience-user .user-info {
+#experience-user .user-info {
     width: 150px;
     height: 150px;
 }
 
-.experience-user .user-info-wrap {
+#experience-user .user-info-wrap {
     width: 150px;
     height: 150px;
 }
 
 .experience-user-info{
     width:100%;
+    padding:20px;
 }
+
+.experience-side-menu-item{
+    cursor:pointer;
+}
+
+.experience_featured_pictures{
+    background-size:   cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.experience_featured_picture_dark{
+    position: relative;
+}
+
+.experience_featured_picture_dark .experience_featured_pictures:after {
+    content: '\A';
+    position: absolute;
+    width: 100%; height:100%;
+    top:0; left:0;
+    background:rgba(0,0,0,0.6);
+    opacity: 0;
+    transition: all 1s;
+    -webkit-transition: all 0.5s;
+}
+
+.experience_featured_picture_dark:hover .experience_featured_pictures:after {
+    opacity: 1;
+}
+
+.experience_featured_picture_large{
+    height: 250px;
+}
+
+.experience_featured_picture_small{
+    height: 175px;
+}
+
+
+#user-main a h2{
+    -webkit-transition: text-shadow 0.2s; /* Safari */
+    transition: text-shadow 0.2s;
+}
+
+#user-main a h2:hover{
+    text-shadow: 2px 0px 3px rgba(150, 150, 150, 1);
+}
+
+a h4:hover{
+    font-weight: 400;
+}
+
+#experience-booking{
+    height:0px;
+    overflow: hidden;
+    width:60%;
+    margin:auto;
+    margin-top: 30px;
+}
+
+#experience-hidden-pictures {
+    display:none;
+}
+
+#experience-hidden-pictures.experience-pictures-visible {
+    height: auto;
+    visibility: visible;
+    opacity: 1;
+}
+
+.experience-bottom-user{
+    border-top: solid 1px #e6e6e6;
+    width: 100%;
+    height:150px;
+    position: relative;
+    overflow:hidden
+}
+
+.experience-bottom-container{
+    width:100%;
+    margin:auto;
+    height: 100%;
+}
+
+.experience-bottom-contact{
+    cursor:pointer;
+    height:100%;
+    display: inline-block;
+    -webkit-transition: text-shadow 0.2s; /* Safari */
+    transition: text-shadow 0.2s;
+}
+
+.experience-bottom-contact:hover{
+    text-shadow: 2px 0px 3px rgba(150, 150, 150, 1);
+}
+
+.experience-bottom-price{
+    cursor:pointer;
+    padding-left:20%;
+    width: 120%;
+    height:100%;
+    display:inline-block;
+    margin-left:-6%;
+    -webkit-transition: text-shadow 0.2s; /* Safari */
+    transition: text-shadow 0.2s;
+}
+
+.experience-price{
+    font-size: 40px;
+    line-height: 55px;
+    letter-spacing: -.009em;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-left:30px;
+}
+
+.experience-bottom-price:hover{
+    text-shadow: 2px 0px 3px rgba(150, 150, 150, 1);
+}
+
+.experience-bottom-user .experience-image-separation{
+    width:20%;
+    height: 100%;
+    position: absolute;
+    z-index:1;
+    margin-left: -25px;
+}
+
+.experience-bottom-user .experience-image-triangle{
+    width:0px;
+    height:0px;
+    border-top:200px solid #f0f0f0;
+    border-right:60px solid transparent;
+}
+
+.experience-bottom-right{
+    height:100%;
+    background-color:#e6e6e6;
+}
+
+
+/* //////////////////////////////////////////////////////// */
+/* ////////////////////   USER VIEW  ////////////////////// */
+/* //////////////////////////////////////////////////////// */
+
+
+.user-picture{
+    width: 100%;
+    height: 250px;
+    margin-top: -150px;
+    border: solid white 3px;
+}
+
+.featured-card{
+    border: 1px solid #e6e6e6;
+    height:200px;
+    position: relative;
+}
+
+.featured-card a{
+    color: #272727;
+}
+
+.featured-card a:hover{
+    color: #272727;
+}
+
+.featured-card .experience-image {
+    position: relative;
+    width:100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.featured-card .experience-image:after {
+    content: '\A';
+    position: absolute;
+    width: 100%; height:100%;
+    top:0; left:0;
+    background:rgba(0,0,0,0.6);
+    opacity: 0;
+    transition: all 1s;
+    -webkit-transition: all 0.5s;
+}
+
+.featured-card:hover .experience-image:after {
+    opacity: 1;
+}
+
+.featured-card .experience-image img {
+    position: absolute;
+    top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;
+}
+.featured-card .experience-image .title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+    color: #FFF;
+}
+
+.featured-card .experience-image-separation{
+    width:20%;
+    height: 100%;
+    position: absolute;
+    z-index:1;
+}
+
+.featured-card .experience-image-triangle{
+    width:0px;
+    height:0px;
+    border-top:200px solid white;
+    border-right:60px solid transparent;
+}
+
+/* //////////////////////////////////////////////////////// */
+/* ////////////////   FLAGS /////////////////////////////// */
+/* //////////////////////////////////////////////////////// */
+
+
+.flag {
+    background-size: 100% 100%!important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+.flag-lg {
+    width: 150px;
+    height: 113px;
+}
+
+.flag-md {
+    width: 100px;
+    height: 75px;
+}
+
+.flag-sm {
+    width: 75px;
+    height: 57px;
+}
+
+.flag-xs {
+    width: 27px;
+    height: 20px;
+}
+
+
+
+/* //////////////////////////////////////////////////////// */
+/* ////////////////   HACKS  ////////////////////////////// */
+/* //////////////////////////////////////////////////////// */
+
 
 /* //// PAGES OVERRIDE FOR CARDS //// */
 .panel-title{

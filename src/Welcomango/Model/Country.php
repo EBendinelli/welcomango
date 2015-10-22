@@ -117,4 +117,27 @@ class Country
         $this->cities = new ArrayCollection();
     }
 
+
+    /**
+     * Add cities
+     *
+     * @param \Welcomango\Model\City $cities
+     * @return Country
+     */
+    public function addCity(\Welcomango\Model\City $cities)
+    {
+        $this->cities[] = $cities;
+
+        return $this;
+    }
+
+    /**
+     * Remove cities
+     *
+     * @param \Welcomango\Model\City $cities
+     */
+    public function removeCity(\Welcomango\Model\City $cities)
+    {
+        $this->cities->removeElement($cities);
+    }
 }

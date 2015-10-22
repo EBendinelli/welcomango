@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Participation
  *
  * @ORM\Table(name="wm_participation")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Welcomango\Model\Repository\ParticipationRepository")
  */
 class Participation
 {
@@ -66,7 +66,7 @@ class Participation
     /**
      * @var integer
      *
-     * @ORM\Column(name="note", type="integer")
+     * @ORM\Column(name="note", type="integer", nullable=true)
      */
     private $note;
 
@@ -74,7 +74,7 @@ class Participation
      * @var User
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="participations")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
     private $user;
 
@@ -85,6 +85,13 @@ class Participation
      * @ORM\JoinColumn(name="experience_id", referencedColumnName="id")
      */
     private $experience;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="number_of_participants", type="integer", nullable=true)
+     */
+    private $numberOfParticipants;
 
     /**
      * Get id
@@ -266,5 +273,25 @@ class Participation
     public function setExperience($experience)
     {
         $this->experience = $experience;
+    }
+
+    /**
+     * Set numberOfParticipants
+     *
+     * @param integer $numberOfParticipants
+     */
+    public function setNumberOfParticipants($numberOfParticipants)
+    {
+        $this->numberOfParticipants = $numberOfParticipants;
+    }
+
+    /**
+     * Get numberOfParticipants
+     *
+     * @return integer
+     */
+    public function getNumberOfParticipants()
+    {
+        return $this->numberOfParticipants;
     }
 }

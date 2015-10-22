@@ -3,7 +3,7 @@
 {% trans_default_domain "crm" %}
 
 {% block actions %}
-    {# {{ button.create(path('experience_create'), 'experience.create'|trans) }}#}
+    {{ button.create(path('admin_experience_create'), 'experience.create'|trans) }}
 {% endblock %}
 
 {% set pager_url = path('admin_experience_list') %}

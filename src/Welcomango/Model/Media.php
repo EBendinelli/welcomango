@@ -302,4 +302,37 @@ class Media
 
         $this->file = null;
     }
+
+    /**
+     * Add experiences
+     *
+     * @param \Welcomango\Model\Experience $experiences
+     * @return Media
+     */
+    public function addExperience(\Welcomango\Model\Experience $experiences)
+    {
+        $this->experiences[] = $experiences;
+
+        return $this;
+    }
+
+    /**
+     * Remove experiences
+     *
+     * @param \Welcomango\Model\Experience $experiences
+     */
+    public function removeExperience(\Welcomango\Model\Experience $experiences)
+    {
+        $this->experiences->removeElement($experiences);
+    }
+
+    /**
+     * Get experiences
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getExperiences()
+    {
+        return $this->experiences;
+    }
 }

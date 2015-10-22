@@ -13,6 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 use Welcomango\Bundle\Front\CoreBundle\Controller\Controller;
 use Welcomango\Model\Experience;
+use Welcomango\Model\Participation;
 
 
 /**
@@ -128,8 +129,41 @@ class ExperienceController extends Controller
      */
     public function viewAction(Request $request, Experience $experience)
     {
+        $user = $this->getUser();
+
+        // Must create a related experience function
+        $relatedExperiences = $this
+        ->getRepository('Welcomango\Model\Experience')
+        ->getFeatured(3);
+
+        $participation = new Participation();
+        $participation->setUser($user);
+        $participation->setExperience($experience);
+        $form = $this->createForm($this->get('welcomango.front.form.participation.type'), $participation);
+        $form->handleRequest($request);
+
+        $formSubmitted = false;
+        if($form->isSubmitted()){
+            $formSubmitted = true;
+        }
+
+        if ($form->isValid()) {
+            $participationManager = $this->get('welcomango.front.participation.manager');
+
+            $participation = $participationManager->processParticipationQuery($participation, $form);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($participation);
+            $entityManager->flush();
+
+            return $this->render('WelcomangoFrontExperienceBundle:Experience:requestSent.html.twig');
+        }
+
         return $this->render('WelcomangoFrontExperienceBundle:Experience:view.html.twig', array(
-            'experience' => $experience
+            'experience' => $experience,
+            'relatedExperiences' => $relatedExperiences,
+            'formSubmitted' => $formSubmitted,
+            'form' => $form->createView()
         ));
 
     }

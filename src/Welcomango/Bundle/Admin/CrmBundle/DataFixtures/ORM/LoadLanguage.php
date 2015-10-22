@@ -44,6 +44,6 @@ class LoadLanguageData extends AbstractFixture implements FixtureInterface, Orde
     public function getOrder()
     {
         //Define the order in which the fixtures are executed
-        return 2;
+        return 4;
     }
 }

@@ -52,6 +52,10 @@ class Builder extends ContainerAware
         $menu->addChild('menu.title.experiences', array(
             'route'          => 'front_experience_list',
         ));
+
+        $menu->addChild('menu.title.login', array(
+            'route'          => 'fos_user_security_login',
+        ));
 /*
         $menu->addChild('menu.title.people', array(
             'route'          => 'front_people_list',

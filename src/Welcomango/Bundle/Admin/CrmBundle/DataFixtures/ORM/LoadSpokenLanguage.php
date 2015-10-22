@@ -42,6 +42,6 @@ class LoadSpokenLanguageData extends AbstractFixture  implements FixtureInterfac
     public function getOrder()
     {
         //Define the order in which the fixtures are executed
-        return 3;
+        return 5;
     }
 }

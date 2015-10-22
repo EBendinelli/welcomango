@@ -38,6 +38,6 @@ class LoadCountryData extends AbstractFixture implements FixtureInterface, Order
     public function getOrder()
     {
         //Define the order in which the fixtures are executed
-        return 4;
+        return 1;
     }
 }

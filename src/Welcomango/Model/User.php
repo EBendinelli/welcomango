@@ -6,6 +6,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="Welcomango\Model\Repository\UserRepository")
@@ -81,6 +82,42 @@ class User extends BaseUser
      * @ORM\Column(name="birthdate", type="datetime")
      */
     private $birthdate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="City")
+     * @ORM\JoinColumn(name="from_city_id", referencedColumnName="id")
+     */
+    private $fromCity;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="City")
+     * @ORM\JoinColumn(name="current_city_id", referencedColumnName="id")
+     */
+    private $currentCity;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="gender", type="string", length=1)
+     * @Assert\NotBlank()
+     * @Assert\Choice(choices = {"M", "F", "O"})
+     */
+    protected $gender;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="occupation", type="string", length=255)
+     */
+    private $occupation;
+
 
     /**
      * Get id
@@ -261,6 +298,98 @@ class User extends BaseUser
     }
 
     /**
+     * Set description
+     *
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFromCity()
+    {
+        return $this->fromCity;
+    }
+
+    /**
+     * @param mixed $fromCity
+     */
+    public function setFromCity($fromCity)
+    {
+        $this->fromCity = $fromCity;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCurrentCity()
+    {
+        return $this->currentCity;
+    }
+
+    /**
+     * @param mixed $currentCity
+     */
+    public function setCurrentCity($currentCity)
+    {
+        $this->currentCity = $currentCity;
+    }
+
+    /**
+     * Set gender
+     *
+     * @param string $gender
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+    }
+
+    /**
+     * Get gender
+     *
+     * @return string
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
+     * Set occupation
+     *
+     * @param string $occupation
+     */
+    public function setOccupation($occupation)
+    {
+        $this->occupation = $occupation;
+    }
+
+    /**
+     * Get occupation
+     *
+     * @return string
+     */
+    public function getOccupation()
+    {
+        return $this->occupation;
+    }
+
+    /**
      * Get age
      *
      * @return integer
@@ -323,5 +452,15 @@ class User extends BaseUser
         parent::__construct();
         $this->spokenLanguages = new ArrayCollection();
         $this->participations  = new ArrayCollection();
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }

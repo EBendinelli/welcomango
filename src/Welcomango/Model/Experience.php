@@ -131,7 +131,7 @@ class Experience
     private $featured = false;
 
     /**
-     * @ORM\Column(name="average_note", type="float")
+     * @ORM\Column(name="average_note", type="float", nullable=true)
      */
     private $averageNote;
 
@@ -525,5 +525,28 @@ class Experience
     public function setMedias($medias)
     {
         $this->medias = $medias;
+    }
+
+    /**
+     * Add medias
+     *
+     * @param \Welcomango\Model\Media $medias
+     * @return Experience
+     */
+    public function addMedia(\Welcomango\Model\Media $medias)
+    {
+        $this->medias[] = $medias;
+
+        return $this;
+    }
+
+    /**
+     * Remove medias
+     *
+     * @param \Welcomango\Model\Media $medias
+     */
+    public function removeMedia(\Welcomango\Model\Media $medias)
+    {
+        $this->medias->removeElement($medias);
     }
 }

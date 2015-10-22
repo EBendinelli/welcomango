@@ -128,3 +128,10 @@ stof_doctrine_extensions:
             sortable: true
 
 gregwar_image: ~
+
+services:
+ twig.extension.text:
+     class: Twig_Extensions_Extension_Text
+     tags:
+         - { name: twig.extension }
+
