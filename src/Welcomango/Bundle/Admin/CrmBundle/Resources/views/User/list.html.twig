@@ -2,6 +2,8 @@
 
 {% trans_default_domain "crm" %}
 
+{% form_theme form with ["::theme.html.twig"] %}
+
 {% block actions %}
    {{ button.create(path('admin_user_create'), 'user.create'|trans) }}
 {% endblock %}

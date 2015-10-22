@@ -5,6 +5,26 @@
     </div>
 {% endblock text_widget %}
 
+{% block yes_no_widget %}
+    {% spaceless %}
+        <div class="form-group {% if required %}required{% endif %}">
+            <label>{{ form_label(form) }}</label>
+            <div class="radio radio-success">
+                {% set isChecked = false %}
+                {% for key, child in form.children %}
+                    {% if child.vars.checked == true %}
+                        {% set isChecked = true %}
+                    {% endif %}
+                    <input type="radio" value="{{ child.vars.value }}"
+                           {% if child.vars.checked == true or (child.vars.value == 2 and isChecked == false) %}checked="checked" {% endif %} name="{{ form.vars.full_name }}"
+                           id="{{ form.vars.id }}_{{ key }}">
+                    <label for="{{ form.vars.id }}_{{ key }}">{{ child.vars.label }}</label>
+                {% endfor %}
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock %}
+
 {% block mark_widget %}
     <div class="form-group form-group-default {% if required %}required{% endif %}">
         <label>{{ form_label(form) }}</label>
