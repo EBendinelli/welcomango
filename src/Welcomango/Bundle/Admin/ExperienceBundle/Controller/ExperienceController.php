@@ -32,8 +32,12 @@ class ExperienceController extends Controller
      */
     public function listAction(Request $request)
     {
+        $filters   = $this->getFilters(array(), 'experienceSearch');
         $paginator = $this->get('knp_paginator');
-        $query     = $this->getRepository('Welcomango\Model\Experience')->findAll();
+        $query     = $this->getRepository('Welcomango\Model\Experience')->createPagerQueryBuilder($filters);
+
+        $form = $this->createForm($this->get('welcomango.form.experience.filter'), $filters);
+
         $pagination = $paginator->paginate(
             $query,
             $request->query->get('page', 1),
@@ -42,6 +46,7 @@ class ExperienceController extends Controller
 
         return array(
             'pagination' => $pagination,
+            'form'       => $form->createView()
         );
     }
 
@@ -114,6 +119,36 @@ class ExperienceController extends Controller
 
         $this->getDoctrine()->getManager()->remove($experience);
         $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirect($this->generateUrl('admin_experience_list'));
+    }
+
+    /**
+     * Process and render form filters
+     *
+     * @param Request $request
+     *
+     * @Route("/experiences/filters/research", name="admin_experiences_filters")
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function filterFormAction(Request $request)
+    {
+        if ($request->request->has('_reset')) {
+            $this->removeFilters('experienceSearch');
+
+            return $this->redirect($this->generateUrl('admin_experience_list'));
+        }
+
+        $form = $this->createForm($this->get('welcomango.form.experience.filter'), null);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $datas = $form->getData();
+
+            $this->setFilters($datas, 'experienceSearch');
+
+        }
 
         return $this->redirect($this->generateUrl('admin_experience_list'));
     }

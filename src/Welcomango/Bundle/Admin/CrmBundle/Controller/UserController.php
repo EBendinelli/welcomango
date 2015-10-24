@@ -156,7 +156,7 @@ class UserController extends Controller
      *
      * @param Request $request
      *
-     * @Route("/users/filters/research", name="users_filters")
+     * @Route("/users/filters/research", name="admin_users_filters")
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

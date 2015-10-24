@@ -10,7 +10,7 @@
 
 {% set pager_url = path('admin_user_list') %}
 {% set number_per_page = false %}
-{% set filter_url = path('users_filters') %}
+{% set filter_url = path('admin_users_filters') %}
 
 {% block filters %}
    {% include "WelcomangoAdminCrmBundle:User:filter.html.twig" %}

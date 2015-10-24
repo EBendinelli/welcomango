@@ -17,15 +17,21 @@
                     <div class="col-md-6">{{ form_row(form.password.first) }}</div>
                     <div class="col-md-6">{{ form_row(form.password.second) }}</div>
                 </div>
+                {{ form_row(form.medias) }}
                 {{ form_row(form.roles, { 'label_helper' :  'admin.faq.email_sender.helper'|trans } ) }}
                 <div class="row">
                     <div class="col-md-6">{{ form_row(form.phone) }}</div>
-                    <div class="col-md-6">{{ form_row(form.birthdate) }}</div>
+                    <div class="col-md-4">{{ form_row(form.birthdate) }}</div>
+                    <div class="col-md-2">{{ form_row(form.gender) }}</div>
+
                 </div>
                 <div class="row">
                     <div class="col-md-12">{{ form_row(form.description) }}</div>
                 </div>
-
+                <div class="row">
+                    <div class="col-md-6">{{ form_row(form.from_city) }}</div>
+                    <div class="col-md-6">{{ form_row(form.current_city) }}</div>
+                </div>
             </div>
         </div>
     </div>

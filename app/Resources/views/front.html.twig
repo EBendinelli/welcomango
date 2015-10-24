@@ -72,7 +72,7 @@
                 <!-- BEGIN MENU ITEMS -->
                 <div class="header-inner">
                     {% block sidebar %}
-                        {{ knp_menu_render('menu_front', { ancestorClass: 'open', lastClass: 'end', ancestorClass: 'open', currentClass: 'active', callingView:'front'}) }}
+                        {{ knp_menu_render('menu_front', { ancestorClass: 'open', lastClass: 'end', ancestorClass: 'open', currentClass: 'active', callingView:'front', allow_safe_labels: 'true'}) }}
                     {% endblock %}
                     <a href="#" class="search-toggle hidden-xs hidden-sm" data-toggle="search"><i class="fs-14 pg-search"></i></a>
                 </div>

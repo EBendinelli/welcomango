@@ -18,6 +18,9 @@
         <argument type="service" id="security.context" />
         <argument type="service" id="doctrine.orm.entity_manager" />
     </service>
+
+    <service id="welcomango.form.experience.filter" class="Welcomango\Bundle\Admin\ExperienceBundle\Form\Type\ExperienceFilterType">
+    </service>
 </services>
 
 </container>

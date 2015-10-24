@@ -24,7 +24,11 @@
             <!-- START USER CARD -->
             <div class="panel col-md-3">
                 <div id="user-picture-container">
-                    <div class="user-picture user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(5) ~ ".jpg") }})"></div>
+                    {% if user.getMedias.first %}
+                        <div class="user-picture user-img-1" style="background-image:url({{ asset(user.getMedias.first.getWebPath) }})"></div>
+                    {% else %}
+                        <div class="user-picture user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(5) ~ ".jpg") }})"></div>
+                    {% endif %}
                 </div>
                 <div id="user-info" class="bg-master-lighter m-t-10 p-l-10 p-t-10 p-b-10 p-r-10">
                     <div id="user-info-details" class="m-b-10">

@@ -19,6 +19,11 @@
 
         <service id="welcomango.form.user.filter" class="Welcomango\Bundle\Admin\CrmBundle\Form\Type\UserFilterType">
         </service>
+
+        <service id="welcomango.doctrine.user_listener" class="Welcomango\Bundle\Admin\CrmBundle\Doctrine\UserListener">
+            <argument type="service" id="security.encoder_factory" />
+            <tag name="doctrine.event_listener" event="prePersist"/>
+        </service>
     </services>
 
 </container>

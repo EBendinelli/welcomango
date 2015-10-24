@@ -130,6 +130,14 @@ class User extends BaseUser
      */
     private $occupation;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Media", inversedBy="users")
+     * @ORM\JoinTable(name="wm_users_medias")
+     **/
+    private $medias;
+
 
     /**
      * Get id
@@ -464,6 +472,7 @@ class User extends BaseUser
         parent::__construct();
         $this->spokenLanguages = new ArrayCollection();
         $this->participations  = new ArrayCollection();
+        $this->medias         = new ArrayCollection();
     }
 
     /**
@@ -474,5 +483,44 @@ class User extends BaseUser
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getMedias()
+    {
+        return $this->medias;
+    }
+
+    /**
+     * @param ArrayCollection $medias
+     */
+    public function setMedias($medias)
+    {
+        $this->medias = $medias;
+    }
+
+    /**
+     * Add medias
+     *
+     * @param \Welcomango\Model\Media $medias
+     * @return User
+     */
+    public function addMedia(\Welcomango\Model\Media $medias)
+    {
+        $this->medias[] = $medias;
+
+        return $this;
+    }
+
+    /**
+     * Remove medias
+     *
+     * @param \Welcomango\Model\Media $medias
+     */
+    public function removeMedia(\Welcomango\Model\Media $medias)
+    {
+        $this->medias->removeElement($medias);
     }
 }

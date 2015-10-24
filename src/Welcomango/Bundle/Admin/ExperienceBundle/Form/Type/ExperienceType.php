@@ -94,7 +94,6 @@ class ExperienceType extends AbstractType
         ]);
 
         $builder->add('medias', 'entity', array(
-            'data' => '',
             'class' => 'Welcomango\Model\Media',
             'property' => 'title',
             'multiple' => true,
@@ -103,8 +102,6 @@ class ExperienceType extends AbstractType
                 return $er->createQueryBuilder('m');
             },
         ));
-
-        $builder->add('save', 'submit');
     }
 
     /**

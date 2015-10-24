@@ -2,16 +2,18 @@
 
 {% trans_default_domain "crm" %}
 
+{% form_theme form with ["::theme.html.twig"] %}
+
 {% block actions %}
     {{ button.create(path('admin_experience_create'), 'experience.create'|trans) }}
 {% endblock %}
 
 {% set pager_url = path('admin_experience_list') %}
 {% set number_per_page = false %}
-{#{% set filter_url = path('experience_filters') %}#}
+{% set filter_url = path('admin_experiences_filters') %}
 
 {% block filters %}
-    {# {% include "YproxAdminCrmBundle:Experience:filter.html.twig" %}#}
+    {% include "WelcomangoAdminExperienceBundle:Experience:filter.html.twig" %}
 {% endblock %}
 
 {% block no_results %}

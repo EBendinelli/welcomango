@@ -12,10 +12,6 @@ use Doctrine\ORM\EntityRepository;
 class ExperienceRepository extends EntityRepository
 {
 
-    public function test(){
-        return 'ok';
-    }
-
     public function getFeatured($limit){
         return $this
             ->createQueryBuilder('a')
@@ -77,5 +73,53 @@ class ExperienceRepository extends EntityRepository
             ->getQuery()
             ->getResult()
             ;
+    }
+
+    /**
+     * Create paginated and filtered query builder
+     *
+     * @param array $filters
+     *
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function createPagerQueryBuilder(array $filters = array())
+    {
+        $queryBuilder = $this->createQueryBuilder('e');
+
+        if ($cities = $this->getFilter('city', $filters)) {
+            foreach ($cities as $city) {
+                $ORs[] = "u.city LIKE '%".$city."%'";
+            }
+            $queryBuilder->andWhere($queryBuilder->expr()->orX()->addMultiple($ORs));
+        }
+
+        if ($title = $this->getFilter('title', $filters)) {
+            $queryBuilder->andWhere('e.title LIKE :title');
+            $queryBuilder->setParameter('title', '%'.$title.'%');
+        }
+
+        if ($description = $this->getFilter('description', $filters)) {
+            $queryBuilder->andWhere('e.description = :description');
+            $queryBuilder->setParameter('description', $description);
+        }
+
+        return $queryBuilder;
+    }
+
+    /**
+     * Get filter from filters array
+     *
+     * @param string $key
+     * @param array  $filters
+     *
+     * @return mixed
+     */
+    protected function getFilter($key, array $filters)
+    {
+        if (array_key_exists($key, $filters) && (null != $filters[$key] || is_bool($filters[$key]))) {
+            return $filters[$key];
+        }
+
+        return null;
     }
 }

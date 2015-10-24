@@ -549,6 +549,12 @@ a h4:hover{
 /* ////////////////   HACKS  ////////////////////////////// */
 /* //////////////////////////////////////////////////////// */
 
+/* FRONT MENU USER PICTURE CSS */
+.front-menu-user-picture{
+    width: 35px;
+    opacity: 1;
+}
+
 
 /* //// PAGES OVERRIDE FOR CARDS //// */
 .panel-title{

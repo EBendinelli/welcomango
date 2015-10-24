@@ -7,6 +7,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Core\SecurityContext;
+
 
 class Builder extends ContainerAware
 {
@@ -26,16 +29,20 @@ class Builder extends ContainerAware
      */
     private $requestStack;
 
+    protected $authorizationChecker;
+
     /**
      * @param FactoryInterface              $factory              factory
      * @param SecurityContextInterface      $securityContext      security context
      * @param RequestStack                  $requestStack         requestStack
+     * @param SecurityContextInterface      $securityContext      security context
      */
-    public function __construct(FactoryInterface $factory, TokenStorageInterface $tokenStorage, RequestStack $requestStack)
+    public function __construct(FactoryInterface $factory, TokenStorageInterface $tokenStorage, RequestStack $requestStack, SecurityContext $securityContext)
     {
         $this->factory              = $factory;
         $this->tokenStorage         = $tokenStorage;
         $this->requestStack         = $requestStack;
+        $this->securityContext      = $securityContext;
     }
 
     public function createMainMenu()
@@ -53,9 +60,37 @@ class Builder extends ContainerAware
             'route'          => 'front_experience_list',
         ));
 
-        $menu->addChild('menu.title.login', array(
-            'route'          => 'fos_user_security_login',
-        ));
+
+        if ($this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            $user= $this->securityContext->getToken()->getUser();
+
+            $menu->addChild('logout', array(
+                'route'          => 'fos_user_security_logout',
+            ));
+
+            $menu->addChild($user->getUsername(), array(
+                'route'          => 'fos_user_profile_show',
+            ));
+
+            if($user->getMedias()->first()){
+                $image = "<img src='/".$user->getMedias()->first()->getWebPath()."' class='front-menu-user-picture' />";
+            }else{
+                $image = "<img src='/img/front/profile.png' class='front-menu-user-picture' />";
+            }
+            $menu->addChild( $image ,
+                array(
+                    'route' => 'fos_user_profile_show',
+                    'extras' => array(
+                        'safe_label' => true
+                    )
+                )
+            );
+        }else{
+            $menu->addChild('menu.title.login', array(
+                'route'          => 'fos_user_security_login',
+            ));
+        }
+
 /*
         $menu->addChild('menu.title.people', array(
             'route'          => 'front_people_list',

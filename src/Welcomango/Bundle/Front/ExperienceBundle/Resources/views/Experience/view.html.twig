@@ -123,7 +123,7 @@
                                                     </div>
                                                 </div>
                                             {% endfor %}
-                                            {% if experience.getMedias.getValues[3] %}
+                                            {% if experience.getMedias.getValues[3] is defined %}
                                                 <div class="col-md-12 text-right">
                                                     <button id="experience-pictures-btn" class="text-center btn btn-sm" onclick="togglePictures();">More</button>
                                                 </div>
@@ -143,7 +143,6 @@
                 </div>
             </div>
 
-
             <div class="col-md-4" id="experience-user-container" >
                 <div class="bg-master-lighter row" id="experience-user">
                     <!-- MAIN USER DISPLAY -->
@@ -152,7 +151,11 @@
                             <div class="user-item user-img-1">
                                 <div class="user-info-wrap">
                                     <div class="user-info">
-                                        <div class="user-info-front user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(5) ~ ".jpg") }})"></div>
+                                        {% if experience.getAuthor.getMedias.first %}
+                                            <div class="user-info-front user-img-1" style="background-image:url({{ asset(experience.getAuthor.getMedias.first.getWebPath) }})"></div>
+                                        {% else %}
+                                            <div class="user-info-front user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(5) ~ ".jpg") }})"></div>
+                                        {% endif %}
                                         <div class="user-info-back bg-master-dark">
                                             <div class="m-t-60 text-center">
                                                 <span>View Profile</span>
@@ -172,7 +175,11 @@
                             <div class="col-md-1"></div>
                             <div class="col-md-3">
                                 <a href="{{ path('front_experience_list') }}">
-                                    <div class="user-info-front-small user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(5) ~ ".jpg") }})"></div>
+                                    {% if experience.getAuthor.getMedias.first %}
+                                        <div class="user-info-front-small user-img-1" style="background-image:url({{ asset(experience.getAuthor.getMedias.first.getWebPath) }})"></div>
+                                    {% else %}
+                                        <div class="user-info-front-small user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(5) ~ ".jpg") }})"></div>
+                                    {% endif %}
                                 </a>
                             </div>
                             <div class="col-md-7 text-left">

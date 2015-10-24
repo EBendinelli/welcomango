@@ -16,7 +16,11 @@
             <div class="user-item user-img-1">
                 <div class="user-info-wrap">
                     <div class="user-info">
-                        <div class="user-info-front user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(5) ~ ".jpg") }})"></div>
+                        {% if experience.getAuthor.getMedias.first %}
+                            <div class="user-info-front user-img-1" style="background-image:url({{ asset(experience.getAuthor.getMedias.first.getWebPath) }})"></div>
+                        {% else %}
+                            <div class="user-info-front user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(5) ~ ".jpg") }})"></div>
+                        {% endif %}
                         <div class="user-info-back bg-primary-dark">
                             <div class="m-t-45 text-center">
                                 <span>View Profile</span>

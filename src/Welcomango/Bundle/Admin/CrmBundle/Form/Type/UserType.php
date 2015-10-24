@@ -56,6 +56,12 @@ class UserType extends AbstractType
             User::ROLE_USER        => User::ROLE_USER,
         );
 
+        $genders = array(
+            'M' => 'M',
+            'F' => 'F',
+            'O' => 'O'
+        );
+
         $builder->add('username', 'text', ['label' => 'form.user.username']);
         $builder->add('email', 'text', ['label' => 'form.user.email']);
         $builder->add('firstName', 'text', ['label' => 'form.user.firstname']);
@@ -87,11 +93,42 @@ class UserType extends AbstractType
 
         $builder->add('password', 'repeated', array(
             'type'            => 'password',
-            'invalid_message' => 'Les mots de passe doivent correspondre',
+            'invalid_message' => 'The passwords don\'t match',
             'options'         => array('required' => true),
             'first_options'   => array('label' => 'form.user.password'),
             'second_options'  => array('label' => 'form.user.password.validate'),
         ));
+
+        $builder->add('medias', 'entity', array(
+            'class' => 'Welcomango\Model\Media',
+            'property' => 'title',
+            'multiple' => true,
+            'required' => false,
+            'query_builder' => function (EntityRepository $er) {
+                return $er->createQueryBuilder('m');
+            },
+
+        ));
+
+        $builder->add('from_city', 'entity', array(
+            'class' => 'Model:City',
+            'property' => 'name',
+        ));
+
+        $builder->add('current_city', 'entity', array(
+            'class' => 'Model:City',
+            'property' => 'name',
+        ));
+
+        $builder->add('gender','choice', array(
+            'choices' => $genders,
+            'multiple' => false,
+            'label' => 'form.user.gender'
+        ));
+
+
+
+        $builder->add('save', 'submit');
     }
 
     /**
