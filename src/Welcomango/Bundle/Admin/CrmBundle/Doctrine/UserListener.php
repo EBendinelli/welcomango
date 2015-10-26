@@ -18,6 +18,7 @@ class UserListener
 
     public function prePersist(LifecycleEventArgs $args)
     {
+        /* TODO this is not working at all, nothing passes by this function despite the service being declared */
         $entity = $args->getEntity();
         if ($entity instanceof User) {
             $this->handleEvent($entity);

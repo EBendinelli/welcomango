@@ -52,9 +52,9 @@ class Builder extends ContainerAware
         $menu->setChildrenAttributes(array('class' => 'menu'));
         $menu->setExtra('toggler', true);
 
-            $menu->addChild('menu.title.home', array(
+        /*$menu->addChild('menu.title.home', array(
             'route'          => 'front_homepage',
-        ));
+        ));*/
 
         $menu->addChild('menu.title.experiences', array(
             'route'          => 'front_experience_list',

@@ -512,6 +512,37 @@ a h4:hover{
 }
 
 /* //////////////////////////////////////////////////////// */
+/* ////////////////   PROFILE  //////////////////////////// */
+/* //////////////////////////////////////////////////////// */
+
+#profile-header{
+    border-bottom:solid 1px #e6e6e6;
+    border-left:solid 1px #e6e6e6;
+    border-right:solid 1px #e6e6e6;
+    padding: 0px;
+}
+
+#profile-header a:last-child{
+    border-right:none;
+}
+
+.profile-header-item:hover{
+    background-color:white;
+    color: #F13F0F;
+}
+
+.profile-header-item{
+    border-right:solid 1px #e6e6e6;
+    padding-top:10px;
+    padding-bottom:10px;
+    color: #626262;
+    -webkit-transition: background-color 0.2s !important; /* Safari */
+    transition: background-color 0.2s !important;
+}
+
+
+
+/* //////////////////////////////////////////////////////// */
 /* ////////////////   FLAGS /////////////////////////////// */
 /* //////////////////////////////////////////////////////// */
 

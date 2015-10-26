@@ -2,12 +2,12 @@
 
 {% block page_content %}
 
-    <section class="p-b-20 bg-primary-dark m-t-100 sm-no-margin ">
+    <section class="p-b-20 bg-primary-light m-t-100 sm-no-margin ">
         <div class="container p-t-50">
             <div class="row">
                 <div class="col-md-3"><br/></div>
                 <div class="col-md-9">
-                    <h2 class="text-white">{{ app.user.firstname }} {{ app.user.lastname|upper }}</h2>
+                    <h2 class="text-white">{{ 'profile.welcomeBack'|trans }} {{ app.user.firstname }} {{ app.user.lastname|upper }}</h2>
                     <h4 class="text-white">{{ app.user.currentCity.name}}, {{ app.user.currentCity.country.name}}</h4>
                     <h4 class="text-white">{{ app.user.getAge}}</h4>
                 </div>
@@ -47,15 +47,28 @@
 
             <!-- START USER CONTENT -->
             <div class="col-md-9">
+
+                    <div id="profile-header" class="col-md-12 bg-master-lightest m-b-20 text-center" >
+                        <a href="" class="col-md-4 profile-header-item">
+                            <i class="fa fa-envelope fa-lg m-r-5"></i>{{ 'profile.message'|trans }}
+                        </a>
+                        <a href="" class="col-md-4 profile-header-item">
+                            <i class="fa fa-plus fa-lg m-r-5"></i>{{ 'profile.addExperience'|trans }}
+                        </a>
+                        <a href="" class="col-md-4 profile-header-item">
+                            <i class="fa fa-pencil fa-lg m-r-5"></i>{{ 'profile.editProfile'|trans }}
+                        </a>
+                    </div>
+
                 <div id="user-content" class="m-t-30">
                     <div id="user-proposed-experience" class="m-b-20">
-                        <h2 class="m-b-30">Adventure</h2>
-{#                        {% if proposedExperiences|first is not null %}
-                            {{ include("WelcomangoFrontExperienceBundle:Experience:_featuredExperience.html.twig", { 'experience': proposedExperiences|first}) }}
-                        {% endif %}#}
+                        <h2 class="m-b-30">{{ 'profile.yourExperience'|trans }}</h2>
+                        {% if userExperiences|first is not null %}
+                            {{ include("WelcomangoFrontExperienceBundle:Experience:_featuredExperience.html.twig", { 'experience': userExperiences|first, 'profile': true}) }}
+                        {% endif %}
                     </div>
                     <div id="user-description">
-                        <h2>About {{ user.firstname}}</h2>
+                        <h2>{{ 'profile.aboutYou'|trans }}</h2>
                         <hr style="margin-top:25px"/>
                         <p>{{ app.user.description|nl2br|raw }}</p>
                     </div>
