@@ -1,0 +1,170 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block meta_title %}{{ "profile.editProfile"|trans({}, "interface") }}{% endblock %}
+
+{% block profile_content %}
+    {{ form_errors(form) }}
+
+    <h2>{{ 'profile.editYourInformations'|trans }}</h2>
+    <div id="profile-edit-information" class="m-t-20">
+        <div class="row">
+            <div class="col-md-12 bg-master-lighter">
+                {{ form_start(form, {'action': path('fos_user_profile_edit')}) }}
+                <h4>{{ 'profile.edit.aboutYou'|trans }}</h4>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12">{{ form_row(form.username) }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">{{ form_row(form.firstName) }}</div>
+                    <div class="col-md-6">{{ form_row(form.lastName) }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">{{ form_row(form.phone) }}</div>
+                    <div class="col-md-4">{{ form_row(form.birthdate) }}</div>
+                    <div class="col-md-2">{{ form_row(form.gender) }}</div>
+
+                </div>
+                <h4>{{ 'profile.edit.currentSituation'|trans }}</h4>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6">{{ form_row(form.from_city) }}</div>
+                    <div class="col-md-6">{{ form_row(form.current_city) }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">{{ form_row(form.description) }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">{{ form_row(form.occupation) }}</div>
+                </div>
+                <div class="row text-right m-b-20">
+                    <a href="{{ path('fos_user_profile_show') }}" class="btn btn-default">{{ 'interface.cancel'|trans({}, "interface") }}</a>
+                    <button type="submit" class="btn btn-complete">
+                     <i class="fa fa-save"></i>{{ 'interface.save'|trans({}, "interface") }}
+                    </button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+    {#<div id="myFormWizard">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs nav-tabs-linetriangle nav-tabs-separator">
+            <li class="active">
+                <a data-toggle="tab" href="#tab1"><i class="fa fa-shopping-cart tab-icon"></i> <span>Your cart</span></a>
+            </li>
+            <li class="">
+                <a data-toggle="tab" href="#tab2"><i class="fa fa-truck tab-icon"></i> <span>Shipping information</span></a>
+            </li>
+            <li class="">
+                <a data-toggle="tab" href="#tab3"><i class="fa fa-credit-card tab-icon"></i> <span>Payment details</span></a>
+            </li>
+            <li class="">
+                <a data-toggle="tab" href="#tab4"><i class="fa fa-check tab-icon"></i> <span>Summary</span></a>
+            </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active slide" id="tab1">
+                ...
+            </div>
+            <div class="tab-pane slide" id="tab2">
+                ...
+            </div>
+            <div class="tab-pane slide" id="tab3">
+                ...
+            </div>
+            <div class="tab-pane slide" id="tab4">
+                ...
+            </div>
+
+            <ul class="pager wizard">
+                <li class="next">
+                    <button class="btn btn-primary btn-cons btn-animated from-left fa fa-truck pull-right" type="button">
+                        <span>Next</span>
+                    </button>
+                </li>
+                <li class="next finish" style="display:none;">
+                    <button class="btn btn-primary btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
+                        <span>Finish</span>
+                    </button>
+                </li>
+                <li class="previous first" style="display:none;">
+                    <button class="btn btn-white btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
+                        <span>First</span>
+                    </button>
+                </li>
+                <li class="previous">
+                    <button class="btn btn-white btn-cons pull-right" type="button">
+                        <span>Previous</span>
+                    </button>
+                </li>
+            </ul>
+
+            <div class="wizard-footer padding-20 bg-master-light">
+                Copyright &copy; 2014 - Revox
+            </div>
+        </div>
+    </div>#}
+{% endblock profile_content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ form_javascript(form) }}
+    {#<script>
+        $(document).ready(function() {
+            $('#myFormWizard').bootstrapWizard({
+                onTabShow: function(tab, navigation, index) {
+                    var $total = navigation.find('li').length;
+                    var $current = index + 1;
+
+                    // If it's the last tab then hide the last button and show the finish instead
+                    if ($current >= $total) {
+                        $('#myFormWizard').find('.pager .next').hide();
+                        $('#myFormWizard').find('.pager .finish').show();
+                        $('#myFormWizard').find('.pager .finish').removeClass('disabled');
+                    } else {
+                        $('#myFormWizard').find('.pager .next').show();
+                        $('#myFormWizard').find('.pager .finish').hide();
+                    }
+
+                    var li = navigation.find('li.active');
+
+                    var btnNext = $('#myFormWizard').find('.pager .next').find('button');
+                    var btnPrev = $('#myFormWizard').find('.pager .previous').find('button');
+
+                    // remove fontAwesome icon classes
+                    function removeIcons(btn) {
+                        btn.removeClass(function(index, css) {
+                            return (css.match(/(^|\s)fa-\S+/g) || []).join(' ');
+                        });
+                    }
+
+                    if ($current > 1 && $current < $total) {
+
+                        var nextIcon = li.next().find('.fa');
+                        var nextIconClass = nextIcon.attr('class').match(/fa-[\w-]*/).join();
+
+                        removeIcons(btnNext);
+                        btnNext.addClass(nextIconClass + ' btn-animated from-left fa');
+
+                        var prevIcon = li.prev().find('.fa');
+                        var prevIconClass = prevIcon.attr('class').match(/fa-[\w-]*/).join();
+
+                        removeIcons(btnPrev);
+                        btnPrev.addClass(prevIconClass + ' btn-animated from-left fa');
+                    } else if ($current == 1) {
+                        // remove classes needed for button animations from previous button
+                        btnPrev.removeClass('btn-animated from-left fa');
+                        removeIcons(btnPrev);
+                    } else {
+                        // remove classes needed for button animations from next button
+                        btnNext.removeClass('btn-animated from-left fa');
+                        removeIcons(btnNext);
+                    }
+                }
+            });
+        });
+    </script>#}
+{% endblock %}

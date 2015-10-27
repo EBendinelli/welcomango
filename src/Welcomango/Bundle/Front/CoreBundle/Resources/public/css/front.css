@@ -244,8 +244,8 @@ div.dotted-line span {
 }
 
 #experience-user{
-    height: 400px;
-
+    min-height: 300px;
+    /*height: 400px;*/
 }
 
 .experience-content{
@@ -528,7 +528,7 @@ a h4:hover{
 
 .profile-header-item:hover{
     background-color:white;
-    color: #F13F0F;
+    color: #48b0f7;
 }
 
 .profile-header-item{

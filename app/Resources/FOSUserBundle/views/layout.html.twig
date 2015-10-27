@@ -1,13 +1,16 @@
 {% extends '::front.html.twig' %}
 
+{% block meta_title %}
+{% endblock %}
+
 {% block page_content %}
 
-    <section class="p-b-20 bg-primary-light m-t-100 sm-no-margin ">
+    <section class="p-b-20 bg-primary m-t-100 sm-no-margin ">
         <div class="container p-t-50">
             <div class="row">
                 <div class="col-md-3"><br/></div>
                 <div class="col-md-9">
-                    <h2 class="text-white">{{ 'profile.welcomeBack'|trans }} {{ app.user.firstname }} {{ app.user.lastname|upper }}</h2>
+                    <h2 class="text-white">{{ 'profile.welcomeBack'|trans }} {{ app.user.firstname }} {{ app.user.lastname|upper }}!</h2>
                     <h4 class="text-white">{{ app.user.currentCity.name}}, {{ app.user.currentCity.country.name}}</h4>
                     <h4 class="text-white">{{ app.user.getAge}}</h4>
                 </div>
@@ -26,56 +29,24 @@
                         <div class="user-picture user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(5) ~ ".jpg") }})"></div>
                     {% endif %}
                 </div>
-                <div id="user-info" class="bg-master-lighter m-t-10 p-l-10 p-t-10 p-b-10 p-r-10">
-                    <div id="user-info-details" class="m-b-10">
-                        <div><span class="bold">Occupation:</span> {{ app.user.occupation }}</div>
-                        <div><span class="bold">From:</span> {{ app.user.fromCity.name }}</div>
-                        <div><span class="bold">Currently living in:</span> {{ app.user.currentCity.name}}</div>
-                        <div><span class="bold">Gender:</span> {{ app.user.gender}}</div>
-                    </div>
-                    <hr/>
-                    <div class=" m-b-15 ">
-                        <div class="bold m-b-10">{{ 'user.languagespoken'|trans }}</div>
-                        {% for language in app.user.getSpokenLanguages.getValues %}
-                            <div class="flag flag-xs" role="image"  style="background: url({{ asset('img/countries/'~ language.language.flagLabel|lower ~'.svg') }});"></div>
-                        {% endfor %}
 
-                    </div>
-                </div>
+                {% block sub_profile_picture %}
+                {% endblock sub_profile_picture %}
+
             </div>
             <!-- END USER CARD -->
 
             <!-- START USER CONTENT -->
             <div class="col-md-9">
-
-                    <div id="profile-header" class="col-md-12 bg-master-lightest m-b-20 text-center" >
-                        <a href="" class="col-md-4 profile-header-item">
-                            <i class="fa fa-envelope fa-lg m-r-5"></i>{{ 'profile.message'|trans }}
-                        </a>
-                        <a href="" class="col-md-4 profile-header-item">
-                            <i class="fa fa-plus fa-lg m-r-5"></i>{{ 'profile.addExperience'|trans }}
-                        </a>
-                        <a href="" class="col-md-4 profile-header-item">
-                            <i class="fa fa-pencil fa-lg m-r-5"></i>{{ 'profile.editProfile'|trans }}
-                        </a>
-                    </div>
-
-                <div id="user-content" class="m-t-30">
-                    <div id="user-proposed-experience" class="m-b-20">
-                        <h2 class="m-b-30">{{ 'profile.yourExperience'|trans }}</h2>
-                        {% if userExperiences|first is not null %}
-                            {{ include("WelcomangoFrontExperienceBundle:Experience:_featuredExperience.html.twig", { 'experience': userExperiences|first, 'profile': true}) }}
-                        {% endif %}
-                    </div>
-                    <div id="user-description">
-                        <h2>{{ 'profile.aboutYou'|trans }}</h2>
-                        <hr style="margin-top:25px"/>
-                        <p>{{ app.user.description|nl2br|raw }}</p>
-                    </div>
-                </div>
+                {% block profile_content %}
+                {% endblock profile_content %}
             </div>
             <!-- END USER CONTENT -->
         </div>
     </section>
 
 {% endblock page_content %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

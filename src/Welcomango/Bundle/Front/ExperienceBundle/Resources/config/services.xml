@@ -14,5 +14,10 @@
         <service id="welcomango.front.participation.manager" class="Welcomango\Bundle\Front\ExperienceBundle\Manager\ParticipationManager">
         </service>
 
+        <service id="welcomango.front.form.user.type" class="Welcomango\Bundle\Front\CrmBundle\Form\Type\UserType">
+            <argument type="service" id="security.context" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
     </services>
 </container>
