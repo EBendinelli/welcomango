@@ -132,9 +132,6 @@
     {% endblock page_content %}
     <!-- END PLACE PAGE CONTENT HERE -->
 
-</div>
-{%  endblock page_container %}
-
     {% block footer %}
         {% include "::frontFooter.html.twig" %}
     {% endblock footer %}
@@ -273,7 +270,8 @@
         <!-- END Overlay Content !-->
     </div>
     <!-- END OVERLAY -->
-
+</div>
+{%  endblock page_container %}
 <!-- BEGIN VENDOR JS -->
 {% block javascripts %}
     <script type="text/javascript" src="{{ asset("js/plugins-front.js") }}"></script>
@@ -281,7 +279,6 @@
 <!-- BEGIN PAGES FRONTEND LIB -->
     <script type="text/javascript" src="{{ asset("js/pages-front.js") }}"></script>
     <script src="{{ asset('js/plugins.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/pages.js') }}" type="text/javascript"></script>
     <!-- END PAGES LIB -->
 {% endblock %}
 {% endblock inner_body %}
