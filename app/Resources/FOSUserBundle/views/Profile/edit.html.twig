@@ -1,11 +1,13 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
+{#{% form_theme form with ["::frontTheme.html.twig"] %}#}
+
 {% block meta_title %}{{ "profile.editProfile"|trans({}, "interface") }}{% endblock %}
 
 {% block profile_content %}
     {{ form_errors(form) }}
 
-    <h2>{{ 'profile.editYourInformations'|trans }}</h2>
+    {#<h2>{{ 'profile.editYourInformations'|trans }}</h2>
     <div id="profile-edit-information" class="m-t-20">
         <div class="row">
             <div class="col-md-12 bg-master-lighter">
@@ -46,73 +48,76 @@
                 {{ form_end(form) }}
             </div>
         </div>
+    </div>#}
+
+    <div class="alert alert-info m-t-20">
+        <button class="close" data-dismiss="alert"></button>
+        This section defines what the other traveler will see from you. <br/>
+        Make sure to tell them how you see yourself as a travel as well as a local when you're not on a trip!
     </div>
 
-    {#<div id="myFormWizard">
+    <div id="myFormWizard" class="m-t-20">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs nav-tabs-linetriangle nav-tabs-separator">
             <li class="active">
-                <a data-toggle="tab" href="#tab1"><i class="fa fa-shopping-cart tab-icon"></i> <span>Your cart</span></a>
+                <a data-toggle="tab" href="#tab1"><i class="fa pg-map tab-icon"></i> <span>Current situation</span></a>
             </li>
             <li class="">
-                <a data-toggle="tab" href="#tab2"><i class="fa fa-truck tab-icon"></i> <span>Shipping information</span></a>
+                <a data-toggle="tab" href="#tab2"><i class="fa fa-language tab-icon"></i> <span>Languages</span></a>
             </li>
             <li class="">
-                <a data-toggle="tab" href="#tab3"><i class="fa fa-credit-card tab-icon"></i> <span>Payment details</span></a>
-            </li>
-            <li class="">
-                <a data-toggle="tab" href="#tab4"><i class="fa fa-check tab-icon"></i> <span>Summary</span></a>
+                <a data-toggle="tab" href="#tab3"><i class="fa fa-user tab-icon"></i> <span>About you</span></a>
             </li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
             <div class="tab-pane active slide" id="tab1">
-                ...
+                {{ form_start(form, {'action': path('fos_user_profile_edit')}) }}
+                <div class="row">
+                    <div class="col-md-6">{{ form_row(form.from_city) }}</div>
+                    <div class="col-md-6">{{ form_row(form.current_city) }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">{{ form_row(form.description) }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">{{ form_row(form.occupation) }}</div>
+                </div>
             </div>
             <div class="tab-pane slide" id="tab2">
                 ...
             </div>
             <div class="tab-pane slide" id="tab3">
-                ...
-            </div>
-            <div class="tab-pane slide" id="tab4">
-                ...
+                <div class="row">
+                    <div class="col-md-12">{{ form_row(form.username) }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">{{ form_row(form.firstName) }}</div>
+                    <div class="col-md-6">{{ form_row(form.lastName) }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">{{ form_row(form.phone) }}</div>
+                    <div class="col-md-4">{{ form_row(form.birthdate) }}</div>
+                    <div class="col-md-2">{{ form_row(form.gender) }}</div>
+                </div>
+
             </div>
 
-            <ul class="pager wizard">
-                <li class="next">
-                    <button class="btn btn-primary btn-cons btn-animated from-left fa fa-truck pull-right" type="button">
-                        <span>Next</span>
-                    </button>
-                </li>
-                <li class="next finish" style="display:none;">
-                    <button class="btn btn-primary btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
-                        <span>Finish</span>
-                    </button>
-                </li>
-                <li class="previous first" style="display:none;">
-                    <button class="btn btn-white btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
-                        <span>First</span>
-                    </button>
-                </li>
-                <li class="previous">
-                    <button class="btn btn-white btn-cons pull-right" type="button">
-                        <span>Previous</span>
-                    </button>
-                </li>
-            </ul>
-
-            <div class="wizard-footer padding-20 bg-master-light">
-                Copyright &copy; 2014 - Revox
+            <div class="row text-right m-t-20">
+                <a href="{{ path('fos_user_profile_show') }}" class="btn btn-default">{{ 'interface.cancel'|trans({}, "interface") }}</a>
+                <button type="submit" class="btn btn-complete">
+                    <i class="fa fa-save"></i>{{ 'interface.save'|trans({}, "interface") }}
+                </button>
             </div>
+            {{ form_end(form) }}
         </div>
-    </div>#}
+    </div>
 {% endblock profile_content %}
 
 {% block javascripts %}
     {{ parent() }}
     {{ form_javascript(form) }}
-    {#<script>
+    <script>
         $(document).ready(function() {
             $('#myFormWizard').bootstrapWizard({
                 onTabShow: function(tab, navigation, index) {
@@ -166,5 +171,5 @@
                 }
             });
         });
-    </script>#}
+    </script>
 {% endblock %}

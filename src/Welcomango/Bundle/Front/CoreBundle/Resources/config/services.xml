@@ -10,11 +10,11 @@
             <argument type="service" id="security.token_storage" />
             <argument type="service" id="request_stack" />
             <argument type="service" id="security.context" />
+            <argument type="service" id="router" />
         </service>
 
         <service id="welcomango.front.menu_builder.main" class="Knp\Menu\MenuItem" factory-service="welcomango.front.menu_builder" factory-method="createMainMenu">
             <tag name="knp_menu.menu" alias="menu_front" />
-
         </service>
 
     </services>

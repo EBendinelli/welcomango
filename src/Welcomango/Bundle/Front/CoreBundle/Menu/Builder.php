@@ -29,6 +29,8 @@ class Builder extends ContainerAware
      */
     private $requestStack;
 
+    private $router;
+
     protected $authorizationChecker;
 
     /**
@@ -37,12 +39,13 @@ class Builder extends ContainerAware
      * @param RequestStack                  $requestStack         requestStack
      * @param SecurityContextInterface      $securityContext      security context
      */
-    public function __construct(FactoryInterface $factory, TokenStorageInterface $tokenStorage, RequestStack $requestStack, SecurityContext $securityContext)
+    public function __construct(FactoryInterface $factory, TokenStorageInterface $tokenStorage, RequestStack $requestStack, SecurityContext $securityContext, $router)
     {
         $this->factory              = $factory;
         $this->tokenStorage         = $tokenStorage;
         $this->requestStack         = $requestStack;
         $this->securityContext      = $securityContext;
+        $this->router               = $router;
     }
 
     public function createMainMenu()
@@ -64,7 +67,7 @@ class Builder extends ContainerAware
         if ($this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $user= $this->securityContext->getToken()->getUser();
 
-            $menu->addChild('logout', array(
+            $menu->addChild('log Out', array(
                 'route'          => 'fos_user_security_logout',
             ));
 
@@ -86,10 +89,30 @@ class Builder extends ContainerAware
                 )
             );
         }else{
-            $menu->addChild('menu.title.login', array(
-                'route'          => 'fos_user_security_login',
-            ));
+            $loginLink = $this->router->generate('fos_user_security_login');
+            $loginButton = "<a class='btn btn-sm btn-bordered btn-black block-title fs-12 hidden-sm hidden-xs' href='".$loginLink."' data-text='Login'>Login</a>";
+            $menu->addChild( $loginButton ,
+                array(
+                    'route' => 'fos_user_security_login',
+                    'extras' => array(
+                        'safe_label' => true
+                    )
+                )
+            );
+
+            $registerLink = $this->router->generate('fos_user_registration_register');
+            $registerButton = "<a class='btn btn-primary btn-cons' href='".$registerLink."' data-text='Login'>Sign up</a>";
+            $menu->addChild( $registerButton ,
+                array(
+                    'route' => 'fos_user_security_login',
+                    'extras' => array(
+                        'safe_label' => true
+                    )
+                )
+            );
+
         }
+
 
 /*
         $menu->addChild('menu.title.people', array(
