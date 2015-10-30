@@ -6,11 +6,26 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 use Welcomango\Model\Participation;
 
-class LoadParticipationData extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface
+class LoadParticipationData extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface, ContainerAwareInterface
 {
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -88,6 +103,12 @@ class LoadParticipationData extends AbstractFixture implements FixtureInterface,
             $manager->persist($entry);
         }
         $manager->flush();
+
+        //Update average notes of Experiences based on generated participations
+        $experienceManager = $this->container->get('welcomango.front.experience.manager');
+        foreach($experiences as $experience){
+            $experienceManager->updateAverageNote($experience);
+        }
 
     }
 

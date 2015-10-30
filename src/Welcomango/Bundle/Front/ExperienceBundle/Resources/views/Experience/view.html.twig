@@ -12,12 +12,15 @@
         {% set imageBanner = asset("img/front/places-" ~ random(18) ~ ".jpg") %}
     {% endif %}
     <!-- START BANNER SECTION -->
-    <section class="p-b-70 bg-master-darkest m-t-100 sm-no-margin" data-pages-bg-image="{{ asset(imageBanner) }}" data-bg-overlay="black" data-overlay-opacity="0.3" data-pages="parallax">
+    <section class="p-b-70 bg-master-darkest sm-no-margin" data-pages-bg-image="{{ asset(imageBanner) }}" data-bg-overlay="black" data-overlay-opacity="0.3" data-pages="parallax">
         <div class="container p-t-50">
             <div class="row">
                 <div class="col-lg-1 col-min">
                     <div class="text-center">
-                        <h1 class="text-white col-sm-12 p-b-10">{{ experience.title }}</h1>
+                        <h1 class="text-white col-sm-12 ">{{ experience.title }}</h1>
+                        <div class="m-b-10">
+                            {{ include("WelcomangoFrontExperienceBundle:Experience:_experienceNote.html.twig", { 'note': experience.getAverageNote, 'size': 'medium'}) }}
+                        </div>
                         <p class="fs-12 font-arial text-white ">A {{ experience.estimatedDuration }}h adventure proposed by {{ experience.getAuthor.firstname }}</p>
                         <button id="experience-booking-btn" type="button" class="btn btn-lg btn-primary btn-cons btn-rounded m-t-20" onclick="toggleBooking()">
                             {{ 'experience.sendRequest'|trans }}
@@ -54,7 +57,13 @@
                     <div id="experience-city">
                         <div class="experience-city">
                             <div class="m-l-20 p-b-20">
-                                <h1>{{ experience.getCity.name }}</h1>
+                                <div class="experience-city-picto" style="background-image:url({{ asset('img/welcomango-picto.png') }}">
+                                    {# TODO see if we add the note in this mango. If so, add white BG to the picture #}
+                                    {#<div class="experience-picto-note">
+                                        <h4 class="text-primary bold">{{ experience.getAverageNote }}<i class="fa fa-star fa-sm"></i></h4>
+                                    </div>#}
+                                </div>
+                                <h1 class="experience-city-title">{{ experience.getCity.name }}</h1>
                                 <h4>{{ experience.getCity.getCountry.name }}</h4>
                             </div>
                         </div>
@@ -154,7 +163,7 @@
                                         {% if experience.getAuthor.getMedias.first %}
                                             <div class="user-info-front user-img-1" style="background-image:url({{ asset(experience.getAuthor.getMedias.first.getWebPath) }})"></div>
                                         {% else %}
-                                            <div class="user-info-front user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(5) ~ ".jpg") }})"></div>
+                                            <div class="user-info-front user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }})"></div>
                                         {% endif %}
                                         <div class="user-info-back bg-master-dark">
                                             <div class="m-t-60 text-center">
@@ -178,7 +187,7 @@
                                     {% if experience.getAuthor.getMedias.first %}
                                         <div class="user-info-front-small user-img-1" style="background-image:url({{ asset(experience.getAuthor.getMedias.first.getWebPath) }})"></div>
                                     {% else %}
-                                        <div class="user-info-front-small user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(5) ~ ".jpg") }})"></div>
+                                        <div class="user-info-front-small user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }})"></div>
                                     {% endif %}
                                 </a>
                             </div>
@@ -270,8 +279,8 @@
         });
 
         //Make the menu and user card sticky to top
-        $("#experience-user-container").stick_in_parent({offset_top: 60});
-        $("#experience-side-menu").stick_in_parent({offset_top: 60});
+        $("#experience-user-container").stick_in_parent({offset_top: 80});
+        $("#experience-side-menu").stick_in_parent({offset_top: 80});
 
         /* //Update active menu on scroll
         $(window).on("scroll", function() {
@@ -289,7 +298,7 @@
 
         //make the user card sticky
         $(function(){
-            var stickyUserTop = $('#experience-user').offset().top-60;
+            var stickyUserTop = $('#experience-user').offset().top-80;
 
             $(window).scroll(function(){
                 if( $(window).scrollTop() > stickyUserTop ) {

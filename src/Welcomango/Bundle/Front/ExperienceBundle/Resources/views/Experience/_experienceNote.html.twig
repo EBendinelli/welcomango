@@ -1,0 +1,57 @@
+{% if mango is defined %}
+    <div class="experience-note text-center">
+        {% set noteClass = "card-picto-note-sm" %}
+        {% if size is defined %}
+            {% if size == 'medium' %}
+                {% set noteClass = "card-picto-note-md" %}
+            {% elseif size == 'large' %}
+                {% set noteClass = "card-picto-note-lg" %}
+            {% endif %}
+        {% endif %}
+
+        {% if note/note|round == 1 %}
+            {% for i in 1..note %}
+                <img class="{{ noteClass }}" src="{{ asset('img/welcomango-picto-full.png') }}"/>
+            {% endfor %}
+            {% for i in note..4 %}
+                <img class="{{ noteClass }}" src="{{ asset('img/welcomango-picto.png') }}"/>
+            {% endfor %}
+        {% else %}
+            {% for i in 1..note|round(0,'floor') %}
+                <img class="{{ noteClass }}" src="{{ asset('img/welcomango-picto-full.png') }}"/>
+            {% endfor %}
+            <img class="{{ noteClass }}" src="{{ asset('img/welcomango-picto-half.png') }}"/>
+            {% for i in note|round(0,'ceil')..4 %}
+                <img class="{{ noteClass }}" src="{{ asset('img/welcomango-picto.png') }}"/>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% else %}
+    <div class="experience-note text-center text-warning">
+        {% set noteClass = "fa-sm" %}
+        {% if size is defined %}
+            {% if size == 'medium' %}
+                {% set noteClass = "fa-lg" %}
+            {% elseif size == 'large' %}
+                {% set noteClass = "fa-3x" %}
+            {% endif %}
+        {% endif %}
+
+        {% if note/note|round == 1 %}
+            {% for i in 1..note %}
+                <i class="fa fa-star {{ noteClass }}"></i>
+            {% endfor %}
+            {% for i in note..4 %}
+                <i class="fa fa-star-o {{ noteClass }}"></i>
+            {% endfor %}
+        {% else %}
+            {% for i in 1..note|round(0,'floor') %}
+                <i class="fa fa-star {{ noteClass }}"></i>
+            {% endfor %}
+            <i class="fa fa-star-half-o {{ noteClass }}"></i>
+            {% for i in note|round(0,'ceil')..4 %}
+                <i class="fa fa-star-o {{ noteClass }}"></i>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endif %}

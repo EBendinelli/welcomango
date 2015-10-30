@@ -36,7 +36,7 @@ div.dotted-line span {
 }
 
 /* //////////////////////////////////////////////////////// */
-/* ////////////////////   CARDS UI  /////////////////////// */
+/* ///////////////  EXPERIENCE CARDS UI  ////////////////// */
 /* //////////////////////////////////////////////////////// */
 
 
@@ -151,6 +151,43 @@ div.dotted-line span {
 }
 
 
+.card-city-picto{
+    position: absolute;
+    top: -40px;
+    right: 40px;
+    height:70px;
+    width:50px;
+    background-size:   cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    z-index:0;
+    -webkit-transition: top 0.2s; /* Safari */
+    transition: top 0.2s;
+}
+
+.card-city-picto .card-picto-note{
+    text-align:center;
+}
+
+.card-city-picto:hover{
+    top:-65px;
+}
+
+.card-picto-note-sm{
+    height:20px;
+    width:17px !important;
+}
+
+.card-picto-note-md{
+    height:40px;
+    width:34px !important;
+}
+
+.card-picto-note-lg{
+    height:80px;
+    width:68px !important;
+}
+
 /* //////////////////////////////////////////////////////// */
 /* ////////////////   USER IN CARD UI  //////////////////// */
 /* //////////////////////////////////////////////////////// */
@@ -243,6 +280,24 @@ div.dotted-line span {
     border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
+.experience-city-picto{
+    height:100px;
+    width:70px;
+    margin-top:-100px;
+    background-size:   cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.experience-city-picto .experience-picto-note{
+    text-align:center;
+    padding-top:17px;
+}
+
+.experience-city-title{
+    margin-top:-10px;
+}
+
 #experience-user{
     min-height: 300px;
     /*height: 400px;*/
@@ -253,7 +308,7 @@ div.dotted-line span {
 }
 
 .experience-content{
-    overflow: hidden;
+    /*overflow: hidden;*/
     padding: 15px;
     margin-left: 129px;
 }
@@ -580,9 +635,22 @@ a h4:hover{
 /* ////////////////   HACKS  ////////////////////////////// */
 /* //////////////////////////////////////////////////////// */
 
+/* //// PAGES HEADER  //// */
+.header.bg-header {
+    height: 80px;
+}
+
+.header.bg-header .header-inner {
+    line-height: 80px;
+}
+
 /* FRONT MENU USER PICTURE CSS */
 .front-menu-user-picture{
     width: 35px;
+    border-radius: 50%;
+}
+
+a .front-menu-user-picture{
     opacity: 1;
 }
 
@@ -649,3 +717,7 @@ a h4:hover{
 }
 
 
+/* //// MEH ICON ON NOT ALLOWED PAGE  //// */
+.veryBigIcon{
+    font-size: 20em;
+}

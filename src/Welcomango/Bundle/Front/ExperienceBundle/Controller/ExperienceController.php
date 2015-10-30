@@ -177,10 +177,19 @@ class ExperienceController extends Controller
      */
     public function deleteAction(Experience $experience)
     {
+
+        //User the voter to check if the user can delete this experience
+        //$this->denyAccessUnlessGranted('delete', $experience, 'Unauthorized access!');
+        if(!$this->isGranted('delete', $experience)){
+            return $this->render('WelcomangoFrontCoreBundle:CRUD:notAllowed.html.twig');
+        }
+
+
         $this->getDoctrine()->getManager()->remove($experience);
         $this->getDoctrine()->getManager()->flush();
 
-        return $this->redirect($this->generateUrl('experience_list'));
+        return $this->render('WelcomangoFrontExperienceBundle:Experience:deleteSuccess.html.twig');
+        /*return $this->redirect($this->generateUrl('front_profile_experience_deleted'));*/
     }
 
     /**

@@ -4,6 +4,7 @@
 
 {% block sub_profile_picture %}
 
+    <!-- BEGIN PROFILE HEADER -->
     <div id="user-info" class="bg-master-lighter m-t-10 p-l-10 p-t-10 p-b-10 p-r-10">
         <div id="user-info-details" class="m-b-10">
             <div><span class="bold">Occupation:</span> {{ app.user.occupation }}</div>
@@ -20,10 +21,13 @@
 
         </div>
     </div>
+    <!-- END PROFILE HEADER -->
 
 {% endblock sub_profile_picture %}
 
 {% block profile_content %}
+
+    <!-- BEGIN PROFILE TOP MENU-->
     <div id="profile-header" class="col-md-12 bg-master-lighter m-b-20 text-center" >
         <a href="" class="col-md-4 profile-header-item">
             <i class="fa fa-envelope fa-lg m-r-5"></i>{{ 'profile.message'|trans }}
@@ -35,17 +39,22 @@
             <i class="fa fa-pencil fa-lg m-r-5"></i>{{ 'profile.editProfile'|trans }}
         </a>
     </div>
+    <!-- END PROFILE TOP MENU-->
 
+    <!-- BEGIN PROFILE CONTENT-->
     <div id="user-content" class="m-t-30">
         <div id="user-proposed-experience" class="m-b-20">
             <h2 class="m-b-30">{{ 'profile.yourExperience'|trans }}</h2>
-            {% if userExperiences|first is not null %}
+
+            {% if userExperiences|first %}
                 {{ include("WelcomangoFrontExperienceBundle:Experience:_featuredExperience.html.twig", { 'experience': userExperiences|first, 'darkBg': true, 'profile': true}) }}
+                <div id="profile-experience-action" class="text-right">
+                    <a href="{{ path('front_experience_edit', {'experience_id': userExperiences|first.id}) }}" class="btn btn-complete btn-cons"><i class="fa fa-pencil"></i> {{ 'profile.editExperience'|trans }}</a>
+                    <button class="btn btn-danger btn-cons" data-toggle="modal" data-target="#deleteConfirmation"><i class="fa fa-trash "></i> {{ 'profile.deleteExperience'|trans }}</button>
+                </div>
+            {% else %}
+                <a href="{{ path('front_experience_create') }}" class="btn btn-primary btn-cons" ><i class="fa fa-plus-circle "></i> {{ 'profile.createExperience'|trans }}</a>
             {% endif %}
-            <div id="profile-experience-action" class="text-right">
-                <button class="btn btn-complete btn-cons"><i class="fa fa-pencil "></i> Edit</button>
-                <button class="btn btn-danger btn-cons"><i class="fa fa-trash "></i> Delete</button>
-            </div>
         </div>
         <div id="user-description">
             <h2>{{ 'profile.aboutYou'|trans }}</h2>
@@ -53,4 +62,37 @@
             <p>{{ app.user.description|nl2br|raw }}</p>
         </div>
     </div>
+    <!-- END PROFILE CONTENT-->
+
+
+    <!-- BEGIN DELETE CONFIRMATION MODAL -->
+    {% if userExperiences|first %}
+        <div class="modal fade slide-up disable-scroll" id="deleteConfirmation" tabindex="-1" role="dialog" aria-labelledby="modalSlideUpLabel" aria-hidden="false">
+            <div class="modal-dialog ">
+                <div class="modal-content-wrapper">
+                    <div class="modal-content text-center">
+                        <div class="modal-header clearfix text-center">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                <i class="pg-close fs-14"></i>
+                            </button>
+                            <h5>Are you sure you want to delete your experience?</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                This means that Welcomanger won't be able to visit your town in your company anymore.<br/>
+                                How sad.<br/><br/>
+                                <i class="fa fa-frown-o fa-4x"></i><br/><br/>
+                                <span class="fs-12"><i class="fa fa-exclamation-triangle"></i> Note that you won't be able to undo this action.</span><br/>
+                            </p>
+                            <button type="button" data-dismiss="modal" class="btn btn-info  btn-cons"><i class="fa fa-arrow-left "></i> Cancel</button>
+                            <a href="{{ path('front_experience_delete', {'experience_id': userExperiences|first.id}) }}" class="btn btn-danger btn-cons"><i class="fa fa-trash "></i> Delete</a>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+        </div>
+    {% endif %}
+    <!-- END DELETE CONFIRMATION MODAL -->
 {% endblock profile_content %}
