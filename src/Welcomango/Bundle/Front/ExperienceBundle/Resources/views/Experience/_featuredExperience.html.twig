@@ -1,6 +1,6 @@
 {# Complete with correct informations #}
 <div class="col-md-12 {% if profile is not defined %}m-b-30{% endif %}" style="padding-left:0px; padding-right:0px">
-    <div id="experience_{{ experience.getId }}" class="card featured-card {% if darkBg is defined %}card-bg-master-lightest{% endif %}" >
+    <div id="experience_{{ experience.id }}" class="card featured-card {% if darkBg is defined %}card-bg-master-lightest{% endif %}" >
         <a href="{{ path('front_experience_view', {'experience_id' : experience.getId }) }}" >
             <div class="row">
                 <div class="panel-body p-t-0 featured-card-content col-md-5 p-l-60">

@@ -2,11 +2,11 @@
 
 {% trans_default_domain "experience" %}
 
-{% set listing = path('experience_list') %}
+{% set listing = path('front_experience_list') %}
 {% form_theme form with ["::theme.html.twig"] %}
 
 {% block page_content %}
-    {{ include("WelcomangoExperienceBundle:Experience:form.html.twig", {'path': path('experience_create')}) }}
+    {{ include("WelcomangoExperienceBundle:Experience:form.html.twig", {'path': path('front_experience_create')}) }}
 {% endblock %}
 
 {% block stylesheets %}

@@ -21,15 +21,7 @@ class ExperienceManager
     //Update the average note based on existing participations
     public function updateAverageNote($experience){
         $participationRepo = $this->entityManager->getRepository('Welcomango\Model\Participation');
-
-        $newNote = $participationRepo
-            ->createQueryBuilder('p')
-            ->select("AVG(p.note) as average_note")
-            ->where('p.isParticipant = 1')
-            ->andWhere('p.experience ='.$experience->getId())
-            ->getQuery()
-            ->getSingleResult()
-            ;
+        $newNote = $participationRepo->getAverageNoteForExperience($experience);
 
         $experience->setAverageNote($newNote['average_note']);
         $this->entityManager->persist($experience);
@@ -55,7 +47,7 @@ class ExperienceManager
         die();
         /*$experience->setAverageNote($newNote['average_note']);
         $this->entityManager->persist($experience);
-        $this->entityManager->flush();*/
+        $this->entityManager->flush();
     }*/
 
 }

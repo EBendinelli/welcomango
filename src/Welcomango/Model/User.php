@@ -6,6 +6,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -264,6 +265,15 @@ class User extends BaseUser
         return $this->spokenLanguages;
     }
 
+    public function hasSpokenLanguage($language)
+    {
+        $criteria = Criteria::create()
+            ->where(Criteria::expr()->eq("language", $language));
+
+        $result = $this->spokenLanguages->matching($criteria);
+
+        return ($result->isEmpty()) ? false : true;
+    }
 
     /**
      * @return string

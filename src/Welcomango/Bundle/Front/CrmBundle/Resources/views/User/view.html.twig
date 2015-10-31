@@ -54,7 +54,7 @@
                 <div id="user-content" class="m-t-30">
                     <div id="user-proposed-experience" class="m-b-20">
                         <h2 class="m-b-30">Adventure</h2>
-                        {% if proposedExperiences|first is not null %}
+                        {% if proposedExperiences|first  %}
                             {{ include("WelcomangoFrontExperienceBundle:Experience:_featuredExperience.html.twig", { 'experience': proposedExperiences|first}) }}
                         {% endif %}
                     </div>
