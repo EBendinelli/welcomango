@@ -1,3 +1,0 @@
-welcomango_front_experience_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: WelcomangoFrontExperienceBundle:Default:index }

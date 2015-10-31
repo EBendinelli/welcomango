@@ -1,0 +1,58 @@
+{# Complete with correct informations #}
+ <div class="{% if column == 4 %}col-sm-3{% elseif column == 3  %}col-sm-4{% endif %} m-t-20">
+     {#<div class="card-city-picto" style="background-image:url({{ asset('img/welcomango-picto.png') }}">
+         &#123;&#35; TODO see if we add the note in this mango. If so, add white BG to the picture &#35;&#125;
+         <div class="card-picto-note">
+             <h4 class="text-primary bold">{{ experience.getAverageNote }}<i class="fa fa-star fa-sm"></i></h4>
+         </div>
+     </div>#}
+    <div id="experience_{{ experience.getId }}" class="card {% if darkBg is defined %}card-bg-master-lightest{% endif %}" >
+        <a href="{{ path('front_experience_view', {'experience_id' : experience.getId }) }}" >
+            <div class="card-clickable"></div>
+            <div class="experience-image">
+                {% if experience.getMedias.first %}
+                    <img class="" data-src="{{ asset(experience.getMedias.first.getWebPath) }}" alt="Card image cap">
+                {% else %}
+                    <img class="" data-src="{{ asset("img/front/places-" ~ random(18) ~ ".jpg") }}" alt="Card image cap">
+                {% endif %}
+            </div>
+        </a>
+
+        <div class="user" onclick="location.href='{{ path('front_user_view', {'user_id' : experience.getAuthor.id }) }}'">
+            <div class="user-item user-img-1">
+                <div class="user-info-wrap">
+                    <div class="user-info">
+                        {% if experience.getAuthor.getMedias.first %}
+                            <div class="user-info-front user-img-1" style="background-image:url({{ asset(experience.getAuthor.getMedias.first.getWebPath) }})"></div>
+                        {% else %}
+                            <div class="user-info-front user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }})"></div>
+                        {% endif %}
+                        <div class="user-info-back bg-primary-dark">
+                            <div class="m-t-45 text-center">
+                                <span>View Profile</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-body p-t-0 card-content">
+            <div class="panel-title semi-bold">
+                {{ experience.getTitle }} with <span class="text-primary">{{ experience.getAuthor.firstname }}</span>
+            </div>
+            <div class="text-center m-b-10">
+                in <span class="semi-bold">{% if experience.getCity %}{{ experience.getCity.Name }}{% endif %}</span>
+            </div>
+            <div class="m-b-10">
+                {{ include("WelcomangoExperienceBundle:Experience:_experienceNote.html.twig", { 'note': experience.getAverageNote, 'mango': true}) }}
+            </div>
+            <div class="dotted-line"><span></span></div>
+            <div class="text-center">
+                {{ experience.getDescription | truncate(200)}}
+            </div>
+        </div>
+    </div>
+
+</div>
+

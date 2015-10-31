@@ -1,0 +1,11 @@
+experience_edit:
+    path:      /experience_edit/{id}
+    defaults:  { _controller: WelcomangoExperienceBundle:AdminExperience:edit }
+    requirements:
+        id: \d+
+
+experience_delete:
+    path:      /experience_delete/{id}
+    defaults:  { _controller: WelcomangoExperienceBundle:AdminExperience:delete }
+    requirements:
+        id: \d+

@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:doctrine="http://symfony.com/schema/dic/doctrine"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="welcomango.form.user.type" class="Welcomango\Bundle\UserBundle\Form\Type\AdminUserType">
+            <argument type="service" id="security.context" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
+        <service id="welcomango.form.language.type" class="Welcomango\Bundle\UserBundle\Form\Type\AdminLanguageType">
+        </service>
+
+        <service id="welcomango.form.user.filter" class="Welcomango\Bundle\UserBundle\Form\Type\AdminUserFilterType">
+        </service>
+
+      <!--  <service id="doctrine.user_listener" class="Welcomango\Bundle\Admin\CrmBundle\Doctrine\UserListener">
+            <argument type="service" id="security.encoder_factory" />
+            <tag name="doctrine.event_listener" event="prePersist"/>
+        </service>-->
+    </services>
+
+</container>

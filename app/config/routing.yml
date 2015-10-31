@@ -1,45 +1,28 @@
-welcomango_admin_participation:
-    resource: "@WelcomangoAdminParticipationBundle/Controller/"
+welcomango_user_bundle:
+    resource: "@WelcomangoUserBundle/Controller/"
     type:     annotation
     prefix:   /
 
-welcomango_common_base:
-    resource: "@WelcomangoCommonBaseBundle/Controller/"
+welcomango_media_bundle:
+    resource: "@WelcomangoMediaBundle/Controller/"
     type:     annotation
     prefix:   /
 
-welcomango_front_experience_bundle:
-    resource: "@WelcomangoFrontExperienceBundle/Controller/"
+
+welcomango_core_bundle:
+    resource: "@WelcomangoCoreBundle/Controller/"
     type:     annotation
     prefix:   /
 
-welcomango_front_core_bundle:
-    resource: "@WelcomangoFrontCoreBundle/Controller/"
+welcomango_experience_bundle:
+    resource: "@WelcomangoExperienceBundle/Controller/"
     type:     annotation
     prefix:   /
 
-welcomango_front_crm_bundle:
-    resource: "@WelcomangoFrontCrmBundle/Controller/"
+welcomango_participation_bundle:
+    resource: "@WelcomangoParticipationBundle/Controller/"
     type:     annotation
     prefix:   /
 
-welcomango_admin_core_bundle:
-    resource: "@WelcomangoAdminCoreBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-welcomango_admin_crm_bundle:
-    resource: "@WelcomangoAdminCrmBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-welcomango_admin_experience_bundle:
-    resource: "@WelcomangoAdminExperienceBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-admin_user_bundle:
-   resource: "@WelcomangoAdminCrmBundle/Resources/config/routing.yml"
-
-front_user_bundle:
-   resource: "@WelcomangoFrontCrmBundle/Resources/config/routing.yml"
+welcomango_fos_routing:
+    resource: "@WelcomangoUserBundle/Resources/config/routing.yml"

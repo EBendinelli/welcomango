@@ -47,7 +47,7 @@
             <h2 class="m-b-30">{{ 'profile.yourExperience'|trans }}</h2>
 
             {% if userExperiences|first %}
-                {{ include("WelcomangoFrontExperienceBundle:Experience:_featuredExperience.html.twig", { 'experience': userExperiences|first, 'darkBg': true, 'profile': true}) }}
+                {{ include("WelcomangoExperienceBundle:Experience:_featuredExperience.html.twig", { 'experience': userExperiences|first, 'darkBg': true, 'profile': true}) }}
                 <div id="profile-experience-action" class="text-right">
                     <a href="{{ path('front_experience_edit', {'experience_id': userExperiences|first.id}) }}" class="btn btn-complete btn-cons"><i class="fa fa-pencil"></i> {{ 'profile.editExperience'|trans }}</a>
                     <button class="btn btn-danger btn-cons" data-toggle="modal" data-target="#deleteConfirmation"><i class="fa fa-trash "></i> {{ 'profile.deleteExperience'|trans }}</button>

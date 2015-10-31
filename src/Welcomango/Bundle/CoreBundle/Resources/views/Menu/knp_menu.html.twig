@@ -1,0 +1,11 @@
+{# FRONT HEADER MENU TEMPLATE #}
+{% if options.callingView == 'front' %}
+    {% block front_menu %}
+        {% include("WelcomangoCoreBundle:Menu:knp_menu_front.html.twig") %}
+    {% endblock %}
+{# ADMIN SIDE MENU TEMPLATE #}
+{% elseif options.callingView == 'admin' %}
+    {% block admin_menu %}
+        {% include("WelcomangoCoreBundle:Menu:knp_menu_admin.html.twig") %}
+    {% endblock %}
+{% endif %}

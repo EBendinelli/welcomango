@@ -23,9 +23,13 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
 
             // Admin Side
-            new Welcomango\Bundle\Admin\CrmBundle\WelcomangoAdminCrmBundle(),
-            new Welcomango\Bundle\Admin\CoreBundle\WelcomangoAdminCoreBundle(),
-            new Welcomango\Bundle\Admin\ExperienceBundle\WelcomangoAdminExperienceBundle(),
+            new Welcomango\Bundle\UserBundle\WelcomangoUserBundle(),
+            new Welcomango\Bundle\CoreBundle\WelcomangoCoreBundle(),
+            new Welcomango\Bundle\MediaBundle\WelcomangoMediaBundle(),
+            new Welcomango\Bundle\ExperienceBundle\WelcomangoExperienceBundle(),
+            new Welcomango\Bundle\ParticipationBundle\WelcomangoParticipationBundle(),
+            /*new Welcomango\Bundle\Admin\CoreBundle\WelcomangoAdminCoreBundle(),
+
 
             // Front Side
 
@@ -34,7 +38,7 @@ class AppKernel extends Kernel
             new Welcomango\Bundle\Front\ExperienceBundle\WelcomangoFrontExperienceBundle(),
 
             // Common
-            new Welcomango\Bundle\Common\BaseBundle\WelcomangoCommonBaseBundle(),
+            new Welcomango\Bundle\Common\BaseBundle\WelcomangoCommonBaseBundle(),*/
 
             new Gregwar\ImageBundle\GregwarImageBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
@@ -43,7 +47,7 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
-            new Welcomango\Bundle\Admin\ParticipationBundle\WelcomangoAdminParticipationBundle(),
+            //new Welcomango\Bundle\Admin\ParticipationBundle\WelcomangoAdminParticipationBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -1,0 +1,75 @@
+{% extends "::front.html.twig" %}
+
+{% block page_container %}
+
+    {% block jumbotron %}
+        {{ include("WelcomangoCoreBundle:Core:slider.html.twig") }}
+    {% endblock jumbotron %}
+
+    {% block page_content %}
+        <section class="bg-master-lightest p-b-85 p-t-75">
+            <div class="container">
+                <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+                    <h5 class="block-title hint-text no-margin">Explore</h5>
+                    <div class="row">
+                        <div class="col-sm-5 col-md-4">
+                            <h1 class="m-t-5">Different ways to Organize your Content.</h1>
+                        </div>
+                        <div class="col-sm-7 col-md-8 no-padding xs-p-l-15 xs-p-r-15">
+                            <div class="p-t-20 p-l-35 md-p-l-5 md-p-t-15">
+                                <p>Our long standing vision has been to bypass the usual admin dashboard structure, and move forward with a more sophisticated yet simple framework that would create a credible impact on the many conventional dashboard users.</p>
+                                <p class="hint-text font-arial small-text col-md-7 no-padding">A product is accessible when all people regardless of ability can navigate it, understand it, and use it to achieve goals.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-master-lighter p-b-85 p-t-75">
+            <div class="container">
+                <h3 class="text-center m-b-30">Here are our favorites experience</h3>
+                {% for experience in featuredExperiences  %}
+                    {{ include("WelcomangoExperienceBundle:Experience:_experienceTile.html.twig", { 'experiences': featuredExperiences, 'column': 3 }) }}
+                {% endfor %}
+                <div>
+                    <h3 class="text-center m-b-30">And the ones people prefered</h3>
+                </div>
+                {% for experience in bestExperiences  %}
+                    {{ include("WelcomangoExperienceBundle:Experience:_experienceTile.html.twig", { 'experiences': bestExperiences, 'column': 4 }) }}
+                {% endfor %}
+                </div>
+        </section>
+
+        <!-- START CONTENT SECTION -->
+        <section id="meet" class="p-b-60 p-t-60 bg-master-lightest">
+            <div class="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <h1 class="light m-t-5">Keep in touch</h1>
+                            <h5 class="hint-text">Stay informed and up to date with notifications from your favorite
+                                apps and details</h5>
+                            <form class="m-t-30 m-b-20">
+                                <div class="form-group form-group-default input-group col-md-12  col-sm-12">
+                                    <label>Email Address</label>
+                                    <input type="email" placeholder="johnsmith@abc.com" class="form-control">
+                      <span class="input-group-btn">
+                                <button type="button" class="btn btn-white  btn-cons">Subscribe</button>
+                            </span>
+                                    <br>
+                                </div>
+                                <p class="font-arial fs-12 hint-text">We value your <strong>privacy</strong>. None of the details supplied will be shared with external parties</p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END CONTENT SECTION -->
+    {% endblock page_content %}
+
+    {% block footer %}
+        {% include "::frontFooter.html.twig" %}
+    {% endblock footer %}
+{% endblock %}
