@@ -23,7 +23,7 @@ class LoadCityData extends AbstractFixture implements FixtureInterface, OrderedF
             array('name' => 'Paris', 'postcode' => 75001, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'France'))),
             array('name' => 'Helsinki', 'postcode' => 65450, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Finland'))),
             array('name' => 'Brussels', 'postcode' => 1000, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Belgium'))),
-            array('name' => 'London', 'postcode' => 2100, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'England'))),
+            array('name' => 'London', 'postcode' => 2100, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'United Kingdom'))),
             array('name' => 'Rome', 'postcode' => 5486, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Italy'))),
             array('name' => 'Milan', 'postcode' => 4700, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Italy'))),
             array('name' => 'Barcelone', 'postcode' => 2005, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Spain'))),

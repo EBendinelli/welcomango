@@ -22,17 +22,21 @@ class LoadSpokenLanguageData extends AbstractFixture  implements FixtureInterfac
         $languageRepo = $manager->getRepository('Welcomango\Model\Language');
         $languages = $languageRepo->findAll();
 
-        for($i=0;$i<10;$i++){
+        for($i=0;$i<20;$i++){
             $randomLevel = rand(1,3);
+            $oneLanguage = $languages[array_rand($languages)];
+            $oneUser = $users[array_rand($users)];
 
-            $entry = new SpokenLanguage();
-            $entry->setUser($users[array_rand($users)]);
-            $entry->setLanguage($languages[array_rand($languages)]);
-            $entry->setLevel($randomLevel);
+            if(!$oneUser->hasSpokenLanguage($oneLanguage)) {
+                $entry = new SpokenLanguage();
+                $entry->setUser($oneUser);
+                $entry->setLanguage($oneLanguage);
+                $entry->setLevel($randomLevel);
+            }
 
             $manager->persist($entry);
+            $manager->flush();
         }
-        $manager->flush();
 
     }
 

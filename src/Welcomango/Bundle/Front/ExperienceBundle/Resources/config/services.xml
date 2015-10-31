@@ -18,13 +18,13 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
+        <service id="security.access.post_voter" class="Welcomango\Bundle\Front\ExperienceBundle\Security\Voter\ExperienceVoter" public="false" >
+            <tag name="security.voter" />
+        </service>
+
         <service id="welcomango.front.form.user.type" class="Welcomango\Bundle\Front\CrmBundle\Form\Type\UserType">
             <argument type="service" id="security.context" />
             <argument type="service" id="doctrine.orm.entity_manager" />
-        </service>
-
-        <service id="security.access.post_voter" class="Welcomango\Bundle\Front\ExperienceBundle\Security\Voter\ExperienceVoter" public="false" >
-            <tag name="security.voter" />
         </service>
 
     </services>

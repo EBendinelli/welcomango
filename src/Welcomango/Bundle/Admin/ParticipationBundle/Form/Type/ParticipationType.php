@@ -136,6 +136,6 @@ class ParticipationType extends AbstractType
      */
     public function getName()
     {
-        return 'admin_participatione';
+        return 'admin_participation';
     }
 }
