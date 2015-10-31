@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
+use Welcomango\Bundle\UserBundle\Form\DataTransformer\CityTransformer;
 use Welcomango\Model\User;
 
 /**
@@ -19,10 +20,27 @@ use Welcomango\Model\User;
 class AdminUserFilterType extends AbstractType
 {
     /**
+     * @var Doctrine\ORM\EntityManager entityManager
+     */
+    protected $entityManager;
+
+    /**
+     * __construct
+     *
+     * @param \Doctrine\ORM\EntityManager $entityManager
+     */
+    public function __construct(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $transformer = new CityTransformer($this->entityManager);
+
         $builder
             ->add('roles', 'choice', [
                 'label'    => 'form.user.roles',
@@ -38,6 +56,10 @@ class AdminUserFilterType extends AbstractType
                 'required' => false,
                 'label'    => 'user.is_active',
             ])
+            ->add($builder->create('city', 'genemu_jqueryselect2_hidden', [
+                'configs' => [],
+                'label'   => 'form.city',
+            ])->addModelTransformer($transformer))
         ;
     }
 

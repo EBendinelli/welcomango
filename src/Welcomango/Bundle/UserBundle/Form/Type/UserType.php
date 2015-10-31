@@ -1,6 +1,6 @@
 <?php
 
-namespace Welcomango\Bundle\UserBundle\Form\Type;
+namespace Welcomango\Bundle\UserBundle\Form\AType;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
@@ -14,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-use Welcomango\Bundle\Front\CrmBundle\Form\Type\SpokenLanguageType;
+use Welcomango\Bundle\UserBundle\Form\Type\AdminSpokenLanguageType;
 
 use Welcomango\Model\User;
 
@@ -59,7 +59,7 @@ class UserType extends AbstractType
         $genders = array(
             'M' => 'M',
             'F' => 'F',
-            'O' => 'O'
+            'O' => 'O',
         );
 
         $builder->add('username', 'text', ['label' => 'form.user.username']);
@@ -68,15 +68,14 @@ class UserType extends AbstractType
         $builder->add('phone', 'text', ['label' => 'form.user.phone', 'required' => false]);
         $builder->add('occupation', 'text', ['label' => 'form.user.occupation']);
         $builder->add('birthdate', 'date', [
-            'years' => range(date('Y') - 100, date('Y') - 10),
-            'label' => 'form.user.birthdate',
-            'required' => false
+            'years'    => range(date('Y') - 100, date('Y') - 10),
+            'label'    => 'form.user.birthdate',
+            'required' => false,
         ]);
 
         $builder->add('description', 'textarea', [
-            'label' => 'form.user.description'
+            'label' => 'form.user.description',
         ]);
-
 
         /*$builder->add('spokenLanguages', 'collection', array(
             'type'         => new SpokenLanguageType(),
@@ -85,24 +84,21 @@ class UserType extends AbstractType
             'by_reference' => false,
         ));*/
 
-
         $builder->add('from_city', 'entity', array(
-            'class' => 'Model:City',
+            'class'    => 'Model:City',
             'property' => 'name',
         ));
 
         $builder->add('current_city', 'entity', array(
-            'class' => 'Model:City',
+            'class'    => 'Model:City',
             'property' => 'name',
         ));
 
-        $builder->add('gender','choice', array(
-            'choices' => $genders,
+        $builder->add('gender', 'choice', array(
+            'choices'  => $genders,
             'multiple' => false,
-            'label' => 'form.user.gender'
+            'label'    => 'form.user.gender',
         ));
-
-
 
 
     }

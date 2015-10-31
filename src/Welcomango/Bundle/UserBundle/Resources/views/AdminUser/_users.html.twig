@@ -1,0 +1,32 @@
+<div class="col-md-12">
+    <div class="grid simple horizontal green">
+        <div class="grid-title">
+            <h4>{{ "user.results"|trans({}, "crm") }}</h4>
+            <div class="tools"><a href="javascript:;" class="collapse"></a></a> <a href="javascript:;" class="remove"></a> </div>
+        </div>
+        <div class="grid-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>{{ 'user.username'|trans }}</th>
+                    <th>{{ 'user.roles'|trans }}</th>
+                    <th>{{ 'user.last_login'|trans }}</th>
+                    <th>{{ 'user.is_active'|trans }}</th>
+                    <th>{{ "interface.actions"|trans }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    {% include "WelcomangoUserBundle:AdminUser:_userRow.html.twig" with {'user': user} %}
+                {% else %}
+                    <tr>
+                        <td colspan="4">
+                            {{ "interface.actions"|trans({}, "interface") }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

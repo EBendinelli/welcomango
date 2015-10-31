@@ -75,7 +75,7 @@ class AdminUserController extends BaseController
         }
 
         return array(
-            'form' => $form->createView()
+            'form' => $form->createView(),
         );
     }
 
@@ -116,8 +116,8 @@ class AdminUserController extends BaseController
         }
 
         return array(
-            'form'           => $form->createView(),
-            'user' => $user
+            'form' => $form->createView(),
+            'user' => $user,
         );
     }
 
@@ -137,22 +137,28 @@ class AdminUserController extends BaseController
     }
 
     /**
+     * List cities for Ajax Calls
+     *
      * @param Request $request
      *
-     * @Route("/user/_user_search_ajax", name="admin_user_search_ajax")
-     * @Method("POST")
-     * @Template("YproxAdminCrmBundle:User:_users.html.twig")
+     * @Route("/json/cities/list.json", name="admin_user_search_ajax", defaults={"_format"="json"})
      *
-     * @return array
+     * @return JsonResponse
      */
-    public function ajaxSearchAction(Request $request)
+    public function citiesAction(Request $request)
     {
-        $query = $request->request->get('query');
-        $users = $this->getRepository('Yprox\Model\User')->findByQuery($query);
+        $data = array();
 
-        return array(
-            'users' => $users
-        );
+        if ($request->request->has('query') && $request->request->get('query') != '') {
+            $query  = $request->request->get('query');
+            $cities = $this->getRepository('Welcomango\Model\City')->findForAutocomplete($query);
+
+            foreach ($cities as $city) {
+                $data[] = ['id' => $city['id'], 'text' => $city['text']];
+            }
+        }
+
+        return new JsonResponse($data);
     }
 
     /**

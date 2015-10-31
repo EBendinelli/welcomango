@@ -15,6 +15,7 @@
         </service>
 
         <service id="welcomango.form.user.filter" class="Welcomango\Bundle\UserBundle\Form\Type\AdminUserFilterType">
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
       <!--  <service id="doctrine.user_listener" class="Welcomango\Bundle\Admin\CrmBundle\Doctrine\UserListener">
