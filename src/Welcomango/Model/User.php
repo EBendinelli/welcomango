@@ -452,6 +452,7 @@ class User extends BaseUser
     public function addSpokenLanguage(SpokenLanguage $spokenLanguage)
     {
         $this->spokenLanguages[] = $spokenLanguage;
+        $spokenLanguage->setUser($this);
     }
 
     /**
@@ -460,8 +461,6 @@ class User extends BaseUser
     public function removeSpokenLanguage(SpokenLanguage $spokenLanguage)
     {
         $this->spokenLanguages->removeElement($spokenLanguage);
-        //If not working try this:
-        //$this->spokenLanguages->remove($spokenLanguage);
     }
 
     /**
@@ -472,7 +471,7 @@ class User extends BaseUser
         parent::__construct();
         $this->spokenLanguages = new ArrayCollection();
         $this->participations  = new ArrayCollection();
-        $this->medias         = new ArrayCollection();
+        $this->medias          = new ArrayCollection();
     }
 
     /**

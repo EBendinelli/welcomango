@@ -55,7 +55,7 @@ class ExperienceManager
         die();
         /*$experience->setAverageNote($newNote['average_note']);
         $this->entityManager->persist($experience);
-        $this->entityManager->flush();*/
+        $this->entityManager->flush();
     }*/
 
 }

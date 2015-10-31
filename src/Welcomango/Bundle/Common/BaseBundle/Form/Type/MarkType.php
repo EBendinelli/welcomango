@@ -22,6 +22,7 @@ class MarkType extends AbstractType
     {
         $resolver->setDefaults(array(
             'label' => 'form.type.mark',
+            'data' => '1',
             'attr'  => array(
                 'class'         => 'star',
                 'min'        => 1,

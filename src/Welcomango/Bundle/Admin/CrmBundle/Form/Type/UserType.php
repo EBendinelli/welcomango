@@ -63,6 +63,7 @@ class UserType extends AbstractType
         );
 
         $builder->add('username', 'text', ['label' => 'form.user.username']);
+        $builder->add('occupation', 'text', ['label' => 'form.user.occupation']);
         $builder->add('email', 'text', ['label' => 'form.user.email']);
         $builder->add('firstName', 'text', ['label' => 'form.user.firstname']);
         $builder->add('lastName', 'text', ['label' => 'form.user.lastname']);
@@ -89,6 +90,7 @@ class UserType extends AbstractType
             'allow_add'    => true,
             'allow_delete' => true,
             'by_reference' => false,
+            'label'        => false
         ));
 
         $builder->add('password', 'repeated', array(

@@ -2,6 +2,7 @@
 
 namespace Welcomango\Bundle\Admin\CrmBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -66,16 +67,8 @@ class UserController extends Controller
 
         if ($form->isValid()) {
             $user = $form->getData();
-
             $this->get('fos_user.user_manager')->updateUser($user);
-
-            foreach($user->getSpokenLanguages() as $spokenLanguage) {
-                $spokenLanguage->setUser($user);
-                $this->getDoctrine()->getManager()->persist($spokenLanguage);
-            }
-
             $this->getDoctrine()->getManager()->flush();
-
             $this->addFlash('success', $this->trans('user.created.success', array(), 'user'));
 
             return $this->redirect($this->generateUrl('admin_user_list'));
@@ -98,9 +91,20 @@ class UserController extends Controller
     public function editAction(Request $request, User $user)
     {
         $form = $this->createForm($this->get('welcomango.form.user.type'), $user);
+
+        $originalSpokenLanguages = new ArrayCollection();
+        foreach ($user->getSpokenLanguages() as $spokenLanguage) {
+            $originalSpokenLanguages->add($spokenLanguage);
+        }
+
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $this->getDoctrine()->getManager()->persist($user);
+            foreach ($originalSpokenLanguages as $originalSpokenLanguage) {
+                if (false === $form->getData()->getSpokenLanguages()->contains($originalSpokenLanguage)) {
+                    $this->getDoctrine()->getManager()->remove($originalSpokenLanguage);
+                }
+            }
+
             $this->get('fos_user.user_manager')->updateUser($user);
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', $this->trans('user.edit.success', array(), 'crm'));

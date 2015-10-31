@@ -1,9 +1,8 @@
 <script type="text/javascript">
     $(function () {
         $('.portlet').portlet();
-
-        var $collectionHolder;
-        $collectionHolder = $('ul.languages');
+        var $collectionHolder = $('ul.languages');
+        var index = $collectionHolder.find(':input').length;
 
         $collectionHolder.find('ul.languages').each(function () {
             addSpokenLanguageFormDeleteLink($(this));
@@ -25,17 +24,9 @@
     });
 
     function addSpokenLanguageForm($collectionHolder, $newLinkLi) {
-        var prototype = $collectionHolder.data('prototype');
-
-        var index = $collectionHolder.data('index');
-
-        var newForm = prototype.replace(/__name__/g, index);
-
-        $collectionHolder.data('index', index + 1);
-
-        var $newFormLi = $('<div></div>').append(newForm);
-        $newLinkLi.before($newFormLi);
-        addSpokenLanguageFormDeleteLink($newFormLi);
+        var index = $collectionHolder.find(':input').length;
+        var $prototype = $($collectionHolder.attr('data-prototype').replace(/__name__label__/g, 'Adresse').replace(/__name__/g, index));
+        $collectionHolder.append($prototype);
         initSelect2Plugin();
     }
 
