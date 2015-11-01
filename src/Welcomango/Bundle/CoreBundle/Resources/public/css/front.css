@@ -721,3 +721,9 @@ a .front-menu-user-picture{
 .veryBigIcon{
     font-size: 20em;
 }
+
+/* ///// BOOTSTRAP TABLE FOR PARTICIPATION LIST /////// */
+.table tbody tr td {
+    border-top: 0;
+    padding: 20px;
+}

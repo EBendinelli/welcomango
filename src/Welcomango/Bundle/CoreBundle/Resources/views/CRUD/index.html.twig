@@ -1,0 +1,137 @@
+{% extends "::front.html.twig" %}
+
+{% block page_content %}
+
+    {% block search_results '' %}
+
+
+
+{#
+        {% block filter_block %}
+            {% if form is defined %}
+                <div class="container-fluid container-fixed-lg">
+                    <div class="cold-md-12">
+                        <div class="panel panel-default portlet">
+                            <div class="panel-heading">
+                                <div class="panel-title">{{ "interface.filter.title"|trans({}, "interface") }}</div>
+                                <div class="panel-controls">
+                                    <a href="#" class="portlet-collapse" data-toggle="collapse"><i class="portlet-icon portlet-icon-collapse"></i></a>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                {{ form_start(form, {'action': filter_url, 'method': 'POST', 'attr': { 'novalidate': 'novalidate', 'class': 'filter' } }) }}
+                                {% block filters %}{{ form_row(form) }}{% endblock %}
+                                <div class="btn-toolbar text-right" role="toolbar">
+                                    <button type="submit" id="btn-filter" class="btn btn-primary btn-sm btn-filter-inversed">{{ 'interface.filter'|trans({}, "interface") }}</button>
+                                    <button type="submit" class="btn btn-default btn-sm" name="_reset">{{ 'interface.reset'|trans({}, "interface") }}</button>
+                                </div>
+                                {{ form_rest(form) }}
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endblock %}
+
+----
+#}
+        {% block page_header %}
+            {% include("WelcomangoCoreBundle:CRUD:subHeader.html.twig") %}
+            {# MAIN DESCRIPTION #}
+            <section class="bg-master-lighter p-b-85 p-t-75">
+                <div class="container">
+                    <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+                        <h5 class="block-title hint-text no-margin">
+                            {% block element_title %}
+                            {% endblock element_title %}
+                        </h5>
+                        <div class="row">
+                            <div class="col-sm-5 col-md-4">
+                                <h1 class="m-t-5">
+                                    {% block element_main_sentence %}
+                                    {% endblock element_main_sentence %}
+                                </h1>
+                            </div>
+                            <div class="col-sm-7 col-md-8 no-padding xs-p-l-15 xs-p-r-15">
+                                <div class="p-t-20 p-l-35 md-p-l-5 md-p-t-15">
+                                    <p>
+                                        {% block element_description %}
+                                        {% endblock element_description %}
+                                    </p>
+                                    <p class="hint-text font-arial small-text col-md-7 no-padding">
+                                        {% block element_last_description  %}
+                                        {% endblock element_last_description %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        {% endblock %}
+
+
+        {% block main_content %}
+            {# ELEMENT DISPLAY #}
+            <div class="container-fluid container-fixed-lg bg-master-lighter ">
+                <div class="container large-container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-transparent">
+                                <div class="panel-body">
+                                {% if pagination|length %}
+                                    {% block table %}
+                                        <div class="table-responsive" style="overflow:visible">
+                                            <table class="{% block table_class %}entity-table table table-striped table-condensed{% endblock %}">
+                                                <thead>
+                                                {% block table_head %}{% endblock %}
+                                                </thead>
+                                                <tbody>
+                                                {% for entity in pagination %}
+                                                    {% block table_body %}{% endblock %}
+                                                {% endfor %}
+                                                </tbody>
+
+                                                {% set table_footer = block('table_footer')|default('') %}
+                                                {% if table_footer %}
+                                                    <tfoot>{{ table_footer|raw }}</tfoot>
+                                                {% endif %}
+                                            </table>
+
+                                            {% include 'WelcomangoCoreBundle:CRUD:pagination.html.twig' with {
+                                            'path': pager_url,
+                                            'pagination': pagination,
+                                            'number_per_page': number_per_page|default(false)
+                                            } %}
+
+                                        </div>
+                                    {% endblock %}
+                                {% else %}
+                                    {% block no_results %}
+                                        <div class="alert text-center">
+                                            <strong>{{ 'interface.noresult'|trans({}, "admin") }}</strong>
+                                        </div>
+                                    {% endblock %}
+                                {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+
+        {% block additionnal_content '' %}
+        {% endblock %}
+
+
+        {% block javascripts %}
+            {{ parent() }}
+            <script type="text/javascript">
+                $(function(){
+                    $('.portlet').portlet();
+                });
+            </script>
+        {% endblock %}
+

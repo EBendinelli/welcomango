@@ -21,7 +21,7 @@ use Welcomango\Model\User;
 /**
  * UserEditType Form class
  */
-class UserType extends AbstractType
+class UserEditType extends AbstractType
 {
     /**
      * @var SecurityContextInterface security context
@@ -65,22 +65,26 @@ class UserType extends AbstractType
         $builder->add('username', 'text', ['label' => 'form.user.username']);
         $builder->add('firstName', 'text', ['label' => 'form.user.firstname']);
         $builder->add('lastName', 'text', ['label' => 'form.user.lastname']);
-        $builder->add('email', 'text', ['label' => 'form.user.email']);
-
+        $builder->add('phone', 'text', ['label' => 'form.user.phone', 'required' => false]);
+        $builder->add('occupation', 'text', ['label' => 'form.user.occupation']);
         $builder->add('birthdate', 'date', [
             'years' => range(date('Y') - 100, date('Y') - 10),
             'label' => 'form.user.birthdate',
             'required' => false
         ]);
 
+        $builder->add('description', 'textarea', [
+            'label' => 'form.user.description'
+        ]);
 
-        $builder->add('password', 'repeated', array(
-            'type'            => 'password',
-            'invalid_message' => 'The passwords don\'t match',
-            'options'         => array('required' => true),
-            'first_options'   => array('label' => 'form.user.password'),
-            'second_options'  => array('label' => 'form.user.password.validate'),
-        ));
+
+        /*$builder->add('spokenLanguages', 'collection', array(
+            'type'         => new SpokenLanguageType(),
+            'allow_add'    => true,
+            'allow_delete' => true,
+            'by_reference' => false,
+        ));*/
+
 
         $builder->add('from_city', 'entity', array(
             'class' => 'Model:City',
@@ -98,7 +102,7 @@ class UserType extends AbstractType
             'label' => 'form.user.gender'
         ));
 
-        $builder->add('register', 'submit');
+
 
 
     }

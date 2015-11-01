@@ -7,32 +7,61 @@
 {% endblock fos_user_content %}
 
 
-{% block page_container %}
+{% block page_content %}
 <!-- BEGIN JUMBOTRON -->
-<section class="jumbotron demo-custom-height xs-full-height bg-black" data-pages-bg-image="{{ asset('img/front/places-0.jpg') }}">
+<section class="jumbotron full-height bg-black" data-pages-bg-image="{{ asset('img/front/places-0.jpg') }}" data-bg-overlay="black" data-overlay-opacity="0.2" >
     <div class="container-xs-height full-height">
         <div class="col-xs-height col-middle text-left">
-            <div class="container">
-                <div class="col-sm-6">
-                    <h1 class="light text-white">The new websites <br>on its way!</h1>
-                    <h4 class="text-white">Sign up for our spam free newsletter</h4>
-                    <form class="m-t-25 m-b-20">
-                        <div class="form-group form-group-default input-group no-border input-group-attached col-md-12  col-sm-12 col-xs-12">
-                            <label>Email Address</label>
-                            <input type="email" class="form-control" placeholder="johnsmith@abc.com">
-                  <span class="input-group-btn">
-                     <button class="btn btn-black  btn-cons" type="button">Subscribe!</button>
-                  </span>
-                        </div>
-                    </form>
-                    <p class="text-white fs-12">Be first to find out when we Launch our product.</p>
+            <div class="container m-t-50 m-b-100">
+                <!-- BEGIN TEXT PART -->
+                <div class="col-md-6 col-md-push-6">
+                    <h1 class="light text-white m-b-40">The first step of your next adventure</h1>
+                    <h4 class="text-white">Join the Welcomango community to discover a new way of traveling and enhance your life experience. </h4>
+                    <br/>
+                    <h4 class="text-white">Feel a European city and create boundaries with the locals</h4>
                 </div>
+                <!-- END TEXT PART -->
+
+                <!-- BEGIN FORM PART -->
+                <div class="col-md-5 bg-master-lightest p-t-10 p-l-20 p-r-20 m-l-10  m-r-10  row col-md-pull-6">
+                    <h4 class="text-center bold m-b-30">Join Welcomango Now</h4>
+                    {{ form_start(form) }}
+                    {{ form_errors(form) }}
+                    {{ form_row(form.username) }}
+                    {{ form_row(form.email) }}
+                    <div class="row">
+                        <div class="col-md-6">{{ form_row(form.firstName) }}</div>
+                        <div class="col-md-6">{{ form_row(form.lastName) }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">{{ form_row(form.password.first) }}</div>
+                        <div class="col-md-6">{{ form_row(form.password.second) }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">{{ form_row(form.birthdate) }}</div>
+                        <div class="col-md-6">{{ form_row(form.gender) }}</div>
+
+                    </div>
+                    <div class="row">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">{{ form_row(form.from_city) }}</div>
+                        <div class="col-md-6">{{ form_row(form.current_city) }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            Captcha
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-right">{{ form_row(form.register, {'attr': {'class': 'btn-primary'}} ) }}</div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+                <!-- END FORM PART -->
             </div>
         </div>
     </div>
 </section>
 <!-- END JUMBOTRON -->
-{% endblock page_container %}
-
-
-
+{% endblock page_content %}

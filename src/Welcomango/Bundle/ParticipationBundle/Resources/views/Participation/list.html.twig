@@ -1,0 +1,88 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block profile_content %}
+    <h2 class="text-center">COUCOU C LES RIKUEST</h2>
+    <div class="panel panel-default portlet">
+        <div class="panel-body" id="profile_request_received">
+            <div class="table-responsive">
+                <table class="entity-table table table-striped table-condensed">
+                    <thead>
+                    <tr>
+                        <th class="col-md-3">{{ 'participation.user'|trans }}</th>
+                        <th class="col-md-1">{{ 'participation.numberOfParticipants'|trans }}</th>
+                        <th class="col-md-2">{{ 'participation.date'|trans }}</th>
+                        <th class="col-md-2">{{ 'participation.duration'|trans }}</th>
+                        <th class="col-md-2">{{ 'participation.time'|trans }}</th>
+                        <th class="col-md-2">{{ 'participation.controls'|trans }}</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for participation in participations %}
+                            {% if participation.isParticipant %}
+                                <tr>
+                                    <td class="col-md-3">
+                                        <a href="{{ asset(path('front_user_view', {'user_id': participation.user.id})) }}" class="text-black semi-bold">
+                                            {% if participation.user.getMedias.first %}
+                                                <img src='{{ asset(participation.user.getMedias.first.getWebPath) }}' class='front-menu-user-picture m-r-10' />
+                                            {% else %}
+                                                <img src='{{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }}' class='front-menu-user-picture m-r-10' />
+                                            {% endif %}
+                                            {{ participation.user.firstname }} {{ participation.user.lastname }}
+                                        </a>
+                                    </td>
+                                    <td class="col-md-1">{{ participation.numberOfParticipants }}</td>
+                                    <td class="col-md-2">{{ participation.date|date('Y-m-d')  }}</td>
+                                    <td class="col-md-2">{{ date_difference(participation.startTime, participation.endTime) }}</td>
+                                    <td class="col-md-2">{{ participation.startTime|date('H:i') }}</td>
+                                    <td class="col-md-2">v</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="panel-body" id="profile_request_sent">
+            <div class="table-responsive">
+                <table class="entity-table table table-striped table-condensed">
+                    <thead>
+                    <tr>
+                        <th class="col-md-3">{{ 'participation.user'|trans }}</th>
+                        <th class="col-md-1">{{ 'participation.numberOfParticipants'|trans }}</th>
+                        <th class="col-md-2">{{ 'participation.date'|trans }}</th>
+                        <th class="col-md-2">{{ 'participation.duration'|trans }}</th>
+                        <th class="col-md-2">{{ 'participation.time'|trans }}</th>
+                        <th class="col-md-2">{{ 'participation.controls'|trans }}</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for participation in participations %}
+                        {% if participation.isCreator %}
+                            <tr>
+                                <td class="col-md-3">
+                                    <a href="{{ asset(path('front_user_view', {'user_id': participation.user.id})) }}" class="text-black semi-bold">
+                                        {% if participation.user.getMedias.first %}
+                                            <img src='{{ asset(participation.user.getMedias.first.getWebPath) }}' class='front-menu-user-picture m-r-10' />
+                                        {% else %}
+                                            <img src='{{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }}' class='front-menu-user-picture m-r-10' />
+                                        {% endif %}
+                                        {{ participation.user.firstname }} {{ participation.user.lastname }}
+                                    </a>
+                                </td>
+                                <td class="col-md-1">{{ participation.numberOfParticipants }}</td>
+                                <td class="col-md-2">{{ participation.date|date('Y-m-d')  }}</td>
+                                <td class="col-md-2">{{ date_difference(participation.startTime, participation.endTime) }}</td>
+                                <td class="col-md-2">{{ participation.startTime|date('H:i') }}</td>
+                                <td class="col-md-2">v</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock profile_content %}

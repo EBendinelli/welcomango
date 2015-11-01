@@ -9,7 +9,6 @@
         <div id="user-info-details" class="m-b-10">
             <div><span class="bold">Occupation:</span> {{ app.user.occupation }}</div>
             <div><span class="bold">From:</span> {{ app.user.fromCity.name }}</div>
-            <div><span class="bold">Currently living in:</span> {{ app.user.currentCity.name}}</div>
             <div><span class="bold">Gender:</span> {{ app.user.gender}}</div>
         </div>
         <hr/>
@@ -32,8 +31,8 @@
         <a href="" class="col-md-4 profile-header-item">
             <i class="fa fa-envelope fa-lg m-r-5"></i>{{ 'profile.message'|trans }}
         </a>
-        <a href="" class="col-md-4 profile-header-item">
-            <i class="fa fa-plus fa-lg m-r-5"></i>{{ 'profile.addExperience'|trans }}
+        <a href="{{ path('participation_list') }}" class="col-md-4 profile-header-item">
+            <i class="fa fa-bullhorn fa-lg m-r-5"></i>{{ 'profile.seeRequests'|trans }}
         </a>
         <a href="{{ path('fos_user_profile_edit') }}" class="col-md-4 profile-header-item">
             <i class="fa fa-pencil fa-lg m-r-5"></i>{{ 'profile.editProfile'|trans }}

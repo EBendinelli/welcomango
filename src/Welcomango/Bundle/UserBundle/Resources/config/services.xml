@@ -22,6 +22,11 @@
             <tag name="security.voter" />
         </service>
 
+        <service id="welcomango.front.form.user.edit.type" class="Welcomango\Bundle\UserBundle\Form\Type\UserEditType">
+            <argument type="service" id="security.context" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
         <service id="welcomango.front.form.user.type" class="Welcomango\Bundle\UserBundle\Form\Type\UserType">
             <argument type="service" id="security.context" />
             <argument type="service" id="doctrine.orm.entity_manager" />

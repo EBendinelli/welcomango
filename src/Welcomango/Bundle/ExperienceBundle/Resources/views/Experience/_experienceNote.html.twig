@@ -9,7 +9,11 @@
             {% endif %}
         {% endif %}
 
-        {% if note/note|round == 1 %}
+        {% if note|round == 5 %}
+            {% for i in 1..5 %}
+                <img class="{{ noteClass }}" src="{{ asset('img/welcomango-picto-full.png') }}"/>
+            {% endfor %}
+        {% elseif note/note|round == 1 %}
             {% for i in 1..note %}
                 <img class="{{ noteClass }}" src="{{ asset('img/welcomango-picto-full.png') }}"/>
             {% endfor %}
@@ -37,7 +41,11 @@
             {% endif %}
         {% endif %}
 
-        {% if note/note|round == 1 %}
+        {% if note|round == 5 %}
+            {% for i in 1..5 %}
+                <i class="fa fa-star {{ noteClass }}"></i>
+            {% endfor %}
+        {% elseif note/note|round == 1 %}
             {% for i in 1..note %}
                 <i class="fa fa-star {{ noteClass }}"></i>
             {% endfor %}
