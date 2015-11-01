@@ -47,14 +47,8 @@ class AdminParticipationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $status = array_combine($options['available_status'], $options['available_status']);
 
-        $status = array(
-            'available' => 'available',
-            'booked' => 'booked',
-            'happened' =>'happened',
-            'requested' => 'requested',
-            'validated' => 'validated'
-        );
         $numberOfParticipants = array();
         for($i=0;$i<48;$i++) $numberOfParticipants [$i] = $i;
 
@@ -115,8 +109,6 @@ class AdminParticipationType extends AbstractType
             'label' => 'form.participation.numberOfParticipants'
         ]);
 
-
-
         $builder->add('save', 'submit');
     }
 
@@ -129,6 +121,7 @@ class AdminParticipationType extends AbstractType
             'data_class'         => 'Welcomango\Model\Participation',
             'translation_domain' => 'participation'
         ]);
+        $resolver->setRequired('available_status');
     }
 
     /**

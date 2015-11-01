@@ -135,3 +135,10 @@ services:
      tags:
          - { name: twig.extension }
 
+welcomango_participation:
+    available_status:
+        - Available
+        - Happened
+        - Booked
+        - Requested
+        - Validated
