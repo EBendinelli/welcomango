@@ -28,12 +28,12 @@ class AppKernel extends Kernel
             new Welcomango\Bundle\ExperienceBundle\WelcomangoExperienceBundle(),
             new Welcomango\Bundle\ParticipationBundle\WelcomangoParticipationBundle(),
 
+            new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new Gregwar\ImageBundle\GregwarImageBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
         );
 

@@ -18,11 +18,12 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('welcomango_admin_participation');
+        $rootNode    = $treeBuilder->root('welcomango_participation');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode
+            ->children()
+                ->arrayNode('available_status')->prototype('scalar')->end()
+            ->end();
 
         return $treeBuilder;
     }

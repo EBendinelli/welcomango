@@ -56,8 +56,9 @@ class AdminParticipationController extends BaseController
     public function createAction(Request $request)
     {
         $participation = new Participation();
-
-        $form = $this->createForm($this->get('welcomango.form.participation.create'), $participation);
+        $form = $this->createForm($this->get('welcomango.form.participation.create'), $participation, [
+            'available_status' => $this->container->getParameter('available_status'),
+        ]);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -86,7 +87,9 @@ class AdminParticipationController extends BaseController
      */
     public function editAction(Request $request, Participation $participation)
     {
-        $form = $this->createForm($this->get('welcomango.form.participation.edit'), $participation);
+        $form = $this->createForm($this->get('welcomango.form.participation.create'), $participation, [
+            'available_status' => $this->container->getParameter('available_status'),
+        ]);
         $form->handleRequest($request);
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->persist($participation);

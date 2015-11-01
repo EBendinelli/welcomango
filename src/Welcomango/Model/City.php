@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * City
  *
+ * @ORM\Entity(repositoryClass="Welcomango\Model\Repository\CityRepository")
  * @ORM\Table(name="wm_city")
- * @ORM\Entity
  */
 class City
 {
@@ -52,7 +52,7 @@ class City
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -63,6 +63,7 @@ class City
      * Set name
      *
      * @param string $name
+     *
      * @return City
      */
     public function setName($name)
@@ -75,7 +76,7 @@ class City
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -86,6 +87,7 @@ class City
      * Set postcode
      *
      * @param integer $postcode
+     *
      * @return City
      */
     public function setPostcode($postcode)
@@ -98,7 +100,7 @@ class City
     /**
      * Get postcode
      *
-     * @return integer 
+     * @return integer
      */
     public function getPostcode()
     {
@@ -109,6 +111,7 @@ class City
      * Set geolocation
      *
      * @param string $geolocation
+     *
      * @return City
      */
     public function setGeolocation($geolocation)
@@ -121,7 +124,7 @@ class City
     /**
      * Get geolocation
      *
-     * @return string 
+     * @return string
      */
     public function getGeolocation()
     {
@@ -143,5 +146,4 @@ class City
     {
         $this->country = $country;
     }
-
 }

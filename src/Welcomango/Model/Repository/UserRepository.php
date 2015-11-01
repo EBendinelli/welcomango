@@ -31,6 +31,9 @@ class UserRepository extends EntityRepository
 
         if ($username = $this->getFilter('username', $filters)) {
             $queryBuilder->andWhere('u.username LIKE :username');
+            $queryBuilder->orWhere('u.email LIKE :username');
+            $queryBuilder->orWhere('u.firstName LIKE :username');
+            $queryBuilder->orWhere('u.lastName LIKE :username');
             $queryBuilder->setParameter('username', '%'.$username.'%');
         }
 
@@ -38,6 +41,11 @@ class UserRepository extends EntityRepository
             $enabled = $this->getFilter('enabled', $filters);
             $queryBuilder->andWhere('u.enabled = :enabled');
             $queryBuilder->setParameter('enabled', $enabled);
+        }
+
+        if ($city = $this->getFilter('city', $filters)) {
+            $queryBuilder->andWhere('u.currentCity = :city');
+            $queryBuilder->setParameter('city', $city);
         }
 
         return $queryBuilder;

@@ -15,7 +15,6 @@ use Welcomango\Bundle\CoreBundle\Controller\Controller as BaseController;
 use Welcomango\Model\Experience;
 use Welcomango\Model\Participation;
 
-
 /**
  * Class ExperienceController
  *
@@ -33,8 +32,8 @@ class ExperienceController extends BaseController
      */
     public function listAction(Request $request)
     {
-        $paginator = $this->get('knp_paginator');
-        $query     = $this->getRepository('Welcomango\Model\Experience')->findAll();
+        $paginator  = $this->get('knp_paginator');
+        $query      = $this->getRepository('Welcomango\Model\Experience')->findAll();
         $pagination = $paginator->paginate(
             $query,
             $request->query->get('page', 1),
@@ -62,7 +61,6 @@ class ExperienceController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($experience);
             $em->flush();
@@ -77,14 +75,13 @@ class ExperienceController extends BaseController
         }
 
         return array(
-            'form' => $form->createView()
+            'form' => $form->createView(),
         );
     }
 
 
-
     /**
-     * @param Request $request
+     * @param Request    $request
      * @param Experience $experience
      *
      * @Route("/experience/{experience_id}/edit", name="front_experience_edit")
@@ -111,14 +108,14 @@ class ExperienceController extends BaseController
 
         return array(
             'form'           => $form->createView(),
-            'requested_user' => $experience
+            'requested_user' => $experience,
         );
 
 
     }
 
     /**
-     * @param Request $request
+     * @param Request    $request
      * @param Experience $experience
      *
      * @Route("/experience/{experience_id}", name="front_experience_view")
@@ -133,17 +130,19 @@ class ExperienceController extends BaseController
 
         // Must create a related experience function
         $relatedExperiences = $this
-        ->getRepository('Welcomango\Model\Experience')
-        ->getFeatured(3);
+            ->getRepository('Welcomango\Model\Experience')
+            ->getFeatured(3);
 
         $participation = new Participation();
         $participation->setUser($user);
         $participation->setExperience($experience);
-        $form = $this->createForm($this->get('welcomango.front.form.participation.type'), $participation);
+        $form = $this->createForm($this->get('welcomango.form.participation.type'), $participation, [
+            'available_status' => $this->container->getParameter('available_status'),
+        ]);
         $form->handleRequest($request);
 
         $formSubmitted = false;
-        if($form->isSubmitted()){
+        if ($form->isSubmitted()) {
             $formSubmitted = true;
         }
 
@@ -160,15 +159,16 @@ class ExperienceController extends BaseController
         }
 
         return $this->render('WelcomangoExperienceBundle:Experience:view.html.twig', array(
-            'experience' => $experience,
+            'experience'         => $experience,
             'relatedExperiences' => $relatedExperiences,
-            'formSubmitted' => $formSubmitted,
-            'form' => $form->createView()
+            'formSubmitted'      => $formSubmitted,
+            'form'               => $form->createView(),
         ));
 
     }
 
     /**
+     * @param Experience $experience
      *
      * @Route("/experience/{experience_id}/delete", name="front_experience_delete")
      * @ParamConverter("experience", options={"id" = "experience_id"})
@@ -177,19 +177,14 @@ class ExperienceController extends BaseController
      */
     public function deleteAction(Experience $experience)
     {
-
-        //User the voter to check if the user can delete this experience
-        //$this->denyAccessUnlessGranted('delete', $experience, 'Unauthorized access!');
-        if(!$this->isGranted('delete', $experience)){
-            return $this->render('WelcomangoFrontCoreBundle:CRUD:notAllowed.html.twig');
+        if (!$this->isGranted('delete', $experience)) {
+            return $this->render('WelcomangoCoreBundle:CRUD:notAllowed.html.twig');
         }
-
 
         $this->getDoctrine()->getManager()->remove($experience);
         $this->getDoctrine()->getManager()->flush();
 
         return $this->render('WelcomangoExperienceBundle:Experience:deleteSuccess.html.twig');
-        /*return $this->redirect($this->generateUrl('front_profile_experience_deleted'));*/
     }
 
     /**
@@ -203,11 +198,11 @@ class ExperienceController extends BaseController
      */
     public function ajaxSearchAction(Request $request)
     {
-        $query = $request->request->get('query');
+        $query       = $request->request->get('query');
         $experiences = $this->getRepository('Welcomango\Model\Experience')->findByQuery($query);
 
         return array(
-            'experience' => $experiences
+            'experience' => $experiences,
         );
     }
 }
