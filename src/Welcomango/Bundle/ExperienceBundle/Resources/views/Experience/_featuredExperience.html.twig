@@ -11,14 +11,14 @@
                         in <span class="semi-bold">{% if experience.getCity %}{{ experience.getCity.Name }}{% endif %}</span>
                     </div>
                     <div class="dotted-line"><span></span></div>
-                    <div class="text-center">
+                    <div class="text-center m-t-20">
                         {{ experience.getDescription | truncate(150)}}
                     </div>
                 </div>
 
                 <div class="col-md-7">
                     <div class="experience-image-separation">
-                        <div class="experience-image-triangle" {% if darkBg is defined %}style="border-top:200px solid #f0f0f0;"{% endif %}></div>
+                        <div class="experience-image-triangle {% if darkBg is defined %}card-triangle-bg-master-lightest{% endif %}"></div>
                     </div>
 
                     <div class="card-clickable" style="z-index:9;">

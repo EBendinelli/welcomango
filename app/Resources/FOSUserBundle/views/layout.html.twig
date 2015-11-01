@@ -3,16 +3,25 @@
 {% block meta_title %}
 {% endblock %}
 
+{#
+    user is loaded by the controller when we display the public user profile
+    since we also use this layout for the profile display (when logged), we load the current user (app.user) in the user variable
+    this way we only have to handle one variable: user. Which is either the current user or the one display depending on the case
+#}
+{% if user is not defined %}
+    {% set user = app.user %}
+{% endif %}
+
 {% block page_content %}
 
-    <section class="p-b-20 bg-primary sm-no-margin ">
+    <section class="p-b-20 {% block profile_header_class 'bg-primary' %} sm-no-margin ">
         <div class="container p-t-50">
             <div class="row">
                 <div class="col-md-3"><br/></div>
                 <div class="col-md-9">
-                    <h2 class="text-white">{{ 'profile.welcomeBack'|trans }} {{ app.user.firstname }} {{ app.user.lastname|upper }}!</h2>
-                    <h4 class="text-white">{{ app.user.currentCity.name}}, {{ app.user.currentCity.country.name}}</h4>
-                    <h4 class="text-white">{{ app.user.getAge}}</h4>
+                    <h2 class="text-white">{% block profile_welcome_message '' %} {{ user.firstname }} {{ user.lastname|upper }}!</h2>
+                    <h4 class="text-white">{{ user.currentCity.name}}, {{ user.currentCity.country.name}}</h4>
+                    <h4 class="text-white">{{ user.getAge}}</h4>
                 </div>
             </div>
         </div>
@@ -23,14 +32,47 @@
             <!-- START USER CARD -->
             <div class="panel col-md-3">
                 <div id="user-picture-container">
-                    {% if app.user.getMedias.first %}
-                        <div class="user-picture user-img-1" style="background-image:url({{ asset(app.user.getMedias.first.getWebPath) }})"></div>
+                    {% if user.getMedias.first %}
+                        <div class="user-picture user-img-1" style="background-image:url({{ asset(user.getMedias.first.getWebPath) }})"></div>
                     {% else %}
                         <div class="user-picture user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }})"></div>
                     {% endif %}
                 </div>
 
                 {% block sub_profile_picture %}
+                    <!-- THIS IS THE MENU PROFILE WHEN THE USER IS LOGGED -->
+                    <!-- BEGIN PROFILE SIDE MENU-->
+                    <div id="profile-menu-left" class="bg-master-lightest m-t-10 p-b-10">
+                        <div id="profile-menu-title" class="text-center link-black">
+                            <a href="{{ path('fos_user_profile_show') }}"><h4>{{ 'profile.menu'|trans }}</h4></a>
+                        </div>
+                        <div class="dotted-line"><span></span></div>
+                        <div id="profile-menu-items">
+                            <ul>
+                                <a href="">
+                                    <li class="profile-menu-item">
+                                        <i class="fa fa-envelope fa-lg m-r-10"></i>{{ 'profile.message'|trans }}
+                                    </li>
+                                </a>
+                                <a href="{{ path('participation_received_list') }}" class="profile-menu-item">
+                                    <li class="profile-menu-item">
+                                        <i class="fa fa-bullhorn fa-lg m-r-10"></i>{{ 'profile.requestsFromTravelers'|trans }}
+                                    </li>
+                                </a>
+                                <a href="{{ path('participation_sent_list') }}" class="profile-menu-item">
+                                    <li class="profile-menu-item">
+                                        <i class="fa fa-suitcase fa-lg m-r-10"></i>{{ 'profile.yourRequests'|trans }}
+                                    </li>
+                                </a>
+                                <a href="{{ path('fos_user_profile_edit') }}" class="profile-menu-item">
+                                    <li class="profile-menu-item">
+                                        <i class="fa fa-pencil fa-lg m-r-10"></i>{{ 'profile.editProfile'|trans }}
+                                    </li>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- END PROFILE SIDE MENU-->
                 {% endblock sub_profile_picture %}
 
             </div>
@@ -39,14 +81,54 @@
             <!-- START USER CONTENT -->
             <div class="col-md-9">
                 {% block profile_content %}
+
+                <!-- BEGIN MAIN INFO BLOCK -->
+                    <div id="user-content" class="m-t-30">
+                        <div id="user-situation" >
+                            <h2 class="m-b-30">{{ 'profile.mainInfo'|trans }}</h2>
+                            <div class="col-md-12 panel panel-default">
+                                <div id="user-info-details" class="row {% block main_info_class 'bg-master-lightest' %} p-t-20">
+                                    <div class="m-b-10 col-md-6">
+                                        <div class="user-info-items">
+                                            <i class="fa fa-briefcase fa-lg"></i>
+                                            <span class="text-black semi-bold">{{ 'profile.occupation'|trans }}:</span> {{ app.user.occupation }}
+                                        </div>
+                                        <div class="user-info-items">
+                                            <i class="fa fa-home fa-lg"></i>
+                                            <span class="text-black semi-bold">{{ 'profile.hometown'|trans }}:</span> {{ app.user.fromCity.name }}
+                                        </div>
+                                        <div class="user-info-items">
+                                            <i class="fa fa-venus-mars fa-lg"></i>
+                                            <span class="text-black semi-bold">{{ 'profile.gender'|trans }}:</span> {{ app.user.gender}}
+                                        </div>
+                                    </div>
+                                    <div class=" m-b-15 col-md-6">
+                                        <div class="m-b-10">
+                                            <i class="fa fa-language fa-lg"></i>
+                                            <span class="text-black semi-bold">{{ 'user.languagespoken'|trans }}</span>
+                                        </div>
+                                        {% for language in app.user.getSpokenLanguages.getValues %}
+                                            <div class="flag flag-xs" role="image"  style="background: url({{ asset('img/countries/'~ language.language.flagLabel|lower ~'.svg') }});"></div>
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END MAIN INFO BLOCK -->
                 {% endblock profile_content %}
             </div>
             <!-- END USER CONTENT -->
         </div>
     </section>
 
+    {% block extra_content %}
+    {% endblock extra_content %}
+
 {% endblock page_content %}
 
 {% block javascripts %}
     {{ parent() }}
 {% endblock %}
+

@@ -3,6 +3,7 @@
 namespace Welcomango\Model;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Participation
@@ -92,6 +93,14 @@ class Participation
      * @ORM\Column(name="number_of_participants", type="integer", nullable=true)
      */
     private $numberOfParticipants;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime")
+     * @Gedmo\Timestampable(on="create")
+     */
+    private $createdAt;
 
     /**
      * Get id
@@ -293,5 +302,25 @@ class Participation
     public function getNumberOfParticipants()
     {
         return $this->numberOfParticipants;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 }

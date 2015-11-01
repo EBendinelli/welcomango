@@ -1,0 +1,73 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block profile_content %}
+    <h2 class="text-center">COUCOU C LES RIKUEST SENT</h2>
+
+    <div class="panel panel-default portlet">
+        <!-- TABLE OF REQUEST SEND BY THE USER-->
+        <div class="panel-body" id="profile_request_sent">
+            <div class="table-responsive">
+                <table class="entity-table table table-condensed">
+                    <thead>
+                    <tr>
+                        <th class="col-md-3">{{ 'participation.experience'|trans }}</th>
+                        <th class="col-md-1">{{ 'participation.numberOfParticipants'|trans }}</th>
+                        <th class="col-md-2">{{ 'participation.date'|trans }}</th>
+                        <th class="col-md-1">{{ 'participation.duration'|trans }}</th>
+                        <th class="col-md-1">{{ 'participation.time'|trans }}</th>
+                        <th class="col-md-2">{{ 'participation.status'|trans }}</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for participation in participations %}
+                        {% if participation.status != 'happened' %}
+                            <tr class="">
+                                <td class="col-md-3">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <a href="{{ asset(path('front_user_view', {'user_id': participation.user.id})) }}">
+                                                {% if participation.user.getMedias.first %}
+                                                    <img src='{{ asset(participation.user.getMedias.first.getWebPath) }}' class='front-menu-user-picture m-r-10' />
+                                                {% else %}
+                                                    <img src='{{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }}' class='front-menu-user-picture m-r-10' />
+                                                {% endif %}
+                                            </a>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="requested-experience">
+                                                <a href="{{ path('front_experience_view', {'experience_id': participation.experience.id}) }}" class="text-black semi-bold hover-bold">
+                                                    {{ participation.experience.title }}
+                                                </a>
+                                            </div>
+                                            <div class="requested-experience-user">
+                                                by <a href="{{ asset(path('front_user_view', {'user_id': participation.experience.getAuthor.id})) }}" class="text-primary hover-bold">{{ participation.experience.getAuthor.firstname }}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="col-md-1">{{ participation.numberOfParticipants }}</td>
+                                <td class="col-md-2">{{ participation.date|date('Y-m-d')  }}</td>
+                                <td class="col-md-1">{{ date_difference(participation.startTime, participation.endTime) }}</td>
+                                <td class="col-md-1">{{ participation.startTime|date('H:i') }}</td>
+                                <td class="col-md-2">{{ participation.status }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% if participations.count == 0 %}
+                    <div class="col-md-12 text-center alert alert-warning">
+                        <i class="fa fa-frown-o m-r-5"></i>{{ 'participation.noRequestFound' }}
+                        <div><strong><a class="alert-warning" href="{{ path('front_experience_list') }}">{{ 'participation.explore' }}</a></strong></div>
+                    </div>
+                {% endif %}
+                {% include 'WelcomangoCoreBundle:CRUD:pagination.html.twig' with {
+                'path': path('participation_sent_list'),
+                'pagination': participations
+                } %}
+            </div>
+        </div>
+    </div>
+
+{% endblock profile_content %}

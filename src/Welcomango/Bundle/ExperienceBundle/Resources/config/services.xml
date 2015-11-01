@@ -5,9 +5,6 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="welcomango.front.participation.manager" class="Welcomango\Bundle\ExperienceBundle\Manager\ParticipationManager">
-        </service>
-
         <service id="welcomango.front.experience.manager" class="Welcomango\Bundle\ExperienceBundle\Manager\ExperienceManager">
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>

@@ -36,14 +36,15 @@ class LoadParticipationData extends AbstractFixture implements FixtureInterface,
 
         $users = $userRepo->findAll();
         $experiences = $experienceRepo->findAll();
-        $creatorStatus = array('available', 'happened', 'booked');
-        $ParticipantStatus = array('requested', 'validated', 'happened');
+        $creatorStatus = array('Available', 'Happened', 'Booked');
+        $ParticipantStatus = array('Requested', 'Accepted', 'Happened');
 
         //Each experience has a creator
         foreach($experiences as $experience){
             $entry = new Participation();
             $entry->setUser($users[array_rand($users)]);
             $entry->setExperience($experience);
+
             $randDate = new \DateTime;
             $randTimestamp = mt_rand(1421406219,1476612219);
             $randDate->setTimestamp($randTimestamp);

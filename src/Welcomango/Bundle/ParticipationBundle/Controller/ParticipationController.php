@@ -26,21 +26,59 @@ class ParticipationController extends BaseController
     /**
      * @param Request $request
      *
-     * @Route("/participation/list", name="participation_list")
+     * @Route("/requests/received", name="participation_received_list")
      * @Template()
      *
      * @return array
      */
-    public function listAction(Request $request)
+    public function listReceivedAction(Request $request)
     {
         $user = $this->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
-        $participations = $this->getRepository('Welcomango\Model\Participation')->findByUser($user);
+
+        $experience = $user->getExperience();
+
+        $paginator = $this->get('knp_paginator');
+        $query     = $this->getRepository('Welcomango\Model\Participation')->findBy(array('experience' => $experience , 'isParticipant' => 1), array('createdAt' => 'DESC'));
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1),
+            20
+        );
 
         return array(
-            'participations' => $participations,
+            'participations' => $pagination,
+            'user' => $user
+        );
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @Route("/requests/sent", name="participation_sent_list")
+     * @Template()
+     *
+     * @return array
+     */
+    public function listSentAction(Request $request)
+    {
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+
+        $paginator = $this->get('knp_paginator');
+        $query     = $this->getRepository('Welcomango\Model\Participation')->findBy(array('user' => $user, 'isParticipant' => 1));
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1),
+            20
+        );
+
+        return array(
+            'participations' => $pagination,
         );
     }
 
@@ -78,43 +116,20 @@ class ParticipationController extends BaseController
      * @param Request    $request
      * @param Participation $participation
      *
-     * @Route("/participation/{participation_id}/edit", name="participation_edit")
+     * @Route("/request/update/{participation_id}/status", name="participation_update")
      * @Template()
      *
      * @return array
      */
-    public function editAction(Request $request, Participation $participation)
+    public function updateAction(Request $request, Participation $participation)
     {
-        $form = $this->createForm($this->get('welcomango.form.participation.edit'), $participation);
-        $form->handleRequest($request);
-        if ($form->isValid()) {
-            $this->getDoctrine()->getManager()->persist($participation);
-            $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success', $this->trans('participation.edit.success', array(), 'crm'));
+        $participation->setStatus($request->query->get('status'));
 
-            return $this->redirect($this->generateUrl('participation_list'));
-        }
-
-        return array(
-            'form'           => $form->createView(),
-            'requested_participation' => $participation
-        );
-    }
-
-    /**
-     * @param Participation $participation
-     *
-     * @Route("/participation/{participation_id}/delete", name="participation_delete")
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function deleteAction(Participation $participation)
-    {
-
-        $this->getDoctrine()->getManager()->remove($participation);
+        $this->getDoctrine()->getManager()->persist($participation);
         $this->getDoctrine()->getManager()->flush();
+        $this->addFlash('success', $this->trans('participation.edit.success', array(), 'crm'));
 
-        return $this->redirect($this->generateUrl('participation_list'));
+        return $this->redirect($this->generateUrl('participation_received_list'));
     }
 
 }

@@ -532,4 +532,15 @@ class User extends BaseUser
     {
         $this->medias->removeElement($medias);
     }
+
+    /**
+     * Get experience
+     *
+     * @return Experience
+     */
+    public function getExperience(){
+        foreach($this->participations as $participation){
+            if($participation->getIsCreator()) return $participation->getExperience();
+        }
+    }
 }

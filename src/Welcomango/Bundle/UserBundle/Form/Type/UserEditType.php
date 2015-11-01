@@ -102,9 +102,6 @@ class UserEditType extends AbstractType
             'label' => 'form.user.gender'
         ));
 
-
-
-
     }
 
     /**

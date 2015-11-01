@@ -1,4 +1,36 @@
 /* //////////////////////////////////////////////////////// */
+/* ////////////////   GENERAL UI ////////////////////////// */
+/* //////////////////////////////////////////////////////// */
+
+.hover-bold:hover{
+    transition: font-weight 0.2s linear !important;
+}
+
+.hover-bold:hover{
+    font-weight: 700 !important;
+}
+
+.hover-shadow:hover{
+    transition: text-shadow 1s linear !important;
+}
+
+.hover-shadow:hover{
+    text-shadow: 2px 0px 3px rgba(150, 150, 150, 1) !important;
+}
+
+.link-black{
+    color: #2c2c2c;
+}
+
+.hover-opacity:hover{
+    opacity: 0.5;
+}
+
+.hover-pointer:hover{
+    cursor: pointer;
+}
+
+/* //////////////////////////////////////////////////////// */
 /* ////////////////////   DOTED LINE  ////////////////////// */
 /* //////////////////////////////////////////////////////// */
 
@@ -6,7 +38,7 @@
 div.dotted-line:after {
     width: 100%;
     height: 1px;
-    background: none repeat scroll 0% 0% #252525;
+    background: none repeat scroll 0% 0% #313B44;
     position: absolute;
     top: 5px;
     left: 0px;
@@ -17,7 +49,7 @@ div.dotted-line:after {
 div.dotted-line {
     width: 170px;
     height: 1px;
-    margin: 0px auto 25px;
+    margin: 0px auto 15px;
     text-align: center;
     position: relative;
 }
@@ -28,7 +60,7 @@ div.dotted-line span {
     border: 3px solid #FFF;
     display: block;
     margin: auto;
-    background: none repeat scroll 0% 0% #252525;
+    background: none repeat scroll 0% 0% #313B44;
     border-radius: 50%;
     z-index: 2;
     position: relative;
@@ -83,7 +115,11 @@ div.dotted-line span {
 }
 
 .card-bg-master-lightest{
-    background-color:#f0f0f0;
+    background-color:#fafafa;
+}
+
+.card-triangle-bg-master-lightest{
+    border-top:200px solid #fafafa !important;
 }
 
 .card .title {
@@ -501,7 +537,7 @@ a h4:hover{
 }
 
 .featured-card{
-    border: 1px solid #e6e6e6;
+    border: 1px solid rgba(0,0,0,.07);
     height:200px;
     position: relative;
 }
@@ -566,6 +602,14 @@ a h4:hover{
     border-right:60px solid transparent;
 }
 
+.user-info-items{
+    margin-bottom:20px;
+}
+
+.user-info-details{
+    /*border*/
+}
+
 /* //////////////////////////////////////////////////////// */
 /* ////////////////   PROFILE  //////////////////////////// */
 /* //////////////////////////////////////////////////////// */
@@ -579,6 +623,11 @@ a h4:hover{
 
 #profile-header a:last-child{
     border-right:none;
+}
+
+#profile-menu-title{
+    padding-top:5px;
+
 }
 
 .profile-header-item:hover{
@@ -595,7 +644,23 @@ a h4:hover{
     transition: background-color 0.2s !important;
 }
 
+#profile-menu-items ul{
+    padding: 0px;
+}
 
+#profile-menu-items li{
+    list-style-type: none;
+    padding:10px 15px 10px 15px;
+}
+
+#profile-menu-items a{
+    color: #313B44;
+}
+
+.profile-menu-item:hover{
+    background-color:white;
+    color: #48b0f7;
+}
 
 /* //////////////////////////////////////////////////////// */
 /* ////////////////   FLAGS /////////////////////////////// */
@@ -724,6 +789,5 @@ a .front-menu-user-picture{
 
 /* ///// BOOTSTRAP TABLE FOR PARTICIPATION LIST /////// */
 .table tbody tr td {
-    border-top: 0;
     padding: 20px;
 }

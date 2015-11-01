@@ -1,0 +1,99 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block profile_content %}
+    {% if not user.getExperience %}
+        <div class="row">
+            <div class="col-md-12 text-center m-t-20 p-b-30 bg-master-lightest ">
+                <h2>Oops</h2>
+                <i class="fa fa-meh-o fa-5x m-b-20"></i>
+                <p>{{ 'participation.noExperienceCreated' }}</p>
+                <a class="m-t-20 btn btn-primary"><i class="fa fa-plus fa-lg m-r-5"></i>{{ 'participation.createExperience' }}</a>
+            </div>
+        </div>
+    {% else %}
+        <div class="text-center m-b-20">
+            <h2>{{ 'participation.requestReceivedFor'|trans }}</h2>
+            <h4>
+                <a class="text-primary hover-bold" href="{{ path('front_experience_view', {'experience_id': user.getExperience.id}) }}">{{ user.getExperience.title }}</a>
+            </h4>
+        </div>
+        <div class="panel panel-default portlet">
+            <!-- TABLE OF REQUEST RECEIVED FOR THE USER EXPERIENCE -->
+            <div class="panel-body" id="profile_request_received">
+                <div class="table-responsive">
+                    <table class="entity-table table table-condensed">
+                        <thead>
+                        <tr>
+                            <th class="col-md-3">{{ 'participation.user'|trans }}</th>
+                            <th class="col-md-2">{{ 'participation.requestedTime'|trans }}</th>
+                            <th class="col-md-2">{{ 'participation.date'|trans }}</th>
+                            <th class="col-md-2">{{ 'participation.duration'|trans }}</th>
+                            <th class="col-md-3">{{ 'participation.controls'|trans }}</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for participation in participations %}
+                                <tr style="margin-top:10px">
+                                    <td class="col-md-3">
+                                        <a href="{{ asset(path('front_user_view', {'user_id': participation.user.id})) }}" class="link-black semi-bold">
+                                            {% if participation.user.getMedias.first %}
+                                                <img src='{{ asset(participation.user.getMedias.first.getWebPath) }}' class='front-menu-user-picture m-r-10' />
+                                            {% else %}
+                                                <img src='{{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }}' class='front-menu-user-picture m-r-10' />
+                                            {% endif %}
+                                            {{ participation.user.firstname }} {{ participation.user.lastname }}
+                                        </a>
+                                    </td>
+                                    <td class="col-md-2">{{ participation.createdAt|time_diff  }}</td>
+                                    <td class="col-md-2">{{ participation.date|date('d-m-Y')  }}</td>
+                                    <td class="col-md-2 text-center">{{ date_difference(participation.startTime, participation.endTime) }}</td>
+                                    <td class="col-md-3">
+                                        {{ request_action(participation) }}
+                                        {{ participation.status }}
+                                    </td>
+                                </tr>
+                              {#  <tr>
+                                    <td colspan="5">
+                                        <div class="row">
+                                            <div class="col-md-12 semi-bold m-b-10">{{ 'participation.requestDetails'|trans }}</div>
+                                            <div class="col-md-4"><span class="semi-bold">{{ participation.numberOfParticipants }}</span> {{ 'participation.participants'|trans }}</div>
+                                            <div class="col-md-4">{{ 'participation.meetingAt'|trans }}: <span class="semi-bold">{{ participation.startTime|date('H:i') }}</span></div>
+                                            <div class="col-md-4"></div>
+                                        </div>
+                                    </td>
+                                </tr>#}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% if participations.count == 0 %}
+                        <div class="col-md-12 text-center alert alert-warning"><i class="fa fa-frown-o m-r-5"></i>{{ 'participation.noRequestFound' }}</div>
+                    {% endif %}
+                    {% include 'WelcomangoCoreBundle:CRUD:pagination.html.twig' with {
+                    'path': path('participation_received_list'),
+                    'pagination': participations
+                    } %}
+                </div>
+            </div>
+        </div>
+
+        <!-- BEGIN DELETE CONFIRMATION MODAL -->
+        {{ include("::_modal.html.twig", {
+            'title': 'Are you sure you want to refuse meeting?',
+            'main_text': 'If you have not yet exchanged with this person, please send him a little message.',
+            'valid_button_name': 'Decline'
+        })}}
+        <!-- END DELETE CONFIRMATION MODAL -->
+
+    {% endif %}
+
+{% endblock profile_content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        function updateModal(route){
+            $('#modal-delete-button').attr("href", route);
+        }
+    </script>
+{% endblock %}

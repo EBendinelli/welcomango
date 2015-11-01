@@ -1,6 +1,6 @@
 <?php
 
-namespace Welcomango\Bundle\ExperienceBundle\Manager;
+namespace Welcomango\Bundle\ParticipationBundle\Manager;
 
 
 class ParticipationManager
