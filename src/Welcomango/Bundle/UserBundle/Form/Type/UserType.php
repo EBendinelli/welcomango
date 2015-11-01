@@ -1,6 +1,6 @@
 <?php
 
-namespace Welcomango\Bundle\UserBundle\Form\AType;
+namespace Welcomango\Bundle\UserBundle\Form\Type;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
