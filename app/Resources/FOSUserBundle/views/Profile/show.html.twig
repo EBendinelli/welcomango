@@ -4,6 +4,44 @@
 
 {% block profile_welcome_message %}{{ 'profile.welcomeBack'|trans }}{% endblock %}
 
+{% block sub_profile_picture %}
+    <!-- THIS IS THE MENU PROFILE WHEN THE USER IS LOGGED -->
+    <!-- BEGIN PROFILE SIDE MENU-->
+    <div id="profile-menu-left" class="bg-master-lightest m-t-10 p-b-10">
+        <div id="profile-menu-title" class="text-center link-black">
+            <a href="{{ path('fos_user_profile_show') }}"><h4>{{ 'profile.menu'|trans }}</h4></a>
+        </div>
+        <div class="dotted-line"><span></span></div>
+        <div id="profile-menu-items">
+            <ul>
+                <a href="">
+                    <li class="profile-menu-item">
+                        <i class="fa fa-envelope fa-lg m-r-10"></i>{{ 'profile.message'|trans }}
+                    </li>
+                </a>
+                <a href="{{ path('participation_received_list', {'display': 'received'}) }}" class="profile-menu-item">
+                    <li class="profile-menu-item">
+                        <i class="fa fa-bullhorn fa-lg m-r-10"></i>{{ 'profile.requestsFromTravelers'|trans }}
+                        {{ notification_display(user, 'received') }}
+                    </li>
+                </a>
+                <a href="{{ path('participation_sent_list') }}" class="profile-menu-item">
+                    <li class="profile-menu-item">
+                        <i class="fa fa-suitcase fa-lg m-r-10"></i>{{ 'profile.yourRequests'|trans }}
+                        {{ notification_display(user, 'sent') }}
+                    </li>
+                </a>
+                <a href="{{ path('fos_user_profile_edit') }}" class="profile-menu-item">
+                    <li class="profile-menu-item">
+                        <i class="fa fa-pencil fa-lg m-r-10"></i>{{ 'profile.editProfile'|trans }}
+                    </li>
+                </a>
+            </ul>
+        </div>
+    </div>
+    <!-- END PROFILE SIDE MENU-->
+{% endblock sub_profile_picture %}
+
 {% block profile_content %}
 
     <!-- BEGIN PROFILE TOP MENU-->
@@ -50,7 +88,8 @@
             'title': 'Are you sure you want to delete your experience?',
             'path_valid': path('front_experience_delete', {'experience_id': userExperiences|first.id}),
             'main_text': 'This means that Welcomanger won\'t be able to visit your town in your company anymore.<br/>How sad.',
-            'valid_button_name': 'Delete'
+            'valid_button_name': 'Delete',
+            'extra_icon': '<i class="fa fa-frown-o fa-4x"></i>'
         })}}
     {% endif %}
     <!-- END DELETE CONFIRMATION MODAL -->

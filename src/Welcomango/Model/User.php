@@ -139,6 +139,20 @@ class User extends BaseUser
      **/
     private $medias;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="note_as_local", type="float", nullable=true)
+     */
+    private $noteAsLocal;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="note_as_traveler", type="float", nullable=true)
+     */
+    private $noteAsTraveler;
+
 
     /**
      * Get id
@@ -511,6 +525,46 @@ class User extends BaseUser
     }
 
     /**
+     * Set noteAsLocal
+     *
+     * @param float $$noteAsLocal
+     */
+    public function setNoteAsLocal($noteAsLocal)
+    {
+        $this->noteAsLocal = $noteAsLocal;
+    }
+
+    /**
+     * Get noteAsLocal
+     *
+     * @return float
+     */
+    public function getNoteAsLocal()
+    {
+        return $this->noteAsLocal;
+    }
+
+    /**
+     * Set noteAsTraveler
+     *
+     * @param float $noteAsTraveler
+     */
+    public function setNoteAsTraveler($noteAsTraveler)
+    {
+        $this->noteAsTraveler = $noteAsTraveler;
+    }
+
+    /**
+     * Get noteAsTraveler
+     *
+     * @return float
+     */
+    public function getNoteAsTraveler()
+    {
+        return $this->noteAsTraveler;
+    }
+
+    /**
      * Add medias
      *
      * @param \Welcomango\Model\Media $medias
@@ -542,5 +596,19 @@ class User extends BaseUser
         foreach($this->participations as $participation){
             if($participation->getIsCreator()) return $participation->getExperience();
         }
+    }
+
+    /**
+     * @return Array
+     */
+    public function getAttendedParticipations()
+    {
+        $attendedParticipations = array();
+        foreach($this->participations as $participation){
+            if($participation->getIsParticipant() && $participation->getStatus() == 'Happened'){
+                $attendedParticipations[] = $participation;
+            }
+        }
+        return $attendedParticipations;
     }
 }

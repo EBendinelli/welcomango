@@ -62,7 +62,6 @@ class LoadParticipationData extends AbstractFixture implements FixtureInterface,
             $entry->setEndTime($endTime);
 
             $entry->setEndTime($endTime);
-            $entry->setNote(rand(1,5));
 
             $entry->setIsCreator(true);
             $entry->setIsParticipant(false);
@@ -73,35 +72,40 @@ class LoadParticipationData extends AbstractFixture implements FixtureInterface,
         }
 
         //Generate random participations participant
-        for($i=0;$i<30;$i++){
+        for($i=0;$i<40;$i++){
             $entry = new Participation();
-            $entry->setUser($users[array_rand($users)]);
-            $entry->setExperience($experiences[array_rand($experiences)]);
+            $randExperience = $experiences[array_rand($experiences)];
+            $entry->setExperience($randExperience );
+            $randUser = $users[array_rand($users)];
+            if($randUser != $randExperience->getAuthor()){
+                $entry->setUser($randUser );
 
-            $randDate = new \DateTime;
-            $randTimestamp = mt_rand(1421406219,1476612219);
-            $randDate->setTimestamp($randTimestamp );
-            $entry->setDate($randDate);
+                $randDate = new \DateTime;
+                $randTimestamp = mt_rand(1421406219,1476612219);
+                $randDate->setTimestamp($randTimestamp );
+                $entry->setDate($randDate);
 
-            $startTime = new \Datetime;
-            $startTime->setTimestamp($randTimestamp);
-            $randTime = rand(9, 19);
-            $startTime->setTime($randTime ,0);
-            $entry->setStartTime($startTime);
+                $startTime = new \Datetime;
+                $startTime->setTimestamp($randTimestamp);
+                $randTime = rand(9, 19);
+                $startTime->setTime($randTime ,0);
+                $entry->setStartTime($startTime);
 
-            $endTime = new \Datetime;
-            $endTime->setTimestamp($randTimestamp);
-            $endTime->setTime($randTime+rand(1,5),0);
-            $entry->setEndTime($endTime);
+                $endTime = new \Datetime;
+                $endTime->setTimestamp($randTimestamp);
+                $endTime->setTime($randTime+rand(1,5),0);
+                $entry->setEndTime($endTime);
 
-            $entry->setNote(rand(1,5));
-            $entry->setNumberOfParticipants(rand(1,10));
-            $entry->setIsCreator(false);
-            $entry->setIsParticipant(true);
-            $entry->setStatus($ParticipantStatus[rand(0,2)]);
+                $entry->setLocalNote(rand(1,5));
+                $entry->setTravelerNote(rand(1,5));
+                $entry->setNumberOfParticipants(rand(1,10));
+                $entry->setIsCreator(false);
+                $entry->setIsParticipant(true);
+                $entry->setStatus($ParticipantStatus[rand(0,2)]);
 
 
-            $manager->persist($entry);
+                $manager->persist($entry);
+            }
         }
         $manager->flush();
 
@@ -109,6 +113,12 @@ class LoadParticipationData extends AbstractFixture implements FixtureInterface,
         $experienceManager = $this->container->get('welcomango.front.experience.manager');
         foreach($experiences as $experience){
             $experienceManager->updateAverageNote($experience);
+        }
+
+        $userManager = $this->container->get('welcomango.front.user.manager');
+        foreach($users as $user){
+            $userManager->updateAverageTravelerNote($user);
+            $userManager->updateAverageLocalNote($user);
         }
 
     }

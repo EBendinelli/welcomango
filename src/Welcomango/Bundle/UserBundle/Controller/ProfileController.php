@@ -33,7 +33,7 @@ class ProfileController extends BaseProfileController
             ->findAllExperiencesCreatedByUser($user);
 
         return $this->render('FOSUserBundle:Profile:show.html.twig', array(
-            'userExperiences' => $userExperiences
+            'userExperiences' => $userExperiences,
         ));
     }
 

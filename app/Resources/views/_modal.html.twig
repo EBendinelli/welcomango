@@ -12,7 +12,7 @@
                     <p>
                         {{ main_text|raw }}
                         <div class="m-t-10 m-b-20">
-                            <i class="fa fa-frown-o fa-4x"></i>
+                            {{ extra_icon|default('')|raw }}
                         </div>
                         <span class="fs-12"><i class="fa fa-exclamation-triangle"></i> Note that you won't be able to undo this action.</span><br/>
                     </p>

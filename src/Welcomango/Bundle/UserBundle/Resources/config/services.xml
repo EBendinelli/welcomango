@@ -23,6 +23,10 @@
             <argument type="service" id="security.context" />
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
+
+        <service id="welcomango.front.user.manager" class="Welcomango\Bundle\UserBundle\Manager\UserManager">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
     </services>
 
 </container>

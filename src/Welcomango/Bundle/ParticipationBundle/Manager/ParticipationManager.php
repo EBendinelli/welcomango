@@ -11,7 +11,7 @@ class ParticipationManager
     }
 
     public function processParticipationQuery($participation, $form){
-        $participation->setStatus('requested');
+        $participation->setStatus('Requested');
         $participation->setIsCreator(0);
         $participation->setIsParticipant(1);
         $participation->setDate($form->get('desired_date')->getData());

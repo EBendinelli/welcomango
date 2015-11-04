@@ -32,47 +32,16 @@
             <!-- START USER CARD -->
             <div class="panel col-md-3">
                 <div id="user-picture-container">
-                    {% if user.getMedias.first %}
-                        <div class="user-picture user-img-1" style="background-image:url({{ asset(user.getMedias.first.getWebPath) }})"></div>
-                    {% else %}
-                        <div class="user-picture user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }})"></div>
-                    {% endif %}
+                    <a href="{{ path('fos_user_profile_show') }}">
+                        {% if user.getMedias.first %}
+                            <div class="user-picture user-img-1" style="background-image:url({{ asset(user.getMedias.first.getWebPath) }})"></div>
+                        {% else %}
+                            <div class="user-picture user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }})"></div>
+                        {% endif %}
+                    </a>
                 </div>
 
                 {% block sub_profile_picture %}
-                    <!-- THIS IS THE MENU PROFILE WHEN THE USER IS LOGGED -->
-                    <!-- BEGIN PROFILE SIDE MENU-->
-                    <div id="profile-menu-left" class="bg-master-lightest m-t-10 p-b-10">
-                        <div id="profile-menu-title" class="text-center link-black">
-                            <a href="{{ path('fos_user_profile_show') }}"><h4>{{ 'profile.menu'|trans }}</h4></a>
-                        </div>
-                        <div class="dotted-line"><span></span></div>
-                        <div id="profile-menu-items">
-                            <ul>
-                                <a href="">
-                                    <li class="profile-menu-item">
-                                        <i class="fa fa-envelope fa-lg m-r-10"></i>{{ 'profile.message'|trans }}
-                                    </li>
-                                </a>
-                                <a href="{{ path('participation_received_list') }}" class="profile-menu-item">
-                                    <li class="profile-menu-item">
-                                        <i class="fa fa-bullhorn fa-lg m-r-10"></i>{{ 'profile.requestsFromTravelers'|trans }}
-                                    </li>
-                                </a>
-                                <a href="{{ path('participation_sent_list') }}" class="profile-menu-item">
-                                    <li class="profile-menu-item">
-                                        <i class="fa fa-suitcase fa-lg m-r-10"></i>{{ 'profile.yourRequests'|trans }}
-                                    </li>
-                                </a>
-                                <a href="{{ path('fos_user_profile_edit') }}" class="profile-menu-item">
-                                    <li class="profile-menu-item">
-                                        <i class="fa fa-pencil fa-lg m-r-10"></i>{{ 'profile.editProfile'|trans }}
-                                    </li>
-                                </a>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- END PROFILE SIDE MENU-->
                 {% endblock sub_profile_picture %}
 
             </div>

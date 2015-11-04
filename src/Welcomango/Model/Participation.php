@@ -67,9 +67,16 @@ class Participation
     /**
      * @var integer
      *
-     * @ORM\Column(name="note", type="integer", nullable=true)
+     * @ORM\Column(name="local_note", type="integer", nullable=true)
      */
-    private $note;
+    private $localNote;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="traveler_note", type="integer", nullable=true)
+     */
+    private $travelerNote;
 
     /**
      * @var User
@@ -233,23 +240,43 @@ class Participation
     }
 
     /**
-     * Set note
+     * Set localNote
      *
-     * @param integer $note
+     * @param integer $localNote
      */
-    public function setNote($note)
+    public function setLocalNote($localNote)
     {
-        $this->note = $note;
+        $this->localNote = $localNote;
     }
 
     /**
-     * Get note
+     * Get localNote
      *
-     * @return integer 
+     * @return integer
      */
-    public function getNote()
+    public function getLocalNote()
     {
-        return $this->note;
+        return $this->localNote;
+    }
+
+    /**
+     * Set travelerNote
+     *
+     * @param integer $travelerNote
+     */
+    public function setTravelerNote($travelerNote)
+    {
+        $this->travelerNote = $travelerNote;
+    }
+
+    /**
+     * Get travelerNote
+     *
+     * @return integer
+     */
+    public function gettravelerNote()
+    {
+        return $this->travelerNote;
     }
 
     /**

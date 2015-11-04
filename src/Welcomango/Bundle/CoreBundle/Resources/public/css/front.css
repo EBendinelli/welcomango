@@ -7,7 +7,7 @@
 }
 
 .hover-bold:hover{
-    font-weight: 700 !important;
+    font-weight: 600 !important;
 }
 
 .hover-shadow:hover{
@@ -28,6 +28,28 @@
 
 .hover-pointer:hover{
     cursor: pointer;
+}
+
+.hover-bg-master-lightest:hover{
+    background-color: #f6f6f6;
+}
+
+.notification-icon{
+    position:absolute;    /* This breaks the div from the normal HTML document. */
+    bottom: 0px;
+    left:25px;
+    padding:1px 0px 0px 1px;
+    background-color:red; /* you could use a background image if you'd like as well */
+    color:white;
+    font-weight:bold;
+    font-size:0.65em;
+    width: 14px;
+    height: 14px;
+    text-align:center;
+
+    border-radius:50%;
+    z-index:9;
+    box-shadow:1px 1px 1px gray;
 }
 
 /* //////////////////////////////////////////////////////// */
@@ -662,6 +684,31 @@ a h4:hover{
     color: #48b0f7;
 }
 
+.profile-menu-item{
+    position: relative;
+    display: inline-block;
+}
+
+#profile-request-received tr:hover{
+    cursor:pointer;
+}
+
+.participation-row-bold{
+    font-weight:bold !important;
+}
+
+.participation-row-bold td{
+    font-weight:bold !important;
+}
+
+.participation-row-bold  a{
+    font-weight:bold !important;
+}
+
+.participation-row-refused{
+    opacity:0.5;
+}
+
 /* //////////////////////////////////////////////////////// */
 /* ////////////////   FLAGS /////////////////////////////// */
 /* //////////////////////////////////////////////////////// */
@@ -790,4 +837,23 @@ a .front-menu-user-picture{
 /* ///// BOOTSTRAP TABLE FOR PARTICIPATION LIST /////// */
 .table tbody tr td {
     padding: 20px;
+}
+
+
+/* /// IMITATION OF PAGES BEHAVIOR FOR DETAILED TABLE /// */
+.table-details td:first-child:before{
+    content: "\f054";
+    display: inline-block;
+    margin-right: 8px;
+    font-family: 'FontAwesome';
+    -webkit-transition: all 0.12s linear;
+    transition: all 0.12s linear;
+}
+
+.shown td:first-child:before{
+    transform: rotate(90deg);
+}
+
+.shown{
+    background-color: #f6f6f6;
 }

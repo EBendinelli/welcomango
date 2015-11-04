@@ -41,5 +41,10 @@
         <service id="welcomango.core.display_role_icon_extension" class="Welcomango\Bundle\CoreBundle\Twig\DisplayRoleIconExtension">
             <tag name="twig.extension"/>
         </service>
+
+        <service id="welcomango.core.notification_display" class="Welcomango\Bundle\CoreBundle\Twig\NotificationDisplayExtension">
+            <tag name="twig.extension"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
     </services>
 </container>

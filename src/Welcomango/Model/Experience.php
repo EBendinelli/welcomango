@@ -501,12 +501,6 @@ class Experience
         }
     }
 
-    public function updateAverageNote(){
-        /**
-         * @todo develop experience manager to handle this
-         */
-    }
-
     public function __construct()
     {
         $this->tags           = new ArrayCollection();
