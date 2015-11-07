@@ -151,3 +151,10 @@ welcomango_participation:
         - Accepted
         - Refused
         - Cancelled
+    meeting_times:
+        - Early Morning
+        - Morning
+        - Lunchtime
+        - Afternoon
+        - Evening
+        - Night

@@ -1,6 +1,6 @@
 <?php
 
-namespace Welcomango\Bundle\UserBundle\Form\Type;
+namespace Welcomango\Bundle\ExperienceBundle\Form\Type;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\FormEvent;
@@ -12,12 +12,12 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 use Welcomango\Bundle\CoreBundle\DataTransformer\CityTransformer;
-use Welcomango\Model\User;
+use Welcomango\Model\Experience;
 
 /**
- * AdminUserFilterType form
+ * ExperienceFilterType form
  */
-class AdminUserFilterType extends AbstractType
+class ExperienceFilterType extends AbstractType
 {
     /**
      * @var Doctrine\ORM\EntityManager entityManager
@@ -42,19 +42,15 @@ class AdminUserFilterType extends AbstractType
         $transformer = new CityTransformer($this->entityManager);
 
         $builder
-            ->add('roles', 'choice', [
+/*            ->add('roles', 'choice', [
                 'label'    => 'form.user.roles',
                 'required' => false,
                 'choices'  => User::getAvailableRoles(),
                 'multiple' => true,
-            ])
-            ->add('username', 'text', [
+            ])*/
+            ->add('title', 'text', [
                 'required' => false,
-                'label'    => 'user.username',
-            ])
-            ->add('enabled', 'yes_no', [
-                'required' => false,
-                'label'    => 'user.is_active',
+                'label'    => 'experience.title',
             ])
             ->add($builder->create('city', 'genemu_jqueryselect2_hidden', [
                 'configs' => [],
@@ -80,6 +76,6 @@ class AdminUserFilterType extends AbstractType
      */
     public function getName()
     {
-        return 'user_research';
+        return 'experience_research';
     }
 }

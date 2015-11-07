@@ -60,15 +60,15 @@
                                     <div class="m-b-10 col-md-6">
                                         <div class="user-info-items">
                                             <i class="fa fa-briefcase fa-lg"></i>
-                                            <span class="text-black semi-bold">{{ 'profile.occupation'|trans }}:</span> {{ app.user.occupation }}
+                                            <span class="text-black semi-bold">{{ 'profile.occupation'|trans }}:</span> {{ user.occupation }}
                                         </div>
                                         <div class="user-info-items">
                                             <i class="fa fa-home fa-lg"></i>
-                                            <span class="text-black semi-bold">{{ 'profile.hometown'|trans }}:</span> {{ app.user.fromCity.name }}
+                                            <span class="text-black semi-bold">{{ 'profile.hometown'|trans }}:</span> {{ user.fromCity.name }}
                                         </div>
                                         <div class="user-info-items">
                                             <i class="fa fa-venus-mars fa-lg"></i>
-                                            <span class="text-black semi-bold">{{ 'profile.gender'|trans }}:</span> {{ app.user.gender}}
+                                            <span class="text-black semi-bold">{{ 'profile.gender'|trans }}:</span> {{ user.gender}}
                                         </div>
                                     </div>
                                     <div class=" m-b-15 col-md-6">
@@ -76,7 +76,7 @@
                                             <i class="fa fa-language fa-lg"></i>
                                             <span class="text-black semi-bold">{{ 'user.languagespoken'|trans }}</span>
                                         </div>
-                                        {% for language in app.user.getSpokenLanguages.getValues %}
+                                        {% for language in user.getSpokenLanguages.getValues %}
                                             <div class="flag flag-xs" role="image"  style="background: url({{ asset('img/countries/'~ language.language.flagLabel|lower ~'.svg') }});"></div>
                                         {% endfor %}
 
