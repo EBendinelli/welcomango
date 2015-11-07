@@ -25,10 +25,7 @@ class MediaType extends AbstractType
                 'label'    => 'form.media.description',
                 'required' => true,
             ])
-            ->add('file', 'file', [
-                'label'    => 'form.user.flag_label',
-                'required' => true,
-            ])
+            ->add('file', 'genemu_jqueryimage');
         ;
     }
 

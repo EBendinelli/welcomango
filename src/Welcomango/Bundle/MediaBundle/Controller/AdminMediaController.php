@@ -63,7 +63,13 @@ class AdminMediaController extends BaseController
 
         if ($form->isValid()) {
             $media = $form->getData();
-            $media->upload();
+            $file  = $media->getFile();
+
+            $media->setFilename($file->getBasename('.'.$file->guessExtension()));
+            $media->setExtension($file->guessExtension());
+            $media->setSize($file->getSize());
+            $media->setMimeType($file->getMimeType());
+
             $this->getDoctrine()->getManager()->persist($media);
             $this->getDoctrine()->getManager()->flush();
 

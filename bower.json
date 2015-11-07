@@ -1,7 +1,9 @@
 {
   "name": "welcomango/base",
   "dependencies": {
+    "Jcrop": "~2.0.3",
     "flag-icon": "~0.11.1",
-    "pages-assets": "git@github.com:jblanchon/pages-assets.git#v0.2.2"
+    "pages-assets": "git@github.com:jblanchon/pages-assets.git#v0.2.2",
+    "uploadify": "~3.2.1"
   }
 }
