@@ -242,7 +242,8 @@ gulp.task('assets-css', function() {
         'components/pages-assets/pages-front/plugins/swiper/css/swiper.css',
         'components/pages-assets/pages-front/plugins/text-rotate/simpletextrotator.css',
         'components/pages-assets/pages-front/plugins/bootstrap-select2/select2.css',
-        'components/pages-assets/pages-front/plugins/bootstrap-select2/select2-bootstrap.css'
+        'components/pages-assets/pages-front/plugins/bootstrap-select2/select2-bootstrap.css',
+        'components/pages-assets/pages-front/plugins/jquery-datatable/media/css/*'
     ])
         .pipe(minifyCSS())
         .pipe(concat('plugins-front.css'))
@@ -313,5 +314,9 @@ gulp.task('img', function() {
     //// FRONT////
     gulp.src('components/pages-assets/pages-front/images/**/*')
         .pipe(gulp.dest(img_front_path))
+    ;
+
+    gulp.src('components/pages-assets/pages-front/plugins/jquery-datatable/media/images/*')
+        .pipe(gulp.dest(img_front_path + '/data-tables/'))
     ;
 });

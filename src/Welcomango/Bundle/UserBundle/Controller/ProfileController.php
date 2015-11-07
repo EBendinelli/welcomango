@@ -33,8 +33,7 @@ class ProfileController extends BaseProfileController
             ->findAllExperiencesCreatedByUser($user);
 
         return $this->render('FOSUserBundle:Profile:show.html.twig', array(
-            'user' => $user,
-            'userExperiences' => $userExperiences
+            'userExperiences' => $userExperiences,
         ));
     }
 
@@ -58,7 +57,7 @@ class ProfileController extends BaseProfileController
             return $event->getResponse();
         }
 
-        $form = $this->createForm($this->get('welcomango.front.form.user.type'), $user);
+        $form = $this->createForm($this->get('welcomango.front.form.user.edit.type'), $user);
         $form->setData($user);
 
         $form->handleRequest($request);

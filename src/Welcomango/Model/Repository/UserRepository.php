@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityRepository;
 
 class UserRepository extends EntityRepository
 {
+
     /**
      * Create paginated and filtered query builder
      *

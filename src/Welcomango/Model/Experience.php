@@ -494,17 +494,11 @@ class Experience
      */
     public function getAuthor()
     {
-        foreach ($this->participations as $participant) {
-            if ($participant->getIsCreator()) {
-                return $participant->getUser();
+        foreach ($this->participations as $participation) {
+            if ($participation->getIsCreator()) {
+                return $participation->getUser();
             }
         }
-    }
-
-    public function updateAverageNote(){
-        /**
-         * @todo develop experience manager to handle this
-         */
     }
 
     public function __construct()

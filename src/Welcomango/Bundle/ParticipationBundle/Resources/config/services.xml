@@ -9,6 +9,18 @@
             <argument type="service" id="security.context"/>
             <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
+
+        <service id="participation.date_difference" class="Welcomango\Bundle\ParticipationBundle\Twig\DateDifferenceExtension">
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="participation.request_action" class="Welcomango\Bundle\ParticipationBundle\Twig\RequestActionExtension">
+            <tag name="twig.extension"/>
+            <argument type="service" id="router"/>
+        </service>
+
+        <service id="welcomango.front.participation.manager" class="Welcomango\Bundle\ParticipationBundle\Manager\ParticipationManager">
+        </service>
     </services>
 
 </container>

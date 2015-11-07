@@ -14,10 +14,6 @@
         <argument type="service" id="security.context" />
         <argument type="service" id="doctrine.orm.entity_manager" />
     </service>
-
-    <service id="participation.date_difference" class="Welcomango\Bundle\ParticipationBundle\Twig\DateDifferenceExtension">
-        <tag name="twig.extension"/>
-    </service>
 </services>
 
 </container>

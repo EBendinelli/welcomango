@@ -2,32 +2,51 @@
 
 {% block meta_title %}{{ "profile.yourProfile"|trans({}, "interface") }}{% endblock %}
 
+{% block profile_welcome_message %}{{ 'profile.welcomeBack'|trans }}{% endblock %}
+
 {% block sub_profile_picture %}
-
-    <!-- BEGIN PROFILE HEADER -->
-    <div id="user-info" class="bg-master-lighter m-t-10 p-l-10 p-t-10 p-b-10 p-r-10">
-        <div id="user-info-details" class="m-b-10">
-            <div><span class="bold">Occupation:</span> {{ app.user.occupation }}</div>
-            <div><span class="bold">From:</span> {{ app.user.fromCity.name }}</div>
-            <div><span class="bold">Gender:</span> {{ app.user.gender}}</div>
+    <!-- THIS IS THE MENU PROFILE WHEN THE USER IS LOGGED -->
+    <!-- BEGIN PROFILE SIDE MENU-->
+    <div id="profile-menu-left" class="bg-master-lightest m-t-10 p-b-10">
+        <div id="profile-menu-title" class="text-center link-black">
+            <a href="{{ path('fos_user_profile_show') }}"><h4>{{ 'profile.menu'|trans }}</h4></a>
         </div>
-        <hr/>
-        <div class=" m-b-15 ">
-            <div class="bold m-b-10">{{ 'user.languagespoken'|trans }}</div>
-            {% for language in app.user.getSpokenLanguages.getValues %}
-                <div class="flag flag-xs" role="image"  style="background: url({{ asset('img/countries/'~ language.language.flagLabel|lower ~'.svg') }});"></div>
-            {% endfor %}
-
+        <div class="dotted-line"><span></span></div>
+        <div id="profile-menu-items">
+            <ul>
+                <a href="">
+                    <li class="profile-menu-item">
+                        <i class="fa fa-envelope fa-lg m-r-10"></i>{{ 'profile.message'|trans }}
+                    </li>
+                </a>
+                <a href="{{ path('participation_received_list', {'display': 'received'}) }}" class="profile-menu-item">
+                    <li class="profile-menu-item">
+                        <i class="fa fa-bullhorn fa-lg m-r-10"></i>{{ 'profile.requestsFromTravelers'|trans }}
+                        {{ notification_display(user, 'received') }}
+                    </li>
+                </a>
+                <a href="{{ path('participation_sent_list') }}" class="profile-menu-item">
+                    <li class="profile-menu-item">
+                        <i class="fa fa-suitcase fa-lg m-r-10"></i>{{ 'profile.yourRequests'|trans }}
+                        {{ notification_display(user, 'sent') }}
+                    </li>
+                </a>
+                <a href="{{ path('fos_user_profile_edit') }}" class="profile-menu-item">
+                    <li class="profile-menu-item">
+                        <i class="fa fa-pencil fa-lg m-r-10"></i>{{ 'profile.editProfile'|trans }}
+                    </li>
+                </a>
+            </ul>
         </div>
     </div>
-    <!-- END PROFILE HEADER -->
-
+    <!-- END PROFILE SIDE MENU-->
 {% endblock sub_profile_picture %}
 
 {% block profile_content %}
 
     <!-- BEGIN PROFILE TOP MENU-->
-    <div id="profile-header" class="col-md-12 bg-master-lighter m-b-20 text-center" >
+    <!-- TODO Not used anymore for now. If not used in the future, removed css -->
+    {#<div id="profile-header" class="col-md-12 bg-master-lighter m-b-20 text-center" >
         <a href="" class="col-md-4 profile-header-item">
             <i class="fa fa-envelope fa-lg m-r-5"></i>{{ 'profile.message'|trans }}
         </a>
@@ -37,11 +56,11 @@
         <a href="{{ path('fos_user_profile_edit') }}" class="col-md-4 profile-header-item">
             <i class="fa fa-pencil fa-lg m-r-5"></i>{{ 'profile.editProfile'|trans }}
         </a>
-    </div>
+    </div>#}
     <!-- END PROFILE TOP MENU-->
 
     <!-- BEGIN PROFILE CONTENT-->
-    <div id="user-content" class="m-t-30">
+        {{ parent() }}
         <div id="user-proposed-experience" class="m-b-20">
             <h2 class="m-b-30">{{ 'profile.yourExperience'|trans }}</h2>
 
@@ -49,7 +68,7 @@
                 {{ include("WelcomangoExperienceBundle:Experience:_featuredExperience.html.twig", { 'experience': userExperiences|first, 'darkBg': true, 'profile': true}) }}
                 <div id="profile-experience-action" class="text-right">
                     <a href="{{ path('front_experience_edit', {'experience_id': userExperiences|first.id}) }}" class="btn btn-complete btn-cons"><i class="fa fa-pencil"></i> {{ 'profile.editExperience'|trans }}</a>
-                    <button class="btn btn-danger btn-cons" data-toggle="modal" data-target="#deleteConfirmation"><i class="fa fa-trash "></i> {{ 'profile.deleteExperience'|trans }}</button>
+                    <button class="btn btn-danger btn-cons" data-toggle="modal" data-target=".modal-action"><i class="fa fa-trash "></i> {{ 'profile.deleteExperience'|trans }}</button>
                 </div>
             {% else %}
                 <a href="{{ path('front_experience_create') }}" class="btn btn-primary btn-cons" ><i class="fa fa-plus-circle "></i> {{ 'profile.createExperience'|trans }}</a>
@@ -60,38 +79,18 @@
             <hr style="margin-top:25px"/>
             <p>{{ app.user.description|nl2br|raw }}</p>
         </div>
-    </div>
     <!-- END PROFILE CONTENT-->
 
 
     <!-- BEGIN DELETE CONFIRMATION MODAL -->
     {% if userExperiences|first %}
-        <div class="modal fade slide-up disable-scroll" id="deleteConfirmation" tabindex="-1" role="dialog" aria-labelledby="modalSlideUpLabel" aria-hidden="false">
-            <div class="modal-dialog ">
-                <div class="modal-content-wrapper">
-                    <div class="modal-content text-center">
-                        <div class="modal-header clearfix text-center">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                <i class="pg-close fs-14"></i>
-                            </button>
-                            <h5>Are you sure you want to delete your experience?</h5>
-                        </div>
-                        <div class="modal-body">
-                            <p>
-                                This means that Welcomanger won't be able to visit your town in your company anymore.<br/>
-                                How sad.<br/><br/>
-                                <i class="fa fa-frown-o fa-4x"></i><br/><br/>
-                                <span class="fs-12"><i class="fa fa-exclamation-triangle"></i> Note that you won't be able to undo this action.</span><br/>
-                            </p>
-                            <button type="button" data-dismiss="modal" class="btn btn-info  btn-cons"><i class="fa fa-arrow-left "></i> Cancel</button>
-                            <a href="{{ path('front_experience_delete', {'experience_id': userExperiences|first.id}) }}" class="btn btn-danger btn-cons"><i class="fa fa-trash "></i> Delete</a>
-                        </div>
-
-                    </div>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-        </div>
+        {{ include("::_modal.html.twig", {
+            'title': 'Are you sure you want to delete your experience?',
+            'path_valid': path('front_experience_delete', {'experience_id': userExperiences|first.id}),
+            'main_text': 'This means that Welcomanger won\'t be able to visit your town in your company anymore.<br/>How sad.',
+            'valid_button_name': 'Delete',
+            'extra_icon': '<i class="fa fa-frown-o fa-4x"></i>'
+        })}}
     {% endif %}
     <!-- END DELETE CONFIRMATION MODAL -->
 {% endblock profile_content %}

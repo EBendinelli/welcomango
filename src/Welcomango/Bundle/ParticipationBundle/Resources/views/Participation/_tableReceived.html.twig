@@ -1,0 +1,106 @@
+{% if display == 'received' %}
+    {% set tableId= 'profile-request-received' %}
+    {% set timeColumnName = 'participation.requestedTime'|trans  %}
+{% elseif display == 'happened' %}
+    {% set tableId= 'profile-request-happened' %}
+    {% set timeColumnName = 'participation.happenedTime'|trans  %}
+{% endif %}
+
+{% if activeTab ==  'happened' and  display == 'received' %}
+    {% set tableDisplay = 'display:none' %}
+{% elseif activeTab ==  'received' and  display == 'happened' %}
+    {% set tableDisplay = 'display:none' %}
+{% endif %}
+
+<table class="entity-table table table-condensed" id="{{ tableId }}" style="{{ tableDisplay|default('') }}">
+    <thead>
+    <tr>
+        <th class="col-md-4" >{{ 'participation.user'|trans }}</th>
+        <th class="col-md-2">{{ timeColumnName }}</th>
+        <th class="col-md-3">{{ 'participation.date'|trans }}</th>
+        <th class="col-md-3">{{ 'participation.controls'|trans }}</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for participation in participations %}
+        {% if display == 'received' %}
+            {% set timeDisplay = participation.createdAt %}
+        {% elseif display == 'happened' %}
+            {% set timeDisplay = participation.date %}
+        {% endif %}
+
+        {% set extraClass = '' %}
+        {% set extraClassDetails = '' %}
+        {% if participation.status == 'Requested' %}
+            {% set extraClass = 'participation-row-requested info' %}
+            {% set extraClassDetails = 'participation-row-bold' %}
+        {% elseif participation.status == 'Refused' %}
+            {% set extraClass = 'participation-row-refused' %}
+            {% set extraClassDetails = 'participation-row-refused' %}
+        {% endif %}
+        <tr class="participation-row clickable table-details hover-bg-master-lightest hover-pointer {{ extraClass|default('') }}" onClick="rowToggle(this, {{ participation.id }}, event)">
+            <td class="col-md-4 semi-bold">
+                <a href="{{ asset(path('front_user_view', {'user_id': participation.user.id})) }}">
+                    {% if participation.user.getMedias.first %}
+                        <img src='{{ asset(participation.user.getMedias.first.getWebPath) }}' class='front-menu-user-picture m-r-10' />
+                    {% else %}
+                        <img src='{{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }}' class='front-menu-user-picture m-r-10' />
+                    {% endif %}
+                </a>
+                {{ participation.user.firstname }} {{ participation.user.lastname }}
+            </td>
+            <td class="col-md-2">{{ timeDisplay|time_diff  }}</td>
+            <td class="col-md-3">{{ participation.date|date('d-m-Y')  }}</td>
+            <td class="col-md-3">
+                {{ request_action(participation, user) }}
+                {% if display == 'happened' %}
+                    {{ include("WelcomangoExperienceBundle:Experience:_experienceNote.html.twig", { 'note': participation.experience.getAverageNote, 'size': 'small'}) }}
+                {% endif %}
+                {#{{ participation.status }}#}
+            </td>
+        </tr>
+        <tr class="participation_details_{{ participation.id }} {{ extraClassDetails|default('') }}" style="display: none">
+            <td colspan="4">
+                <div class="row">
+                    <div class="col-md-12 semi-bold text-center">
+                        {{ 'participation.requestFrom'|trans }}
+                        <a href="{{ asset(path('front_user_view', {'user_id': participation.user.id})) }}" class="text-primary semi-bold">
+                            {{ participation.user.firstname }} {{ participation.user.lastname }}
+                        </a>
+                        <div class="m-b-20">
+                            {{ 'participation.requestDetails'|trans }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <i class="fa fa-user p-r-5"></i>
+                        <span class="semi-bold">{{ participation.numberOfParticipants }}</span> {{ 'participation.participants'|trans }}
+                    </div>
+                    <div class="col-md-6">
+                        <i class="fa fa-street-view p-l-5 p-r-5"></i>
+                        {{ 'participation.meetingAt'|trans }}: <span class="semi-bold">{{ participation.startTime|date('H:i') }}</span>
+                    </div>
+                    <div class="col-md-6 p-r-5">
+                        <i class="fa fa-clock-o "></i>
+                        {{ 'participation.duration'|trans }}: <span class="semi-bold">{{ date_difference(participation.startTime, participation.endTime) }}</span>
+                    </div>
+                    <div class="col-md-6">
+                        <i class="fa fa-globe p-l-5 p-r-5"></i>
+                        {{ 'participation.experiencesAttendedBy'|trans }}: <span class="semi-bold">{{ participation.user.getAttendedParticipations|length }}</span>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% if participations.count == 0 %}
+    <div class="col-md-12 text-center alert alert-warning"><i class="fa fa-frown-o m-r-5"></i>{{ 'participation.noRequestFound' }}</div>
+{% endif %}
+{% include 'WelcomangoCoreBundle:CRUD:pagination.html.twig' with {
+'path': path('participation_received_list'),
+'pagination': participations
+} %}

@@ -1,0 +1,133 @@
+{% extends "FOSUserBundle:Profile:show.html.twig" %}
+
+{% block profile_content %}
+    {% if not user.getExperience %}
+        <div class="row" >
+            <div class="col-md-12 text-center m-t-20 p-b-30 bg-master-lightest ">
+                <h2 >Oops</h2>
+                <i class="fa fa-meh-o fa-5x m-b-20"></i>
+                <p>{{ 'participation.noExperienceCreated' }}</p>
+                <a class="m-t-20 btn btn-primary"><i class="fa fa-plus fa-lg m-r-5"></i>{{ 'participation.createExperience' }}</a>
+            </div>
+        </div>
+    {% else %}
+        <div class="text-center m-b-20">
+            <h2 data-toggle="modal" data-target=".modal-action" >{{ 'participation.requestReceivedFor'|trans }}</h2>
+            <h4>
+                <a class="text-primary" href="{{ path('front_experience_view', {'experience_id': user.getExperience.id}) }}">{{ user.getExperience.title }}</a>
+            </h4>
+        </div>
+
+        <div class="row m-b-20">
+            <div class="col-md-6 text-right"><button id="participation-pending-filter" class="btn btn-dark {%  if activeTab == 'received' %}btn-primary{% endif %}" onClick="toggleFilterClass(this)">Pending</button></div>
+            <div class="col-md-6 text-left"><button id="participation-happened-filter" class="btn btn-dark {%  if activeTab == 'happened' %}btn-primary{% endif %}" onClick="toggleFilterClass(this)">Happened</button></div>
+        </div>
+
+        <!-- NOTE: if we want to add an effect on the content display, we shall use div instead of table. See bellow -->
+        <div class="panel panel-default portlet">
+            <!-- TABLE OF REQUEST RECEIVED FOR THE USER EXPERIENCE -->
+            <div class="panel-body">
+                <div class="table-responsive">
+                    {% include "WelcomangoParticipationBundle:Participation:_tableReceived.html.twig" with{ 'participations' : participations, 'display': 'received', 'activeTab': activeTab} %}
+
+                    {% include "WelcomangoParticipationBundle:Participation:_tableReceived.html.twig" with{ 'participations' : participationsHappened, 'display': 'happened', 'activeTab': activeTab} %}
+                </div>
+            </div>
+        </div>
+
+       {# <div class="panel panel-default portlet">
+            <!-- TABLE OF REQUEST RECEIVED FOR THE USER EXPERIENCE -->
+            <div class="panel-body" id="profile_request_received">
+                <div class="">
+                    <div class="row">
+                        <div class="participation-list-header">
+                            <div class="col-md-4">{{ 'participation.user'|trans }}</div>
+                            <div class="col-md-2">{{ 'participation.requestedTime'|trans }}</div>
+                            <div class="col-md-3">{{ 'participation.date'|trans }}</div>
+                            <div class="col-md-3">{{ 'participation.controls'|trans }}</div>
+                        </div>
+                    </div>
+                    {% for participation in participations %}
+                        <div class="row clickable table-details" data-toggle="collapse" data-target=".participation_details_{{ participation.id }}" onClick="rowToggle(this)">
+                            <div class="col-md-4 semi-bold">
+                                {% if participation.user.getMedias.first %}
+                                    <img src='{{ asset(participation.user.getMedias.first.getWebPath) }}' class='front-menu-user-picture m-r-10' />
+                                {% else %}
+                                    <img src='{{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }}' class='front-menu-user-picture m-r-10' />
+                                {% endif %}
+                                {{ participation.user.firstname }} {{ participation.user.lastname }}
+                            </div>
+                            <div class="col-md-2">{{ participation.createdAt|time_diff  }}</div>
+                            <div class="col-md-3">{{ participation.date|date('d-m-Y')  }}</div>
+                            <div class="col-md-3">
+                                {{ request_action(participation) }}
+                                {{ participation.status }}
+                            </div>
+                        </div>
+                        <div class="collapse out participation_details_{{ participation.id }}">
+                            <div class="row">
+                                <div class="col-md-12 semi-bold text-center">
+                                    {{ 'participation.requestFrom'|trans }}
+                                    <a href="{{ asset(path('front_user_view', {'user_id': participation.user.id})) }}" class="text-primary semi-bold">
+                                        {{ participation.user.firstname }} {{ participation.user.lastname }}
+                                    </a>
+                                </div>
+                                <div class="col-md-12 semi-bold m-b-10">{{ 'participation.requestDetails'|trans }}</div>
+                                <div class="col-md-4"><span class="semi-bold">{{ participation.numberOfParticipants }}</span> {{ 'participation.participants'|trans }}</div>
+                                <div class="col-md-4">{{ 'participation.meetingAt'|trans }}: <span class="semi-bold">{{ participation.startTime|date('H:i') }}</span></div>
+                                <th class="col-md-2">{{ 'participation.duration'|trans }}</th>
+                                <td class="col-md-2 text-center">{{ date_difference(participation.startTime, participation.endTime) }}</td>
+                                <div class="col-md-4"></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                {% if participations.count == 0 %}
+                    <div class="col-md-12 text-center alert alert-warning"><i class="fa fa-frown-o m-r-5"></i>{{ 'participation.noRequestFound' }}</div>
+                {% endif %}
+                {% include 'WelcomangoCoreBundle:CRUD:pagination.html.twig' with {
+                'path': path('participation_received_list'),
+                'pagination': participations
+                } %}
+            </div>
+        </div>#}
+
+        <!-- BEGIN DELETE CONFIRMATION MODAL -->
+        {{ include("::_modal.html.twig", {
+            'title': 'Are you sure you want to refuse this request?',
+            'main_text': 'If you have not yet exchanged with this person, please send him a little message.',
+            'valid_button_name': 'Decline',
+            'icon': 'fa-times-circle '
+        })}}
+        <!-- END DELETE CONFIRMATION MODAL -->
+
+    {% endif %}
+
+{% endblock profile_content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        //JS To update modal content according to the participation we want to update
+        function updateModal(route){
+            $('#modal-delete-button').attr("href", route);
+        }
+
+        function rowToggle(element, id, event){
+            if(event.target.nodeName.toLowerCase() == "i") return;
+            $(element).toggleClass('shown');
+            $('.participation_details_'+id).toggle();
+        }
+
+        function toggleFilterClass(element){
+            if($(element).hasClass('btn-primary')) { return }
+            else{
+                $('#participation-pending-filter').toggleClass('btn-primary');
+                $('#participation-happened-filter').toggleClass('btn-primary');
+                $('#profile-request-received').toggle();
+                $('#profile-request-happened').toggle();
+            }
+        }
+
+    </script>
+{% endblock %}

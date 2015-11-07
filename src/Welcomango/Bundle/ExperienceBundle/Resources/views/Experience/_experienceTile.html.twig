@@ -44,11 +44,11 @@
             <div class="text-center m-b-10">
                 in <span class="semi-bold">{% if experience.getCity %}{{ experience.getCity.Name }}{% endif %}</span>
             </div>
-            <div class="m-b-10">
+            <div class="m-b-10 text-center">
                 {{ include("WelcomangoExperienceBundle:Experience:_experienceNote.html.twig", { 'note': experience.getAverageNote, 'mango': true}) }}
             </div>
             <div class="dotted-line"><span></span></div>
-            <div class="text-center">
+            <div class="text-center m-t-20">
                 {{ experience.getDescription | truncate(200)}}
             </div>
         </div>

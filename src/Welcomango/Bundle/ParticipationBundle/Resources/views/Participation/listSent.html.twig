@@ -1,0 +1,52 @@
+{% extends "FOSUserBundle:Profile:show.html.twig" %}
+
+{% block profile_content %}
+    <div class="text-center m-b-20">
+        <h2 data-toggle="modal" data-target=".modal-action" >{{ 'participation.requestsSent'|trans }}</h2>
+    </div>
+
+    <div class="row m-b-20">
+        <div class="col-md-6 text-right"><button id="participation-pending-filter" class="btn btn-dark {%  if activeTab == 'sent' %}btn-primary{% endif %}" onClick="toggleFilterClass(this)">Pending</button></div>
+        <div class="col-md-6 text-left"><button id="participation-happened-filter" class="btn btn-dark {%  if activeTab == 'happened' %}btn-primary{% endif %}" onClick="toggleFilterClass(this)">Happened</button></div>
+    </div>
+
+    <div class="panel panel-default portlet">
+        <!-- TABLE OF REQUEST SEND BY THE USER-->
+        <div class="panel-body" id="profile_request_sent">
+            <div class="table-responsive">
+                {% include "WelcomangoParticipationBundle:Participation:_tableSent.html.twig" with{ 'participations' : participations, 'display': 'sent', 'activeTab': activeTab} %}
+                {% include "WelcomangoParticipationBundle:Participation:_tableSent.html.twig" with{ 'participations' : participationsHappened, 'display': 'happened', 'activeTab': activeTab} %}
+            </div>
+        </div>
+    </div>
+
+    <!-- BEGIN DELETE CONFIRMATION MODAL -->
+    {{ include("::_modal.html.twig", {
+        'title': 'Are you sure you want to cancel this request?',
+        'main_text': 'If you have not yet exchanged with this person, please send him a little message.',
+        'valid_button_name': 'Cancel',
+        'icon': 'fa-times-circle '
+    })}}
+    <!-- END DELETE CONFIRMATION MODAL -->
+
+{% endblock profile_content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        function updateModal(route){
+            $('#modal-delete-button').attr("href", route);
+        }
+
+      function toggleFilterClass(element){
+            if($(element).hasClass('btn-primary')) { return }
+            else{
+                $('#participation-pending-filter').toggleClass('btn-primary');
+                $('#participation-happened-filter').toggleClass('btn-primary');
+                $('#profile-request-sent').toggle();
+                $('#profile-request-happened').toggle();
+            }
+       }
+
+    </script>
+{% endblock %}

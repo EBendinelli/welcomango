@@ -6,9 +6,6 @@
 
 
     <services>
-        <service id="welcomango.front.participation.manager" class="Welcomango\Bundle\ExperienceBundle\Manager\ParticipationManager">
-        </service>
-
         <service id="welcomango.front.experience.manager" class="Welcomango\Bundle\ExperienceBundle\Manager\ExperienceManager">
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
@@ -24,6 +21,10 @@
 
         <service id="welcomango.front.form.user.type" class="Welcomango\Bundle\UserBundle\Form\Type\UserType">
             <argument type="service" id="security.context" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
+        <service id="welcomango.front.user.manager" class="Welcomango\Bundle\UserBundle\Manager\UserManager">
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
     </services>

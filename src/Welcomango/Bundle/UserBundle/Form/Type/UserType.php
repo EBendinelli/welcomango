@@ -61,6 +61,7 @@ class UserType extends AbstractType
         $builder->add('firstName', 'text', ['label' => 'form.user.firstname']);
         $builder->add('lastName', 'text', ['label' => 'form.user.lastname']);
         $builder->add('email', 'text', ['label' => 'form.user.email']);
+        $builder->add('occupation', 'text', ['label' => 'form.user.occupation']);
 
         $builder->add('birthdate', 'date', [
             'years'    => range(date('Y') - 100, date('Y') - 10),

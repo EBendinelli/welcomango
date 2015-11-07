@@ -1,0 +1,26 @@
+<div class="modal fade slide-up disable-scroll modal-action" tabindex="-1" role="dialog" aria-labelledby="modalSlideUpLabel" aria-hidden="false">
+    <div class="modal-dialog ">
+        <div class="modal-content-wrapper">
+            <div class="modal-content text-center">
+                <div class="modal-header clearfix text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="pg-close fs-14"></i>
+                    </button>
+                    <h5>{{ title }}</h5>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        {{ main_text|raw }}
+                        <div class="m-t-10 m-b-20">
+                            {{ extra_icon|default('')|raw }}
+                        </div>
+                        <span class="fs-12"><i class="fa fa-exclamation-triangle"></i> Note that you won't be able to undo this action.</span><br/>
+                    </p>
+                    <button type="button" data-dismiss="modal" class="btn btn-info  btn-cons"><i class="fa fa-arrow-left "></i> Cancel</button>
+                    <a id="modal-delete-button" href="{{ path_valid|default('#') }}" class="btn btn-danger btn-cons"><i class="fa {{ icon|default('fa-trash') }}"></i> {{ valid_button_name }}</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

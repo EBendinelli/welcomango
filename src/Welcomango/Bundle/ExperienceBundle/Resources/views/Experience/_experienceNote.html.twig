@@ -1,5 +1,5 @@
 {% if mango is defined %}
-    <div class="experience-note text-center">
+    <span class="experience-note text-center">
         {% set noteClass = "card-picto-note-sm" %}
         {% if size is defined %}
             {% if size == 'medium' %}
@@ -13,6 +13,10 @@
             {% for i in 1..5 %}
                 <img class="{{ noteClass }}" src="{{ asset('img/welcomango-picto-full.png') }}"/>
             {% endfor %}
+        {% elseif note|round == 0 %}
+            {% for i in 1..5 %}
+                <img class="{{ noteClass }}" src="{{ asset('img/welcomango-picto.png') }}"/>
+            {% endfor %}
         {% elseif note/note|round == 1 %}
             {% for i in 1..note %}
                 <img class="{{ noteClass }}" src="{{ asset('img/welcomango-picto-full.png') }}"/>
@@ -25,13 +29,15 @@
                 <img class="{{ noteClass }}" src="{{ asset('img/welcomango-picto-full.png') }}"/>
             {% endfor %}
             <img class="{{ noteClass }}" src="{{ asset('img/welcomango-picto-half.png') }}"/>
-            {% for i in note|round(0,'ceil')..4 %}
-                <img class="{{ noteClass }}" src="{{ asset('img/welcomango-picto.png') }}"/>
-            {% endfor %}
+            {% if note|round(0,'ceil') < 5 %}
+                {% for i in note|round(0,'ceil')..4 %}
+                    <img class="{{ noteClass }}" src="{{ asset('img/welcomango-picto.png') }}"/>
+                {% endfor %}
+            {% endif %}
         {% endif %}
-    </div>
+    </span>
 {% else %}
-    <div class="experience-note text-center text-warning">
+    <span class="experience-note text-center text-warning">
         {% set noteClass = "fa-sm" %}
         {% if size is defined %}
             {% if size == 'medium' %}
@@ -45,6 +51,10 @@
             {% for i in 1..5 %}
                 <i class="fa fa-star {{ noteClass }}"></i>
             {% endfor %}
+        {% elseif note|round == 0 %}
+            {% for i in 1..5 %}
+                <i class="fa fa-star-o {{ noteClass }}"></i>
+            {% endfor %}
         {% elseif note/note|round == 1 %}
             {% for i in 1..note %}
                 <i class="fa fa-star {{ noteClass }}"></i>
@@ -57,9 +67,11 @@
                 <i class="fa fa-star {{ noteClass }}"></i>
             {% endfor %}
             <i class="fa fa-star-half-o {{ noteClass }}"></i>
-            {% for i in note|round(0,'ceil')..4 %}
-                <i class="fa fa-star-o {{ noteClass }}"></i>
-            {% endfor %}
+            {% if note|round(0,'ceil') < 4 %}
+                {% for i in note|round(0,'ceil')..4 %}
+                    <i class="fa fa-star-o {{ noteClass }}"></i>
+                {% endfor %}
+            {% endif %}
         {% endif %}
-    </div>
+    </span>
 {% endif %}
