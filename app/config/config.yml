@@ -116,6 +116,18 @@ knp_paginator:
 
 genemu_form:
     select2: ~
+    file:
+        enabled:    true
+        folder:     '/upload/medias'
+        swf:        '/uploadify/uploadify.swf'
+    image:
+        enabled:  true
+        selected: 'large'
+        filters:  ['crop']
+        thumbnails:
+            small:  [100, 100]
+            medium: [200, 200]
+            large:  [500, 500]
 
 stof_doctrine_extensions:
     # default_locale: fr

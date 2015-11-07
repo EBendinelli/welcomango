@@ -26,3 +26,9 @@ welcomango_participation_bundle:
 
 welcomango_fos_routing:
     resource: "@WelcomangoUserBundle/Resources/config/routing.yml"
+
+genemu_upload:
+    resource: "@GenemuFormBundle/Resources/config/routing/upload.xml"
+
+genemu_image:
+    resource: "@GenemuFormBundle/Resources/config/routing/image.xml"

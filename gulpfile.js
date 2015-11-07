@@ -157,6 +157,18 @@ gulp.task('assets-js', function() {
     ])
         .pipe(gulp.dest(assets_js))
     ;
+
+    gulp.src([
+        'components/uploadify/jquery.uploadify.min.js'
+    ])
+        .pipe(gulp.dest(assets_js))
+    ;
+
+    gulp.src([
+        'components/Jcrop/js/Jcrop.min.js'
+    ])
+        .pipe(gulp.dest(assets_js))
+    ;
 });
 
 
@@ -235,6 +247,20 @@ gulp.task('assets-css', function() {
         .pipe(minifyCSS())
         .pipe(concat('plugins-front.css'))
         .pipe(gulp.dest(assets_front_css))
+    ;
+
+    gulp.src([
+        'components/uploadify/uploadify.css',
+    ])
+        .pipe(minifyCSS())
+        .pipe(concat('uploadify.min.css'))
+        .pipe(gulp.dest(assets_css))
+    ;
+
+    gulp.src([
+        'components/Jcrop/css/Jcrop.min.css',
+    ])
+        .pipe(gulp.dest(assets_css))
     ;
 
 });

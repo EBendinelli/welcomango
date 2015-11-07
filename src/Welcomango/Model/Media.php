@@ -265,48 +265,16 @@ class Media
         return __DIR__.'/../../../web/'.$this->getUploadDir();
     }
 
-    protected function getUploadDir()
+    public function getUploadDir()
     {
-        return 'uploads/medias';
-    }
-
-    /**
-     * Do a manager !
-     */
-    public function upload()
-    {
-        if (null === $this->getFile()) {
-            return;
-        }
-
-        $fileSystem  = new Filesystem();
-        $currentFile = $this->getFile();
-
-        if ($this->getId()) {
-            if ($fileSystem->exists($this->getUploadRootDir().'/'.$this->getFilename())) {
-                $fileSystem->remove($this->getUploadRootDir().'/'.$this->getFilename());
-            }
-        }
-
-        $this->setSize($currentFile->getSize());
-        $this->setMimeType($currentFile->getMimeType());
-        $this->setFilename($currentFile->getClientOriginalName());
-        $this->setOriginalFilename($currentFile->getClientOriginalName());
-
-        $this->getFile()->move(
-            $this->getUploadRootDir(),
-            $this->getFile()->getClientOriginalName()
-        );
-
-        $this->path = $this->getFile()->getClientOriginalName();
-
-        $this->file = null;
+        return 'upload/medias';
     }
 
     /**
      * Add experiences
      *
      * @param \Welcomango\Model\Experience $experiences
+     *
      * @return Media
      */
     public function addExperience(\Welcomango\Model\Experience $experiences)
@@ -329,7 +297,7 @@ class Media
     /**
      * Get experiences
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getExperiences()
     {
