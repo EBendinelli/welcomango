@@ -12,3 +12,35 @@
     <button class="btn btn-complete btn-sm" type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ label|trans({}, translation_domain) }}</button>
 {% endblock button_widget %}
 
+{% block genemu_jqueryselect2_hidden_javascript %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $field = $('#{{ id }}');
+
+            $configs = $.extend({}, {
+                ajax: {
+                    quietMillis: 100,
+                    url: "{{ path('experience_search_ajax') }}",
+                    type: 'POST',
+                    data: function (term) {
+                        return {
+                            query: term,
+                        };
+                    },
+                    results: function (data) {
+                        console.log(data);
+                        return { results: data };
+                    }
+                },
+                initSelection : function (element, callback) {
+                    if ($(element).val() != '') {
+                        var params = $(element).val().split(";");
+                        callback({id: params[0], text: params[1]});
+                        $(element).val(params[0]);
+                    }
+                }
+            });
+            $field.select2($configs);
+        });
+    </script>
+{% endblock %}

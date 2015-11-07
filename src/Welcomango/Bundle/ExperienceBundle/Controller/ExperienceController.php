@@ -32,16 +32,21 @@ class ExperienceController extends BaseController
      */
     public function listAction(Request $request)
     {
+        $filters   = $this->getFilters(array(), 'experienceSearch');
+
         $paginator  = $this->get('knp_paginator');
-        $query      = $this->getRepository('Welcomango\Model\Experience')->findAll();
+        $query      = $this->getRepository('Welcomango\Model\Experience')->createPagerQueryBuilder($filters);
         $pagination = $paginator->paginate(
             $query,
             $request->query->get('page', 1),
             6
         );
 
+        $form = $this->createForm($this->get('welcomango.form.experience.filter'), $filters);
+
         return array(
             'pagination' => $pagination,
+            'form'       => $form->createView()
         );
     }
 
@@ -187,22 +192,57 @@ class ExperienceController extends BaseController
         return $this->render('WelcomangoExperienceBundle:Experience:deleteSuccess.html.twig');
     }
 
+
     /**
+     * List cities for Ajax Calls
+     *
      * @param Request $request
      *
-     * @Route("/experience/_experience_search_ajax", name="front_experience_search_ajax")
-     * @Method("POST")
-     * @Template("YproxAdminCrmBundle:Experience:_experience.html.twig")
+     * @Route("/json/cities/list.json", name="experience_search_ajax", defaults={"_format"="json"})
      *
-     * @return array
+     * @return JsonResponse
      */
-    public function ajaxSearchAction(Request $request)
+    public function citiesAction(Request $request)
     {
-        $query       = $request->request->get('query');
-        $experiences = $this->getRepository('Welcomango\Model\Experience')->findByQuery($query);
+        $data = array();
 
-        return array(
-            'experience' => $experiences,
-        );
+        if ($request->request->has('query') && $request->request->get('query') != '') {
+            $query  = $request->request->get('query');
+            $cities = $this->getRepository('Welcomango\Model\City')->findForAutocomplete($query);
+
+            foreach ($cities as $city) {
+                $data[] = ['id' => $city['id'], 'text' => $city['text']];
+            }
+        }
+
+        return new JsonResponse($data);
+    }
+
+    /**
+     * Process and render form filters
+     *
+     * @param Request $request
+     *
+     * @Route("/experience/filters/research", name="experience_filters")
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function filterFormAction(Request $request)
+    {
+        if ($request->request->has('_reset')) {
+            $this->removeFilters('experienceSearch');
+
+            return $this->redirect($this->generateUrl('front_experience_list'));
+        }
+
+        $form = $this->createForm($this->get('welcomango.form.experience.filter'), null);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $datas = $form->getData();
+            $this->setFilters($datas, 'experienceSearch');
+        }
+
+        return $this->redirect($this->generateUrl('front_experience_list'));
     }
 }

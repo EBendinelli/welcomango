@@ -34,41 +34,58 @@ class LoadParticipationData extends AbstractFixture implements FixtureInterface,
         $userRepo = $manager->getRepository('Welcomango\Model\User');
         $experienceRepo = $manager->getRepository('Welcomango\Model\Experience');
 
+        $participationManager = $this->container->get('welcomango.front.experience.manager');
+
         $users = $userRepo->findAll();
         $experiences = $experienceRepo->findAll();
         $creatorStatus = array('Available', 'Happened', 'Booked');
         $ParticipantStatus = array('Requested', 'Accepted', 'Happened');
+        $times = $this->container->getParameter('meeting_times');
 
         //Each experience has a creator
         foreach($experiences as $experience){
-            $entry = new Participation();
-            $entry->setUser($users[array_rand($users)]);
-            $entry->setExperience($experience);
+            for($i=0;$i<40;$i++){
+                $entry = new Participation();
+                $entry->setUser($users[array_rand($users)]);
+                $entry->setExperience($experience);
 
-            $randDate = new \DateTime;
-            $randTimestamp = mt_rand(1421406219,1476612219);
-            $randDate->setTimestamp($randTimestamp);
-            $randDate->setTime($randDate->format('G'), 0);
-            $entry->setDate($randDate);
+                //Get random date
+                $randDate = new \DateTime;
+                $randTimestamp = mt_rand(1421406219,1476612219);
+                $randDate->setTimestamp($randTimestamp);
+                $randDate->setTime($randDate->format('G'), 0);
+                $entry->setDate($randDate);
 
-            $startTime = new \Datetime;
-            $startTime->setTimestamp($randTimestamp);
-            $startTime->setTime(9,0);
-            $entry->setStartTime($startTime);
+                //Define random time of the day
+                $randTime1 = rand(0,5);
+                $randTime2 = rand(0,5);
+                $randTime3 = rand(0,5);
+                $randTime4 = rand(0,5);
+                $availableTimes = array();
+                $availableTimes[] = $times[$randTime1];
+                if($randTime2 != $randTime1) $availableTimes[] = $times[$randTime2];
+                if($randTime3 != $randTime1 && $randTime3 != $randTime2) $availableTimes[] = $times[$randTime3];
+                if($randTime4 != $randTime1 && $randTime4 != $randTime2 && $randTime4 != $randTime3 ) $availableTimes[] = $times[$randTime4];
 
-            $endTime = new \Datetime;
-            $endTime->setTimestamp($randTimestamp);
-            $endTime->setTime(23,0);
-            $entry->setEndTime($endTime);
+                $participationManager->
 
-            $entry->setEndTime($endTime);
+                $startTime = new \Datetime;
+                $startTime->setTimestamp($randTimestamp);
+                $startTime->setTime(9,0);
+                $entry->setStartTime($startTime);
 
-            $entry->setIsCreator(true);
-            $entry->setIsParticipant(false);
-            $entry->setStatus($creatorStatus[rand(0,2)]);
-            $entry->setNumberOfParticipants(rand(1,10));
+                $endTime = new \Datetime;
+                $endTime->setTimestamp($randTimestamp);
+                $endTime->setTime(23,0);
+                $entry->setEndTime($endTime);
 
-            $manager->persist($entry);
+                $entry->setIsCreator(true);
+                $entry->setIsParticipant(false);
+                $entry->setStatus($creatorStatus[rand(0,2)]);
+                $entry->setNumberOfParticipants(rand(1,10));
+
+                $manager->persist($entry);
+            }
         }
 
         //Generate random participations participant

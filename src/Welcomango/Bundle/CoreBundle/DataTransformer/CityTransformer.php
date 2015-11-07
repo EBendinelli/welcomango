@@ -1,6 +1,6 @@
 <?php
 
-namespace Welcomango\Bundle\UserBundle\Form\DataTransformer;
+namespace Welcomango\Bundle\CoreBundle\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;

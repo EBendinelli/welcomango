@@ -12,5 +12,9 @@
         <service id="security.access.post_voter" class="Welcomango\Bundle\ExperienceBundle\Security\Voter\ExperienceVoter" public="false" >
             <tag name="security.voter" />
         </service>
+
+        <service id="welcomango.form.experience.filter" class="Welcomango\Bundle\ExperienceBundle\Form\Type\ExperienceFilterType">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
     </services>
 </container>

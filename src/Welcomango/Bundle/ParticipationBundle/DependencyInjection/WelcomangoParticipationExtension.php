@@ -23,6 +23,7 @@ class WelcomangoParticipationExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $container->setParameter('available_status', $config['available_status']);
+        $container->setParameter('meeting_times', $config['meeting_times']);
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services_admin.xml');

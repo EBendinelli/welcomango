@@ -22,7 +22,12 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->arrayNode('available_status')->prototype('scalar')->end()
+                ->arrayNode('available_status')
+                    ->prototype('scalar')->end()
+                ->end()
+                ->arrayNode('meeting_times')
+                    ->prototype('scalar')->end()
+                ->end()
             ->end();
 
         return $treeBuilder;

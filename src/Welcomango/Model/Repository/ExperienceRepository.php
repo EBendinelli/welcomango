@@ -71,24 +71,31 @@ class ExperienceRepository extends EntityRepository
      */
     public function createPagerQueryBuilder(array $filters = array())
     {
-        $queryBuilder = $this->createQueryBuilder('e');
+        $queryBuilder = $this
+            ->createQueryBuilder('e')
+            ->leftJoin('e.participations', 'p')
+            ->where('e.published = true');
 
-        if ($cities = $this->getFilter('city', $filters)) {
-            foreach ($cities as $city) {
-                $ORs[] = "u.city LIKE '%".$city."%'";
-            }
-            $queryBuilder->andWhere($queryBuilder->expr()->orX()->addMultiple($ORs));
+        if ($city = $this->getFilter('city', $filters)) {
+            $queryBuilder->andWhere('e.city = :city');
+            $queryBuilder->setParameter('city', $city);
         }
 
         if ($title = $this->getFilter('title', $filters)) {
             $queryBuilder->andWhere('e.title LIKE :title');
+            $queryBuilder->orWhere('e.description LIKE :title');
             $queryBuilder->setParameter('title', '%'.$title.'%');
         }
 
-        if ($description = $this->getFilter('description', $filters)) {
-            $queryBuilder->andWhere('e.description = :description');
-            $queryBuilder->setParameter('description', $description);
+        if ($title = $this->getFilter('startDate', $filters)) {
+            $queryBuilder->andWhere('e.title LIKE :title');
         }
+
+        /*if ($title = $this->getFilter('endDate', $filters)) {
+            $queryBuilder->andWhere('e.fecha BETWEEN :monday AND :sunday')
+                ->setParameter('monday', $monday->format('Y-m-d'))
+                ->setParameter('sunday', $sunday->format('Y-m-d'));
+        }*/
 
         return $queryBuilder;
     }
