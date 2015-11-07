@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new FOS\MessageBundle\FOSMessageBundle(),
 
             new Welcomango\Bundle\UserBundle\WelcomangoUserBundle(),
             new Welcomango\Bundle\CoreBundle\WelcomangoCoreBundle(),

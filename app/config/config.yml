@@ -154,6 +154,11 @@ services:
         tags:
             - { name: 'twig.extension' }
 
+fos_message:
+    db_driver: orm
+    thread_class: Welcomango\Model\Thread
+    message_class: Welcomango\Model\Message
+
 welcomango_participation:
     available_status:
         - Available

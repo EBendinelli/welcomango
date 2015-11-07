@@ -8,7 +8,6 @@ welcomango_media_bundle:
     type:     annotation
     prefix:   /
 
-
 welcomango_core_bundle:
     resource: "@WelcomangoCoreBundle/Controller/"
     type:     annotation
@@ -32,3 +31,6 @@ genemu_upload:
 
 genemu_image:
     resource: "@GenemuFormBundle/Resources/config/routing/image.xml"
+
+fos_message:
+    resource: "@FOSMessageBundle/Resources/config/routing.xml"

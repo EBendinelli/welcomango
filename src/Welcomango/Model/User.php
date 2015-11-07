@@ -2,34 +2,23 @@
 
 namespace Welcomango\Model;
 
-use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
+use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\Common\Collections\ArrayCollection;
+use FOS\MessageBundle\Model\ParticipantInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="Welcomango\Model\Repository\UserRepository")
  * @ORM\Table(name="wm_user")
  */
-class User extends BaseUser
+class User extends BaseUser implements ParticipantInterface
 {
     const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
     const ROLE_ADMIN       = 'ROLE_ADMIN';
     const ROLE_USER        = 'ROLE_USER';
-
-    /**
-     * @return array
-     */
-    public static function getAvailableRoles()
-    {
-        return array(
-            self::ROLE_SUPER_ADMIN => self::ROLE_SUPER_ADMIN,
-            self::ROLE_ADMIN       => self::ROLE_ADMIN,
-            self::ROLE_USER        => self::ROLE_USER,
-        );
-    }
 
     /**
      * @ORM\Id
@@ -153,6 +142,17 @@ class User extends BaseUser
      */
     private $noteAsTraveler;
 
+    /**
+     * @return array
+     */
+    public static function getAvailableRoles()
+    {
+        return array(
+            self::ROLE_SUPER_ADMIN => self::ROLE_SUPER_ADMIN,
+            self::ROLE_ADMIN       => self::ROLE_ADMIN,
+            self::ROLE_USER        => self::ROLE_USER,
+        );
+    }
 
     /**
      * Get id
@@ -279,6 +279,11 @@ class User extends BaseUser
         return $this->spokenLanguages;
     }
 
+    /**
+     * @param Language $language
+     *
+     * @return bool
+     */
     public function hasSpokenLanguage($language)
     {
         $criteria = Criteria::create()
@@ -441,10 +446,10 @@ class User extends BaseUser
     public function getAge()
     {
         $birthdateTimestamp = $this->birthdate->getTimestamp();
-        $birthDate = date('d/m/Y', $birthdateTimestamp);
+        $birthDate          = date('d/m/Y', $birthdateTimestamp);
 
-        $timeZone  = new \DateTimeZone('Europe/Brussels');
-        $age = \DateTime::createFromFormat('d/m/Y', $birthDate, $timeZone)
+        $timeZone = new \DateTimeZone('Europe/Brussels');
+        $age      = \DateTime::createFromFormat('d/m/Y', $birthDate, $timeZone)
             ->diff(new \DateTime('now', $timeZone))
             ->y;
 
@@ -501,7 +506,7 @@ class User extends BaseUser
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -527,7 +532,7 @@ class User extends BaseUser
     /**
      * Set noteAsLocal
      *
-     * @param float $$noteAsLocal
+     * @param float $noteAsLocal
      */
     public function setNoteAsLocal($noteAsLocal)
     {
@@ -567,7 +572,8 @@ class User extends BaseUser
     /**
      * Add medias
      *
-     * @param \Welcomango\Model\Media $medias
+     * @param Media $medias
+     *
      * @return User
      */
     public function addMedia(\Welcomango\Model\Media $medias)
@@ -592,9 +598,12 @@ class User extends BaseUser
      *
      * @return Experience
      */
-    public function getExperience(){
-        foreach($this->participations as $participation){
-            if($participation->getIsCreator()) return $participation->getExperience();
+    public function getExperience()
+    {
+        foreach ($this->participations as $participation) {
+            if ($participation->getIsCreator()) {
+                return $participation->getExperience();
+            }
         }
     }
 
@@ -604,11 +613,12 @@ class User extends BaseUser
     public function getAttendedParticipations()
     {
         $attendedParticipations = array();
-        foreach($this->participations as $participation){
-            if($participation->getIsParticipant() && $participation->getStatus() == 'Happened'){
+        foreach ($this->participations as $participation) {
+            if ($participation->getIsParticipant() && $participation->getStatus() == 'Happened') {
                 $attendedParticipations[] = $participation;
             }
         }
+
         return $attendedParticipations;
     }
 }
