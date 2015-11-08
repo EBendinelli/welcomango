@@ -1,0 +1,12 @@
+{% extends "FOSUserBundle:Profile:show.html.twig" %}
+
+{% block profile_content %}
+
+    <h2>{{ participation.experience.title }} - messages</h2>
+
+    <form action="{{ url('message_list', {'user_id': user.id, 'participation_id': participation.id}) }}" method="post">
+        {{ form_widget(form) }}
+        <input type="submit" />
+    </form>
+
+{% endblock %}

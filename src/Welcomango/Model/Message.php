@@ -35,4 +35,27 @@ class Message extends BaseMessage
      * @var MessageMetadata[]|\Doctrine\Common\Collections\Collection
      */
     protected $metadata;
+
+    /**
+     * The origin message is the one which can be set at the experience booking
+     *
+     * @ORM\Column(name="origin_message", type="boolean", nullable=true)
+     */
+    protected $originMessage;
+
+    /**
+     * @return bool
+     */
+    public function getOriginMessage()
+    {
+        return $this->originMessage;
+    }
+
+    /**
+     * @param bool $originMessage
+     */
+    public function setOriginMessage($originMessage)
+    {
+        $this->originMessage = $originMessage;
+    }
 }

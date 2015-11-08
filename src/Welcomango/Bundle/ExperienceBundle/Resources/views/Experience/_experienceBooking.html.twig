@@ -19,6 +19,9 @@
             <div class="col-md-6">{{ form_row(form.desired_time) }}</div>
             <div class="col-md-6">{{ form_row(form.number_of_participants) }}</div>
         </div>
+        <div class="row">
+            <div class="col-md-12">{{ form_row(form.message) }}</div>
+        </div>
         {% if app.user %}
             <div class="col-md-12 text-right m-t-10">{{ form_end(form) }}</div>
         {% endif %}

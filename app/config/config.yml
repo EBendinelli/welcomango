@@ -158,6 +158,7 @@ fos_message:
     db_driver: orm
     thread_class: Welcomango\Model\Thread
     message_class: Welcomango\Model\Message
+    composer: welcomango.message.composer
 
 welcomango_participation:
     available_status:

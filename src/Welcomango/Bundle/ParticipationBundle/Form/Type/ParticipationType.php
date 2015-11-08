@@ -32,7 +32,8 @@ class ParticipationType extends AbstractType
     protected $entityManager;
 
     /**
-     * __construct
+     * @param SecurityContextInterface $securityContext
+     * @param EntityManager            $entityManager
      */
     public function __construct(SecurityContextInterface $securityContext, EntityManager $entityManager)
     {
@@ -49,17 +50,23 @@ class ParticipationType extends AbstractType
         $numberOfParticipants = array();
         $desiredTime          = array();
 
-        for ($i = 0; $i < 48; $i++) $desiredDuration[$i] = $i;
-        for ($i = 0; $i < 20; $i++) $numberOfParticipants[$i] = $i;
+        for ($i = 0; $i < 48; $i++) {
+            $desiredDuration[$i] = $i;
+        }
+
+        for ($i = 0; $i < 20; $i++) {
+            $numberOfParticipants[$i] = $i;
+        }
 
         $desiredTime[] = "Morning";
         $desiredTime[] = "Lunchtime";
         $desiredTime[] = "Afternoon";
         $desiredTime[] = "Evening";
 
-        /*$builder->add('message', 'textarea', [
-            'label' => 'form.participation.message'
-        ]);*/
+        $builder->add('message', 'textarea', [
+            'label'  => 'form.participation.message',
+            'mapped' => false,
+        ]);
 
         $builder->add('desired_duration', 'choice', [
             'choices' => $desiredDuration,

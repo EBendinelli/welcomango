@@ -23,6 +23,10 @@ welcomango_participation_bundle:
     type:     annotation
     prefix:   /
 
+welcomango_message_bundle:
+    resource: "@WelcomangoMessageBundle/Controller/"
+    type:     annotation
+
 welcomango_fos_routing:
     resource: "@WelcomangoUserBundle/Resources/config/routing.yml"
 

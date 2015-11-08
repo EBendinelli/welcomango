@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="welcomango.message.composer" class="Welcomango\Bundle\MessageBundle\Manager\MessageComposer">
+            <argument type="service" id="welcomango.message_manager" />
+            <argument type="service" id="welcomango.thread_manager" />
+        </service>
+
+        <service id="welcomango.message_manager" class="Welcomango\Bundle\MessageBundle\Manager\MessageManager" public="false">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>%fos_message.message_class%</argument>
+            <argument>%fos_message.message_meta_class%</argument>
+        </service>
+
+        <service id="welcomango.thread_manager" class="Welcomango\Bundle\MessageBundle\Manager\ThreadManager" public="false">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>%fos_message.thread_class%</argument>
+            <argument>%fos_message.thread_meta_class%</argument>
+            <argument type="service" id="welcomango.message_manager" />
+        </service>
+
+    </services>
+
+</container>

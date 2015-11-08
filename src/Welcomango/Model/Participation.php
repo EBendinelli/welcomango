@@ -110,9 +110,14 @@ class Participation
     private $createdAt;
 
     /**
+     * @ORM\OneToOne(targetEntity="Thread", mappedBy="participation", cascade={"persist"})
+     **/
+    private $thread;
+
+    /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -132,7 +137,7 @@ class Participation
     /**
      * Get isCreator
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsCreator()
     {
@@ -152,7 +157,7 @@ class Participation
     /**
      * Get isParticipant
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsParticipant()
     {
@@ -172,7 +177,7 @@ class Participation
     /**
      * Get date
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -192,7 +197,7 @@ class Participation
     /**
      * Get startTime
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getStartTime()
     {
@@ -212,7 +217,7 @@ class Participation
     /**
      * Get endTime
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getEndTime()
     {
@@ -232,7 +237,7 @@ class Participation
     /**
      * Get status
      *
-     * @return string 
+     * @return string
      */
     public function getStatus()
     {
@@ -349,5 +354,21 @@ class Participation
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @return Thread
+     */
+    public function getThread()
+    {
+        return $this->thread;
+    }
+
+    /**
+     * @param Thread $thread
+     */
+    public function setThread($thread)
+    {
+        $this->thread = $thread;
     }
 }

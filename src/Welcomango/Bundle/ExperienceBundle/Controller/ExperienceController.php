@@ -32,7 +32,7 @@ class ExperienceController extends BaseController
      */
     public function listAction(Request $request)
     {
-        $filters   = $this->getFilters(array(), 'experienceSearch');
+        $filters = $this->getFilters(array(), 'experienceSearch');
 
         $paginator  = $this->get('knp_paginator');
         $query      = $this->getRepository('Welcomango\Model\Experience')->createPagerQueryBuilder($filters);
@@ -46,7 +46,7 @@ class ExperienceController extends BaseController
 
         return array(
             'pagination' => $pagination,
-            'form'       => $form->createView()
+            'form'       => $form->createView(),
         );
     }
 
@@ -152,6 +152,8 @@ class ExperienceController extends BaseController
         }
 
         if ($form->isValid()) {
+            $message = $form->get('message')->getData();
+
             $participationManager = $this->get('welcomango.front.participation.manager');
 
             $participation = $participationManager->processParticipationQuery($participation, $form);
@@ -159,6 +161,21 @@ class ExperienceController extends BaseController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($participation);
             $entityManager->flush();
+
+            if (null !== $message) {
+                $composer = $this->container->get('welcomango.message.composer');
+
+                $message = $composer->newThread()
+                    ->setSender($user)
+                    ->addRecipient($experience->getAuthor())
+                    ->setSubject($experience->getTitle().' - Messages')
+                    ->setBody($message)
+                    ->setParticipation($participation)
+                    ->getMessage();
+
+                $sender = $this->container->get('fos_message.sender');
+                $sender->send($message);
+            }
 
             return $this->render('WelcomangoExperienceBundle:Experience:requestSent.html.twig');
         }
