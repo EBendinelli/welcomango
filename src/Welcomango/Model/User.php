@@ -8,10 +8,15 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="Welcomango\Model\Repository\UserRepository")
  * @ORM\Table(name="wm_user")
+ *
+ * @UniqueEntity("email")
+ * @UniqueEntity("username")
+ *
  */
 class User extends BaseUser
 {

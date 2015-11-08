@@ -203,7 +203,9 @@ class ExperienceController extends BaseController
             return $this->render('WelcomangoCoreBundle:CRUD:notAllowed.html.twig');
         }
 
-        $this->getDoctrine()->getManager()->remove($experience);
+        $experience->setDeleted(true);
+
+        $this->getDoctrine()->getManager()->persist($experience);
         $this->getDoctrine()->getManager()->flush();
 
         return $this->render('WelcomangoExperienceBundle:Experience:deleteSuccess.html.twig');

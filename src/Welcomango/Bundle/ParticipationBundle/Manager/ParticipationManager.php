@@ -20,10 +20,9 @@ class ParticipationManager
         if(!$participation->getExperience()->isAvailableForDate($participation->getStartTime())){
             return false;
         }
-        if(!$participation->getExperience()->isAlreadyBookedByUser($participation)){
+        if($participation->getExperience()->isAlreadyBookedByUser($participation)){
             return false;
         }
-
 
         return $participation;
     }

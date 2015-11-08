@@ -17,6 +17,7 @@ class ExperienceRepository extends EntityRepository
             ->createQueryBuilder('a')
             ->where('a.featured = true')
             ->andWhere('a.published = true')
+            ->andWhere('a.deleted = false')
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult()
@@ -28,6 +29,7 @@ class ExperienceRepository extends EntityRepository
             ->createQueryBuilder('a')
             ->leftJoin('a.participations', 'b')
             ->where('a.published = true')
+            ->andWhere('a.deleted = false')
             ->groupBy('a.id')
             ->orderBy('a.averageNote', 'DESC')
             ->setMaxResults($limit)
@@ -43,6 +45,7 @@ class ExperienceRepository extends EntityRepository
             ->where('a.published = true')
             ->andWhere('b.user ='.$user->getId())
             ->andWhere('b.isCreator = 1')
+            ->andWhere('a.deleted = false')
             ->groupBy('a.id')
             ->getQuery()
             ->getResult()
@@ -54,6 +57,7 @@ class ExperienceRepository extends EntityRepository
             ->createQueryBuilder('a')
             ->leftJoin('a.participations', 'b')
             ->where('a.published = true')
+            ->where('a.deleted = false')
             ->andWhere('b.user ='.$user->getId())
             ->andWhere('b.isParticipant = 1')
             ->groupBy('a.id')
@@ -66,15 +70,18 @@ class ExperienceRepository extends EntityRepository
      * Create paginated and filtered query builder
      *
      * @param array $filters
+     * @param boolean $isDeleted
      *
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function createPagerQueryBuilder(array $filters = array())
+    public function createPagerQueryBuilder(array $filters = array(), $isDeleted = false)
     {
         $queryBuilder = $this
             ->createQueryBuilder('e')
             ->leftJoin('e.participations', 'p')
             ->where('e.published = true');
+
+        if(!$isDeleted) $queryBuilder->andWhere('e.deleted = false');
 
         if ($city = $this->getFilter('city', $filters)) {
             $queryBuilder->andWhere('e.city = :city');

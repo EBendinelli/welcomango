@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Experience
@@ -29,6 +30,7 @@ class Experience
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $title;
 
@@ -130,6 +132,11 @@ class Experience
      * @ORM\Column(name="featured", type="boolean")
      */
     private $featured = false;
+
+    /**
+     * @ORM\Column(name="deleted", type="boolean")
+     */
+    private $deleted = true;
 
     /**
      * @ORM\Column(name="average_note", type="float", nullable=true)
@@ -415,6 +422,30 @@ class Experience
     }
 
     /**
+     * Set deleted
+     *
+     * @param boolean $deleted
+     *
+     * @return Experience
+     */
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted
+     *
+     * @return boolean
+     */
+    public function isFeatured()
+    {
+        return $this->deleted;
+    }
+
+    /**
      * Set averageNote
      *
      * @param boolean $averageNote
@@ -550,26 +581,40 @@ class Experience
 
     public function isAvailableForDate($startTime)
     {
-        $criteria = Criteria::create()
+        // TODO: FUCKING CRITERIA NOT WORKING. NO QUERY EXECUTED, FIND WHY. Should replace the foreach
+        /*$criteria = Criteria::create()
             ->where(Criteria::expr()->eq("startTime", $startTime))
             ->andWhere(Criteria::expr()->eq("isParticipant", 1))
-            ->andWhere(Criteria::expr()->eq("status", 'Booked'));
+            ->andWhere(Criteria::expr()->eq("status", 'Booked'));*/
 
-        $result = $this->participations->matching($criteria);
+        foreach($this->participations as $participation){
+            if($participation->getStartTime() == $startTime && $participation->getIsParticipant() == 1 && $participation->getStatus() == 'Booked'){
+                return false;
+            }
+        }
+        return true;
 
-        return ($result->isEmpty()) ? true : false;
+        /*$result = $this->participations->matching($criteria);
+        return ($result->isEmpty()) ? true : false;*/
     }
 
     public function isAlreadyBookedByUser($participation)
     {
-        $criteria = Criteria::create()
+        // TODO: FUCKING CRITERIA NOT WORKING. NO QUERY EXECUTED, FIND WHY. Should replace the foreach
+        /*$criteria = Criteria::create()
             ->where(Criteria::expr()->eq("startTime", $participation->getStartTime()))
             ->andWhere(Criteria::expr()->eq("isParticipant", 1))
-            ->andWhere(Criteria::expr()->eq("user", $participation->getUser()));
+            ->andWhere(Criteria::expr()->eq("user", $participation->getUser()));*/
 
-        $result = $this->participations->matching($criteria);
+        foreach($this->participations as $existingParticipation){
+            if($existingParticipation->getStartTime() == $participation->getStartTime() && $existingParticipation->getIsParticipant() == 1 && $existingParticipation->getUser() == $participation->getUser()){
+                return true;
+            }
+        }
+        return false;
 
-        return ($result->isEmpty()) ? true : false;
+        /*$result = $this->participations->matching($criteria);
+        return ($result->isEmpty()) ? true : false;*/
     }
 
 }

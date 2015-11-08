@@ -34,9 +34,9 @@ class AdminExperienceController extends BaseController
     {
         $filters   = $this->getFilters(array(), 'experienceSearch');
         $paginator = $this->get('knp_paginator');
-        $query     = $this->getRepository('Welcomango\Model\Experience')->createPagerQueryBuilder($filters);
+        $query     = $this->getRepository('Welcomango\Model\Experience')->createPagerQueryBuilder($filters, true);
 
-        $form = $this->createForm($this->get('welcomango.form.experience.filter'), $filters);
+        $form = $this->createForm($this->get('welcomango.admin.form.experience.filter'), $filters);
 
         $pagination = $paginator->paginate(
             $query,
@@ -62,7 +62,7 @@ class AdminExperienceController extends BaseController
     {
         $experience = new Experience();
 
-        $form = $this->createForm($this->get('welcomango.form.experience.create'), $experience);
+        $form = $this->createForm($this->get('welcomango.admin.form.experience.create'), $experience);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -91,7 +91,7 @@ class AdminExperienceController extends BaseController
      */
     public function editAction(Request $request, Experience $experience)
     {
-        $form = $this->createForm($this->get('welcomango.form.experience.edit'), $experience);
+        $form = $this->createForm($this->get('welcomango.admin.form.experience.edit'), $experience);
         $form->handleRequest($request);
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->persist($experience);
@@ -140,7 +140,7 @@ class AdminExperienceController extends BaseController
             return $this->redirect($this->generateUrl('admin_experience_list'));
         }
 
-        $form = $this->createForm($this->get('welcomango.form.experience.filter'), null);
+        $form = $this->createForm($this->get('welcomango.admin.form.experience.filter'), null);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

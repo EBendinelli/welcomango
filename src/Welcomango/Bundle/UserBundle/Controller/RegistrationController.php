@@ -11,6 +11,9 @@ use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 use Welcomango\Model\Experience;
 use Welcomango\Model\City;
@@ -38,6 +41,7 @@ class RegistrationController extends BaseProfileController
             return $event->getResponse();
         }
 
+
         $form = $this->createForm($this->get('welcomango.front.form.user.type'), $user);
         $form->setData($user);
 
@@ -56,7 +60,6 @@ class RegistrationController extends BaseProfileController
 
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
 
-            ldd($response);
             return $response;
         }
 
@@ -65,4 +68,36 @@ class RegistrationController extends BaseProfileController
         ));
     }
 
+
+    /**
+     * Check User Form filed for Ajax Calls
+     *
+     * @param Request $request
+     *
+     * @Route("/json/registration/form/list.json", name="usr_registration_check_ajax", defaults={"_format"="json"})
+     *
+     * @return String
+     */
+    public function checkFormAction(Request $request){
+        $response = array();
+        $response['message'] = 'Oops. Something went wrong.';
+        $response['container'] = 'warning';
+
+        $userRepository = $this->getDoctrine()->getManager()->getRepository('Welcomango\Model\User');
+        if ($request->request->has('query') && $request->request->get('query') != '' && $request->request->has('field') && $request->request->get('field') != '') {
+            $query  = $request->request->get('query');
+            $field = $request->request->get('field');
+            $field = \str_replace('front_user_', '', $field);
+
+            $result = $userRepository->findBy(array($field => $query));
+            if($result){
+                $response['message'] = 'username.taken';
+                $response['class'] = 'alert alert-danger';
+            }else{
+                $response['message'] = 'username.free';
+                $response['class'] = 'alert alert-success';
+            }
+        }
+        return new JsonResponse($response);
+    }
 }

@@ -25,10 +25,12 @@
                 <!-- BEGIN FORM PART -->
                 <div class="col-md-5 bg-master-lightest p-t-10 p-l-20 p-r-20 m-l-10  m-r-10  row col-md-pull-6">
                     <h4 class="text-center bold m-b-30">Join Welcomango Now</h4>
-                    {{ form_start(form) }}
+                    {{ form_start(form, {'attr': {'id': 'registration_form'}}) }}
                     {{ form_errors(form) }}
                     {{ form_row(form.username) }}
+                    <div id="front_user_username_message"></div>
                     {{ form_row(form.email) }}
+                    <div id="front_user_email_message"></div>
                     <div class="row">
                         <div class="col-md-6">{{ form_row(form.firstName) }}</div>
                         <div class="col-md-6">{{ form_row(form.lastName) }}</div>
@@ -67,3 +69,39 @@
 </section>
 <!-- END JUMBOTRON -->
 {% endblock page_content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        var timeout;
+        $(document).ready(function () {
+            $('#front_user_username').val('');
+            var elements = ['front_user_username', 'front_user_email'];
+
+            $('.form-control').keyup(function (event) {
+                if($.inArray($(this).attr('id'), elements) > -1){
+
+                    var query = $(this).val();
+                    var field = $(this).attr('id');
+                    var element = $(this)
+                    var elementId = element.attr('id');
+
+                    clearTimeout(timeout);
+
+                    if (query.length > 3) {
+                        timeout = setTimeout(function () {
+                            $('#spinner').css('display', 'inline');
+                            $.post("{{ path('usr_registration_check_ajax') }}", {'query': query, 'field': field}, function (response) {
+                                var parsedResponse = $.parseJSON(response);
+                                $('#spinner').css('display', 'none');
+                                $('#'+elementId+'_message').html(parsedResponse['message']);
+                                $('#'+elementId+'_message').removeAttr('class');
+                                $('#'+elementId+'_message').addClass(parsedResponse['class'])
+                            }, 'html');
+                        }, 500);
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock javascripts %}

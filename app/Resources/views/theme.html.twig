@@ -5,6 +5,13 @@
     </div>
 {% endblock text_widget %}
 
+{% block email_widget %}
+    <div class="form-group form-group-default {% if required %}required{% endif %}">
+        <label>{{ form_label(form) }}</label>
+        <input type="email" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %} placeholder="ex: name@example.com" />
+    </div>
+{% endblock email_widget %}
+
 {% block yes_no_widget %}
     {% spaceless %}
         <div class="form-group {% if required %}required{% endif %}">
