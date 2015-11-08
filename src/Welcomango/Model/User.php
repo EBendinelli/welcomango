@@ -94,7 +94,7 @@ class User extends BaseUser implements ParticipantInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="City")
-     * @ORM\JoinColumn(name="from_city_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="from_city_id", referencedColumnName="id", nullable=true)
      */
     private $fromCity;
 

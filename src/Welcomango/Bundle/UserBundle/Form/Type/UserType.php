@@ -77,10 +77,6 @@ class UserType extends AbstractType
             'second_options'  => array('label' => 'form.user.password.validate'),
         ));
 
-        $builder->add('from_city', 'entity', array(
-            'class'    => 'Model:City',
-            'property' => 'name',
-        ));
 
         $builder->add('current_city', 'entity', array(
             'class'    => 'Model:City',

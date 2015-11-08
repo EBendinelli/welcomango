@@ -8,7 +8,7 @@
         {% block page_header %}
             {% include("WelcomangoCoreBundle:CRUD:subHeader.html.twig") %}
             {# MAIN DESCRIPTION #}
-            <section class="bg-master-lighter p-b-85 p-t-75">
+            <section class="bg-master-lightest p-b-85 p-t-75">
                 <div class="container">
                     <div class="md-p-l-20 md-p-r-20 xs-no-padding">
                         <h5 class="block-title hint-text no-margin">
@@ -43,35 +43,31 @@
 
         {% block filter_block %}
             {% if form is defined %}
-                <div class="container-fluid container-fixed-lg">
-                    <div class="cold-md-12">
-                        <div class="panel panel-default portlet">
-                            <div class="panel-heading">
-                                <div class="panel-title">{{ "interface.filter.title"|trans({}, "interface") }}</div>
-                                <div class="panel-controls">
-                                    <a href="#" class="portlet-collapse" data-toggle="collapse"><i class="portlet-icon portlet-icon-collapse"></i></a>
+                <section class="container-fluid container-fixed-lg bg-master-lightest">
+                    <div class="container large-container">
+                        <div class="cold-md-12">
+                            <div class="panel panel-default portlet">
+                                <div class="panel-body">
+                                    {{ form_start(form, {'action': filter_url, 'method': 'POST', 'attr': { 'novalidate': 'novalidate', 'class': 'filter' } }) }}
+                                    {% block filters %}{{ form_row(form) }}{% endblock %}
+                                    <div class="btn-toolbar text-center m-t-20" role="toolbar">
+                                        <button type="submit" id="btn-filter" class="btn btn-primary btn-sm btn-filter-inversed">{{ 'interface.search'|trans({}, "interface") }}</button>
+                                        <button type="submit" class="btn btn-default btn-sm" name="_reset">{{ 'interface.clear'|trans({}, "interface") }}</button>
+                                    </div>
+                                    {{ form_rest(form) }}
+                                    {{ form_end(form) }}
                                 </div>
-                            </div>
-                            <div class="panel-body">
-                                {{ form_start(form, {'action': filter_url, 'method': 'POST', 'attr': { 'novalidate': 'novalidate', 'class': 'filter' } }) }}
-                                {% block filters %}{{ form_row(form) }}{% endblock %}
-                                <div class="btn-toolbar text-right" role="toolbar">
-                                    <button type="submit" id="btn-filter" class="btn btn-primary btn-sm btn-filter-inversed">{{ 'interface.filter'|trans({}, "interface") }}</button>
-                                    <button type="submit" class="btn btn-default btn-sm" name="_reset">{{ 'interface.reset'|trans({}, "interface") }}</button>
-                                </div>
-                                {{ form_rest(form) }}
-                                {{ form_end(form) }}
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
             {% endif %}
         {% endblock %}
 
 
         {% block main_content %}
             {# ELEMENT DISPLAY #}
-            <section class="container-fluid container-fixed-lg bg-master-lighter ">
+            <section class="container-fluid container-fixed-lg bg-master-lightest">
                 <div class="container large-container">
                     <div class="row">
                         <div class="col-md-12">

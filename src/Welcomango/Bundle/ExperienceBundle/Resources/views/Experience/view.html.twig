@@ -22,9 +22,13 @@
                             {{ include("WelcomangoExperienceBundle:Experience:_experienceNote.html.twig", { 'note': experience.getAverageNote, 'size': 'medium'}) }}
                         </div>
                         <p class="fs-12 font-arial text-white ">A {{ experience.estimatedDuration }}h adventure proposed by {{ experience.getAuthor.firstname }}</p>
-                        <button id="experience-booking-btn" type="button" class="btn btn-lg btn-primary btn-cons btn-rounded m-t-20" onclick="toggleBooking()">
-                            {{ 'experience.sendRequest'|trans }}
-                        </button>
+                        {% if app.user == experience.getAuthor %}
+                            <a href="{{ path('front_experience_edit', {'experience_id': experience.id}) }}" class="btn btn-lg btn-complete btn-cons btn-rounded m-t-20"><i class="fa fa-pencil"></i> {{ 'profile.editExperience'|trans }}</a>
+                        {% else %}
+                            <button id="experience-booking-btn" type="button" class="btn btn-lg btn-primary btn-cons btn-rounded m-t-20" onclick="toggleBooking()">
+                                {{ 'experience.sendRequest'|trans }}
+                            </button>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -219,7 +223,7 @@
                                 <div class="experience-image-separation">
                                     <div class="experience-image-triangle"></div>
                                 </div>
-                                <div class="experience-bottom-price bg-master-light" onclick="userToggleBooking()">
+                                <div class="experience-bottom-price bg-master-light" {% if app.user != experience.getAuthor %}onclick="userToggleBooking(){% endif %}">
                                     <div class=" experience-price">
                                         {{ experience.pricePerHour }}€/h
                                     </div>
