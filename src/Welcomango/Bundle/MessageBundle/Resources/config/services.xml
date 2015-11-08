@@ -5,9 +5,23 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="welcomango.new.thread.type" class="Welcomango\Bundle\MessageBundle\Form\Type\ThreadType">
+        </service>
+
+        <service id="welcomango.message.creator" class="Welcomango\Bundle\MessageBundle\Manager\CreateMessageManager">
+            <argument type="service" id="welcomango.message.composer" />
+            <argument type="service" id="welcomango.message.sender" />
+        </service>
+
         <service id="welcomango.message.composer" class="Welcomango\Bundle\MessageBundle\Manager\MessageComposer">
             <argument type="service" id="welcomango.message_manager" />
             <argument type="service" id="welcomango.thread_manager" />
+        </service>
+
+        <service id="welcomango.message.sender" class="Welcomango\Bundle\MessageBundle\Manager\Sender">
+            <argument type="service" id="welcomango.message_manager"/>
+            <argument type="service" id="welcomango.thread_manager"/>
+            <argument type="service" id="debug.event_dispatcher"/>
         </service>
 
         <service id="welcomango.message_manager" class="Welcomango\Bundle\MessageBundle\Manager\MessageManager" public="false">

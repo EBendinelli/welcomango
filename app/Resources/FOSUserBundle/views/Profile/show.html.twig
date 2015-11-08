@@ -14,9 +14,10 @@
         <div class="dotted-line"><span></span></div>
         <div id="profile-menu-items">
             <ul>
-                <a href="">
+                <a href="{{ path('message_inbox') }}">
                     <li class="profile-menu-item">
                         <i class="fa fa-envelope fa-lg m-r-10"></i>{{ 'profile.message'|trans }}
+                        {{ notification_display(user, 'inbox') }}
                     </li>
                 </a>
                 <a href="{{ path('participation_received_list', {'display': 'received'}) }}" class="profile-menu-item">

@@ -16,12 +16,11 @@
     </div>
 {% endfor %}
 
-<h3>{% trans from 'FOSMessageBundle' %}reply{% endtrans %}</h3>
+<h3>{{ 'message.reply'|trans }}</h3>
 
-<form action="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}" method="post">
+<form action="{{ url('message_thread', {'thread_id': thread.id, 'user_id' : user.id}) }}" method="post">
     {{ form_widget(form) }}
-
-    <input type="submit" />
+    <button type="submit" />
 </form>
 
 {% endblock %}

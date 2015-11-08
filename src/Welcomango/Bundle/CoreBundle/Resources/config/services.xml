@@ -43,8 +43,9 @@
         </service>
 
         <service id="welcomango.core.notification_display" class="Welcomango\Bundle\CoreBundle\Twig\NotificationDisplayExtension">
-            <tag name="twig.extension"/>
             <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="fos_message.provider"/>
+            <tag name="twig.extension"/>
         </service>
     </services>
 </container>

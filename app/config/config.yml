@@ -159,6 +159,7 @@ fos_message:
     thread_class: Welcomango\Model\Thread
     message_class: Welcomango\Model\Message
     composer: welcomango.message.composer
+    sender: welcomango.message.sender
 
 welcomango_participation:
     available_status:

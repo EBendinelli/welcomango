@@ -116,8 +116,6 @@ class ExperienceController extends BaseController
             'form'           => $form->createView(),
             'requested_user' => $experience,
         );
-
-
     }
 
     /**
@@ -162,18 +160,17 @@ class ExperienceController extends BaseController
                     'title' => 'Hm. Want to go on an adventure with yourself? ',
                     'message' => 'Well maybe you just wanted to edit your experience',
                     'return_path' => $this->get('router')->generate('front_experience_view', array('experience_id' => $experience->getId())),
-                    'return_message' => 'Return to experience'
+                    'return_message' => 'Return to experience',
                 ));
             }
 
             $participationManager = $this->get('welcomango.front.participation.manager');
-
-            if (!$participation = $participationManager->processParticipationQuery($participation, $form)) {
+            if (!$participationManager->processParticipationQuery($participation, $form)) {
                 return $this->render('WelcomangoCoreBundle:CRUD:notAllowed.html.twig', array(
                     'title'          => 'Oops, something went wrong.',
                     'message'        => 'This experience is not available at this time... Try another time or another day',
                     'return_path'    => $this->get('router')->generate('front_experience_view', array('experience_id' => $experience->getId())),
-                    'return_message' => 'Return to experience'
+                    'return_message' => 'Return to experience',
                 ));
             }
 
@@ -182,18 +179,7 @@ class ExperienceController extends BaseController
             $entityManager->flush();
 
             if (null !== $message) {
-                $composer = $this->container->get('welcomango.message.composer');
-
-                $message = $composer->newThread()
-                    ->setSender($user)
-                    ->addRecipient($experience->getAuthor())
-                    ->setSubject($experience->getTitle().' - Messages')
-                    ->setBody($message)
-                    ->setParticipation($participation)
-                    ->getMessage();
-
-                $sender = $this->container->get('fos_message.sender');
-                $sender->send($message);
+                $this->get('welcomango.message.creator')->createThread($participation, $user, $message);
             }
 
             return $this->render('WelcomangoExperienceBundle:Experience:requestSent.html.twig');

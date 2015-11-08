@@ -4,9 +4,9 @@
 
     <h2>{{ participation.experience.title }} - messages</h2>
 
-    <form action="{{ url('message_list', {'user_id': user.id, 'participation_id': participation.id}) }}" method="post">
-        {{ form_widget(form) }}
+    {{ form_start(form, {'action': path('message_request', {'user_id': user.id, 'participation_id': participation.id})}) }}
+        {{ form_rest(form)  }}
         <input type="submit" />
-    </form>
+    {{ form_end(form) }}
 
 {% endblock %}

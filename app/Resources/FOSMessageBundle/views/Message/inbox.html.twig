@@ -1,0 +1,9 @@
+{% extends "FOSUserBundle:Profile:show.html.twig" %}
+
+{% block profile_content %}
+
+    <h2>{% trans from 'FOSMessageBundle' %}inbox{% endtrans %}</h2>
+
+{% include 'FOSMessageBundle:Message:threads_list.html.twig' with {'threads': threads} %}
+
+{% endblock %}

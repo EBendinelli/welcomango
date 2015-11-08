@@ -44,7 +44,7 @@ class RequestActionExtension extends \Twig_Extension
     public function requestAction(Participation $participation, User $user)
     {
         $availableActions = '';
-        $messageRoute     = $this->router->generate('message_list', array(
+        $messageRoute     = $this->router->generate('message_request', array(
             'participation_id' => $participation->getId(),
             'user_id'          => $user->getId(),
         ));
