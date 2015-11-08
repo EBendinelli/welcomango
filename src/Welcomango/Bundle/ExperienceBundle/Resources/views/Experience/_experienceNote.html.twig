@@ -11,27 +11,27 @@
 
         {% if note|round == 5 %}
             {% for i in 1..5 %}
-                <img class="{{ noteClass }}" src="{{ asset('img/welcomango-picto-full.png') }}"/>
+                <img class="{{ noteClass }}" src="{{ asset('bundles/welcomangocore/images/welcomango-picto-full.png') }}"/>
             {% endfor %}
         {% elseif note|round == 0 %}
             {% for i in 1..5 %}
-                <img class="{{ noteClass }}" src="{{ asset('img/welcomango-picto.png') }}"/>
+                <img class="{{ noteClass }}" src="{{ asset('bundles/welcomangocore/images/welcomango-picto.png') }}"/>
             {% endfor %}
         {% elseif note/note|round == 1 %}
             {% for i in 1..note %}
-                <img class="{{ noteClass }}" src="{{ asset('img/welcomango-picto-full.png') }}"/>
+                <img class="{{ noteClass }}" src="{{ asset('bundles/welcomangocore/images/welcomango-picto-full.png') }}"/>
             {% endfor %}
             {% for i in note..4 %}
-                <img class="{{ noteClass }}" src="{{ asset('img/welcomango-picto.png') }}"/>
+                <img class="{{ noteClass }}" src="{{ asset('bundles/welcomangocore/images/welcomango-picto.png') }}"/>
             {% endfor %}
         {% else %}
             {% for i in 1..note|round(0,'floor') %}
-                <img class="{{ noteClass }}" src="{{ asset('img/welcomango-picto-full.png') }}"/>
+                <img class="{{ noteClass }}" src="{{ asset('bundles/welcomangocore/images/welcomango-picto-full.png') }}"/>
             {% endfor %}
-            <img class="{{ noteClass }}" src="{{ asset('img/welcomango-picto-half.png') }}"/>
+            <img class="{{ noteClass }}" src="{{ asset('bundles/welcomangocore/images/welcomango-picto-half.png') }}"/>
             {% if note|round(0,'ceil') < 5 %}
                 {% for i in note|round(0,'ceil')..4 %}
-                    <img class="{{ noteClass }}" src="{{ asset('img/welcomango-picto.png') }}"/>
+                    <img class="{{ noteClass }}" src="{{ asset('bundles/welcomangocore/images/welcomango-picto.png') }}"/>
                 {% endfor %}
             {% endif %}
         {% endif %}

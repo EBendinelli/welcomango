@@ -41,22 +41,40 @@ class ExperienceFilterType extends AbstractType
     {
         $transformer = new CityTransformer($this->entityManager);
 
+        for ($i = 1; $i < 11; $i++) $numberOfParticipants[$i] = $i;
+
         $builder
-/*            ->add('roles', 'choice', [
-                'label'    => 'form.user.roles',
-                'required' => false,
-                'choices'  => User::getAvailableRoles(),
-                'multiple' => true,
-            ])*/
             ->add('title', 'text', [
                 'required' => false,
                 'label'    => 'experience.title',
             ])
             ->add($builder->create('city', 'genemu_jqueryselect2_hidden', [
+                'required' => false,
                 'configs' => [],
                 'label'   => 'form.city',
             ])->addModelTransformer($transformer))
         ;
+
+        $builder->add('date', 'date', [
+            'label'    => 'form.experience.date',
+            'required' => false,
+            'years'    => range(date('Y'), date('Y') + 1),
+            'months'   => range(date('m'), 12),
+            'days'     => range(date('d'), 31),
+            'widget'   => 'single_text',
+            'format'   => 'dd-MM-yyyy',
+            'attr'     => [
+                'class'            => 'form-control input-inline datepicker',
+                'data-provide'     => 'datepicker',
+                'data-date-format' => 'dd-mm-yyyy',
+            ],
+        ]);
+
+        $builder->add('min_participants_accepted', 'choice', [
+            'required' => false,
+            'choices' => $numberOfParticipants,
+            'label'   => 'form.experience.minParticipantsAccepted',
+        ]);
     }
 
     /**

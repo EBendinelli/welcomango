@@ -36,6 +36,7 @@ class RequestActionExtension extends \Twig_Extension
     {
         $availableActions = '';
 
+
         //If checking received request
         if($participation->getExperience()->getAuthor() == $user){
             $acceptedRoute = $this->router->generate('participation_update', array('participation_id' => $participation->getId(), 'status' => 'Accepted'));

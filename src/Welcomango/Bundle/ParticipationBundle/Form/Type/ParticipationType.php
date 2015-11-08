@@ -49,13 +49,10 @@ class ParticipationType extends AbstractType
         $numberOfParticipants = array();
         $desiredTime          = array();
 
-        for ($i = 0; $i < 48; $i++) $desiredDuration[$i] = $i;
-        for ($i = 0; $i < 20; $i++) $numberOfParticipants[$i] = $i;
+        for ($i = 1; $i <= $options['experience']->getMaximumDuration(); $i++) $desiredDuration[$i] = $i;
+        for ($i = 1; $i <= $options['experience']->getMaximumParticipants(); $i++) $numberOfParticipants[$i] = $i;
 
-        $desiredTime[] = "Morning";
-        $desiredTime[] = "Lunchtime";
-        $desiredTime[] = "Afternoon";
-        $desiredTime[] = "Evening";
+        $desiredTime = $options['meeting_times'];
 
         /*$builder->add('message', 'textarea', [
             'label' => 'form.participation.message'
@@ -90,6 +87,7 @@ class ParticipationType extends AbstractType
             'label'    => 'form.participation.desiredTime',
             'required' => false,
             'mapped'   => false,
+            'placeholder' => false,
             'data'     => '1',
         ]);
 
@@ -111,7 +109,7 @@ class ParticipationType extends AbstractType
             'data_class'         => 'Welcomango\Model\Participation',
             'translation_domain' => 'participation',
         ]);
-        $resolver->setRequired('available_status');
+        $resolver->setRequired(array('available_status', 'meeting_times', 'experience'));
 
     }
 

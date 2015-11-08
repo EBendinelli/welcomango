@@ -34,6 +34,7 @@ class ExperienceController extends BaseController
     {
         $filters   = $this->getFilters(array(), 'experienceSearch');
 
+
         $paginator  = $this->get('knp_paginator');
         $query      = $this->getRepository('Welcomango\Model\Experience')->createPagerQueryBuilder($filters);
         $pagination = $paginator->paginate(
@@ -143,6 +144,8 @@ class ExperienceController extends BaseController
         $participation->setExperience($experience);
         $form = $this->createForm($this->get('welcomango.form.participation.type'), $participation, [
             'available_status' => $this->container->getParameter('available_status'),
+            'meeting_times' => $this->container->getParameter('meeting_times'),
+            'experience' => $experience,
         ]);
         $form->handleRequest($request);
 
@@ -152,9 +155,23 @@ class ExperienceController extends BaseController
         }
 
         if ($form->isValid()) {
+            if($user == $experience->getAuthor()){
+                return $this->render('WelcomangoCoreBundle:CRUD:notAllowed.html.twig', array(
+                    'title' => 'Hm. Want to go on an adventure with yourself? ',
+                    'message' => 'Well maybe you just wanted to edit your experience',
+                    'return_path' => $this->get('router')->generate('front_experience_view', array('experience_id' => $experience->getId())),
+                    'return_message' => 'Return to experience'
+                ));
+            }
             $participationManager = $this->get('welcomango.front.participation.manager');
 
-            $participation = $participationManager->processParticipationQuery($participation, $form);
+            if(!$participation = $participationManager->processParticipationQuery($participation, $form))
+                return $this->render('WelcomangoCoreBundle:CRUD:notAllowed.html.twig', array(
+                    'title' => 'Oops, something went wrong.',
+                    'message' => 'This experience is not available at this time... Try another time or another day',
+                    'return_path' => $this->get('router')->generate('front_experience_view', array('experience_id' => $experience->getId())),
+                    'return_message' => 'Return to experience'
+                ));
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($participation);

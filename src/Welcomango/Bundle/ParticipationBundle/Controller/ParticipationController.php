@@ -40,27 +40,23 @@ class ParticipationController extends BaseController
 
         $experience = $user->getExperience();
 
+        $activeTab = $request->get('display');
+        if(!$activeTab) $activeTab = 'received';
+
+        if($activeTab == 'received'){ $statusFilter = array('Requested', 'Accepted', 'Refused'); }
+        else{ $statusFilter = array('Happened'); }
+
+
         $paginator = $this->get('knp_paginator');
-        $query     = $this->getRepository('Welcomango\Model\Participation')->findBy(array('experience' => $experience , 'isParticipant' => 1, 'status' => array('Accepted', 'Refused', 'Requested')), array('createdAt' => 'DESC'));
+        $query     = $this->getRepository('Welcomango\Model\Participation')->findBy(array('experience' => $experience , 'isParticipant' => 1, 'status' => $statusFilter), array('createdAt' => 'DESC'));
         $pagination = $paginator->paginate(
             $query,
             $request->query->get('page', 1),
             20
         );
 
-        $queryHappened = $this->getRepository('Welcomango\Model\Participation')->findBy(array('experience' => $experience , 'isParticipant' => 1, 'status' => array('Happened')), array('date' => 'DESC'));
-        $paginationHappened = $paginator->paginate(
-            $queryHappened,
-            $request->query->get('page', 1),
-            20
-        );
-
-        $activeTab = $request->get('display');
-        if(!$activeTab) $activeTab = 'received';
-
         return array(
             'participations' => $pagination,
-            'participationsHappened' => $paginationHappened,
             'activeTab' => $activeTab,
             'user' => $user
         );
@@ -81,27 +77,22 @@ class ParticipationController extends BaseController
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
+        $activeTab = $request->get('display');
+        if(!$activeTab) $activeTab = 'sent';
+
+        if($activeTab == 'sent'){ $statusFilter = array('Requested', 'Accepted', 'Refused'); }
+        else{ $statusFilter = array('Happened'); }
+
         $paginator = $this->get('knp_paginator');
-        $query     = $this->getRepository('Welcomango\Model\Participation')->findBy(array('user' => $user, 'isParticipant' => 1, 'status' => array('Accepted', 'Refused', 'Requested')));
+        $query     = $this->getRepository('Welcomango\Model\Participation')->findBy(array('user' => $user, 'isParticipant' => 1, 'status' => $statusFilter), array('createdAt' => 'DESC'));
         $pagination = $paginator->paginate(
             $query,
             $request->query->get('page', 1),
             20
         );
 
-        $queryHappened = $this->getRepository('Welcomango\Model\Participation')->findBy(array('user' => $user, 'isParticipant' => 1, 'status' => array('Happened')));
-        $paginationHappened = $paginator->paginate(
-            $queryHappened,
-            $request->query->get('page', 1),
-            20
-        );
-
-        $activeTab = $request->get('display');
-        if(!$activeTab) $activeTab = 'sent';
-
         return array(
             'participations' => $pagination,
-            'participationsHappened' => $paginationHappened,
             'activeTab' => $activeTab,
         );
     }

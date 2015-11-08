@@ -87,9 +87,16 @@ class ExperienceRepository extends EntityRepository
             $queryBuilder->setParameter('title', '%'.$title.'%');
         }
 
-        if ($title = $this->getFilter('startDate', $filters)) {
-            $queryBuilder->andWhere('e.title LIKE :title');
+        if ($date = $this->getFilter('date', $filters)) {
+
+            $queryBuilder->andWhere('p.date LIKE :date');
+            $queryBuilder->setParameter('date', $date->format('Y-m-d').'%');
         }
+
+        if ($minParticipants = $this->getFilter('min_participants_accepted', $filters)) {
+            $queryBuilder->andWhere('e.maximumParticipants >= '.$minParticipants);
+        }
+
 
         /*if ($title = $this->getFilter('endDate', $filters)) {
             $queryBuilder->andWhere('e.fecha BETWEEN :monday AND :sunday')

@@ -5,6 +5,7 @@ namespace Welcomango\Model;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Criteria;
 
 /**
  * Experience
@@ -546,4 +547,29 @@ class Experience
     {
         $this->medias->removeElement($medias);
     }
+
+    public function isAvailableForDate($startTime)
+    {
+        $criteria = Criteria::create()
+            ->where(Criteria::expr()->eq("startTime", $startTime))
+            ->andWhere(Criteria::expr()->eq("isParticipant", 1))
+            ->andWhere(Criteria::expr()->eq("status", 'Booked'));
+
+        $result = $this->participations->matching($criteria);
+
+        return ($result->isEmpty()) ? true : false;
+    }
+
+    public function isAlreadyBookedByUser($participation)
+    {
+        $criteria = Criteria::create()
+            ->where(Criteria::expr()->eq("startTime", $participation->getStartTime()))
+            ->andWhere(Criteria::expr()->eq("isParticipant", 1))
+            ->andWhere(Criteria::expr()->eq("user", $participation->getUser()));
+
+        $result = $this->participations->matching($criteria);
+
+        return ($result->isEmpty()) ? true : false;
+    }
+
 }

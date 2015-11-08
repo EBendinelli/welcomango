@@ -1,6 +1,7 @@
 {% extends "FOSUserBundle:Profile:show.html.twig" %}
 
 {% block profile_content %}
+
     {% if not user.getExperience %}
         <div class="row" >
             <div class="col-md-12 text-center m-t-20 p-b-30 bg-master-lightest ">
@@ -12,15 +13,15 @@
         </div>
     {% else %}
         <div class="text-center m-b-20">
-            <h2 data-toggle="modal" data-target=".modal-action" >{{ 'participation.requestReceivedFor'|trans }}</h2>
+            <h2>{{ 'participation.requestReceivedFor'|trans }}</h2>
             <h4>
                 <a class="text-primary" href="{{ path('front_experience_view', {'experience_id': user.getExperience.id}) }}">{{ user.getExperience.title }}</a>
             </h4>
         </div>
 
         <div class="row m-b-20">
-            <div class="col-md-6 text-right"><button id="participation-pending-filter" class="btn btn-dark {%  if activeTab == 'received' %}btn-primary{% endif %}" onClick="toggleFilterClass(this)">Pending</button></div>
-            <div class="col-md-6 text-left"><button id="participation-happened-filter" class="btn btn-dark {%  if activeTab == 'happened' %}btn-primary{% endif %}" onClick="toggleFilterClass(this)">Happened</button></div>
+            <div class="col-md-6 text-right"><a id="participation-pending-filter" class="btn btn-dark {%  if activeTab == 'received' %}btn-primary{% endif %}" onClick="filterStatus(this, 'received'); toggleFilterClass(this);">Pending</a></div>
+            <div class="col-md-6 text-left"><a id="participation-happened-filter" class="btn btn-dark {%  if activeTab == 'happened' %}btn-primary{% endif %}" onClick="filterStatus(this, 'happened'); toggleFilterClass(this);">Happened</a></div>
         </div>
 
         <!-- NOTE: if we want to add an effect on the content display, we shall use div instead of table. See bellow -->
@@ -28,9 +29,98 @@
             <!-- TABLE OF REQUEST RECEIVED FOR THE USER EXPERIENCE -->
             <div class="panel-body">
                 <div class="table-responsive">
-                    {% include "WelcomangoParticipationBundle:Participation:_tableReceived.html.twig" with{ 'participations' : participations, 'display': 'received', 'activeTab': activeTab} %}
+                    <table class="entity-table table table-condensed">
+                        <thead>
+                        <tr>
+                            <th class="col-md-3" >{{ 'participation.user'|trans }}</th>
+                            {% if activeTab == 'received' %}
+                                <th class="col-md-2">{{ 'participation.requestedTime'|trans  }}</th>
+                            {% endif %}
+                            <th class="col-md-2">{{ 'participation.date'|trans }}</th>
+                            <th class="col-md-2">{{ 'participation.status'|trans }}</th>
+                            <th class="col-md-2">{{ 'participation.controls'|trans }}</th>
+                        </tr>
+                        </thead>
 
-                    {% include "WelcomangoParticipationBundle:Participation:_tableReceived.html.twig" with{ 'participations' : participationsHappened, 'display': 'happened', 'activeTab': activeTab} %}
+                        <tbody>
+                        {% for participation in participations %}
+                            {% set extraClass = '' %}
+                            {% set extraClassDetails = '' %}
+                            {% if participation.status == 'Requested' %}
+                                {% set extraClass = 'participation-row-bold info' %}
+                                {% set extraClassDetails = 'participation-row-bold' %}
+                            {% elseif participation.status == 'Refused' %}
+                                {% set extraClass = 'participation-row-refused' %}
+                                {% set extraClassDetails = 'participation-row-refused' %}
+                            {% endif %}
+                            <tr class="participation-row clickable table-details hover-bg-master-lightest hover-pointer {{ extraClass|default('') }}" onClick="rowToggle(this, {{ participation.id }}, event)">
+                                <td class="col-md-4 semi-bold">
+                                    <a href="{{ asset(path('front_user_view', {'user_id': participation.user.id})) }}">
+                                        {% if participation.user.getMedias.first %}
+                                            <img src='{{ asset(participation.user.getMedias.first.getWebPath) }}' class='front-menu-user-picture m-r-10' />
+                                        {% else %}
+                                            <img src='{{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }}' class='front-menu-user-picture m-r-10' />
+                                        {% endif %}
+                                    </a>
+                                    {{ participation.user.firstname }} {{ participation.user.lastname }}
+                                </td>
+                                {% if participation.status != 'Happened' %}
+                                    <td class="col-md-2">{{ participation.createdAt|time_diff  }}</td>
+                                {% endif %}
+                                <td class="col-md-2">{{ participation.date|date('d-m-Y')  }}</td>
+                                <td class="col-md-2">{{ participation.status }}</td>
+                                <td class="col-md-2">
+                                    {{ request_action(participation, user) }}
+                                    {% if participation.status == 'Happened' %}
+                                        {{ include("WelcomangoExperienceBundle:Experience:_experienceNote.html.twig", { 'note': participation.experience.getAverageNote, 'size': 'small'}) }}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr class="participation_details_{{ participation.id }} {{ extraClassDetails|default('') }}" style="display: none">
+                                <td colspan="5">
+                                    <div class="row">
+                                        <div class="col-md-12 semi-bold text-center">
+                                            {{ 'participation.requestFrom'|trans }}
+                                            <a href="{{ asset(path('front_user_view', {'user_id': participation.user.id})) }}" class="text-primary semi-bold">
+                                                {{ participation.user.firstname }} {{ participation.user.lastname }}
+                                            </a>
+                                            <div class="m-b-20">
+                                                {{ 'participation.requestDetails'|trans }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <i class="fa fa-user p-r-5"></i>
+                                            <span class="semi-bold">{{ participation.numberOfParticipants }}</span> {{ 'participation.participants'|trans }}
+                                        </div>
+                                        <div class="col-md-6">
+                                            <i class="fa fa-street-view p-l-5 p-r-5"></i>
+                                            {{ 'participation.meetingAt'|trans }}: <span class="semi-bold">{{ participation.startTime|date('H:i') }}</span>
+                                        </div>
+                                        <div class="col-md-6 p-r-5">
+                                            <i class="fa fa-clock-o "></i>
+                                            {{ 'participation.duration'|trans }}: <span class="semi-bold">{{ date_difference(participation.startTime, participation.endTime) }}</span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <i class="fa fa-globe p-l-5 p-r-5"></i>
+                                            {{ 'participation.experiencesAttendedBy'|trans }}: <span class="semi-bold">{{ participation.user.getAttendedParticipations|length }}</span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% include 'WelcomangoCoreBundle:CRUD:pagination.html.twig' with {
+                    'path': path('participation_received_list'),
+                    'pagination': participations
+                    } %}
+
+                    {% if participations.count == 0 %}
+                        <div class="col-md-12 text-center alert alert-warning"><i class="fa fa-frown-o m-r-5"></i>{{ 'participation.noRequestFound' }}</div>
+                    {% endif %}
+
                 </div>
             </div>
         </div>
@@ -117,6 +207,14 @@
             if(event.target.nodeName.toLowerCase() == "i") return;
             $(element).toggleClass('shown');
             $('.participation_details_'+id).toggle();
+        }
+
+        function filterStatus(element, display){
+            if($(element).hasClass('btn-primary')) { return }
+            else{
+                var route = "{{ path('participation_received_list', { 'display': "PLACEHOLDER"}) }}";
+                window.location = route.replace("PLACEHOLDER", display); ;
+            }
         }
 
         function toggleFilterClass(element){

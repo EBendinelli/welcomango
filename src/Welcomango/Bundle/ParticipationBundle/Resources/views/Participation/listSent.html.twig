@@ -2,20 +2,121 @@
 
 {% block profile_content %}
     <div class="text-center m-b-20">
-        <h2 data-toggle="modal" data-target=".modal-action" >{{ 'participation.requestsSent'|trans }}</h2>
+        <h2>{{ 'participation.requestsSent'|trans }}</h2>
     </div>
 
     <div class="row m-b-20">
-        <div class="col-md-6 text-right"><button id="participation-pending-filter" class="btn btn-dark {%  if activeTab == 'sent' %}btn-primary{% endif %}" onClick="toggleFilterClass(this)">Pending</button></div>
-        <div class="col-md-6 text-left"><button id="participation-happened-filter" class="btn btn-dark {%  if activeTab == 'happened' %}btn-primary{% endif %}" onClick="toggleFilterClass(this)">Happened</button></div>
+        <div class="col-md-6 text-right"><button id="participation-pending-filter" class="btn btn-dark {%  if activeTab == 'sent' %}btn-primary{% endif %}" onClick="filterStatus(this, 'sent');  toggleFilterClass(this)">Pending</button></div>
+        <div class="col-md-6 text-left"><button id="participation-happened-filter" class="btn btn-dark {%  if activeTab == 'happened' %}btn-primary{% endif %}" onClick="filterStatus(this, 'happened');  toggleFilterClass(this)">Happened</button></div>
     </div>
 
     <div class="panel panel-default portlet">
         <!-- TABLE OF REQUEST SEND BY THE USER-->
         <div class="panel-body" id="profile_request_sent">
             <div class="table-responsive">
-                {% include "WelcomangoParticipationBundle:Participation:_tableSent.html.twig" with{ 'participations' : participations, 'display': 'sent', 'activeTab': activeTab} %}
-                {% include "WelcomangoParticipationBundle:Participation:_tableSent.html.twig" with{ 'participations' : participationsHappened, 'display': 'happened', 'activeTab': activeTab} %}
+                {% if activeTab == 'sent' %}
+                    {% set timeColumnName = 'participation.requestedTime'|trans  %}
+                {% elseif activeTab == 'happened' %}
+                    {% set timeColumnName = 'participation.happenedTime'|trans  %}
+                {% endif %}
+
+                <table class="entity-table table table-condensed" >
+                    <thead>
+                    <tr>
+                        <th class="col-md-3">{{ 'participation.experience'|trans }}</th>
+                        <th class="col-md-2">{{ 'participation.date'|trans }}</th>
+                        <th class="col-md-1">{{ 'participation.meetingTime'|trans }}</th>
+                        <th class="col-md-2">{{ 'participation.status'|trans }}</th>
+                        <th class="col-md-2">{{ 'participation.control'|trans }}</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for participation in participations %}
+                        {% set extraClass = '' %}
+                        {% if participation.status == 'Accepted' %}
+                            {% set extraClass = 'participation-row-bold success' %}
+                        {% endif %}
+                        <tr class="participation-row clickable table-details hover-bg-master-lightest hover-pointer {{ extraClass|default('') }}" onClick="rowToggle(this, {{ participation.id }}, event)">
+                            <td class="col-md-3">
+                                <div class="row" style="display:inline-block">
+                                    <div class="col-md-3">
+                                        <a href="{{ asset(path('front_user_view', {'user_id': participation.experience.getAuthor.id})) }}">
+                                            {% if participation.experience.getAuthor.getMedias.first %}
+                                                <img src='{{ asset(participation.experience.getAuthor.getMedias.first.getWebPath) }}' class='front-menu-user-picture m-r-10' />
+                                            {% else %}
+                                                <img src='{{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }}' class='front-menu-user-picture m-r-10' />
+                                            {% endif %}
+                                        </a>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="requested-experience">
+                                            <a href="{{ path('front_experience_view', {'experience_id': participation.experience.id}) }}" class="text-black semi-bold ">
+                                                {{ participation.experience.title }}
+                                            </a>
+                                        </div>
+                                        <div class="requested-experience-user">
+                                            by <a href="{{ asset(path('front_user_view', {'user_id': participation.experience.getAuthor.id})) }}" class="text-primary ">{{ participation.experience.getAuthor.firstname }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="col-md-2">{{ participation.date|date('Y-m-d')  }}</td>
+                            <td class="col-md-1">{{ participation.startTime|date('H:i') }}</td>
+                            <td class="col-md-2">{{ participation.status }}</td>
+                            <td class="col-md-2">
+                            {{ request_action(participation, user) }}
+                            {% if participation.status == 'Happened' %}
+                            {{ include("WelcomangoExperienceBundle:Experience:_experienceNote.html.twig", { 'note': participation.experience.getAverageNote, 'size': 'small'}) }}
+                            {% endif %}
+                            </td>
+                        </tr>
+                        <tr class="participation_details_{{ participation.id }} {{ extraClassDetails|default('') }}" style="display: none">
+                            <td colspan="5">
+                                <div class="row">
+                                    <div class="col-md-12 semi-bold text-center">
+                                        {{ 'participation.sentTo'|trans }}
+                                        <a href="{{ asset(path('front_user_view', {'user_id': participation.user.id})) }}" class="text-primary semi-bold">
+                                            {{ participation.user.firstname }} {{ participation.user.lastname }}
+                                        </a>
+                                        <div class="m-b-20">
+                                            {{ 'participation.requestDetails'|trans }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <i class="fa fa-user p-r-5"></i>
+                                        <span class="semi-bold">{{ participation.numberOfParticipants }}</span> {{ 'participation.participants'|trans }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        <i class="fa fa-street-view p-l-5 p-r-5"></i>
+                                        {{ 'participation.meetingAt'|trans }}: <span class="semi-bold">{{ participation.startTime|date('H:i') }}</span>
+                                    </div>
+                                    <div class="col-md-6 p-r-5">
+                                        <i class="fa fa-clock-o "></i>
+                                        {{ 'participation.duration'|trans }}: <span class="semi-bold">{{ date_difference(participation.startTime, participation.endTime) }}</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <i class="fa fa-globe p-l-5 p-r-5"></i>
+                                        {{ 'participation.experiencesAttendedBy'|trans }}: <span class="semi-bold">{{ participation.user.getAttendedParticipations|length }}</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% if participations.count == 0 %}
+                    <div class="col-md-12 text-center alert alert-warning">
+                        <i class="fa fa-frown-o m-r-5"></i>{{ 'participation.noRequestFound' }}
+                        <div><strong><a class="alert-warning" href="{{ path('front_experience_list') }}">{{ 'participation.explore' }}</a></strong></div>
+                    </div>
+                {% endif %}
+                {% include 'WelcomangoCoreBundle:CRUD:pagination.html.twig' with {
+                'path': path('participation_sent_list'),
+                'pagination': participations
+                } %}
             </div>
         </div>
     </div>
@@ -38,7 +139,21 @@
             $('#modal-delete-button').attr("href", route);
         }
 
-      function toggleFilterClass(element){
+        function rowToggle(element, id, event){
+            if(event.target.nodeName.toLowerCase() == "i") return;
+            $(element).toggleClass('shown');
+            $('.participation_details_'+id).toggle();
+        }
+
+        function filterStatus(element, display){
+            if($(element).hasClass('btn-primary')) { return }
+            else{
+                var route = "{{ path('participation_sent_list', { 'display': "PLACEHOLDER"}) }}";
+                window.location = route.replace("PLACEHOLDER", display); ;
+            }
+        }
+
+        function toggleFilterClass(element){
             if($(element).hasClass('btn-primary')) { return }
             else{
                 $('#participation-pending-filter').toggleClass('btn-primary');
@@ -46,7 +161,7 @@
                 $('#profile-request-sent').toggle();
                 $('#profile-request-happened').toggle();
             }
-       }
+        }
 
     </script>
 {% endblock %}
