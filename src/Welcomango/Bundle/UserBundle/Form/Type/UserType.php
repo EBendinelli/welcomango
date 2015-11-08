@@ -12,7 +12,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Email;
 
 use Welcomango\Bundle\UserBundle\Form\Type\AdminSpokenLanguageType;
 
@@ -60,7 +60,7 @@ class UserType extends AbstractType
         $builder->add('username', 'text', ['label' => 'form.user.username']);
         $builder->add('firstName', 'text', ['label' => 'form.user.firstname']);
         $builder->add('lastName', 'text', ['label' => 'form.user.lastname']);
-        $builder->add('email', 'text', ['label' => 'form.user.email']);
+        $builder->add('email', 'email', ['label' => 'form.user.email', 'constraints' => [new Email()]]);
         $builder->add('occupation', 'text', ['label' => 'form.user.occupation']);
 
         $builder->add('birthdate', 'date', [
@@ -109,6 +109,6 @@ class UserType extends AbstractType
      */
     public function getName()
     {
-        return 'admin_user';
+        return 'front_user';
     }
 }

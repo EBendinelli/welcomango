@@ -5,17 +5,17 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
 <services>
-    <service id="welcomango.form.experience.create" class="Welcomango\Bundle\ExperienceBundle\Form\Type\AdminExperienceType">
+    <service id="welcomango.admin.form.experience.create" class="Welcomango\Bundle\ExperienceBundle\Form\Type\AdminExperienceType">
         <argument type="service" id="security.context" />
         <argument type="service" id="doctrine.orm.entity_manager" />
     </service>
 
-    <service id="welcomango.form.experience.edit" class="Welcomango\Bundle\ExperienceBundle\Form\Type\AdminExperienceEditType">
+    <service id="welcomango.admin.form.experience.edit" class="Welcomango\Bundle\ExperienceBundle\Form\Type\AdminExperienceEditType">
         <argument type="service" id="security.context" />
         <argument type="service" id="doctrine.orm.entity_manager" />
     </service>
 
-    <service id="welcomango.form.experience.filter" class="Welcomango\Bundle\ExperienceBundle\Form\Type\AdminExperienceFilterType">
+    <service id="welcomango.admin.form.experience.filter" class="Welcomango\Bundle\ExperienceBundle\Form\Type\AdminExperienceFilterType">
     </service>
 
 </services>

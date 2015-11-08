@@ -16,5 +16,10 @@
         <service id="welcomango.form.experience.filter" class="Welcomango\Bundle\ExperienceBundle\Form\Type\ExperienceFilterType">
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
+
+        <service id="welcomango.form.experience.create" class="Welcomango\Bundle\ExperienceBundle\Form\Type\ExperienceType">
+            <argument type="service" id="security.context" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
     </services>
 </container>
