@@ -79,9 +79,16 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Participation", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Booking", mappedBy="user")
      */
-    private $participations;
+    private $bookings;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Experience", mappedBy="creator")
+     */
+    private $experiences;
 
     /**
      * @var \DateTime
@@ -318,17 +325,33 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @return ArrayCollection
      */
-    public function getParticipations()
+    public function getBookings()
     {
-        return $this->participations;
+        return $this->bookings;
     }
 
     /**
-     * @param ArrayCollection $participations
+     * @param ArrayCollection $bookings
      */
-    public function setParticipations($participations)
+    public function setBookings($bookings)
     {
-        $this->participations = $participations;
+        $this->bookings = $bookings;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getExperiences()
+    {
+        return $this->experiences;
+    }
+
+    /**
+     * @param ArrayCollection $experiences
+     */
+    public function setExperiences($experiences)
+    {
+        $this->experiences = $experiences;
     }
 
     /**
@@ -463,21 +486,37 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * @param Participation $participation
+     * @param Booking $booking
      */
-    public function addParticipation(Participation $participation)
+    public function addBooking(Booking $booking)
     {
-        $this->participations[] = $participation;
+        $this->bookings[] = $booking;
     }
 
     /**
-     * @param Participation $participation
+     * @param Booking $booking
      */
-    public function removeParticipation(Participation $participation)
+    public function removeBooking(Booking $booking)
     {
-        $this->participations->removeElement($participation);
+        $this->bookings->removeElement($booking);
         //If not working try this:
-        //$this->participation->remove($participation);
+        //$this->booking->remove($booking);
+    }
+
+    /**
+     * @param Experience $experience
+     */
+    public function addExperience(Experience $experience)
+    {
+        $this->experiences[] = $experience;
+    }
+
+    /**
+     * @param Experience $experience
+     */
+    public function removeExperience(Experience $experience)
+    {
+        $this->experiences->removeElement($experience);
     }
 
     /**
@@ -504,7 +543,7 @@ class User extends BaseUser implements ParticipantInterface
     {
         parent::__construct();
         $this->spokenLanguages = new ArrayCollection();
-        $this->participations  = new ArrayCollection();
+        $this->bookings  = new ArrayCollection();
         $this->medias          = new ArrayCollection();
     }
 
@@ -599,31 +638,17 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Get experience
-     *
-     * @return Experience
-     */
-    public function getExperience()
-    {
-        foreach ($this->participations as $participation) {
-            if ($participation->getIsCreator()) {
-                return $participation->getExperience();
-            }
-        }
-    }
-
-    /**
      * @return Array
      */
-    public function getAttendedParticipations()
+    public function getAttendedExperiences()
     {
-        $attendedParticipations = array();
-        foreach ($this->participations as $participation) {
-            if ($participation->getIsParticipant() && $participation->getStatus() == 'Happened') {
-                $attendedParticipations[] = $participation;
+        $attendedExperiences = array();
+        foreach ($this->bookings as $booking) {
+            if ($booking->getStatus() == 'Happened') {
+                $attendedExperiences[] = $booking;
             }
         }
 
-        return $attendedParticipations;
+        return $attendedExperiences;
     }
 }

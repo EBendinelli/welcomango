@@ -20,8 +20,8 @@ class UserManager
 
     //Update the average note based on existing participations
     public function updateAverageTravelerNote($user){
-        $participationRepo = $this->entityManager->getRepository('Welcomango\Model\Participation');
-        $newNote = $participationRepo->getAverageTravelerNote($user);
+        $bookingRepo = $this->entityManager->getRepository('Welcomango\Model\Booking');
+        $newNote = $bookingRepo->getAverageTravelerNote($user);
 
         $user->setNoteAsLocal($newNote['average_note']);
         $this->entityManager->persist($user);
@@ -29,12 +29,16 @@ class UserManager
     }
 
     public function updateAverageLocalNote($user){
-        $participationRepo = $this->entityManager->getRepository('Welcomango\Model\Participation');
-        $proposedExperience = $user->getExperience();
-        if($proposedExperience) {
-            $newNote = $participationRepo->getAverageLocalNoteForExperience($proposedExperience);
-
-            $user->setNoteAsTraveler($newNote['average_note']);
+        $bookingRepo = $this->entityManager->getRepository('Welcomango\Model\Booking');
+        $proposedExperiences = $user->getExperiences();
+        $averageNotes = array();
+        foreach($proposedExperiences as $experience) {
+            $result = $bookingRepo->getAverageLocalNoteForExperience($experience);
+            $averageNotes[] = $result['average_note'];
+        }
+        if(!empty($averageNotes)){
+            $newAverage = array_sum($averageNotes) / count($averageNotes);
+            $user->setNoteAsTraveler($newAverage);
             $this->entityManager->persist($user);
             $this->entityManager->flush();
         }

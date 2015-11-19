@@ -39,7 +39,7 @@
     bottom: 0px;
     left:25px;
     padding:1px 0px 0px 1px;
-    background-color:red; /* you could use a background image if you'd like as well */
+    background-color: #48B0F7;
     color:white;
     font-weight:bold;
     font-size:0.65em;
@@ -50,6 +50,15 @@
     border-radius:50%;
     z-index:9;
     box-shadow:1px 1px 1px gray;
+    line-height: 12px;
+}
+
+.message-unread-icon{
+    width: 22px;
+    height: 22px;
+    font-size:0.90em;
+    padding-top: 4.5px;
+    left:60px !important;
 }
 
 p{
@@ -653,7 +662,6 @@ a h4:hover{
 
 #profile-menu-title{
     padding-top:5px;
-
 }
 
 .profile-header-item:hover{
@@ -670,6 +678,10 @@ a h4:hover{
     transition: background-color 0.2s !important;
 }
 
+#profile-menu-left{
+    border: 1px solid rgba(0,0,0,.07)
+}
+
 #profile-menu-items ul{
     padding: 0px;
 }
@@ -681,6 +693,7 @@ a h4:hover{
 
 #profile-menu-items a{
     color: #313B44;
+    width:100%
 }
 
 .profile-menu-item:hover{
@@ -691,6 +704,14 @@ a h4:hover{
 .profile-menu-item{
     position: relative;
     display: inline-block;
+}
+
+#user-menu-items ul{
+    padding: 0px;
+}
+
+#user-menu-items li{
+    list-style-type: none;
 }
 
 #profile-request-received tr:hover{
@@ -745,6 +766,113 @@ a h4:hover{
     height: 20px;
 }
 
+/* //////////////////////////////////////////////////////// */
+/* ////////////////   MESSAGES //////////////////////////// */
+/* //////////////////////////////////////////////////////// */
+
+.message-list{
+    padding:15px;
+}
+
+.message-list li{
+    list-style: none;
+    border-bottom: 1px solid rgba(230,230,230,0.7);
+    padding-left:15px;
+    padding-right:15px;
+}
+
+.message-list li:hover {
+    cursor:pointer;
+}
+
+.message-list .message-unread{
+
+    font-weight:bold !important;
+}
+
+.message-list ul{
+    border-top: 1px solid rgba(230,230,230,0.7);
+    border-left: 1px solid rgba(230,230,230,0.7);
+    border-right: 1px solid rgba(230,230,230,0.7);
+    padding: 0px;
+}
+
+.message-list .subject{
+    font-family: 'Helvetica';
+    font-size: 14.33px;
+    color: #3b4752;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    white-space: normal;
+    line-height: 18px;
+}
+
+.message-list .body{
+    font-size: 12.6px;
+    opacity: 0.52
+}
+
+.message-user-picture{
+    width: 65px;
+    border-radius: 50%;
+}
+
+.message-list .datetime{
+    color: #121212;
+    font-family: arial;
+    font-size: 11.1px;
+    position: absolute;
+    right: 15px;
+    bottom: -12px;
+}
+
+.message-list li a{
+    margin: 0px;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.message-list a{
+    color: #3b4752;
+}
+
+.message-list .message-delete{
+    position: absolute;
+    right: 15px;
+    top: -5px;
+}
+
+.message{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(230,230,230,0.7);
+}
+
+.message .name{
+    font-size: 15px;
+    color: #3b4752;
+}
+
+.message .message-content{
+    color: #626262;
+    font-family: "Segoe UI",Arial,sans-serif;
+    font-size: 15px;
+    font-weight: normal;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-font-feature-settings: "kern" 1;
+    -moz-font-feature-settings: "kern" 1;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.messages div:last-child{
+    border-bottom: none;
+}
 
 
 /* //////////////////////////////////////////////////////// */

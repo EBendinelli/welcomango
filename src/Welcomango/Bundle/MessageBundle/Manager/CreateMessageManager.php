@@ -2,7 +2,7 @@
 
 namespace Welcomango\Bundle\MessageBundle\Manager;
 
-use Welcomango\Model\Participation;
+use Welcomango\Model\Booking;
 use Welcomango\Bundle\MessageBundle\Manager\Sender;
 use Welcomango\Bundle\MessageBundle\Manager\MessageComposer;
 
@@ -34,20 +34,20 @@ class CreateMessageManager
     }
 
     /**
-     * @param Participation $participation
+     * @param Booking $booking
      * @param User          $user
      * @param string        $body
      *
      * @return mixed
      */
-    public function createThread($participation, $user, $body)
+    public function createThread($booking, $sender, $recipient, $body)
     {
         $message = $this->messageComposer->newThread()
-            ->setSender($user)
-            ->addRecipient($participation->getExperience()->getAuthor())
-            ->setSubject($participation->getExperience()->getTitle().' - Messages')
+            ->setSender($sender)
+            ->addRecipient($recipient)
+            ->setSubject('Request for '.$booking->getExperience()->getTitle().' on '.$booking->getStartDatetime()->format('F j'))
             ->setBody($body)
-            ->setParticipation($participation)
+            ->setBooking($booking)
             ->getMessage();
 
         $this->sender->send($message);

@@ -1,26 +1,90 @@
 {% extends "FOSUserBundle:Profile:show.html.twig" %}
 
+{% form_theme form with ["::frontTheme.html.twig"] %}
+
 {% block profile_content %}
 
-    <h2>{{ thread.subject }}</h2>
+    <h2 class="text-center m-t-20">{{ thread.subject }}</h2>
+    {% for participant in thread.participants %}
+        {% if app.user !=  participant %}
+            <h4 class="text-center m-b-20">With <span class="text-primary">{{ participant.fullname }}</span></h4>
+        {% endif %}
+    {% endfor %}
+
+    <div class="row bg-master-lightest panel panel-default p-l-20 p-t-20 p-b-20">
+        <div class="col-md-6">
+            <div>
+                <i class="fa fa-user p-b-10"></i>
+                <span class="semi-bold">{{ thread.booking.numberOfParticipants }}</span> {{ 'booking.participants'|trans }}
+            </div>
+            <div >
+                <i class="fa fa-street-view  p-b-10"></i>
+                {{ 'booking.meetingAt'|trans }}: <span class="semi-bold">{{ thread.booking.startDatetime|date('H:i') }}</span>
+            </div>
+            <div>
+                <i class="fa fa-clock-o p-b-10 "></i>
+                {{ 'booking.duration'|trans }}: <span class="semi-bold">{{ date_difference(thread.booking.startDatetime, thread.booking.endDatetime) }}</span>
+            </div>
+            <div>
+                <i class="fa fa-globe "></i>
+                {{ 'booking.experiencesAttendedBy'|trans }}: <span class="semi-bold">{{ thread.booking.user.getAttendedExperiences|length }}</span>
+            </div>
+        </div>
+        <div class="col-md-6 text-center">
+            <div class="bold m-b-10">Meeting booked on {{ thread.booking.startDatetime|date('d-m-Y') }}</div>
+            <i class="fa fa-calendar-o fa-5x "></i>
+        </div>
+    </div>
 
 {% for message in thread.messages %}
-    <div class="messenger_thread_message">
-        <div class="messenger_thread_message_info">
-            {% trans with {'%sender%': message.sender|e, '%date%': message.createdAt|date} from 'FOSMessageBundle' %}message_info{% endtrans %}
-        </div>
-
-        <div class="messenger_thread_message_body" id="message_{{ message.id }}">
-            {{ message.body }}
-        </div>
+    <div class="messages">
+        {% if message.sender == user %}
+            <div class="row message">
+                <div class="col-md-1 p-t-20">
+                    <a href="{{ asset(path('front_user_view', {'user_id': thread.booking.experience.getCreator.id})) }}">
+                        {% if thread.booking.experience.getCreator.getMedias.first %}
+                            <img src='{{ asset(thread.booking.experience.getCreator.getMedias.first.getWebPath) }}'
+                                 class='message-user-picture m-r-10'/>
+                        {% else %}
+                            <img src='{{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }}'
+                                 class='message-user-picture m-r-10'/>
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="col-md-11 p-l-30">
+                    <div class="name bold">{{ message.sender.fullname }}</div>
+                    <span class="hint-text small">{{ message.createdAt|time_diff }}</span>
+                    <p class="message-content m-r-30 bg-master-lighter">{{ message.body }}</p>
+                </div>
+            </div>
+        {% else %}
+            <div class="row message">
+                <div class="col-md-11 p-r-30">
+                    <div class="name bold">{{ message.sender.fullname }}</div>
+                    <span class="hint-text small">{{ message.createdAt|time_diff }}</span>
+                    <p class="message-content bg-primary-lighter" >{{ message.body }}</p>
+                </div>
+                <div class="col-md-1 p-t-20" style="padding-left:0px">
+                    <a href="{{ asset(path('front_user_view', {'user_id': thread.booking.experience.getCreator.id})) }}">
+                        {% if thread.booking.experience.getCreator.getMedias.first %}
+                            <img src='{{ asset(thread.booking.experience.getCreator.getMedias.first.getWebPath) }}'
+                                 class='message-user-picture m-r-10'/>
+                        {% else %}
+                            <img src='{{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }}'
+                                 class='message-user-picture m-r-10'/>
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+        {% endif %}
     </div>
 {% endfor %}
 
-<h3>{{ 'message.reply'|trans }}</h3>
-
-<form action="{{ url('message_thread', {'thread_id': thread.id, 'user_id' : user.id}) }}" method="post">
+<form action="{{ url('message_thread', {'thread_id': thread.id, 'user_id' : user.id}) }}" method="post" class="m-t-20">
     {{ form_widget(form) }}
-    <button type="submit" />
+    <div class="row text-right">
+        <button class="btn btn-primary" type="submit">Send</button>
+    </div>
 </form>
 
 {% endblock %}

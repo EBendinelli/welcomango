@@ -38,14 +38,14 @@ class ExperienceVoter extends AbstractVoter
         switch($attribute) {
             case self::DELETE:
                 // Check that the user is the creator of the experience
-                if ($user->getId() === $experience->getAuthor()->getId()) {
+                if ($user->getId() === $experience->getCreator()->getId()) {
                     return true;
                 }
 
                 break;
             case self::EDIT:
                 // Check that the user is the creator of the experience
-                if ($user->getId() === $experience->getAuthor()->getId()) {
+                if ($user->getId() === $experience->getCreator()->getId()) {
                     return true;
                 }
 

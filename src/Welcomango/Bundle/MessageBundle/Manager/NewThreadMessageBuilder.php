@@ -8,7 +8,7 @@ use FOS\MessageBundle\Model\MessageInterface;
 use FOS\MessageBundle\Model\ParticipantInterface;
 use FOS\MessageBundle\MessageBuilder\AbstractMessageBuilder;
 
-use Welcomango\Model\Participation;
+use Welcomango\Model\Booking;
 
 /**
  * Class NewThreadMessageBuilder
@@ -30,13 +30,13 @@ class NewThreadMessageBuilder extends AbstractMessageBuilder
     }
 
     /**
-     * @param Participation $participation
+     * @param Booking $booking
      *
      * @return NewThreadMessageBuilder (fluent interface)
      */
-    public function setParticipation($participation)
+    public function setBooking($booking)
     {
-        $this->thread->setParticipation($participation);
+        $this->thread->setBooking($booking);
 
         return $this;
     }

@@ -29,9 +29,7 @@ class ProfileController extends BaseProfileController
         }
 
         $entityManager = $this->getDoctrine()->getManager();
-        $userExperiences = $entityManager
-            ->getRepository('Welcomango\Model\Experience')
-            ->findAllExperiencesCreatedByUser($user);
+        $userExperiences = $user->getExperiences();
 
         return $this->render('FOSUserBundle:Profile:show.html.twig', array(
             'userExperiences' => $userExperiences,

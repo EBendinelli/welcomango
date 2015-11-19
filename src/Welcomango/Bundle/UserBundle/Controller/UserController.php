@@ -34,9 +34,7 @@ class UserController extends BaseController
          */
         public function viewAction(Request $request, User $user)
         {
-            $proposedExperiences = $this
-                ->getRepository('Welcomango\Model\Experience')
-                ->findAllExperiencesCreatedByUser($user);
+            $proposedExperiences = $user->getExperiences();
 
             $attendedExperiences = $this
                 ->getRepository('Welcomango\Model\Experience')

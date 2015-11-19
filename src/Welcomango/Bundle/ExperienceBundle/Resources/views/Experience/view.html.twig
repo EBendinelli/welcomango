@@ -19,10 +19,10 @@
                     <div class="text-center">
                         <h1 class="text-white col-sm-12 ">{{ experience.title }}</h1>
                         <div class="m-b-10">
-                            {{ include("WelcomangoExperienceBundle:Experience:_experienceNote.html.twig", { 'note': experience.getAverageNote, 'size': 'medium'}) }}
+                            {{ include("WelcomangoCoreBundle:Core:note.html.twig", { 'note': experience.getAverageNote, 'size': 'medium'}) }}
                         </div>
-                        <p class="fs-12 font-arial text-white ">A {{ experience.estimatedDuration }}h adventure proposed by {{ experience.getAuthor.firstname }}</p>
-                        {% if app.user == experience.getAuthor %}
+                        <p class="fs-12 font-arial text-white ">A {{ experience.estimatedDuration }}h adventure proposed by {{ experience.getCreator.firstname }}</p>
+                        {% if app.user == experience.getCreator %}
                             <a href="{{ path('front_experience_edit', {'experience_id': experience.id}) }}" class="btn btn-lg btn-complete btn-cons btn-rounded m-t-20"><i class="fa fa-pencil"></i> {{ 'profile.editExperience'|trans }}</a>
                         {% else %}
                             <button id="experience-booking-btn" type="button" class="btn btn-lg btn-primary btn-cons btn-rounded m-t-20" onclick="toggleBooking()">
@@ -160,12 +160,12 @@
                 <div class="bg-master-lighter row" id="experience-user">
                     <!-- MAIN USER DISPLAY -->
                     <div id="user-main">
-                        <div class="user" onclick="location.href='{{ path('front_user_view', {'user_id' : experience.getAuthor.id }) }}'">
+                        <div class="user" onclick="location.href='{{ path('front_user_view', {'user_id' : experience.getCreator.id }) }}'">
                             <div class="user-item user-img-1">
                                 <div class="user-info-wrap">
                                     <div class="user-info">
-                                        {% if experience.getAuthor.getMedias.first %}
-                                            <div class="user-info-front user-img-1" style="background-image:url({{ asset(experience.getAuthor.getMedias.first.getWebPath) }})"></div>
+                                        {% if experience.getCreator.getMedias.first %}
+                                            <div class="user-info-front user-img-1" style="background-image:url({{ asset(experience.getCreator.getMedias.first.getWebPath) }})"></div>
                                         {% else %}
                                             <div class="user-info-front user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }})"></div>
                                         {% endif %}
@@ -178,8 +178,8 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="{{ path('front_user_view', {'user_id' : experience.getAuthor.id }) }}">
-                            <h2 class="text-center">{{ experience.getAuthor.firstname }}, {{ experience.getAuthor.getAge }}</h2>
+                        <a href="{{ path('front_user_view', {'user_id' : experience.getCreator.id }) }}">
+                            <h2 class="text-center">{{ experience.getCreator.firstname }}, {{ experience.getCreator.getAge }}</h2>
                         </a>
                     </div>
                     <!-- MINI USER DISPLAY -->
@@ -188,8 +188,8 @@
                             <div class="col-md-1"></div>
                             <div class="col-md-3">
                                 <a href="{{ path('front_experience_list') }}">
-                                    {% if experience.getAuthor.getMedias.first %}
-                                        <div class="user-info-front-small user-img-1" style="background-image:url({{ asset(experience.getAuthor.getMedias.first.getWebPath) }})"></div>
+                                    {% if experience.getCreator.getMedias.first %}
+                                        <div class="user-info-front-small user-img-1" style="background-image:url({{ asset(experience.getCreator.getMedias.first.getWebPath) }})"></div>
                                     {% else %}
                                         <div class="user-info-front-small user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }})"></div>
                                     {% endif %}
@@ -197,7 +197,7 @@
                             </div>
                             <div class="col-md-7 text-left">
                                 <a href="{{ path('front_experience_list') }}">
-                                    <h4>{{ experience.getAuthor.firstname }}, {{ experience.getAuthor.getAge }}</h4>
+                                    <h4>{{ experience.getCreator.firstname }}, {{ experience.getCreator.getAge }}</h4>
                                 </a>
                             </div>
                         </div>
@@ -206,12 +206,12 @@
                     <div class="experience-user-info">
                         <div class="dotted-line"><span></span></div>
                         <div class="text-center m-b-15 ">
-                            {% for language in experience.getAuthor.getSpokenLanguages.getValues %}
+                            {% for language in experience.getCreator.getSpokenLanguages.getValues %}
                                 <div class="flag flag-xs" role="image"  style="background: url({{ asset('img/countries/'~ language.language.flagLabel|lower ~'.svg') }});"></div>
                             {% endfor %}
 
                         </div>
-                        <p>{{ experience.getAuthor.getDescription|truncate(200) }}</p>
+                        <p>{{ experience.getCreator.getDescription|truncate(200) }}</p>
                     </div>
                     <!-- BOOKING  AND PRICE PART -->
                     <div class="bg-master-lighter experience-bottom-user">
@@ -223,7 +223,7 @@
                                 <div class="experience-image-separation">
                                     <div class="experience-image-triangle"></div>
                                 </div>
-                                <div class="experience-bottom-price bg-master-light" {% if app.user != experience.getAuthor %}onclick="userToggleBooking(){% endif %}">
+                                <div class="experience-bottom-price bg-master-light" {% if app.user != experience.getCreator %}onclick="userToggleBooking(){% endif %}">
                                     <div class=" experience-price">
                                         {{ experience.pricePerHour }}€/h
                                     </div>

@@ -18,6 +18,9 @@ class LoadExperienceData extends AbstractFixture implements FixtureInterface, Or
     {
         $cityRepo = $manager->getRepository('Welcomango\Model\City');
 
+        $userRepo = $manager->getRepository('Welcomango\Model\User');
+        $users = $userRepo->findAll();
+
         $experiences = array(
             array('title' => 'A journey in Lyon', 'description' => 'Wandering around the city to taste beers and listen to good music', 'city' => $cityRepo->findOneBy(array('name' => 'Lyon'))),
             array('title' => 'Dreams of Sauna', 'description' => 'Wanna get hot? Follow me into the moistiest places and let\'s get naked', 'city' => $cityRepo->findOneBy(array('name' => 'Helsinki'))),
@@ -34,7 +37,10 @@ class LoadExperienceData extends AbstractFixture implements FixtureInterface, Or
 
         $i = 0;
         foreach($experiences as $experience){
+            //Each experience has a creator
             $entry = new Experience();
+            $entry->setCreator($users[array_rand($users)]);
+
             $entry->setTitle($experience['title']);
             $entry->setDescription($experience['description']);
             $entry->setCity($experience['city']);

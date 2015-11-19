@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="welcomango.form.booking.type" class="Welcomango\Bundle\BookingBundle\Form\Type\BookingType">
+            <argument type="service" id="security.context"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+
+        <service id="booking.date_difference" class="Welcomango\Bundle\BookingBundle\Twig\DateDifferenceExtension">
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="booking.request_action" class="Welcomango\Bundle\BookingBundle\Twig\RequestActionExtension">
+            <tag name="twig.extension"/>
+            <argument type="service" id="router"/>
+        </service>
+
+        <service id="welcomango.front.booking.manager" class="Welcomango\Bundle\BookingBundle\Manager\ParticipationManager">
+        </service>
+    </services>
+</container>

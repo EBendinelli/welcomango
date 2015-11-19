@@ -1,0 +1,37 @@
+{# Complete with correct informations #}
+<tr>
+    <td>
+{#        {% include "YproxAdminCrmBundle:User:_userLink.html.twig" %}#}
+        {{ booking.getId }}
+    </td>
+    <td>
+        {{ 'booking.requestedBy'|trans }}
+    </td>
+    <td>
+        {{ booking.getUser.getFullName }}
+    </td>
+    <td>
+        {{ booking.getNumberOfParticipants }}
+    </td>
+    <td>
+        {{ booking.getStartDatetime|date('Y-m-d')  }}
+    </td>
+    <td>
+        {{ booking.getStartDatetime|date('H:i')  }}
+    </td>
+    <td>
+        {{ booking.getEndDatetime|date('H:i')  }}
+    </td>
+    <td>
+        {{ booking.getStatus }}
+    </td>
+    <td>
+        {% spaceless %}
+            <div class="btn-toolbar">
+                {{ button.edit(path('admin_booking_edit', {'booking_id': booking.id}), false, "btn-xs") }}
+                {{ button.delete(path('admin_booking_delete', {'booking_id': booking.id}), null, "btn-xs") }}
+            </div>
+        {% endspaceless %}
+    </td>
+</tr>
+

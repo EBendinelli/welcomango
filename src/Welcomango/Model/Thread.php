@@ -8,6 +8,7 @@ use FOS\MessageBundle\Entity\Thread as BaseThread;
 
 /**
  * @ORM\Entity
+ * @ORM\Table(name="wm_thread")
  */
 class Thread extends BaseThread
 {
@@ -31,10 +32,10 @@ class Thread extends BaseThread
     protected $messages;
 
     /**
-     * @ORM\OneToOne(targetEntity="Participation")
-     * @ORM\JoinColumn(name="participation_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="Booking")
+     * @ORM\JoinColumn(name="booking_id", referencedColumnName="id")
      */
-    protected $participation;
+    protected $booking;
 
     /**
      * @ORM\OneToMany(targetEntity="ThreadMetadata", mappedBy="thread", cascade={"all"})
@@ -43,18 +44,18 @@ class Thread extends BaseThread
     protected $metadata;
 
     /**
-     * @return Participation
+     * @return Booking
      */
-    public function getParticipation()
+    public function getBooking()
     {
-        return $this->participation;
+        return $this->booking;
     }
 
     /**
-     * @param Participation $participation
+     * @param Booking $booking
      */
-    public function setParticipation(Participation $participation)
+    public function setBooking(Booking $booking)
     {
-        $this->participation = $participation;
+        $this->booking = $booking;
     }
 }

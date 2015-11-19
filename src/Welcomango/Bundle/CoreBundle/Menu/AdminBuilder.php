@@ -76,8 +76,8 @@ class AdminBuilder extends ContainerAware
             'linkAttributes' => ['class' => 'fa fa-picture-o'],
         ));
 
-        $menu->addChild('menu.title.participation', array(
-            'route'          => 'admin_participation_list',
+        $menu->addChild('menu.title.booking', array(
+            'route'          => 'admin_booking_list',
             'linkAttributes' => ['class' => 'fa fa-cloud'],
         ));
 

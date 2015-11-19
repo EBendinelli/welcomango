@@ -2,9 +2,9 @@
 
 {% block profile_content %}
 
-    <h2>{{ participation.experience.title }} - messages</h2>
+    <h2>{{ booking.experience.title }} - messages</h2>
 
-    {{ form_start(form, {'action': path('message_request', {'user_id': user.id, 'participation_id': participation.id})}) }}
+    {{ form_start(form, {'action': path('message_request', {'user_id': user.id, 'booking_id': booking.id})}) }}
         {{ form_rest(form)  }}
         <input type="submit" />
     {{ form_end(form) }}

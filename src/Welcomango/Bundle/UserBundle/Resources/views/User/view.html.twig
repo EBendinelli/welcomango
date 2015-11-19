@@ -8,6 +8,27 @@
 
 {% block main_info_class 'bg-white' %}
 
+{% block sub_profile_picture %}
+    <div id="profile-menu-left" class="bg-master-lightest m-t-10 p-b-10">
+        <div id="profile-menu-title" class="text-center link-black">
+            <h4>{{ 'user.feedbacks'|trans }}</h4>
+        </div>
+        <div class="dotted-line"><span></span></div>
+        <div id="user-menu-items" class="text-center">
+            <ul>
+                <li class="user-menu-item">
+                    <div class="m-b-5">{{ 'profile.noteTraveler'|trans }}</div>
+                    <div>{{ include("WelcomangoCoreBundle:Core:note.html.twig", { 'note': user.getNoteAsTraveler, 'mango': true}) }}</div>
+                </li>
+                <li class="user-menu-item">
+                    <div class="m-b-5">{{ 'profile.noteLocal'|trans }}</div>
+                    <div>{{ include("WelcomangoCoreBundle:Core:note.html.twig", { 'note': user.getNoteAsLocal, 'mango': true}) }}</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock sub_profile_picture %}
+
 {% block profile_content %}
     <!-- LOAD MAIN INFO BLOCK -->
     {{ parent() }}

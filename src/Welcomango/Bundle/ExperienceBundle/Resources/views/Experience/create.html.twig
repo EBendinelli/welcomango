@@ -1,28 +1,51 @@
-{% extends "::admin.html.twig" %}
+{% extends "FOSUserBundle:Profile:show.html.twig" %}
 
-{% trans_default_domain "experience" %}
+{% form_theme form with ["::frontTheme.html.twig"] %}
 
-{% set listing = path('front_experience_list') %}
-{% form_theme form with ["::theme.html.twig"] %}
+{% block meta_title %}{{ "profile.craeteExperience"|trans({}, "interface") }}{% endblock %}
 
-{% block page_content %}
-    {{ include("WelcomangoExperienceBundle:Experience:form.html.twig", {'path': path('front_experience_create')}) }}
-{% endblock %}
+{% block profile_content %}
+    <div>
+        Steps:
+        {% include 'CraueFormFlowBundle:FormFlow:stepList.html.twig' %}
+    </div>
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
 
-{% block stylesheets %}
-    {{ parent() }}
-    {{ form_stylesheet(form) }}
-{% endblock %}
+    {% if flow.getCurrentStepNumber() == 1 %}
+        <div>
+            {{ form_row(form.title) }}
+        </div>
+    {% elseif flow.getCurrentStepNumber() == 2 %}
+
+    {% elseif flow.getCurrentStepNumber() == 3 %}
+        <div class="row" id="experience-create-availabilities tex-center">
+            <div class="fs-14 bold text-center">When are you available in your week?</div>
+            <div class="text-center m-t-20">{{ form_row(form.availability) }}</div>
+        </div>
+        <div class="row" id="experience-create-available-days">
+            <div class="fs-14 bold text-center m-t-30">Which days are you available?</div>
+            <div class="text-center m-t-20">{{ form_row(form.days) }}</div>
+        </div>
+        <div class="row" id="experience-create-available-times text-center">
+            <div class="fs-14 bold text-center m-t-30">At what time are you able to guide voyagers?</div>
+            <div class="text-center m-t-20">{{ form_row(form.times) }}</div>
+        </div>
+    {% endif %}
+
+    {{ form_rest(form) }}
+
+    {% include 'CraueFormFlowBundle:FormFlow:buttons.html.twig' %}
+    {{ form_end(form) }}
+
+
+{% endblock profile_content %}
 
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
-        $('select').select2();
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#experienceForm').validate();
+        $('#front_experience_step3_availability input[type=radio]').change(function(){
+            console.log(this.value);
         });
     </script>
 {% endblock %}

@@ -161,7 +161,7 @@ fos_message:
     composer: welcomango.message.composer
     sender: welcomango.message.sender
 
-welcomango_participation:
+welcomango_booking:
     available_status:
         - Available
         - Happened

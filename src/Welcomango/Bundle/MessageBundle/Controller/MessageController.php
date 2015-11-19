@@ -15,7 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Welcomango\Model\Thread;
 use Welcomango\Model\User;
 use Welcomango\Model\Experience;
-use Welcomango\Model\Participation;
+use Welcomango\Model\Booking;
 use Welcomango\Bundle\CoreBundle\Controller\Controller as BaseController;
 
 /**
@@ -26,19 +26,19 @@ class MessageController extends BaseController
     /**
      * @param Request       $request
      * @param User          $currentUser
-     * @param Participation $participation
+     * @param Booking       $booking
      *
-     * @Route("messages/{user_id}/{participation_id}", name="message_request")
+     * @Route("messages/{user_id}/{booking_id}", name="message_request")
      * @Template()
      *
      * @ParamConverter("currentUser", class="Welcomango\Model\User", options={"id" = "user_id"})
-     * @ParamConverter("participation", class="Welcomango\Model\Participation", options={"id" = "participation_id"})
+     * @ParamConverter("booking", class="Welcomango\Model\BOoking", options={"id" = "booking_id"})
      *
      * @return array
      */
-    public function requestMessageAction(Request $request, User $currentUser, Participation $participation)
+    public function requestMessageAction(Request $request, User $currentUser, Booking $booking)
     {
-        $thread = $this->getRepository('Welcomango\Model\Thread')->findOneByParticipation($participation);
+        $thread = $this->getRepository('Welcomango\Model\Thread')->findOneByBooking($booking);
 
         if ($thread instanceof Thread) {
             return $this->forward('WelcomangoMessageBundle:Message:thread', array(
@@ -48,7 +48,7 @@ class MessageController extends BaseController
         } else {
             return $this->forward('WelcomangoMessageBundle:Message:newThread', array(
                 'user_id'          => $currentUser->getId(),
-                'participation_id' => $participation->getId(),
+                'booking_id'       => $booking->getId(),
             ));
         }
     }
@@ -72,23 +72,36 @@ class MessageController extends BaseController
     /**
      * @param Request       $request
      * @param User          $currentUser
-     * @param Participation $participation
+     * @param Booking       $booking
      *
      * @ParamConverter("currentUser", class="Welcomango\Model\User", options={"id" = "user_id"})
-     * @ParamConverter("participation", class="Welcomango\Model\Participation", options={"id" = "participation_id"})
+     * @ParamConverter("booking", class="Welcomango\Model\Booking", options={"id" = "booking_id"})
      *
      * @Route("/message/new/{user_id}/current", name="message_thread")
      * @Template()
      *
      * @return array
      */
-    public function newThreadAction(Request $request, User $currentUser, Participation $participation)
+    public function newThreadAction(Request $request, User $currentUser, Booking $booking)
     {
         $form = $this->createForm($this->get('welcomango.new.thread.type'));
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $thread = $this->get('welcomango.message.creator')->createThread($participation, $currentUser, $form->getData()['message']);
+            if(isset($form->getData()['message'])){
+                //In this cas the message is coming from the request made on the experience page
+                $message = $form->getData()['message'];
+            }else{
+                //This is the basic key designed by the FOSMessageBundle view
+                $message = $form->getData()['body'];
+            }
+
+            if($booking->getUser() != $currentUser){
+                $recipient = $booking->getUser();
+            }else{
+                $recipient = $booking->getExperience()->getCreator();
+            }
+            $thread = $this->get('welcomango.message.creator')->createThread($booking, $currentUser, $recipient, $message);
 
             return $this->forward('WelcomangoMessageBundle:Message:thread', array(
                 'user_id'   => $currentUser->getId(),
@@ -100,7 +113,7 @@ class MessageController extends BaseController
             'form'          => $form->createView(),
             'data'          => $form->getData(),
             'user'          => $currentUser,
-            'participation' => $participation,
+            'booking' => $booking,
         ));
     }
 

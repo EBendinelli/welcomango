@@ -1,0 +1,167 @@
+{% extends "FOSUserBundle:Profile:show.html.twig" %}
+
+{% block profile_content %}
+    <div class="text-center m-b-20">
+        <h2>{{ 'participation.requestsSent'|trans }}</h2>
+    </div>
+
+    <div class="row m-b-20">
+        <div class="col-md-6 text-right"><button id="participation-pending-filter" class="btn btn-dark {%  if activeTab == 'sent' %}btn-primary{% endif %}" onClick="filterStatus(this, 'sent');  toggleFilterClass(this)">Pending</button></div>
+        <div class="col-md-6 text-left"><button id="participation-happened-filter" class="btn btn-dark {%  if activeTab == 'happened' %}btn-primary{% endif %}" onClick="filterStatus(this, 'happened');  toggleFilterClass(this)">Happened</button></div>
+    </div>
+
+    <div class="panel panel-default portlet">
+        <!-- TABLE OF REQUEST SEND BY THE USER-->
+        <div class="panel-body" id="profile_request_sent">
+            <div class="table-responsive">
+                {% if activeTab == 'sent' %}
+                    {% set timeColumnName = 'booking.requestedTime'|trans  %}
+                {% elseif activeTab == 'happened' %}
+                    {% set timeColumnName = 'booking.happenedTime'|trans  %}
+                {% endif %}
+
+                <table class="entity-table table table-condensed" >
+                    <thead>
+                    <tr>
+                        <th class="col-md-3">{{ 'booking.experience'|trans }}</th>
+                        <th class="col-md-2">{{ 'booking.date'|trans }}</th>
+                        <th class="col-md-1">{{ 'booking.meetingTime'|trans }}</th>
+                        <th class="col-md-2">{{ 'booking.status'|trans }}</th>
+                        <th class="col-md-2">{{ 'booking.control'|trans }}</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for booking in bookings %}
+                        {% set extraClass = '' %}
+                        {% if booking.status == 'Accepted' %}
+                            {% set extraClass = 'participation-row-bold success' %}
+                        {% endif %}
+                        <tr class="participation-row clickable table-details hover-bg-master-lightest hover-pointer {{ extraClass|default('') }}" onClick="rowToggle(this, {{ booking.id }}, event)">
+                            <td class="col-md-3">
+                                <div class="row" style="display:inline-block">
+                                    <div class="col-md-3">
+                                        <a href="{{ asset(path('front_user_view', {'user_id': booking.experience.getCreator.id})) }}">
+                                            {% if booking.experience.getCreator.getMedias.first %}
+                                                <img src='{{ asset(booking.experience.getCreator.getMedias.first.getWebPath) }}' class='front-menu-user-picture m-r-10' />
+                                            {% else %}
+                                                <img src='{{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }}' class='front-menu-user-picture m-r-10' />
+                                            {% endif %}
+                                        </a>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="requested-experience">
+                                            <a href="{{ path('front_experience_view', {'experience_id': booking.experience.id}) }}" class="text-black semi-bold ">
+                                                {{ booking.experience.title }}
+                                            </a>
+                                        </div>
+                                        <div class="requested-experience-user">
+                                            by <a href="{{ asset(path('front_user_view', {'user_id': booking.experience.getCreator.id})) }}" class="text-primary ">{{ booking.experience.getCreator.firstname }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="col-md-2">{{ booking.startDatetime|date('Y-m-d')  }}</td>
+                            <td class="col-md-1">{{ booking.startDatetime|date('H:i') }}</td>
+                            <td class="col-md-2">{{ booking.status }}</td>
+                            <td class="col-md-2">
+                            {{ request_action(booking, user) }}
+                            {% if booking.status == 'Happened' %}
+                            {{ include("WelcomangoCoreBundle:Core:note.html.twig", { 'note': booking.experience.getAverageNote, 'size': 'small'}) }}
+                            {% endif %}
+                            </td>
+                        </tr>
+                        <tr class="participation_details_{{ booking.id }} {{ extraClassDetails|default('') }}" style="display: none">
+                            <td colspan="5">
+                                <div class="row">
+                                    <div class="col-md-12 semi-bold text-center">
+                                        {{ 'booking.sentTo'|trans }}
+                                        <a href="{{ asset(path('front_user_view', {'user_id': booking.user.id})) }}" class="text-primary semi-bold">
+                                            {{ booking.user.firstname }} {{ booking.user.lastname }}
+                                        </a>
+                                        <div class="m-b-20">
+                                            {{ 'booking.requestDetails'|trans }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <i class="fa fa-user p-r-5"></i>
+                                        <span class="semi-bold">{{ booking.numberOfParticipants }}</span> {{ 'booking.participants'|trans }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        <i class="fa fa-street-view p-l-5 p-r-5"></i>
+                                        {{ 'booking.meetingAt'|trans }}: <span class="semi-bold">{{ booking.startDatetime|date('H:i') }}</span>
+                                    </div>
+                                    <div class="col-md-6 p-r-5">
+                                        <i class="fa fa-clock-o "></i>
+                                        {{ 'booking.duration'|trans }}: <span class="semi-bold">{{ date_difference(booking.startDatetime, booking.endDatetime) }}</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <i class="fa fa-globe p-l-5 p-r-5"></i>
+                                        {{ 'booking.experiencesAttendedBy'|trans }}: <span class="semi-bold">{{ booking.user.getAttendedExperiences|length }}</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% if bookings.count == 0 %}
+                    <div class="col-md-12 text-center alert alert-warning">
+                        <i class="fa fa-frown-o m-r-5"></i>{{ 'booking.noRequestFound' }}
+                        <div><strong><a class="alert-warning" href="{{ path('front_experience_list') }}">{{ 'booking.explore' }}</a></strong></div>
+                    </div>
+                {% endif %}
+                {% include 'WelcomangoCoreBundle:CRUD:pagination.html.twig' with {
+                'path': path('booking_sent_list'),
+                'pagination': bookings
+                } %}
+            </div>
+        </div>
+    </div>
+
+    <!-- BEGIN DELETE CONFIRMATION MODAL -->
+    {{ include("::_modal.html.twig", {
+        'title': 'Are you sure you want to cancel this request?',
+        'main_text': 'If you have not yet exchanged with this person, please send him a little message.',
+        'valid_button_name': 'Cancel',
+        'icon': 'fa-times-circle '
+    })}}
+    <!-- END DELETE CONFIRMATION MODAL -->
+
+{% endblock profile_content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        function updateModal(route){
+            $('#modal-delete-button').attr("href", route);
+        }
+
+        function rowToggle(element, id, event){
+            if(event.target.nodeName.toLowerCase() == "i") return;
+            $(element).toggleClass('shown');
+            $('.participation_details_'+id).toggle();
+        }
+
+        function filterStatus(element, display){
+            if($(element).hasClass('btn-primary')) { return }
+            else{
+                var route = "{{ path('booking_sent_list', { 'display': "PLACEHOLDER"}) }}";
+                window.location = route.replace("PLACEHOLDER", display); ;
+            }
+        }
+
+        function toggleFilterClass(element){
+            if($(element).hasClass('btn-primary')) { return }
+            else{
+                $('#participation-pending-filter').toggleClass('btn-primary');
+                $('#participation-happened-filter').toggleClass('btn-primary');
+                $('#profile-request-sent').toggle();
+                $('#profile-request-happened').toggle();
+            }
+        }
+
+    </script>
+{% endblock %}

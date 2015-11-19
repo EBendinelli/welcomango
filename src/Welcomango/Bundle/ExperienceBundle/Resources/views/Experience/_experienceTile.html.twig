@@ -18,12 +18,12 @@
             </div>
         </a>
 
-        <div class="user" onclick="location.href='{{ path('front_user_view', {'user_id' : experience.getAuthor.id }) }}'">
+        <div class="user" onclick="location.href='{{ path('front_user_view', {'user_id' : experience.getCreator.id }) }}'">
             <div class="user-item user-img-1">
                 <div class="user-info-wrap">
                     <div class="user-info">
-                        {% if experience.getAuthor.getMedias.first %}
-                            <div class="user-info-front user-img-1" style="background-image:url({{ asset(experience.getAuthor.getMedias.first.getWebPath) }})"></div>
+                        {% if experience.getCreator.getMedias.first %}
+                            <div class="user-info-front user-img-1" style="background-image:url({{ asset(experience.getCreator.getMedias.first.getWebPath) }})"></div>
                         {% else %}
                             <div class="user-info-front user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }})"></div>
                         {% endif %}
@@ -39,13 +39,13 @@
 
         <div class="panel-body p-t-0 card-content">
             <div class="panel-title semi-bold">
-                {{ experience.getTitle }} with <span class="text-primary">{{ experience.getAuthor.firstname }}</span>
+                {{ experience.getTitle }} with <span class="text-primary">{{ experience.getCreator.firstname }}</span>
             </div>
             <div class="text-center m-b-10">
                 in <span class="semi-bold">{% if experience.getCity %}{{ experience.getCity.Name }}{% endif %}</span>
             </div>
             <div class="m-b-10 text-center">
-                {{ include("WelcomangoExperienceBundle:Experience:_experienceNote.html.twig", { 'note': experience.getAverageNote, 'mango': true}) }}
+                {{ include("WelcomangoCoreBundle:Core:note.html.twig", { 'note': experience.getAverageNote, 'mango': true}) }}
             </div>
             <div class="dotted-line"><span></span></div>
             <div class="text-center m-t-20 m-b-20">

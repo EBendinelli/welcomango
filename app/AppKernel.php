@@ -28,7 +28,8 @@ class AppKernel extends Kernel
             new Welcomango\Bundle\MediaBundle\WelcomangoMediaBundle(),
             new Welcomango\Bundle\MessageBundle\WelcomangoMessageBundle(),
             new Welcomango\Bundle\ExperienceBundle\WelcomangoExperienceBundle(),
-            new Welcomango\Bundle\ParticipationBundle\WelcomangoParticipationBundle(),
+            new Welcomango\Bundle\AvailabilityBundle\WelcomangoAvailabilityBundle(),
+            new Welcomango\Bundle\BookingBundle\WelcomangoBookingBundle(),
 
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new Gregwar\ImageBundle\GregwarImageBundle(),
@@ -37,6 +38,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
+            new Craue\FormFlowBundle\CraueFormFlowBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

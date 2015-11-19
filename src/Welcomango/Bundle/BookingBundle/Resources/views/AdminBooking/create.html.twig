@@ -1,0 +1,28 @@
+{% extends "::admin.html.twig" %}
+
+{% trans_default_domain "booking" %}
+
+{% set listing = path('admin_booking_list') %}
+{% form_theme form with ["::theme.html.twig"] %}
+
+{% block page_content %}
+    {{ include("WelcomangoBookingBundle:AdminBooking:form.html.twig", {'save_path': path('admin_booking_create')}) }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ form_stylesheet(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $('select').select2();
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#bookingForm').validate();
+        });
+    </script>
+{% endblock %}

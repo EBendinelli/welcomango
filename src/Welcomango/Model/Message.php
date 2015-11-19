@@ -8,6 +8,7 @@ use FOS\MessageBundle\Entity\Message as BaseMessage;
 
 /**
  * @ORM\Entity
+ * @ORM\Table(name="wm_message")
  */
 class Message extends BaseMessage
 {

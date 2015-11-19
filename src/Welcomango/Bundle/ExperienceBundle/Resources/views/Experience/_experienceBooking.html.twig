@@ -4,7 +4,7 @@
 
 {% if app.user %}
 <div class="text-white text-center">
-    <p>Give <span class="text-primary">{{ experience.getAuthor.firstname }}</span> a bit more information about your request and send your message</p>
+    <p>Give <span class="text-primary">{{ experience.getCreator.firstname }}</span> a bit more information about your request and send your message</p>
 </div>
 {% else %}
     <div class="alert alert-danger">Looks like you are not logged, please <a class="bold" href="{{ path('fos_user_security_login') }}">login</a> before sending your request</div>

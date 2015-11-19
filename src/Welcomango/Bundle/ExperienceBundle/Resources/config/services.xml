@@ -21,5 +21,11 @@
             <argument type="service" id="security.context" />
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
+
+        <service id="welcomango.form.flow.experience"
+             class="Welcomango\Bundle\ExperienceBundle\Form\Flow\ExperienceFlow"
+             parent="craue.form.flow"
+             scope="request">
+        </service>
     </services>
 </container>

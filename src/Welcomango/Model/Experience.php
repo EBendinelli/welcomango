@@ -35,6 +35,14 @@ class Experience
     private $title;
 
     /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="experiences")
+     * @ORM\JoinColumn(name="creator_id", referencedColumnName="id", nullable=false)
+     */
+    private $creator;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="description", type="text")
@@ -93,9 +101,14 @@ class Experience
     private $maximumParticipants;
 
     /**
-     * @ORM\OneToMany(targetEntity="Participation", mappedBy="experience", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Booking", mappedBy="experience", cascade={"persist", "remove"})
      **/
-    private $participations;
+    private $bookings;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Availability", mappedBy="experience", cascade={"persist", "remove"})
+     **/
+    private $availabilities;
 
     /**
      * @ORM\ManyToMany(targetEntity="Tag", inversedBy="users")
@@ -136,7 +149,7 @@ class Experience
     /**
      * @ORM\Column(name="deleted", type="boolean")
      */
-    private $deleted = true;
+    private $deleted = false;
 
     /**
      * @ORM\Column(name="average_note", type="float", nullable=true)
@@ -328,17 +341,33 @@ class Experience
     /**
      * @return ArrayCollection
      */
-    public function getParticipations()
+    public function getBookings()
     {
-        return $this->participations;
+        return $this->bookings;
     }
 
     /**
-     * @param ArrayCollection $participations
+     * @param ArrayCollection $bookings
      */
-    public function setParticipations($participations)
+    public function setBookings($bookings)
     {
-        $this->participations = $participations;
+        $this->bookings = $bookings;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getAvailabilities()
+    {
+        return $this->availabilities;
+    }
+
+    /**
+     * @param ArrayCollection $availabilities
+     */
+    public function setAvailabilities($availabilities)
+    {
+        $this->availabilities = $availabilities;
     }
 
     /**
@@ -371,6 +400,22 @@ class Experience
     public function setCity($city)
     {
         $this->city = $city;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreator()
+    {
+        return $this->creator;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setCreator($creator)
+    {
+        $this->creator= $creator;
     }
 
     /**
@@ -484,25 +529,25 @@ class Experience
     {
         $this->tags->removeElement($tag);
         //If not working try this:
-        //$this->participation->remove($participation);
+        //$this->booking->remove($booking);
     }
 
     /**
-     * @param Participation $participation
+     * @param Booking $booking
      */
-    public function addParticipation(Participation $participation)
+    public function addBooking(Booking $booking)
     {
-        $this->participations[] = $participation;
+        $this->bookings[] = $booking;
     }
 
     /**
-     * @param Participation $participation
+     * @param Booking $booking
      */
-    public function removeParticipation(Participation $participation)
+    public function removeBooking(Booking $booking)
     {
-        $this->participations->removeElement($participation);
+        $this->bookings->removeElement($booking);
         //If not working try this:
-        //$this->participation->remove($participation);
+        //$this->booking->remove($booking);
     }
 
     /**
@@ -521,22 +566,10 @@ class Experience
         $this->setCreatedAt(new \Datetime());
     }
 
-    /**
-     * @return User
-     */
-    public function getAuthor()
-    {
-        foreach ($this->participations as $participation) {
-            if ($participation->getIsCreator()) {
-                return $participation->getUser();
-            }
-        }
-    }
-
     public function __construct()
     {
         $this->tags           = new ArrayCollection();
-        $this->participations = new ArrayCollection();
+        $this->booking        = new ArrayCollection();
         $this->medias         = new ArrayCollection();
     }
 
@@ -587,8 +620,8 @@ class Experience
             ->andWhere(Criteria::expr()->eq("isParticipant", 1))
             ->andWhere(Criteria::expr()->eq("status", 'Booked'));*/
 
-        foreach($this->participations as $participation){
-            if($participation->getStartTime() == $startTime && $participation->getIsParticipant() == 1 && $participation->getStatus() == 'Booked'){
+        foreach($this->$bookings as $booking){
+            if($booking->getStartTime() == $startTime && $booking->getIsParticipant() == 1 && $booking->getStatus() == 'Booked'){
                 return false;
             }
         }
@@ -598,7 +631,7 @@ class Experience
         return ($result->isEmpty()) ? true : false;*/
     }
 
-    public function isAlreadyBookedByUser($participation)
+    public function isAlreadyBookedByUser($booking)
     {
         // TODO: FUCKING CRITERIA NOT WORKING. NO QUERY EXECUTED, FIND WHY. Should replace the foreach
         /*$criteria = Criteria::create()
@@ -606,8 +639,8 @@ class Experience
             ->andWhere(Criteria::expr()->eq("isParticipant", 1))
             ->andWhere(Criteria::expr()->eq("user", $participation->getUser()));*/
 
-        foreach($this->participations as $existingParticipation){
-            if($existingParticipation->getStartTime() == $participation->getStartTime() && $existingParticipation->getIsParticipant() == 1 && $existingParticipation->getUser() == $participation->getUser()){
+        foreach($this->$bookings as $existingBooking){
+            if($existingBooking->getStartTime() == $booking->getStartTime() && $existingBooking->getIsParticipant() == 1 && $existingBooking->getUser() == $booking->getUser()){
                 return true;
             }
         }

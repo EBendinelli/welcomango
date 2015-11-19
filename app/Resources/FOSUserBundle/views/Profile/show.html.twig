@@ -8,25 +8,25 @@
     <!-- THIS IS THE MENU PROFILE WHEN THE USER IS LOGGED -->
     <!-- BEGIN PROFILE SIDE MENU-->
     <div id="profile-menu-left" class="bg-master-lightest m-t-10 p-b-10">
-        <div id="profile-menu-title" class="text-center link-black">
+        <div id="profile-menu-title" class="text-center">
             <a href="{{ path('fos_user_profile_show') }}"><h4>{{ 'profile.menu'|trans }}</h4></a>
         </div>
         <div class="dotted-line"><span></span></div>
         <div id="profile-menu-items">
             <ul>
-                <a href="{{ path('message_inbox') }}">
+                <a href="{{ path('message_inbox') }}" class="profile-menu-item">
                     <li class="profile-menu-item">
                         <i class="fa fa-envelope fa-lg m-r-10"></i>{{ 'profile.message'|trans }}
                         {{ notification_display(user, 'inbox') }}
                     </li>
                 </a>
-                <a href="{{ path('participation_received_list', {'display': 'received'}) }}" class="profile-menu-item">
+                <a href="{{ path('booking_received_list', {'display': 'received'}) }}" class="profile-menu-item">
                     <li class="profile-menu-item">
                         <i class="fa fa-bullhorn fa-lg m-r-10"></i>{{ 'profile.requestsFromTravelers'|trans }}
                         {{ notification_display(user, 'received') }}
                     </li>
                 </a>
-                <a href="{{ path('participation_sent_list') }}" class="profile-menu-item">
+                <a href="{{ path('booking_sent_list') }}" class="profile-menu-item">
                     <li class="profile-menu-item">
                         <i class="fa fa-suitcase fa-lg m-r-10"></i>{{ 'profile.yourRequests'|trans }}
                         {{ notification_display(user, 'sent') }}
@@ -37,6 +37,25 @@
                         <i class="fa fa-pencil fa-lg m-r-10"></i>{{ 'profile.editProfile'|trans }}
                     </li>
                 </a>
+            </ul>
+        </div>
+    </div>
+
+    <div id="profile-menu-left" class="bg-master-lightest m-t-15 p-b-10">
+        <div id="profile-menu-title" class="text-center link-black">
+            <h4>{{ 'user.feedbacks'|trans }}</h4>
+        </div>
+        <div class="dotted-line"><span></span></div>
+        <div id="user-menu-items" class="text-center">
+            <ul>
+                <li class="user-menu-item">
+                    <div class="m-b-5">{{ 'profile.noteTraveler'|trans }}</div>
+                    <div>{{ include("WelcomangoCoreBundle:Core:note.html.twig", { 'note': user.getNoteAsTraveler, 'mango': true}) }}</div>
+                </li>
+                <li class="user-menu-item">
+                    <div class="m-b-5">{{ 'profile.noteLocal'|trans }}</div>
+                    <div>{{ include("WelcomangoCoreBundle:Core:note.html.twig", { 'note': user.getNoteAsLocal, 'mango': true}) }}</div>
+                </li>
             </ul>
         </div>
     </div>
@@ -63,16 +82,16 @@
     <!-- BEGIN PROFILE CONTENT-->
         {{ parent() }}
         <div id="user-proposed-experience" class="m-b-20">
-            <h2 class="m-b-30">{{ 'profile.yourExperience'|trans }}</h2>
-
-            {% if userExperiences|first %}
+            {% if userExperiences.isEmpty %}
+                <a href="{{ path('front_experience_create') }}" class="btn btn-primary btn-cons" ><i class="fa fa-plus-circle "></i> {{ 'profile.createExperience'|trans }}</a>
+            {% else %}
+                <h2 class="m-b-30">{{ 'profile.yourExperience'|trans }}</h2>
                 {{ include("WelcomangoExperienceBundle:Experience:_featuredExperience.html.twig", { 'experience': userExperiences|first, 'darkBg': true, 'profile': true}) }}
                 <div id="profile-experience-action" class="text-right">
                     <a href="{{ path('front_experience_edit', {'experience_id': userExperiences|first.id}) }}" class="btn btn-complete btn-cons"><i class="fa fa-pencil"></i> {{ 'profile.editExperience'|trans }}</a>
                     <button class="btn btn-danger btn-cons" data-toggle="modal" data-target=".modal-action"><i class="fa fa-trash "></i> {{ 'profile.deleteExperience'|trans }}</button>
                 </div>
-            {% else %}
-                <a href="{{ path('front_experience_create') }}" class="btn btn-primary btn-cons" ><i class="fa fa-plus-circle "></i> {{ 'profile.createExperience'|trans }}</a>
+                <br/>
             {% endif %}
         </div>
         <div id="user-description">

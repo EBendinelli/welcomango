@@ -1,3 +1,13 @@
+welcomango_booking:
+    resource: "@WelcomangoBookingBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+welcomango_availability:
+    resource: "@WelcomangoAvailabilityBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 welcomango_user_bundle:
     resource: "@WelcomangoUserBundle/Controller/"
     type:     annotation
@@ -15,11 +25,6 @@ welcomango_core_bundle:
 
 welcomango_experience_bundle:
     resource: "@WelcomangoExperienceBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-welcomango_participation_bundle:
-    resource: "@WelcomangoParticipationBundle/Controller/"
     type:     annotation
     prefix:   /
 

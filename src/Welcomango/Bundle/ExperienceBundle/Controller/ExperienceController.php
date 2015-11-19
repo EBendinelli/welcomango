@@ -10,10 +10,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use FOS\UserBundle\Model\UserInterface;
 
 use Welcomango\Bundle\CoreBundle\Controller\Controller as BaseController;
 use Welcomango\Model\Experience;
-use Welcomango\Model\Participation;
+use Welcomango\Model\Booking;
 
 /**
  * Class ExperienceController
@@ -61,28 +63,46 @@ class ExperienceController extends BaseController
      */
     public function createAction(Request $request)
     {
-        $experience = new Experience();
+        $user = $this->getUser();
 
-        $form = $this->createForm($this->get('welcomango.form.experience.create'), $experience);
-        $form->handleRequest($request);
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+        $experience = new Experience(); // Your form data class. Has to be an object, won't work properly with an array.
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($experience);
-            $em->flush();
+        $flow = $this->get('welcomango.form.flow.experience'); // must match the flow's service id
+        $flow->bind($experience);
 
-//            $this->getRepository('Welcomango\Model\Experience')->updateExperience($experience);
+        // form of the current step
+        $form = $flow->createForm();
+        if ($flow->isValid($form)) {
+            $flow->saveCurrentStepData($form);
 
-            $this->addFlash('success', $this->trans('experience.created.success', array(), 'user'));
+            if ($flow->nextStep()) {
+                // form for the next step
+                $form = $flow->createForm();
+            } else {
+                // flow finished
+                ldd($experience);
+                $bookingManager = $this->get('welcomango.front.booking.manager');
+                $bookingManager->generateBookingForExperience($experience, $form);
 
-            return $this->redirect($this->generateUrl('experience_edit', array(
-                'experience_id' => $experience->getId(),
-            )));
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($experience);
+                $em->flush();
+
+                $flow->reset(); // remove step data from the session
+
+                return $this->render('WelcomangoExperienceBundle:Experience:createSuccess.html.twig', array(
+                    'experience' => $experience,
+                ));
+            }
         }
 
-        return array(
+        return $this->render('WelcomangoExperienceBundle:Experience:create.html.twig', array(
             'form' => $form->createView(),
-        );
+            'flow' => $flow,
+        ));
     }
 
 
@@ -137,10 +157,10 @@ class ExperienceController extends BaseController
             ->getRepository('Welcomango\Model\Experience')
             ->getFeatured(3);
 
-        $participation = new Participation();
-        $participation->setUser($user);
-        $participation->setExperience($experience);
-        $form = $this->createForm($this->get('welcomango.form.participation.type'), $participation, [
+        $booking = new Booking();
+        $booking->setUser($user);
+        $booking->setExperience($experience);
+        $form = $this->createForm($this->get('welcomango.form.booking.type'), $booking, [
             'available_status' => $this->container->getParameter('available_status'),
             'meeting_times' => $this->container->getParameter('meeting_times'),
             'experience' => $experience,
@@ -155,7 +175,7 @@ class ExperienceController extends BaseController
         if ($form->isValid()) {
             $message = $form->get('message')->getData();
 
-            if ($user == $experience->getAuthor()) {
+            if ($user == $experience->getCreator()) {
                 return $this->render('WelcomangoCoreBundle:CRUD:notAllowed.html.twig', array(
                     'title' => 'Hm. Want to go on an adventure with yourself? ',
                     'message' => 'Well maybe you just wanted to edit your experience',
@@ -179,7 +199,7 @@ class ExperienceController extends BaseController
             $entityManager->flush();
 
             if (null !== $message) {
-                $this->get('welcomango.message.creator')->createThread($participation, $user, $message);
+                $this->get('welcomango.message.creator')->createThread($participation, $user, $participation->getExperience()->getCreator(), $message);
             }
 
             return $this->render('WelcomangoExperienceBundle:Experience:requestSent.html.twig');

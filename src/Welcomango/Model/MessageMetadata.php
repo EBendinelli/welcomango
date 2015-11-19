@@ -8,7 +8,7 @@ use FOS\MessageBundle\Entity\MessageMetadata as BaseMessageMetadata;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="message_metadata")
+ * @ORM\Table(name="wm_message_metadata")
  */
 class MessageMetadata extends BaseMessageMetadata
 {
