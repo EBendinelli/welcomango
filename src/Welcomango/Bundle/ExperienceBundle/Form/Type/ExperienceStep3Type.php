@@ -17,7 +17,8 @@ class ExperienceStep3Type extends AbstractType {
 
         $availabilities = array('form.experience.alwaysAvailable', 'form.experience.specificAvailability');
         $days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
-        $times= array('Early Morning', 'Morning', 'Lunchtime', 'Afternoon', 'Evening', 'Night');
+        $hours = array('Early Morning', 'Morning', 'Lunchtime', 'Afternoon', 'Evening', 'Night');
+        $months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 
         $builder->add('availability', 'choice',[
             'choices' => $availabilities,
@@ -29,7 +30,7 @@ class ExperienceStep3Type extends AbstractType {
             'data' => 0,
         ]);
 
-        $builder->add('days', 'choice',[
+        $builder->add('day', 'choice',[
             'choices' => $days,
             'label' => false,
             'mapped'   => false,
@@ -38,14 +39,55 @@ class ExperienceStep3Type extends AbstractType {
             'data' => array("5", "6"),
         ]);
 
-        $builder->add('times', 'choice',[
-            'choices' => $times,
+        $builder->add('hour', 'choice',[
+            'choices' => $hours,
             'label' => false,
             'mapped'   => false,
             'expanded' => true,
             'multiple' => true,
         ]);
 
+        /*$builder->add('month', 'choice',[
+            'choices' => $months,
+            'label' => false,
+            'mapped'   => false,
+            'expanded' => true,
+            'multiple' => true,
+        ]);*/
+
+        $builder->add('start_date', 'date', [
+            'label'    => 'form.experience.startDate',
+            'data'     => new \DateTime(),
+            'required' => false,
+            'mapped'   => false,
+            'years'    => range(date('Y'), date('Y') + 1),
+            'months'   => range(date('m'), 12),
+            'days'     => range(date('d'), 31),
+            'widget'   => 'single_text',
+            'format'   => 'dd-MM-yyyy',
+            'attr'     => [
+                'class'            => 'form-control input-inline datepicker',
+                'data-provide'     => 'datepicker',
+                'data-date-format' => 'dd-mm-yyyy',
+            ],
+        ]);
+
+        $builder->add('end_date', 'date', [
+            'label'    => 'form.experience.endDate',
+            'data'     => new \DateTime(),
+            'required' => false,
+            'mapped'   => false,
+            'years'    => range(date('Y'), date('Y') + 1),
+            'months'   => range(date('m'), 12),
+            'days'     => range(date('d'), 31),
+            'widget'   => 'single_text',
+            'format'   => 'dd-MM-yyyy',
+            'attr'     => [
+                'class'            => 'form-control input-inline datepicker',
+                'data-provide'     => 'datepicker',
+                'data-date-format' => 'dd-mm-yyyy',
+            ],
+        ]);
 
     }
 
@@ -55,10 +97,7 @@ class ExperienceStep3Type extends AbstractType {
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults([
-            'data_class'         => 'Welcomango\Model\Experience',
-            'translation_domain' => 'experience'
-        ]);
+
     }
 
     /**

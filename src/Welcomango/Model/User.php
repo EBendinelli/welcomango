@@ -343,7 +343,15 @@ class User extends BaseUser implements ParticipantInterface
      */
     public function getExperiences()
     {
-        return $this->experiences;
+        $availableExperiences = new ArrayCollection;
+
+        //remove deleted experiences
+        foreach($this->experiences as $experience){
+            if(!$experience->isDeleted()) {
+                $availableExperiences[] = $experience;
+            }
+        }
+        return $availableExperiences;
     }
 
     /**

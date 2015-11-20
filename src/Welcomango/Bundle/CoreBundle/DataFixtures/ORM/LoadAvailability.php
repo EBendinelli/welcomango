@@ -40,6 +40,7 @@ class LoadAvailabilityData extends AbstractFixture implements FixtureInterface, 
         foreach($experiences as $experience){
             //Each experience has a creator
             $entry = new Availability();
+            $entry->setExperience($experience);
 
             //Let's handle the first experience differently so we have a referencial
             if($first){
@@ -50,7 +51,7 @@ class LoadAvailabilityData extends AbstractFixture implements FixtureInterface, 
                 $entry->setStartDate($randStartDate);
 
                 $randEndDate = clone $randStartDate;
-                $randMonthsAvailable = rand(1,12);
+                $randMonthsAvailable = rand(0,12);
                 $randEndDate->add(new \DateInterval('P'.$randMonthsAvailable.'M'));
                 $entry->setEndDate($randEndDate);
 
@@ -78,7 +79,7 @@ class LoadAvailabilityData extends AbstractFixture implements FixtureInterface, 
                 $entry->setStartDate($randStartDate);
 
                 $randEndDate = clone $randStartDate;
-                $randMonthsAvailable = rand(1, 12);
+                $randMonthsAvailable = rand(0, 11);
                 $randEndDate->add(new \DateInterval('P' . $randMonthsAvailable . 'M'));
                 $entry->setEndDate($randEndDate);
 
@@ -98,7 +99,7 @@ class LoadAvailabilityData extends AbstractFixture implements FixtureInterface, 
 
                 $randMonths = array();
                 for ($i = 0; $i < 9; $i++) {
-                    $randMonth = rand(1, 12);
+                    $randMonth = rand(0, 11);
                     if (!isset($randMonths[$randMonth]))
                         $randMonths[$randMonth] = $randMonth;
                 }
@@ -107,7 +108,7 @@ class LoadAvailabilityData extends AbstractFixture implements FixtureInterface, 
 
                 $randDays = array();
                 for ($i = 0; $i < 5; $i++) {
-                    $randDay = rand(1, 12);
+                    $randDay = rand(0, 6);
                     if (!isset($randDays[$randDay]))
                         $randDays[$randDay] = $randDay;
                 }

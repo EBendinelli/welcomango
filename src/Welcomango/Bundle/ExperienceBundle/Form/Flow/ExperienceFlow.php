@@ -29,9 +29,6 @@ class ExperienceFlow extends FormFlow {
                 'label' => 'Your availabilities',
                 'form_type' => new ExperienceStep3Type(),
             ),
-            array(
-                'label' => 'Overview',
-            ),
         );
     }
 

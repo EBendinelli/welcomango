@@ -63,7 +63,7 @@ class ExperienceRepository extends EntityRepository
     {
         $queryBuilder = $this
             ->createQueryBuilder('e')
-            ->leftJoin('e.participations', 'p')
+            ->leftJoin('e.availabilities', 'a')
             ->where('e.published = true');
 
         if(!$isDeleted) $queryBuilder->andWhere('e.deleted = false');
@@ -81,8 +81,20 @@ class ExperienceRepository extends EntityRepository
 
         if ($date = $this->getFilter('date', $filters)) {
 
-            $queryBuilder->andWhere('p.date LIKE :date');
-            $queryBuilder->setParameter('date', $date->format('Y-m-d').'%');
+            //Check that the date is included in the available period
+            $queryBuilder->andWhere('a.startDate <= :start_date');
+            $queryBuilder->setParameter('start_date', $date->format('Y-m-d').'%');
+            $queryBuilder->andWhere('a.endDate >= :end_date');
+            $queryBuilder->setParameter('end_date', $date->format('Y-m-d').'%');
+
+            //Check that the day is also available
+            $queryBuilder->andWhere('a.day LIKE :day');
+            $queryBuilder->setParameter('day', '%,'.$date->format('w').',%');
+        }
+
+        if ($hour = $this->getFilter('hour', $filters)) {
+            $queryBuilder->andWhere('a.hour LIKE :hour');
+            $queryBuilder->setParameter('hour', '%,'.$hour.',%');
         }
 
         if ($minParticipants = $this->getFilter('min_participants_accepted', $filters)) {

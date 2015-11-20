@@ -69,6 +69,7 @@ class ExperienceController extends BaseController
             throw new AccessDeniedException('This user does not have access to this section.');
         }
         $experience = new Experience(); // Your form data class. Has to be an object, won't work properly with an array.
+        $experience->setCreator($user);
 
         $flow = $this->get('welcomango.form.flow.experience'); // must match the flow's service id
         $flow->bind($experience);
@@ -83,13 +84,12 @@ class ExperienceController extends BaseController
                 $form = $flow->createForm();
             } else {
                 // flow finished
-                ldd($experience);
-                $bookingManager = $this->get('welcomango.front.booking.manager');
-                $bookingManager->generateBookingForExperience($experience, $form);
-
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($experience);
                 $em->flush();
+
+                $availabilityManager = $this->get('welcomango.front.availability.manager');
+                $availabilityManager->generateAvailabilityForExperience($experience, $form);
 
                 $flow->reset(); // remove step data from the session
 
@@ -150,6 +150,16 @@ class ExperienceController extends BaseController
      */
     public function viewAction(Request $request, Experience $experience)
     {
+        //TODO: We might be able to do better...
+        if($experience->isDeleted()) {
+            return $this->render('WelcomangoCoreBundle:CRUD:notAllowed.html.twig', array(
+                'title' => 'This experience is not available anymore',
+                'message' => 'Well, maybe it never existed...',
+                'return_path' => $this->get('router')->generate('front_experience_list'),
+                'return_message' => 'Return to experiences',
+            ));
+        }
+
         $user = $this->getUser();
 
         // Must create a related experience function
@@ -184,8 +194,8 @@ class ExperienceController extends BaseController
                 ));
             }
 
-            $participationManager = $this->get('welcomango.front.participation.manager');
-            if (!$participationManager->processParticipationQuery($participation, $form)) {
+            $bookingManager = $this->get('welcomango.front.booking.manager');
+            if (!$bookingManager->processBookingQuery($booking, $form)) {
                 return $this->render('WelcomangoCoreBundle:CRUD:notAllowed.html.twig', array(
                     'title'          => 'Oops, something went wrong.',
                     'message'        => 'This experience is not available at this time... Try another time or another day',
@@ -195,7 +205,7 @@ class ExperienceController extends BaseController
             }
 
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($participation);
+            $entityManager->persist($booking);
             $entityManager->flush();
 
             if (null !== $message) {
@@ -228,10 +238,16 @@ class ExperienceController extends BaseController
             return $this->render('WelcomangoCoreBundle:CRUD:notAllowed.html.twig');
         }
 
-        $experience->setDeleted(true);
+        $entityManager = $this->getDoctrine()->getManager();
 
-        $this->getDoctrine()->getManager()->persist($experience);
-        $this->getDoctrine()->getManager()->flush();
+        $experience->setDeleted(true);
+        $availabilities = $experience->getAvailabilities();
+        foreach($availabilities as $availability){
+            $entityManager->remove($availability);
+        }
+
+        $entityManager->merge($experience);
+        $entityManager ->flush();
 
         return $this->render('WelcomangoExperienceBundle:Experience:deleteSuccess.html.twig');
     }

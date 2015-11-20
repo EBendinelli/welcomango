@@ -19,7 +19,7 @@
             <argument type="service" id="router"/>
         </service>
 
-        <service id="welcomango.front.booking.manager" class="Welcomango\Bundle\BookingBundle\Manager\ParticipationManager">
+        <service id="welcomango.front.booking.manager" class="Welcomango\Bundle\BookingBundle\Manager\BookingManager">
         </service>
     </services>
 </container>

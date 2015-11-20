@@ -2,18 +2,50 @@
 
 namespace Welcomango\Bundle\AvailabilityBundle\Manager;
 
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
+use Welcomango\Model\Availability;
 
 class AvailabilityManager
 {
-    public function __construct()
-    {
 
+    /**
+     * @var Doctrine\ORM\EntityManager entityManager
+     */
+    protected $entityManager;
+
+    public function __construct(EntityManager $entityManager)
+    {
+        $this->entityManager   = $entityManager;
     }
 
     //When creating an experience, process the form to generate the availability and Booking
-    public function generateParticipationForExperience($experience, $form){
-        if($form->get('always_available')->getData()){
+    public function generateAvailabilityForExperience($experience, $form){
+        if($form->get('availability')->getData() == 0){
+            $availability = new Availability();
+            $availability->setHour('*');
+            $availability->setDay('*');
+            $availability->setMonth('*');
+            $availability->setExperience($experience);
+            $availability->setStartDate($form->get('start_date')->getData());
+            $availability->setEndDate($form->get('end_date')->getData());
 
+            $this->entityManager->persist($availability);
+            $this->entityManager->flush();
+        }else{
+            $availability = new Availability();
+
+            $hours = $this->generateAvailabilityHours($form->get('hour')->getData());
+            $days = ','.implode(',', $form->get('day')->getData()).',';
+            $availability->setHour($hours);
+            $availability->setDay($days);
+            $availability->setMonth('*');
+            $availability->setExperience($experience);
+            $availability->setStartDate($form->get('start_date')->getData());
+            $availability->setEndDate($form->get('end_date')->getData());
+
+            $this->entityManager->persist($availability);
+            $this->entityManager->flush();
         }
     }
 

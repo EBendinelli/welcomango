@@ -371,6 +371,22 @@ class Experience
     }
 
     /**
+     * @param Availability $availability
+     */
+    public function removeAvailability(Availability $availability)
+    {
+        $this->availability->removeElement($availability);
+    }
+
+    /**
+     * @param Availability $availability
+     */
+    public function addAvailability(Availability $availability)
+    {
+        $this->availability[] = $availability;
+    }
+
+    /**
      * @return mixed
      */
     public function getTags()
@@ -478,6 +494,16 @@ class Experience
         $this->deleted = $deleted;
 
         return $this;
+    }
+
+    /**
+     * Get deleted
+     *
+     * @return Experience
+     */
+    public function isDeleted()
+    {
+        return $this->deleted;
     }
 
     /**

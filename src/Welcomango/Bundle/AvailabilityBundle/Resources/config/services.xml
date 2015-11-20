@@ -6,6 +6,7 @@
 
     <services>
         <service id="welcomango.front.availability.manager" class="Welcomango\Bundle\AvailabilityBundle\Manager\AvailabilityManager">
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
     </services>
 </container>
