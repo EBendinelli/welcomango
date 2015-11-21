@@ -144,11 +144,36 @@ class BookingController extends BaseController
     {
         $booking->setStatus($request->query->get('status'));
 
+        if($request->query->get('status') == 'Accepted'){
+            $booking->setSeen(false);
+        }
+
         $this->getDoctrine()->getManager()->persist($booking);
         $this->getDoctrine()->getManager()->flush();
         $this->addFlash('success', $this->trans('booking.edit.success', array(), 'crm'));
 
         return $this->redirect($this->generateUrl('booking_received_list'));
+    }
+
+    /**
+     * Check User Form filed for Ajax Calls
+     *
+     * @param Request $request
+     *
+     * @Route("/json/registration/form/list.json", name="booking_mark_as_seen_ajax", defaults={"_format"="json"})
+     *
+     * @return String
+     */
+    public function markAsSeenAction(Request $request){
+        if ($request->request->has('id') && $request->request->get('id') != '' ) {
+            $bookingRepository = $this->getDoctrine()->getManager()->getRepository('Welcomango\Model\Booking');
+            $booking = $bookingRepository->find($request->request->get('id'));
+            $booking->setSeen(true);
+
+            $this->getDoctrine()->getManager()->persist($booking);
+            $this->getDoctrine()->getManager()->flush();
+        }
+        return new JsonResponse();
     }
 
 }

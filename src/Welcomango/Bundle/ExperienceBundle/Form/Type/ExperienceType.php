@@ -46,7 +46,6 @@ class ExperienceType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
         $estimatedDurations = array();
         $minimumDurations = array();
         $maximumDurations = array();
@@ -56,52 +55,123 @@ class ExperienceType extends AbstractType
         for($i=0;$i<48;$i++) $maximumDurations[$i] = $i;
         for($i=0;$i<10;$i++) $maximumParticipants[$i] = $i;
 
-        $builder->add('title', 'text', ['label' => 'form.experience.title']);
-        $builder->add('description', 'textarea', [
-            'label' => 'form.experience.description'
-        ]);
+        $availabilities = array('form.experience.alwaysAvailable', 'form.experience.specificAvailability');
+        $days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
+        $hours = array('Early Morning', 'Morning', 'Lunchtime', 'Afternoon', 'Evening', 'Night');
+        $months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 
-        $builder->add('city', 'entity', array(
-            'class' => 'Model:City',
-            'property' => 'name',
-        ));
+        switch ($options['flow_step']) {
+            case 1:
+                $builder->add('title', 'text', ['label' => 'form.experience.title']);
+                $builder->add('description', 'textarea', [
+                    'label' => 'form.experience.description'
+                ]);
 
-        $builder->add('estimated_duration', 'choice',[
-            'choices' => $estimatedDurations,
-            'label' => 'form.experience.estimatedDuration'
-        ]);
+                $builder->add('city', 'entity', array(
+                    'class' => 'Model:City',
+                    'property' => 'name',
+                ));
 
-        $builder->add('minimum_duration', 'choice',[
-            'choices' => $minimumDurations,
-            'label' => 'form.experience.minimumDuration'
-        ]);
+                $builder->add('tags', 'entity', array(
+                    'class' => 'Model:Tag',
+                    'property' => 'name',
+                    'multiple' => true,
+                ));
+                break;
+            case 2:
+                $builder->add('estimated_duration', 'choice',[
+                    'choices' => $estimatedDurations,
+                    'label' => 'form.experience.estimatedDuration'
+                ]);
 
-        $builder->add('maximum_duration', 'choice', [
-            'choices' => $maximumDurations,
-            'label' => 'form.experience.maximumDuration'
-        ]);
+                $builder->add('minimum_duration', 'choice',[
+                    'choices' => $minimumDurations,
+                    'label' => 'form.experience.minimumDuration'
+                ]);
 
-        $builder->add('price_per_hour', 'text', ['label' => 'form.experience.pricePerHour']);
+                $builder->add('maximum_duration', 'choice', [
+                    'choices' => $maximumDurations,
+                    'label' => 'form.experience.maximumDuration'
+                ]);
 
-        $builder->add('maximum_participants', 'choice', [
-            'choices' => $maximumParticipants,
-            'label' => 'form.experience.maximumParticipants'
-        ]);
+                $builder->add('price_per_hour', 'text', ['label' => 'form.experience.pricePerHour']);
 
-        $builder->add('maximum_participants', 'choice', [
-            'choices' => $maximumParticipants,
-            'label' => 'form.experience.maximumParticipants'
-        ]);
+                $builder->add('maximum_participants', 'choice', [
+                    'choices' => $maximumParticipants,
+                    'label' => 'form.experience.maximumParticipants'
+                ]);
+                break;
+            case 3:
+                $builder->add('availability', 'choice',[
+                    'choices' => $availabilities,
+                    'label' => 'form.experience.availability',
+                    'mapped'   => false,
+                    'expanded' => true,
+                    'multiple' => false,
+                    'label' => false,
+                    'data' => 0,
+                ]);
 
-        $builder->add('medias', 'entity', array(
-            'class' => 'Welcomango\Model\Media',
-            'property' => 'title',
-            'multiple' => true,
-            'required' => false,
-            'query_builder' => function (EntityRepository $er) {
-                return $er->createQueryBuilder('m');
-            },
-        ));
+                $builder->add('day', 'choice',[
+                    'choices' => $days,
+                    'label' => false,
+                    'mapped'   => false,
+                    'expanded' => true,
+                    'multiple' => true,
+                    'data' => array("5", "6"),
+                ]);
+
+                $builder->add('hour', 'choice',[
+                    'choices' => $hours,
+                    'label' => false,
+                    'mapped'   => false,
+                    'expanded' => true,
+                    'multiple' => true,
+                ]);
+
+                /*$builder->add('month', 'choice',[
+                    'choices' => $months,
+                    'label' => false,
+                    'mapped'   => false,
+                    'expanded' => true,
+                    'multiple' => true,
+                ]);*/
+
+                $builder->add('start_date', 'date', [
+                    'label'    => 'form.experience.startDate',
+                    'data'     => new \DateTime(),
+                    'required' => false,
+                    'mapped'   => false,
+                    'years'    => range(date('Y'), date('Y') + 1),
+                    'months'   => range(date('m'), 12),
+                    'days'     => range(date('d'), 31),
+                    'widget'   => 'single_text',
+                    'format'   => 'dd-MM-yyyy',
+                    'attr'     => [
+                        'class'            => 'form-control input-inline datepicker',
+                        'data-provide'     => 'datepicker',
+                        'data-date-format' => 'dd-mm-yyyy',
+                    ],
+                ]);
+
+                $builder->add('end_date', 'date', [
+                    'label'    => 'form.experience.endDate',
+                    'data'     => new \DateTime(),
+                    'required' => false,
+                    'mapped'   => false,
+                    'years'    => range(date('Y'), date('Y') + 1),
+                    'months'   => range(date('m'), 12),
+                    'days'     => range(date('d'), 31),
+                    'widget'   => 'single_text',
+                    'format'   => 'dd-MM-yyyy',
+                    'attr'     => [
+                        'class'            => 'form-control input-inline datepicker',
+                        'data-provide'     => 'datepicker',
+                        'data-date-format' => 'dd-mm-yyyy',
+                    ],
+                ]);
+                break;
+        }
     }
 
     /**

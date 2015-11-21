@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 use Welcomango\Model\Experience;
 use Welcomango\Model\City;
+use Welcomango\Model\Tag;
 
 /**
  * AdminExperienceType Form class
@@ -64,6 +65,12 @@ class AdminExperienceType extends AbstractType
         $builder->add('city', 'entity', array(
             'class' => 'Model:City',
             'property' => 'name',
+        ));
+
+        $builder->add('tags', 'entity', array(
+            'class' => 'Model:Tag',
+            'property' => 'name',
+            'multiple' => true,
         ));
 
         $builder->add('estimated_duration', 'choice',[

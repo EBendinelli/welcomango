@@ -40,6 +40,7 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
             new Craue\FormFlowBundle\CraueFormFlowBundle(),
+            new Welcomango\Bundle\TagBundle\WelcomangoTagBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

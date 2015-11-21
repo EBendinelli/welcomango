@@ -94,6 +94,11 @@ class Booking
     private $thread;
 
     /**
+     * @ORM\Column(name="seen", type="boolean")
+     */
+    private $seen = true;
+
+    /**
      * Get id
      *
      * @return integer
@@ -289,5 +294,29 @@ class Booking
     public function setThread($thread)
     {
         $this->thread = $thread;
+    }
+
+    /**
+     * Set seen
+     *
+     * @param boolean $seen
+     *
+     * @return Boolean
+     */
+    public function setSeen($seen)
+    {
+        $this->seen = $seen;
+
+        return $this;
+    }
+
+    /**
+     * Get seen
+     *
+     * @return boolean
+     */
+    public function getSeen()
+    {
+        return $this->seen;
     }
 }

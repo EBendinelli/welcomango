@@ -71,7 +71,7 @@ class NotificationDisplayExtension extends \Twig_Extension
                 }
                 break;
             case 'sent':
-                $sentRequest = $this->entityManager->getRepository('Welcomango\Model\Booking')->findBy(array('user' => $user,  'status' => array('Accepted')));
+                $sentRequest = $this->entityManager->getRepository('Welcomango\Model\Booking')->findBy(array('user' => $user,  'seen' => false));
                 if (count($sentRequest)) {
                     $icon = '<div class="notification-icon">'.count($sentRequest).'</div>';
                 }

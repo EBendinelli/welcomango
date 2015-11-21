@@ -1,6 +1,6 @@
 <?php
 
-namespace Welcomango\Bundle\Admin\ExperienceBundle\DataFixtures\ORM;
+namespace Welcomango\Bundle\CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;

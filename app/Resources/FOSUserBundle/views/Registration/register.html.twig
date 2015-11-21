@@ -91,7 +91,7 @@
                     if (query.length > 3) {
                         timeout = setTimeout(function () {
                             $('#spinner').css('display', 'inline');
-                            $.post("{{ path('usr_registration_check_ajax') }}", {'query': query, 'field': field}, function (response) {
+                            $.post("{{ path('user_registration_check_ajax') }}", {'query': query, 'field': field}, function (response) {
                                 var parsedResponse = $.parseJSON(response);
                                 $('#spinner').css('display', 'none');
                                 $('#'+elementId+'_message').html(parsedResponse['message']);

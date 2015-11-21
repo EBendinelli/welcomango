@@ -1,0 +1,28 @@
+{# Complete with correct informations #}
+<tr>
+    <td>
+{#        {% include "YproxAdminCrmBundle:User:_userLink.html.twig" %}#}
+        {{ tag.getId }}
+    </td>
+    <td>
+        {{ tag.getName }}
+    </td>
+    <td>
+        {{ tag.getName|replace({' ':''})|lower }}.png
+    </td>
+    <td>
+        {{ tag.getCreatedAt|date('Y-m-d')  }}
+    </td>
+    <td>
+        {{ tag.getUpdatedAt|date('Y-m-d')   }}
+    </td>
+    <td>
+        {% spaceless %}
+            <div class="btn-toolbar">
+                {{ button.edit(path('admin_tag_edit', {'tag_id': tag.id}), false, "btn-xs") }}
+                {{ button.delete(path('admin_tag_delete', {'tag_id': tag.id}), null, "btn-xs") }}
+            </div>
+        {% endspaceless %}
+    </td>
+</tr>
+

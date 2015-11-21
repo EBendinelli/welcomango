@@ -1,6 +1,6 @@
 <?php
 
-namespace Welcomango\Bundle\ExperienceBundle\DataFixtures\ORM;
+namespace Welcomango\Bundle\CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
@@ -20,6 +20,9 @@ class LoadExperienceData extends AbstractFixture implements FixtureInterface, Or
 
         $userRepo = $manager->getRepository('Welcomango\Model\User');
         $users = $userRepo->findAll();
+
+        $tagRepo = $manager->getRepository('Welcomango\Model\Tag');
+        $tags = $tagRepo->findAll();
 
         $experiences = array(
             array('title' => 'A journey in Lyon', 'description' => 'Wandering around the city to taste beers and listen to good music', 'city' => $cityRepo->findOneBy(array('name' => 'Lyon'))),
@@ -63,8 +66,14 @@ class LoadExperienceData extends AbstractFixture implements FixtureInterface, Or
             $entry->setPricePerHour(rand(5,50));
             $entry->setMaximumParticipants(rand(1,10));
 
-            //MUST BE REMOVED WHEN THE METHOD TO CALCULATE AVERAGE NOTE IS SET
-            $entry->setAverageNote(rand(1,5));
+            $randTags = array();
+            for($i=0;$i<4;$i++){
+                $randTag = rand(0,15);
+                if(!isset($randTags[$randTag])){
+                    $randTags[$randTag] = $tags[$randTag];
+                    $entry->addTag($randTags[$randTag]);
+                }
+            }
 
             $manager->persist($entry);
         }
@@ -78,6 +87,6 @@ class LoadExperienceData extends AbstractFixture implements FixtureInterface, Or
     public function getOrder()
     {
         //Define the order in which the fixtures are executed
-        return 6;
+        return 7;
     }
 }

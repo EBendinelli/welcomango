@@ -34,10 +34,10 @@
                     <tbody>
                     {% for booking in bookings %}
                         {% set extraClass = '' %}
-                        {% if booking.status == 'Accepted' %}
+                        {% if not booking.seen %}
                             {% set extraClass = 'participation-row-bold success' %}
                         {% endif %}
-                        <tr class="participation-row clickable table-details hover-bg-master-lightest hover-pointer {{ extraClass|default('') }}" onClick="rowToggle(this, {{ booking.id }}, event)">
+                        <tr id="booking-row-{{ booking.id }}" class="participation-row clickable table-details hover-bg-master-lightest hover-pointer {{ extraClass|default('') }}" onClick="rowToggle(this, {{ booking.id }}, event)">
                             <td class="col-md-3">
                                 <div class="row" style="display:inline-block">
                                     <div class="col-md-3">
@@ -162,6 +162,16 @@
                 $('#profile-request-happened').toggle();
             }
         }
+
+        $(document).ready(function () {
+            $('.participation-row-bold').hover(function (event) {
+                var bookingId = $(this).attr('id');
+                var id = bookingId.replace('booking-row-', '');
+                $.post("{{ path('booking_mark_as_seen_ajax') }}", {'id': id}, function (response) {
+                    $('#'+bookingId).removeClass('participation-row-bold success');
+                }, 'html');
+            })
+        });
 
     </script>
 {% endblock %}

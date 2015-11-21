@@ -35,8 +35,9 @@
                             <th class="col-md-3" >{{ 'booking.user'|trans }}</th>
                             {% if activeTab == 'received' %}
                                 <th class="col-md-2">{{ 'booking.requestedTime'|trans  }}</th>
+                            {% else %}
+                                <th class="col-md-2">{{ 'booking.date'|trans }}</th>
                             {% endif %}
-                            <th class="col-md-2">{{ 'booking.date'|trans }}</th>
                             <th class="col-md-2">{{ 'booking.status'|trans }}</th>
                             <th class="col-md-2">{{ 'booking.controls'|trans }}</th>
                         </tr>
@@ -66,8 +67,9 @@
                                 </td>
                                 {% if booking.status != 'Happened' %}
                                     <td class="col-md-2">{{ booking.createdAt|time_diff  }}</td>
+                                {% else %}
+                                    <td class="col-md-2">{{ booking.startDatetime|date('d-m-Y')  }}</td>
                                 {% endif %}
-                                <td class="col-md-2">{{ booking.startDatetime|date('d-m-Y')  }}</td>
                                 <td class="col-md-2">{{ booking.status }}</td>
                                 <td class="col-md-2">
                                     {{ request_action(booking, user) }}
@@ -77,13 +79,13 @@
                                 </td>
                             </tr>
                             <tr class="participation_details_{{ booking.id }} {{ extraClassDetails|default('') }}" style="display: none">
-                                <td colspan="5">
+                                <td colspan="4">
                                     <div class="row">
                                         <div class="col-md-12 semi-bold text-center">
                                             {{ 'booking.requestFrom'|trans }}
                                             <a href="{{ asset(path('front_user_view', {'user_id': booking.user.id})) }}" class="text-primary semi-bold">
                                                 {{ booking.user.firstname }} {{ booking.user.lastname }}
-                                            </a>
+                                            </a> for <span class="text-primary">{{ booking.startDatetime|date('d-m-Y')  }}</span>
                                             <div class="m-b-20">
                                                 {{ 'participation.requestDetails'|trans }}
                                             </div>
