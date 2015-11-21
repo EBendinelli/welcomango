@@ -4,12 +4,22 @@ namespace Welcomango\Bundle\ExperienceBundle\Form\Flow;
 
 use Craue\FormFlowBundle\Form\FormFlow;
 use Craue\FormFlowBundle\Form\FormFlowInterface;
+use Symfony\Component\Form\FormTypeInterface;
 
 use Welcomango\Bundle\ExperienceBundle\Form\Type\ExperienceStep1Type;
 use Welcomango\Bundle\ExperienceBundle\Form\Type\ExperienceStep2Type;
 use Welcomango\Bundle\ExperienceBundle\Form\Type\ExperienceStep3Type;
 
 class ExperienceFlow extends FormFlow {
+
+    /**
+     * @var FormTypeInterface
+     */
+    protected $formType;
+
+    public function setFormType(FormTypeInterface $formType) {
+        $this->formType = $formType;
+    }
 
     public function getName() {
         return 'front_experience_flow';
@@ -19,15 +29,16 @@ class ExperienceFlow extends FormFlow {
         return array(
             array(
                 'label' => 'The Experience',
-                'form_type' => new ExperienceStep1Type(),
+                'form_type' => $this->formType,
             ),
             array(
                 'label' => 'The Travelers',
-                'form_type' => new ExperienceStep2Type(),
+                'form_type' => $this->formType,
             ),
             array(
                 'label' => 'Your availabilities',
-                'form_type' => new ExperienceStep3Type(),
+                'form_type' => $this->formType,
+
             ),
         );
     }

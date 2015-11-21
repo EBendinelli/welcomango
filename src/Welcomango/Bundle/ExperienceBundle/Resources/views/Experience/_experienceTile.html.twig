@@ -1,5 +1,5 @@
 {# Complete with correct informations #}
- <div class="{% if column == 4 %}col-sm-3{% elseif column == 3  %}col-sm-4{% endif %} m-t-20">
+ <div class="col-sm-{{ 12/column }} m-t-20">
      {#<div class="card-city-picto" style="background-image:url({{ asset('img/welcomango-picto.png') }}">
          &#123;&#35; TODO see if we add the note in this mango. If so, add white BG to the picture &#35;&#125;
          <div class="card-picto-note">

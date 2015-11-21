@@ -1,6 +1,6 @@
 <?php
 
-namespace Welcomango\Bundle\ExperienceBundle\DataFixtures\ORM;
+namespace Welcomango\Bundle\CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
@@ -129,6 +129,6 @@ class LoadAvailabilityData extends AbstractFixture implements FixtureInterface, 
     public function getOrder()
     {
         //Define the order in which the fixtures are executed
-        return 7;
+        return 8;
     }
 }

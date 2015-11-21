@@ -638,7 +638,7 @@ class Experience
         $this->medias->removeElement($medias);
     }
 
-    public function isAvailableForDate($startTime)
+    public function isAvailableForDate($bookingRequest)
     {
         // TODO: FUCKING CRITERIA NOT WORKING. NO QUERY EXECUTED, FIND WHY. Should replace the foreach
         /*$criteria = Criteria::create()
@@ -646,8 +646,13 @@ class Experience
             ->andWhere(Criteria::expr()->eq("isParticipant", 1))
             ->andWhere(Criteria::expr()->eq("status", 'Booked'));*/
 
-        foreach($this->$bookings as $booking){
-            if($booking->getStartTime() == $startTime && $booking->getIsParticipant() == 1 && $booking->getStatus() == 'Booked'){
+        foreach($this->availabilities as $availability){
+            if($bookingRequest->getStartDatetime()->format('YY-mm-dd') > $availability->getStartDate()
+                && $bookingRequest->getEndDatetime()->format('YY-mm-dd') < $availability->getEndDate()
+                && $bookingRequest->getExperience() ==  $availability->getExperience()
+                && (strrpos(','.$bookingRequest->getStartDatetime()->format('w').',', $availability->getDay()) || $availability->getDay() == "*")
+                && (strrpos(','.$bookingRequest->getStartDatetime()->format('G').',', $availability->getHour()) || $availability->getHour() == "*")
+            ){
                 return false;
             }
         }
@@ -657,7 +662,7 @@ class Experience
         return ($result->isEmpty()) ? true : false;*/
     }
 
-    public function isAlreadyBookedByUser($booking)
+    public function isAlreadyRequestedByUser($booking)
     {
         // TODO: FUCKING CRITERIA NOT WORKING. NO QUERY EXECUTED, FIND WHY. Should replace the foreach
         /*$criteria = Criteria::create()
@@ -665,8 +670,11 @@ class Experience
             ->andWhere(Criteria::expr()->eq("isParticipant", 1))
             ->andWhere(Criteria::expr()->eq("user", $participation->getUser()));*/
 
-        foreach($this->$bookings as $existingBooking){
-            if($existingBooking->getStartTime() == $booking->getStartTime() && $existingBooking->getIsParticipant() == 1 && $existingBooking->getUser() == $booking->getUser()){
+        foreach($this->bookings as $existingBooking){
+            if($existingBooking->getStartDatetime() == $booking->getStartDatetime()
+                && $existingBooking->getEndDatetime() == $booking->getEndDatetime()
+                && $existingBooking->getUser() == $booking->getUser()
+            ){
                 return true;
             }
         }
@@ -674,6 +682,28 @@ class Experience
 
         /*$result = $this->participations->matching($criteria);
         return ($result->isEmpty()) ? true : false;*/
+    }
+
+    public function getNumberOfTimeAttended(){
+        $count = 0;
+        foreach($this->bookings as $booking){
+            if($booking->getStatus() == 'Happened'){
+                $count++;
+            }
+        }
+
+        return $count;
+    }
+
+    public function getPendingRequest(){
+        $count = 0;
+        foreach($this->bookings as $booking){
+            if($booking->getStatus() == 'Requested'){
+                $count++;
+            }
+        }
+
+        return $count;
     }
 
 }

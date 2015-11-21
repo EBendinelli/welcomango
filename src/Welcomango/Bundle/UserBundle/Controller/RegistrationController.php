@@ -74,7 +74,7 @@ class RegistrationController extends BaseProfileController
      *
      * @param Request $request
      *
-     * @Route("/json/registration/form/list.json", name="usr_registration_check_ajax", defaults={"_format"="json"})
+     * @Route("/json/registration/form/list.json", name="user_registration_check_ajax", defaults={"_format"="json"})
      *
      * @return String
      */

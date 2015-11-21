@@ -1,0 +1,8 @@
+{% extends "FOSUserBundle:Profile:show.html.twig" %}
+
+{% block profile_content %}
+    {% for experience in experiences %}
+        {% include "WelcomangoExperienceBundle:Experience:_profileExperienceTile.html.twig" with { 'experience' : experience, 'column': 2 } %}
+    {% endfor %}
+
+{% endblock profile_content %}

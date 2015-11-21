@@ -22,10 +22,18 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
+        <service id="welcomango.form.experience.edit" class="Welcomango\Bundle\ExperienceBundle\Form\Type\ExperienceEditType">
+            <argument type="service" id="security.context" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
         <service id="welcomango.form.flow.experience"
              class="Welcomango\Bundle\ExperienceBundle\Form\Flow\ExperienceFlow"
              parent="craue.form.flow"
              scope="request">
+            <call method="setFormType">
+                <argument type="service" id="welcomango.form.experience.create" />
+            </call>
         </service>
     </services>
 </container>

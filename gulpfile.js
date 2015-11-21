@@ -244,6 +244,8 @@ gulp.task('assets-css', function() {
         'components/pages-assets/pages-front/plugins/text-rotate/simpletextrotator.css',
         'components/pages-assets/pages-front/plugins/bootstrap-select2/select2.css',
         'components/pages-assets/pages-front/plugins/bootstrap-select2/select2-bootstrap.css',
+        'components/pages-assets/pages-front/plugins/bootstrap-datepicker/css/datepicker.css',
+        'components/pages-assets/pages-front/plugins/bootstrap-datepicker/css/datepicker3.css',
         'components/pages-assets/pages-front/plugins/jquery-datatable/media/css/*'
     ])
         .pipe(minifyCSS())
