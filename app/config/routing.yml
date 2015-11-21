@@ -43,3 +43,7 @@ genemu_image:
 
 fos_message:
     resource: "@FOSMessageBundle/Resources/config/routing.xml"
+
+oneup_uploader:
+    resource: .
+    type: uploader

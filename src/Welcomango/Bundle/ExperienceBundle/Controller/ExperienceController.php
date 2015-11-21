@@ -16,6 +16,7 @@ use FOS\UserBundle\Model\UserInterface;
 use Welcomango\Bundle\CoreBundle\Controller\Controller as BaseController;
 use Welcomango\Model\Experience;
 use Welcomango\Model\Booking;
+use Welcomango\Model\Media;
 
 /**
  * Class ExperienceController
@@ -73,18 +74,30 @@ class ExperienceController extends BaseController
 
         $flow = $this->get('welcomango.form.flow.experience'); // must match the flow's service id
         $flow->bind($experience);
-
+        $em = $this->getDoctrine()->getManager();
         // form of the current step
         $form = $flow->createForm();
         if ($flow->isValid($form)) {
-            $flow->saveCurrentStepData($form);
 
+            if(isset($form['medias_id'])) {
+                $medias = explode(',', $form['medias_id']->getData());
+                foreach ($medias as $mediaId) {
+                    $media = $this->getRepository('Welcomango\Model\Media')->findOneById($mediaId);
+                    $experience->addMedia($media);
+                }
+            }
+
+            $flow->saveCurrentStepData($form);
             if ($flow->nextStep()) {
                 // form for the next step
+
+
+
                 $form = $flow->createForm();
             } else {
+
                 // flow finished
-                $em = $this->getDoctrine()->getManager();
+
                 $em->persist($experience);
                 $em->flush();
 
@@ -104,7 +117,6 @@ class ExperienceController extends BaseController
             'flow' => $flow,
         ));
     }
-
 
     /**
      * @param Request    $request
@@ -150,6 +162,7 @@ class ExperienceController extends BaseController
      */
     public function viewAction(Request $request, Experience $experience)
     {
+        ldd(count($experience->getMedias()));
         //TODO: We might be able to do better...
         if($experience->isDeleted()) {
             return $this->render('WelcomangoCoreBundle:CRUD:notAllowed.html.twig', array(

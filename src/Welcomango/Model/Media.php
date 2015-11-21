@@ -16,6 +16,45 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Media
 {
+    const KB = 1024;
+    const MB = 1048576;
+
+    const GIF  = "gif";
+    const PNG  = "png";
+    const JPG  = "jpf";
+    const JPEG = "jpeg";
+
+    const MIME_PNG = 'image/png';
+    const MIME_JPG = 'image/jpeg';
+    const MIME_GIF = 'image/gif';
+
+    public static function availableImageType() {
+        return array(
+            self::GIF  => self::GIF,
+            self::PNG  => self::PNG,
+            self::JPG  => self::JPG,
+            self::JPEG => self::JPEG,
+        );
+    }
+
+    public static function availableMimeType() {
+        return array(
+            self::MIME_PNG  => self::MIME_PNG,
+            self::MIME_JPG  => self::MIME_JPG,
+            self::MIME_GIF  => self::MIME_GIF,
+        );
+    }
+
+    public static function getTmpDir()
+    {
+        return '/upload/medias/tmp';
+    }
+
+    public function getUploadTmpRootDir()
+    {
+        return __DIR__.'/../../../web/upload/medias/tmp';
+    }
+
     /**
      * @var integer
      *
@@ -74,6 +113,11 @@ class Media
      * @ORM\ManyToMany(targetEntity="Experience", mappedBy="medias")
      **/
     protected $experiences;
+
+    /**
+     * @ORM\Column(name="temp", type="boolean")
+     */
+    protected $temp;
 
     /**
      * The constructor
@@ -302,5 +346,21 @@ class Media
     public function getExperiences()
     {
         return $this->experiences;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isTemp()
+    {
+        return $this->temp;
+    }
+
+    /**
+     * @param boolean $temp
+     */
+    public function setTemp($temp)
+    {
+        $this->temp = $temp;
     }
 }

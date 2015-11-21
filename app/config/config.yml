@@ -161,6 +161,11 @@ fos_message:
     composer: welcomango.message.composer
     sender: welcomango.message.sender
 
+oneup_uploader:
+    mappings:
+        gallery:
+            frontend: blueimp
+
 welcomango_booking:
     available_status:
         - Available

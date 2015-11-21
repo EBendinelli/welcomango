@@ -2,6 +2,7 @@
 
 namespace Welcomango\Bundle\ExperienceBundle\Form\Type;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -14,8 +15,8 @@ use Welcomango\Model\City;
  */
 class ExperienceStep1Type extends AbstractType {
 
-    public function buildForm(FormBuilderInterface $builder, array $options) {
-
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder->add('title', 'text', ['label' => 'form.experience.title']);
         $builder->add('description', 'textarea', [
             'label' => 'form.experience.description'
@@ -25,6 +26,16 @@ class ExperienceStep1Type extends AbstractType {
             'class' => 'Model:City',
             'property' => 'name',
         ));
+
+        $builder->add('medias', 'file', array(
+            'multiple' => true,
+            'required' => false,
+            'mapped' => false,
+        ));
+
+        $builder->add('medias_id', 'hidden', [
+            'mapped' => false
+        ]);
     }
 
 
