@@ -101,25 +101,22 @@ class ExperienceController extends BaseController
         // form of the current step
         $form = $flow->createForm();
         if ($flow->isValid($form)) {
+            $session = $this->get('session');
+            $flow->saveCurrentStepData($form);
 
-            if(isset($form['medias_id'])) {
-                $medias = explode(',', $form['medias_id']->getData());
+            if (isset($form['medias_id']) && !$session->has('medias_id') && $session->get('medias_id') !=  $form['medias_id']->getData()) {
+                $this->get('session')->set('medias_id', $form['medias_id']->getData());
+            }
+
+            if ($flow->nextStep()) {
+                $form = $flow->createForm();
+            } else {
+                // flow finished
+                $medias = explode(',', $session->get('medias_id'));
                 foreach ($medias as $mediaId) {
                     $media = $this->getRepository('Welcomango\Model\Media')->findOneById($mediaId);
                     $experience->addMedia($media);
                 }
-            }
-
-            $flow->saveCurrentStepData($form);
-            if ($flow->nextStep()) {
-                // form for the next step
-
-
-
-                $form = $flow->createForm();
-            } else {
-
-                // flow finished
 
                 $em->persist($experience);
                 $em->flush();
@@ -185,10 +182,9 @@ class ExperienceController extends BaseController
      */
     public function viewAction(Request $request, Experience $experience)
     {
-        ldd(count($experience->getMedias()));
         //TODO: We might be able to do better...
         // Check that the experience is still available and not deleted
-        if($experience->isDeleted()) {
+        if ($experience->isDeleted()) {
             return $this->render('WelcomangoCoreBundle:CRUD:notAllowed.html.twig', array(
                 'title' => 'This experience is not available anymore',
                 'message' => 'Well, maybe it never existed...',
@@ -207,7 +203,7 @@ class ExperienceController extends BaseController
         //Create an array with the forbidden dates
         $forbiddenDates = array();
         $availabilities = $experience->getAvailabilities();
-        foreach($availabilities as $availability){
+        foreach ($availabilities as $availability) {
 
         }
 
@@ -290,7 +286,8 @@ class ExperienceController extends BaseController
 
         $experience->setDeleted(true);
         $availabilities = $experience->getAvailabilities();
-        foreach($availabilities as $availability){
+
+        foreach ($availabilities as $availability) {
             $entityManager->remove($availability);
         }
 

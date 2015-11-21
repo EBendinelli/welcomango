@@ -155,7 +155,7 @@ class AdminMediaController extends BaseController
         $mediaList = array();
 
         if ($request->isXmlHttpRequest()) {
-            if(count($request->files->all()['front_experience_step1']['medias']) > 10) {
+            if (count($request->files->all()['front_experience']['medias']) > 10) {
                 $errors = array(
                     "label"  => $this->get('translator')->trans('too.many.files'),
                     "status" => -1,
@@ -164,7 +164,7 @@ class AdminMediaController extends BaseController
                 return new JsonResponse(json_encode($errors));
             }
 
-            foreach ($request->files->all()['front_experience_step1']['medias'] as $file) {
+            foreach ($request->files->all()['front_experience']['medias'] as $file) {
                 if ($file->getSize() > 5 * Media::MB) {
                     $errors = array(
                         "label"  => $this->get('translator')->trans('incorect.file.size'),
