@@ -19,41 +19,14 @@ class Media
     const KB = 1024;
     const MB = 1048576;
 
-    const GIF  = "gif";
-    const PNG  = "png";
-    const JPG  = "jpf";
+    const GIF = "gif";
+    const PNG = "png";
+    const JPG = "jpf";
     const JPEG = "jpeg";
 
     const MIME_PNG = 'image/png';
     const MIME_JPG = 'image/jpeg';
     const MIME_GIF = 'image/gif';
-
-    public static function availableImageType() {
-        return array(
-            self::GIF  => self::GIF,
-            self::PNG  => self::PNG,
-            self::JPG  => self::JPG,
-            self::JPEG => self::JPEG,
-        );
-    }
-
-    public static function availableMimeType() {
-        return array(
-            self::MIME_PNG  => self::MIME_PNG,
-            self::MIME_JPG  => self::MIME_JPG,
-            self::MIME_GIF  => self::MIME_GIF,
-        );
-    }
-
-    public static function getTmpDir()
-    {
-        return '/upload/medias/tmp';
-    }
-
-    public function getUploadTmpRootDir()
-    {
-        return __DIR__.'/../../../web/upload/medias/tmp';
-    }
 
     /**
      * @var integer
@@ -118,6 +91,35 @@ class Media
      * @ORM\Column(name="temp", type="boolean")
      */
     protected $temp;
+
+    public static function availableImageType()
+    {
+        return array(
+            self::GIF  => self::GIF,
+            self::PNG  => self::PNG,
+            self::JPG  => self::JPG,
+            self::JPEG => self::JPEG,
+        );
+    }
+
+    public static function availableMimeType()
+    {
+        return array(
+            self::MIME_PNG => self::MIME_PNG,
+            self::MIME_JPG => self::MIME_JPG,
+            self::MIME_GIF => self::MIME_GIF,
+        );
+    }
+
+    public static function getTmpDir()
+    {
+        return '/upload/medias/tmp';
+    }
+
+    public static function getUploadTmpRootDir()
+    {
+        return __DIR__.'/../../../web/upload/medias/tmp';
+    }
 
     /**
      * The constructor
@@ -290,6 +292,9 @@ class Media
         $this->path = $path;
     }
 
+    /**
+     * @return null|string
+     */
     public function getAbsolutePath()
     {
         return null === $this->path
@@ -297,6 +302,9 @@ class Media
             : $this->getUploadRootDir().'/'.$this->path;
     }
 
+    /**
+     * @return null|string
+     */
     public function getWebPath()
     {
         return null === $this->path
@@ -304,14 +312,30 @@ class Media
             : $this->getUploadDir().'/'.$this->path;
     }
 
+    /**
+     * @return string
+     */
     public function getUploadRootDir()
     {
         return __DIR__.'/../../../web/'.$this->getUploadDir();
     }
 
+    /**
+     * @return string
+     */
     public function getUploadDir()
     {
         return 'upload/medias';
+    }
+
+    /**
+     * @param $experienceId
+     *
+     * @return string
+     */
+    public function getExperienceRootDir($experienceId)
+    {
+        return __DIR__.'/../../../web/'.$this->getUploadDir().'/experience/'.$experienceId;
     }
 
     /**

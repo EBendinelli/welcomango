@@ -104,7 +104,7 @@ class ExperienceController extends BaseController
             $session = $this->get('session');
             $flow->saveCurrentStepData($form);
 
-            if (isset($form['medias_id']) && !$session->has('medias_id') && $session->get('medias_id') !=  $form['medias_id']->getData()) {
+            if (isset($form['medias_id']) && null !== $form['medias_id']->getData()) {
                 $this->get('session')->set('medias_id', $form['medias_id']->getData());
             }
 
@@ -112,14 +112,9 @@ class ExperienceController extends BaseController
                 $form = $flow->createForm();
             } else {
                 // flow finished
-                $medias = explode(',', $session->get('medias_id'));
-                foreach ($medias as $mediaId) {
-                    $media = $this->getRepository('Welcomango\Model\Media')->findOneById($mediaId);
-                    $experience->addMedia($media);
-                }
-
                 $em->persist($experience);
                 $em->flush();
+                $this->get('welcomango.front.experience.manager')->processUploadMedias($experience, $session->get('medias_id'));
 
                 $availabilityManager = $this->get('welcomango.front.availability.manager');
                 $availabilityManager->generateAvailabilityForExperience($experience, $form);
