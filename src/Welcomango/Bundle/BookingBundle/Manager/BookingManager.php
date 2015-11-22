@@ -22,7 +22,7 @@ class BookingManager
         $date = $form->get('desired_date')->getData();
 
         $this->setBookingTimeForPeriod($booking, $date, $form->get('desired_time')->getData());
-        if(!$booking->getExperience()->isAvailableForDate($booking)){
+        if(!$booking->getExperience()->isAvailableForBooking($booking)){
             return false;
         }
         if($booking->getExperience()->isAlreadyRequestedByUser($booking)){

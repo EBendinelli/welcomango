@@ -74,7 +74,6 @@ class BookingType extends AbstractType
 
         $builder->add('desired_date', 'date', [
             'label'    => 'form.booking.desiredDate',
-            'data'     => new \DateTime(),
             'required' => false,
             'mapped'   => false,
             'years'    => range(date('Y'), date('Y') + 1),
