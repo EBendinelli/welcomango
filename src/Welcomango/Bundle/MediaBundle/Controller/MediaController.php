@@ -33,8 +33,12 @@ class MediaController extends BaseController
         $errors    = array();
         $mediaList = array();
 
+        $formName       = $request->request->get('formName');
+        $inputName      = $request->request->get('inputName');
+        $templateReturn = $request->request->get('templateReturn');
+
         if ($request->isXmlHttpRequest()) {
-            if (count($request->files->all()['front_experience']['medias']) > 10) {
+            if (count($request->files->all()[$formName][$inputName]) > 10) {
                 $errors = array(
                     "label"  => $this->get('translator')->trans('too.many.files'),
                     "status" => -1,
@@ -43,7 +47,17 @@ class MediaController extends BaseController
                 return new JsonResponse(json_encode($errors));
             }
 
-            foreach ($request->files->all()['front_experience']['medias'] as $file) {
+            if (count($request->files->all()[$formName][$inputName]) == 1) {
+                if (is_array($request->files->all()[$formName][$inputName])) {
+                    $process = $request->files->all()[$formName][$inputName];
+                } else {
+                    $process[] = $request->files->all()[$formName][$inputName];
+                }
+            } else {
+                $process = $request->files->all()[$formName][$inputName];
+            }
+
+            foreach ($process as $file) {
                 if ($file->getSize() > 5 * Media::MB) {
                     $errors = array(
                         "label"  => $this->get('translator')->trans('incorect.file.size'),
@@ -79,7 +93,7 @@ class MediaController extends BaseController
             if (empty($errors)) {
                 $this->getDoctrine()->getManager()->flush();
 
-                return $this->render('WelcomangoExperienceBundle:Experience:_renderImages.html.twig', array(
+                return $this->render($templateReturn, array(
                     'images' => $mediaList,
                 ));
             }

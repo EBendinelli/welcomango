@@ -9,7 +9,7 @@
     <div class="col-md-12">
         <div class="panel panel-default portlet">
             <div class="panel-body">
-                {{ form_start(form, {'action': path('admin_media_create'), 'attr': {'novalidate': 'novalidate' }}) }}
+                {{ form_start(form, {'action': path('admin_media_create'), 'attr': {'novalidate': 'novalidate', 'id': 'mediaForm'}}) }}
                 {% include "WelcomangoMediaBundle:AdminMedia:form.html.twig" with { 'form': form } %}
                 {% include "WelcomangoCoreBundle:Form:formFooter.html.twig" with {'listing' : listing, 'update': form.vars.id } only %}
                 {{ form_end(form) }}
@@ -25,5 +25,13 @@
 
 {% block javascripts %}
     {{ parent() }}
+    {{ include('@WelcomangoMedia/AdminMedia/_baseJs.html.twig', {
+        'templateReturn' : 'WelcomangoMediaBundle:AdminMedia:_renderImages.html.twig',
+        'idSearch'       : 'admin_language_file',
+        'formName'       : 'admin_language',
+        'idForm'         : 'mediaForm',
+        'multiple'       : 'false',
+        'inputName'      : 'file',
+    }) }}
     {{ form_javascript(form) }}
 {% endblock %}
