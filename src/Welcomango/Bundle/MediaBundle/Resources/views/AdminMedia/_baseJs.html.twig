@@ -23,12 +23,9 @@
             },
             success: function (data) {
                 {%  if multiple == 'false' %}
-
-                console.log('FALLLSEE');
-                $("#medias").html();
+                $("#medias").html("");
                 {% endif %}
                 $("#medias").append(data);
-                $(function(){ $('#image').Jcrop(); });
                 updateMediaListField();
             },
             // Form data
