@@ -17,6 +17,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
 use Welcomango\Bundle\CoreBundle\Controller\Controller as BaseController;
 use Welcomango\Model\Experience;
 use Welcomango\Model\Booking;
+use Welcomango\Model\Media;
 
 /**
  * Class ExperienceController
@@ -97,20 +98,24 @@ class ExperienceController extends BaseController
 
         $flow = $this->get('welcomango.form.flow.experience'); // must match the flow's service id
         $flow->bind($experience);
-
+        $em = $this->getDoctrine()->getManager();
         // form of the current step
         $form = $flow->createForm();
         if ($flow->isValid($form)) {
+            $session = $this->get('session');
             $flow->saveCurrentStepData($form);
 
+            if (isset($form['medias_id']) && null !== $form['medias_id']->getData()) {
+                $this->get('session')->set('medias_id', $form['medias_id']->getData());
+            }
+
             if ($flow->nextStep()) {
-                // form for the next step
                 $form = $flow->createForm();
             } else {
                 // flow finished
-                $em = $this->getDoctrine()->getManager();
                 $em->persist($experience);
                 $em->flush();
+                $this->get('welcomango.front.experience.manager')->processUploadMedias($experience, $session->get('medias_id'));
 
                 $availabilityManager = $this->get('welcomango.front.availability.manager');
                 $availabilityManager->generateAvailabilityForExperience($experience, $form);
@@ -128,7 +133,6 @@ class ExperienceController extends BaseController
             'flow' => $flow,
         ));
     }
-
 
     /**
      * @param Request    $request
@@ -176,7 +180,7 @@ class ExperienceController extends BaseController
     {
         //TODO: We might be able to do better...
         // Check that the experience is still available and not deleted
-        if($experience->isDeleted()) {
+        if ($experience->isDeleted()) {
             return $this->render('WelcomangoCoreBundle:CRUD:notAllowed.html.twig', array(
                 'title' => 'This experience is not available anymore',
                 'message' => 'Well, maybe it never existed...',
@@ -194,6 +198,7 @@ class ExperienceController extends BaseController
 
         //Get forbidden dates for datepicker
         $forbiddenDates = $this->get('welcomango.front.experience.manager')->getAvailableDatesForDatePicker($experience);
+
 
         // Prepare the booking form
         $booking = new Booking();
@@ -275,7 +280,8 @@ class ExperienceController extends BaseController
 
         $experience->setDeleted(true);
         $availabilities = $experience->getAvailabilities();
-        foreach($availabilities as $availability){
+
+        foreach ($availabilities as $availability) {
             $entityManager->remove($availability);
         }
 

@@ -9,12 +9,16 @@
         Steps:
         {% include 'CraueFormFlowBundle:FormFlow:stepList.html.twig' %}
     </div>
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr': {'id': 'experienceForm'}}) }}
     {{ form_errors(form) }}
 
     {% if flow.getCurrentStepNumber() == 1 %}
         <div>
             {{ form_row(form.title) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.medias) }}
+            {{ form_row(form.medias_id) }}
+            <div id="medias"></div>
         </div>
     {% elseif flow.getCurrentStepNumber() == 2 %}
 
@@ -54,6 +58,57 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
+
+        var mediasIds = [];
+
+        $('#front_experience_medias').change(function() {
+            var formData = new FormData($('#experienceForm')[0]);
+            $.ajax({
+                url: '{{ path('experience_media_upload') }}',  //Server script to process data
+                type: 'POST',
+                xhr: function() {  // Custom XMLHttpRequest
+                    var myXhr = $.ajaxSettings.xhr();
+                    if(myXhr.upload){ // Check if upload property exists
+
+                    }
+                    return myXhr;
+                },
+                //Ajax events
+                error: function (request) {
+                    console.log(request);
+                },
+                success: function (data) {
+                    $( "#medias" ).append(data);
+                    updateMediaListField();
+                },
+                // Form data
+                data: formData,
+                //Options to tell jQuery not to process data or worry about content-type.
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
+
+        $(".delete_media").bind( "click", function() {
+            console.log("DELETE" + this.id);
+        });
+
+        function deleteMedia(mediaId) {
+            var data = {request : mediaId};
+            $.post("{{ path('experience_media_delete') }}", {'mediaId': mediaId}, function (response) {
+                $("#media_"+mediaId).remove();
+            }, 'html');
+        }
+
+        function updateMediaListField() {
+            $("#medias").children('div').each(function() {
+                var res = this.id.replace("media_", "");
+                mediasIds.push(res);
+            });
+            $('#front_experience_medias_id').val(mediasIds.join());
+        }
+
         $('#front_experience_step3_availability input[type=radio]').change(function(){
             console.log(this.value);
         });

@@ -1,0 +1,6 @@
+{% for image in images %}
+    <div class="media_container" id="media_{{ image.id }}">
+        <img id="img_{{ image.id }}" data-value="{{ image.id }}" src="{{ image(image.getUploadTmpRootDir() ~ '/' ~ image.originalFilename).resize(200,175).jpeg() }}"/>
+        <div class="delete_media" onclick="deleteMedia({{ image.id }})" id="{{ image.id }}">Delete</div>
+    </div>
+{% endfor %}
