@@ -359,17 +359,23 @@
         // This set the maximum date to one year from now
         endDate.setDate(endDate.getDate()+365);
 
+        //forbiddenDates calculated earlier
         var forbidden = {{ forbiddenDates|json_encode|raw }};
 
         $('#front_booking_desired_date').datepicker({
             startDate: startDate,
             endDate: endDate,
-            beforeShowDay:function(Date){
-                var curr_date = Date.toJSON().substring(0,10);
+            weekStart: 1,
+            beforeShowDay:function(date){
+                var curr_date = ("0" + date.getDate()).slice(-2);
+                var curr_month = ("0" + (date.getMonth() + 1)).slice(-2);
+                var curr_year = date.getFullYear();
+                var curr_date = curr_year + "-" + curr_month + "-" + curr_date ;
 
                 if (forbidden.indexOf(curr_date)>-1) return false;
             }
         });
+
     </script>
 
 {% endblock %}

@@ -638,6 +638,59 @@ class Experience
         $this->medias->removeElement($medias);
     }
 
+    public function isAvailableForDate(){
+
+    }
+
+    public function getAvailableDays(){
+        $interval = \DateInterval::createFromDateString('1 day');
+        $availableDates = array();
+
+        foreach ($this->availabilities as $availability) {
+            //First we get the available days according to the period defined and the days selected
+            $endDate = $availability->getEndDate();
+            // The interval doesn't include the last day if we don't do this
+            $endDate->modify('+1 day');;
+            $period = new \DatePeriod($availability->getStartDate(), $interval, $endDate);
+            foreach ($period as $day) {
+                if (strrpos($availability->getDay(), ',' . $day->format('w') . ',') > -1 || $availability->getDay() == "*") {
+                    $availableDates[$day->format('Y-m-d')] = $day->format('Y-m-d');
+                }
+            }
+
+
+            //Then we remove the days which are FULLY booked
+            //So we look for accepted booking happening on the available days
+            //This variable is used to store available hours for specific days
+            $availableHours = array();
+            foreach($this->bookings as $booking){
+                if(isset($availableDates[$booking->getStartDatetime()->format('Y-m-d')]) && $booking->getStatus() == 'Accepted'){
+                    //Store booking information in variables for clarity
+                    $bookingStartTime = $booking->getStartDatetime()->format('G');
+                    $bookingEndTime = $booking->getEndDatetime()->format('G');
+                    $bookingDay = $booking->getStartDatetime()->format('Y-m-d');
+
+                    //We get a string with the available hours for this day
+                    //This string will be used as a basis
+                    $availableHours[$bookingDay] = $availability->getHour();
+
+                    $bookedHours = ',';
+                    for($i = $bookingStartTime; $i<= $bookingEndTime; $i++){
+                        $bookedHours .= $i.',';
+                    }
+                    //Now we removed this booked hours from the available hours
+                    $availableHours[$bookingDay] = str_replace($bookedHours, '', $availableHours[$bookingDay]);
+                    //Eventually, if their is no available hours remaining, we remove this day from the available ones
+                    if(empty($availableHours[$bookingDay])){
+                        unset($availableDates[$bookingDay]);
+                    }
+                }
+            }
+        }
+
+        return $availableDates;
+    }
+
     public function isAvailableForBooking($bookingRequest)
     {
         foreach($this->availabilities as $availability){

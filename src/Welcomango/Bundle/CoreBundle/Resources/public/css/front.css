@@ -558,6 +558,12 @@ a h4:hover{
     background-color:#e6e6e6;
 }
 
+.experience-map-user-picture{
+    width: 65px;
+    border-radius: 50%;
+    float:left;
+}
+
 
 /* //////////////////////////////////////////////////////// */
 /* ////////////////////   USER VIEW  ////////////////////// */
@@ -988,4 +994,21 @@ a .front-menu-user-picture{
 
 .shown{
     background-color: #f6f6f6;
+}
+
+/* /////// BOOTSTRAP DATEPICKER HACKS ////////// */
+.datepicker table tr td.day{
+    font-weight: bold;
+}
+
+.datepicker table tr td.disabled{
+    font-weight: 400;
+}
+
+.datepicker table tr td.new{
+    font-weight: 400;
+}
+
+.datepicker table tr td.old{
+    font-weight: 400;
 }
