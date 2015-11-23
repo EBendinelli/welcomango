@@ -1,0 +1,59 @@
+<script type="text/javascript">
+
+    var mediasIds = [];
+
+    $('#{{ idSearch }}').change(function () {
+        var formData = new FormData($('#{{ idForm }}')[0]);
+        formData.append("formName", "{{ formName }}");
+        formData.append("inputName", "{{ inputName }}");
+        formData.append("templateReturn", "{{ templateReturn }}");
+        $.ajax({
+            url: '{{ path('experience_media_upload') }}',  //Server script to process data
+            type: 'POST',
+            xhr: function () {  // Custom XMLHttpRequest
+                var myXhr = $.ajaxSettings.xhr();
+                if (myXhr.upload) { // Check if upload property exists
+
+                }
+                return myXhr;
+            },
+            //Ajax events
+            error: function (request) {
+                console.log(request);
+            },
+            success: function (data) {
+                {%  if multiple == 'false' %}
+                $("#medias").html("");
+                {% endif %}
+                $("#medias").append(data);
+                updateMediaListField();
+            },
+            // Form data
+            data: formData,
+            //Options to tell jQuery not to process data or worry about content-type.
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    });
+
+    function deleteMedia(mediaId) {
+        var data = {request: mediaId};
+        $.post("{{ path('experience_media_delete') }}", {'mediaId': mediaId}, function (response) {
+            $("#media_" + mediaId).remove();
+        }, 'html');
+    }
+
+    function updateMediaListField() {
+        $("#medias").children('div').each(function () {
+            var res = this.id.replace("media_", "");
+            mediasIds.push(res);
+        });
+        // Used only for experiences Because of the flow form (severals steps form)
+        $('#front_experience_medias_id').val(mediasIds.join());
+    }
+
+    $('#front_experience_step3_availability input[type=radio]').change(function () {
+        console.log(this.value);
+    });
+</script>

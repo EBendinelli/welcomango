@@ -1,0 +1,13 @@
+{% for image in images %}
+    <div class="media_container" id="media_{{ image.id }}">
+        <img id="image" class="croper" data-value="{{ image.id }}" src="{{ asset('/upload/medias/tmp/' ~ image.originalFilename) }}"/>
+        <div class="delete_media" onclick="deleteMedia({{ image.id }})" id="{{ image.id }}">Delete</div>
+    </div>
+    <script type="text/javascript">
+        $('#image').Jcrop({
+            bgOpacity:   .4,
+            setSelect:   [ 100, 100, 50, 50 ],
+            aspectRatio: 1
+        });
+    </script>
+{% endfor %}
