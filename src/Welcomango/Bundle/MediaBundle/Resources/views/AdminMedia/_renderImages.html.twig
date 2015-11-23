@@ -2,12 +2,67 @@
     <div class="media_container" id="media_{{ image.id }}">
         <img id="image" class="croper" data-value="{{ image.id }}" src="{{ asset('/upload/medias/tmp/' ~ image.originalFilename) }}"/>
         <div class="delete_media" onclick="deleteMedia({{ image.id }})" id="{{ image.id }}">Delete</div>
+        <label>X1</label><input type="text" size="4" id="x1" name="x1" />
+        <label>Y1</label><input type="text" size="4" id="y1" name="y1" />
+        <label>X2</label><input type="text" size="4" id="x2" name="x2" />
+        <label>Y2</label><input type="text" size="4" id="y2" name="y2" />
+        <label>W</label><input type="text" size="4" id="w" name="w" />
+        <label>H</label><input type="text" size="4" id="h" name="h" />
     </div>
+        <div id="crop-image" class="btn btn-success btn-cons"><i class="fa fa-plus"></i> CROP !</div>
     <script type="text/javascript">
+
+        var formData = new FormData();
+
         $('#image').Jcrop({
             bgOpacity:   .4,
             setSelect:   [ 100, 100, 50, 50 ],
-            aspectRatio: 1
+            aspectRatio: 1,
+            onChange: showCoords
+        });
+
+        function showCoords(c)
+        {
+            $('#x1').val(c.x);
+            $('#y1').val(c.y);
+            $('#x2').val(c.x2);
+            $('#y2').val(c.y2);
+            $('#w').val(c.w);
+            $('#h').val(c.h);
+
+            formData.append("x1", c.x);
+            formData.append("y1", c.y);
+            formData.append("x2", c.x2);
+            formData.append("y2", c.y2);
+            formData.append("w", c.w);
+            formData.append("h", c.h);
+        };
+
+        $('#crop-image').click(function () {
+            $.ajax({
+                url: '{{ path('media_crop') }}',  //Server script to process data
+                type: 'POST',
+                xhr: function () {  // Custom XMLHttpRequest
+                    var myXhr = $.ajaxSettings.xhr();
+                    if (myXhr.upload) { // Check if upload property exists
+
+                    }
+                    return myXhr;
+                },
+                //Ajax events
+                error: function (request) {
+                    console.log(request);
+                },
+                success: function (data) {
+                    $("#medias").append(data);
+                },
+                // Form data
+                data: formData,
+                //Options to tell jQuery not to process data or worry about content-type.
+                cache: false,
+                contentType: false,
+                processData: false
+            });
         });
     </script>
 {% endfor %}

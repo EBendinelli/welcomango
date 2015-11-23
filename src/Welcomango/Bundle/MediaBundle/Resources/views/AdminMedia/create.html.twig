@@ -33,5 +33,28 @@
         'multiple'       : 'false',
         'inputName'      : 'file',
     }) }}
+z
+    <script type="text/javascript">
+        $('#crop-image').click(function () {
+            $.ajax({
+                url: '{{ path('media_crop') }}',  //Server script to process data
+                type: 'POST',
+                //Ajax events
+                error: function (request) {
+                    console.log(request);
+                },
+                success: function (data) {
+                    $("#medias").append(data);
+                },
+                // Form data
+                data: formData,
+                //Options to tell jQuery not to process data or worry about content-type.
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
+    </script>
+
     {{ form_javascript(form) }}
 {% endblock %}

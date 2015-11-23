@@ -124,4 +124,31 @@ class MediaController extends BaseController
 
         return new JsonResponse();
     }
+
+    /**
+     * @param Request $request
+     *
+     * @Route("/experience/media/crop", name="media_crop")
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function mediaCropAction(Request $request)
+    {
+        ldd($request->request->all());
+        $targetWidth = $request->request->get('w');
+        $targetHeight = $request->request->get('h');
+        $jpeg_quality = 90;
+
+        $src = 'demo_files/flowers.jpg';
+        $img_r = imagecreatefromjpeg($src);
+        $dst_r = ImageCreateTrueColor( $targetWidth, $targetHeight );
+
+        imagecopyresampled($dst_r,$img_r,0,0,$_POST['x'],$_POST['y'],
+            $targ_w,$targ_h,$_POST['w'],$_POST['h']);
+
+        header('Content-type: image/jpeg');
+        imagejpeg($dst_r, null, $jpeg_quality);
+
+        return new JsonResponse();
+    }
 }
