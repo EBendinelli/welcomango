@@ -13,6 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Model\UserInterface;
 
+use Symfony\Component\Validator\Constraints\DateTime;
 use Welcomango\Bundle\CoreBundle\Controller\Controller as BaseController;
 use Welcomango\Model\Experience;
 use Welcomango\Model\Booking;
@@ -195,12 +196,9 @@ class ExperienceController extends BaseController
             ->getRepository('Welcomango\Model\Experience')
             ->getFeatured(3);
 
-        //Create an array with the forbidden dates
-        $forbiddenDates = array();
-        $availabilities = $experience->getAvailabilities();
-        foreach ($availabilities as $availability) {
+        //Get forbidden dates for datepicker
+        $forbiddenDates = $this->get('welcomango.front.experience.manager')->getAvailableDatesForDatePicker($experience);
 
-        }
 
         // Prepare the booking form
         $booking = new Booking();
@@ -259,6 +257,7 @@ class ExperienceController extends BaseController
             'relatedExperiences' => $relatedExperiences,
             'formSubmitted'      => $formSubmitted,
             'form'               => $form->createView(),
+            'forbiddenDates'     => $forbiddenDates,
         ));
 
     }

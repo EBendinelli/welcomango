@@ -170,11 +170,6 @@ class ExperienceEditType extends AbstractType
         ]);
     }
 
-    public function finishView(FormView $view, FormInterface $form, array $options)
-    {
-
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -192,9 +187,5 @@ class ExperienceEditType extends AbstractType
     public function getName()
     {
         return 'front_experience_edit';
-    }
-
-    public function getParent(){
-        return new ExperienceType($this->securityContext,$this->entityManager);
     }
 }

@@ -1,6 +1,10 @@
 {% extends "FOSUserBundle:Profile:show.html.twig" %}
 
 {% block profile_content %}
+    <div class="text-center">
+        <a class="m-t-20 m-b-10 btn btn-success fs-16 bold" style="width:100%" href="{{ path('front_experience_create') }}">Create a new Experience!</a>
+    </div>
+
     {% for experience in experiences %}
         {% include "WelcomangoExperienceBundle:Experience:_profileExperienceTile.html.twig" with { 'experience' : experience, 'column': 2 } %}
     {% endfor %}

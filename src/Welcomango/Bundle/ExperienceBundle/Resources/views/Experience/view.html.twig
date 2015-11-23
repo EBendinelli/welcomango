@@ -353,21 +353,29 @@
         }
 
         //Display only certain dates in the datepicker
-        var date = new Date();
-        date.setDate(date.getDate());
-        var forbidden=['12/25/2015','12/24/2015'];
+        var startDate = new Date();
+        var endDate = new Date();
+        startDate.setDate(startDate.getDate());
+        // This set the maximum date to one year from now
+        endDate.setDate(endDate.getDate()+365);
+
+        //forbiddenDates calculated earlier
+        var forbidden = {{ forbiddenDates|json_encode|raw }};
 
         $('#front_booking_desired_date').datepicker({
-            startDate: date,
-            beforeShowDay:function(Date){
-                var curr_date = Date.getDate();
-                var curr_month = Date.getMonth()+1;
-                var curr_year = Date.getFullYear();
-                var curr_date=curr_month+'/'+curr_date+'/'+curr_year;
+            startDate: startDate,
+            endDate: endDate,
+            weekStart: 1,
+            beforeShowDay:function(date){
+                var curr_date = ("0" + date.getDate()).slice(-2);
+                var curr_month = ("0" + (date.getMonth() + 1)).slice(-2);
+                var curr_year = date.getFullYear();
+                var curr_date = curr_year + "-" + curr_month + "-" + curr_date ;
 
                 if (forbidden.indexOf(curr_date)>-1) return false;
             }
         });
+
     </script>
 
 {% endblock %}

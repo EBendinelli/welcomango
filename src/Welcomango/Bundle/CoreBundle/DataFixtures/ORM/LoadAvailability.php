@@ -57,15 +57,15 @@ class LoadAvailabilityData extends AbstractFixture implements FixtureInterface, 
 
                 //The experience is available from monday to friday in the evening and during the weekend in the morning
                 $firstEntry = clone $entry;
-                $firstEntry->setDay(',1,2,3,4,5,');
+                $firstEntry->setDay(',0,1,2,3,4,');
                 $hours = $availabilityManager->generateAvailabilityHours(array('4','5'));
                 $firstEntry->setHour($hours);
                 $firstEntry->setMonth('*');
                 $manager->persist($firstEntry);
 
                 $secondEntry = clone $entry;
-                $secondEntry->setDay(',6,7,');
-                $hours = $availabilityManager->generateAvailabilityHours(array('1','1'));
+                $secondEntry->setDay(',5,6,');
+                $hours = $availabilityManager->generateAvailabilityHours(array('1',''));
                 $secondEntry->setHour($hours);
                 $secondEntry->setMonth('*');
                 $manager->persist($secondEntry);
@@ -79,7 +79,7 @@ class LoadAvailabilityData extends AbstractFixture implements FixtureInterface, 
                 $entry->setStartDate($randStartDate);
 
                 $randEndDate = clone $randStartDate;
-                $randMonthsAvailable = rand(0, 11);
+                $randMonthsAvailable = rand(1, 12);
                 $randEndDate->add(new \DateInterval('P' . $randMonthsAvailable . 'M'));
                 $entry->setEndDate($randEndDate);
 
@@ -99,7 +99,7 @@ class LoadAvailabilityData extends AbstractFixture implements FixtureInterface, 
 
                 $randMonths = array();
                 for ($i = 0; $i < 9; $i++) {
-                    $randMonth = rand(0, 11);
+                    $randMonth = rand(1, 12);
                     if (!isset($randMonths[$randMonth]))
                         $randMonths[$randMonth] = $randMonth;
                 }

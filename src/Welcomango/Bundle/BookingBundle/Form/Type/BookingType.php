@@ -50,8 +50,8 @@ class BookingType extends AbstractType
         $numberOfParticipants = array();
         $desiredTime          = array();
 
-        for ($i = 0; $i < 48; $i++) {
-            $desiredDuration[$i] = $i;
+        for ($i = 1; $i < 8; $i++) {
+            $desiredDuration[$i] = $i.':00';
         }
 
         for ($i = 0; $i < 20; $i++) {
@@ -74,7 +74,6 @@ class BookingType extends AbstractType
 
         $builder->add('desired_date', 'date', [
             'label'    => 'form.booking.desiredDate',
-            'data'     => new \DateTime(),
             'required' => false,
             'mapped'   => false,
             'years'    => range(date('Y'), date('Y') + 1),
