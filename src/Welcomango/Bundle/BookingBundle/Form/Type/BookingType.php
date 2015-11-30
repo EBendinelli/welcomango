@@ -116,7 +116,6 @@ class BookingType extends AbstractType
             'translation_domain' => 'booking',
         ]);
         $resolver->setRequired(array('available_status', 'meeting_times', 'experience'));
-
     }
 
     /**

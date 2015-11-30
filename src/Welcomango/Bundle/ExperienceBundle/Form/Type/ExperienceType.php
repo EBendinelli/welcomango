@@ -51,10 +51,10 @@ class ExperienceType extends AbstractType
         $minimumDurations    = array();
         $maximumDurations    = array();
         $maximumParticipants = array();
-        for ($i = 0; $i < 48; $i++) $estimatedDurations[$i] = $i;
-        for ($i = 0; $i < 48; $i++) $minimumDurations[$i] = $i;
-        for ($i = 0; $i < 48; $i++) $maximumDurations[$i] = $i;
-        for ($i = 0; $i < 10; $i++) $maximumParticipants[$i] = $i;
+        for ($i = 1; $i < 48; $i++) $estimatedDurations[$i] = $i;
+        for ($i = 1; $i < 48; $i++) $minimumDurations[$i] = $i;
+        for ($i = 1; $i < 48; $i++) $maximumDurations[$i] = $i;
+        for ($i = 1; $i < 10; $i++) $maximumParticipants[$i] = $i;
 
         $availabilities = array('form.experience.alwaysAvailable', 'form.experience.specificAvailability');
         $days           = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
@@ -78,6 +78,7 @@ class ExperienceType extends AbstractType
                     ->add('medias', 'file', array(
                         'multiple' => true,
                         'mapped'   => false,
+                        'required' => false,
                     ))
                 ;
 
@@ -96,7 +97,13 @@ class ExperienceType extends AbstractType
                         'choices' => $maximumDurations,
                         'label'   => 'form.experience.maximumDuration',
                     ])
-                    ->add('price_per_hour', 'text', ['label' => 'form.experience.pricePerHour'])
+                    ->add('price_per_hour', 'integer', [
+                        'label' => 'form.experience.pricePerHour',
+                        'attr'    => array(
+                            'min'   => '0',
+                            'max'   => '400',
+                        )
+                    ])
                     ->add('maximum_participants', 'choice', [
                         'choices' => $maximumParticipants,
                         'label'   => 'form.experience.maximumParticipants',
@@ -105,72 +112,13 @@ class ExperienceType extends AbstractType
 
                 break;
             case 3:
-                $builder
-                    ->add('availability', 'choice', [
-                        'choices'  => $availabilities,
-                        'label'    => 'form.experience.availability',
-                        'mapped'   => false,
-                        'expanded' => true,
-                        'multiple' => false,
-                        'label'    => false,
-                        'data'     => 0,
-                    ])
-                    ->add('day', 'choice', [
-                        'choices'  => $days,
-                        'label'    => false,
-                        'mapped'   => false,
-                        'expanded' => true,
-                        'multiple' => true,
-                        'data'     => array("5", "6"),
-                    ])
-                    ->add('hour', 'choice', [
-                        'choices'  => $hours,
-                        'label'    => false,
-                        'mapped'   => false,
-                        'expanded' => true,
-                        'multiple' => true,
-                    ])
-                    /*$builder->add('month', 'choice',[
-                        'choices' => $months,
-                        'label' => false,
-                        'mapped'   => false,
-                        'expanded' => true,
-                        'multiple' => true,
-                    ]);*/
-
-                    ->add('start_date', 'date', [
-                        'label'    => 'form.experience.startDate',
-                        'data'     => new \DateTime(),
-                        'required' => false,
-                        'mapped'   => false,
-                        'years'    => range(date('Y'), date('Y') + 1),
-                        'months'   => range(date('m'), 12),
-                        'days'     => range(date('d'), 31),
-                        'widget'   => 'single_text',
-                        'format'   => 'dd-MM-yyyy',
-                        'attr'     => [
-                            'class'            => 'form-control input-inline datepicker',
-                            'data-provide'     => 'datepicker',
-                            'data-date-format' => 'dd-mm-yyyy',
-                        ],
-                    ])
-                    ->add('end_date', 'date', [
-                        'label'    => 'form.experience.endDate',
-                        'data'     => new \DateTime(),
-                        'required' => false,
-                        'mapped'   => false,
-                        'years'    => range(date('Y'), date('Y') + 1),
-                        'months'   => range(date('m'), 12),
-                        'days'     => range(date('d'), 31),
-                        'widget'   => 'single_text',
-                        'format'   => 'dd-MM-yyyy',
-                        'attr'     => [
-                            'class'            => 'form-control input-inline datepicker',
-                            'data-provide'     => 'datepicker',
-                            'data-date-format' => 'dd-mm-yyyy',
-                        ],
-                    ])
-                ;
+                $builder->add('availabilities', 'collection', [
+                    'type' => new AvailabilityType(),
+                    'allow_add'    => true,
+                    'by_reference' => false,
+                    'allow_delete' => true,
+                    'label'        => false,
+                ]);
                 break;
         }
 

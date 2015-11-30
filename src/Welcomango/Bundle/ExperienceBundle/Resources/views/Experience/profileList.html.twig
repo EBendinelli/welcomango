@@ -9,4 +9,23 @@
         {% include "WelcomangoExperienceBundle:Experience:_profileExperienceTile.html.twig" with { 'experience' : experience, 'column': 2 } %}
     {% endfor %}
 
+    {% if experiences %}
+        {{ include("::_modal.html.twig", {
+            'title': 'Are you sure you want to delete your experience?',
+            'path_valid': '#',
+            'main_text': 'This means that Welcomanger won\'t be able to visit your town in your company anymore.<br/>How sad.',
+            'valid_button_name': 'Delete',
+            'extra_icon': '<i class="fa fa-frown-o fa-4x"></i>'
+        })}}
+    {% endif %}
+
 {% endblock profile_content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        function updateModal(route){
+            $('#modal-delete-button').attr("href", route);
+        }
+    </script>
+{% endblock %}

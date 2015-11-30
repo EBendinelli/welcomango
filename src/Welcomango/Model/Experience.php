@@ -90,6 +90,12 @@ class Experience
      * @var integer
      *
      * @ORM\Column(name="price_per_hour", type="integer")
+     *  @Assert\Range(
+     *      min = 0,
+     *      max = 800,
+     *      minMessage = "Min % is 0",
+     *      maxMessage = "Max % is 100"
+     * )
      */
     private $pricePerHour;
 
@@ -375,7 +381,7 @@ class Experience
      */
     public function removeAvailability(Availability $availability)
     {
-        $this->availability->removeElement($availability);
+        $this->availabilities->removeElement($availability);
     }
 
     /**

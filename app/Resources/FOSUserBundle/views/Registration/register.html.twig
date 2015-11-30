@@ -89,16 +89,14 @@
                     clearTimeout(timeout);
 
                     if (query.length > 3) {
-                        timeout = setTimeout(function () {
-                            $('#spinner').css('display', 'inline');
-                            $.post("{{ path('user_registration_check_ajax') }}", {'query': query, 'field': field}, function (response) {
-                                var parsedResponse = $.parseJSON(response);
-                                $('#spinner').css('display', 'none');
-                                $('#'+elementId+'_message').html(parsedResponse['message']);
-                                $('#'+elementId+'_message').removeAttr('class');
-                                $('#'+elementId+'_message').addClass(parsedResponse['class'])
-                            }, 'html');
-                        }, 500);
+                        /*$('#spinner').css('display', 'inline');*/
+                        $.post("{{ path('user_registration_check_ajax') }}", {'query': query, 'field': field}, function (response) {
+                            var parsedResponse = $.parseJSON(response);
+                            $('#spinner').css('display', 'none');
+                            $('#'+elementId+'_message').html(parsedResponse['message']);
+                            $('#'+elementId+'_message').removeAttr('class');
+                            $('#'+elementId+'_message').addClass(parsedResponse['class'])
+                        }, 'html');
                     }
                 }
             });

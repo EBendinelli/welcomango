@@ -1,5 +1,7 @@
 {% extends "FOSUserBundle:Profile:show.html.twig" %}
 
+{% form_theme form with ["::frontTheme.html.twig"] %}
+
 {#{% form_theme form with ["::frontTheme.html.twig"] %}#}
 
 {% block meta_title %}{{ "profile.editProfile"|trans({}, "interface") }}{% endblock %}

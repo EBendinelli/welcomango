@@ -23,28 +23,19 @@
     {% elseif flow.getCurrentStepNumber() == 2 %}
 
     {% elseif flow.getCurrentStepNumber() == 3 %}
-        <div class="row" id="experience-create-availabilities tex-center">
-            <div class="fs-14 bold text-center">When are you available in your week?</div>
-            <div class="text-center m-t-20">{{ form_row(form.availability) }}</div>
+        <div id="availabilities" class="availabilities"
+             data-prototype="{% filter escape %}{% include 'WelcomangoExperienceBundle:Experience:_availabilities.html.twig' with {'form': form.availabilities.vars.prototype } %}{% endfilter %}">
+            {% for availability in form.availabilities %}
+                {% include 'WelcomangoExperienceBundle:Experience:_availabilities.html.twig' with {'form': availability } %}
+            {% endfor %}
         </div>
-        <div class="row" id="experience-create-available-days">
-            <div class="fs-14 bold text-center m-t-30">Which days are you available?</div>
-            <div class="text-center m-t-20">{{ form_row(form.day) }}</div>
-        </div>
-        <div class="row" id="experience-create-available-times text-center">
-            <div class="fs-14 bold text-center m-t-30">At what time are you able to guide voyagers?</div>
-            <div class="text-center m-t-20">{{ form_row(form.hour) }}</div>
-        </div>
-        {#<div class="row" id="experience-create-available-times text-center">
-            <div class="fs-14 bold text-center m-t-30">Which months?</div>
-            <div class="text-center m-t-20">{{ form_row(form.month) }}</div>
-        </div>#}
 
-        <div class="row">
-            <div class="fs-14 bold text-center m-t-30 m-b-20">For how long can you propose this experience?</div>
-            <div class="col-md-6">{{ form_row(form.start_date) }}</div>
-            <div class="col-md-6">{{ form_row(form.end_date) }}</div>
-        </div>
+        {#Delete confirmation modal#}
+        {% include 'WelcomangoCoreBundle:Core:stickUpModal.html.twig' with {
+        'title': 'Remove availability',
+        'text': 'availability.modal.removeText'|trans ,
+        'confirm' : 'delete'|trans
+        } %}
     {% endif %}
 
     {{ form_rest(form) }}
@@ -57,6 +48,11 @@
 
 {% block javascripts %}
     {{ parent() }}
+
+    {% include 'WelcomangoExperienceBundle:Experience:_availabilityJs.html.twig' with {
+        'datepickerId' : 'front_experience_availabilities_0_start_date',
+    } %}
+
     {{ include('@WelcomangoMedia/AdminMedia/_baseJs.html.twig', {
         'idSearch'       : 'front_experience_medias',
         'idForm'         : 'experienceForm',
@@ -65,4 +61,5 @@
         'multiple'       : 'true',
         'templateReturn' : 'WelcomangoExperienceBundle:Experience:_renderImages.html.twig',
     }) }}
+
 {% endblock %}

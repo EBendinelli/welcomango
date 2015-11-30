@@ -160,7 +160,7 @@ class BookingController extends BaseController
      *
      * @param Request $request
      *
-     * @Route("/json/registration/form/list.json", name="booking_mark_as_seen_ajax", defaults={"_format"="json"})
+     * @Route("/json/booking/form/list.json", name="booking_mark_as_seen_ajax", defaults={"_format"="json"})
      *
      * @return String
      */

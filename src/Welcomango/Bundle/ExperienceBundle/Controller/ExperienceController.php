@@ -12,9 +12,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Model\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 use Symfony\Component\Validator\Constraints\DateTime;
 use Welcomango\Bundle\CoreBundle\Controller\Controller as BaseController;
+use Welcomango\Model\Availability;
 use Welcomango\Model\Experience;
 use Welcomango\Model\Booking;
 use Welcomango\Model\Media;
@@ -96,9 +98,17 @@ class ExperienceController extends BaseController
         $experience = new Experience(); // Your form data class. Has to be an object, won't work properly with an array.
         $experience->setCreator($user);
 
+        //Set availabilities
+        $availabilities = new ArrayCollection();
+        $availability = new Availability();
+        $availability->setDay(array('0','1','3','4'));
+        $availability->setHour(array('1','3'));
+        $availability->setExperience($experience);
+        $availabilities->add($availability);
+        $experience->setAvailabilities($availabilities);
+
         $flow = $this->get('welcomango.form.flow.experience'); // must match the flow's service id
         $flow->bind($experience);
-        $em = $this->getDoctrine()->getManager();
         // form of the current step
         $form = $flow->createForm();
         if ($flow->isValid($form)) {
@@ -112,13 +122,14 @@ class ExperienceController extends BaseController
             if ($flow->nextStep()) {
                 $form = $flow->createForm();
             } else {
-                // flow finished
-                $em->persist($experience);
-                $em->flush();
-                $this->get('welcomango.front.experience.manager')->processUploadMedias($experience, $session->get('medias_id'));
 
                 $availabilityManager = $this->get('welcomango.front.availability.manager');
                 $availabilityManager->generateAvailabilityForExperience($experience, $form);
+                // flow finished
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($experience);
+                $em->flush();
+                $this->get('welcomango.front.experience.manager')->processUploadMedias($experience, $session->get('medias_id'));
 
                 $flow->reset(); // remove step data from the session
 
@@ -146,11 +157,29 @@ class ExperienceController extends BaseController
      */
     public function editAction(Request $request, Experience $experience)
     {
+        //Here we transform the hour and day data to arrays
+        $availabilities = $experience->getAvailabilities();
+        $availabilityManager = $this->get('welcomango.front.availability.manager');
+        $availabilityManager->prepareAvailabilityForForm($availabilities);
+
+        $originalAvailabilities = new ArrayCollection();
+        foreach ($availabilities as $availability) {
+            $originalAvailabilities->add($availability);
+        }
+
         $form = $this->createForm($this->get('welcomango.form.experience.edit'), $experience);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $this->getDoctrine()->getManager()->persist($experience);
+            $availabilityManager->updateAvailabilityForExperience($experience, $form, $originalAvailabilities);
+
+            // This cleanly remove the deleted availabilities
+            foreach ($originalAvailabilities as $originalAvailability) {
+                if (false === $form->getData()->getAvailabilities()->contains($originalAvailability)) {
+                    $this->getDoctrine()->getManager()->remove($originalAvailability);
+                }
+            }
+
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', $this->trans('experience.edit.success', array(), 'crm'));
 

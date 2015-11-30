@@ -8,11 +8,6 @@ welcomango_booking:
     type:     annotation
     prefix:   /
 
-welcomango_availability:
-    resource: "@WelcomangoAvailabilityBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 welcomango_user_bundle:
     resource: "@WelcomangoUserBundle/Controller/"
     type:     annotation
