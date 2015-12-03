@@ -40,13 +40,12 @@ class ExperienceController extends BaseController
     {
         $filters = $this->getFilters(array(), 'experienceSearch');
 
-
         $paginator  = $this->get('knp_paginator');
         $query      = $this->getRepository('Welcomango\Model\Experience')->createPagerQueryBuilder($filters);
         $pagination = $paginator->paginate(
             $query,
             $request->query->get('page', 1),
-            6
+            9
         );
 
         $form = $this->createForm($this->get('welcomango.form.experience.filter'), $filters);
@@ -357,6 +356,7 @@ class ExperienceController extends BaseController
      */
     public function filterFormAction(Request $request)
     {
+
         if ($request->request->has('_reset')) {
             $this->removeFilters('experienceSearch');
 

@@ -20,6 +20,7 @@
         </service>
 
         <service id="welcomango.front.booking.manager" class="Welcomango\Bundle\BookingBundle\Manager\BookingManager">
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
     </services>
 </container>

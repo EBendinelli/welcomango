@@ -7,7 +7,7 @@
 {% block sub_profile_picture %}
     <!-- THIS IS THE MENU PROFILE WHEN THE USER IS LOGGED -->
     <!-- BEGIN PROFILE SIDE MENU-->
-    <div id="profile-menu-left" class="bg-master-lightest m-t-10 p-b-10">
+    <div id="profile-menu-left" class="bg-white m-t-10 p-b-10">
         <div id="profile-menu-title" class="text-center">
             <a href="{{ path('fos_user_profile_show') }}"><h4>{{ 'profile.menu'|trans }}</h4></a>
         </div>
@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    <div id="profile-menu-left" class="bg-master-lightest m-t-15 p-b-10">
+    <div id="profile-menu-left" class="bg-white m-t-15 p-b-10">
         <div id="profile-menu-title" class="text-center link-black">
             <h4>{{ 'user.feedbacks'|trans }}</h4>
         </div>
@@ -84,14 +84,70 @@
     </div>#}
     <!-- END PROFILE TOP MENU-->
 
+    <!-- BEGIN DASHBOARD -->
+        <h3>{{ 'profile.latestUpdate'|trans }}</h3>
+        <div id="dashboard" class="p-l-10 p-r-10 m-t-20">
+            <div class="row no-margin">
+                {% if nextTrip %}
+                <div class="col-md-4 ">
+                    <div class="p-l-20 p-r-20 p-b-20 b-a b-thick b-warning bg-white">
+                        <h4 class="text-center">Your next trip</h4>
+                        <div class="text-center"><i class="fa fa-plane fa-3x"></i></div>
+                        <div class="m-t-20">
+                            Is <span class="text-primary">{{ nextTrip.experience.title }}</span>
+                            happening in <span class="text-primary">{{ nextTrip.experience.city.name }}</span>
+                            with <span class="text-primary">{{ nextTrip.experience.getCreator.firstname }}</span>
+                            in <span class="bold">{{ nextTrip.startDatetime|time_diff }}</span>
+                        </div>
+                        <div class="m-t-20 text-center">
+                            <a href="{{ path('message_request', {'booking_id': nextTrip.id, 'user_id' : user.id }) }}" class="btn btn-complete">Contact</a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if nextVisitGiven %}
+                <div class="col-md-4 ">
+                    <div class="p-l-20 p-r-20  p-b-20 b-a b-thick b-warning bg-white">
+                        <h4 class="text-center">Your next meeting</h4>
+                        <div class="text-center"><i class="fa fa-bullhorn fa-3x"></i></div>
+                        <div class="m-t-20">
+                            Is a flavor of <span class="text-primary">{{ nextVisitGiven.experience.title }}</span>
+                            in which you will bring <span class="text-primary">{{ nextVisitGiven.user.firstname }}</span>
+                            in <span class="bold">{{ nextVisitGiven.startDatetime|time_diff }}</span>
+                        </div>
+                        <div class="m-t-20 text-center">
+                            <a href="{{ path('message_request', {'booking_id': nextVisitGiven.id, 'user_id' : user.id }) }}" class="btn btn-complete">Contact</a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if nextVisitGiven %}
+                    <div class="col-md-4 ">
+                        <div class="p-l-20 p-r-20  p-b-20 b-a b-thick b-warning bg-white">
+                            <h4 class="text-center">Rate your past experiences</h4>
+                            <div class="text-center"><i class="fa fa-star fa-3x"></i></div>
+                            <div class="m-t-20">
+                                Rate the last experiences you attended and give a feedback to the author
+                            </div>
+                            <div class="m-t-20 text-center">
+                                <a href="{{ path('message_request', {'booking_id': nextVisitGiven.id, 'user_id' : user.id }) }}" class="btn btn-complete">Rate</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    <!-- END DASHBOARD-->
+
+    {{ parent() }}
+
     <!-- BEGIN PROFILE CONTENT-->
-        {{ parent() }}
         <div id="user-proposed-experience" class="m-b-20">
             {% if userExperiences.isEmpty %}
                 <a href="{{ path('front_experience_create') }}" class="btn btn-primary btn-cons" ><i class="fa fa-plus-circle "></i> {{ 'profile.createExperience'|trans }}</a>
             {% else %}
-                <h2 class="m-b-30">{{ 'profile.yourExperience'|trans }}</h2>
-                {{ include("WelcomangoExperienceBundle:Experience:_featuredExperience.html.twig", { 'experience': userExperiences|first, 'darkBg': true, 'profile': true}) }}
+                <h3 class="m-b-30">{{ 'profile.yourExperience'|trans }}</h3>
+                {{ include("WelcomangoExperienceBundle:Experience:_featuredExperience.html.twig", { 'experience': userExperiences|first,  'profile': true}) }}
                 <div id="profile-experience-action" class="text-right">
                     <a href="{{ path('front_experience_edit', {'experience_id': userExperiences|first.id}) }}" class="btn btn-bordered btn-black btn-cons"><i class="fa fa-pencil"></i> {{ 'profile.editExperience'|trans }}</a>
                     <button class="btn btn-danger btn-cons" data-toggle="modal" data-target=".modal-action"><i class="fa fa-trash "></i> {{ 'profile.deleteExperience'|trans }}</button>
@@ -100,7 +156,7 @@
             {% endif %}
         </div>
         <div id="user-description">
-            <h2>{{ 'profile.aboutYou'|trans }}</h2>
+            <h3>{{ 'profile.aboutYou'|trans }}</h3>
             <hr style="margin-top:25px"/>
             <p>{{ app.user.description|nl2br|raw }}</p>
         </div>

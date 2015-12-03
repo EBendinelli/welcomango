@@ -44,5 +44,4 @@ class BookingRepository extends EntityRepository
             ->getSingleResult()
             ;
     }
-
 }

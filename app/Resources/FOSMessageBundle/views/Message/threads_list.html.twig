@@ -1,6 +1,6 @@
 <div class="row message-list">
     {% if threads %}
-        <ul>
+        <ul class="bg-white">
         {% for thread in threads %}
             <li class="item p-t-15 p-b-15 {% if not fos_message_is_read(thread) %}message-unread{% endif %}" onclick="location.href='{{ url('fos_message_thread_view', {'threadId': thread.id}) }}'">
                 <div class="row">

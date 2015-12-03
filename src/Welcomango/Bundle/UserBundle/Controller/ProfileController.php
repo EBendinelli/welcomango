@@ -31,8 +31,45 @@ class ProfileController extends BaseProfileController
         $entityManager = $this->getDoctrine()->getManager();
         $userExperiences = $user->getExperiences();
 
+        $bookings = array();
+        foreach($userExperiences as $experience){
+            $expBookings = $experience->getBookings();
+            $bookings = array_merge($bookings, $expBookings->toArray());
+        }
+
+        //This get the next visit given by the user. It's basically the accepted booking with the date the closest to today
+        $nextVisitGiven = false;
+        $nextVisitGivenTime = new \DateTime();
+        $nextVisitGivenTime->add(new \DateInterval('P1Y'));
+        foreach($bookings as $booking){
+            if($booking->getStatus() == 'Accepted'){
+                if($booking->getStartDatetime() < $nextVisitGivenTime){
+                    $nextVisitGivenTime = $booking->getStartDatetime();
+                    $nextVisitGiven = $booking;
+                    dump($booking);
+                }
+            }
+        }
+
+        //This get the next visit planned by the user as a voyager.
+        $nextTrip = false;
+        $nextTripTime = new \DateTime();
+        $nextTripTime->add(new \DateInterval('P1Y'));
+        $plannedBookings = $user->getBookings();
+        foreach($plannedBookings as $booking){
+            if($booking->getStatus() == 'Accepted'){
+                if($booking->getStartDatetime() < $nextTripTime){
+                    $nextTripTime = $booking->getStartDatetime();
+                    $nextTrip = $booking;
+                    dump($booking);
+                }
+            }
+        }
+
         return $this->render('FOSUserBundle:Profile:show.html.twig', array(
             'userExperiences' => $userExperiences,
+            'nextVisitGiven' => $nextVisitGiven,
+            'nextTrip'  => $nextTrip,
         ));
     }
 

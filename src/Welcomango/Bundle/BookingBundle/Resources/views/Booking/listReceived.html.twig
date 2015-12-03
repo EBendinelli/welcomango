@@ -8,7 +8,7 @@
                 <h2 >Oops</h2>
                 <i class="fa fa-meh-o fa-5x m-b-20"></i>
                 <p>{{ 'booking.noExperienceCreated' }}</p>
-                <a class="m-t-20 btn btn-primary"><i class="fa fa-plus fa-lg m-r-5"></i>{{ 'booking.createExperience' }}</a>
+                <a href={{ path('front_experience_create') }} class="m-t-20 btn btn-primary"><i class="fa fa-plus fa-lg m-r-5"></i>{{ 'booking.createExperience' }}</a>
             </div>
         </div>
     {% else %}

@@ -27,10 +27,10 @@
         </div>
     </section>
 
-    <section class="container-fluid container-fixed-lg p-b-50  bg-white">
+    <section class="container-fluid container-fixed-lg p-b-50  bg-master-lightest">
         <div class="container">
             <!-- START USER CARD -->
-            <div class="panel col-md-3">
+            <div class="panel col-md-3 bg-master-lightest">
                 <div id="user-picture-container">
                     <a href="{{ path('fos_user_profile_show') }}">
                         {% if user.getMedias.first %}
@@ -56,7 +56,7 @@
                         <div id="user-situation" >
                             <h2 class="m-b-30">{{ 'profile.mainInfo'|trans }}</h2>
                             <div class="col-md-12 panel panel-default">
-                                <div id="user-info-details" class="row {% block main_info_class 'bg-master-lightest' %} p-t-20">
+                                <div id="user-info-details" class="row {% block main_info_class 'bg-white' %} p-t-20">
                                     <div class="m-b-10 col-md-6">
                                         <div class="user-info-items">
                                             <i class="fa fa-briefcase fa-lg"></i>

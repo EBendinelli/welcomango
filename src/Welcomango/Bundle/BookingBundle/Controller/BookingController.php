@@ -46,11 +46,17 @@ class BookingController extends BaseController
         if($activeTab == 'received'){ $statusFilter = array('Requested', 'Accepted', 'Refused'); }
         else{ $statusFilter = array('Happened'); }
 
-
+        //Get User experiences Ids
         $experienceIds = array();
+        $bookings = array();
         foreach($experiences as $experience){
             $experienceIds[] = $experience->getId();
+
+            //Update booking status before display (if something happened)
+            // This might not be useful once we have a cron
+            $this->get('welcomango.front.booking.manager')->updateBookingStatus($experience);
         }
+
         $paginator = $this->get('knp_paginator');
         $query     = $this->getRepository('Welcomango\Model\Booking')->findBy(array('experience' => $experienceIds , 'status' => $statusFilter), array('createdAt' => 'DESC'));
         $pagination = $paginator->paginate(
@@ -58,6 +64,7 @@ class BookingController extends BaseController
             $request->query->get('page', 1),
             20
         );
+
 
         return array(
             'bookings' => $pagination,

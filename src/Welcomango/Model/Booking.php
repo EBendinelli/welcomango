@@ -99,6 +99,11 @@ class Booking
     private $seen = true;
 
     /**
+     * @ORM\Column(name="action_required", type="boolean")
+     */
+    private $actionRequired = true;
+
+    /**
      * Get id
      *
      * @return integer
@@ -318,5 +323,29 @@ class Booking
     public function getSeen()
     {
         return $this->seen;
+    }
+
+    /**
+     * Set actionRequired
+     *
+     * @param boolean $actionRequired
+     *
+     * @return Boolean
+     */
+    public function setActionRequired($actionRequired)
+    {
+        $this->actionRequired = $actionRequired;
+
+        return $this;
+    }
+
+    /**
+     * Get actionRequired
+     *
+     * @return boolean
+     */
+    public function getActionRequired()
+    {
+        return $this->actionRequired;
     }
 }

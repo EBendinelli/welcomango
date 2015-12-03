@@ -11,7 +11,7 @@
         {% endif %}
     {% endfor %}
 
-    <div class="row bg-master-lightest panel panel-default p-l-20 p-t-20 p-b-20">
+    <div class="row bg-white panel panel-default p-l-20 p-t-20 p-b-20">
         <div class="col-md-6">
             <div>
                 <i class="fa fa-user p-b-10"></i>
@@ -54,7 +54,7 @@
                 <div class="col-md-11 p-l-30">
                     <div class="name bold">{{ message.sender.fullname }}</div>
                     <span class="hint-text small">{{ message.createdAt|time_diff }}</span>
-                    <p class="message-content m-r-30 bg-master-lighter">{{ message.body|nl2br|raw }}</p>
+                    <p class="message-content m-r-30 bg-master-light ">{{ message.body|nl2br|raw }}</p>
                 </div>
             </div>
         {% else %}

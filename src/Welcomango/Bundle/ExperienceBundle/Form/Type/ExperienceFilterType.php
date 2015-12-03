@@ -75,6 +75,12 @@ class ExperienceFilterType extends AbstractType
             'choices' => $numberOfParticipants,
             'label'   => 'form.experience.minParticipantsAccepted',
         ]);
+
+        $builder->add('tags', 'entity', array(
+            'class'    => 'Model:Tag',
+            'property' => 'name',
+            'multiple' => true,
+        ));
     }
 
     /**
