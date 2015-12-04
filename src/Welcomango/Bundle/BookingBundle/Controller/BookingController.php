@@ -65,11 +65,14 @@ class BookingController extends BaseController
             20
         );
 
+        //Prepare rating and comment form
+        $ratingForm = $this->createForm($this->get('welcomango.form.rating.type'));
 
         return array(
-            'bookings' => $pagination,
-            'activeTab' => $activeTab,
-            'user' => $user
+            'bookings'   => $pagination,
+            'activeTab'  => $activeTab,
+            'user'       => $user,
+            'ratingForm' => $ratingForm->createView(),
         );
     }
 
@@ -160,6 +163,21 @@ class BookingController extends BaseController
         $this->addFlash('success', $this->trans('booking.edit.success', array(), 'crm'));
 
         return $this->redirect($this->generateUrl('booking_received_list'));
+    }
+
+    /**
+     * @param Request    $request
+     * @param Booking $booking
+     *
+     * @Route("/request/update/{booking_id}/rate", name="booking_rate")
+     * @Template()
+     *
+     * @return array
+     */
+    public function rateAction(Request $request, Booking $booking, User $user)
+    {
+        die();
+                return $this->redirect($this->generateUrl('booking_received_list'));
     }
 
     /**

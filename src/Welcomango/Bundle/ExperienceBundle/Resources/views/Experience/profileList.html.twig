@@ -10,7 +10,7 @@
     {% endfor %}
 
     {% if experiences %}
-        {{ include("::_modal.html.twig", {
+        {{ include("WelcomangoCoreBundle:Core:modal.html.twig", {
             'title': 'Are you sure you want to delete your experience?',
             'path_valid': '#',
             'main_text': 'This means that Welcomanger won\'t be able to visit your town in your company anymore.<br/>How sad.',

@@ -59,12 +59,16 @@ class LoadBookingData extends AbstractFixture implements FixtureInterface, Order
                 $bookingManager->setBookingTimeForPeriod($entry, $randDate, $requestTime);
 
                 /*if($randExperience->isAvailableForBooking($entry->getStartTime())){*/
+                $entry->setNumberOfParticipants(rand(1,10));
+                $randStatus = $status[rand(0,2)];
+                $entry->setStatus($randStatus);
+                if($randStatus == 'Happened'){
+                    $entry->setActionRequired(true);
                     $entry->setLocalNote(rand(1,5));
                     $entry->setTravelerNote(rand(1,5));
-                    $entry->setNumberOfParticipants(rand(1,10));
-                    $entry->setStatus($status[rand(0,2)]);
+                }
 
-                    $manager->persist($entry);
+                $manager->persist($entry);
                 /*}*/
             }
         }

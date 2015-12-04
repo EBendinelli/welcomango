@@ -1,10 +1,12 @@
 {% extends "FOSUserBundle:Profile:show.html.twig" %}
 
+{% form_theme ratingForm with ["::frontTheme.html.twig"] %}
+
 {% block profile_content %}
 
     {% if user.getExperiences.isEmpty %}
         <div class="row" >
-            <div class="col-md-12 text-center m-t-20 p-b-30 bg-master-lightest ">
+            <div class="col-md-12 text-center m-t-20 p-b-30 bg-white b-a b-grey">
                 <h2 >Oops</h2>
                 <i class="fa fa-meh-o fa-5x m-b-20"></i>
                 <p>{{ 'booking.noExperienceCreated' }}</p>
@@ -67,8 +69,10 @@
                                 <td class="col-md-2">{{ booking.status }}</td>
                                 <td class="col-md-2">
                                     {{ request_action(booking, user) }}
-                                    {% if booking.status == 'Happened' %}
+                                    {% if booking.status == 'Happened' and booking.travelerNote %}
                                         {{ include("WelcomangoCoreBundle:Core:note.html.twig", { 'note': booking.experience.getAverageNote, 'size': 'small'}) }}
+                                    {% elseif booking.status == 'Happened' %}
+                                        <a class="btn btn-sm btn-complete" data-toggle="modal" data-target=".modal-rating" onClick="updateRatingModal('{{ path('booking_rate', {'booking_id' : booking.id}) }}')">Rate</a>
                                     {% endif %}
                                 </td>
                             </tr>
@@ -179,13 +183,19 @@
         </div>#}
 
         <!-- BEGIN DELETE CONFIRMATION MODAL -->
-        {{ include("::_modal.html.twig", {
+        {{ include("WelcomangoCoreBundle:Core:modal.html.twig", {
             'title': 'Are you sure you want to refuse this request?',
             'main_text': 'If you have not yet exchanged with this person, please send him a little message.',
             'valid_button_name': 'Decline',
             'icon': 'fa-times-circle '
         })}}
         <!-- END DELETE CONFIRMATION MODAL -->
+
+        <!-- BEGIN RATING MODAL -->
+        {{ include("WelcomangoBookingBundle:Booking:_ratingModal.html.twig", {
+            'form' : ratingForm,
+        })}}
+        <!-- END RATING MODAL -->
 
     {% endif %}
 
@@ -199,8 +209,12 @@
             $('#modal-delete-button').attr("href", route);
         }
 
+        function updateRatingModal(route){
+            $('#modal-rating-button').attr("href", route);
+        }
+
         function rowToggle(element, id, event){
-            if(event.target.nodeName.toLowerCase() == "i") return;
+            if(event.target.nodeName.toLowerCase() == "i" || event.target.nodeName.toLowerCase() == "a") return;
             $(element).toggleClass('shown');
             $('.participation_details_'+id).toggle();
         }

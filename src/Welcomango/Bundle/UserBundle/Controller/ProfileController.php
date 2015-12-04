@@ -66,10 +66,14 @@ class ProfileController extends BaseProfileController
             }
         }
 
+        //Get Comments
+        $comments = $user->getReceivedComments();
+
         return $this->render('FOSUserBundle:Profile:show.html.twig', array(
-            'userExperiences' => $userExperiences,
-            'nextVisitGiven' => $nextVisitGiven,
-            'nextTrip'  => $nextTrip,
+            'userExperiences'   => $userExperiences,
+            'nextVisitGiven'    => $nextVisitGiven,
+            'nextTrip'          => $nextTrip,
+            'comments'          => $comments,
         ));
     }
 

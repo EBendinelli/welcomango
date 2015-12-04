@@ -10,6 +10,9 @@
             <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
 
+        <service id="welcomango.form.rating.type" class="Welcomango\Bundle\BookingBundle\Form\Type\RatingCommentType">
+        </service>
+
         <service id="booking.date_difference" class="Welcomango\Bundle\BookingBundle\Twig\DateDifferenceExtension">
             <tag name="twig.extension"/>
         </service>

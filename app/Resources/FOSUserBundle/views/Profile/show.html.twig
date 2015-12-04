@@ -165,7 +165,7 @@
 
     <!-- BEGIN DELETE CONFIRMATION MODAL -->
     {% if userExperiences|first %}
-        {{ include("::_modal.html.twig", {
+        {{ include("WelcomangoCoreBundle:Core:modal.html.twig", {
             'title': 'Are you sure you want to delete your experience?',
             'path_valid': path('front_experience_delete', {'experience_id': userExperiences|first.id}),
             'main_text': 'This means that Welcomanger won\'t be able to visit your town in your company anymore.<br/>How sad.',
@@ -175,3 +175,4 @@
     {% endif %}
     <!-- END DELETE CONFIRMATION MODAL -->
 {% endblock profile_content %}
+

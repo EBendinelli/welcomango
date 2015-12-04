@@ -40,10 +40,14 @@ class UserController extends BaseController
                 ->getRepository('Welcomango\Model\Experience')
                 ->findAllExperiencesAttendedByUser($user);
 
+            //Get comment
+            $comments = $user->getReceivedComments();
+
             return $this->render('WelcomangoUserBundle:User:view.html.twig', array(
                 'user' => $user,
                 'proposedExperiences' => $proposedExperiences,
-                'attendedExperiences' => $attendedExperiences
+                'attendedExperiences' => $attendedExperiences,
+                'comments'            => $comments,
             ));
 
         }
