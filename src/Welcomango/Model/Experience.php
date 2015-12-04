@@ -389,7 +389,7 @@ class Experience
      */
     public function addAvailability(Availability $availability)
     {
-        $this->availability[] = $availability;
+        $this->availabilities[] = $availability;
     }
 
     /**
@@ -469,7 +469,7 @@ class Experience
      *
      * @param boolean $featured
      *
-     * @return Experience
+     * @return boolean
      */
     public function setFeatured($featured)
     {
@@ -493,7 +493,7 @@ class Experience
      *
      * @param boolean $deleted
      *
-     * @return Experience
+     * @return boolean
      */
     public function setDeleted($deleted)
     {
@@ -505,7 +505,7 @@ class Experience
     /**
      * Get deleted
      *
-     * @return Experience
+     * @return boolean
      */
     public function isDeleted()
     {
@@ -513,7 +513,7 @@ class Experience
     }
 
     /**
-     * Get deleted
+     * Get Featured
      *
      * @return boolean
      */

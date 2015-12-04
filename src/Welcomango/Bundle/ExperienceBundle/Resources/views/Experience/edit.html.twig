@@ -48,9 +48,9 @@
             <div class="tab-pane slide" id="tab3">
 
                 <div id="availabilities" class="availabilities"
-                    data-prototype="{% filter escape %}{% include 'WelcomangoExperienceBundle:Experience:_availabilities.html.twig' with {'form': form.availabilities.vars.prototype } %}{% endfilter %}">
+                    data-prototype="{% filter escape %}{% include 'WelcomangoExperienceBundle:Availability:_availabilities.html.twig' with {'form': form.availabilities.vars.prototype } %}{% endfilter %}">
                     {% for availability in form.availabilities %}
-                        {% include 'WelcomangoExperienceBundle:Experience:_availabilities.html.twig' with {'form': availability } %}
+                        {% include 'WelcomangoExperienceBundle:Availability:_availabilities.html.twig' with {'form': availability } %}
                     {% endfor %}
                 </div>
 
@@ -77,7 +77,7 @@
     {{ parent() }}
     {{ form_javascript(form) }}
 
-       {% include 'WelcomangoExperienceBundle:Experience:_availabilityJs.html.twig' %}
+       {% include 'WelcomangoExperienceBundle:Availability:_availabilityJs.html.twig' %}
 
     <script>
         //Stuff for the layout

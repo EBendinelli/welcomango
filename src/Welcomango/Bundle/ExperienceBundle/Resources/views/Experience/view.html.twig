@@ -165,11 +165,7 @@
                             <div class="user-item user-img-1">
                                 <div class="user-info-wrap">
                                     <div class="user-info">
-                                        {% if experience.getCreator.getMedias.first %}
-                                            <div class="user-info-front user-img-1" style="background-image:url({{ asset(experience.getCreator.getMedias.first.getWebPath) }})"></div>
-                                        {% else %}
-                                            <div class="user-info-front user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }})"></div>
-                                        {% endif %}
+                                        {{ display_avatar(experience.getCreator, false, true, 'user-info-front') }}
                                         <div class="user-info-back bg-master-dark">
                                             <div class="m-t-60 text-center">
                                                 <span>View Profile</span>
@@ -189,11 +185,7 @@
                             <div class="col-md-1"></div>
                             <div class="col-md-3">
                                 <a href="{{ path('front_experience_list') }}">
-                                    {% if experience.getCreator.getMedias.first %}
-                                        <div class="user-info-front-small user-img-1" style="background-image:url({{ asset(experience.getCreator.getMedias.first.getWebPath) }})"></div>
-                                    {% else %}
-                                        <div class="user-info-front-small user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }})"></div>
-                                    {% endif %}
+                                    {{ display_avatar(experience.getCreator, false, true, 'user-info-front-small') }}
                                 </a>
                             </div>
                             <div class="col-md-7 text-left">
@@ -240,11 +232,14 @@
     <!-- END EXPERIENCE SECTION -->
 
     <!-- START COMMENT SECTION -->
-    <section class="container-fluid bg-master-light container-fixed-lg p-b-50">
+    <section class="container-fluid bg-master-lighter container-fixed-lg p-b-50">
         <div class="row">
             <div class="container">
-                <div class="text-center m-b-40 m-t-40">
-                    <h2>Comments</h2>
+                <div class="m-b-40 m-t-40">
+                    <h2 class="text-center m-b-40">Comments</h2>
+                    <div id="experience-comments">
+                        {% include("WelcomangoExperienceBundle:Comment:list.html.twig") with { 'comments': comments } %}
+                    </div>
                 </div>
             </div>
         </div>

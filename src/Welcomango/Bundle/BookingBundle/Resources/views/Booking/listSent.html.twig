@@ -41,13 +41,7 @@
                             <td class="col-md-3">
                                 <div class="row" style="display:inline-block">
                                     <div class="col-md-3">
-                                        <a href="{{ asset(path('front_user_view', {'user_id': booking.experience.getCreator.id})) }}">
-                                            {% if booking.experience.getCreator.getMedias.first %}
-                                                <img src='{{ asset(booking.experience.getCreator.getMedias.first.getWebPath) }}' class='front-menu-user-picture m-r-10' />
-                                            {% else %}
-                                                <img src='{{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }}' class='front-menu-user-picture m-r-10' />
-                                            {% endif %}
-                                        </a>
+                                        {{ display_avatar(booking.experience.getCreator, true, false, 'front-menu-user-picture m-r-10' ) }}
                                     </div>
                                     <div class="col-md-9">
                                         <div class="requested-experience">

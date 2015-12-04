@@ -110,17 +110,10 @@
             });
 
             {% for experience in attendedExperiences  %}
-                {% if experience.getCreator.getMedias.first %}
-                    {%  set userSrc = asset(experience.getCreator.getMedias.first.getWebPath) %}
-                {% else %}
-                    {%  set userSrc = asset("img/front/faces/face" ~ random(8) ~ ".jpg") %}
-                {% endif %}
                 var contentString_{{ experience.id }} = '<div id="content">'+
                         '<div id="siteNotice">'+
                         '</div>'+
-                        '<a href="{{ asset(path("front_user_view", {"user_id": experience.getCreator.id})) }}">'+
-                        '<img src="{{ userSrc }}" class="experience-map-user-picture m-r-10">'+
-                        '</a>'+
+                        '{{ display_avatar(experience.getCreator, true, false, 'float:left; margin-right:10px') }}'+
                         '<h4 id="firstHeading" class="firstHeading p-t-15 p-b-10 ">{{ experience.title }} with <span class="text-primary">{{ experience.getCreator }}</span></h4>'+
                         '<div class="dotted-line"><span></span></div>'+
                         '<div id="bodyContent">'+

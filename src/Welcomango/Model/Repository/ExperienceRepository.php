@@ -51,6 +51,18 @@ class ExperienceRepository extends EntityRepository
             ;
     }
 
+    public function getCommentsForExperience($experience){
+        $comments = array();
+        $bookings = $experience->getBookings();
+        foreach($bookings as $booking){
+            if($booking->getStatus() == 'Happened'){
+                $bookingComments = $booking->getComments();
+                $comments = array_merge($comments, $bookingComments->toArray());
+            }
+        }
+        return $comments;
+    }
+
     /**
      * Create paginated and filtered query builder
      *

@@ -32,13 +32,7 @@
             <!-- START USER CARD -->
             <div class="panel col-md-3 bg-master-lightest">
                 <div id="user-picture-container">
-                    <a href="{{ path('fos_user_profile_show') }}">
-                        {% if user.getMedias.first %}
-                            <div class="user-picture user-img-1" style="background-image:url({{ asset(user.getMedias.first.getWebPath) }})"></div>
-                        {% else %}
-                            <div class="user-picture user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }})"></div>
-                        {% endif %}
-                    </a>
+                    {{ display_avatar(user, true, true, 'user-picture') }}
                 </div>
 
                 {% block sub_profile_picture %}

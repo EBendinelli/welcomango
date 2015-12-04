@@ -74,6 +74,11 @@ class Booking
     private $experience;
 
     /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="booking", cascade={"persist", "remove"})
+     **/
+    private $comments;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="number_of_participants", type="integer", nullable=true)
@@ -243,6 +248,38 @@ class Booking
     public function setExperience($experience)
     {
         $this->experience = $experience;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param ArrayCollection $comments
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
+    }
+
+    /**
+     * @param Comment $comment
+     */
+    public function removeComment(Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * @param Comment $comment
+     */
+    public function addComment(Comment $comment)
+    {
+        $this->comments[] = $comment;
     }
 
     /**

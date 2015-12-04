@@ -206,6 +206,8 @@ class ExperienceController extends BaseController
      */
     public function viewAction(Request $request, Experience $experience)
     {
+        $experienceRepository = $this->getRepository('Welcomango\Model\Experience');
+
         //TODO: We might be able to do better...
         // Check that the experience is still available and not deleted
         if ($experience->isDeleted()) {
@@ -219,10 +221,11 @@ class ExperienceController extends BaseController
 
         $user = $this->getUser();
 
+        //Get Comments
+        $comments = $experienceRepository->getCommentsForExperience($experience);
+
         // TODO: Must create a related experience function
-        $relatedExperiences = $this
-            ->getRepository('Welcomango\Model\Experience')
-            ->getFeatured(3);
+        $relatedExperiences = $experienceRepository->getFeatured(3);
 
         //Get forbidden dates for datepicker
         $forbiddenDates = $this->get('welcomango.front.experience.manager')->getAvailableDatesForDatePicker($experience);
@@ -286,6 +289,7 @@ class ExperienceController extends BaseController
             'formSubmitted'      => $formSubmitted,
             'form'               => $form->createView(),
             'forbiddenDates'     => $forbiddenDates,
+            'comments'           => $comments,
         ));
 
     }

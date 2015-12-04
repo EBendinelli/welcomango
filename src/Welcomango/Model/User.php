@@ -141,6 +141,16 @@ class User extends BaseUser implements ParticipantInterface
     private $medias;
 
     /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="poster", cascade={"persist", "remove"})
+     **/
+    private $postedComments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="receiver", cascade={"persist", "remove"})
+     **/
+    private $receivedComments;
+
+    /**
      * @var float
      *
      * @ORM\Column(name="note_as_local", type="float", nullable=true)
@@ -153,6 +163,11 @@ class User extends BaseUser implements ParticipantInterface
      * @ORM\Column(name="note_as_traveler", type="float", nullable=true)
      */
     private $noteAsTraveler;
+
+    /**
+     * @ORM\Column(name="deleted", type="boolean")
+     */
+    private $deleted = false;
 
     /**
      * @return array
@@ -619,6 +634,94 @@ class User extends BaseUser implements ParticipantInterface
     public function getNoteAsTraveler()
     {
         return $this->noteAsTraveler;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getPostedComments()
+    {
+        return $this->postedComments;
+    }
+
+    /**
+     * @param ArrayCollection $postedComments
+     */
+    public function setPostedComments($postedComments)
+    {
+        $this->postedComments = $postedComments;
+    }
+
+    /**
+     * @param Comment $postedComment
+     */
+    public function removePostedComment(Comment $postedComment)
+    {
+        $this->postedComments->removeElement($postedComment);
+    }
+
+    /**
+     * @param Comment $postedComment
+     */
+    public function addPostedComment(Comment $postedComment)
+    {
+        $this->postedComments[] = $postedComment;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getReceivedComments()
+    {
+        return $this->receivedComments;
+    }
+
+    /**
+     * @param ArrayCollection $receivedComments
+     */
+    public function setReceivedComments($receivedComments)
+    {
+        $this->receivedComments = $receivedComments;
+    }
+
+    /**
+     * @param Comment $receivedComment
+     */
+    public function removeReceivedComment(Comment $receivedComment)
+    {
+        $this->receivedComments->removeElement($receivedComment);
+    }
+
+    /**
+     * @param Comment $receivedComment
+     */
+    public function addReceivedComment(Comment $receivedComment)
+    {
+        $this->receivedComments[] = $receivedComment;
+    }
+
+    /**
+     * Set deleted
+     *
+     * @param boolean $deleted
+     *
+     * @return Experience
+     */
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted
+     *
+     * @return Experience
+     */
+    public function isDeleted()
+    {
+        return $this->deleted;
     }
 
     /**
