@@ -74,6 +74,11 @@ class Booking
     private $experience;
 
     /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="booking", cascade={"persist", "remove"})
+     **/
+    private $comments;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="number_of_participants", type="integer", nullable=true)
@@ -97,6 +102,11 @@ class Booking
      * @ORM\Column(name="seen", type="boolean")
      */
     private $seen = true;
+
+    /**
+     * @ORM\Column(name="action_required", type="boolean")
+     */
+    private $actionRequired = true;
 
     /**
      * Get id
@@ -241,6 +251,38 @@ class Booking
     }
 
     /**
+     * @return ArrayCollection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param ArrayCollection $comments
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
+    }
+
+    /**
+     * @param Comment $comment
+     */
+    public function removeComment(Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * @param Comment $comment
+     */
+    public function addComment(Comment $comment)
+    {
+        $this->comments[] = $comment;
+    }
+
+    /**
      * Set numberOfParticipants
      *
      * @param integer $numberOfParticipants
@@ -318,5 +360,29 @@ class Booking
     public function getSeen()
     {
         return $this->seen;
+    }
+
+    /**
+     * Set actionRequired
+     *
+     * @param boolean $actionRequired
+     *
+     * @return Boolean
+     */
+    public function setActionRequired($actionRequired)
+    {
+        $this->actionRequired = $actionRequired;
+
+        return $this;
+    }
+
+    /**
+     * Get actionRequired
+     *
+     * @return boolean
+     */
+    public function getActionRequired()
+    {
+        return $this->actionRequired;
     }
 }

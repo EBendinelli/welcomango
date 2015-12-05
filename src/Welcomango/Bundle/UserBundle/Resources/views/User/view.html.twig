@@ -9,7 +9,7 @@
 {% block main_info_class 'bg-white' %}
 
 {% block sub_profile_picture %}
-    <div id="profile-menu-left" class="bg-master-lightest m-t-10 p-b-10">
+    <div id="profile-menu-left" class="bg-white m-t-10 p-b-10">
         <div id="profile-menu-title" class="text-center link-black">
             <h4>{{ 'user.feedbacks'|trans }}</h4>
         </div>
@@ -51,22 +51,40 @@
 {% endblock %}
 
 {% block extra_content %}
-    <!-- START PAST EXPERIENCES SECTION -->
+    <!-- START COMMENT SECTION -->
     <section class="container-fluid bg-master-lighter container-fixed-lg p-b-50">
+        <div class="row">
+            <div class="container">
+                <div class="m-b-40 m-t-40">
+                    <h2 class="text-center m-b-40">Comments</h2>
+                    <div id="experience-comments">
+                        {% include("WelcomangoExperienceBundle:Comment:list.html.twig") with { 'comments': comments } %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END COMMENT SECTION -->
+
+    <!-- START PAST EXPERIENCES SECTION -->
+    <section class="container-fluid bg-master-lightest container-fixed-lg p-b-20">
         <div class="row">
             <div class="container">
                 <div class="text-center m-b-40 m-t-40">
                     <h2>Last experiences attented by {{ user.firstname }}</h2>
                 </div>
+            </div>
+        </div>
+    </section>
+    <div id="userMap" style="height:700px; width:100%"></div>
+    <section class="container-fluid bg-master-lightest container-fixed-lg p-b-50 p-t-40">
+        <div class="row">
+            <div class="container">
                 {% for experience in attendedExperiences  %}
                     {{ include("WelcomangoExperienceBundle:Experience:_experienceTile.html.twig", { 'experiences': attendedExperiences, 'column': 3, 'limit': 3}) }}
                 {% endfor %}
             </div>
         </div>
-    </section>
-    <div id="userMap" style="height:700px; width:100%"></div>
-
-    <section class="container-fluid bg-master-lightest container-fixed-lg p-b-50">
     </section>
     <!-- END PAST EXPERIENCES SECTION -->
 {% endblock extra_content %}
@@ -110,17 +128,11 @@
             });
 
             {% for experience in attendedExperiences  %}
-                {% if experience.getCreator.getMedias.first %}
-                    {%  set userSrc = asset(experience.getCreator.getMedias.first.getWebPath) %}
-                {% else %}
-                    {%  set userSrc = asset("img/front/faces/face" ~ random(8) ~ ".jpg") %}
-                {% endif %}
+
                 var contentString_{{ experience.id }} = '<div id="content">'+
                         '<div id="siteNotice">'+
                         '</div>'+
-                        '<a href="{{ asset(path("front_user_view", {"user_id": experience.getCreator.id})) }}">'+
-                        '<img src="{{ userSrc }}" class="experience-map-user-picture m-r-10">'+
-                        '</a>'+
+                        '{{ display_avatar(experience.getCreator, true, false, 'experience-map-user-picture m-r-10') }}'+
                         '<h4 id="firstHeading" class="firstHeading p-t-15 p-b-10 ">{{ experience.title }} with <span class="text-primary">{{ experience.getCreator }}</span></h4>'+
                         '<div class="dotted-line"><span></span></div>'+
                         '<div id="bodyContent">'+
@@ -152,6 +164,7 @@
 
                         marker_{{ experience.id }}.addListener('click', function() {
                             if (infowindow) infowindow.close();
+                            infowindow.setContent(contentString_{{ experience.id }});
                             infowindow.open(map, marker_{{ experience.id }});
                         });
 

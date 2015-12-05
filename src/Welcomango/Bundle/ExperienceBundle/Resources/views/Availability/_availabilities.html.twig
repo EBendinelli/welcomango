@@ -1,0 +1,36 @@
+<div class="availability panel panel-default p-l-20 p-r-20 p-b-20" data-pages="portlet" >
+    <div class="panel-heading"><div class="panel-controls"></div></div>
+    <div class="row p-b-10">
+        <div class="row" id="experience-create-available-days">
+            <div class="fs-14 bold text-center">
+                <div>{{ 'availabilities.whichDays'|trans }}</div>
+                <p class="hint-text fs-13 font-arial">{{ 'availabilities.whichDaysNote'|trans }}</p>
+            </div>
+            <div class="text-center m-t-20">{{ form_row(form.day) }}</div>
+        </div>
+        <div class="row" id="experience-create-available-times text-center">
+            <div class="fs-14 bold text-center m-t-30">
+                {{ 'availabilities.whatTime'|trans }}
+                <p class="hint-text fs-13 font-arial">{{ 'availabilities.whatTimeNote'|trans }}</p>
+            </div>
+            <div class="text-center m-t-20">{{ form_row(form.hour) }}</div>
+        </div>
+        <div class="row">
+            <div class="fs-14 bold text-center m-t-30 m-b-20">
+                {{ 'availabilities.howLong'|trans }}
+                <p class="hint-text fs-13 font-arial">{{ 'availabilities.howLongNote'|trans }}</p>
+            </div>
+            <div class="col-md-6">{{ form_row(form.start_date) }}</div>
+            <div class="col-md-6">{{ form_row(form.end_date) }}</div>
+        </div>
+
+        {% if update is defined %}
+            <a onclick="deleteRow(this.parentNode)" href="#">{{ 'availabilities.delete'|trans }}</a>
+            <script type="application/javascript">
+                function deleteRow(element) {
+                    element.remove();
+                }
+            </script>
+        {% endif %}
+    </div>
+</div>

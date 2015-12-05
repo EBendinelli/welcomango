@@ -46,11 +46,17 @@ class BookingController extends BaseController
         if($activeTab == 'received'){ $statusFilter = array('Requested', 'Accepted', 'Refused'); }
         else{ $statusFilter = array('Happened'); }
 
-
+        //Get User experiences Ids
         $experienceIds = array();
+        $bookings = array();
         foreach($experiences as $experience){
             $experienceIds[] = $experience->getId();
+
+            //Update booking status before display (if something happened)
+            // This might not be useful once we have a cron
+            $this->get('welcomango.front.booking.manager')->updateBookingStatus($experience);
         }
+
         $paginator = $this->get('knp_paginator');
         $query     = $this->getRepository('Welcomango\Model\Booking')->findBy(array('experience' => $experienceIds , 'status' => $statusFilter), array('createdAt' => 'DESC'));
         $pagination = $paginator->paginate(
@@ -59,10 +65,14 @@ class BookingController extends BaseController
             20
         );
 
+        //Prepare rating and comment form
+        $ratingForm = $this->createForm($this->get('welcomango.form.rating.type'));
+
         return array(
-            'bookings' => $pagination,
-            'activeTab' => $activeTab,
-            'user' => $user
+            'bookings'   => $pagination,
+            'activeTab'  => $activeTab,
+            'user'       => $user,
+            'ratingForm' => $ratingForm->createView(),
         );
     }
 
@@ -95,9 +105,29 @@ class BookingController extends BaseController
             20
         );
 
+        //Prepare rating and comment form
+        $ratingForm = $this->createForm($this->get('welcomango.form.rating.type'));
+
         return array(
             'bookings' => $pagination,
             'activeTab' => $activeTab,
+            'ratingForm' => $ratingForm->createView(),
+        );
+    }
+
+    /**
+     * @param Request    $request
+     * @param Booking $booking
+     *
+     * @Route("/booking/{booking_id}", name="booking_view")
+     * @Template()
+     *
+     * @return array
+     */
+    public function viewAction(Request $request, Booking $booking){
+
+        return array(
+            'booking' => $booking,
         );
     }
 
@@ -156,11 +186,39 @@ class BookingController extends BaseController
     }
 
     /**
+     * @param Request    $request
+     * @param Booking $booking
+     *
+     * @Route("/request/update/{booking_id}/rate", name="booking_rate")
+     * @Template()
+     *
+     * @return array
+     */
+    public function rateAction(Request $request, Booking $booking)
+    {
+        $ratingForm = $this->createForm($this->get('welcomango.form.rating.type'));
+        $ratingForm ->handleRequest($request);
+
+        if ($ratingForm->isValid()) {
+            $user = $this->getUser();
+
+            $commentBody = $ratingForm->get('body')->getData();
+            $note = $ratingForm->get('note')->getData();
+
+
+            $this->get('welcomango.front.booking.manager')->updateNote($booking, $user, $note);
+            $this->get('welcomango.front.comment.manager')->createComment($booking, $user, $commentBody);
+        }
+
+        return $this->redirect($this->generateUrl('booking_received_list', ['display' => 'happened']));
+    }
+
+    /**
      * Check User Form filed for Ajax Calls
      *
      * @param Request $request
      *
-     * @Route("/json/registration/form/list.json", name="booking_mark_as_seen_ajax", defaults={"_format"="json"})
+     * @Route("/json/booking/form/list.json", name="booking_mark_as_seen_ajax", defaults={"_format"="json"})
      *
      * @return String
      */

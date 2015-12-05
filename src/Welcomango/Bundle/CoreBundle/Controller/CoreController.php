@@ -32,9 +32,13 @@ class CoreController extends BaseController
             ->getRepository('Welcomango\Model\Experience')
             ->getBestRated(4);
 
+        $filters = $this->getFilters(array(), 'experienceSearch');
+        $form = $this->createForm($this->get('welcomango.form.experience.filter'), $filters);
+
         return array(
             'featuredExperiences' => $featuredExperiences,
-            'bestExperiences' => $bestExperiences
+            'bestExperiences'     => $bestExperiences,
+            'form'                => $form->createView(),
         );
     }
 }

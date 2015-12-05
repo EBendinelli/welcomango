@@ -10,6 +10,9 @@
             <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
 
+        <service id="welcomango.form.rating.type" class="Welcomango\Bundle\BookingBundle\Form\Type\RatingCommentType">
+        </service>
+
         <service id="booking.date_difference" class="Welcomango\Bundle\BookingBundle\Twig\DateDifferenceExtension">
             <tag name="twig.extension"/>
         </service>
@@ -20,6 +23,11 @@
         </service>
 
         <service id="welcomango.front.booking.manager" class="Welcomango\Bundle\BookingBundle\Manager\BookingManager">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
+        <service id="welcomango.front.comment.manager" class="Welcomango\Bundle\BookingBundle\Manager\CommentManager">
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
     </services>
 </container>

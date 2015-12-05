@@ -31,7 +31,6 @@ class AppKernel extends Kernel
             new Welcomango\Bundle\MediaBundle\WelcomangoMediaBundle(),
             new Welcomango\Bundle\MessageBundle\WelcomangoMessageBundle(),
             new Welcomango\Bundle\ExperienceBundle\WelcomangoExperienceBundle(),
-            new Welcomango\Bundle\AvailabilityBundle\WelcomangoAvailabilityBundle(),
             new Welcomango\Bundle\BookingBundle\WelcomangoBookingBundle(),
 
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),

@@ -1,13 +1,14 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
+{% trans_default_domain "interface" %}
 {% block meta_title %}{{ "profile.yourProfile"|trans({}, "interface") }}{% endblock %}
 
-{% block profile_welcome_message %}{{ 'profile.welcomeBack'|trans }}{% endblock %}
+{% block profile_welcome_message %}{{ 'profile.welcomeBack'|trans({'%name%': user.fullname}) }}{% endblock %}
 
 {% block sub_profile_picture %}
     <!-- THIS IS THE MENU PROFILE WHEN THE USER IS LOGGED -->
     <!-- BEGIN PROFILE SIDE MENU-->
-    <div id="profile-menu-left" class="bg-master-lightest m-t-10 p-b-10">
+    <div id="profile-menu-left" class="bg-white m-t-10 p-b-10">
         <div id="profile-menu-title" class="text-center">
             <a href="{{ path('fos_user_profile_show') }}"><h4>{{ 'profile.menu'|trans }}</h4></a>
         </div>
@@ -18,11 +19,6 @@
                     <li class="profile-menu-item">
                         <i class="fa fa-envelope fa-lg m-r-10"></i>{{ 'profile.message'|trans }}
                         {{ notification_display(user, 'inbox') }}
-                    </li>
-                </a>
-                <a href="{{ path('front_experience_profile_list') }}" class="profile-menu-item">
-                    <li class="profile-menu-item">
-                        <i class="fa fa-road fa-lg m-r-10"></i>{{ 'profile.yourExperiences'|trans }}
                     </li>
                 </a>
                 <a href="{{ path('booking_received_list', {'display': 'received'}) }}" class="profile-menu-item">
@@ -37,6 +33,11 @@
                         {{ notification_display(user, 'sent') }}
                     </li>
                 </a>
+                <a href="{{ path('front_experience_profile_list') }}" class="profile-menu-item">
+                    <li class="profile-menu-item">
+                        <i class="fa fa-road fa-lg m-r-10"></i>{{ 'profile.yourExperiences'|trans }}
+                    </li>
+                </a>
                 <a href="{{ path('fos_user_profile_edit') }}" class="profile-menu-item">
                     <li class="profile-menu-item">
                         <i class="fa fa-pencil fa-lg m-r-10"></i>{{ 'profile.editProfile'|trans }}
@@ -46,9 +47,9 @@
         </div>
     </div>
 
-    <div id="profile-menu-left" class="bg-master-lightest m-t-15 p-b-10">
+    <div id="profile-menu-left" class="bg-white m-t-15 p-b-10">
         <div id="profile-menu-title" class="text-center link-black">
-            <h4>{{ 'user.feedbacks'|trans }}</h4>
+            <h4>{{ 'profile.feedbacks'|trans }}</h4>
         </div>
         <div class="dotted-line"><span></span></div>
         <div id="user-menu-items" class="text-center">
@@ -84,23 +85,75 @@
     </div>#}
     <!-- END PROFILE TOP MENU-->
 
+    <!-- BEGIN DASHBOARD -->
+        <h3>{{ 'profile.latestUpdate'|trans }}</h3>
+        <div id="dashboard" class="p-l-10 p-r-10 m-t-20">
+            <div class="row no-margin">
+                {% if nextTrip %}
+                <div class="col-md-4 ">
+                    <div class="p-l-20 p-r-20 p-b-20 b-a b-thick b-warning bg-white">
+                        <h4 class="text-center">{{ 'profile.yourNextTrip'|trans }}</h4>
+                        <div class="text-center"><i class="fa fa-plane fa-3x"></i></div>
+                        <div class="m-t-20">
+                            {{ 'profile.nextTripDetails'|trans({'%experienceTitle%': nextTrip.experience.title, '%experienceCity%': nextTrip.experience.city.name, '%experienceGuide%': nextTrip.experience.getCreator.firstname, '%time%': nextTrip.startDatetime|time_diff  })|raw }}
+                        </div>
+                        <div class="m-t-20 text-center">
+                            <a href="{{ path('message_request', {'booking_id': nextTrip.id, 'user_id' : user.id }) }}" class="btn btn-complete">Contact</a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if nextVisitGiven %}
+                <div class="col-md-4 ">
+                    <div class="p-l-20 p-r-20  p-b-20 b-a b-thick b-warning bg-white">
+                        <h4 class="text-center">{{ 'profile.nextVisitGiven'|trans }}</h4>
+                        <div class="text-center"><i class="fa fa-bullhorn fa-3x"></i></div>
+                        <div class="m-t-20">
+                            {{ 'profile.nextVisitDetails'|trans({'%experienceTitle%': nextVisitGiven.experience.title, '%experienceCity%': nextTrip.experience.city.name, '%experienceTraveler%': nextVisitGiven.user.firstname, '%time%': nextVisitGiven.startDatetime|time_diff  })|raw }}
+
+                        </div>
+                        <div class="m-t-20 text-center">
+                            <a href="{{ path('message_request', {'booking_id': nextVisitGiven.id, 'user_id' : user.id }) }}" class="btn btn-complete">Contact</a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if nextVisitGiven %}
+                    <div class="col-md-4 ">
+                        <div class="p-l-20 p-r-20  p-b-20 b-a b-thick b-warning bg-white">
+                            <h4 class="text-center">{{ 'profile.rateExperiences'|trans }}</h4>
+                            <div class="text-center"><i class="fa fa-star fa-3x"></i></div>
+                            <div class="m-t-20">
+                                {{ 'profile.rateExperiencesText'|trans }}
+                            </div>
+                            <div class="m-t-20 text-center">
+                                <a href="{{ path('message_request', {'booking_id': nextVisitGiven.id, 'user_id' : user.id }) }}" class="btn btn-complete">Rate</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    <!-- END DASHBOARD-->
+
+    {{ parent() }}
+
     <!-- BEGIN PROFILE CONTENT-->
-        {{ parent() }}
         <div id="user-proposed-experience" class="m-b-20">
             {% if userExperiences.isEmpty %}
                 <a href="{{ path('front_experience_create') }}" class="btn btn-primary btn-cons" ><i class="fa fa-plus-circle "></i> {{ 'profile.createExperience'|trans }}</a>
             {% else %}
-                <h2 class="m-b-30">{{ 'profile.yourExperience'|trans }}</h2>
-                {{ include("WelcomangoExperienceBundle:Experience:_featuredExperience.html.twig", { 'experience': userExperiences|first, 'darkBg': true, 'profile': true}) }}
+                <h3 class="m-b-30">{{ 'profile.yourExperience'|trans }}</h3>
+                {{ include("WelcomangoExperienceBundle:Experience:_featuredExperience.html.twig", { 'experience': userExperiences|first,  'profile': true}) }}
                 <div id="profile-experience-action" class="text-right">
-                    <a href="{{ path('front_experience_edit', {'experience_id': userExperiences|first.id}) }}" class="btn btn-bordered btn-black btn-cons"><i class="fa fa-pencil"></i> {{ 'profile.editExperience'|trans }}</a>
-                    <button class="btn btn-danger btn-cons" data-toggle="modal" data-target=".modal-action"><i class="fa fa-trash "></i> {{ 'profile.deleteExperience'|trans }}</button>
+                    <a href="{{ path('front_experience_edit', {'experience_id': userExperiences|first.id}) }}" class="btn btn-bordered btn-black btn-cons"><i class="fa fa-pencil"></i> {{ 'interface.edit'|trans }}</a>
+                    <button class="btn btn-danger btn-cons" data-toggle="modal" data-target=".modal-action"><i class="fa fa-trash "></i> {{ 'interface.delete'|trans }}</button>
                 </div>
                 <br/>
             {% endif %}
         </div>
         <div id="user-description">
-            <h2>{{ 'profile.aboutYou'|trans }}</h2>
+            <h3>{{ 'profile.aboutYou'|trans }}</h3>
             <hr style="margin-top:25px"/>
             <p>{{ app.user.description|nl2br|raw }}</p>
         </div>
@@ -109,7 +162,7 @@
 
     <!-- BEGIN DELETE CONFIRMATION MODAL -->
     {% if userExperiences|first %}
-        {{ include("::_modal.html.twig", {
+        {{ include("WelcomangoCoreBundle:Core:modal.html.twig", {
             'title': 'Are you sure you want to delete your experience?',
             'path_valid': path('front_experience_delete', {'experience_id': userExperiences|first.id}),
             'main_text': 'This means that Welcomanger won\'t be able to visit your town in your company anymore.<br/>How sad.',
@@ -119,3 +172,4 @@
     {% endif %}
     <!-- END DELETE CONFIRMATION MODAL -->
 {% endblock profile_content %}
+

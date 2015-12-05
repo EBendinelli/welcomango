@@ -27,6 +27,7 @@ class ThreadType extends AbstractType
         $builder
             ->add('body', 'textarea', [
                 'label'    => 'form.thread.body',
+                'data'     => '',
             ])
         ;
     }

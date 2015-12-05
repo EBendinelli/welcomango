@@ -1,5 +1,7 @@
 {% extends '::front.html.twig' %}
 
+{% trans_default_domain "interface" %}
+
 {% block meta_title %}
 {% endblock %}
 
@@ -19,7 +21,7 @@
             <div class="row">
                 <div class="col-md-3"><br/></div>
                 <div class="col-md-9">
-                    <h2 class="text-white">{% block profile_welcome_message '' %} {{ user.firstname }} {{ user.lastname|upper }}!</h2>
+                    <h2 class="text-white">{% block profile_welcome_message %} {{ user.firstname }} {{ user.lastname|upper }} {% endblock %}</h2>
                     <h4 class="text-white">{{ user.currentCity.name}}, {{ user.currentCity.country.name}}</h4>
                     <h4 class="text-white">{{ user.getAge}}</h4>
                 </div>
@@ -27,18 +29,12 @@
         </div>
     </section>
 
-    <section class="container-fluid container-fixed-lg p-b-50  bg-white">
+    <section class="container-fluid container-fixed-lg p-b-50  bg-master-lightest">
         <div class="container">
             <!-- START USER CARD -->
-            <div class="panel col-md-3">
+            <div class="panel col-md-3 bg-master-lightest">
                 <div id="user-picture-container">
-                    <a href="{{ path('fos_user_profile_show') }}">
-                        {% if user.getMedias.first %}
-                            <div class="user-picture user-img-1" style="background-image:url({{ asset(user.getMedias.first.getWebPath) }})"></div>
-                        {% else %}
-                            <div class="user-picture user-img-1" style="background-image:url({{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }})"></div>
-                        {% endif %}
-                    </a>
+                    {{ display_avatar(user, true, true, 'user-picture') }}
                 </div>
 
                 {% block sub_profile_picture %}
@@ -56,7 +52,7 @@
                         <div id="user-situation" >
                             <h2 class="m-b-30">{{ 'profile.mainInfo'|trans }}</h2>
                             <div class="col-md-12 panel panel-default">
-                                <div id="user-info-details" class="row {% block main_info_class 'bg-master-lightest' %} p-t-20">
+                                <div id="user-info-details" class="row {% block main_info_class 'bg-white' %} p-t-20">
                                     <div class="m-b-10 col-md-6">
                                         <div class="user-info-items">
                                             <i class="fa fa-briefcase fa-lg"></i>
@@ -74,7 +70,7 @@
                                     <div class=" m-b-15 col-md-6">
                                         <div class="m-b-10">
                                             <i class="fa fa-language fa-lg"></i>
-                                            <span class="text-black semi-bold">{{ 'user.languagespoken'|trans }}</span>
+                                            <span class="text-black semi-bold">{{ 'profile.spokenLanguages'|trans }}</span>
                                         </div>
                                         {% for language in user.getSpokenLanguages.getValues %}
                                             <div class="flag flag-xs" role="image"  style="background: url({{ asset('img/countries/'~ language.language.flagLabel|lower ~'.svg') }});"></div>
@@ -86,6 +82,7 @@
                         </div>
                     </div>
                     <!-- END MAIN INFO BLOCK -->
+
                 {% endblock profile_content %}
             </div>
             <!-- END USER CONTENT -->
@@ -95,7 +92,10 @@
     {% block extra_content %}
     {% endblock extra_content %}
 
+
 {% endblock page_content %}
+
+
 
 {% block javascripts %}
     {{ parent() }}

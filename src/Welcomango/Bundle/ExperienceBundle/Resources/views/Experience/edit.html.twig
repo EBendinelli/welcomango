@@ -2,12 +2,14 @@
 
 {% form_theme form with ["::frontTheme.html.twig"] %}
 
+{% trans_default_domain "experience" %}
+
 {% block profile_content %}
     {{ form_errors(form) }}
 
     <div class="alert alert-info m-t-20">
         <button class="close" data-dismiss="alert"></button>
-        If you already have a meeting incoming, make sure to alert the travelers of the changes!
+        {{ 'experience.editTopMessage'|trans }}
     </div>
 
     <div id="myFormWizard" class="m-t-20">
@@ -44,29 +46,20 @@
                 </div>
             </div>
             <div class="tab-pane slide" id="tab3">
-                <div class="row" id="experience-create-availabilities tex-center">
-                    <div class="fs-14 bold text-center">When are you available in your week?</div>
-                    <div class="text-center m-t-20">{{ form_row(form.availability) }}</div>
-                </div>
-                <div class="row" id="experience-create-available-days">
-                    <div class="fs-14 bold text-center m-t-30">Which days are you available?</div>
-                    <div class="text-center m-t-20">{{ form_row(form.day) }}</div>
-                </div>
-                <div class="row" id="experience-create-available-times text-center">
-                    <div class="fs-14 bold text-center m-t-30">At what time are you able to guide voyagers?</div>
-                    <div class="text-center m-t-20">{{ form_row(form.hour) }}</div>
-                </div>
-                {#<div class="row" id="experience-create-available-times text-center">
-                    <div class="fs-14 bold text-center m-t-30">Which months?</div>
-                    <div class="text-center m-t-20">{{ form_row(form.month) }}</div>
-                </div>#}
 
-                <div class="row">
-                    <div class="fs-14 bold text-center m-t-30 m-b-20">For how long can you propose this experience?</div>
-                    <div class="col-md-6">{{ form_row(form.start_date) }}</div>
-                    <div class="col-md-6">{{ form_row(form.end_date) }}</div>
+                <div id="availabilities" class="availabilities"
+                    data-prototype="{% filter escape %}{% include 'WelcomangoExperienceBundle:Availability:_availabilities.html.twig' with {'form': form.availabilities.vars.prototype } %}{% endfilter %}">
+                    {% for availability in form.availabilities %}
+                        {% include 'WelcomangoExperienceBundle:Availability:_availabilities.html.twig' with {'form': availability } %}
+                    {% endfor %}
                 </div>
 
+                {#Delete confirmation modal#}
+                {% include 'WelcomangoCoreBundle:Core:stickUpModal.html.twig' with {
+                    'title': 'Remove availability',
+                    'text': 'availability.modal.removeText'|trans ,
+                    'confirm' : 'delete'|trans
+                } %}
             </div>
 
             <div class="row text-right m-t-20">
@@ -83,7 +76,11 @@
 {% block javascripts %}
     {{ parent() }}
     {{ form_javascript(form) }}
+
+       {% include 'WelcomangoExperienceBundle:Availability:_availabilityJs.html.twig' %}
+
     <script>
+        //Stuff for the layout
         $(document).ready(function() {
             $('#myFormWizard').bootstrapWizard({
                 onTabShow: function(tab, navigation, index) {

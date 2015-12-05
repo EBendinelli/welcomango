@@ -25,7 +25,7 @@ class Availability
     /**
      * @var integer
      *
-     * @ORM\Column(name="day", type="string")
+     * @ORM\Column(name="day", type="string", nullable=false)
      */
     private $day;
 
@@ -39,21 +39,21 @@ class Availability
     /**
      * @var integer
      *
-     * @ORM\Column(name="hour", type="string")
+     * @ORM\Column(name="hour", type="string", nullable=false)
      */
     private $hour;
 
     /**
      * @var dime
      *
-     * @ORM\Column(name="startDate", type="date")
+     * @ORM\Column(name="startDate", type="date", nullable=false)
      */
     private $startDate;
 
     /**
      * @var date
      *
-     * @ORM\Column(name="endDate", type="date")
+     * @ORM\Column(name="endDate", type="date", nullable=false)
      */
     private $endDate;
 
@@ -61,7 +61,7 @@ class Availability
      * @var Experience
      *
      * @ORM\ManyToOne(targetEntity="Experience", inversedBy="availabilities")
-     * @ORM\JoinColumn(name="experience_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="experience_id", referencedColumnName="id", nullable=false)
      */
     private $experience;
 

@@ -1,0 +1,169 @@
+<script type="text/javascript">
+
+    updateBtnGroup();
+    updateDatePickers()
+
+    //Stuff to add availabilities
+    var $collectionHolder;
+
+    // setup an "add a tag" link
+    var $addAvailabilityLink = $('<a href="#" class="btn btn-primary add_availability_link">Add an availability</a>');
+    var $newLinkLi = $('<div class="text-center"></div>').append($addAvailabilityLink);
+
+    jQuery(document).ready(function() {
+        // Get the ul that holds the collection of tags
+        $collectionHolder = $('div.availabilities');
+
+        // add a delete link to all of the existing availability form li elements
+        $collectionHolder.find('div.availability').each(function() {
+            addAvailabilityFormDeleteLink($(this));
+        });
+
+        // add the "add a tag" anchor and li to the tags ul
+        $collectionHolder.append($newLinkLi);
+
+        // count the current form inputs we have (e.g. 2), use that as the new
+        // index when inserting a new item (e.g. 2)
+        $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+        $addAvailabilityLink.on('click', function(e) {
+            // prevent the link from creating a "#" on the URL
+            e.preventDefault();
+
+            // add a new tag form (see next code block)
+            addAvailabilityForm($collectionHolder, $newLinkLi);
+            updateBtnGroup();
+            updateDatePickers();
+        });
+    });
+
+    function addAvailabilityForm($collectionHolder, $newLinkLi) {
+        // Get the data-prototype explained earlier
+        var prototype = $collectionHolder.data('prototype');
+
+        // get the new index
+        var index = $collectionHolder.data('index');
+
+        // Replace '__name__' in the prototype's HTML to
+        // instead be a number based on how many items we have
+        var newForm = prototype.replace(/__name__/g, index);
+
+        // increase the index with one for the next item
+        $collectionHolder.data('index', index + 1);
+
+        // Display the form in the page in an li, before the "Add a tag" link li
+        var $newFormLi = $('<div></div>').append(newForm);
+        console.log($newFormLi);
+        addAvailabilityFormDeleteLink($newFormLi);
+        $newLinkLi.before($newFormLi);
+    }
+
+    function addAvailabilityFormDeleteLink($AvailabilityFormLi) {
+        var $removeFormA = $('<a href="#" class="portlet-close" data-toggle="modal" data-target="#confirmModal"><i class="portlet-icon portlet-icon-close"></i></a>');
+        var $panelControls = $AvailabilityFormLi.find(".panel-controls");
+        $panelControls.append($removeFormA);
+
+        $removeFormA.on('click', function() {
+            $('#confirmModalButton').on('click', function(e) {
+                // prevent the link from creating a "#" on the URL
+                e.preventDefault();
+
+                // remove the li for the tag form
+                console.log($AvailabilityFormLi);
+                $AvailabilityFormLi.remove();
+            });
+        });
+    }
+
+    function updateBtnGroup(){
+        //Make the always button different
+        $('.btn-group').each(function(){
+            $(this).children().last().removeClass("btn-complete").addClass("btn-success");
+        });
+
+        //Clean the selection when always is selected
+        $('.btn-group').each(function() {
+            var $buttonGrp = $(this);
+
+            //Clean the selection when always is selected
+            $buttonGrp.children().last().click(function () {
+                $buttonGrp.children().each(function () {
+                    $(this).removeClass("active");
+                    $(this).children().attr('checked', false);
+                });
+                if($(this).children().is(':checked')){
+                    $(this).children().attr('checked', false);
+                }else{
+                    $(this).children().attr('checked', true);
+                }
+            });
+
+            //Clear the always option when anything else is selected
+            $buttonGrp.children().click(function () {
+                $buttonGrp.children().last().removeClass("active");
+                $buttonGrp.children().last().attr('checked', false);
+                if($(this).children().is(':checked')) {
+                    $(this).children().attr('checked', false);
+                }else{
+                    $(this).children().attr('checked', true);
+                }
+            });
+        });
+    }
+
+    function updateDatePickers(){
+        //Display only certain dates in the datepicker
+        var startDate = new Date();
+        var endDate = new Date();
+        startDate.setDate(startDate.getDate());
+        // This set the maximum date to one year from now
+        endDate.setDate(endDate.getDate()+365);
+
+
+        $('.datepicker').each(function(){
+            $(this).datepicker({
+                startDate: startDate,
+                endDate: endDate,
+                weekStart: 1
+            });
+        });
+    }
+
+    //check that end date is after start date
+    $(function() {
+        $('.datepicker').datepicker({
+            onSelect: function(){
+                var id = $(this).attr('id');
+                if(id.slice(-10) == 'start_date'){
+                    var selected = $(this).val();
+                    var endDateId = id.replace('start_date', 'end_date');
+                    var newStartDate = new Date();
+                    newStartDate.setDate(selected.substring(0,2));
+                    newStartDate.setMonth(selected.substring(3,5)-1);
+                    newStartDate.setYear(selected.substring(6,10));
+                    alert(endDateId);
+                    $(endDateId).datepicker({
+                        startDate: newStartDate
+                    });
+                }
+            }
+        });
+        /*$('.datepicker').on("change", function () {
+            var id = $(this).attr('id');
+            if(id.slice(-10) == 'start_date'){
+                var selected = $(this).val();
+                var endDateId = id.replace('start_date', 'end_date');
+                var newStartDate = new Date();
+                newStartDate.setDate(selected.substring(0,2));
+                newStartDate.setMonth(selected.substring(3,5)-1);
+                newStartDate.setYear(selected.substring(6,10));
+                alert(endDateId);
+                $(endDateId).datepicker({
+                    startDate: newStartDate
+                });
+            }
+        });*/
+    });
+
+
+</script>

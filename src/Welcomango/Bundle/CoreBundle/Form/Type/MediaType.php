@@ -4,7 +4,7 @@ namespace Welcomango\Bundle\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -18,7 +18,8 @@ class MediaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('mediaList', 'hidden', [
+            ->add('title', 'hidden', [
+                'label'    => 'form.media.title',
                 'required' => false,
             ])
         ;
@@ -45,6 +46,6 @@ class MediaType extends AbstractType
 
     public function getParent()
     {
-        return HiddenType::class;
+        return 'collection';
     }
 }

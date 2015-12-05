@@ -11,7 +11,8 @@
         {% endif %}
     {% endfor %}
 
-    <div class="row bg-master-lightest panel panel-default p-l-20 p-t-20 p-b-20">
+    <!-- BOOKING SUMMARY BEGIN -->
+    <div class="row bg-white panel panel-default p-l-20 p-t-20 p-b-20">
         <div class="col-md-6">
             <div>
                 <i class="fa fa-user p-b-10"></i>
@@ -35,26 +36,19 @@
             <i class="fa fa-calendar-o fa-5x "></i>
         </div>
     </div>
+    <!-- BOOKING SUMMARY END -->
 
 {% for message in thread.messages %}
     <div class="messages">
         {% if message.sender == user %}
             <div class="row message">
                 <div class="col-md-1 p-t-20">
-                    <a href="{{ asset(path('front_user_view', {'user_id': thread.booking.experience.getCreator.id})) }}">
-                        {% if thread.booking.experience.getCreator.getMedias.first %}
-                            <img src='{{ asset(thread.booking.experience.getCreator.getMedias.first.getWebPath) }}'
-                                 class='message-user-picture m-r-10'/>
-                        {% else %}
-                            <img src='{{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }}'
-                                 class='message-user-picture m-r-10'/>
-                        {% endif %}
-                    </a>
+                    {{ display_avatar(thread.booking.experience.getCreator, true, false, 'message-user-picture m-r-10') }}
                 </div>
                 <div class="col-md-11 p-l-30">
                     <div class="name bold">{{ message.sender.fullname }}</div>
                     <span class="hint-text small">{{ message.createdAt|time_diff }}</span>
-                    <p class="message-content m-r-30 bg-master-lighter">{{ message.body|nl2br|raw }}</p>
+                    <p class="message-content m-r-30 bg-master-light ">{{ message.body|nl2br|raw }}</p>
                 </div>
             </div>
         {% else %}

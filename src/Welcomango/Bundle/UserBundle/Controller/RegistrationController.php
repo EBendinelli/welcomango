@@ -21,7 +21,6 @@ use Welcomango\Model\User;
 
 class RegistrationController extends BaseProfileController
 {
-
     public function registerAction(Request $request)
     {
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
@@ -41,7 +40,6 @@ class RegistrationController extends BaseProfileController
             return $event->getResponse();
         }
 
-
         $form = $this->createForm($this->get('welcomango.front.form.user.type'), $user);
         $form->setData($user);
 
@@ -57,7 +55,6 @@ class RegistrationController extends BaseProfileController
                 $url = $this->generateUrl('fos_user_registration_confirmed');
                 $response = new RedirectResponse($url);
             }
-
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
 
             return $response;

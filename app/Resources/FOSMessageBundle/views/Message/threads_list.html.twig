@@ -1,16 +1,12 @@
 <div class="row message-list">
     {% if threads %}
-        <ul>
+        <ul class="bg-white">
         {% for thread in threads %}
             <li class="item p-t-15 p-b-15 {% if not fos_message_is_read(thread) %}message-unread{% endif %}" onclick="location.href='{{ url('fos_message_thread_view', {'threadId': thread.id}) }}'">
                 <div class="row">
                     <div class="col-md-1 text-center ">
                         <a href="{{ asset(path('front_user_view', {'user_id': thread.booking.experience.getCreator.id})) }}">
-                            {% if thread.booking.experience.getCreator.getMedias.first %}
-                                <img src='{{ asset(thread.booking.experience.getCreator.getMedias.first.getWebPath) }}' class='message-user-picture m-r-10' />
-                            {% else %}
-                                <img src='{{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }}' class='message-user-picture m-r-10' />
-                            {% endif %}
+                            {'{{ display_avatar(thread.booking.experience.getCreator, false, false, 'margin-right:10px') }}'+
                             {% if not fos_message_is_read(thread) %}
                                 {{ notification_display(user, 'message') }}
                             {% endif %}

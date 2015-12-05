@@ -51,10 +51,10 @@ class ExperienceType extends AbstractType
         $minimumDurations    = array();
         $maximumDurations    = array();
         $maximumParticipants = array();
-        for ($i = 0; $i < 48; $i++) $estimatedDurations[$i] = $i;
-        for ($i = 0; $i < 48; $i++) $minimumDurations[$i] = $i;
-        for ($i = 0; $i < 48; $i++) $maximumDurations[$i] = $i;
-        for ($i = 0; $i < 10; $i++) $maximumParticipants[$i] = $i;
+        for ($i = 1; $i < 48; $i++) $estimatedDurations[$i] = $i;
+        for ($i = 1; $i < 48; $i++) $minimumDurations[$i] = $i;
+        for ($i = 1; $i < 48; $i++) $maximumDurations[$i] = $i;
+        for ($i = 1; $i < 10; $i++) $maximumParticipants[$i] = $i;
 
         $availabilities = array('form.experience.alwaysAvailable', 'form.experience.specificAvailability');
         $days           = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
@@ -74,8 +74,6 @@ class ExperienceType extends AbstractType
                 'multiple' => true,
             ))
             ->add('medias', 'medias', array(
-                'by_reference' => false,
-                'compound' => true,
                 'label'        => false,
                 'required'     => false
             ))
@@ -161,6 +159,13 @@ class ExperienceType extends AbstractType
                 ],
             ])
             ->add('register', 'submit');
+             $builder->add('availabilities', 'collection', [
+                    'type' => new AvailabilityType(),
+                    'allow_add'    => true,
+                    'by_reference' => false,
+                    'allow_delete' => true,
+                    'label'        => false,
+                ]);
     }
 
     /**

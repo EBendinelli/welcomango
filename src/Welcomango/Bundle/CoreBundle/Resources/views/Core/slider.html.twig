@@ -8,8 +8,7 @@
                 <div class="swiper-slide fit">
                     <!-- BEGIN IMAGE PARRALAX -->
                     <div class="slider-wrapper">
-                        <div class="image" data-swiper-parallax="30%">
-                            <img draggable="false" src="{{ asset("img/front/places-3.jpg") }}" class="image-responsive-height" alt="" title="">
+                        <div class="image" data-swiper-parallax="30%" data-pages-bg-image="{{ asset("img/front/places-" ~ random(18) ~ ".jpg") }}" data-bg-overlay="black" data-overlay-opacity="0.2">
                         </div>
                     </div>
                     <!-- END IMAGE PARRALAX -->
@@ -19,11 +18,20 @@
                             <div class="container-xs-height full-height">
                                 <div class="col-xs-height col-middle text-left">
                                     <div class="container">
-                                        <div class="col-md-6 no-padding col-xs-10 col-xs-offset-1">
-                                            <h1 class="light sm-text-center" data-swiper-parallax="-15%"> Create your own front-end with endless possibilities.</h1>
-                                            <h4 class="sm-text-center">Save time, save money, look more professional and win more clients.</h4>
-                                            <h5 class="block-title text-white sm-text-center">Behind the scenes watch tour</h5>
-                                            <p class="fs-12 font-arial hint-text sm-text-center">Available at themeforest, envato market place.</p>
+                                        <div class="row">
+                                            {{ form_start(form, {'action': filter_url, 'method': 'POST', 'attr': { 'novalidate': 'novalidate', 'class': 'filter' } }) }}
+                                            <div class="col-md-9 col-md-offset-2 text-center">
+                                                <h1 class="text-white sm-text-center" data-swiper-parallax="-15%">Enjoy your next trip differently</h1>
+                                                <h4 class="text-white sm-text-center m-b-40">Find enthusiastic people willing to show you a different side of their city</h4>
+                                                <div class="col-md-8">
+                                                    {{ form_row(form.city,  {'attr' : {'class' : 'form-filter-select2'} }) }}
+                                                </div>
+                                                <div class="col-md-4">
+                                                    {{ form_row(form.date) }}
+                                                </div>
+                                                <div style="display: none">{{ form(form) }}</div>
+                                                <button type="submit" id="btn-filter" class="btn btn-primary btn-lg btn-filter-inversed m-t-20">{{ 'interface.search'|trans({}, "interface") }}</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -37,8 +45,7 @@
                 <div class="swiper-slide fit">
                     <!-- BEGIN IMAGE PARRALAX -->
                     <div class="slider-wrapper">
-                        <div class="image" data-swiper-parallax="30%">
-                            <img draggable="false" src="{{ asset("img/front/places-14.jpg") }}" class="image-responsive-height" alt="" title="">
+                        <div class="image" data-swiper-parallax="30%" data-pages-bg-image="{{ asset("img/front/places-" ~ random(18) ~ ".jpg") }}" data-bg-overlay="black" data-overlay-opacity="0.2">
                         </div>
                     </div>
                     <!-- END IMAGE PARRALAX -->
@@ -48,11 +55,11 @@
                             <div class="container-xs-height full-height">
                                 <div class="col-xs-height col-middle text-left">
                                     <div class="container">
-                                        <div class="col-md-6 no-padding col-xs-10 col-xs-offset-1">
-                                            <h1 class="light sm-text-center" data-swiper-parallax="-15%"> Twenty & Counting... Unique Website Templates</h1>
-                                            <h4 class="sm-text-center">Save time, save money, look more professional and win more clients.</h4>
-                                            <h5 class="block-title text-white sm-text-center">Behind the scenes watch tour</h5>
-                                            <p class="fs-12 font-arial hint-text sm-text-center">Available at themeforest, envato market place.</p>
+                                        <div class="col-md-9 col-md-offset-2 text-center">
+                                            <h1 class="text-white sm-text-center" data-swiper-parallax="-15%"> Join the community</h1>
+                                            <h4 class="text-white sm-text-center">And show the world what is awesome about where you live</h4>
+                                            <p class="fs-14 font-arial text-white sm-text-center">Meet people with common interested, get intrigued by your destination, discover a different side of the places you visit</p>
+                                            <a href="{{ path('fos_user_registration_register') }}" class="btn btn-primary btn-lg m-t-40">Join now</a>
                                         </div>
                                     </div>
                                 </div>

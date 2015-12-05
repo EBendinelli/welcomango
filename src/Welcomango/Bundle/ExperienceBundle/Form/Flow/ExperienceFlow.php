@@ -6,9 +6,6 @@ use Craue\FormFlowBundle\Form\FormFlow;
 use Craue\FormFlowBundle\Form\FormFlowInterface;
 use Symfony\Component\Form\FormTypeInterface;
 
-use Welcomango\Bundle\ExperienceBundle\Form\Type\ExperienceStep1Type;
-use Welcomango\Bundle\ExperienceBundle\Form\Type\ExperienceStep2Type;
-use Welcomango\Bundle\ExperienceBundle\Form\Type\ExperienceStep3Type;
 
 class ExperienceFlow extends FormFlow {
 

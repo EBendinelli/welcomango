@@ -51,6 +51,22 @@ class ExperienceRepository extends EntityRepository
             ;
     }
 
+    public function getCommentsForExperience($experience){
+        $comments = array();
+        $bookings = $experience->getBookings();
+        foreach($bookings as $booking){
+            if($booking->getStatus() == 'Happened'){
+                $bookingComments = $booking->getComments();
+                foreach($bookingComments as $comment){
+                    if($comment->IsValidated() && !$comment->isDeleted()) {
+                        $comments[] = $comment;
+                    }
+                }
+            }
+        }
+        return $comments;
+    }
+
     /**
      * Create paginated and filtered query builder
      *
@@ -64,6 +80,7 @@ class ExperienceRepository extends EntityRepository
         $queryBuilder = $this
             ->createQueryBuilder('e')
             ->leftJoin('e.availabilities', 'a')
+            ->leftJoin('e.tags', 't')
             ->where('e.published = true');
 
         if(!$isDeleted) $queryBuilder->andWhere('e.deleted = false');
@@ -99,6 +116,15 @@ class ExperienceRepository extends EntityRepository
 
         if ($minParticipants = $this->getFilter('min_participants_accepted', $filters)) {
             $queryBuilder->andWhere('e.maximumParticipants >= '.$minParticipants);
+        }
+
+        if ($tags = $this->getFilter('tags', $filters)) {
+            if($tags instanceof ArrayCollection){
+                foreach($tags as $tag){
+                    $queryBuilder->andWhere('t.name = :tag');
+                    $queryBuilder->setParameter('tag', $tag->getName());
+                }
+            }
         }
 
 

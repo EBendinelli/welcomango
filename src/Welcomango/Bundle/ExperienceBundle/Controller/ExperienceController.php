@@ -18,6 +18,7 @@ use FOS\UserBundle\Model\UserInterface;
 
 use Symfony\Component\Validator\Constraints\DateTime;
 use Welcomango\Bundle\CoreBundle\Controller\Controller as BaseController;
+use Welcomango\Model\Availability;
 use Welcomango\Model\Experience;
 use Welcomango\Model\Booking;
 use Welcomango\Model\Media;
@@ -46,7 +47,7 @@ class ExperienceController extends BaseController
         $pagination = $paginator->paginate(
             $query,
             $request->query->get('page', 1),
-            6
+            9
         );
 
         $form = $this->createForm($this->get('welcomango.form.experience.filter'), $filters);
@@ -100,19 +101,29 @@ class ExperienceController extends BaseController
         $experience->setCreator($user);
 
         $em = $this->getDoctrine()->getManager();
-
-        $form = $this->createForm($this->get('welcomango.form.experience.create'));
-
+        $experience->setMedias(new ArrayCollection());
+        $form = $this->createForm($this->get('welcomango.form.experience.create'), $experience);
+        $experience->setMedias(new ArrayCollection());
         $form->handleRequest($request);
+
+
+        //Set availabilities
+        $availabilities = new ArrayCollection();
+        $availability = new Availability();
+        $availability->setDay(array('0','1','3','4'));
+        $availability->setHour(array('1','3'));
+        $availability->setExperience($experience);
+        $availabilities->add($availability);
+        $experience->setAvailabilities($availabilities);
 
         if ($form->isValid()) {
             ldd($form->get('medias')->getData());
-            $em->persist($experience);
-            $em->flush();
-            //$this->get('welcomango.front.experience.manager')->processUploadMedias($experience));
 
             $availabilityManager = $this->get('welcomango.front.availability.manager');
             $availabilityManager->generateAvailabilityForExperience($experience, $form);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($experience);
+            $em->flush();
 
             return $this->render('WelcomangoExperienceBundle:Experience:createSuccess.html.twig', array(
                 'experience' => $experience,
@@ -137,11 +148,29 @@ class ExperienceController extends BaseController
      */
     public function editAction(Request $request, Experience $experience)
     {
+        //Here we transform the hour and day data to arrays
+        $availabilities = $experience->getAvailabilities();
+        $availabilityManager = $this->get('welcomango.front.availability.manager');
+        $availabilityManager->prepareAvailabilityForForm($availabilities);
+
+        $originalAvailabilities = new ArrayCollection();
+        foreach ($availabilities as $availability) {
+            $originalAvailabilities->add($availability);
+        }
+
         $form = $this->createForm($this->get('welcomango.form.experience.edit'), $experience);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $this->getDoctrine()->getManager()->persist($experience);
+            $availabilityManager->updateAvailabilityForExperience($experience, $form, $originalAvailabilities);
+
+            // This cleanly remove the deleted availabilities
+            foreach ($originalAvailabilities as $originalAvailability) {
+                if (false === $form->getData()->getAvailabilities()->contains($originalAvailability)) {
+                    $this->getDoctrine()->getManager()->remove($originalAvailability);
+                }
+            }
+
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', $this->trans('experience.edit.success', array(), 'crm'));
 
@@ -169,6 +198,8 @@ class ExperienceController extends BaseController
      */
     public function viewAction(Request $request, Experience $experience)
     {
+        $experienceRepository = $this->getRepository('Welcomango\Model\Experience');
+
         //TODO: We might be able to do better...
         // Check that the experience is still available and not deleted
         if ($experience->isDeleted()) {
@@ -182,10 +213,11 @@ class ExperienceController extends BaseController
 
         $user = $this->getUser();
 
+        //Get Comments
+        $comments = $experienceRepository->getCommentsForExperience($experience);
+
         // TODO: Must create a related experience function
-        $relatedExperiences = $this
-            ->getRepository('Welcomango\Model\Experience')
-            ->getFeatured(3);
+        $relatedExperiences = $experienceRepository->getFeatured(3);
 
         //Get forbidden dates for datepicker
         $forbiddenDates = $this->get('welcomango.front.experience.manager')->getAvailableDatesForDatePicker($experience);
@@ -249,6 +281,7 @@ class ExperienceController extends BaseController
             'formSubmitted'      => $formSubmitted,
             'form'               => $form->createView(),
             'forbiddenDates'     => $forbiddenDates,
+            'comments'           => $comments,
         ));
 
     }
@@ -319,6 +352,7 @@ class ExperienceController extends BaseController
      */
     public function filterFormAction(Request $request)
     {
+
         if ($request->request->has('_reset')) {
             $this->removeFilters('experienceSearch');
 

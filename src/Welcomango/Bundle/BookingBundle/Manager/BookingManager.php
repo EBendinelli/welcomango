@@ -2,12 +2,19 @@
 
 namespace Welcomango\Bundle\BookingBundle\Manager;
 
+use Doctrine\ORM\EntityManager;
 
 class BookingManager
 {
-    public function __construct()
-    {
 
+    /**
+     * @var Doctrine\ORM\EntityManager entityManager
+     */
+    protected $entityManager;
+
+    public function __construct(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
     }
 
     //When creating an experience, process the form to generate the participations
@@ -81,6 +88,29 @@ class BookingManager
         $booking->setEndDatetime($endTime);
 
         return $booking;
+    }
+
+    public function updateBookingStatus($experience){
+        $bookings = $experience->getBookings();
+        $today = new \Datetime();
+        foreach($bookings as $booking){
+            if($booking->getStatus() == 'Accepted' && $booking->getStartDatetime() < $today){
+                $booking->setStatus('Happened');
+                $booking->setActionRequired(true);
+                $this->entityManager->persist($booking);
+            }
+        }
+        $this->entityManager->flush();
+    }
+
+    public function updateNote($booking, $user, $note){
+        if($user == $booking->getUser()){
+            $booking->setLocalNote($note+1);
+        }else{
+            $booking->setTravelerNote($note+1);
+        }
+        $this->entityManager->persist($booking);
+        $this->entityManager->flush();
     }
 
 }

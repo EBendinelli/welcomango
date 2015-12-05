@@ -18,7 +18,7 @@ class UserManager
         $this->entityManager   = $entityManager;
     }
 
-    //Update the average note based on existing participations
+    //Update the average note based on existing booking
     public function updateAverageTravelerNote($user){
         $bookingRepo = $this->entityManager->getRepository('Welcomango\Model\Booking');
         $newNote = $bookingRepo->getAverageTravelerNote($user);

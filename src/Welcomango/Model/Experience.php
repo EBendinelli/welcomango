@@ -92,6 +92,12 @@ class Experience
      * @var integer
      *
      * @ORM\Column(name="price_per_hour", type="integer")
+     *  @Assert\Range(
+     *      min = 0,
+     *      max = 800,
+     *      minMessage = "Min % is 0",
+     *      maxMessage = "Max % is 100"
+     * )
      */
     private $pricePerHour;
 
@@ -377,7 +383,7 @@ class Experience
      */
     public function removeAvailability(Availability $availability)
     {
-        $this->availability->removeElement($availability);
+        $this->availabilities->removeElement($availability);
     }
 
     /**
@@ -385,7 +391,7 @@ class Experience
      */
     public function addAvailability(Availability $availability)
     {
-        $this->availability[] = $availability;
+        $this->availabilities[] = $availability;
     }
 
     /**
@@ -465,7 +471,7 @@ class Experience
      *
      * @param boolean $featured
      *
-     * @return Experience
+     * @return boolean
      */
     public function setFeatured($featured)
     {
@@ -489,7 +495,7 @@ class Experience
      *
      * @param boolean $deleted
      *
-     * @return Experience
+     * @return boolean
      */
     public function setDeleted($deleted)
     {
@@ -501,7 +507,7 @@ class Experience
     /**
      * Get deleted
      *
-     * @return Experience
+     * @return boolean
      */
     public function isDeleted()
     {
@@ -509,7 +515,7 @@ class Experience
     }
 
     /**
-     * Get deleted
+     * Get Featured
      *
      * @return boolean
      */

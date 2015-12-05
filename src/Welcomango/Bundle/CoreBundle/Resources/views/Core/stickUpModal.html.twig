@@ -1,0 +1,22 @@
+<!-- MODAL STICK UP  -->
+<div class="modal fade stick-up" id="{{ modalId|default('confirmModal') }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content-wrapper">
+            <div class="modal-content">
+                <div class="modal-header clearfix text-left">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i></button>
+                    <h5>{{ title|default('Are you sure') }}</h5>
+                </div>
+                <div class="modal-body">
+                    <p class="no-margin">{{  text|default('') }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-cons pull-left inline" data-dismiss="modal" id="confirmModalButton">{{ confirm|default('Continue') }}</button>
+                    <button type="button" class="btn btn-default btn-cons no-margin pull-left inline" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- END MODAL STICK UP  -->
