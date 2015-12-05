@@ -1,6 +1,6 @@
 {% extends "::front.html.twig" %}
 
-{% trans_default_domain "experience" %}
+{% trans_default_domain "interface" %}
 
 {#{% form_theme form with ["::frontTheme.html.twig"] %}#}
 
@@ -21,7 +21,7 @@
                         <div class="m-b-10">
                             {{ include("WelcomangoCoreBundle:Core:note.html.twig", { 'note': experience.getAverageNote, 'size': 'medium'}) }}
                         </div>
-                        <p class="fs-12 font-arial text-white ">A {{ experience.estimatedDuration }}h adventure proposed by {{ experience.getCreator.firstname }}</p>
+                        <p class="fs-12 font-arial text-white ">{{ 'experience.experienceShortText'|trans({'%experienceDuration%': experience.estimatedDuration, '%experienceCreator%': experience.getCreator.firstname}) }}</p>
                         <div class="text-center text-white">{{ display_tag(experience.getTags) }}</div>
                         {% if app.user == experience.getCreator %}
                             <a href="{{ path('front_experience_edit', {'experience_id': experience.id}) }}" class="btn btn-lg btn-complete btn-cons btn-rounded m-t-20"><i class="fa fa-pencil"></i> {{ 'profile.editExperience'|trans }}</a>
@@ -82,15 +82,22 @@
                                         {{  'experience.estimatedDuration'|trans }}: <span class="text-black semi-bold">{{ experience.getEstimatedDuration}}h</span>
                                     </div>
                                     <div >
-                                        {{  'experience.minimunDuration'|trans }}: <span class="text-black semi-bold">{{ experience.getMinimumDuration}}h</span>
+                                        {{  'experience.maximumParticipants'|trans }}: <span class="text-black semi-bold">{{ experience.maximumParticipants}}</span>
                                     </div>
                                     <div >
-                                        {{  'experience.maximumDuration'|trans }}: <span class="text-black semi-bold">{{ experience.getMaximumDuration}}h</span>
+                                        {% set experienceHappened = 0 %}
+                                        {% for booking in experience.bookings %}
+                                            {% if booking.status == "Happened" %}
+                                                {% set experienceHappened = experienceHappened + 1  %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        {{  'experience.happenedTimes'|trans }}: <span class="text-black semi-bold">{{ experienceHappened}}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
+
                                     <div >
-                                        {{  'experience.maximumParticipants'|trans }}: <span class="text-black semi-bold">{{ experience.getMaximumParticipants}}h</span>
+                                        {{  'experience.minimunDuration'|trans }}: <span class="text-black semi-bold">{{ experience.getMinimumDuration}}h</span>
                                     </div>
                                     <div >
                                         {{  'experience.maximumDuration'|trans }}: <span class="text-black semi-bold">{{ experience.getMaximumDuration}}h</span>
@@ -146,7 +153,7 @@
                                         </div>
                                     {% else %}
                                         <div>
-                                            {{ 'experience.SorryNoPictures'|trans }}
+                                            {{ 'experience.sorryNoPictures'|trans }}
                                             <i class="fa fa-meh-o"></i>
                                         </div>
                                     {% endif %}

@@ -5,7 +5,7 @@
 {% block meta_title %}{{ "profile.craeteExperience"|trans({}, "interface") }}{% endblock %}
 
 {% block profile_content %}
-    <div>
+    {#<div>
         Steps:
         {% include 'CraueFormFlowBundle:FormFlow:stepList.html.twig' %}
     </div>
@@ -30,7 +30,7 @@
             {% endfor %}
         </div>
 
-        {#Delete confirmation modal#}
+        &#123;&#35;Delete confirmation modal&#35;&#125;
         {% include 'WelcomangoCoreBundle:Core:stickUpModal.html.twig' with {
         'title': 'Remove availability',
         'text': 'availability.modal.removeText'|trans ,
@@ -41,6 +41,12 @@
     {{ form_rest(form) }}
 
     {% include 'CraueFormFlowBundle:FormFlow:buttons.html.twig' %}
+    {{ form_end(form) }}#}
+
+    {{ form_start(form, {'action': path('front_experience_create')} ) }}
+    {{ form_errors(form) }}
+    {{ form_rest(form) }}
+    <button id="modal-rating-button" class="btn btn-complete btn-cons"><i class="fa fa-valid"></i>{{ 'submit'|trans }}</button>
     {{ form_end(form) }}
 
 

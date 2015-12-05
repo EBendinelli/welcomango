@@ -69,8 +69,8 @@
                                 <td class="col-md-2">{{ booking.status }}</td>
                                 <td class="col-md-2">
                                     {{ request_action(booking, user) }}
-                                    {% if booking.status == 'Happened' and booking.travelerNote %}
-                                        {{ include("WelcomangoCoreBundle:Core:note.html.twig", { 'note': booking.experience.getAverageNote, 'size': 'small'}) }}
+                                    {% booking.status == 'Happened' and booking.travelerNote %}
+                                        {{ include("WelcomangoCoreBundle:Core:note.html.twig", { 'note': booking.travelerNote, 'size': 'small'}) }}
                                     {% elseif booking.status == 'Happened' %}
                                         <a class="btn btn-sm btn-complete" data-toggle="modal" data-target=".modal-rating" onClick="updateRatingModal('{{ path('booking_rate', {'booking_id' : booking.id}) }}')">Rate</a>
                                     {% endif %}
@@ -210,7 +210,7 @@
         }
 
         function updateRatingModal(route){
-            $('#modal-rating-button').attr("href", route);
+            $('#front_rating_comment').attr("action", route);
         }
 
         function rowToggle(element, id, event){

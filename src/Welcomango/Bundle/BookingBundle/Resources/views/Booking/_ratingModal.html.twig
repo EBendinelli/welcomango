@@ -13,14 +13,15 @@
                         {{ 'booking.ratingText'|trans }}
                     <div class="fs-12"><i class="fa fa-exclamation-triangle"></i>{{ 'booking.ratingNote'|trans }}</div>
                     </p>
+                    {{ form_start(form, {'action': path('booking_rate', {'booking_id' : booking.id|default('#')} ), 'attr': {'id': form.vars.id}}) }}
                     <div id="ratingForm">
-
                         {{ form_row(form.note) }}
                         {{ form_row(form.body) }}
 
                     </div>
                     <button type="button" data-dismiss="modal" class="btn btn-info  btn-cons"><i class="fa fa-arrow-left "></i> Cancel</button>
-                    <a id="modal-rating-button" href="{{ path('booking_rate', {'booking_id' : booking.id|default('#')}) }}" class="btn btn-complete btn-cons"><i class="fa fa-valid"></i>{{ 'submit'|trans }}</a>
+                    <button id="modal-rating-button" class="btn btn-complete btn-cons"><i class="fa fa-valid"></i>{{ 'submit'|trans }}</button>
+                    {{ form_end(form) }}
                 </div>
 
             </div>

@@ -1,5 +1,7 @@
 {% extends '::front.html.twig' %}
 
+{% trans_default_domain "interface" %}
+
 {% block meta_title %}
 {% endblock %}
 
@@ -19,7 +21,7 @@
             <div class="row">
                 <div class="col-md-3"><br/></div>
                 <div class="col-md-9">
-                    <h2 class="text-white">{% block profile_welcome_message '' %} {{ user.firstname }} {{ user.lastname|upper }}!</h2>
+                    <h2 class="text-white">{% block profile_welcome_message %} {{ user.firstname }} {{ user.lastname|upper }} {% endblock %}</h2>
                     <h4 class="text-white">{{ user.currentCity.name}}, {{ user.currentCity.country.name}}</h4>
                     <h4 class="text-white">{{ user.getAge}}</h4>
                 </div>
@@ -68,7 +70,7 @@
                                     <div class=" m-b-15 col-md-6">
                                         <div class="m-b-10">
                                             <i class="fa fa-language fa-lg"></i>
-                                            <span class="text-black semi-bold">{{ 'user.languagespoken'|trans }}</span>
+                                            <span class="text-black semi-bold">{{ 'profile.spokenLanguages'|trans }}</span>
                                         </div>
                                         {% for language in user.getSpokenLanguages.getValues %}
                                             <div class="flag flag-xs" role="image"  style="background: url({{ asset('img/countries/'~ language.language.flagLabel|lower ~'.svg') }});"></div>

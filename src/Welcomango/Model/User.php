@@ -645,6 +645,20 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
+     * @return ArrayCollection
+     */
+    public function getDisplayablePostedComments()
+    {
+        $postedComments = new ArrayCollection();
+        foreach($this->postedComments as $comment){
+            if($comment->IsValidated() && !$comment->isDeleted()){
+                $postedComments->add($comment);
+            }
+        }
+        return $postedComments;
+    }
+
+    /**
      * @param ArrayCollection $postedComments
      */
     public function setPostedComments($postedComments)
@@ -674,6 +688,20 @@ class User extends BaseUser implements ParticipantInterface
     public function getReceivedComments()
     {
         return $this->receivedComments;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getDisplayableReceivedComments()
+    {
+        $receivedComments = new ArrayCollection();
+        foreach($this->receivedComments as $comment){
+            if($comment->IsValidated() && !$comment->isDeleted()){
+                $receivedComments->add($comment);
+            }
+        }
+        return $receivedComments;
     }
 
     /**

@@ -57,7 +57,11 @@ class ExperienceRepository extends EntityRepository
         foreach($bookings as $booking){
             if($booking->getStatus() == 'Happened'){
                 $bookingComments = $booking->getComments();
-                $comments = array_merge($comments, $bookingComments->toArray());
+                foreach($bookingComments as $comment){
+                    if($comment->IsValidated() && !$comment->isDeleted()) {
+                        $comments[] = $comment;
+                    }
+                }
             }
         }
         return $comments;

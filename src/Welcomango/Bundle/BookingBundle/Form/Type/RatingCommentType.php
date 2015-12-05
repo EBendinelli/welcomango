@@ -27,11 +27,22 @@ class RatingCommentType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $note = array();
+        for($i = 1;$i<=5; $i++) $note[] = $i;
+
         $builder
-            ->add('body', 'textarea', ['label' => 'form.rating.description'])
-            ->add('note', 'mark', [
-                'label'    => 'form.rating.note',
+            ->add('body', 'textarea', [
+                'label' => 'form.rating.description',
                 'required' => true,
+            ])
+            ->add('note', 'choice', [
+                'label'    => 'form.rating.note',
+                'choices'  => $note,
+                'expanded' => true,
+                'required' => true,
+                'label_attr' => array(
+                    'class' => 'radio-inline'
+                )
             ]);
     }
 

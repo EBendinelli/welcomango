@@ -990,8 +990,9 @@ a .front-menu-user-picture{
 /* /// IMITATION OF PAGES BEHAVIOR FOR DETAILED TABLE /// */
 .table-details td:first-child:before{
     content: "\f054";
-    display: inline-block;
+    float:left;
     margin-right: 8px;
+    margin-top:8px;
     font-family: 'FontAwesome';
     -webkit-transition: all 0.12s linear;
     transition: all 0.12s linear;

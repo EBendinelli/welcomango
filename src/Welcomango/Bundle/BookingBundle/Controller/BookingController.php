@@ -105,9 +105,29 @@ class BookingController extends BaseController
             20
         );
 
+        //Prepare rating and comment form
+        $ratingForm = $this->createForm($this->get('welcomango.form.rating.type'));
+
         return array(
             'bookings' => $pagination,
             'activeTab' => $activeTab,
+            'ratingForm' => $ratingForm->createView(),
+        );
+    }
+
+    /**
+     * @param Request    $request
+     * @param Booking $booking
+     *
+     * @Route("/booking/{booking_id}", name="booking_view")
+     * @Template()
+     *
+     * @return array
+     */
+    public function viewAction(Request $request, Booking $booking){
+
+        return array(
+            'booking' => $booking,
         );
     }
 
@@ -174,10 +194,23 @@ class BookingController extends BaseController
      *
      * @return array
      */
-    public function rateAction(Request $request, Booking $booking, User $user)
+    public function rateAction(Request $request, Booking $booking)
     {
-        die();
-                return $this->redirect($this->generateUrl('booking_received_list'));
+        $ratingForm = $this->createForm($this->get('welcomango.form.rating.type'));
+        $ratingForm ->handleRequest($request);
+
+        if ($ratingForm->isValid()) {
+            $user = $this->getUser();
+
+            $commentBody = $ratingForm->get('body')->getData();
+            $note = $ratingForm->get('note')->getData();
+
+
+            $this->get('welcomango.front.booking.manager')->updateNote($booking, $user, $note);
+            $this->get('welcomango.front.comment.manager')->createComment($booking, $user, $commentBody);
+        }
+
+        return $this->redirect($this->generateUrl('booking_received_list', ['display' => 'happened']));
     }
 
     /**
