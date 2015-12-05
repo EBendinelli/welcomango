@@ -2,6 +2,9 @@
 
 namespace Welcomango\Bundle\ExperienceBundle\Controller;
 
+use Symfony\Component\HttpFoundation\File\File;
+use Gaufrette\Filesystem;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -37,7 +40,6 @@ class ExperienceController extends BaseController
     public function listAction(Request $request)
     {
         $filters = $this->getFilters(array(), 'experienceSearch');
-
 
         $paginator  = $this->get('knp_paginator');
         $query      = $this->getRepository('Welcomango\Model\Experience')->createPagerQueryBuilder($filters);
@@ -93,44 +95,33 @@ class ExperienceController extends BaseController
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
-        $experience = new Experience(); // Your form data class. Has to be an object, won't work properly with an array.
+
+        $experience = new Experience();
         $experience->setCreator($user);
 
-        $flow = $this->get('welcomango.form.flow.experience'); // must match the flow's service id
-        $flow->bind($experience);
         $em = $this->getDoctrine()->getManager();
-        // form of the current step
-        $form = $flow->createForm();
-        if ($flow->isValid($form)) {
-            $session = $this->get('session');
-            $flow->saveCurrentStepData($form);
 
-            if (isset($form['medias_id']) && null !== $form['medias_id']->getData()) {
-                $this->get('session')->set('medias_id', $form['medias_id']->getData());
-            }
+        $form = $this->createForm($this->get('welcomango.form.experience.create'));
 
-            if ($flow->nextStep()) {
-                $form = $flow->createForm();
-            } else {
-                // flow finished
-                $em->persist($experience);
-                $em->flush();
-                $this->get('welcomango.front.experience.manager')->processUploadMedias($experience, $session->get('medias_id'));
+        $form->handleRequest($request);
 
-                $availabilityManager = $this->get('welcomango.front.availability.manager');
-                $availabilityManager->generateAvailabilityForExperience($experience, $form);
+        if ($form->isValid()) {
+            ldd($form->get('medias')->getData());
+            $em->persist($experience);
+            $em->flush();
+            //$this->get('welcomango.front.experience.manager')->processUploadMedias($experience));
 
-                $flow->reset(); // remove step data from the session
+            $availabilityManager = $this->get('welcomango.front.availability.manager');
+            $availabilityManager->generateAvailabilityForExperience($experience, $form);
 
-                return $this->render('WelcomangoExperienceBundle:Experience:createSuccess.html.twig', array(
-                    'experience' => $experience,
-                ));
-            }
+            return $this->render('WelcomangoExperienceBundle:Experience:createSuccess.html.twig', array(
+                'experience' => $experience,
+            ));
         }
 
         return $this->render('WelcomangoExperienceBundle:Experience:create.html.twig', array(
-            'form' => $form->createView(),
-            'flow' => $flow,
+            'form'   => $form->createView(),
+            'medias' => new ArrayCollection(),
         ));
     }
 

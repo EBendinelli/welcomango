@@ -50,7 +50,7 @@ class Media
     /**
      * @ORM\Column(name="mime_type", type="string", length=255)
      */
-    protected $mime_type;
+    protected $mimeType;
 
     /**
      * @ORM\Column(name="extension", type="string", length=255)
@@ -78,11 +78,6 @@ class Media
     protected $path;
 
     /**
-     * @Assert\File(maxSize="6000000")
-     */
-    protected $file;
-
-    /**
      * @ORM\ManyToMany(targetEntity="Experience", mappedBy="medias")
      **/
     protected $experiences;
@@ -92,41 +87,12 @@ class Media
      */
     protected $temp;
 
-    public static function availableImageType()
-    {
-        return array(
-            self::GIF  => self::GIF,
-            self::PNG  => self::PNG,
-            self::JPG  => self::JPG,
-            self::JPEG => self::JPEG,
-        );
-    }
-
-    public static function availableMimeType()
-    {
-        return array(
-            self::MIME_PNG => self::MIME_PNG,
-            self::MIME_JPG => self::MIME_JPG,
-            self::MIME_GIF => self::MIME_GIF,
-        );
-    }
-
-    public static function getTmpDir()
-    {
-        return '/upload/medias/tmp';
-    }
-
-    public static function getUploadTmpRootDir()
-    {
-        return __DIR__.'/../../../web/upload/medias/tmp';
-    }
-
     /**
      * The constructor
      */
     public function __construct()
     {
-        $this->mime_type = "unknown";
+        $this->mimeType = "unknown";
         $this->extension = "unknown";
         $this->filename  = "unknown";
         $this->size      = 0;
@@ -169,15 +135,15 @@ class Media
      */
     public function getMimeType()
     {
-        return $this->mime_type;
+        return $this->mimeType;
     }
 
     /**
-     * @param string $mime_type
+     * @param string $mimeType
      */
-    public function setMimeType($mime_type)
+    public function setMimeType($mimeType)
     {
-        $this->mime_type = $mime_type;
+        $this->mimeType = $mimeType;
     }
 
     /**
@@ -253,30 +219,6 @@ class Media
     }
 
     /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFile()
-    {
-        return $this->file;
-    }
-
-    /**
-     * @param mixed $file
-     */
-    public function setFile($file)
-    {
-        $this->file = $file;
-    }
-
-    /**
      * @return mixed
      */
     public function getPath()
@@ -290,52 +232,6 @@ class Media
     public function setPath($path)
     {
         $this->path = $path;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getAbsolutePath()
-    {
-        return null === $this->path
-            ? null
-            : $this->getUploadRootDir().'/'.$this->path;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getWebPath()
-    {
-        return null === $this->path
-            ? null
-            : $this->getUploadDir().'/'.$this->path;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUploadRootDir()
-    {
-        return __DIR__.'/../../../web/'.$this->getUploadDir();
-    }
-
-    /**
-     * @return string
-     */
-    public function getUploadDir()
-    {
-        return 'upload/medias';
-    }
-
-    /**
-     * @param $experienceId
-     *
-     * @return string
-     */
-    public function getExperienceRootDir($experienceId)
-    {
-        return __DIR__.'/../../../web/'.$this->getUploadDir().'/experience/'.$experienceId;
     }
 
     /**

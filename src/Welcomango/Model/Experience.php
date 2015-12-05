@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\Validator\Constraints as Assert;
 
+use Welcomango\Bundle\ExperienceBundle\Validator\Constraints as WelcomangoAssert;
+
 /**
  * Experience
  *

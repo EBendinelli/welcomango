@@ -78,3 +78,8 @@
         {{ label|trans({}, translation_domain) }}
     </label>
 {%- endblock radio_widget -%}
+
+{%- block medias_widget -%}
+    <div id="medias" class="dropzone" style="background-color: lightgray ;height: 300px"></div>
+    <input type="hidden" id="mediasListName" {{ block('widget_attributes') }} class="form-control">
+{%- endblock medias_widget -%}

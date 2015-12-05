@@ -45,7 +45,6 @@ gulp.task('assets-js', function() {
         'components/pages-assets/plugins/pace/pace.min.js',
         'components/pages-assets/plugins/modernizr.custom.js',
         'components/pages-assets/plugins/jquery-ui/jquery-ui.min.js',
-        'components/pages-assets/plugins/dropzone/dropzone.js',
         'components/pages-assets/plugins/boostrapv3/js/bootstrap.min.js',
         'components/pages-assets/plugins/jquery/jquery-easy.js',
         'components/pages-assets/plugins/jquery-unveil/jquery.unveil.min.js',
@@ -170,6 +169,12 @@ gulp.task('assets-js', function() {
     ])
         .pipe(gulp.dest(assets_js))
     ;
+
+    gulp.src([
+        'components/dropzone/dist/dropzone.js'
+    ])
+        .pipe(gulp.dest(assets_js))
+    ;
 });
 
 
@@ -264,6 +269,14 @@ gulp.task('assets-css', function() {
     gulp.src([
         'components/Jcrop/css/Jcrop.min.css',
     ])
+        .pipe(gulp.dest(assets_css))
+    ;
+
+    gulp.src([
+        'components/dropzone/dist/dropzone.css',
+        'components/dropzone/dist/basic.css',
+    ])
+        .pipe(concat('dropzone.min.css'))
         .pipe(gulp.dest(assets_css))
     ;
 

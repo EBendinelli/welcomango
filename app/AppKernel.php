@@ -23,6 +23,8 @@ class AppKernel extends Kernel
             new Oneup\UploaderBundle\OneupUploaderBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new FOS\MessageBundle\FOSMessageBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle(),
+            new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
 
             new Welcomango\Bundle\UserBundle\WelcomangoUserBundle(),
             new Welcomango\Bundle\CoreBundle\WelcomangoCoreBundle(),
