@@ -7,5 +7,10 @@
         <service id="welcomango.media_namer" class="Welcomango\Bundle\MediaBundle\Manager\MediaNamer" >
             <argument type="service" id="security.token_storage"/>
         </service>
+
+        <service id="welcomango.media.manager" class="Welcomango\Bundle\MediaBundle\Manager\MediaManager" >
+            <argument type="service" id="welcomango.media_namer"/>
+            <argument type="service" id="knp_gaufrette.filesystem_map"/>
+        </service>
     </services>
 </container>

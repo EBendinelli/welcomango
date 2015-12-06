@@ -23,7 +23,7 @@
             <tag name="knp_menu.menu" alias="menu_admin" />
         </service>
 
-        <service id="welcomango.form.media.type" class="Welcomango\Bundle\CoreBundle\Form\Type\MediaType">
+        <service id="welcomango.form.media.type" class="Welcomango\Bundle\MediaBundle\Form\Type\MediaType">
             <tag name="form.type" alias="medias" />
         </service>
 

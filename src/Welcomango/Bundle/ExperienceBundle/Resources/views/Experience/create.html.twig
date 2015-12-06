@@ -10,16 +10,17 @@
         <div>
             {{ form_row(form.title) }}
             {{ form_row(form.description) }}
-            {{ form_row(form.medias) }}
+            {{ form_row(form.medias_upload) }}
+            <div id="medias" class="dropzone" style="background-color: lightgray ;height: 300px"></div>
         </div>
     {{ form_rest(form) }}
 
-    <div id="availabilities" class="availabilities"
+{#    <div id="availabilities" class="availabilities"
          data-prototype="{% filter escape %}{% include 'WelcomangoExperienceBundle:Availability:_availabilities.html.twig' with {'form': form.availabilities.vars.prototype } %}{% endfilter %}">
         {% for availability in form.availabilities %}
             {% include 'WelcomangoExperienceBundle:Availability:_availabilities.html.twig' with {'form': availability } %}
         {% endfor %}
-    </div>
+    </div>#}
 
     {#Delete confirmation modal#}
     {% include 'WelcomangoCoreBundle:Core:stickUpModal.html.twig' with {

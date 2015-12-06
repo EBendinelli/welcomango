@@ -154,8 +154,6 @@ stof_doctrine_extensions:
             loggable: true
             sortable: true
 
-gregwar_image: ~
-
 services:
     twig.extension.text:
         class: Twig_Extensions_Extension_Text

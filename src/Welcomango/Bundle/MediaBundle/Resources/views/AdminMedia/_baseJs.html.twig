@@ -15,6 +15,7 @@
 <script src="{{ asset('js/dropzone.js') }}"></script>
 <script type="text/javascript">
     Dropzone.autoDiscover = false;
+    var medias = [];
     $(function() {
         var dropzone = new Dropzone("div#medias", {
             url: "{{ oneup_uploader_endpoint('gallery') }}",
@@ -31,12 +32,21 @@
                 this.options.addedfile.call(this, mockFile);
                 {% endfor %}
                 this.on("addedfile", function(file) {
-                    $('#mediasListName').html(file.name);
+                    medias.push(file.name);
+                    computeMediaName();
                 });
                 this.on("removedfile", function(file) {
                     $.post("{{ path('experience_media_delete') }}", {'file': file.name}, function (response) {}, 'html');
+                    var index = medias.indexOf(+file.name);
+                    medias.splice(index, 1);
+                    computeMediaName();
                 });
             }
         });
     });
+
+    function computeMediaName() {
+        $('#front_experience_medias_upload').val(medias.join(','));
+    }
+
 </script>

@@ -70,7 +70,7 @@
 
     <!-- BOOKING EXPERIENCE BEGIN -->
     {% if booking.experience.getMedias.first %}
-        {% set imageBanner = asset(experience.getMedias.first.getWebPath) %}
+
     {% else %}
         {% set imageBanner = asset("img/front/places-" ~ random(18) ~ ".jpg") %}
     {% endif %}

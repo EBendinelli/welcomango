@@ -13,6 +13,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Welcomango\Bundle\MediaBundle\Form\Type\MediaType;
 
 use Welcomango\Model\Experience;
 use Welcomango\Model\City;
@@ -56,11 +57,6 @@ class ExperienceType extends AbstractType
         for ($i = 1; $i < 48; $i++) $maximumDurations[$i] = $i;
         for ($i = 1; $i < 10; $i++) $maximumParticipants[$i] = $i;
 
-        $availabilities = array('form.experience.alwaysAvailable', 'form.experience.specificAvailability');
-        $days           = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
-        $hours          = array('Early Morning', 'Morning', 'Lunchtime', 'Afternoon', 'Evening', 'Night');
-        $months         = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
-
         $builder
             ->add('title', 'text', ['label' => 'form.experience.title'])
             ->add('description', 'textarea', ['label' => 'form.experience.description'])
@@ -73,10 +69,10 @@ class ExperienceType extends AbstractType
                 'property' => 'name',
                 'multiple' => true,
             ))
-            ->add('medias', 'medias', array(
-                'label'        => false,
-                'required'     => false
-            ))
+            ->add('medias_upload', 'hidden', [
+                'required' => false,
+                'mapped'   => false,
+            ])
             ->add('estimated_duration', 'choice', [
                 'choices' => $estimatedDurations,
                 'label'   => 'form.experience.estimatedDuration',
@@ -94,38 +90,6 @@ class ExperienceType extends AbstractType
                 'choices' => $maximumParticipants,
                 'label'   => 'form.experience.maximumParticipants',
             ])
-            ->add('availability', 'choice', [
-                'choices'  => $availabilities,
-                'label'    => 'form.experience.availability',
-                'mapped'   => false,
-                'expanded' => true,
-                'multiple' => false,
-                'label'    => false,
-                'data'     => 0,
-            ])
-            ->add('day', 'choice', [
-                'choices'  => $days,
-                'label'    => false,
-                'mapped'   => false,
-                'expanded' => true,
-                'multiple' => true,
-                'data'     => array("5", "6"),
-            ])
-            ->add('hour', 'choice', [
-                'choices'  => $hours,
-                'label'    => false,
-                'mapped'   => false,
-                'expanded' => true,
-                'multiple' => true,
-            ])
-            /*$builder->add('month', 'choice',[
-                'choices' => $months,
-                'label' => false,
-                'mapped'   => false,
-                'expanded' => true,
-                'multiple' => true,
-            ]);*/
-
             ->add('start_date', 'date', [
                 'label'    => 'form.experience.startDate',
                 'data'     => new \DateTime(),
@@ -158,14 +122,14 @@ class ExperienceType extends AbstractType
                     'data-date-format' => 'dd-mm-yyyy',
                 ],
             ])
+            ->add('availabilities', 'collection', [
+                'type'         => new AvailabilityType(),
+                'allow_add'    => true,
+                'by_reference' => false,
+                'allow_delete' => true,
+                'label'        => false,
+            ])
             ->add('register', 'submit');
-             $builder->add('availabilities', 'collection', [
-                    'type' => new AvailabilityType(),
-                    'allow_add'    => true,
-                    'by_reference' => false,
-                    'allow_delete' => true,
-                    'label'        => false,
-                ]);
     }
 
     /**
