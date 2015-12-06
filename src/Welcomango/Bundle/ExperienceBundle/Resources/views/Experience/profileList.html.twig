@@ -1,8 +1,15 @@
 {% extends "FOSUserBundle:Profile:show.html.twig" %}
 
+{% trans_default_domain "interface" %}
+
 {% block profile_content %}
+    <div class="bg-white p-l-20 p-b-20 p-t-10 m-t-20 b-a b-warning">
+        <h4>{{ 'experience.manage.title'|trans }}</h4>
+        <p>{{ 'experience.manage.introductionText'|trans }}</p>
+    </div>
+
     <div class="text-center">
-        <a class="m-t-20 m-b-10 btn btn-success fs-16 bold" style="width:100%" href="{{ path('front_experience_create') }}">Create a new Experience!</a>
+        <a class="m-t-20 m-b-10 btn btn-complete fs-16 bold" style="width:100%" href="{{ path('front_experience_create') }}">Create a new Experience!</a>
     </div>
 
     {% for experience in experiences %}

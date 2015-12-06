@@ -1,0 +1,103 @@
+{% extends "FOSUserBundle:Profile:show.html.twig" %}
+
+{% trans_default_domain "interface" %}
+
+{% block profile_content %}
+
+    {% block booking_title %}
+        <div class="text-center m-b-20">
+            <h2>{{ 'booking.bookingFor'|trans({'%title%': booking.experience.title,'%city%': booking.experience.city.getName})|raw }}</h2>
+            <div class="hint">{{ 'booking.requestSentExplanation' }}</div>
+        </div>
+    {% endblock %}
+
+    {% block booking_actions %}
+        {% set statusClass = '' %}
+        {% if booking.status == 'Happened' %}
+            {% set statusClass = 'text-black' %}
+        {% elseif booking.status == 'Accepted' %}
+            {% set statusClass = 'text-success' %}
+        {% elseif booking.status == 'Refused' %}
+            {% set statusClass = 'text-danger' %}
+        {% else %}
+            {% set statusClass = 'text-complete' %}
+        {% endif %}
+
+        <div class="row bg-white panel panel-default p-l-20 p-r-20 p-b-10">
+            <div class="col-md-6">
+                <h4 class="p-t-10">
+                    {{ 'booking.status'|trans }} <span class="bold {{ statusClass }}">{{ booking.status }}</span>
+                </h4>
+            </div>
+            <div class="col-md-6 text-right p-t-15">
+                {{ request_action(booking, user, 3) }}
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block booking_details %}
+        <!-- BOOKING SUMMARY BEGIN -->
+        <div class="row bg-white panel panel-default p-l-20 p-b-20 p-t-20">
+            <div class="col-md-6">
+                <div>
+                    <i class="fa fa-user p-b-10"></i>
+                    <span class="semi-bold">{{ booking.numberOfParticipants }}</span> {{ 'booking.participants'|trans }}
+                </div>
+                <div >
+                    <i class="fa fa-street-view  p-b-10"></i>
+                    {{ 'booking.meetingAt'|trans }}: <span class="semi-bold">{{ booking.startDatetime|date('H:i') }}</span>
+                </div>
+                <div>
+                    <i class="fa fa-clock-o p-b-10 "></i>
+                    {{ 'booking.duration'|trans }}: <span class="semi-bold">{{ date_difference(booking.startDatetime, booking.endDatetime) }}</span>
+                </div>
+                <div>
+                    <i class="fa fa-globe "></i>
+                    {{ 'booking.experiencesAttendedBy'|trans }}: <span class="semi-bold">{{ booking.user.getAttendedExperiences|length }}</span>
+                </div>
+            </div>
+            <div class="col-md-6 text-center">
+                <div class="bold m-b-10">Meeting booked on {{ booking.startDatetime|date('d-m-Y') }}</div>
+                <i class="fa fa-calendar-o fa-5x "></i>
+            </div>
+        </div>
+        <!-- BOOKING SUMMARY END -->
+    {% endblock  %}
+
+    {% block experience_details %}
+        <!-- BOOKING EXPERIENCE BEGIN -->
+        {% if booking.experience.getMedias.first %}
+            {% set imageBanner = asset(experience.getMedias.first.getWebPath) %}
+        {% else %}
+            {% set imageBanner = asset("img/front/places-" ~ random(18) ~ ".jpg") %}
+        {% endif %}
+
+        <div class="row bg-white panel panel-default p-b-20">
+            <div class="p-b-40 p-t-20 bg-master-darkest sm-no-margin"  data-pages-bg-image="{{ asset(imageBanner) }}" data-bg-overlay="black" data-overlay-opacity="0.3" data-pages="parallax">
+                <h4 class="text-white text-center ">{{ 'booking.experienceDetails'|trans }}</h4>
+                <h4 class="text-primary text-center p-b-20 ">
+                    <a class="text-primary">{{ booking.experience.title }}</a>
+                    <span class="text-white">with</span> {{ booking.experience.getCreator.firstname }}
+                </h4>
+            </div>
+            <div class="col-md-6 p-l-20 p-t-20">
+                <div class="bold m-b-10">{{ 'experience.description'|trans }}</div>
+                <div><p>{{ booking.experience.description }}</p></div>
+                <div class="bold m-t-20 m-b-10">{{ 'experience.tags'|trans }}</div>
+                <div>{{ display_tag(booking.experience.tags) }}</div>
+            </div>
+            <div class="col-md-6"></div>
+        </div>
+        <!-- BOOKING EXPERIENCE END -->
+    {% endblock %}
+
+    <!-- BEGIN DELETE CONFIRMATION MODAL -->
+    {{ include("WelcomangoCoreBundle:Core:modal.html.twig", {
+        'title': 'Are you sure you want to cancel this meeting?',
+        'main_text': 'If you have not yet exchanged with this person, please send him a little message.',
+        'valid_button_name': 'Decline',
+        'icon': 'fa-times-circle ',
+        'path_valid': path('front_experience_view', {'experience_id': booking.experience.id}),
+    })}}
+    <!-- END DELETE CONFIRMATION MODAL -->
+{% endblock profile_content %}

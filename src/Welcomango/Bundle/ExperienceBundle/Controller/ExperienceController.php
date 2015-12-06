@@ -48,6 +48,13 @@ class ExperienceController extends BaseController
             9
         );
 
+        $entityManager = $this->getDoctrine()->getManager();
+        if(isset($filters['tags'])){
+            foreach ($filters['tags'] as $tag) {
+                $entityManager->persist($tag);
+            }
+        }
+
         $form = $this->createForm($this->get('welcomango.form.experience.filter'), $filters);
 
         return array(

@@ -2,6 +2,7 @@
 
 namespace Welcomango\Model\Repository;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -119,8 +120,8 @@ class ExperienceRepository extends EntityRepository
         }
 
         if ($tags = $this->getFilter('tags', $filters)) {
-            if($tags instanceof ArrayCollection){
-                foreach($tags as $tag){
+            if($tags instanceof ArrayCollection) {
+                foreach ($tags as $tag) {
                     $queryBuilder->andWhere('t.name = :tag');
                     $queryBuilder->setParameter('tag', $tag->getName());
                 }
