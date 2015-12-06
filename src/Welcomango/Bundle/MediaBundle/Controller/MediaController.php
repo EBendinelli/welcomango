@@ -35,9 +35,6 @@ class MediaController extends BaseController
         $originalFilename = $request->request->get('file');
         $tmpFilename = $this->get('welcomango.media_namer')->getTempName($originalFilename);
 
-/*        $experienceAdapter->write("50/".$originalFilename, $content);
-        ldd($tmpAdapter->get($tmpFilename));*/
-
         $originalFilename = $request->request->get('file');
         $tmpFilename      = $this->get('welcomango.media_namer')->getTempName($originalFilename);
 
