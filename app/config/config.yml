@@ -95,9 +95,25 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Welcomango\Model\User
+    service:
+        mailer: fos_user.mailer.twig_swift
     registration:
+        form:
+            type: front_user
         confirmation:
             enabled: true
+            from_email:
+                address:        no-reply@welcomango.com
+                sender_name:    Welcomango team
+            template: WelcomangoEmailBundle:EmailTemplate:registration.html.twig
+    resetting:
+        email:
+            template: WelcomangoEmailBundle:EmailTemplate:reseting.html.twig
+    resetting:
+        email:
+            from_email:
+                address: no-reply@welcomango.com
+                sender_name: Welcomango team
 
 knp_menu:
     twig:
@@ -149,6 +165,10 @@ services:
         class: Twig_Extensions_Extension_Date
         tags:
             - { name: 'twig.extension' }
+    monolog_processor:
+        class: Monolog\Processor\PsrLogMessageProcessor
+        tags:
+            - { name: monolog.processor}
 
 fos_message:
     db_driver: orm

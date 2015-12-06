@@ -28,16 +28,16 @@
                     {{ form_start(form, {'attr': {'id': 'registration_form'}}) }}
                     {{ form_errors(form) }}
                     {{ form_row(form.username) }}
-                    <div id="front_user_username_message"></div>
+                    <div id="fos_user_registration_form_username_message"></div>
                     {{ form_row(form.email) }}
-                    <div id="front_user_email_message"></div>
+                    <div id="fos_user_registration_form_email_message"></div>
                     <div class="row">
                         <div class="col-md-6">{{ form_row(form.firstName) }}</div>
                         <div class="col-md-6">{{ form_row(form.lastName) }}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">{{ form_row(form.password.first) }}</div>
-                        <div class="col-md-6">{{ form_row(form.password.second) }}</div>
+                        <div class="col-md-6">{{ form_row(form.plain_password.first) }}</div>
+                        <div class="col-md-6">{{ form_row(form.plain_password.second) }}</div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">{{ form_row(form.birthdate) }}</div>
@@ -75,8 +75,8 @@
     <script>
         var timeout;
         $(document).ready(function () {
-            $('#front_user_username').val('');
-            var elements = ['front_user_username', 'front_user_email'];
+            $('#fos_user_registration_form_username').val('');
+            var elements = ['fos_user_registration_form_username', 'fos_user_registration_form_email'];
 
             $('.form-control').keyup(function (event) {
                 if($.inArray($(this).attr('id'), elements) > -1){
@@ -92,6 +92,7 @@
                         /*$('#spinner').css('display', 'inline');*/
                         $.post("{{ path('user_registration_check_ajax') }}", {'query': query, 'field': field}, function (response) {
                             var parsedResponse = $.parseJSON(response);
+                            console.log(elementId);
                             $('#spinner').css('display', 'none');
                             $('#'+elementId+'_message').html(parsedResponse['message']);
                             $('#'+elementId+'_message').removeAttr('class');

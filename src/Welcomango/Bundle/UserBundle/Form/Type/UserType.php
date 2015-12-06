@@ -69,7 +69,7 @@ class UserType extends AbstractType
             'required' => false,
         ]);
 
-        $builder->add('password', 'repeated', array(
+        $builder->add('plain_password', 'repeated', array(
             'type'            => 'password',
             'invalid_message' => 'The passwords don\'t match',
             'options'         => array('required' => true),

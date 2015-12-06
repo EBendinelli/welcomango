@@ -1,9 +1,5 @@
 <?php
 
-ini_set('display_errors',1);
-ini_set('display_startup_errors',1);
-error_reporting(-1);
-
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
@@ -32,6 +28,7 @@ class AppKernel extends Kernel
             new Welcomango\Bundle\MessageBundle\WelcomangoMessageBundle(),
             new Welcomango\Bundle\ExperienceBundle\WelcomangoExperienceBundle(),
             new Welcomango\Bundle\BookingBundle\WelcomangoBookingBundle(),
+            new Welcomango\Bundle\EmailBundle\WelcomangoEmailBundle(),
 
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new Gregwar\ImageBundle\GregwarImageBundle(),
