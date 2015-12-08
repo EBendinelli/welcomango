@@ -38,11 +38,11 @@ class LoadBookingData extends AbstractFixture implements FixtureInterface, Order
 
         $users = $userRepo->findAll();
         $experiences = $experienceRepo->findAll();
-        $status = array('Requested', 'Accepted', 'Happened');
+        $status = array('Requested', 'Accepted', 'Happened', 'Refused');
         $times = $this->container->getParameter('meeting_times');
 
         //Generate random booking participant
-        for($i=0;$i<40;$i++){
+        for($i=0;$i<50;$i++){
             $entry = new Booking();
             $randExperience = $experiences[array_rand($experiences)];
             $entry->setExperience($randExperience );
@@ -60,7 +60,7 @@ class LoadBookingData extends AbstractFixture implements FixtureInterface, Order
 
                 /*if($randExperience->isAvailableForBooking($entry->getStartTime())){*/
                 $entry->setNumberOfParticipants(rand(1,10));
-                $randStatus = $status[rand(0,2)];
+                $randStatus = $status[rand(0,3)];
                 $entry->setStatus($randStatus);
                 if($randStatus == 'Happened'){
                     $entry->setActionRequired(true);

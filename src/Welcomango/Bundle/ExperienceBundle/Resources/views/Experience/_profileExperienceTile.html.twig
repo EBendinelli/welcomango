@@ -27,8 +27,8 @@
         </a>
 
         <div class="panel-body p-t-0 ">
-            <div class="text-center"><a href="{{ path('booking_received_list', {'display': 'happened'}) }}" class="text-success semi-bold">{{ 'experience.attended'|trans }}: {{ experience.getNumberOfTimeAttended }}<a/></div>
-            <div class="text-center"><a href="{{ path('booking_received_list', {'display': 'received'}) }}" class="text-success semi-bold">{{ 'experience.pendingRequest'|trans }}: {{ experience.getPendingRequest }}</a></div>
+            <div class="text-center"><a href="{{ path('booking_received_list', {'display': 'happened'}) }}" class="text-complete semi-bold">{{ 'experience.attended'|trans }}: {{ experience.getNumberOfTimeAttended }}<a/></div>
+            <div class="text-center"><a href="{{ path('booking_received_list', {'display': 'received'}) }}" class="text-complete semi-bold">{{ 'experience.pendingRequest'|trans }}: {{ experience.getPendingRequest }}</a></div>
             <div class="text-center m-t-10 m-b-20">
                 <p class="fs-14">{{ experience.getDescription | truncate(200)}}</p>
             </div>

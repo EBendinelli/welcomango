@@ -66,6 +66,14 @@ class ProfileController extends BaseProfileController
             }
         }
 
+        //If the user has a new request we display a link
+        $newRequest = false;
+        foreach($bookings as $booking){
+            if($booking->getStatus() == 'Requested'){
+                $newRequest = $booking;
+            }
+        }
+
         //Get Comments
         $comments = $user->getReceivedComments();
 
@@ -74,6 +82,7 @@ class ProfileController extends BaseProfileController
             'nextVisitGiven'    => $nextVisitGiven,
             'nextTrip'          => $nextTrip,
             'comments'          => $comments,
+            'newRequest'        => $newRequest,
         ));
     }
 

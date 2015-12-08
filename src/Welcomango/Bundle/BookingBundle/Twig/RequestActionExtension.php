@@ -41,7 +41,7 @@ class RequestActionExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function requestAction(Booking $booking, User $user)
+    public function requestAction(Booking $booking, User $user, $size = 2)
     {
         $availableActions = '';
         $messageRoute     = $this->router->generate('message_request', array(
@@ -58,18 +58,18 @@ class RequestActionExtension extends \Twig_Extension
             // TODO change the accepted modal + content + confirmation
             switch ($booking->getStatus()) {
                 case 'Requested':
-                    $accept           = '<a href="'.$acceptedRoute.'"><i class="fa fa-check fa-2x text-success hover-opacity hover-pointer m-r-5"></i></a>';
-                    $refuse           = '<span data-toggle="modal" data-target=".modal-action" onClick="updateModal(\''.$refusedRoute.'\')"><i class="fa fa-times fa-2x text-danger hover-opacity hover-pointer m-r-10"></i></span>';
-                    $message          = '<a href="'.$messageRoute.'"><i class="fa fa-envelope fa-2x text-black hover-opacity hover-pointer m-r-5"></i></a>';
+                    $accept           = '<a href="'.$acceptedRoute.'"><i class="fa fa-check fa-'.$size.'x text-success hover-opacity hover-pointer m-r-5"></i></a>';
+                    $refuse           = '<span data-toggle="modal" data-target=".modal-action" onClick="updateModal(\''.$refusedRoute.'\')"><i class="fa fa-times fa-'.$size.'x text-danger hover-opacity hover-pointer m-r-10"></i></span>';
+                    $message          = '<a href="'.$messageRoute.'"><i class="fa fa-envelope fa-'.$size.'x text-black hover-opacity hover-pointer m-r-5"></i></a>';
                     $availableActions = $accept.$refuse.$message;
                     break;
                 case 'Happened':
                 case 'Accepted':
-                    $message          = '<a href="'.$messageRoute.'"><i class="fa fa-envelope fa-2x text-black hover-opacity hover-pointer m-r-5"></i></a>';
+                    $message          = '<a href="'.$messageRoute.'"><i class="fa fa-envelope fa-'.$size.'x text-black hover-opacity hover-pointer m-r-5"></i></a>';
                     $availableActions = $message;
                     break;
                 case 'Refused':
-                    $refused          = '<i class="fa fa-ban fa-2x m-r-5"></i>';
+                    $refused          = '<i class="fa fa-ban fa-'.$size.'x m-r-5"></i>';
                     $availableActions = $refused;
                     break;
             }
@@ -78,21 +78,21 @@ class RequestActionExtension extends \Twig_Extension
             $cancelRoute = $this->router->generate('booking_update', array('booking_id' => $booking->getId(), 'status' => 'Cancel'));
             switch ($booking->getStatus()) {
                 case 'Requested':
-                    $pending          = '<span><i class="fa fa-clock-o fa-2x text-black m-r-5"></i></span>';
-                    $cancel           = '<span data-toggle="modal" data-target=".modal-action" onClick="updateModal(\''.$cancelRoute.'\')"><i class="fa fa-times fa-2x text-danger hover-opacity hover-pointer m-r-10"></i></span>';
+                    $pending          = '<span><i class="fa fa-clock-o fa-'.$size.'x text-black m-r-5"></i></span>';
+                    $cancel           = '<span data-toggle="modal" data-target=".modal-action" onClick="updateModal(\''.$cancelRoute.'\')"><i class="fa fa-times fa-'.$size.'x text-danger hover-opacity hover-pointer m-r-10"></i></span>';
                     $availableActions = $pending.$cancel;
                     break;
                 case 'Accepted':
-                    $accepted         = '<span><i class="fa fa-check fa-2x text-success m-r-5"></i></span>';
+                    $accepted         = '<span><i class="fa fa-check fa-'.$size.'x text-success m-r-5"></i></span>';
                     $availableActions = $accepted;
                     break;
                 case 'Refused':
-                    $refused          = '<i class="fa fa-frown text-danger fa-2x m-r-5"></i>';
+                    $refused          = '<i class="fa fa-frown text-danger fa-'.$size.'x m-r-5"></i>';
                     $availableActions = $refused;
                     break;
             }
 
-            $message           = '<a href="'.$messageRoute.'"><i class="fa fa-envelope fa-2x text-black hover-opacity hover-pointer m-r-5"></i></a>';
+            $message           = '<a href="'.$messageRoute.'"><i class="fa fa-envelope fa-'.$size.'x text-black hover-opacity hover-pointer m-r-5"></i></a>';
             $availableActions .= $message;
 
         }

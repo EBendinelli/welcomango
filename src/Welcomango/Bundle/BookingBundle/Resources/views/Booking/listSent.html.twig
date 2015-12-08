@@ -36,7 +36,11 @@
                     {% for booking in bookings %}
                         {% set extraClass = '' %}
                         {% if not booking.seen %}
-                            {% set extraClass = 'participation-row-bold success' %}
+                            {% if booking.status == 'Accepted' %}
+                                {% set extraClass = 'participation-row-bold success' %}
+                            {% elseif booking.status == 'Accepted' %}
+                                {% set extraClass = 'participation-row-bold danger' %}
+                            {% endif %}
                         {% endif %}
                         <tr id="booking-row-{{ booking.id }}" class="participation-row clickable table-details hover-bg-master-lightest hover-pointer {{ extraClass|default('') }}" onClick="rowToggle(this, {{ booking.id }}, event)">
                             <td class="col-md-3">
@@ -58,7 +62,7 @@
                             </td>
                             <td class="col-md-2">{{ booking.startDatetime|date('Y-m-d')  }}</td>
                             <td class="col-md-1">{{ booking.startDatetime|date('H:i') }}</td>
-                            <td class="col-md-2 {% if booking.status == 'Accepted' %}text-success bold{% endif %}">{{ booking.status }}</td>
+                            <td class="col-md-2 {% if booking.status == 'Accepted' %}text-success bold{% elseif booking.status == 'Refused' %}text-danger bold{% endif %}">{{ booking.status }}</td>
                             <td class="col-md-2">
                             {{ request_action(booking, user) }}
                             {% if booking.status == 'Happened' and booking.localNote %}
@@ -71,16 +75,15 @@
                         <tr class="participation_details_{{ booking.id }} {{ extraClassDetails|default('') }}" style="display: none">
                             <td colspan="5">
                                 <div class="row">
-                                    <div class="col-md-12 semi-bold text-center m-b-10">
+                                    <div class="col-md-12 semi-bold text-center m-b-20">
                                         {{ 'booking.sentTo'|trans }}
                                         <a href="{{ asset(path('front_user_view', {'user_id': booking.user.id})) }}" class="text-primary semi-bold">
                                             {{ booking.experience.getCreator.fullname }}
                                         </a>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row m-b-10">
                                     <div class="col-md-6">
-                                        <div class="bold text-center m-b-10">{{ 'booking.requestDetails'|trans }}</div>
                                         <div>
                                             <i class="fa fa-user p-r-5"></i>
                                             <span class="semi-bold">{{ booking.numberOfParticipants }}</span> {{ 'booking.participants'|trans }}
@@ -94,22 +97,22 @@
                                     </div>
                                     <div class="col-md-6">
                                         {% if activeTab == 'happened'  %}
-                                            <div class="bold text-center m-b-10">{{ 'booking.comment'|trans }}</div>
+                                            {% set commentFound = false %}
                                             {% if booking.status == 'Happened' %}
                                                 {% if booking.comments is not empty %}
                                                     {% for comment in booking.comments %}
                                                         {% if comment.receiver == user %}
+                                                            {% set commentFound = true %}
                                                             <div style="font-style: italic; white-space:normal">"{{ comment.body|nl2br|raw }}"</div>
                                                         {% endif %}
                                                     {% endfor %}
-                                                {% else %}
-                                                    {{ 'booking.noComment'|trans }}
                                                 {% endif %}
-                                            {% else %}
-                                                {{ 'booking.noComment'|trans }}
+                                            {% endif %}
+                                            {% if not commentFound %}
+                                                <div class="text-center p-t-20">{{ 'booking.noComment'|trans }}</div>
                                             {% endif %}
                                         {% else %}
-                                            <div class="text-center m-t-40"><a href="{{ path('booking_view', {'booking_id' : booking.id}) }}"  class="btn btn-complete">See more</a></div>
+                                            <div class="text-center m-t-20"><a href="{{ path('booking_view', {'booking_id' : booking.id}) }}"  class="btn btn-complete">See more</a></div>
                                         {% endif %}
                                     </div>
                                 </div>

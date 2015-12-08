@@ -93,7 +93,7 @@ class Controller extends BaseController
                     } else {
                         unset($filters[$key]);
                     }
-                } elseif (!$value instanceof \DateTime) {
+                } elseif (!$value instanceof \DateTime || !$value instanceof ArrayCollection) {
                     $filters[$key] = array(
                         'class' => get_class($value),
                         'id'    => $value->getId()
@@ -101,6 +101,7 @@ class Controller extends BaseController
                 }
             }
         }
+
         $session = $this->get('request_stack')->getCurrentRequest()->getSession();
         $session->set(
             'admin.filters' . ($type ? '_' . $type : ''),

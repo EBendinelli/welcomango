@@ -124,7 +124,32 @@ class BookingController extends BaseController
      *
      * @return array
      */
-    public function viewAction(Request $request, Booking $booking){
+    public function viewBookingAction(Request $request, Booking $booking)
+    {
+        $user = $this->getUser();
+        if($user != $booking->getUser()){
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+        return array(
+            'booking' => $booking,
+        );
+    }
+
+    /**
+     * @param Request    $request
+     * @param Booking $booking
+     *
+     * @Route("/request/{booking_id}", name="request_view")
+     * @Template()
+     *
+     * @return array
+     */
+    public function viewRequestAction(Request $request, Booking $booking)
+    {
+        $user = $this->getUser();
+        if($user != $booking->getExperience()->getCreator()){
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
 
         return array(
             'booking' => $booking,
@@ -170,13 +195,10 @@ class BookingController extends BaseController
      *
      * @return array
      */
-    public function updateAction(Request $request, Booking $booking)
+    public function updateAction(Request $request, Booking $booking, $view = 'booking_received_list')
     {
         $booking->setStatus($request->query->get('status'));
-
-        if($request->query->get('status') == 'Accepted'){
-            $booking->setSeen(false);
-        }
+        $booking->setSeen(false);
 
         $this->getDoctrine()->getManager()->persist($booking);
         $this->getDoctrine()->getManager()->flush();

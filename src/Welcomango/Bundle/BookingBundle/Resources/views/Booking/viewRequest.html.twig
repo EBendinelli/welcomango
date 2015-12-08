@@ -1,0 +1,25 @@
+{% extends "WelcomangoBookingBundle:Booking:viewLayout.html.twig" %}
+
+{% trans_default_domain "interface" %}
+
+{% block profile_content %}
+    {% block booking_title %}
+        <div class="text-center m-b-20">
+            <h2>{{ 'booking.requestFor'|trans({'%title%': booking.experience.title,'%username%': booking.user})|raw }}</h2>
+            <div class="hint">{{ 'booking.requestSentExplanation' }}</div>
+        </div>
+    {% endblock %}
+
+    {% block booking_actions %}
+        {{ parent() }}
+    {% endblock %}
+
+    {% block booking_details %}
+        {{ parent() }}
+    {% endblock %}
+
+    {% block experience_details %}
+        {{ parent() }}
+    {% endblock %}
+
+{% endblock profile_content %}
