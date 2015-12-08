@@ -24,9 +24,9 @@ use Welcomango\Bundle\CoreBundle\Controller\Controller as BaseController;
 class MessageController extends BaseController
 {
     /**
-     * @param Request       $request
-     * @param User          $currentUser
-     * @param Booking       $booking
+     * @param Request $request
+     * @param User    $currentUser
+     * @param Booking $booking
      *
      * @Route("messages/{user_id}/{booking_id}", name="message_request")
      * @Template()
@@ -47,8 +47,8 @@ class MessageController extends BaseController
             ));
         } else {
             return $this->forward('WelcomangoMessageBundle:Message:newThread', array(
-                'user_id'          => $currentUser->getId(),
-                'booking_id'       => $booking->getId(),
+                'user_id'    => $currentUser->getId(),
+                'booking_id' => $booking->getId(),
             ));
         }
     }
@@ -70,9 +70,9 @@ class MessageController extends BaseController
     }
 
     /**
-     * @param Request       $request
-     * @param User          $currentUser
-     * @param Booking       $booking
+     * @param Request $request
+     * @param User    $currentUser
+     * @param Booking $booking
      *
      * @ParamConverter("currentUser", class="Welcomango\Model\User", options={"id" = "user_id"})
      * @ParamConverter("booking", class="Welcomango\Model\Booking", options={"id" = "booking_id"})
@@ -88,17 +88,17 @@ class MessageController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            if(isset($form->getData()['message'])){
+            if (isset($form->getData()['message'])) {
                 //In this cas the message is coming from the request made on the experience page
                 $message = $form->getData()['message'];
-            }else{
+            } else {
                 //This is the basic key designed by the FOSMessageBundle view
                 $message = $form->getData()['body'];
             }
 
-            if($booking->getUser() != $currentUser){
+            if ($booking->getUser() != $currentUser) {
                 $recipient = $booking->getUser();
-            }else{
+            } else {
                 $recipient = $booking->getExperience()->getCreator();
             }
             $thread = $this->get('welcomango.message.creator')->createThread($booking, $currentUser, $recipient, $message);
@@ -110,9 +110,9 @@ class MessageController extends BaseController
         }
 
         return $this->render('FOSMessageBundle:Message:newThread.html.twig', array(
-            'form'          => $form->createView(),
-            'data'          => $form->getData(),
-            'user'          => $currentUser,
+            'form'    => $form->createView(),
+            'data'    => $form->getData(),
+            'user'    => $currentUser,
             'booking' => $booking,
         ));
     }
@@ -125,7 +125,7 @@ class MessageController extends BaseController
      * @ParamConverter("currentUser", class="Welcomango\Model\User", options={"id" = "user_id"})
      * @ParamConverter("thread", class="Welcomango\Model\Thread", options={"id" = "thread_id"})
      *
-     * @Route("/messages/{thread_id}/{user_id}/current", name="message_thread")
+     * @Route("/messages/{thread_id}/{user_id}/current", name="message_thread_view")
      * @Template()
      *
      * @return array

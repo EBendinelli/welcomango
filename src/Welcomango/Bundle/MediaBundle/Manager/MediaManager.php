@@ -59,6 +59,7 @@ class MediaManager
             $adapter->write('/'.$experience->getId().'/'.$originalFileName, $fileContent);
             $mediaEntity = new Media();
             $mediaEntity->setOriginalFilename($originalFileName);
+            $mediaEntity->setPath('/medias/experiences/'.$experience->getId().'/');
             $mediaEntity->addExperience($experience);
             $mediaCollection->add($mediaEntity);
         }

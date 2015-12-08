@@ -39,7 +39,6 @@ class MediaController extends BaseController
         $tmpFilename      = $this->get('welcomango.media_namer')->getTempName($originalFilename);
 
         $media = new Media();
-        $media->setTemp(true);
         $media->setOriginalFilename($originalFilename);
 
         $this->getDoctrine()->getManager()->persist($media);
@@ -49,7 +48,6 @@ class MediaController extends BaseController
     }
 
     /**
-     *
      * Process delete for a non used media (experience front form)
      *
      * @param Request $request

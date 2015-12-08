@@ -36,26 +36,6 @@ class Media
     protected $description;
 
     /**
-     * @ORM\Column(name="mime_type", type="string", length=255)
-     */
-    protected $mimeType;
-
-    /**
-     * @ORM\Column(name="extension", type="string", length=255)
-     */
-    protected $extension;
-
-    /**
-     * @ORM\Column(name="size", type="integer")
-     */
-    protected $size;
-
-    /**
-     * @ORM\Column(name="filename", type="string", nullable=false)
-     */
-    protected $filename;
-
-    /**
      * @ORM\Column(name="original_filename", type="string", nullable=true)
      */
     protected $originalFilename;
@@ -75,10 +55,7 @@ class Media
      */
     public function __construct()
     {
-        $this->mimeType  = "unknown";
-        $this->extension = "unknown";
-        $this->filename  = "unknown";
-        $this->size      = 0;
+        $this->size = 0;
     }
 
     /**
@@ -114,38 +91,6 @@ class Media
     }
 
     /**
-     * @return string
-     */
-    public function getMimeType()
-    {
-        return $this->mimeType;
-    }
-
-    /**
-     * @param string $mimeType
-     */
-    public function setMimeType($mimeType)
-    {
-        $this->mimeType = $mimeType;
-    }
-
-    /**
-     * @return string
-     */
-    public function getExtension()
-    {
-        return $this->extension;
-    }
-
-    /**
-     * @param string $extension
-     */
-    public function setExtension($extension)
-    {
-        $this->extension = $extension;
-    }
-
-    /**
      * @return int
      */
     public function getSize()
@@ -159,22 +104,6 @@ class Media
     public function setSize($size)
     {
         $this->size = $size;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFilename()
-    {
-        return $this->filename;
-    }
-
-    /**
-     * @param string $filename
-     */
-    public function setFilename($filename)
-    {
-        $this->filename = $filename;
     }
 
     /**

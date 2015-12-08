@@ -139,10 +139,9 @@
     </div>
 {% endblock choice_widget %}
 
-
 {% block file_widget %}
     {% spaceless %}
-        <div class="dropzone">
+        <div>
             <div class="fallback">{% set type = type|default('file') %}
                 <input type="{{ type }}" {{ block('widget_attributes') }}/>
             </div>
