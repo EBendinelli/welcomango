@@ -72,7 +72,7 @@
             </li>
         </ul>
         <!-- Tab panes -->
-        <div class="tab-content">
+        <div class="tab-content bg-white b-l b-r b-b b-grey">
             <div class="tab-pane active slide" id="tab1">
                 {{ form_start(form, {'action': path('fos_user_profile_edit')}) }}
                 <div class="row">
@@ -105,7 +105,7 @@
 
             </div>
 
-            <div class="row text-right m-t-20">
+            <div class="text-right m-t-20">
                 <a href="{{ path('fos_user_profile_show') }}" class="btn btn-default">{{ 'interface.cancel'|trans({}, "interface") }}</a>
                 <button type="submit" class="btn btn-complete">
                     <i class="fa fa-save"></i>{{ 'interface.save'|trans({}, "interface") }}

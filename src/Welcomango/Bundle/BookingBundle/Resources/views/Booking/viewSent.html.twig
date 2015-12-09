@@ -5,7 +5,7 @@
 {% block profile_content %}
     {% block booking_title %}
         <div class="text-center m-b-20">
-            <h2>{{ 'booking.requestFor'|trans({'%title%': booking.experience.title,'%username%': booking.user})|raw }}</h2>
+            <h2>{{ 'booking.bookingFor'|trans({'%title%': booking.experience.title,'%city%': booking.experience.city.getName})|raw }}</h2>
             <div class="hint">{{ 'booking.requestSentExplanation' }}</div>
         </div>
     {% endblock %}
@@ -21,5 +21,13 @@
     {% block experience_details %}
         {{ parent() }}
     {% endblock %}
+
+    <!-- BEGIN DELETE CONFIRMATION MODAL -->
+    {{ include("WelcomangoCoreBundle:Core:modal.html.twig", {
+        'title': 'Are you sure you want to cancel this request?',
+        'main_text': 'If you have not yet exchanged with this person, please send him a little message.',
+        'valid_button_name': 'Cancel',
+        'icon': 'fa-times-circle '
+    })}}
 
 {% endblock profile_content %}

@@ -32,7 +32,7 @@ class RatingCommentType extends AbstractType
 
         $builder
             ->add('body', 'textarea', [
-                'label' => 'form.rating.description',
+                'label' => 'form.rating.comment',
                 'required' => true,
             ])
             ->add('note', 'choice', [

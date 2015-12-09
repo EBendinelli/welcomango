@@ -711,13 +711,17 @@ a h4:hover{
 }
 
 .profile-menu-item:hover{
-    background-color:white;
+    background-color:#fafafa;
     color: #48b0f7;
 }
 
 .profile-menu-item{
     position: relative;
     display: inline-block;
+}
+
+.profile-menu-item-active{
+    background-color: #f0f0f0;
 }
 
 #user-menu-items ul{
@@ -924,13 +928,9 @@ a .front-menu-user-picture{
 
 /* //// PAGES WIZZARD //// */
 
-.tab-content{
-    background-color: #FAFAFA !important;
-}
-
 .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
     font-weight:bold !important;
-    background-color: white  !important;
+    background-color: #fafafa  !important;
     color: #F34B1F !important;
 
 }

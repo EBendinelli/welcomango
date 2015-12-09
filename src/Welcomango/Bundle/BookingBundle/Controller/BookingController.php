@@ -119,12 +119,12 @@ class BookingController extends BaseController
      * @param Request    $request
      * @param Booking $booking
      *
-     * @Route("/booking/{booking_id}", name="booking_view")
+     * @Route("/booking/{booking_id}", name="booking_sent_view")
      * @Template()
      *
      * @return array
      */
-    public function viewBookingAction(Request $request, Booking $booking)
+    public function viewSentAction(Request $request, Booking $booking)
     {
         $user = $this->getUser();
         if($user != $booking->getUser()){
@@ -139,20 +139,23 @@ class BookingController extends BaseController
      * @param Request    $request
      * @param Booking $booking
      *
-     * @Route("/request/{booking_id}", name="request_view")
+     * @Route("/received/{booking_id}", name="booking_received_view")
      * @Template()
      *
      * @return array
      */
-    public function viewRequestAction(Request $request, Booking $booking)
+    public function viewReceivedAction(Request $request, Booking $booking)
     {
         $user = $this->getUser();
         if($user != $booking->getExperience()->getCreator()){
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
+        $ratingForm = $this->createForm($this->get('welcomango.form.rating.type'));
+
         return array(
             'booking' => $booking,
+            'form' => $ratingForm->createView(),
         );
     }
 
@@ -190,12 +193,12 @@ class BookingController extends BaseController
      * @param Request    $request
      * @param Booking $booking
      *
-     * @Route("/request/update/{booking_id}/status", name="booking_update")
+     * @Route("/request/update/{booking_id}/status/{view}", name="booking_update")
      * @Template()
      *
      * @return array
      */
-    public function updateAction(Request $request, Booking $booking, $view = 'booking_received_list')
+    public function updateAction(Request $request, Booking $booking, $view)
     {
         $booking->setStatus($request->query->get('status'));
         $booking->setSeen(false);
@@ -204,19 +207,23 @@ class BookingController extends BaseController
         $this->getDoctrine()->getManager()->flush();
         $this->addFlash('success', $this->trans('booking.edit.success', array(), 'crm'));
 
-        return $this->redirect($this->generateUrl('booking_received_list'));
+        if(substr($view, -5) == '_view'){
+            return $this->redirect($this->generateUrl($view, ['booking_id' => $booking->getId()]));
+        }else{
+            return $this->redirect($this->generateUrl($view));
+        }
     }
 
     /**
      * @param Request    $request
      * @param Booking $booking
      *
-     * @Route("/request/update/{booking_id}/rate", name="booking_rate")
+     * @Route("/request/update/{booking_id}/rate/{view}", name="booking_rate")
      * @Template()
      *
      * @return array
      */
-    public function rateAction(Request $request, Booking $booking)
+    public function rateAction(Request $request, Booking $booking, $view)
     {
         $ratingForm = $this->createForm($this->get('welcomango.form.rating.type'));
         $ratingForm ->handleRequest($request);
@@ -232,7 +239,11 @@ class BookingController extends BaseController
             $this->get('welcomango.front.comment.manager')->createComment($booking, $user, $commentBody);
         }
 
-        return $this->redirect($this->generateUrl('booking_received_list', ['display' => 'happened']));
+        if(substr($view, -5) == '_view'){
+            return $this->redirect($this->generateUrl($view, ['booking_id' => $booking->getId()]));
+        }else{
+            return $this->redirect($this->generateUrl($view, ['display' => 'happened']));
+        }
     }
 
     /**

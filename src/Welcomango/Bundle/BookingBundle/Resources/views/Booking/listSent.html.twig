@@ -1,5 +1,7 @@
 {% extends "FOSUserBundle:Profile:show.html.twig" %}
 
+{% form_theme ratingForm with ["::frontTheme.html.twig"] %}
+
 {% block profile_content %}
     <div class="text-center m-b-20">
         <h2>{{ 'booking.requestsSent'|trans }}</h2>
@@ -68,7 +70,7 @@
                             {% if booking.status == 'Happened' and booking.localNote %}
                                 {{ include("WelcomangoCoreBundle:Core:note.html.twig", { 'note': booking.localNote, 'size': 'small'}) }}
                             {% elseif booking.status == 'Happened' %}
-                                <a class="btn btn-sm btn-complete" data-toggle="modal" data-target=".modal-rating" onClick="updateRatingModal('{{ path('booking_rate', {'booking_id' : booking.id}) }}')">Rate</a>
+                                <a class="btn btn-sm btn-complete" data-toggle="modal" data-target=".modal-rating" onClick="updateRatingModal('{{ path('booking_rate', {'booking_id' : booking.id, 'view': 'booking_sent_list'}) }}')">Rate</a>
                             {% endif %}
                             </td>
                         </tr>
@@ -112,9 +114,14 @@
                                                 <div class="text-center p-t-20">{{ 'booking.noComment'|trans }}</div>
                                             {% endif %}
                                         {% else %}
-                                            <div class="text-center m-t-20"><a href="{{ path('booking_view', {'booking_id' : booking.id}) }}"  class="btn btn-complete">See more</a></div>
+                                            <div class="text-center m-t-20"><a href="{{ path('booking_sent_view', {'booking_id' : booking.id}) }}"  class="btn btn-complete">See more</a></div>
                                         {% endif %}
                                     </div>
+                                    {% if activeTab == 'happened'  %}
+                                        <div class="row text-center">
+                                            a
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </td>
                         </tr>

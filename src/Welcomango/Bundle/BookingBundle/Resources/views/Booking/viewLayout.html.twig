@@ -30,9 +30,12 @@
                 </h4>
             </div>
             <div class="col-md-6 text-right p-t-15">
-                {{ request_action(booking, user, 3) }}
+                {{ request_action(booking, user, 3, 'view') }}
             </div>
         </div>
+    {% endblock %}
+
+    {% block booking_review %}
     {% endblock %}
 
     {% block booking_details %}
@@ -91,13 +94,5 @@
         <!-- BOOKING EXPERIENCE END -->
     {% endblock %}
 
-    <!-- BEGIN DELETE CONFIRMATION MODAL -->
-    {{ include("WelcomangoCoreBundle:Core:modal.html.twig", {
-        'title': 'Are you sure you want to cancel this meeting?',
-        'main_text': 'If you have not yet exchanged with this person, please send him a little message.',
-        'valid_button_name': 'Decline',
-        'icon': 'fa-times-circle ',
-        'path_valid': path('front_experience_view', {'experience_id': booking.experience.id}),
-    })}}
-    <!-- END DELETE CONFIRMATION MODAL -->
+
 {% endblock profile_content %}

@@ -1,77 +1,85 @@
-{% if mango is defined %}
-    <span class="experience-note text-center">
-        {% set noteClass = "card-picto-note-sm" %}
-        {% if size is defined %}
-            {% if size == 'medium' %}
-                {% set noteClass = "card-picto-note-md" %}
-            {% elseif size == 'large' %}
-                {% set noteClass = "card-picto-note-lg" %}
+{% if not note %}
+    <span class="experience-note text-center hint-text" style="font-style:italic">{{ 'experience.noNoteYet'|trans }}</span>
+{% else %}
+    {% if mango is defined %}
+        <span class="experience-note text-center">
+            {% set noteClass = "card-picto-note-sm" %}
+            {% if size is defined %}
+                {% if size == 'medium' %}
+                    {% set noteClass = "card-picto-note-md" %}
+                {% elseif size == 'large' %}
+                    {% set noteClass = "card-picto-note-lg" %}
+                {% endif %}
             {% endif %}
-        {% endif %}
 
-        {% if note|round == 5 %}
-            {% for i in 1..5 %}
-                <img class="{{ noteClass }}" src="{{ asset('bundles/welcomangocore/images/welcomango-picto-full.png') }}"/>
-            {% endfor %}
-        {% elseif note|round == 0 %}
-            {% for i in 1..5 %}
-                <img class="{{ noteClass }}" src="{{ asset('bundles/welcomangocore/images/welcomango-picto.png') }}"/>
-            {% endfor %}
-        {% elseif note/note|round == 1 %}
-            {% for i in 1..note %}
-                <img class="{{ noteClass }}" src="{{ asset('bundles/welcomangocore/images/welcomango-picto-full.png') }}"/>
-            {% endfor %}
-            {% for i in note..4 %}
-                <img class="{{ noteClass }}" src="{{ asset('bundles/welcomangocore/images/welcomango-picto.png') }}"/>
-            {% endfor %}
-        {% else %}
-            {% for i in 1..note|round(0,'floor') %}
-                <img class="{{ noteClass }}" src="{{ asset('bundles/welcomangocore/images/welcomango-picto-full.png') }}"/>
-            {% endfor %}
-            <img class="{{ noteClass }}" src="{{ asset('bundles/welcomangocore/images/welcomango-picto-half.png') }}"/>
-            {% if note|round(0,'ceil') < 5 %}
-                {% for i in note|round(0,'ceil')..4 %}
+            {% if note|round == 5 %}
+                {% for i in 1..5 %}
+                    <img class="{{ noteClass }}" src="{{ asset('bundles/welcomangocore/images/welcomango-picto-full.png') }}"/>
+                {% endfor %}
+            {% elseif note|round == 0 %}
+                {% for i in 1..5 %}
                     <img class="{{ noteClass }}" src="{{ asset('bundles/welcomangocore/images/welcomango-picto.png') }}"/>
                 {% endfor %}
+            {% elseif note/note|round == 1 %}
+                {% for i in 1..note %}
+                    <img class="{{ noteClass }}" src="{{ asset('bundles/welcomangocore/images/welcomango-picto-full.png') }}"/>
+                {% endfor %}
+                {% for i in note..4 %}
+                    <img class="{{ noteClass }}" src="{{ asset('bundles/welcomangocore/images/welcomango-picto.png') }}"/>
+                {% endfor %}
+            {% else %}
+                {% if  note|round(0,'floor') > 0%}
+                    {% for i in 1..note|round(0,'floor') %}
+                        <img class="{{ noteClass }}" src="{{ asset('bundles/welcomangocore/images/welcomango-picto-full.png') }}"/>
+                    {% endfor %}
+                {% endif %}
+                <img class="{{ noteClass }}" src="{{ asset('bundles/welcomangocore/images/welcomango-picto-half.png') }}"/>
+                {% if note|round(0,'ceil') < 5 %}
+                    {% for i in note|round(0,'ceil')..4 %}
+                        <img class="{{ noteClass }}" src="{{ asset('bundles/welcomangocore/images/welcomango-picto.png') }}"/>
+                    {% endfor %}
+                {% endif %}
             {% endif %}
-        {% endif %}
-    </span>
-{% else %}
-    <span class="experience-note text-center text-warning">
-        {% set noteClass = "fa-sm" %}
-        {% if size is defined %}
-            {% if size == 'medium' %}
-                {% set noteClass = "fa-lg" %}
-            {% elseif size == 'large' %}
-                {% set noteClass = "fa-3x" %}
+        </span>
+    {% else %}
+        <span class="experience-note text-center text-warning">
+            {% set noteClass = "fa-sm" %}
+            {% if size is defined %}
+                {% if size == 'medium' %}
+                    {% set noteClass = "fa-lg" %}
+                {% elseif size == 'large' %}
+                    {% set noteClass = "fa-3x" %}
+                {% endif %}
             {% endif %}
-        {% endif %}
 
-        {% if note|round == 5 %}
-            {% for i in 1..5 %}
-                <i class="fa fa-star {{ noteClass }}"></i>
-            {% endfor %}
-        {% elseif note|round == 0 %}
-            {% for i in 1..5 %}
-                <i class="fa fa-star-o {{ noteClass }}"></i>
-            {% endfor %}
-        {% elseif note/note|round == 1 %}
-            {% for i in 1..note %}
-                <i class="fa fa-star {{ noteClass }}"></i>
-            {% endfor %}
-            {% for i in note..4 %}
-                <i class="fa fa-star-o {{ noteClass }}"></i>
-            {% endfor %}
-        {% else %}
-            {% for i in 1..note|round(0,'floor') %}
-                <i class="fa fa-star {{ noteClass }}"></i>
-            {% endfor %}
-            <i class="fa fa-star-half-o {{ noteClass }}"></i>
-            {% if note|round(0,'ceil') < 4 %}
-                {% for i in note|round(0,'ceil')..4 %}
+            {% if note|round == 5 %}
+                {% for i in 1..5 %}
+                    <i class="fa fa-star {{ noteClass }}"></i>
+                {% endfor %}
+            {% elseif note|round == 0 %}
+                {% for i in 1..5 %}
                     <i class="fa fa-star-o {{ noteClass }}"></i>
                 {% endfor %}
+            {% elseif note/note|round == 1 %}
+                {% for i in 1..note %}
+                    <i class="fa fa-star {{ noteClass }}"></i>
+                {% endfor %}
+                {% for i in note..4 %}
+                    <i class="fa fa-star-o {{ noteClass }}"></i>
+                {% endfor %}
+            {% else %}
+                {% if  note|round(0,'floor') > 0%}
+                    {% for i in 1..note|round(0,'floor') %}
+                        <i class="fa fa-star {{ noteClass }}"></i>
+                    {% endfor %}
+                {% endif %}
+                <i class="fa fa-star-half-o {{ noteClass }}"></i>
+                {% if note|round(0,'ceil') < 4 %}
+                    {% for i in note|round(0,'ceil')..4 %}
+                        <i class="fa fa-star-o {{ noteClass }}"></i>
+                    {% endfor %}
+                {% endif %}
             {% endif %}
-        {% endif %}
-    </span>
+        </span>
+    {% endif %}
 {% endif %}

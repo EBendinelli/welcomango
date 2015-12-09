@@ -74,6 +74,23 @@ class ProfileController extends BaseProfileController
             }
         }
 
+        //Check if the user has unrated finished booking
+        $feedbackAsTraveler = false;
+        $count = 0;
+        foreach($bookings as $booking){
+            if($booking->getStatus() == 'Happened' && !$booking->getLocalNote() ){
+                $count++;
+                $feedbackAsTraveler = $booking;
+            }
+        }
+
+        $feedbackAsLocal = false;
+        foreach($plannedBookings as $booking){
+            if($booking->getStatus() == 'Happened' && !$booking->getTravelerNote() ){
+                $feedbackAsLocal = $booking;
+            }
+        }
+
         //Get Comments
         $comments = $user->getReceivedComments();
 
@@ -83,6 +100,8 @@ class ProfileController extends BaseProfileController
             'nextTrip'          => $nextTrip,
             'comments'          => $comments,
             'newRequest'        => $newRequest,
+            'feedbackAsLocal'  => $feedbackAsLocal,
+            'feedbackAsTraveler'  => $feedbackAsTraveler,
         ));
     }
 

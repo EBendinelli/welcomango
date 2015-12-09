@@ -32,7 +32,7 @@ class MessageController extends BaseController
      * @Template()
      *
      * @ParamConverter("currentUser", class="Welcomango\Model\User", options={"id" = "user_id"})
-     * @ParamConverter("booking", class="Welcomango\Model\BOoking", options={"id" = "booking_id"})
+     * @ParamConverter("booking", class="Welcomango\Model\Booking", options={"id" = "booking_id"})
      *
      * @return array
      */

@@ -2,7 +2,7 @@ generic.title.meta: Welcomango - Places through people
 
 interface.edit: Edit
 interface.delete: Delete
-interface.rate: Rate
+interface.giveFeedback: Give feedback
 interface.view: View
 interface.comment: Comment
 interface.contact: Contact
@@ -25,8 +25,11 @@ profile.yourNextTrip: Your next trip
 profile.nextTripDetails: Is <span class="text-primary">%experienceTitle%</span> happening in <span class="text-primary">%experienceCity%</span> with <span class="text-primary">%experienceGuide%</span> <span class="bold">%time%</span>
 profile.nextVisitGiven: Next visit planned
 profile.nextVisitDetails: Is a flavor of <span class="text-primary">%experienceTitle%</span> in which you will bring <span class="text-primary">%experienceTraveler%</span> in <span class="bold">%time%</span>
-profile.rateExperiences: Rate your past experiences
-profile.rateExperiencesText: Rate the last experiences you attended and give a feedback to the author
+profile.giveFeedbackTitle: Give a feedback to <span class="text-primary">%user%</span>
+profile.rateAsLocal: Give a feedback about %user% on the time you had together!
+profile.rateAsTraveler: Give a feedback about on the time you had in <span class="text-primary">%city%</span>!
+profile.newRequest: You have a new request
+profile.newRequestText: From <span class="text-primary">%user%</span> for <span class="text-primary">%experience%</span>
 profile.occupation: Occupation
 profile.hometown: Hometown
 profile.gender: Gender
@@ -48,3 +51,11 @@ experience.manage.title: A different flavor of your city
 
 booking.bookingFor: Your reservation for <span class="text-primary">%title%</span> in <span class="text-primary">%city%</span>
 booking.requestFor: Request for <span class="text-primary">%title%</span> from <span class="text-primary">%username%</span>
+
+booking.noteReceived: Note received as a local
+booking.noteGiven: Note for %user% as traveler
+booking.noNote: No note yet
+booking.noComment: No comment yet
+
+
+booking.commentWaitingForApproval: This comment is waiting for approval, it should be validated anytime soon

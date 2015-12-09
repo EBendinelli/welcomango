@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="col-md-1 text-center ">
                         <a href="{{ asset(path('front_user_view', {'user_id': thread.booking.experience.getCreator.id})) }}">
-                            {'{{ display_avatar(thread.booking.experience.getCreator, false, false, 'margin-right:10px') }}'+
+                            {{ display_avatar(thread.booking.experience.getCreator, false, false, 'message-user-picture') }}
                             {% if not fos_message_is_read(thread) %}
                                 {{ notification_display(user, 'message') }}
                             {% endif %}

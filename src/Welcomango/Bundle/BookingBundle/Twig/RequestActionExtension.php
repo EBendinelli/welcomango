@@ -4,8 +4,8 @@ namespace Welcomango\Bundle\BookingBundle\Twig;
 
 use Symfony\Component\Routing\Router;
 
-use Welcomango\Model\Booking;
-use Welcomango\Model\User;
+    use Welcomango\Model\Booking;
+    use Welcomango\Model\User;
 
 /**
  * Class RequestActionExtension
@@ -41,7 +41,7 @@ class RequestActionExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function requestAction(Booking $booking, User $user, $size = 2)
+    public function requestAction(Booking $booking, User $user, $size = 2, $view = 'list')
     {
         $availableActions = '';
         $messageRoute     = $this->router->generate('message_request', array(
@@ -52,14 +52,24 @@ class RequestActionExtension extends \Twig_Extension
 
         //If checking received request
         if ($booking->getExperience()->getCreator() == $user) {
-            $acceptedRoute = $this->router->generate('booking_update', array('booking_id' => $booking->getId(), 'status' => 'Accepted'));
-            $refusedRoute  = $this->router->generate('booking_update', array('booking_id' => $booking->getId(), 'status' => 'Refused'));
+            if($view == "view"){
+                $redirectRoute = 'booking_received_view';
+            }else{
+                $redirectRoute = 'booking_received_list';
+            }
+            $acceptedRoute = $this->router->generate('booking_update', array('booking_id' => $booking->getId(), 'status' => 'Accepted', 'view' => $redirectRoute));
+            $refusedRoute  = $this->router->generate('booking_update', array('booking_id' => $booking->getId(), 'status' => 'Refused', 'view' => $redirectRoute));
 
             // TODO change the accepted modal + content + confirmation
             switch ($booking->getStatus()) {
                 case 'Requested':
                     $accept           = '<a href="'.$acceptedRoute.'"><i class="fa fa-check fa-'.$size.'x text-success hover-opacity hover-pointer m-r-5"></i></a>';
-                    $refuse           = '<span data-toggle="modal" data-target=".modal-action" onClick="updateModal(\''.$refusedRoute.'\')"><i class="fa fa-times fa-'.$size.'x text-danger hover-opacity hover-pointer m-r-10"></i></span>';
+                    if($view == "view") {
+                        $refuse = '<span data-toggle="modal" data-target=".modal-action"><i class="fa fa-times fa-' . $size . 'x text-danger hover-opacity hover-pointer m-r-10"></i></span>';
+                    }else {
+                        $refuse = '<span data-toggle="modal" data-target=".modal-action" onClick="updateModal(\'' . $refusedRoute . '\')"><i class="fa fa-times fa-' . $size . 'x text-danger hover-opacity hover-pointer m-r-10"></i></span>';
+                    }
+
                     $message          = '<a href="'.$messageRoute.'"><i class="fa fa-envelope fa-'.$size.'x text-black hover-opacity hover-pointer m-r-5"></i></a>';
                     $availableActions = $accept.$refuse.$message;
                     break;
@@ -74,12 +84,22 @@ class RequestActionExtension extends \Twig_Extension
                     break;
             }
         } else {
+            if($view == "view"){
+                $redirectRoute = 'booking_sent_view';
+            }else{
+                $redirectRoute = 'booking_sent_list';
+            }
+
             //If checking sent requests
-            $cancelRoute = $this->router->generate('booking_update', array('booking_id' => $booking->getId(), 'status' => 'Cancel'));
+            $cancelRoute = $this->router->generate('booking_update', array('booking_id' => $booking->getId(), 'status' => 'Cancel', 'view' => $redirectRoute));
             switch ($booking->getStatus()) {
                 case 'Requested':
                     $pending          = '<span><i class="fa fa-clock-o fa-'.$size.'x text-black m-r-5"></i></span>';
-                    $cancel           = '<span data-toggle="modal" data-target=".modal-action" onClick="updateModal(\''.$cancelRoute.'\')"><i class="fa fa-times fa-'.$size.'x text-danger hover-opacity hover-pointer m-r-10"></i></span>';
+                    if($view == "view") {
+                        $cancel = '<span data-toggle="modal" data-target=".modal-action"><i class="fa fa-times fa-' . $size . 'x text-danger hover-opacity hover-pointer m-r-10"></i></span>';
+                    }else{
+                        $cancel = '<span data-toggle="modal" data-target=".modal-action" onClick="updateModal(\'' . $cancelRoute . '\')"><i class="fa fa-times fa-' . $size . 'x text-danger hover-opacity hover-pointer m-r-10"></i></span>';
+                    }
                     $availableActions = $pending.$cancel;
                     break;
                 case 'Accepted':

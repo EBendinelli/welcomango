@@ -75,7 +75,7 @@
                                     {% if booking.status == 'Happened' and booking.travelerNote %}
                                         {{ include("WelcomangoCoreBundle:Core:note.html.twig", { 'note': booking.travelerNote, 'size': 'small'}) }}
                                     {% elseif booking.status == 'Happened' %}
-                                        <a class="btn btn-sm btn-complete" data-toggle="modal" data-target=".modal-rating" onClick="updateRatingModal('{{ path('booking_rate', {'booking_id' : booking.id}) }}')">Rate</a>
+                                        <a class="btn btn-sm btn-complete" data-toggle="modal" data-target=".modal-rating" onClick="updateRatingModal('{{ path('booking_rate', {'booking_id' : booking.id, 'view': 'booking_received_list' }) }}')">Rate</a>
                                     {% endif %}
                                 </td>
                             </tr>
@@ -119,9 +119,14 @@
                                                     <div class="text-center p-t-20">{{ 'booking.noComment'|trans }}</div>
                                                 {% endif %}
                                             {% else %}
-                                                <div class="text-center m-t-20"><a href="{{ path('request_view', {'booking_id' : booking.id}) }}"  class="btn btn-complete">See more</a></div>
+                                                <div class="text-center m-t-20"><a href="{{ path('booking_received_view', {'booking_id' : booking.id}) }}"  class="btn btn-complete">{{ 'booking.viewRequest'|trans }}</a></div>
                                             {% endif %}
                                         </div>
+                                        {% if activeTab == 'happened'  %}
+                                            <div class="col-md-12 m-t-10 text-center">
+                                                <a href="{{ path('booking_received_view', {'booking_id' : booking.id}) }}">{{ 'booking.viewRequest'|trans }}</a>
+                                            </div>
+                                        {% endif %}
                                     </div>
                                 </td>
                             </tr>
