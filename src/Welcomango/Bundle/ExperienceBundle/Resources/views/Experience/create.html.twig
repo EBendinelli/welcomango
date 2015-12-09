@@ -5,67 +5,40 @@
 {% block meta_title %}{{ "profile.craeteExperience"|trans({}, "interface") }}{% endblock %}
 
 {% block profile_content %}
-    {#<div>
-        Steps:
-        {% include 'CraueFormFlowBundle:FormFlow:stepList.html.twig' %}
-    </div>
-    {{ form_start(form, {'attr': {'id': 'experienceForm'}}) }}
+    {{ form_start(form, {'attr': {'id': form.vars.id}}) }}
     {{ form_errors(form) }}
-
-    {% if flow.getCurrentStepNumber() == 1 %}
         <div>
             {{ form_row(form.title) }}
             {{ form_row(form.description) }}
-            {{ form_row(form.medias) }}
-            {{ form_row(form.medias_id) }}
-            <div id="medias"></div>
+            {{ form_row(form.medias_upload) }}
+            <div id="medias" class="dropzone" style="background-color: lightgray ;height: 300px"></div>
         </div>
-    {% elseif flow.getCurrentStepNumber() == 2 %}
-
-    {% elseif flow.getCurrentStepNumber() == 3 %}
-        <div id="availabilities" class="availabilities"
-             data-prototype="{% filter escape %}{% include 'WelcomangoExperienceBundle:Availability:_availabilities.html.twig' with {'form': form.availabilities.vars.prototype } %}{% endfilter %}">
-            {% for availability in form.availabilities %}
-                {% include 'WelcomangoExperienceBundle:Availability:_availabilities.html.twig' with {'form': availability } %}
-            {% endfor %}
-        </div>
-
-        &#123;&#35;Delete confirmation modal&#35;&#125;
-        {% include 'WelcomangoCoreBundle:Core:stickUpModal.html.twig' with {
-        'title': 'Remove availability',
-        'text': 'availability.modal.removeText'|trans ,
-        'confirm' : 'delete'|trans
-        } %}
-    {% endif %}
-
     {{ form_rest(form) }}
 
-    {% include 'CraueFormFlowBundle:FormFlow:buttons.html.twig' %}
-    {{ form_end(form) }}#}
+{#    <div id="availabilities" class="availabilities"
+         data-prototype="{% filter escape %}{% include 'WelcomangoExperienceBundle:Availability:_availabilities.html.twig' with {'form': form.availabilities.vars.prototype } %}{% endfilter %}">
+        {% for availability in form.availabilities %}
+            {% include 'WelcomangoExperienceBundle:Availability:_availabilities.html.twig' with {'form': availability } %}
+        {% endfor %}
+    </div>#}
 
-    {{ form_start(form, {'action': path('front_experience_create')} ) }}
-    {{ form_errors(form) }}
-    {{ form_rest(form) }}
+    {#Delete confirmation modal#}
+    {% include 'WelcomangoCoreBundle:Core:stickUpModal.html.twig' with {
+    'title': 'Remove availability',
+    'text': 'availability.modal.removeText'|trans ,
+    'confirm' : 'delete'|trans
+    } %}
+
     <button id="modal-rating-button" class="btn btn-complete btn-cons"><i class="fa fa-valid"></i>{{ 'submit'|trans }}</button>
     {{ form_end(form) }}
-
 
 {% endblock profile_content %}
 
 {% block javascripts %}
     {{ parent() }}
-
+    {{ include('WelcomangoMediaBundle:AdminMedia:_baseJs.html.twig') }}
     {% include 'WelcomangoExperienceBundle:Availability:_availabilityJs.html.twig' with {
         'datepickerId' : 'front_experience_availabilities_0_start_date',
     } %}
-
-    {{ include('@WelcomangoMedia/AdminMedia/_baseJs.html.twig', {
-        'idSearch'       : 'front_experience_medias',
-        'idForm'         : 'experienceForm',
-        'formName'       : 'front_experience',
-        'inputName'      : 'medias',
-        'multiple'       : 'true',
-        'templateReturn' : 'WelcomangoExperienceBundle:Experience:_renderImages.html.twig',
-    }) }}
-
 {% endblock %}
+

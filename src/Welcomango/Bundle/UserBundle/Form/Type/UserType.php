@@ -69,12 +69,22 @@ class UserType extends AbstractType
             'required' => false,
         ]);
 
-        $builder->add('password', 'repeated', array(
+        $builder->add('plain_password', 'repeated', array(
             'type'            => 'password',
             'invalid_message' => 'The passwords don\'t match',
             'options'         => array('required' => true),
             'first_options'   => array('label' => 'form.user.password'),
             'second_options'  => array('label' => 'form.user.password.validate'),
+        ));
+
+        $builder->add('currentCity', 'entity', array(
+            'class'    => 'Model:City',
+            'property' => 'name',
+        ));
+
+        $builder->add('fromCity', 'entity', array(
+            'class'    => 'Model:City',
+            'property' => 'name',
         ));
 
 

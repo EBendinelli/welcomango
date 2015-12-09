@@ -322,6 +322,18 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
+     * @return bool
+     */
+    public function hasExperiences()
+    {
+        if ($this->getExperiences()->isEmpty()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * @return string
      */
     public function getFullName()
@@ -358,14 +370,15 @@ class User extends BaseUser implements ParticipantInterface
      */
     public function getExperiences()
     {
-        $availableExperiences = new ArrayCollection;
+        $availableExperiences = new ArrayCollection();
 
         //remove deleted experiences
-        foreach($this->experiences as $experience){
-            if(!$experience->isDeleted()) {
+        foreach ($this->experiences as $experience) {
+            if (!$experience->isDeleted()) {
                 $availableExperiences[] = $experience;
             }
         }
+
         return $availableExperiences;
     }
 
@@ -566,7 +579,8 @@ class User extends BaseUser implements ParticipantInterface
     {
         parent::__construct();
         $this->spokenLanguages = new ArrayCollection();
-        $this->bookings  = new ArrayCollection();
+        $this->experiences     = new ArrayCollection();
+        $this->bookings        = new ArrayCollection();
         $this->medias          = new ArrayCollection();
     }
 
@@ -650,11 +664,12 @@ class User extends BaseUser implements ParticipantInterface
     public function getDisplayablePostedComments()
     {
         $postedComments = new ArrayCollection();
-        foreach($this->postedComments as $comment){
-            if($comment->IsValidated() && !$comment->isDeleted()){
+        foreach ($this->postedComments as $comment) {
+            if ($comment->IsValidated() && !$comment->isDeleted()) {
                 $postedComments->add($comment);
             }
         }
+
         return $postedComments;
     }
 
@@ -696,11 +711,12 @@ class User extends BaseUser implements ParticipantInterface
     public function getDisplayableReceivedComments()
     {
         $receivedComments = new ArrayCollection();
-        foreach($this->receivedComments as $comment){
-            if($comment->IsValidated() && !$comment->isDeleted()){
+        foreach ($this->receivedComments as $comment) {
+            if ($comment->IsValidated() && !$comment->isDeleted()) {
                 $receivedComments->add($comment);
             }
         }
+
         return $receivedComments;
     }
 

@@ -1,6 +1,6 @@
 <tr>
     <td>
-        <img src="{{ asset(media.getUploadDir() ~ '/' ~ media.filename ~ 'small.' ~ media.extension) }}" />
+        <img src="{{ asset(media.getPath() ~ media.originalFilename) }}" />
     </td>
     <td>
         {{ media.title}}

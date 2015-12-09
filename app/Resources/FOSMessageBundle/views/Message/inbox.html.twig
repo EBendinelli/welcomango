@@ -1,7 +1,6 @@
 {% extends "FOSUserBundle:Profile:show.html.twig" %}
 
 {% block profile_content %}
-
     <h2 class="text-center m-t-20">{% trans from 'FOSMessageBundle' %}inbox{% endtrans %}</h2>
 
 {% include 'FOSMessageBundle:Message:threads_list.html.twig' with {'threads': threads} %}

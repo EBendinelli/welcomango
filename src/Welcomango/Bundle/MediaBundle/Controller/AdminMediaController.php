@@ -11,8 +11,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
-use Welcomango\Bundle\CoreBundle\Controller\Controller as BaseController;
 use Welcomango\Model\Media;
+use Welcomango\Bundle\MediaBundle\Form\Type\AdminMediaType;
+use Welcomango\Bundle\CoreBundle\Controller\Controller as BaseController;
 
 /**
  * Class MediaController
@@ -58,7 +59,7 @@ class AdminMediaController extends BaseController
     {
         $media = new Media();
 
-        $form = $this->createForm($this->get('welcomango.form.media.type'), $media);
+        $form = $this->createForm(AdminMediaType::class, $media);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

@@ -58,7 +58,6 @@ class ExperienceManager
         $this->entityManager->flush();
     }
 
-
     public function getAvailableDatesForDatePicker($experience)
     {
         // Create an array with the forbidden dates
@@ -78,26 +77,5 @@ class ExperienceManager
         }
 
         return $forbiddenDates;
-    }
-
-    /**
-     * Process upload media for experiences
-     * This method will move the medias in temp into the experience directory
-     *
-     * @param Experience $experience
-     * @param array      $mediasId
-     */
-    public function processUploadMedias(Experience $experience, $mediasId)
-    {
-        $medias = explode(',', $mediasId);
-        foreach ($medias as $mediaId) {
-            $media         = $this->mediaRepository->findOneById($mediaId);
-            $mediaTempFile = Media::getUploadTmpRootDir().'/'.$media->getOriginalFilename();
-            if ($this->filesystem->exists($mediaTempFile)) {
-                $this->filesystem->copy($mediaTempFile, $media->getExperienceRootDir($experience->getId()).'/'.$media->getOriginalFilename());
-                $this->filesystem->remove($mediaTempFile);
-            }
-            $experience->addMedia($media);
-        }
     }
 }

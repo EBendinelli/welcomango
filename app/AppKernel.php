@@ -1,9 +1,5 @@
 <?php
 
-ini_set('display_errors',1);
-ini_set('display_startup_errors',1);
-error_reporting(-1);
-
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
@@ -23,6 +19,8 @@ class AppKernel extends Kernel
             new Oneup\UploaderBundle\OneupUploaderBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new FOS\MessageBundle\FOSMessageBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle(),
+            new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
 
             new Welcomango\Bundle\UserBundle\WelcomangoUserBundle(),
             new Welcomango\Bundle\CoreBundle\WelcomangoCoreBundle(),
@@ -30,15 +28,13 @@ class AppKernel extends Kernel
             new Welcomango\Bundle\MessageBundle\WelcomangoMessageBundle(),
             new Welcomango\Bundle\ExperienceBundle\WelcomangoExperienceBundle(),
             new Welcomango\Bundle\BookingBundle\WelcomangoBookingBundle(),
+            new Welcomango\Bundle\EmailBundle\WelcomangoEmailBundle(),
 
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
-            new Gregwar\ImageBundle\GregwarImageBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
-            new Craue\FormFlowBundle\CraueFormFlowBundle(),
             new Welcomango\Bundle\TagBundle\WelcomangoTagBundle(),
         );
 

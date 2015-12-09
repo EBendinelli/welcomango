@@ -8,7 +8,6 @@ use Doctrine\ORM\EntityRepository;
  * UserRepository
  *
  */
-
 class UserRepository extends EntityRepository
 {
 
@@ -50,6 +49,24 @@ class UserRepository extends EntityRepository
         }
 
         return $queryBuilder;
+    }
+
+    /**
+     * @param string $time
+     *
+     * @return array
+     */
+    public function findCreatedBefore($time)
+    {
+        $queryBuilder  = $this->createQueryBuilder('u');
+        $now           = new \DateTime();
+        $dateToCompare = $now->modify('-'.$time);
+
+        $queryBuilder
+            ->where('u.createdAt < :dateToCompare')
+            ->setParameter('dateToCompare', $dateToCompare);
+
+        return $queryBuilder->getQuery()->getResult();
     }
 
     /**

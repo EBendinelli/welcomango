@@ -11,6 +11,15 @@
             <div class="panel-body">
                 {{ form_start(form, {'action': path('admin_media_create'), 'attr': {'novalidate': 'novalidate', 'id': 'mediaForm'}}) }}
                 {% include "WelcomangoMediaBundle:AdminMedia:form.html.twig" with { 'form': form } %}
+                <div id="datas" style="display: none">
+                    <label>X1 <input type="text" size="4" id="x" name="x" /></label>
+                    <label>Y1 <input type="text" size="4" id="y" name="y" /></label>
+                    <label>X2 <input type="text" size="4" id="x2" name="x2" /></label>
+                    <label>Y2 <input type="text" size="4" id="y2" name="y2" /></label>
+                    <label>W <input type="text" size="4" id="w" name="w" /></label>
+                    <label>H <input type="text" size="4" id="h" name="h" /></label>
+                    <button type="button" class="btn btn-success" id="crop-media" >CROP MODA FUCKA</button>
+                </div>
                 {% include "WelcomangoCoreBundle:Form:formFooter.html.twig" with {'listing' : listing, 'update': form.vars.id } only %}
                 {{ form_end(form) }}
             </div>
@@ -25,17 +34,74 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {{ include('@WelcomangoMedia/AdminMedia/_baseJs.html.twig', {
-        'templateReturn' : 'WelcomangoMediaBundle:AdminMedia:_renderImages.html.twig',
-        'idSearch'       : 'admin_language_file',
-        'formName'       : 'admin_language',
-        'idForm'         : 'mediaForm',
-        'multiple'       : 'false',
-        'inputName'      : 'file',
-    }) }}
-z
     <script type="text/javascript">
-        $('#crop-image').click(function () {
+
+        $('#admin_media_file').change(function () {
+            var filename = document.getElementById('admin_media_file').files[0].name
+            console.log(filename);
+            var formData = new FormData();
+            formData.append("file", document.getElementById('admin_media_file').files[0]);
+            $.ajax({
+                url: '{{ oneup_uploader_endpoint('gallery') }}',  //Server script to process data
+                type: 'POST',
+                xhr: function () {  // Custom XMLHttpRequest
+                    var myXhr = $.ajaxSettings.xhr();
+                    if (myXhr.upload) { // Check if upload property exists
+
+                    }
+                    return myXhr;
+                },
+                //Ajax events
+                error: function (request) {
+                    console.log(request);
+                },
+                success: function (data) {
+                    console.log(data);
+                    $("#media").append('<img id="mediaToCrop" src="/medias/tmp/' + getTempFileName(filename) + '">');
+                    $(function () {
+                        $('#mediaToCrop').Jcrop({
+                            aspectRatio: 1,
+                            onChange: showCoords,
+                            onSelect: showCoords
+                        });
+                        $('#datas').show();
+                    });
+                },
+                // Form data
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
+
+        function getTempFileName(filename) {
+            var userId = {{ app.user.id }};
+            var explodeFilename = filename.split('.');
+            var extension = explodeFilename[explodeFilename.length - 1];
+            explodeFilename.pop();
+            return explodeFilename.join() + '_' + userId + '.' + extension;
+        }
+
+        function showCoords(c)
+        {
+            $('#x').val(c.x);
+            $('#y').val(c.y);
+            $('#x2').val(c.x2);
+            $('#y2').val(c.y2);
+            $('#w').val(c.w);
+            $('#h').val(c.h);
+        };
+
+        $('#crop-media').click(function () {
+            var formData = new FormData();
+            formData.append("x", $('#x').val());
+            formData.append("y", $('#y').val());
+            formData.append("x2", $('#x2').val());
+            formData.append("y2", $('#y2').val());
+            formData.append("w", $('#w').val());
+            formData.append("h", $('#h').val());
+
             $.ajax({
                 url: '{{ path('media_crop') }}',  //Server script to process data
                 type: 'POST',

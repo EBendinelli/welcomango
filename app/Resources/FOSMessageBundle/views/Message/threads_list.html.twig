@@ -2,7 +2,7 @@
     {% if threads %}
         <ul class="bg-white">
         {% for thread in threads %}
-            <li class="item p-t-15 p-b-15 {% if not fos_message_is_read(thread) %}message-unread{% endif %}" onclick="location.href='{{ url('fos_message_thread_view', {'threadId': thread.id}) }}'">
+            <li class="item p-t-15 p-b-15 {% if not fos_message_is_read(thread) %}message-unread{% endif %}" onclick="location.href='{{ url('message_thread_view', {'thread_id': thread.id, 'user_id': user.id}) }}'">
                 <div class="row">
                     <div class="col-md-1 text-center ">
                         <a href="{{ asset(path('front_user_view', {'user_id': thread.booking.experience.getCreator.id})) }}">

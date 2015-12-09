@@ -2,6 +2,9 @@
 
 namespace Welcomango\Bundle\ExperienceBundle\Controller;
 
+use Symfony\Component\HttpFoundation\File\File;
+use Gaufrette\Filesystem;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -12,7 +15,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Model\UserInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 
 use Symfony\Component\Validator\Constraints\DateTime;
 use Welcomango\Bundle\CoreBundle\Controller\Controller as BaseController;
@@ -101,53 +103,43 @@ class ExperienceController extends BaseController
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
-        $experience = new Experience(); // Your form data class. Has to be an object, won't work properly with an array.
+
+        $experience = new Experience();
         $experience->setCreator($user);
+
+        $em = $this->getDoctrine()->getManager();
+        $experience->setMedias(new ArrayCollection());
+        $form = $this->createForm($this->get('welcomango.form.experience.create'), $experience);
+        $experience->setMedias(new ArrayCollection());
+        $form->handleRequest($request);
 
         //Set availabilities
         $availabilities = new ArrayCollection();
-        $availability = new Availability();
-        $availability->setDay(array('0','1','3','4'));
-        $availability->setHour(array('1','3'));
+        $availability   = new Availability();
+        $availability->setDay(array('0', '1', '3', '4'));
+        $availability->setHour(array('1', '3'));
         $availability->setExperience($experience);
         $availabilities->add($availability);
         $experience->setAvailabilities($availabilities);
 
-        $flow = $this->get('welcomango.form.flow.experience'); // must match the flow's service id
-        $flow->bind($experience);
-        // form of the current step
-        $form = $flow->createForm();
-        if ($flow->isValid($form)) {
-            $session = $this->get('session');
-            $flow->saveCurrentStepData($form);
+        if ($form->isValid()) {
+            $availabilityManager = $this->get('welcomango.front.availability.manager');
+            $availabilityManager->generateAvailabilityForExperience($experience, $form);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($experience);
+            $em->flush();
+            $experience->setMedias($this->get('welcomango.media.manager')->generateMediasFromCsv($form->get('medias_upload')->getData(), $experience));
+            $em->persist($experience);
+            $em->flush();
 
-            if (isset($form['medias_id']) && null !== $form['medias_id']->getData()) {
-                $this->get('session')->set('medias_id', $form['medias_id']->getData());
-            }
-
-            if ($flow->nextStep()) {
-                $form = $flow->createForm();
-            } else {
-
-                $availabilityManager = $this->get('welcomango.front.availability.manager');
-                $availabilityManager->generateAvailabilityForExperience($experience, $form);
-                // flow finished
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($experience);
-                $em->flush();
-                $this->get('welcomango.front.experience.manager')->processUploadMedias($experience, $session->get('medias_id'));
-
-                $flow->reset(); // remove step data from the session
-
-                return $this->render('WelcomangoExperienceBundle:Experience:createSuccess.html.twig', array(
-                    'experience' => $experience,
-                ));
-            }
+            return $this->render('WelcomangoExperienceBundle:Experience:createSuccess.html.twig', array(
+                'experience' => $experience,
+            ));
         }
 
         return $this->render('WelcomangoExperienceBundle:Experience:create.html.twig', array(
-            'form' => $form->createView(),
-            'flow' => $flow,
+            'form'   => $form->createView(),
+            'medias' => new ArrayCollection(),
         ));
     }
 
@@ -164,9 +156,10 @@ class ExperienceController extends BaseController
     public function editAction(Request $request, Experience $experience)
     {
         //Here we transform the hour and day data to arrays
-        $availabilities = $experience->getAvailabilities();
+        $availabilities      = $experience->getAvailabilities();
         $availabilityManager = $this->get('welcomango.front.availability.manager');
         $availabilityManager->prepareAvailabilityForForm($availabilities);
+
 
         $originalAvailabilities = new ArrayCollection();
         foreach ($availabilities as $availability) {
@@ -196,7 +189,7 @@ class ExperienceController extends BaseController
         }
 
         return array(
-            'form'           => $form->createView(),
+            'form'       => $form->createView(),
             'experience' => $experience,
         );
     }
@@ -219,9 +212,9 @@ class ExperienceController extends BaseController
         // Check that the experience is still available and not deleted
         if ($experience->isDeleted()) {
             return $this->render('WelcomangoCoreBundle:CRUD:notAllowed.html.twig', array(
-                'title' => 'This experience is not available anymore',
-                'message' => 'Well, maybe it never existed...',
-                'return_path' => $this->get('router')->generate('front_experience_list'),
+                'title'          => 'This experience is not available anymore',
+                'message'        => 'Well, maybe it never existed...',
+                'return_path'    => $this->get('router')->generate('front_experience_list'),
                 'return_message' => 'Return to experiences',
             ));
         }
@@ -244,8 +237,8 @@ class ExperienceController extends BaseController
         $booking->setExperience($experience);
         $form = $this->createForm($this->get('welcomango.form.booking.type'), $booking, [
             'available_status' => $this->container->getParameter('available_status'),
-            'meeting_times' => $this->container->getParameter('meeting_times'),
-            'experience' => $experience,
+            'meeting_times'    => $this->container->getParameter('meeting_times'),
+            'experience'       => $experience,
         ]);
         $form->handleRequest($request);
 
@@ -260,9 +253,9 @@ class ExperienceController extends BaseController
             // If the user is trying to book his own experience
             if ($user == $experience->getCreator()) {
                 return $this->render('WelcomangoCoreBundle:CRUD:notAllowed.html.twig', array(
-                    'title' => 'Hm. Want to go on an adventure with yourself? ',
-                    'message' => 'Well maybe you just wanted to edit your experience',
-                    'return_path' => $this->get('router')->generate('front_experience_view', array('experience_id' => $experience->getId())),
+                    'title'          => 'Hm. Want to go on an adventure with yourself? ',
+                    'message'        => 'Well maybe you just wanted to edit your experience',
+                    'return_path'    => $this->get('router')->generate('front_experience_view', array('experience_id' => $experience->getId())),
                     'return_message' => 'Return to experience',
                 ));
             }
@@ -325,7 +318,7 @@ class ExperienceController extends BaseController
         }
 
         $entityManager->merge($experience);
-        $entityManager ->flush();
+        $entityManager->flush();
 
         return $this->render('WelcomangoExperienceBundle:Experience:deleteSuccess.html.twig');
     }

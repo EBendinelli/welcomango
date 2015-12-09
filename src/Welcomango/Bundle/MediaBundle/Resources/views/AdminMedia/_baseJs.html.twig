@@ -1,59 +1,52 @@
+<div id="preview-template">
+    <div class="dz-preview dz-file-preview">
+        <div class="dz-details">
+            <div class="dz-filename"><span data-dz-name></span></div>
+            <div class="dz-size" data-dz-size></div>
+            <div class="dz-id" data-dz-id></div>
+            <img data-dz-thumbnail />
+        </div>
+        <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+        <div class="dz-error-message"><span data-dz-errormessage></span></div>
+        <i class="fa fa-trash delete-icon" data-dz-remove></i>
+    </div>
+</div>
+
+<script src="{{ asset('js/dropzone.js') }}"></script>
 <script type="text/javascript">
-
-    var mediasIds = [];
-
-    $('#{{ idSearch }}').change(function () {
-        var formData = new FormData($('#{{ idForm }}')[0]);
-        formData.append("formName", "{{ formName }}");
-        formData.append("inputName", "{{ inputName }}");
-        formData.append("templateReturn", "{{ templateReturn }}");
-        $.ajax({
-            url: '{{ path('experience_media_upload') }}',  //Server script to process data
-            type: 'POST',
-            xhr: function () {  // Custom XMLHttpRequest
-                var myXhr = $.ajaxSettings.xhr();
-                if (myXhr.upload) { // Check if upload property exists
-
-                }
-                return myXhr;
-            },
-            //Ajax events
-            error: function (request) {
-                console.log(request);
-            },
-            success: function (data) {
-                {%  if multiple == 'false' %}
-                $("#medias").html("");
-                {% endif %}
-                $("#medias").append(data);
-                updateMediaListField();
-            },
-            // Form data
-            data: formData,
-            //Options to tell jQuery not to process data or worry about content-type.
-            cache: false,
-            contentType: false,
-            processData: false
+    Dropzone.autoDiscover = false;
+    var medias = [];
+    $(function() {
+        var dropzone = new Dropzone("div#medias", {
+            url: "{{ oneup_uploader_endpoint('gallery') }}",
+            uploadMultiple: true,
+            acceptedFiles: 'image/*',
+            maxFilesize: 5,
+            dictRemoveFile: "{{ 'medias.delete'|trans }}",
+            dictDefaultMessage: "{{ 'medias.drop_files_here'|trans }}",
+            previewTemplate: document.getElementById('preview-template').innerHTML,
+            init: function () {
+                {% for media in medias %}
+                var mockFile = { name: "{{ media.path }}", size: 99999 };
+                this.options.thumbnail.call(this, mockFile, "{{ asset(picture.webPath()) | imagine_filter('thumb250') }}");
+                this.options.addedfile.call(this, mockFile);
+                {% endfor %}
+                this.on("addedfile", function(file) {
+                    medias.push(file.name);
+                    computeMediaName();
+                });
+                this.on("removedfile", function(file) {
+                    $.post("{{ path('experience_media_delete') }}", {'file': file.name}, function (response) {}, 'html');
+                    var index = medias.indexOf(+file.name);
+                    medias.splice(index, 1);
+                    computeMediaName();
+                });
+            }
         });
     });
 
-    function deleteMedia(mediaId) {
-        var data = {request: mediaId};
-        $.post("{{ path('experience_media_delete') }}", {'mediaId': mediaId}, function (response) {
-            $("#media_" + mediaId).remove();
-        }, 'html');
+    function computeMediaName() {
+        $('#front_experience_medias_upload').val(medias.join(','));
     }
 
-    function updateMediaListField() {
-        $("#medias").children('div').each(function () {
-            var res = this.id.replace("media_", "");
-            mediasIds.push(res);
-        });
-        // Used only for experiences Because of the flow form (severals steps form)
-        $('#front_experience_medias_id').val(mediasIds.join());
-    }
-
-    $('#front_experience_step3_availability input[type=radio]').change(function () {
-        console.log(this.value);
-    });
 </script>

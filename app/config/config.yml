@@ -95,9 +95,25 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Welcomango\Model\User
+    service:
+        mailer: fos_user.mailer.twig_swift
     registration:
+        form:
+            type: front_user
         confirmation:
             enabled: true
+            from_email:
+                address:        no-reply@welcomango.com
+                sender_name:    Welcomango team
+            template: WelcomangoEmailBundle:EmailTemplate:registration.html.twig
+    resetting:
+        email:
+            template: WelcomangoEmailBundle:EmailTemplate:reseting.html.twig
+    resetting:
+        email:
+            from_email:
+                address: no-reply@welcomango.com
+                sender_name: Welcomango team
 
 knp_menu:
     twig:
@@ -116,10 +132,6 @@ knp_paginator:
 
 genemu_form:
     select2: ~
-    file:
-        enabled:    true
-        folder:     '/upload/medias'
-        swf:        '/uploadify/uploadify.swf'
     image:
         enabled:  true
         selected: 'large'
@@ -142,8 +154,6 @@ stof_doctrine_extensions:
             loggable: true
             sortable: true
 
-gregwar_image: ~
-
 services:
     twig.extension.text:
         class: Twig_Extensions_Extension_Text
@@ -153,6 +163,10 @@ services:
         class: Twig_Extensions_Extension_Date
         tags:
             - { name: 'twig.extension' }
+    monolog_processor:
+        class: Monolog\Processor\PsrLogMessageProcessor
+        tags:
+            - { name: monolog.processor}
 
 fos_message:
     db_driver: orm
@@ -164,7 +178,49 @@ fos_message:
 oneup_uploader:
     mappings:
         gallery:
-            frontend: blueimp
+            namer: welcomango.media_namer
+            frontend: dropzone
+            storage:
+                type: gaufrette
+                filesystem: gaufrette.gallery_filesystem
+
+knp_gaufrette:
+    adapters:
+        gallery:
+            local:
+                directory: %kernel.root_dir%/../web/medias/tmp
+                create: true
+        real:
+            local:
+                directory: %kernel.root_dir%/../web/medias
+                create: true
+        experiences:
+            local:
+                directory: %kernel.root_dir%/../web/medias/experiences
+                create: true
+    filesystems:
+        real:
+            adapter: real
+        gallery:
+            adapter: gallery
+        experience:
+            adapter: experiences
+
+liip_imagine:
+    resolvers:
+       default:
+          web_path: ~
+
+    filter_sets:
+        cache: ~
+        thumb120:
+            quality: 100
+            filters:
+                thumbnail: { size: [120, 120], mode: outbound }
+        thumb250:
+            quality: 100
+            filters:
+                thumbnail: { size: [250, 250], mode: outbound }
 
 welcomango_booking:
     available_status:

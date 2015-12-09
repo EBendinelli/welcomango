@@ -1,10 +1,11 @@
 <?php
 
-namespace Welcomango\Bundle\CoreBundle\Form\Type;
+namespace Welcomango\Bundle\MediaBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 /**
  * MediaType Form class
@@ -16,17 +17,7 @@ class MediaType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('title', 'text', [
-                'label'    => 'form.media.title',
-                'required' => true,
-            ])
-            ->add('description', 'textarea', [
-                'label'    => 'form.media.description',
-                'required' => true,
-            ])
-            ->add('file', 'file')
-        ;
+        $builder->add('mediaList', 'hidden', ['required' => false]);
     }
 
     /**
@@ -35,17 +26,17 @@ class MediaType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class'         => 'Welcomango\Model\Media',
             'translation_domain' => 'media',
-            'roles_user'         => null,
+            'compound'           => true,
         ]);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getParent()
     {
-        return 'admin_language';
+        return HiddenType::class;
     }
+
 }
