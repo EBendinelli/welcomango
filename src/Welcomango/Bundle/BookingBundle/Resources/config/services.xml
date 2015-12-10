@@ -10,7 +10,7 @@
             <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
 
-        <service id="welcomango.form.rating.type" class="Welcomango\Bundle\BookingBundle\Form\Type\RatingCommentType">
+        <service id="welcomango.form.feedback.type" class="Welcomango\Bundle\BookingBundle\Form\Type\FeedbackType">
         </service>
 
         <service id="booking.date_difference" class="Welcomango\Bundle\BookingBundle\Twig\DateDifferenceExtension">
@@ -25,13 +25,14 @@
         <service id="booking.request_action" class="Welcomango\Bundle\BookingBundle\Twig\RequestActionExtension">
             <tag name="twig.extension"/>
             <argument type="service" id="router"/>
+            <argument type="service" id="translator"/>
         </service>
 
         <service id="welcomango.front.booking.manager" class="Welcomango\Bundle\BookingBundle\Manager\BookingManager">
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
-        <service id="welcomango.front.comment.manager" class="Welcomango\Bundle\BookingBundle\Manager\CommentManager">
+        <service id="welcomango.front.feedback.manager" class="Welcomango\Bundle\BookingBundle\Manager\FeedbackManager">
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
     </services>

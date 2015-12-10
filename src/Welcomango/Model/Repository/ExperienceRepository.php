@@ -53,19 +53,19 @@ class ExperienceRepository extends EntityRepository
     }
 
     public function getCommentsForExperience($experience){
-        $comments = array();
+        $feedbacks = array();
         $bookings = $experience->getBookings();
         foreach($bookings as $booking){
             if($booking->getStatus() == 'Happened'){
-                $bookingComments = $booking->getComments();
-                foreach($bookingComments as $comment){
-                    if($comment->IsValidated() && !$comment->isDeleted()) {
-                        $comments[] = $comment;
+                $bookingFeedbacks = $booking->getFeedbacks();
+                foreach($bookingFeedbacks as $feedback){
+                    if($feedback->IsValidated() && !$feedback->isDeleted()) {
+                        $feedbacks[] = $feedback;
                     }
                 }
             }
         }
-        return $comments;
+        return $feedbacks;
     }
 
     /**

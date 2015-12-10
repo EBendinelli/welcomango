@@ -44,20 +44,6 @@ class Booking
     private $status;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="local_note", type="integer", nullable=true)
-     */
-    private $localNote;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="traveler_note", type="integer", nullable=true)
-     */
-    private $travelerNote;
-
-    /**
      * @var User
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="bookings")
@@ -74,9 +60,9 @@ class Booking
     private $experience;
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="booking", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Feedback", mappedBy="booking", cascade={"persist", "remove"})
      **/
-    private $comments;
+    private $feedbacks;
 
     /**
      * @var integer
@@ -179,46 +165,6 @@ class Booking
     }
 
     /**
-     * Set localNote
-     *
-     * @param integer $localNote
-     */
-    public function setLocalNote($localNote)
-    {
-        $this->localNote = $localNote;
-    }
-
-    /**
-     * Get localNote
-     *
-     * @return integer
-     */
-    public function getLocalNote()
-    {
-        return $this->localNote;
-    }
-
-    /**
-     * Set travelerNote
-     *
-     * @param integer $travelerNote
-     */
-    public function setTravelerNote($travelerNote)
-    {
-        $this->travelerNote = $travelerNote;
-    }
-
-    /**
-     * Get travelerNote
-     *
-     * @return integer
-     */
-    public function gettravelerNote()
-    {
-        return $this->travelerNote;
-    }
-
-    /**
      * @return User
      */
     public function getUser()
@@ -253,33 +199,85 @@ class Booking
     /**
      * @return ArrayCollection
      */
-    public function getComments()
+    public function getFeedbacks()
     {
-        return $this->comments;
+        return $this->feedbacks;
     }
 
     /**
-     * @param ArrayCollection $comments
+     * @param ArrayCollection $feedbacks
      */
-    public function setComments($comments)
+    public function setFeedbacks($feedbacks)
     {
-        $this->comments = $comments;
+        $this->feedbacks = $feedbacks;
     }
 
     /**
-     * @param Comment $comment
+     * @param Feedback $feedback
      */
-    public function removeComment(Comment $comment)
+    public function removeFeedback(Feedback $feedback)
     {
-        $this->comments->removeElement($comment);
+        $this->feedbacks->removeElement($feedback);
     }
 
     /**
-     * @param Comment $comment
+     * @param Feedback $feedback
      */
-    public function addComment(Comment $comment)
+    public function addFeedback(Feedback $feedback)
     {
-        $this->comments[] = $comment;
+        $this->feedbacks[] = $feedback;
+    }
+
+    /**
+     * @return Boolean
+     */
+    public function hasFeedbackFromTraveler(){
+        foreach($this->feedbacks as $feedback){
+            if($feedback->getSender() == $this->user){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @return Feedback
+     */
+    public function getFeedbackFromTraveler(){
+        foreach($this->feedbacks as $feedback){
+            if($feedback->getSender() == $this->user && !$feedback->isDeleted()){
+                return $feedback;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @return Boolean
+     */
+    public function hasFeedbackFromLocal(){
+        foreach($this->feedbacks as $feedback){
+            if($feedback->getSender() == $this->experience->getCreator()){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @return Feedback
+     */
+    public function getFeedbackFromLocal(){
+        foreach($this->feedbacks as $feedback){
+            if($feedback->getSender() == $this->experience->getCreator() && !$feedback->isDeleted()){
+                return $feedback;
+            }
+        }
+
+        return false;
     }
 
     /**

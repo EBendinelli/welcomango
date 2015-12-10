@@ -9,12 +9,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 
 /**
- * Comment
+ * Feedback
  *
- * @ORM\Table(name="wm_comment")
+ * @ORM\Table(name="wm_feedback")
  * @ORM\Entity
  */
-class Comment
+class Feedback
 {
     /**
      * @var integer
@@ -28,15 +28,15 @@ class Comment
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="postedComments")
-     * @ORM\JoinColumn(name="poster_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="postedFeedbacks")
+     * @ORM\JoinColumn(name="sender_id", referencedColumnName="id", nullable=false)
      */
-    private $poster;
+    private $sender;
 
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="receivedComments")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="receivedFeedbacks")
      * @ORM\JoinColumn(name="receiver_id", referencedColumnName="id", nullable=false)
      */
     private $receiver;
@@ -44,7 +44,7 @@ class Comment
     /**
      * @var Booking
      *
-     * @ORM\ManyToOne(targetEntity="Booking", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="Booking", inversedBy="feedbacks")
      * @ORM\JoinColumn(name="booking_id", referencedColumnName="id", nullable=false)
      */
     private $booking;
@@ -52,9 +52,16 @@ class Comment
     /**
      * @var string
      *
-     * @ORM\Column(name="body", type="text", nullable=false)
+     * @ORM\Column(name="comment", type="text", nullable=true)
      */
-    private $body;
+    private $comment;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="note", type="integer", nullable=false)
+     */
+    private $note;
 
     /**
      * @var \DateTime
@@ -75,7 +82,7 @@ class Comment
     /**
      * @ORM\Column(name="validated", type="boolean")
      */
-    private $validated = true;
+    private $validated = false;
 
     /**
      * @ORM\Column(name="featured", type="boolean")
@@ -96,17 +103,17 @@ class Comment
     /**
      * @return User
      */
-    public function getPoster()
+    public function getSender()
     {
-        return $this->poster;
+        return $this->sender;
     }
 
     /**
-     * @param User $poster
+     * @param User $sender
      */
-    public function setPoster($poster)
+    public function setSender($sender)
     {
-        $this->poster = $poster;
+        $this->sender = $sender;
     }
 
     /**
@@ -142,23 +149,43 @@ class Comment
     }
 
     /**
-     * Set body
+     * Set comment
      *
-     * @param string $body
+     * @param string $comment
      */
-    public function setBody($body)
+    public function setComment($comment)
     {
-        $this->body = $body;
+        $this->comment = $comment;
     }
 
     /**
-     * Get body
+     * Get comment
      *
      * @return string
      */
-    public function getBody()
+    public function getComment()
     {
-        return $this->body;
+        return $this->comment;
+    }
+
+    /**
+     * Set note
+     *
+     * @param integer $note
+     */
+    public function setNote($note)
+    {
+        $this->note = $note;
+    }
+
+    /**
+     * Get note
+     *
+     * @return integer
+     */
+    public function getNote()
+    {
+        return $this->note;
     }
 
     /**

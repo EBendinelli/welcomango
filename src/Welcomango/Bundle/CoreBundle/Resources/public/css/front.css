@@ -2,6 +2,10 @@
 /* ////////////////   GENERAL UI ////////////////////////// */
 /* //////////////////////////////////////////////////////// */
 
+.fs-i{
+    font-style: italic;
+}
+
 .hover-bold:hover{
     transition: font-weight 0.2s linear !important;
 }
@@ -712,7 +716,7 @@ a h4:hover{
 
 .profile-menu-item:hover{
     background-color:#fafafa;
-    color: #48b0f7;
+    color: #48b0f7 !important;
 }
 
 .profile-menu-item{

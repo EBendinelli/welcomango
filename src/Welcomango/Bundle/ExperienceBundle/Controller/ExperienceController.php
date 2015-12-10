@@ -222,7 +222,7 @@ class ExperienceController extends BaseController
         $user = $this->getUser();
 
         //Get Comments
-        $comments = $experienceRepository->getCommentsForExperience($experience);
+        $feedbacks = $experienceRepository->getCommentsForExperience($experience);
 
         // TODO: Must create a related experience function
         $relatedExperiences = $experienceRepository->getFeatured(3);
@@ -289,7 +289,7 @@ class ExperienceController extends BaseController
             'formSubmitted'      => $formSubmitted,
             'form'               => $form->createView(),
             'forbiddenDates'     => $forbiddenDates,
-            'comments'           => $comments,
+            'feedbacks'          => $feedbacks,
         ));
 
     }

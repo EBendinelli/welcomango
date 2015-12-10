@@ -39,13 +39,13 @@ class UserController extends BaseController
             ->findAllExperiencesAttendedByUser($user);
 
         //Get comment
-        $comments = $user->getDisplayableReceivedComments();
+        $feedbacks = $user->getDisplayableReceivedFeedbacks();
 
         return $this->render('WelcomangoUserBundle:User:view.html.twig', array(
             'user'                => $user,
             'proposedExperiences' => $proposedExperiences,
             'attendedExperiences' => $attendedExperiences,
-            'comments'            => $comments,
+            'feedbacks'           => $feedbacks,
         ));
     }
 

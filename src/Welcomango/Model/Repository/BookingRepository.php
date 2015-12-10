@@ -19,13 +19,15 @@ class BookingRepository extends EntityRepository
     // For now locals only have one experience so the experience note is based on the local note
     // Although this is already prepared to handle the case where a local have more than one experience
     // That's why the Experience model has a average_note field
-    public function getAverageLocalNoteForExperience($experience){
+    public function getAverageNoteForExperience($experience){
         $result = $this
             ->createQueryBuilder('b')
-            ->select("AVG(b.localNote) as average_note")
+            ->leftJoin('b.feedbacks', 'f')
+            ->select("AVG(f.note) as average_note")
             ->andWhere('b.experience ='.$experience->getId())
             ->andWhere('b.status like :status')
             ->setParameter('status', 'Happened')
+            ->andWhere('f.validated = 1')
             ->getQuery()
             ->getSingleResult()
             ;
@@ -33,13 +35,15 @@ class BookingRepository extends EntityRepository
         return $result;
     }
 
-    public function getAverageTravelerNote($user){
+    public function getAverageNoteForUser($user){
         return $this
             ->createQueryBuilder('b')
-            ->select("AVG(b.travelerNote) as average_note")
+            ->leftJoin('b.feedbacks', 'f')
+            ->select("AVG(f.note) as average_note")
             ->andWhere('b.status like :status')
             ->setParameter('status', 'Happened')
             ->andWhere('b.user ='.$user->getId())
+            ->andWhere('f.validated = 1')
             ->getQuery()
             ->getSingleResult()
             ;

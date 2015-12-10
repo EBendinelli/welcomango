@@ -5,13 +5,76 @@
 {% block profile_content %}
     {% block booking_title %}
         <div class="text-center m-b-20">
-            <h2>{{ 'booking.bookingFor'|trans({'%title%': booking.experience.title,'%city%': booking.experience.city.getName})|raw }}</h2>
+            <h2>{{ 'booking.bookingFor'|trans({'%title%': booking.experience.title,'%city%': booking.experience.city.getName, '%user%': booking.experience.getCreator.firstname})|raw }}</h2>
             <div class="hint">{{ 'booking.requestSentExplanation' }}</div>
         </div>
     {% endblock %}
 
     {% block booking_actions %}
         {{ parent() }}
+    {% endblock %}
+
+    {% block booking_review %}
+        {% if booking.status == 'Happened' and not booking.getFeedbackFromTraveler %}
+            <div class="row bg-white p-l-20 p-b-20 p-t-20 p-r-20 m-b-20 b-a b-thick b-warning">
+                <div class="text-center">
+                    <p>
+                        {{ 'booking.ratingText'|trans }}
+                    <div class="fs-12"><i class="fa fa-exclamation-triangle"></i>{{ 'booking.ratingNote'|trans }}</div>
+                    </p>
+                    {{ include("WelcomangoBookingBundle:Feedback:form.html.twig", { 'from': form, 'view': 'booking_sent_view'}) }}
+                </div>
+            </div>
+        {% elseif booking.status == 'Happened' and booking.getFeedbackFromTraveler %}
+            {# Handle the case where the feedback has been refused #}
+            {% if booking.getFeedbackFromLocal.isDeleted %}
+                <div class="row bg-white p-l-20 p-b-20 p-t-20 p-r-20 m-b-20 b-a b-thick b-warning">
+                    <div class="text-center">
+                        <p>
+                            {{ 'booking.feedbackRefusedText'|trans }}
+                        <div class="fs-12"><i class="fa fa-exclamation-triangle"></i>{{ 'booking.ratingNote'|trans }}</div>
+                        </p>
+                        {{ include("WelcomangoBookingBundle:Feedback:form.html.twig", { 'from': form, 'view': 'booking_sent_view'}) }}
+                    </div>
+                </div>
+            {% else %}
+                <div class="row bg-white panel panel-default p-l-20 p-b-20 p-t-20 p-r-20 m-b-20 ">
+                    {% if booking.hasFeedbackFromLocal %}
+                        {% if booking.getFeedbackFromLocal.isvalidated %}
+                            <div class="col-md-6 text-center">
+                                <div class="bold m-b-10">{{ 'booking.commentReceived'|trans({'%user%': booking.user.username}) }}</div>
+                                {{ booking_comment(booking.hasFeedbackFromLocal, user, 'receiver') }}
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <div class="bold m-b-10">{{ 'booking.noteReceived'|trans }}</div>
+                                {{ include("WelcomangoCoreBundle:Core:note.html.twig", { 'note': booking.getFeedbackFromTraveler.note, 'size': 'medium'}) }}
+                            </div>
+                        {% else %}
+                            <div class="col-md-12 text-center"><div class="hint-text text-center">{{ 'booking.thisUserFeedbackWaitingForApproval'|trans }}</div></div>
+                        {% endif %}
+                    {% else %}
+                        <div class="col-md-12 text-center"><div class="hint-text text-center">{{ 'booking.noFeedback'|trans }}</div></div>
+                    {% endif %}
+                    <div class="col-md-12"><hr></div>
+                    {% if booking.hasFeedbackFromTraveler %}
+                        {% if booking.getFeedbackFromTraveler.isValidated %}
+                            <div class="col-md-6 text-center">
+                                <div class="bold m-b-10">{{ 'booking.commentGiven'|trans({'%user%': booking.user.username}) }}</div>
+                                {{ booking_comment(booking.getFeedbackFromTraveler, user, 'poster') }}
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <div class="bold m-b-10">{{ 'booking.noteGiven'|trans({'%user%': booking.user.username}) }}</div>
+                                    {{ include("WelcomangoCoreBundle:Core:note.html.twig", { 'note': booking.getFeedbackFromTraveler.note, 'size': 'medium'}) }}
+                            </div>
+                        {% else %}
+                            <div class="col-md-12 text-center"><div class="hint-text text-center">{{ 'booking.thisUserFeedbackWaitingForApproval'|trans }}</div></div>
+                        {% endif %}
+                    {% else %}
+                        <div class="col-md-12 text-center"><div class="hint-text text-center">{{ 'booking.noFeedbackFrom'|trans({'%user%': booking.user}) }}</div></div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endif %}
     {% endblock %}
 
     {% block booking_details %}

@@ -1,0 +1,19 @@
+<div class="panel panel-default p-l-20 p-r-20 p-t-20 p-b-20">
+    <div class="row">
+        <div class="col-md-6 text-center">
+               {{ 'moderation.feedback.FromTo'|trans({'%userFrom%': feedback.sender.fullName, '%userFor%': feedback.receiver.fullname }) }}
+        </div>
+        <div class="col-md-6 text-center">
+            <div>
+                {% include "WelcomangoCoreBundle:Core:note.html.twig" with { 'note' : feedback.note, 'size': 'medium' } %}
+            </div>
+            <div class="m-t-20 fs-i">
+                "{{ feedback.comment  }}"
+            </div>
+        </div>
+        <div class="text-center col-md-12 m-t-20">
+            {{ button.refuse(path('admin_feedback_refuse', {'feedback_id': feedback.id}), false, "btn-xs") }}
+            {{ button.validate(path('admin_feedback_validate', {'feedback_id': feedback.id}), false, "btn-xs") }}
+        </div>
+    </div>
+</div>

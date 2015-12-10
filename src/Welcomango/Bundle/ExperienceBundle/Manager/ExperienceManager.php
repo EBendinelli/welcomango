@@ -51,7 +51,7 @@ class ExperienceManager
     public function updateAverageNote($experience)
     {
         $bookingRepo = $this->entityManager->getRepository('Welcomango\Model\Booking');
-        $newNote = $bookingRepo->getAverageLocalNoteForExperience($experience);
+        $newNote = $bookingRepo->getAverageNoteForExperience($experience);
 
         $experience->setAverageNote($newNote['average_note']);
         $this->entityManager->persist($experience);

@@ -62,11 +62,6 @@ class LoadBookingData extends AbstractFixture implements FixtureInterface, Order
                 $entry->setNumberOfParticipants(rand(1,10));
                 $randStatus = $status[rand(0,3)];
                 $entry->setStatus($randStatus);
-                if($randStatus == 'Happened'){
-                    $entry->setActionRequired(true);
-                    $entry->setLocalNote(rand(1,5));
-                    $entry->setTravelerNote(rand(1,5));
-                }
 
                 $manager->persist($entry);
                 /*}*/
@@ -74,19 +69,6 @@ class LoadBookingData extends AbstractFixture implements FixtureInterface, Order
         }
 
         $manager->flush();
-
-        //Update average notes of Experiences based on generated bookings
-        $experienceManager = $this->container->get('welcomango.front.experience.manager');
-        foreach($experiences as $experience){
-            $experienceManager->updateAverageNote($experience);
-        }
-
-        $userManager = $this->container->get('welcomango.front.user.manager');
-        foreach($users as $user){
-            $userManager->updateAverageTravelerNote($user);
-            $userManager->updateAverageLocalNote($user);
-        }
-
     }
 
     /**

@@ -5,3 +5,8 @@ jms_translation:
             output_dir: %kernel.root_dir%/Resources/translations/
             excluded_names: ["*Test.php"]
             domains: [interface]
+        admin:
+            dirs: [%kernel.root_dir%/Resources/views]
+            output_dir: %kernel.root_dir%/Resources/translations/
+            excluded_names: ["*Test.php"]
+            domains: [admin]

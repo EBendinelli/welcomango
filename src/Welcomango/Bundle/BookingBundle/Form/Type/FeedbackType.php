@@ -17,9 +17,9 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Welcomango\Model\Booking;
 
 /**
- * RatingCommentType Form class
+ * FeedbackType Form class
  */
-class RatingCommentType extends AbstractType
+class FeedbackType extends AbstractType
 {
 
     /**
@@ -31,7 +31,7 @@ class RatingCommentType extends AbstractType
         for($i = 1;$i<=5; $i++) $note[] = $i;
 
         $builder
-            ->add('body', 'textarea', [
+            ->add('comment', 'textarea', [
                 'label' => 'form.rating.comment',
                 'required' => true,
             ])
@@ -52,6 +52,7 @@ class RatingCommentType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
+            'data_class'         => 'Welcomango\Model\Feedback',
             'translation_domain' => 'booking',
         ]);
     }
@@ -61,6 +62,6 @@ class RatingCommentType extends AbstractType
      */
     public function getName()
     {
-        return 'front_rating_comment';
+        return 'front_feedback';
     }
 }

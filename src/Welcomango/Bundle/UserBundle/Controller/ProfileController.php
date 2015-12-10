@@ -31,6 +31,7 @@ class ProfileController extends BaseProfileController
         $entityManager = $this->getDoctrine()->getManager();
         $userExperiences = $user->getExperiences();
 
+        //Get booking for the user's experiences
         $bookings = array();
         foreach($userExperiences as $experience){
             $expBookings = $experience->getBookings();
@@ -46,7 +47,6 @@ class ProfileController extends BaseProfileController
                 if($booking->getStartDatetime() < $nextVisitGivenTime){
                     $nextVisitGivenTime = $booking->getStartDatetime();
                     $nextVisitGiven = $booking;
-                    dump($booking);
                 }
             }
         }
@@ -61,7 +61,6 @@ class ProfileController extends BaseProfileController
                 if($booking->getStartDatetime() < $nextTripTime){
                     $nextTripTime = $booking->getStartDatetime();
                     $nextTrip = $booking;
-                    dump($booking);
                 }
             }
         }
@@ -75,32 +74,36 @@ class ProfileController extends BaseProfileController
         }
 
         //Check if the user has unrated finished booking
-        $feedbackAsTraveler = false;
-        $count = 0;
+        $feedbackAsLocal = array();
         foreach($bookings as $booking){
-            if($booking->getStatus() == 'Happened' && !$booking->getLocalNote() ){
-                $count++;
-                $feedbackAsTraveler = $booking;
+            if($booking->getStatus() == 'Happened' && !$booking->hasFeedbackFromLocal() ){
+                $feedbackAsLocal[] = $booking;
             }
         }
+        if(count($feedbackAsLocal) === 1){
+            $feedbackAsLocal = $feedbackAsLocal[0];
+        }
 
-        $feedbackAsLocal = false;
+        $feedbackAsTraveler = array();
         foreach($plannedBookings as $booking){
-            if($booking->getStatus() == 'Happened' && !$booking->getTravelerNote() ){
-                $feedbackAsLocal = $booking;
+            if($booking->getStatus() == 'Happened' && !$booking->hasFeedbackFromTraveler() ){
+                $feedbackAsTraveler[] = $booking;
             }
+        }
+        if(count($feedbackAsTraveler) === 1){
+            $feedbackAsTraveler = $feedbackAsTraveler[0];
         }
 
         //Get Comments
-        $comments = $user->getReceivedComments();
+        $feedbacks = $user->getReceivedFeedbacks();
 
         return $this->render('FOSUserBundle:Profile:show.html.twig', array(
             'userExperiences'   => $userExperiences,
             'nextVisitGiven'    => $nextVisitGiven,
             'nextTrip'          => $nextTrip,
-            'comments'          => $comments,
+            'feedbacks'         => $feedbacks,
             'newRequest'        => $newRequest,
-            'feedbackAsLocal'  => $feedbackAsLocal,
+            'feedbackAsLocal'   => $feedbackAsLocal,
             'feedbackAsTraveler'  => $feedbackAsTraveler,
         ));
     }

@@ -21,7 +21,7 @@ class UserManager
     //Update the average note based on existing booking
     public function updateAverageTravelerNote($user){
         $bookingRepo = $this->entityManager->getRepository('Welcomango\Model\Booking');
-        $newNote = $bookingRepo->getAverageTravelerNote($user);
+        $newNote = $bookingRepo->getAverageNoteForUser($user);
 
         $user->setNoteAsLocal($newNote['average_note']);
         $this->entityManager->persist($user);
@@ -33,7 +33,7 @@ class UserManager
         $proposedExperiences = $user->getExperiences();
         $averageNotes = array();
         foreach($proposedExperiences as $experience) {
-            $result = $bookingRepo->getAverageLocalNoteForExperience($experience);
+            $result = $bookingRepo->getAverageNoteForExperience($experience);
             $averageNotes[] = $result['average_note'];
         }
         if(!empty($averageNotes)){

@@ -9,7 +9,7 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-use Welcomango\Model\Comment;
+use Welcomango\Model\Feedback;
 
 class LoadCommentData extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -50,36 +50,56 @@ class LoadCommentData extends AbstractFixture implements FixtureInterface, Order
         $i = 0;
         foreach($bookings as $booking){
             if($booking->getStatus() == 'Happened'){
-                $comment = new Comment();
-                $comment->setPoster($booking->getUser());
+                $feedback = new Feedback();
+                $feedback->setSender($booking->getUser());
                 $experience = $booking->getExperience();
-                $comment->setReceiver($experience->getCreator());
-                $comment->setBooking($booking);
+                $feedback->setReceiver($experience->getCreator());
+                $feedback->setBooking($booking);
 
-                $comment->setCreatedAt(new \Datetime());
-                $comment->setUpdatedAt(new \Datetime());
-                $comment->setValidated(true);
-                $comment->setDeleted(false);
+                $feedback->setCreatedAt(new \Datetime());
+                $feedback->setUpdatedAt(new \Datetime());
+                $feedback->setValidated(true);
+                $feedback->setDeleted(false);
 
                 //One comment on 5 is featured
                 $rand = rand(0,4);
                 if($rand == 4){
-                    $comment->setFeatured(true);
+                    $feedback->setFeatured(true);
                 }else{
-                    $comment->setFeatured(false);
+                    $feedback->setFeatured(false);
                 }
 
-                $comment->setBody($comments[$i]);
+                $feedback->setComment($comments[$i]);
                 $i++;
                 if($i == count($comments)){
                     $i = 0;
                 }
 
-                $manager->persist($comment);
+                if($booking->getStatus() == 'Happened'){
+                    $feedback->setNote(rand(1,5));
+                }
+
+                $manager->persist($feedback);
             }
         }
 
         $manager->flush();
+
+        $experienceRepo = $manager->getRepository('Welcomango\Model\Experience');
+        $experiences = $experienceRepo->findAll();
+        //Update average notes of Experiences based on generated bookings
+        $experienceManager = $this->container->get('welcomango.front.experience.manager');
+        foreach($experiences as $experience){
+            $experienceManager->updateAverageNote($experience);
+        }
+
+        $userRepo = $manager->getRepository('Welcomango\Model\User');
+        $users = $userRepo->findAll();
+        $userManager = $this->container->get('welcomango.front.user.manager');
+        foreach($users as $user){
+            $userManager->updateAverageTravelerNote($user);
+            $userManager->updateAverageLocalNote($user);
+        }
     }
 
     /**

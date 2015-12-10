@@ -1,0 +1,10 @@
+{{ form_start(form, {'action': path('booking_rate', {'booking_id' : booking.id|default('#'), 'view': view} ), 'attr': {'id': form.vars.id}}) }}
+<div id="ratingForm">
+    {{ form_row(form.note) }}
+    {{ form_row(form.comment) }}
+</div>
+{% if cancel is defined %}
+    <button type="button" data-dismiss="modal" class="btn btn-info  btn-cons"><i class="fa fa-arrow-left "></i> Cancel</button>
+{% endif %}
+<button id="modal-rating-button" class="btn btn-complete btn-cons"><i class="fa fa-valid"></i>{{ 'submit'|trans }}</button>
+{{ form_end(form) }}

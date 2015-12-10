@@ -19,3 +19,18 @@
     </a>
 {% endmacro %}
 
+{% macro validate(url, label, size = false, color = false, cons = false, tooltip = false, title = "interface.moderate", addThumb = true) %}
+    <a class="btn btn-{% if color %}{{ color }}{% else %}complete{% endif %} {% if cons %}btn-cons{% endif %} {% if size %}{{ size }}{% endif %}" href="{{ url }}" title="{{ title|trans({}, "interface") }}">
+        {% if addThumb == true %}<i class="fa fa-check"></i>{% endif %}
+        {% if label is not sameas(false) %}{{ label }}{% else %}{{ 'interface.validate'|trans({}, 'interface') }}{% endif %}
+    </a>
+{% endmacro %}
+
+
+{% macro refuse(url, label, size = false, color = false, cons = false, tooltip = false, title = "interface.moderate", addThumb = true) %}
+    <a class="btn btn-{% if color %}{{ color }}{% else %}danger{% endif %} {% if cons %}btn-cons{% endif %} {% if size %}{{ size }}{% endif %}" href="{{ url }}" title="{{ title|trans({}, "interface") }}">
+        {% if addThumb == true %}<i class="fa fa-times"></i>{% endif %}
+        {% if label is not sameas(false) %}{{ label }}{% else %}{{ 'interface.refuse'|trans({}, 'interface') }}{% endif %}
+    </a>
+{% endmacro %}
+

@@ -81,6 +81,16 @@ class AdminBuilder extends ContainerAware
             'linkAttributes' => ['class' => 'fa fa-cloud'],
         ));
 
+        $menu->addChild('menu.title.feedback', array(
+            'route'          => 'admin_feedback_list',
+            'linkAttributes' => ['class' => 'fa fa-comment'],
+        ));
+
+        $menu->addChild('menu.title.moderation.feedback', array(
+            'route'          => 'admin_moderation_feedback',
+            'linkAttributes' => ['class' => 'pg-social'],
+        ));
+
         $menu->addChild('menu.title.tag', array(
             'route'          => 'admin_tag_list',
             'linkAttributes' => ['class' => 'fa fa-tag'],

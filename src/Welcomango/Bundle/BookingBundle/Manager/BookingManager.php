@@ -103,15 +103,5 @@ class BookingManager
         $this->entityManager->flush();
     }
 
-    public function updateNote($booking, $user, $note){
-        if($user == $booking->getUser()){
-            $booking->setLocalNote($note+1);
-        }else{
-            $booking->setTravelerNote($note+1);
-        }
-        $this->entityManager->persist($booking);
-        $this->entityManager->flush();
-    }
-
 }
 

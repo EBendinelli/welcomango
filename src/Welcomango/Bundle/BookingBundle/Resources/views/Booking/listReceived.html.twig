@@ -72,11 +72,6 @@
                                 <td class="col-md-2 {% if booking.status == 'Accepted' %}text-success bold{% endif %}">{{ booking.status }}</td>
                                 <td class="col-md-2">
                                     {{ request_action(booking, user) }}
-                                    {% if booking.status == 'Happened' and booking.travelerNote %}
-                                        {{ include("WelcomangoCoreBundle:Core:note.html.twig", { 'note': booking.travelerNote, 'size': 'small'}) }}
-                                    {% elseif booking.status == 'Happened' %}
-                                        <a class="btn btn-sm btn-complete" data-toggle="modal" data-target=".modal-rating" onClick="updateRatingModal('{{ path('booking_rate', {'booking_id' : booking.id, 'view': 'booking_received_list' }) }}')">Rate</a>
-                                    {% endif %}
                                 </td>
                             </tr>
                             <tr class="participation_details_{{ booking.id }} {{ extraClassDetails|default('') }}" style="display: none">
@@ -104,19 +99,20 @@
                                         </div>
                                         <div class="col-md-6">
                                             {% if activeTab == 'happened'  %}
-                                                {% set commentFound = false %}
+                                                {% set feedbackFound = false %}
                                                 {% if booking.status == 'Happened' %}
-                                                    {% if booking.comments is not empty %}
-                                                        {% for comment in booking.comments %}
-                                                            {% if comment.receiver == user %}
-                                                                {% set commentFound = true %}
-                                                                <div style="font-style: italic; white-space:normal">"{{ comment.body|nl2br|raw }}"</div>
+                                                    {% if booking.feedbacks is not empty %}
+                                                        {% for feedback in booking.feedbacks %}
+                                                            {% if feedback.receiver == user %}
+                                                                {% set feedbackFound = true %}
+                                                                <div style="font-style: italic; white-space:normal">"{{ feedback.comment|nl2br|raw }}"</div>
+                                                                <div class="text-right semi-bold">- {{ booking.user.firstname }}</div>
                                                             {% endif %}
                                                         {% endfor %}
                                                     {% endif %}
                                                 {% endif %}
-                                                {% if not commentFound %}
-                                                    <div class="text-center p-t-20">{{ 'booking.noComment'|trans }}</div>
+                                                {% if not feedbackFound %}
+                                                    <div class="text-center p-t-20">{{ 'booking.noCommentReceived'|trans }}</div>
                                                 {% endif %}
                                             {% else %}
                                                 <div class="text-center m-t-20"><a href="{{ path('booking_received_view', {'booking_id' : booking.id}) }}"  class="btn btn-complete">{{ 'booking.viewRequest'|trans }}</a></div>
@@ -231,7 +227,7 @@
         }
 
         function updateRatingModal(route){
-            $('#front_rating_comment').attr("action", route);
+            $('#front_feedback').attr("action", route);
         }
 
         function rowToggle(element, id, event){

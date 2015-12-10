@@ -2,10 +2,13 @@ generic.title.meta: Welcomango - Places through people
 
 interface.edit: Edit
 interface.delete: Delete
+interface.moderate: Moderate
+interface.pending: Pending
 interface.giveFeedback: Give feedback
 interface.view: View
 interface.comment: Comment
 interface.contact: Contact
+interface.waitingForValidation: Waiting for validation
 
 profile.menu: Menu
 profile.message: Messages
@@ -25,9 +28,12 @@ profile.yourNextTrip: Your next trip
 profile.nextTripDetails: Is <span class="text-primary">%experienceTitle%</span> happening in <span class="text-primary">%experienceCity%</span> with <span class="text-primary">%experienceGuide%</span> <span class="bold">%time%</span>
 profile.nextVisitGiven: Next visit planned
 profile.nextVisitDetails: Is a flavor of <span class="text-primary">%experienceTitle%</span> in which you will bring <span class="text-primary">%experienceTraveler%</span> in <span class="bold">%time%</span>
-profile.giveFeedbackTitle: Give a feedback to <span class="text-primary">%user%</span>
+profile.giveFeedbackToTitle: Give a feedback to <span class="text-primary">%user%</span>
+profile.giveFeedbackTitle: Give a feedback for your last experiences
 profile.rateAsLocal: Give a feedback about %user% on the time you had together!
+profile.rateMultipleAsLocal: Give a feedback to the local you met recently!
 profile.rateAsTraveler: Give a feedback about on the time you had in <span class="text-primary">%city%</span>!
+profile.rateMultipleAsTraveler: Give a feedback to the people you guided recently!
 profile.newRequest: You have a new request
 profile.newRequestText: From <span class="text-primary">%user%</span> for <span class="text-primary">%experience%</span>
 profile.occupation: Occupation
@@ -49,7 +55,7 @@ experience.sorryNoPictures: Sorry, it seems that this user did not add any photo
 experience.manage.introductionText: You may have lived in this current city for years and find the idea of a theme oriented experience a bit limitating... Well, here you can create a new experience with a different flavor to propose another version of your city to travelers. For example, if you already propose a culture oriented visit of your town, you can also propose a second experience about the nightlife and the different things happening by night! Let your knowledge of the city talk and try to intrigued the potential visitors ;)
 experience.manage.title: A different flavor of your city
 
-booking.bookingFor: Your reservation for <span class="text-primary">%title%</span> in <span class="text-primary">%city%</span>
+booking.bookingFor: Your reservation for <span class="text-primary">%title%</span> in <span class="text-primary">%city%</span> with <span class="text-primary">%user%</span>
 booking.requestFor: Request for <span class="text-primary">%title%</span> from <span class="text-primary">%username%</span>
 
 booking.noteReceived: Note received as a local
@@ -58,4 +64,7 @@ booking.noNote: No note yet
 booking.noComment: No comment yet
 
 
-booking.commentWaitingForApproval: This comment is waiting for approval, it should be validated anytime soon
+booking.yourFeedbackWaitingForApproval: Your feedback is waiting for approval, it should be validated anytime soon
+booking.thisUserFeedbackWaitingForApproval: This user's feedback is waiting for approval, it should be validated anytime soon
+booking.noFeedbackFrom: Sorry, no feedback received from %user%
+feedbackRefusedText: Sorry, your feedback has been refused, please give a respectuous feedback!

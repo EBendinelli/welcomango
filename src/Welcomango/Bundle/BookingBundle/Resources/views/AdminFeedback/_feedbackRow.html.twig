@@ -1,0 +1,40 @@
+<tr>
+    <td>
+        {{ feedback.getId }}
+    </td>
+    <td>
+        {{ feedback.sender.fullName }}
+    </td>
+    <td>
+        {{ feedback.receiver.fullname}}
+    </td>
+    <td>
+        {{ feedback.comment  }}
+    </td>
+    <td>
+        {{ feedback.note  }}
+        <i class="fa fa-star"></i>
+    </td>
+    <td>
+        {{ feedback.booking.id  }}
+    </td>
+    <td>
+        {% if feedback.validated == 1 %}
+            <span class="text-success bold">{{ 'interface.validated'|trans }}</span>
+        {% elseif feedback.validated  == -1 %}
+            <span class="text-warning">{{ 'interface.refused'|trans }}</span>
+        {% else %}
+            <span class="text-warning bold">{{ 'interface.pending'|trans }}</span>
+        {% endif %}
+    </td>
+    <td>
+        {% spaceless %}
+            <div class="btn-toolbar">
+                {{ button.edit(path('admin_feedback_edit', {'feedback_id': feedback.id}), false, "btn-xs") }}
+                {{ button.delete(path('admin_feedback_delete', {'feedback_id': feedback.id}), null, "btn-xs") }}
+                {{ button.validate(path('admin_feedback_validate', {'feedback_id': feedback.id}), false, "btn-xs") }}
+            </div>
+        {% endspaceless %}
+    </td>
+</tr>
+

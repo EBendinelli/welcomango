@@ -15,6 +15,7 @@ use FOS\UserBundle\Model\UserInterface;
 
 use Welcomango\Bundle\CoreBundle\Controller\Controller as BaseController;
 use Welcomango\Model\Booking;
+use Welcomango\Model\Feedback;
 
 /**
  * Class BookingController
@@ -65,8 +66,8 @@ class BookingController extends BaseController
             20
         );
 
-        //Prepare rating and comment form
-        $ratingForm = $this->createForm($this->get('welcomango.form.rating.type'));
+        //Prepare feedback form
+        $ratingForm = $this->createForm($this->get('welcomango.form.feedback.type'));
 
         return array(
             'bookings'   => $pagination,
@@ -105,8 +106,8 @@ class BookingController extends BaseController
             20
         );
 
-        //Prepare rating and comment form
-        $ratingForm = $this->createForm($this->get('welcomango.form.rating.type'));
+        //Prepare feedback form
+        $ratingForm = $this->createForm($this->get('welcomango.form.feedback.type'));
 
         return array(
             'bookings' => $pagination,
@@ -130,8 +131,12 @@ class BookingController extends BaseController
         if($user != $booking->getUser()){
             throw new AccessDeniedException('This user does not have access to this section.');
         }
+
+        $feedbackForm = $this->createForm($this->get('welcomango.form.feedback.type'));
+
         return array(
             'booking' => $booking,
+            'form' => $feedbackForm->createView(),
         );
     }
 
@@ -151,11 +156,11 @@ class BookingController extends BaseController
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
-        $ratingForm = $this->createForm($this->get('welcomango.form.rating.type'));
+        $feedbackForm = $this->createForm($this->get('welcomango.form.feedback.type'));
 
         return array(
             'booking' => $booking,
-            'form' => $ratingForm->createView(),
+            'form' => $feedbackForm->createView(),
         );
     }
 
@@ -225,18 +230,16 @@ class BookingController extends BaseController
      */
     public function rateAction(Request $request, Booking $booking, $view)
     {
-        $ratingForm = $this->createForm($this->get('welcomango.form.rating.type'));
-        $ratingForm ->handleRequest($request);
+        $feedbackForm = $this->createForm($this->get('welcomango.form.feedback.type'));
+        $feedbackForm->handleRequest($request);
 
-        if ($ratingForm->isValid()) {
+        if ($feedbackForm->isValid()) {
             $user = $this->getUser();
 
-            $commentBody = $ratingForm->get('body')->getData();
-            $note = $ratingForm->get('note')->getData();
+            $comment = $feedbackForm->get('comment')->getData();
+            $note = $feedbackForm->get('note')->getData();
 
-
-            $this->get('welcomango.front.booking.manager')->updateNote($booking, $user, $note);
-            $this->get('welcomango.front.comment.manager')->createComment($booking, $user, $commentBody);
+            $this->get('welcomango.front.feedback.manager')->createFeedback($booking, $user, $comment, $note);
         }
 
         if(substr($view, -5) == '_view'){

@@ -1,0 +1,23 @@
+{% extends "::admin.html.twig" %}
+
+{% trans_default_domain "feedback" %}
+
+{% set listing = path('admin_feedback_list') %}
+{% form_theme form with ["::theme.html.twig"] %}
+
+{% block page_content %}
+    {{ include("WelcomangoBookingBundle:AdminFeedback:form.html.twig", {'save_path': path('admin_feedback_edit', {'feedback_id': form.vars.value.id })}) }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ form_stylesheet(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $('select').select2();
+    </script>
+
+{% endblock %}

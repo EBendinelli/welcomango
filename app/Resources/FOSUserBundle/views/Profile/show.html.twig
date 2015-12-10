@@ -123,32 +123,62 @@
                 </div>
                 {% endif %}
                 {% if feedbackAsLocal %}
+                    {% if feedbackAsLocal|length > 1 %}
                     <div class="col-md-4 ">
                         <div class="p-l-20 p-r-20  p-b-20 b-a b-thick b-warning bg-white">
-                            <h4 class="text-center">{{ 'profile.giveFeedback'|trans({'%user%': feedbackAsLocal.user.firstname})|raw }}</h4>
+                            <h4 class="text-center">{{ 'profile.giveFeedbackTitle'|trans }}</h4>
                             <div class="text-center"><i class="fa fa-star fa-3x"></i></div>
                             <div class="m-t-20">
-                                {{ 'profile.rateAsLocal'|trans({'%experienceTraveler%': feedbackAsLocal.user.firstname})|raw }}
+                                {{ 'profile.rateMutipleAsLocal'|trans }}
                             </div>
                             <div class="m-t-20 text-center">
-                                <a href="{{ path('booking_received_view', {'booking_id': feedbackAsLocal.id, 'user_id' : user.id }) }}" class="btn btn-complete">{{ 'interface.rate'|trans }}</a>
+                                <a href="{{ path('booking_received_list', {'display': 'happened'}) }}" class="btn btn-complete">{{ 'interface.giveFeedback'|trans }}</a>
                             </div>
                         </div>
                     </div>
+                    {% else %}
+                        <div class="col-md-4 ">
+                            <div class="p-l-20 p-r-20  p-b-20 b-a b-thick b-warning bg-white">
+                                <h4 class="text-center">{{ 'profile.giveFeedbackToTitle'|trans({'%user%': feedbackAsLocal.user.firstname})|raw }}</h4>
+                                <div class="text-center"><i class="fa fa-star fa-3x"></i></div>
+                                <div class="m-t-20">
+                                    {{ 'profile.rateAsLocal'|trans({'%user%': feedbackAsLocal.user.firstname })|raw }}
+                                </div>
+                                <div class="m-t-20 text-center">
+                                    <a href="{{ path('booking_received_view', {'booking_id': feedbackAsLocal.id, 'user_id' : user.id }) }}" class="btn btn-complete">{{ 'interface.giveFeedback'|trans }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
                 {% endif %}
                 {% if feedbackAsTraveler %}
-                    <div class="col-md-4 ">
-                        <div class="p-l-20 p-r-20  p-b-20 b-a b-thick b-warning bg-white">
-                            <h4 class="text-center">{{ 'profile.giveFeedbackTitle'|trans({'%user%': feedbackAsTraveler.user.firstname})|raw }}</h4>
-                            <div class="text-center"><i class="fa fa-star fa-3x"></i></div>
-                            <div class="m-t-20">
-                                {{ 'profile.rateAsTraveler'|trans({'%city%': feedbackAsTraveler.experience.city.name})|raw }}
-                            </div>
-                            <div class="m-t-20 text-center">
-                                <a href="{{ path('booking_sent_view', {'booking_id': feedbackAsTraveler.id, 'user_id' : user.id }) }}" class="btn btn-complete">{{ 'interface.giveFeedback'|trans }}</a>
+                    {% if feedbackAsTraveler|length > 1 %}
+                        <div class="col-md-4 ">
+                            <div class="p-l-20 p-r-20  p-b-20 b-a b-thick b-warning bg-white">
+                                <h4 class="text-center">{{ 'profile.giveFeedbackTitle'|trans }}</h4>
+                                <div class="text-center"><i class="fa fa-star fa-3x"></i></div>
+                                <div class="m-t-20">
+                                    {{ 'profile.rateMultipleAsTraveler'|trans }}
+                                </div>
+                                <div class="m-t-20 text-center">
+                                    <a href="{{ path('booking_received_list', {'display': 'happened'}) }}" class="btn btn-complete">{{ 'interface.giveFeedback'|trans }}</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    {%  else %}
+                        <div class="col-md-4 ">
+                            <div class="p-l-20 p-r-20  p-b-20 b-a b-thick b-warning bg-white">
+                                <h4 class="text-center">{{ 'profile.giveFeedbackToTitle'|trans({'%user%': feedbackAsTraveler.user.firstname})|raw }}</h4>
+                                <div class="text-center"><i class="fa fa-star fa-3x"></i></div>
+                                <div class="m-t-20">
+                                    {{ 'profile.rateAsTraveler'|trans({'%city%': feedbackAsTraveler.experience.city.name})|raw }}
+                                </div>
+                                <div class="m-t-20 text-center">
+                                    <a href="{{ path('booking_sent_list', {'booking_id': feedbackAsTraveler.id, 'user_id' : user.id }) }}" class="btn btn-complete">{{ 'interface.giveFeedback'|trans }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
                 {% endif %}
                 {% if newRequest %}
                     <div class="col-md-4 ">

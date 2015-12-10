@@ -14,6 +14,10 @@
             <argument type="service" id="security.context" />
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
+
+        <service id="welcomango.admin.form.feedback.type" class="Welcomango\Bundle\BookingBundle\Form\Type\AdminFeedbackType">
+        </service>
+
     </services>
 
 </container>

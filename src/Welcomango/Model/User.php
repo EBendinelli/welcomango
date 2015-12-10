@@ -141,14 +141,14 @@ class User extends BaseUser implements ParticipantInterface
     private $medias;
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="poster", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Feedback", mappedBy="poster", cascade={"persist", "remove"})
      **/
-    private $postedComments;
+    private $postedFeedbacks;
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="receiver", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Feedback", mappedBy="receiver", cascade={"persist", "remove"})
      **/
-    private $receivedComments;
+    private $receivedFeedbacks;
 
     /**
      * @var float
@@ -653,95 +653,95 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @return ArrayCollection
      */
-    public function getPostedComments()
+    public function getPostedFeedbacks()
     {
-        return $this->postedComments;
+        return $this->postedFeedbacks;
     }
 
     /**
      * @return ArrayCollection
      */
-    public function getDisplayablePostedComments()
+    public function getDisplayablePostedFeedbacks()
     {
-        $postedComments = new ArrayCollection();
-        foreach ($this->postedComments as $comment) {
-            if ($comment->IsValidated() && !$comment->isDeleted()) {
-                $postedComments->add($comment);
+        $postedFeedbacks = new ArrayCollection();
+        foreach ($this->postedFeedbacks as $feedback) {
+            if ($feedback->isValidated() && !$feedback->isDeleted()) {
+                $postedFeedbacks->add($feedback);
             }
         }
 
-        return $postedComments;
+        return $postedFeedbacks;
     }
 
     /**
-     * @param ArrayCollection $postedComments
+     * @param ArrayCollection $postedFeedbacks
      */
-    public function setPostedComments($postedComments)
+    public function setPostedFeedbacks($postedFeedbacks)
     {
-        $this->postedComments = $postedComments;
+        $this->postedFeedbacks= $postedFeedbacks;
     }
 
     /**
-     * @param Comment $postedComment
+     * @param Feedback $postedFeedback
      */
-    public function removePostedComment(Comment $postedComment)
+    public function removePostedFeedback(Feedback $postedFeedback)
     {
-        $this->postedComments->removeElement($postedComment);
+        $this->postedFeedback->removeElement($postedFeedback);
     }
 
     /**
-     * @param Comment $postedComment
+     * @param Feedback $postedFeedback
      */
-    public function addPostedComment(Comment $postedComment)
+    public function addPostedFeedback(Feedback $postedFeedback)
     {
-        $this->postedComments[] = $postedComment;
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getReceivedComments()
-    {
-        return $this->receivedComments;
+        $this->postedFeedbacks[] = $postedFeedback;
     }
 
     /**
      * @return ArrayCollection
      */
-    public function getDisplayableReceivedComments()
+    public function getReceivedFeedbacks()
     {
-        $receivedComments = new ArrayCollection();
-        foreach ($this->receivedComments as $comment) {
-            if ($comment->IsValidated() && !$comment->isDeleted()) {
-                $receivedComments->add($comment);
+        return $this->receivedFeedbacks;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getDisplayableReceivedFeedbacks()
+    {
+        $receivedFeedbacks = new ArrayCollection();
+        foreach ($this->receivedFeedbacks as $feedback) {
+            if ($feedback->isValidated() && !$feedback->isDeleted()) {
+                $receivedFeedbacks->add($feedback);
             }
         }
 
-        return $receivedComments;
+        return $receivedFeedbacks;
     }
 
     /**
-     * @param ArrayCollection $receivedComments
+     * @param ArrayCollection $receivedFeedbacks
      */
-    public function setReceivedComments($receivedComments)
+    public function setReceivedFeedbacks($receivedFeedbacks)
     {
-        $this->receivedComments = $receivedComments;
+        $this->receivedFeedbacks = $receivedFeedbacks;
     }
 
     /**
-     * @param Comment $receivedComment
+     * @param Feedback $receivedFeedback
      */
-    public function removeReceivedComment(Comment $receivedComment)
+    public function removeReceivedFeedback(Feedback $receivedFeedback)
     {
-        $this->receivedComments->removeElement($receivedComment);
+        $this->receivedFeedbacks->removeElement($receivedFeedback);
     }
 
     /**
-     * @param Comment $receivedComment
+     * @param Feedback $receivedFeedback
      */
-    public function addReceivedComment(Comment $receivedComment)
+    public function addReceivedFeedback(Feedback $receivedFeedback)
     {
-        $this->receivedComments[] = $receivedComment;
+        $this->receivedFeedbacks[] = $receivedFeedback;
     }
 
     /**
