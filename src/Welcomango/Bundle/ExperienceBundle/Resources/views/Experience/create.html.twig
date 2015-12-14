@@ -2,35 +2,42 @@
 
 {% form_theme form with ["::frontTheme.html.twig"] %}
 
-{% block meta_title %}{{ "profile.craeteExperience"|trans({}, "interface") }}{% endblock %}
+{% block meta_title %}{{ "profile.createExperience"|trans({}, "interface") }}{% endblock %}
 
 {% block profile_content %}
     {{ form_start(form, {'attr': {'id': form.vars.id}}) }}
     {{ form_errors(form) }}
-        <div>
-            {{ form_row(form.title) }}
-            {{ form_row(form.description) }}
-            {{ form_row(form.medias_upload) }}
-            <div id="medias" class="dropzone" style="background-color: lightgray ;height: 300px"></div>
-        </div>
-    {{ form_rest(form) }}
 
-{#    <div id="availabilities" class="availabilities"
-         data-prototype="{% filter escape %}{% include 'WelcomangoExperienceBundle:Availability:_availabilities.html.twig' with {'form': form.availabilities.vars.prototype } %}{% endfilter %}">
-        {% for availability in form.availabilities %}
-            {% include 'WelcomangoExperienceBundle:Availability:_availabilities.html.twig' with {'form': availability } %}
-        {% endfor %}
-    </div>#}
+                {{ form_row(form.title) }}
+                {{ form_row(form.description) }}
+                {{ form_row(form.medias_upload) }}
+                <div id="medias" class="dropzone" style="background-color: lightgray ;height: 300px"></div>
+                {{ form_row(form.city) }}
+                {{ form_row(form.tags) }}
+                {{ form_row(form.estimated_duration) }}
+                {{ form_row(form.minimum_duration) }}
+                {{ form_row(form.maximum_duration) }}
+                {{ form_row(form.price_per_hour) }}
+                {{ form_row(form.maximum_participants) }}
 
-    {#Delete confirmation modal#}
-    {% include 'WelcomangoCoreBundle:Core:stickUpModal.html.twig' with {
-    'title': 'Remove availability',
-    'text': 'availability.modal.removeText'|trans ,
-    'confirm' : 'delete'|trans
-    } %}
+            <div id="availabilities" class="availabilities"
+                 data-prototype="{% filter escape %}{% include 'WelcomangoExperienceBundle:Availability:_availabilities.html.twig' with {'form': form.availabilities.vars.prototype } %}{% endfilter %}">
+                {% for availability in form.availabilities %}
+                    {% include 'WelcomangoExperienceBundle:Availability:_availabilities.html.twig' with {'form': availability } %}
+                {% endfor %}
 
-    <button id="modal-rating-button" class="btn btn-complete btn-cons"><i class="fa fa-valid"></i>{{ 'submit'|trans }}</button>
-    {{ form_end(form) }}
+                {#Delete confirmation modal#}
+                {% include 'WelcomangoCoreBundle:Core:stickUpModal.html.twig' with {
+                'title': 'Remove availability',
+                'text': 'availability.modal.removeText'|trans ,
+                'confirm' : 'delete'|trans
+                } %}
+            </div>
+
+
+        <button id="modal-rating-button" class="btn btn-complete btn-cons"><i class="fa fa-valid"></i>{{ 'submit'|trans }}</button>
+        {{ form_end(form) }}
+
 
 {% endblock profile_content %}
 

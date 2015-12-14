@@ -91,6 +91,13 @@ class User extends BaseUser implements ParticipantInterface
     private $experiences;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Experience", mappedBy="refusedBy")
+     */
+    private $refusedExperiences;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="birthdate", type="datetime")
@@ -386,6 +393,22 @@ class User extends BaseUser implements ParticipantInterface
      * @param ArrayCollection $experiences
      */
     public function setExperiences($experiences)
+    {
+        $this->experiences = $experiences;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getRefusedExperiences()
+    {
+        return $this->refusedExperiences;
+    }
+
+    /**
+     * @param ArrayCollection $experiences
+     */
+    public function setRefusedExperiences($experiences)
     {
         $this->experiences = $experiences;
     }

@@ -116,11 +116,90 @@ class AdminExperienceController extends BaseController
      */
     public function deleteAction(Experience $experience)
     {
+        $experience->setDeleted(true);
+        $experience->setPublicationStatus('deleted');
 
         $this->getDoctrine()->getManager()->remove($experience);
         $this->getDoctrine()->getManager()->flush();
 
         return $this->redirect($this->generateUrl('admin_experience_list'));
+    }
+
+    /**
+     * @param Experience $experience
+     *
+     * @Route("/experience/{experience_id}/validate", name="admin_experience_validate")
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function validateAction(Experience $experience)
+    {
+        $experience->setPublicationStatus('published');
+
+        $this->getDoctrine()->getManager()->persist($experience);
+        $this->getDoctrine()->getManager()->flush();
+
+        $this->addFlash('success', $this->trans('experience.validated', array(), 'experience'));
+
+        return $this->redirect($this->generateUrl('admin_moderation_experience'));
+    }
+
+    /**
+     * @param Request    $request
+     * @param Experience $experience
+     *
+     * @Route("/experience/{experience_id}/refuse", name="admin_experience_refuse")
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function refuseAction(Request $request, Experience $experience)
+    {
+        $experience->setPublicationStatus('refused');
+
+        $form = $this->createForm($this->get('welcomango.form.refusal.form'), null);
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $reason = $form->get('reason')->getData();
+            $experience->setRefusedFor($reason);
+            $experience->setRefusedBy($this->getUser());
+            $experience->setRefusedAt(new \DateTime());
+            $experience->setPublicationStatus('refused');
+
+            $this->getDoctrine()->getManager()->persist($experience);
+            $this->getDoctrine()->getManager()->flush();
+        }
+
+        $this->addFlash('success', $this->trans('experience.refused', array(), 'experience'));
+
+        return $this->redirect($this->generateUrl('admin_moderation_experience'));
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @Route("/moderation/experience", name="admin_moderation_experience")
+     * @Template()
+     *
+     * @return array
+     */
+    public function moderationListAction(Request $request)
+    {
+        $paginator = $this->get('knp_paginator');
+        $query     = $this->getRepository('Welcomango\Model\Experience')->findBy(['publicationStatus' => 'pending']);
+        $reasons = array('The pictures attached are not related to the experience and/or offensives', 'The description is too broad', 'The description contains personal informations', 'The description containes banned words, abreviations');
+        $form = $this->createForm($this->get('welcomango.form.refusal.form'), null);
+
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1),
+            10
+        );
+
+        return array(
+            'pagination' => $pagination,
+            'reasons'    => $reasons,
+            'form'       => $form->createView(),
+        );
     }
 
     /**

@@ -91,6 +91,11 @@ class AdminBuilder extends ContainerAware
             'linkAttributes' => ['class' => 'pg-social'],
         ));
 
+        $menu->addChild('menu.title.moderation.experience', array(
+            'route'          => 'admin_moderation_experience',
+            'linkAttributes' => ['class' => 'fa-hand-lizard-o'],
+        ));
+
         $menu->addChild('menu.title.tag', array(
             'route'          => 'admin_tag_list',
             'linkAttributes' => ['class' => 'fa fa-tag'],

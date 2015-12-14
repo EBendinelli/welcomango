@@ -2,46 +2,69 @@
 
 {% trans_default_domain "crm" %}
 
-{% block actions %}
-    {# {{ button.create(path('user_create'), 'user.create'|trans) }}#}
-{% endblock %}
-
-{% set pager_url = path('admin_user_list') %}
-{% set number_per_page = false %}
-{#{% set filter_url = path('users_filters') %}#}
-
-{% block filters %}
-    {# {% include "YproxAdminCrmBundle:User:filter.html.twig" %}#}
-{% endblock %}
-
-{% block no_results %}
-    <div class="alert">
-        <strong>{{ 'interface.noresult'|trans({}, "interface") }}</strong>
+{% block page_content %}
+    <div class="row" style="height:200px">
+        <div class="col-md-3" style="height:100%">
+            <!-- START WIDGET -->
+            <div class="widget-2 panel no-border bg-primary widget widget-loader-circle-lg no-margin" style="height:100%">
+                <div class="panel-heading">
+                    <div class="panel-controls">
+                        <ul>
+                            <li><a href="#" class="portlet-refresh" data-toggle="refresh"><i class="portlet-icon portlet-icon-refresh-lg-white"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="pull-bottom bottom-left bottom-right padding-25">
+                        <br>
+                        <h3 class="text-white">There are {{ feedbacksCount }} feedbacks waiting for moderation</h3>
+                        <p class="text-white hint-text hidden-md">Go clean this shit now!</p>
+                        <a class="btn btn-black btn-cons btn-bordered" href="{{ path('admin_moderation_feedback') }}">Moderate</a>
+                    </div>
+                </div>
+            </div>
+            <!-- END WIDGET -->
+        </div>
+        <div class="col-md-3" style="height:100%">
+            <!-- START WIDGET -->
+            <div class="widget-2 panel no-border widget widget-loader-circle-lg no-margin" style="height:100%">
+                <div class="panel-heading">
+                    <div class="panel-controls">
+                        <ul>
+                            <li><a href="#" class="portlet-refresh" data-toggle="refresh"><i class="portlet-icon portlet-icon-refresh-lg-white"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="pull-bottom bottom-left bottom-right padding-25">
+                        <br>
+                        <h3>{{ experiencesCount }} new experiences are waiting for validation</h3>
+                        <p class="hint-text hidden-md">Don't let the users wait!</p>
+                        <a class="btn btn-primary btn-cons btn-bordered" href="{{ path('admin_moderation_feedback') }}">Moderate</a>
+                    </div>
+                </div>
+            </div>
+            <!-- END WIDGET -->
+        </div>
+        <div class="col-md-3" style="height:50%">
+            <!-- START WIDGET -->
+            <div class=" panel no-border bg-success no-margin widget-loader-bar">
+                <div class="panel-heading  ">
+                    <div class="panel-title text-black">
+                        <span class="font-montserrat fs-11 all-caps">New users today<i class="fa fa-chevron-right"></i></span>
+                    </div>
+                </div>
+                <div class="p-l-20">
+                    <h3 class="no-margin p-b-5 text-white">{{ newUsers|length }}</h3>
+                </div>
+            </div>
+            <!-- END WIDGET -->
+        </div>
     </div>
 {% endblock %}
 
-{% block table_head %}
-    <tr>
-        <th style="width: 30%;">{{ knp_pagination_sortable(pagination, 'user.username'|trans, 'u.username')|raw }}</th>
-        <th>{{ "user.roles"|trans }}</th>
-        <th>{{ knp_pagination_sortable(pagination, 'user.last_login'|trans, 'u.lastLogin')|raw }}</th>
-        <th style="width: 8%">{{ knp_pagination_sortable(pagination, 'user.is_active'|trans, 'u.enabled')|raw }}</th>
-        <th>{{ "interface.actions"|trans }}</th>
-    </tr>
-{% endblock %}
-
-{% block page_content %}
-    <h2>This page need to be templated because it's ugly (really ugly)</h2>
-{% endblock %}
-
-{% block table_body %}
-    {% include "WelcomangoAdminCrmBundle:User:_userRow.html.twig" with { 'user' : entity } %}
-{% endblock %}
-
-
-{% block additionnal_content %}
-    {# render(controller("YproxAdminCrmBundle:User:usersByLastLogin")) #}
-{% endblock %}
 
 {% block dashboard_search %}
     <input id="user_search" name="" type="text" class="no-boarder" placeholder="{{ "search.user"|trans }}" style="width:250px;">

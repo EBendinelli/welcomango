@@ -139,15 +139,33 @@ class Experience
     private $city;
 
     /**
-     * Get id
-     *
-     * @return integer
+     * @ORM\Column(name="publication_status", type="string")
+     * @Assert\NotBlank()
+     * @Assert\Choice(choices = {"pending", "published", "refused", "deleted"})
      */
+    private $publicationStatus = 'pending';
 
     /**
-     * @ORM\Column(name="published", type="boolean")
+     * @var string
+     *
+     * @ORM\Column(name="refused_reason", type="string", length=255, nullable=true)
      */
-    private $published = true;
+    private $refusedFor;
+
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="refusedExperiences")
+     * @ORM\JoinColumn(name="refused_by_id", referencedColumnName="id", nullable=true)
+     */
+    private $refusedBy;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="refused_at", type="datetime", nullable=true)
+     */
+    private $refusedAt;
 
     /**
      * @ORM\Column(name="featured", type="boolean")
@@ -158,6 +176,11 @@ class Experience
      * @ORM\Column(name="deleted", type="boolean")
      */
     private $deleted = false;
+
+    /**
+     * @ORM\Column(name="updated_status", type="boolean")
+     */
+    private $updatedStatus = false;
 
     /**
      * @ORM\Column(name="average_note", type="float", nullable=true)
@@ -443,27 +466,83 @@ class Experience
     }
 
     /**
-     * Set published
+     * Set publicationStatus
      *
-     * @param boolean $published
+     * @param string $publicationStatus
      *
      * @return Experience
      */
-    public function setPublished($published)
+    public function setPublicationStatus($publicationStatus)
     {
-        $this->$published = $published;
+        $this->publicationStatus = $publicationStatus;
 
         return $this;
     }
 
     /**
-     * Get published
+     * Get publicationStatus
      *
-     * @return boolean
+     * @return string
      */
-    public function getPublished()
+    public function getPublicationStatus()
     {
-        return $this->published;
+        return $this->publicationStatus;
+    }
+
+    /**
+     * Set refusedFor
+     *
+     * @param string $refusedFor
+     */
+    public function setRefusedFor($refusedFor)
+    {
+        $this->refusedFor = $refusedFor;
+    }
+
+    /**
+     * Get refusedFor
+     *
+     * @return string
+     */
+    public function getRefusedFor()
+    {
+        return $this->refusedFor;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRefusedBy()
+    {
+        return $this->refusedBy;
+    }
+
+    /**
+     * @param mixed $refusedBy
+     */
+    public function setRefusedBy($refusedBy)
+    {
+        $this->refusedBy = $refusedBy;
+    }
+
+    /**
+     * Set refusedAt
+     *
+     * @param \DateTime $refusedAt
+     */
+    public function setRefusedAt($refusedAt)
+    {
+        $this->refusedAt = $refusedAt;
+    }
+
+    /**
+     * Get refusedAt
+     *
+     * @return \DateTime
+     */
+    public function getRefusedAt()
+    {
+        return $this->refusedAt;
     }
 
     /**
@@ -488,6 +567,17 @@ class Experience
     public function getFeatured()
     {
         return $this->featured;
+    }
+
+
+    /**
+     * Get Featured
+     *
+     * @return boolean
+     */
+    public function isFeatured()
+    {
+        return $this->deleted;
     }
 
     /**
@@ -515,13 +605,27 @@ class Experience
     }
 
     /**
-     * Get Featured
+     * Set updatedStatus
+     *
+     * @param boolean $updatedStatus
      *
      * @return boolean
      */
-    public function isFeatured()
+    public function setUpdatedStatus($updatedStatus)
     {
-        return $this->deleted;
+        $this->updatedStatus = $updatedStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedStatus
+     *
+     * @return boolean
+     */
+    public function hasUpdatedStatus()
+    {
+        return $this->updatedStatus;
     }
 
     /**

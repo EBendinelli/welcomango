@@ -106,12 +106,7 @@ class ExperienceController extends BaseController
 
         $experience = new Experience();
         $experience->setCreator($user);
-
-        $em = $this->getDoctrine()->getManager();
-        $experience->setMedias(new ArrayCollection());
-        $form = $this->createForm($this->get('welcomango.form.experience.create'), $experience);
-        $experience->setMedias(new ArrayCollection());
-        $form->handleRequest($request);
+        $experience->setPublicationStatus('pending');
 
         //Set availabilities
         $availabilities = new ArrayCollection();
@@ -121,6 +116,12 @@ class ExperienceController extends BaseController
         $availability->setExperience($experience);
         $availabilities->add($availability);
         $experience->setAvailabilities($availabilities);
+
+        $em = $this->getDoctrine()->getManager();
+        $experience->setMedias(new ArrayCollection());
+        $form = $this->createForm($this->get('welcomango.form.experience.create'), $experience);
+        $experience->setMedias(new ArrayCollection());
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $availabilityManager = $this->get('welcomango.front.availability.manager');
@@ -165,6 +166,7 @@ class ExperienceController extends BaseController
         foreach ($availabilities as $availability) {
             $originalAvailabilities->add($availability);
         }
+
 
         $form = $this->createForm($this->get('welcomango.form.experience.edit'), $experience);
         $form->handleRequest($request);
@@ -216,6 +218,15 @@ class ExperienceController extends BaseController
                 'message'        => 'Well, maybe it never existed...',
                 'return_path'    => $this->get('router')->generate('front_experience_list'),
                 'return_message' => 'Return to experiences',
+            ));
+        }
+        if ($experience->getPublicationStatus() == 'pending') {
+            return $this->render('WelcomangoCoreBundle:CRUD:notAllowed.html.twig', array(
+                'title'          => 'This experience has not been approved yet.',
+                'message'        => 'Just wait a moment until we validate it',
+                'return_path'    => $this->get('router')->generate('front_experience_list'),
+                'return_message' => 'Return to experiences',
+                'icon'           => 'fa-clock-o'
             ));
         }
 

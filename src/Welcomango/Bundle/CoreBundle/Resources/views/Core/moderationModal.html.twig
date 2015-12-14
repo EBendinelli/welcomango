@@ -1,0 +1,27 @@
+<div class="modal fade slide-up disable-scroll modal-action" tabindex="-1" role="dialog" aria-labelledby="modalSlideUpLabel" aria-hidden="false">
+    <div class="modal-dialog ">
+        <div class="modal-content-wrapper">
+            <div class="modal-content text-center">
+                <div class="modal-header clearfix text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="pg-close fs-14"></i>
+                    </button>
+                    <h5>{{ title }}</h5>
+                </div>
+                <div class="modal-body">
+                    {% for reason in reasons  %}
+                        <div class="col-md-6"><div class="panel panel-default m-l-5 m-r-5 p-t-10 refusal-suggestion" style="height:70px;" onclick="updateReason(this)">{{ reason }}</div></div>
+                    {% endfor %}
+                    <div>
+                        {{ form_start(form, {'action': path('admin_experience_refuse', {'experience_id' : experience.id|default('#') }), 'attr': {'id': 'form_experience_refusal'} })  }}
+                        {{ form_row(form.reason) }}
+                        <button type="button" data-dismiss="modal" class="btn btn-info  btn-cons"><i class="fa fa-arrow-left "></i> Cancel</button>
+                        <button id="modal-refusal-button" class="btn btn-danger btn-cons"><i class="fa fa-times"></i> {{ 'refuse'|trans }}</button>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

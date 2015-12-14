@@ -7,7 +7,7 @@
 {% block page_content %}
     <!-- START CONTENT SECTION -->
     {% if experience.getMedias.first %}
-
+        {% set imageBanner = asset(experience.getMedias.first.getPath() ~ experience.getMedias.first.originalFilename) %}
     {% else %}
         {% set imageBanner = asset("img/front/places-" ~ random(18) ~ ".jpg") %}
     {% endif %}
@@ -125,13 +125,13 @@
                                         <div class="experience_container_pictures">
                                             <div class="col-md-12 ">
                                                 <div class="experience_featured_picture_dark">
-                                                    <div class="experience_featured_pictures experience_featured_picture_large m-b-20" style="background-image:url({{ asset(experience.getMedias.first.getWebPath) }})">                                            </div>
+                                                    <div class="experience_featured_pictures experience_featured_picture_large m-b-20" style="background-image:url({{ asset(experience.getMedias.first.getPath() ~ experience.getMedias.first.originalFilename) }})">                                            </div>
                                                 </div>
                                             </div>
                                             {% for media in experience.getMedias.getValues|slice(1,2) %}
                                                 <div class="col-md-6">
                                                     <div class="experience_featured_picture_dark">
-                                                        <div class="experience_featured_pictures experience_featured_picture_small m-b-20" style="background-image:url({{ asset(media.getWebPath) }})"></div>
+                                                        <div class="experience_featured_pictures experience_featured_picture_small m-b-20" style="background-image:url({{ asset(media.getPath() ~ media.originalFilename) }})"></div>
                                                     </div>
                                                 </div>
                                             {% endfor %}
@@ -139,7 +139,7 @@
                                                 <div id="experience-hidden-pictures">
                                                     <div class="col-md-6">
                                                         <div class="experience_featured_picture_dark">
-                                                            <div class="experience_featured_pictures experience_featured_picture_small m-b-20" style="background-image:url({{ asset(media.getWebPath) }})"></div>
+                                                            <div class="experience_featured_pictures experience_featured_picture_small m-b-20" style="background-image:url({{ asset(media.getPath() ~ media.originalFilename) }})"></div>
                                                         </div>
                                                     </div>
                                                 </div>

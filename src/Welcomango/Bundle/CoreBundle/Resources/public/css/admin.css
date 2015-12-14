@@ -37,3 +37,11 @@ We need this file to be temporary... gonna be hard but we can make it !
 .fs-i{
     font-style: italic;
 }
+
+.refusal-suggestion{
+    cursor: pointer;
+}
+
+.refusal-suggestion:hover{
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}

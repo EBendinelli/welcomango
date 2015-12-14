@@ -40,6 +40,9 @@
         <service id="welcomango.form.availability.form" class="Welcomango\Bundle\ExperienceBundle\Form\Type\AvailabilityType">
         </service>
 
+        <service id="welcomango.form.refusal.form" class="Welcomango\Bundle\ExperienceBundle\Form\Type\ExperienceRefusalType">
+        </service>
+
         <service id="welcomango.front.availability.manager" class="Welcomango\Bundle\ExperienceBundle\Manager\AvailabilityManager">
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>

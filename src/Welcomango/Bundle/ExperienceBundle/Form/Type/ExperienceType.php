@@ -90,46 +90,14 @@ class ExperienceType extends AbstractType
                 'choices' => $maximumParticipants,
                 'label'   => 'form.experience.maximumParticipants',
             ])
-            ->add('start_date', 'date', [
-                'label'    => 'form.experience.startDate',
-                'data'     => new \DateTime(),
-                'required' => false,
-                'mapped'   => false,
-                'years'    => range(date('Y'), date('Y') + 1),
-                'months'   => range(date('m'), 12),
-                'days'     => range(date('d'), 31),
-                'widget'   => 'single_text',
-                'format'   => 'dd-MM-yyyy',
-                'attr'     => [
-                    'class'            => 'form-control input-inline datepicker',
-                    'data-provide'     => 'datepicker',
-                    'data-date-format' => 'dd-mm-yyyy',
-                ],
-            ])
-            ->add('end_date', 'date', [
-                'label'    => 'form.experience.endDate',
-                'data'     => new \DateTime(),
-                'required' => false,
-                'mapped'   => false,
-                'years'    => range(date('Y'), date('Y') + 1),
-                'months'   => range(date('m'), 12),
-                'days'     => range(date('d'), 31),
-                'widget'   => 'single_text',
-                'format'   => 'dd-MM-yyyy',
-                'attr'     => [
-                    'class'            => 'form-control input-inline datepicker',
-                    'data-provide'     => 'datepicker',
-                    'data-date-format' => 'dd-mm-yyyy',
-                ],
-            ])
             ->add('availabilities', 'collection', [
                 'type'         => new AvailabilityType(),
                 'allow_add'    => true,
                 'by_reference' => false,
                 'allow_delete' => true,
                 'label'        => false,
-            ])
-            ->add('register', 'submit');
+            ]);
+
     }
 
     /**

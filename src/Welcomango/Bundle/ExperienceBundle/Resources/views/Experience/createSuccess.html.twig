@@ -8,10 +8,11 @@
                     <div class="text-center">
                         <i class="fa fa-check veryBigIcon text-info"></i>
                         <h1 class="col-sm-12 p-b-10">Your experience has been succesfully created!</h1>
+                        <div class="hint-text">We are just going to have a look at it and it should be publicated very soon</div>
                         <p class="font-arial m-t-30"><span class="hint-text">Thanks a lot for proposing this tour of your city! You're part of the community and helping us making traveling better</br>
                                 Have a look and see what it looks like! Or just go back to your profile</span></p>
                         {# TODO path to replace once the contact and report pages are done #}
-                        <a href="{{ path('front_experience_view', {'experience_id' : experience.id}) }}" class="btn btn-lg btn-info btn-cons m-t-20"><i class="fa fa-comment-o "></i> Your experience</a>
+                        <a href="{{ path('front_experience_profile_list') }}" class="btn btn-lg btn-info btn-cons m-t-20"><i class="fa fa-road "></i> Your experiences</a>
                         <a href="{{ path('fos_user_profile_show') }}" class="btn btn-lg btn-primary btn-cons m-t-20"><i class="fa fa-plus-circle "></i> Back to profile</a>
                     </div>
                 </div>

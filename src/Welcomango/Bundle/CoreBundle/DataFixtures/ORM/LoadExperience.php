@@ -49,7 +49,7 @@ class LoadExperienceData extends AbstractFixture implements FixtureInterface, Or
             $entry->setCity($experience['city']);
             $entry->setCreatedAt(new \DateTime());
             $entry->setUpdatedAt(new \DateTime());
-            $entry->setPublished(true);
+            $entry->setPublicationStatus('published');
             ($i%2 == 0 ? $entry->setFeatured(true) : $entry->setFeatured(false));
             $i++;
 

@@ -96,7 +96,7 @@ class ExperienceEditType extends AbstractType
         ]);
 
         $builder->add('availabilities', 'collection', [
-            'type' => new AvailabilityType(),
+            'type'         => new AvailabilityType(),
             'allow_add'    => true,
             'by_reference' => false,
             'allow_delete' => true,

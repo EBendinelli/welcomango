@@ -1,0 +1,68 @@
+{% extends "::admin.html.twig" %}
+
+{% trans_default_domain "admin" %}
+
+{% set pager_url = path('admin_moderation_experience') %}
+
+{% block page_container %}
+    <div class="container-fluid container-fixed-lg">
+        <div class="cold-md-12">
+            <div class="panel panel-default portlet">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        {{ "interface.total.items"|trans({}, "admin") }}: {{ pagination.totalItemCount|number_format }}
+                    </div>
+                    <div class="btn-group pull-right m-b-10" role="group">
+                        {{ block('actions') }}
+                        {% block extra_actions '' %}
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-body">
+            {% if pagination|length %}
+                {% for entity in pagination %}
+                    {% include "WelcomangoExperienceBundle:AdminExperience:_moderationExperienceRow.html.twig" with { 'experience' : entity } %}
+                {% endfor %}
+
+
+                {% include 'WelcomangoCoreBundle:AdminCRUD:pagination.html.twig' with {
+                'path': pager_url,
+                'pagination': pagination,
+                'number_per_page': number_per_page|default(false)
+                } %}
+            {% else %}
+                {% block no_results %}
+                    <div class="alert text-center">
+                        <strong>{{ 'interface.notingToModerate'|trans({}, "admin") }}</strong>
+                    </div>
+                {% endblock %}
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- BEGIN DELETE CONFIRMATION MODAL -->
+    {{ include("WelcomangoCoreBundle:Core:moderationModal.html.twig", {
+        'title': 'Refuse experience',
+        'main_text': reasons,
+        'form' : form,
+        'icon': 'fa-times-circle '
+    })}}
+    <!-- END DELETE CONFIRMATION MODAL -->
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        function updateRefuseModal(route){
+            $('#form_experience_refusal').attr("action", route);
+        }
+
+        function updateReason(elt){
+            $('#admin_experience_refusal_reason').val($(elt).text());
+        }
+    </script>
+{% endblock %}
