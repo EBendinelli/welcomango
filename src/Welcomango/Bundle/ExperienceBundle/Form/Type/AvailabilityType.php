@@ -67,6 +67,7 @@ class AvailabilityType extends AbstractType
         $builder->add('start_date', 'date', [
             'label'    => 'form.experience.startDate',
             'required' => true,
+            'data'     => new \Datetime,
             'years'    => range(date('Y'), date('Y') + 1),
             'months'   => range(date('m'), 12),
             'days'     => range(date('d'), 31),

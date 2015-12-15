@@ -167,12 +167,12 @@ class ExperienceController extends BaseController
             $originalAvailabilities->add($availability);
         }
 
-
         $form = $this->createForm($this->get('welcomango.form.experience.edit'), $experience);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $availabilityManager->updateAvailabilityForExperience($experience, $form, $originalAvailabilities);
+            $experience->setPublicationStatus('pending');
 
             // This cleanly remove the deleted availabilities
             foreach ($originalAvailabilities as $originalAvailability) {
@@ -193,6 +193,7 @@ class ExperienceController extends BaseController
         return array(
             'form'       => $form->createView(),
             'experience' => $experience,
+            'medias'     => $experience->getMedias(),
         );
     }
 

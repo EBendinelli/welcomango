@@ -1,0 +1,38 @@
+<script>
+    //Stuff for the layout
+    $(document).ready(function() {
+        $('#myFormWizard').bootstrapWizard({
+            onTabShow: function(tab, navigation, index) {
+                var $total = navigation.find('li').length;
+                var $current = index + 1;
+
+                var offset = $('#myFormWizard').offset().top;
+                $('html, body').animate( { scrollTop: offset - 100 }, 500 );
+
+
+                // If it's the last tab then hide the last button and show the finish instead
+                if ($current >= $total) {
+                    $('#myFormWizard').find('.pager .next').hide();
+                    $('#myFormWizard').find('.pager .finish').show();
+                    $('#myFormWizard').find('.pager .finish').removeClass('disabled');
+                } else {
+                    $('#myFormWizard').find('.pager .next').show();
+                    $('#myFormWizard').find('.pager .finish').hide();
+                }
+
+                var li = navigation.find('li.active');
+
+                var btnNext = $('#myFormWizard').find('.pager .next').find('button');
+                var btnPrev = $('#myFormWizard').find('.pager .previous').find('button');
+
+                // remove fontAwesome icon classes
+                function removeIcons(btn) {
+                    btn.removeClass(function(index, css) {
+                        return (css.match(/(^|\s)fa-\S+/g) || []).join(' ');
+                    });
+                }
+
+            }
+        });
+    });
+</script>

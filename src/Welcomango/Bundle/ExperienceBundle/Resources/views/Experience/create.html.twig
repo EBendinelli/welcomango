@@ -8,44 +8,114 @@
     {{ form_start(form, {'attr': {'id': form.vars.id}}) }}
     {{ form_errors(form) }}
 
-                {{ form_row(form.title) }}
-                {{ form_row(form.description) }}
-                {{ form_row(form.medias_upload) }}
-                <div id="medias" class="dropzone" style="background-color: lightgray ;height: 300px"></div>
-                {{ form_row(form.city) }}
-                {{ form_row(form.tags) }}
-                {{ form_row(form.estimated_duration) }}
-                {{ form_row(form.minimum_duration) }}
-                {{ form_row(form.maximum_duration) }}
-                {{ form_row(form.price_per_hour) }}
-                {{ form_row(form.maximum_participants) }}
+    <div id="myFormWizard" class="m-t-20">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs nav-tabs-linetriangle nav-tabs-separator">
+            <li class="active">
+                <a data-toggle="tab" href="#tab1"><i class="fa pg-map tab-icon"></i> <span>Experience</span></a>
+            </li>
+            <li class="">
+                <a data-toggle="tab" href="#tab2"><i class="fa fa-user tab-icon"></i> <span>Travelers</span></a>
+            </li>
+            <li class="">
+                <a data-toggle="tab" href="#tab3"><i class="fa fa-calendar-o tab-icon"></i> <span>Availability</span></a>
+            </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content p-l-20 p-r-20 p-t-20 p-b-20">
+            <div class="tab-pane active slide" id="tab1">
+                <div class="row">
+                    <div class="small hint-text m-b-10">{{ "experience.create.titleNote"|trans }}</div>
+                    {{ form_row(form.title) }}
+                    <div class="small hint-text m-b-10 m-t-30">{{ "experience.create.descriptionNote"|trans }}</div>
+                    {{ form_row(form.description) }}
+                    <div class="small hint-text m-b-10 m-t-30">{{ "experience.create.mediaNote"|trans }}</div>
+                    {{ form_row(form.medias_upload) }}
+                    <div id="medias" class="dropzone media-dropzone">
 
-            <div id="availabilities" class="availabilities"
-                 data-prototype="{% filter escape %}{% include 'WelcomangoExperienceBundle:Availability:_availabilities.html.twig' with {'form': form.availabilities.vars.prototype } %}{% endfilter %}">
-                {% for availability in form.availabilities %}
-                    {% include 'WelcomangoExperienceBundle:Availability:_availabilities.html.twig' with {'form': availability } %}
-                {% endfor %}
+                    </div>
+                    <div class="small hint-text m-b-10 m-t-30">{{ "experience.create.cityNote"|trans }}</div>
+                    {{ form_row(form.city) }}
+                    <div class="small hint-text m-b-10 m-t-30">{{ "experience.create.tagsNote"|trans }}</div>
+                    {{ form_row(form.tags) }}
+                </div>
+                <ul class="pager wizard">
+                    <li class="next">
+                        <button class="btn btn-primary btn-cons btn-animated from-left fa pull-right fa-user" type="button">
+                            <span>Next</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-pane slide" id="tab2">
+                <div class="row">
+                    {{ form_row(form.estimated_duration) }}
+                    {{ form_row(form.minimum_duration) }}
+                    {{ form_row(form.maximum_duration) }}
+                    {{ form_row(form.price_per_hour) }}
+                    {{ form_row(form.maximum_participants) }}
+                </div>
+                <ul class="pager wizard">
+                    <li class="next">
+                        <button class="btn btn-primary btn-cons btn-animated from-left fa pull-right fa-calendar-o" type="button">
+                            <span>Finish</span>
+                        </button>
+                    </li>
+                    <li class="previous disabled">
+                        <button class="btn btn-default btn-cons pull-right" type="button">
+                            <span>Previous</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-pane slide" id="tab3">
 
-                {#Delete confirmation modal#}
-                {% include 'WelcomangoCoreBundle:Core:stickUpModal.html.twig' with {
-                'title': 'Remove availability',
-                'text': 'availability.modal.removeText'|trans ,
-                'confirm' : 'delete'|trans
-                } %}
+                <div id="availabilities" class="availabilities"
+                     data-prototype="{% filter escape %}{% include 'WelcomangoExperienceBundle:Availability:_availabilities.html.twig' with {'form': form.availabilities.vars.prototype } %}{% endfilter %}">
+                    {% for availability in form.availabilities %}
+                        {% include 'WelcomangoExperienceBundle:Availability:_availabilities.html.twig' with {'form': availability } %}
+                    {% endfor %}
+
+                    {#Delete confirmation modal#}
+                    {% include 'WelcomangoCoreBundle:Core:stickUpModal.html.twig' with {
+                    'title': 'Remove availability',
+                    'text': 'availability.modal.removeText'|trans ,
+                    'confirm' : 'delete'|trans
+                    } %}
+                </div>
+
+                <ul class="pager wizard">
+                    <li class="next finish">
+                        <button id="modal-rating-button" class="btn btn-primary btn-cons pull-right"><i class="fa fa-valid"></i>{{ 'submit'|trans }}</button>
+                    </li>
+                    <li class="previous disabled">
+                        <button class="btn btn-default btn-cons pull-right" type="button">
+                            <span>Previous</span>
+                        </button>
+                    </li>
+                </ul>
+
+                {{ form_end(form) }}
             </div>
 
 
-        <button id="modal-rating-button" class="btn btn-complete btn-cons"><i class="fa fa-valid"></i>{{ 'submit'|trans }}</button>
-        {{ form_end(form) }}
 
+        </div>
+    </div>
 
 {% endblock profile_content %}
 
 {% block javascripts %}
     {{ parent() }}
     {{ include('WelcomangoMediaBundle:AdminMedia:_baseJs.html.twig') }}
+    {% include 'WelcomangoExperienceBundle:Experience:_baseJs.html.twig' %}
     {% include 'WelcomangoExperienceBundle:Availability:_availabilityJs.html.twig' with {
         'datepickerId' : 'front_experience_availabilities_0_start_date',
     } %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset("css/dropzone.min.css") }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 

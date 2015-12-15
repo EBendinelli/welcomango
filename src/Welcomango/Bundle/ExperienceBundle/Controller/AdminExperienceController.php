@@ -135,6 +135,21 @@ class AdminExperienceController extends BaseController
     public function validateAction(Experience $experience)
     {
         $experience->setPublicationStatus('published');
+        $experience->setUpdatedStatus(true);
+        $experience->setModeratedBy($this->getUser());
+
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Your Experience has been validated')
+            ->setFrom('no-reply@welcomango.com')
+            ->setTo($experience->getCreator()->getEmail())
+            ->setBody(
+                $this->renderView(
+                    'WelcomangoEmailBundle:EmailTemplate:experienceValidation.html.twig',
+                    array('user' => $experience->getCreator())
+                ),
+                'text/html'
+            );
+        $this->get('mailer')->send($message);
 
         $this->getDoctrine()->getManager()->persist($experience);
         $this->getDoctrine()->getManager()->flush();
@@ -154,16 +169,15 @@ class AdminExperienceController extends BaseController
      */
     public function refuseAction(Request $request, Experience $experience)
     {
-        $experience->setPublicationStatus('refused');
-
         $form = $this->createForm($this->get('welcomango.form.refusal.form'), null);
         $form->handleRequest($request);
         if ($form->isValid()) {
             $reason = $form->get('reason')->getData();
             $experience->setRefusedFor($reason);
-            $experience->setRefusedBy($this->getUser());
             $experience->setRefusedAt(new \DateTime());
             $experience->setPublicationStatus('refused');
+            $experience->setUpdatedStatus(true);
+            $experience->setModeratedBy($this->getUser());
 
             $this->getDoctrine()->getManager()->persist($experience);
             $this->getDoctrine()->getManager()->flush();
@@ -185,7 +199,7 @@ class AdminExperienceController extends BaseController
     public function moderationListAction(Request $request)
     {
         $paginator = $this->get('knp_paginator');
-        $query     = $this->getRepository('Welcomango\Model\Experience')->findBy(['publicationStatus' => 'pending']);
+        $query     = $this->getRepository('Welcomango\Model\Experience')->findBy(['publicationStatus' => 'pending', 'deleted' => false]);
         $reasons = array('The pictures attached are not related to the experience and/or offensives', 'The description is too broad', 'The description contains personal informations', 'The description containes banned words, abreviations');
         $form = $this->createForm($this->get('welcomango.form.refusal.form'), null);
 

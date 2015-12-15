@@ -1,0 +1,19 @@
+{% trans_default_domain 'email' %}
+
+{% block subject %}
+    {% autoescape false %}
+    {{ 'email.subject.experienceValidated'|trans({'%experience%': user.username}) }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_text %}
+    {% autoescape false %}
+    {{ 'email.message.experienceValidatedText'|trans({'%username%': user.username, '%experience%': 'a'}) }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    {% autoescape false %}
+    <div>{{ 'email.message.experienceValidatedText'|trans({'%username%': user.username, '%experience%': 'a'}) }}</div>
+    {% endautoescape %}
+{% endblock %}

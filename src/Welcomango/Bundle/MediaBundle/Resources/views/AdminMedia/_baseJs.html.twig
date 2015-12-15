@@ -22,9 +22,11 @@
             uploadMultiple: true,
             acceptedFiles: 'image/*',
             maxFilesize: 5,
-            dictRemoveFile: "{{ 'medias.delete'|trans }}",
+            maxThumbnailFilesize: 5,
+            dictRemoveFile: "{{ 'medias.remove'|trans }}",
             dictDefaultMessage: "{{ 'medias.drop_files_here'|trans }}",
-            previewTemplate: document.getElementById('preview-template').innerHTML,
+            /*previewTemplate: document.getElementById('preview-template').innerHTML,*/
+            addRemoveLinks: true,
             init: function () {
                 {% for media in medias %}
                 var mockFile = { name: "{{ media.path }}", size: 99999 };
@@ -32,8 +34,10 @@
                 this.options.addedfile.call(this, mockFile);
                 {% endfor %}
                 this.on("addedfile", function(file) {
-                    medias.push(file.name);
-                    computeMediaName();
+                    if(file.size < 5000000) {
+                        medias.push(file.name);
+                        computeMediaName();
+                    }
                 });
                 this.on("removedfile", function(file) {
                     $.post("{{ path('experience_media_delete') }}", {'file': file.name}, function (response) {}, 'html');
@@ -44,6 +48,7 @@
             }
         });
     });
+
 
     function computeMediaName() {
         $('#front_experience_medias_upload').val(medias.join(','));

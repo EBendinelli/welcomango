@@ -156,9 +156,9 @@ class Experience
      * @var User
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="refusedExperiences")
-     * @ORM\JoinColumn(name="refused_by_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="moderated_by_id", referencedColumnName="id", nullable=true)
      */
-    private $refusedBy;
+    private $moderatedBy;
 
     /**
      * @var \DateTime
@@ -512,17 +512,17 @@ class Experience
     /**
      * @return mixed
      */
-    public function getRefusedBy()
+    public function getModeratedBy()
     {
-        return $this->refusedBy;
+        return $this->moderatedBy;
     }
 
     /**
-     * @param mixed $refusedBy
+     * @param mixed $moderatedBy
      */
-    public function setRefusedBy($refusedBy)
+    public function setModeratedBy($moderatedBy)
     {
-        $this->refusedBy = $refusedBy;
+        $this->moderatedBy = $moderatedBy;
     }
 
     /**

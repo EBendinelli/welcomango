@@ -17,7 +17,7 @@ class ExperienceRepository extends EntityRepository
         return $this
             ->createQueryBuilder('a')
             ->where('a.featured = true')
-            ->andWhere('a.publicationStatus = published')
+            ->andWhere('a.publicationStatus = \'published\'')
             ->andWhere('a.deleted = false')
             ->setMaxResults($limit)
             ->getQuery()
@@ -29,7 +29,7 @@ class ExperienceRepository extends EntityRepository
         return $this
             ->createQueryBuilder('a')
             ->leftJoin('a.bookings', 'b')
-            ->where('a.publicationStatus = published')
+            ->where('a.publicationStatus = \'published\'')
             ->andWhere('a.deleted = false')
             ->groupBy('a.id')
             ->orderBy('a.averageNote', 'DESC')
@@ -43,7 +43,7 @@ class ExperienceRepository extends EntityRepository
         return $this
             ->createQueryBuilder('a')
             ->leftJoin('a.bookings', 'b')
-            ->where('a.publicationStatus = published')
+            ->where('a.publicationStatus = \'published\'')
             ->where('a.deleted = false')
             ->andWhere('b.user ='.$user->getId())
             ->groupBy('a.id')
@@ -82,7 +82,7 @@ class ExperienceRepository extends EntityRepository
             ->createQueryBuilder('e')
             ->leftJoin('e.availabilities', 'a')
             ->leftJoin('e.tags', 't')
-            ->where('e.publicationStatus = published');
+            ->where('e.publicationStatus = \'published\'');
 
         if(!$isDeleted) $queryBuilder->andWhere('e.deleted = false');
 

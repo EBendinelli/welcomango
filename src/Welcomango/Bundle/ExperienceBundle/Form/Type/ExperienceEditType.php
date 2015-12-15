@@ -56,52 +56,49 @@ class ExperienceEditType extends AbstractType
         for($i=0;$i<48;$i++) $maximumDurations[$i] = $i;
         for($i=0;$i<10;$i++) $maximumParticipants[$i] = $i;
 
-        $builder->add('title', 'text', ['label' => 'form.experience.title']);
-        $builder->add('description', 'textarea', [
-            'label' => 'form.experience.description'
-        ]);
-
-        $builder->add('city', 'entity', array(
-            'class' => 'Model:City',
-            'property' => 'name',
-            'disabled' => true,
-        ));
-
-        $builder->add('estimated_duration', 'choice',[
-            'choices' => $estimatedDurations,
-            'label' => 'form.experience.estimatedDuration'
-        ]);
-
-        $builder->add('tags', 'entity', array(
-            'class' => 'Model:Tag',
-            'property' => 'name',
-            'multiple' => true,
-        ));
-
-        $builder->add('minimum_duration', 'choice',[
-            'choices' => $minimumDurations,
-            'label' => 'form.experience.minimumDuration'
-        ]);
-
-        $builder->add('maximum_duration', 'choice', [
-            'choices' => $maximumDurations,
-            'label' => 'form.experience.maximumDuration'
-        ]);
-
-        $builder->add('price_per_hour', 'text', ['label' => 'form.experience.pricePerHour']);
-
-        $builder->add('maximum_participants', 'choice', [
-            'choices' => $maximumParticipants,
-            'label' => 'form.experience.maximumParticipants'
-        ]);
-
-        $builder->add('availabilities', 'collection', [
-            'type'         => new AvailabilityType(),
-            'allow_add'    => true,
-            'by_reference' => false,
-            'allow_delete' => true,
-            'label'        => false,
-        ]);
+        $builder
+            ->add('title', 'text', ['label' => 'form.experience.title'])
+            ->add('description', 'textarea', [
+                'label' => 'form.experience.description'
+            ])
+            ->add('city', 'entity', array(
+                'class' => 'Model:City',
+                'property' => 'name',
+                'disabled' => true,
+            ))
+            /*->add('medias_upload', 'hidden', [
+                'required' => false,
+                'mapped'   => false,
+            ])*/
+            ->add('estimated_duration', 'choice',[
+                'choices' => $estimatedDurations,
+                'label' => 'form.experience.estimatedDuration'
+            ])
+            ->add('tags', 'entity', array(
+                'class' => 'Model:Tag',
+                'property' => 'name',
+                'multiple' => true,
+            ))
+            ->add('minimum_duration', 'choice',[
+                'choices' => $minimumDurations,
+                'label' => 'form.experience.minimumDuration'
+            ])
+            ->add('maximum_duration', 'choice', [
+                'choices' => $maximumDurations,
+                'label' => 'form.experience.maximumDuration'
+            ])
+            ->add('price_per_hour', 'text', ['label' => 'form.experience.pricePerHour'])
+            ->add('maximum_participants', 'choice', [
+                'choices' => $maximumParticipants,
+                'label' => 'form.experience.maximumParticipants'
+            ])
+            ->add('availabilities', 'collection', [
+                'type'         => new AvailabilityType(),
+                'allow_add'    => true,
+                'by_reference' => false,
+                'allow_delete' => true,
+                'label'        => false,
+            ]);
     }
 
     /**
