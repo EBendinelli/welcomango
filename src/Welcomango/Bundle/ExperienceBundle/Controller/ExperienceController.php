@@ -51,7 +51,7 @@ class ExperienceController extends BaseController
         );
 
         $entityManager = $this->getDoctrine()->getManager();
-        if(isset($filters['tags'])){
+        if (isset($filters['tags'])) {
             foreach ($filters['tags'] as $tag) {
                 $entityManager->persist($tag);
             }
@@ -167,12 +167,13 @@ class ExperienceController extends BaseController
             $originalAvailabilities->add($availability);
         }
 
-        $form = $this->createForm($this->get('welcomango.form.experience.edit'), $experience);
+        $form = $this->createForm($this->get('welcomango.form.experience.create'), $experience);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $availabilityManager->updateAvailabilityForExperience($experience, $form, $originalAvailabilities);
             $experience->setPublicationStatus('pending');
+            $experience->setMedias($this->get('welcomango.media.manager')->generateMediasFromCsv($form->get('medias_upload')->getData(), $experience));
 
             // This cleanly remove the deleted availabilities
             foreach ($originalAvailabilities as $originalAvailability) {
@@ -227,7 +228,7 @@ class ExperienceController extends BaseController
                 'message'        => 'Just wait a moment until we validate it',
                 'return_path'    => $this->get('router')->generate('front_experience_list'),
                 'return_message' => 'Return to experiences',
-                'icon'           => 'fa-clock-o'
+                'icon'           => 'fa-clock-o',
             ));
         }
 

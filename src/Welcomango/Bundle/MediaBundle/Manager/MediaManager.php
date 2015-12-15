@@ -53,15 +53,19 @@ class MediaManager
         $medias = explode(',', $mediaList);
 
         foreach ($medias as $media) {
-            $originalFileName = $media;
-            $tempFileName     = $this->mediaNamer->getTempName($media);
-            $fileContent      = $tempadapter->read($tempFileName);
-            $adapter->write('/'.$experience->getId().'/'.$originalFileName, $fileContent);
-            $mediaEntity = new Media();
-            $mediaEntity->setOriginalFilename($originalFileName);
-            $mediaEntity->setPath('/medias/experiences/'.$experience->getId().'/');
-            $mediaEntity->addExperience($experience);
-            $mediaCollection->add($mediaEntity);
+            if ($media !== "") {
+                $originalFileName = $media;
+                $tempFileName     = $this->mediaNamer->getTempName($media);
+                $mediaEntity      = new Media();
+                $mediaEntity->setOriginalFilename($originalFileName);
+                $mediaEntity->setPath('/medias/experiences/'.$experience->getId().'/');
+                $mediaEntity->addExperience($experience);
+                $mediaCollection->add($mediaEntity);
+                if (!$adapter->has('/'.$experience->getId().'/'.$originalFileName)) {
+                    $fileContent = $tempadapter->read($tempFileName);
+                    $adapter->write('/'.$experience->getId().'/'.$originalFileName, $fileContent);
+                }
+            }
         }
 
         return $mediaCollection;

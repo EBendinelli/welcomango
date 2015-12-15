@@ -66,10 +66,10 @@ class ExperienceEditType extends AbstractType
                 'property' => 'name',
                 'disabled' => true,
             ))
-            /*->add('medias_upload', 'hidden', [
+            ->add('medias_upload', 'hidden', [
                 'required' => false,
                 'mapped'   => false,
-            ])*/
+            ])
             ->add('estimated_duration', 'choice',[
                 'choices' => $estimatedDurations,
                 'label' => 'form.experience.estimatedDuration'

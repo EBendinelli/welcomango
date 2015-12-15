@@ -25,14 +25,17 @@
             maxThumbnailFilesize: 5,
             dictRemoveFile: "{{ 'medias.remove'|trans }}",
             dictDefaultMessage: "{{ 'medias.drop_files_here'|trans }}",
-            /*previewTemplate: document.getElementById('preview-template').innerHTML,*/
             addRemoveLinks: true,
             init: function () {
                 {% for media in medias %}
-                var mockFile = { name: "{{ media.path }}", size: 99999 };
-                this.options.thumbnail.call(this, mockFile, "{{ asset(picture.webPath()) | imagine_filter('thumb250') }}");
+                var mockFile = { name: "{{ media.originalFilename }}", size: 99999 };
+                medias.push('{{ media.originalFilename }}');
                 this.options.addedfile.call(this, mockFile);
+                this.options.thumbnail.call(this, mockFile, "{{ asset(media.getPath() | imagine_filter('thumb120')) ~ media.originalFilename }}");
+                mockFile.previewElement.classList.add('dz-success');
+                mockFile.previewElement.classList.add('dz-complete');
                 {% endfor %}
+                computeMediaName();
                 this.on("addedfile", function(file) {
                     if(file.size < 5000000) {
                         medias.push(file.name);
@@ -41,7 +44,7 @@
                 });
                 this.on("removedfile", function(file) {
                     $.post("{{ path('experience_media_delete') }}", {'file': file.name}, function (response) {}, 'html');
-                    var index = medias.indexOf(+file.name);
+                    var index = medias.indexOf(file.name);
                     medias.splice(index, 1);
                     computeMediaName();
                 });

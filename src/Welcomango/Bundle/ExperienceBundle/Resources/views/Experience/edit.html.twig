@@ -32,8 +32,8 @@
                 <div class="row">
                     {{ form_row(form.title) }}
                     {{ form_row(form.description) }}
-                    {#{{ form_row(form.medias_upload) }}
-                    <div id="medias" class="dropzone" style="background-color: lightgray ;height: 300px"></div>#}
+                    {{ form_row(form.medias_upload) }}
+                    <div id="medias" class="dropzone media-dropzone"></div>
                     {{ form_row(form.city) }}
                     {{ form_row(form.tags) }}
                 </div>
@@ -77,10 +77,15 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {#{{ include('WelcomangoMediaBundle:AdminMedia:_baseJs.html.twig') }}#}
+    {{ include('WelcomangoMediaBundle:AdminMedia:_baseJs.html.twig') }}
     {{ form_javascript(form) }}
 
     {% include 'WelcomangoExperienceBundle:Availability:_availabilityJs.html.twig' %}
     {% include 'WelcomangoExperienceBundle:Experience:_baseJs.html.twig' %}
 
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset("css/dropzone.min.css") }}" rel="stylesheet" type="text/css" />
 {% endblock %}
