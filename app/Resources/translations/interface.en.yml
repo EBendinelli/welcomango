@@ -36,6 +36,10 @@ profile.rateAsTraveler: Give a feedback about on the time you had in <span class
 profile.rateMultipleAsTraveler: Give a feedback to the people you guided recently!
 profile.newRequest: You have a new request
 profile.newRequestText: From <span class="text-primary">%user%</span> for <span class="text-primary">%experience%</span>
+profile.experienceAccepted: Your experience has been published!
+profile.experienceAcceptededText: <span class="text-primary">%experience%</span> is now visible and bookable
+profile.experienceRefused: Your experience has been refused
+profile.experienceRefusedText: %experience% has been refused for the following reason <span class="text-danger">"%reason%"</span>
 profile.occupation: Occupation
 profile.hometown: Hometown
 profile.gender: Gender
@@ -51,6 +55,7 @@ experience.minimumParticipants: Minimum Participants
 experience.description: Description
 experience.pictures: Pictures
 experience.sorryNoPictures: Sorry, it seems that this user did not add any photo...
+experience.refusedWhy: Why has my experience been refused?
 
 experience.manage.introductionText: You may have lived in this current city for years and find the idea of a theme oriented experience a bit limitating... Well, here you can create a new experience with a different flavor to propose another version of your city to travelers. For example, if you already propose a culture oriented visit of your town, you can also propose a second experience about the nightlife and the different things happening by night! Let your knowledge of the city talk and try to intrigued the potential visitors ;)
 experience.manage.title: A different flavor of your city

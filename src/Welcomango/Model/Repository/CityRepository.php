@@ -3,6 +3,7 @@
 namespace Welcomango\Model\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Welcomango\Model\City;
 
 /**
  * CityRepository

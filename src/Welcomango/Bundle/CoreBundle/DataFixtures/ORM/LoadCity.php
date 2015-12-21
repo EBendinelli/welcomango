@@ -19,20 +19,20 @@ class LoadCityData extends AbstractFixture implements FixtureInterface, OrderedF
         $countryRepo = $manager->getRepository('Welcomango\Model\Country');
 
         $cities = array(
-            array('name' => 'Lyon', 'postcode' => 69001, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'France'))),
-            array('name' => 'Paris', 'postcode' => 75001, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'France'))),
-            array('name' => 'Helsinki', 'postcode' => 65450, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Finland'))),
-            array('name' => 'Brussels', 'postcode' => 1000, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Belgium'))),
-            array('name' => 'London', 'postcode' => 2100, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'United Kingdom'))),
-            array('name' => 'Rome', 'postcode' => 5486, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Italy'))),
-            array('name' => 'Milan', 'postcode' => 4700, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Italy'))),
-            array('name' => 'Barcelone', 'postcode' => 2005, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Spain'))),
-            array('name' => 'Madrid', 'postcode' => 200010, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Spain'))),
-            array('name' => 'Vienna', 'postcode' => 780000, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Austria'))),
-            array('name' => 'Amsterdam', 'postcode' => 6544, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Netherlands'))),
-            array('name' => 'Delft', 'postcode' => 4400, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Netherlands'))),
-            array('name' => 'Geneva', 'postcode' => 4400, 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Switzerland'))),
-            array('name' => 'Strasbourg', 'postcode' => 67000, 'geolocation' => '688468', 'country' => $countryRepo->findOneBy(array('name' => 'France')))
+            array('name' => 'Lyon', 'state' => 'RA', 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'France'))),
+            array('name' => 'Paris', 'state' => 'test', 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'France'))),
+            array('name' => 'Helsinki', 'state' => 'test', 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Finland'))),
+            array('name' => 'Brussels', 'state' => 'test', 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Belgium'))),
+            array('name' => 'London', 'state' => 'test', 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'United Kingdom'))),
+            array('name' => 'Rome', 'state' => 'test', 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Italy'))),
+            array('name' => 'Milan', 'state' => 'test', 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Italy'))),
+            array('name' => 'Barcelone', 'state' => 'test', 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Spain'))),
+            array('name' => 'Madrid', 'state' => 'test', 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Spain'))),
+            array('name' => 'Vienna', 'state' => 'test', 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Austria'))),
+            array('name' => 'Amsterdam', 'state' => 'test', 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Netherlands'))),
+            array('name' => 'Delft', 'state' => 'test', 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Netherlands'))),
+            array('name' => 'Geneva', 'state' => 'test', 'geolocation' => '65484468', 'country' => $countryRepo->findOneBy(array('name' => 'Switzerland'))),
+            array('name' => 'Strasbourg', 'state' => 'test', 'geolocation' => '688468', 'country' => $countryRepo->findOneBy(array('name' => 'France')))
         );
 
         //$cities = array_map('str_getcsv', file('/home/eliot/www/welcomango/src/Welcomango/Data/newfile.csv'));
@@ -56,8 +56,8 @@ class LoadCityData extends AbstractFixture implements FixtureInterface, OrderedF
         foreach($cities as $city){
             $entry = new City();
             $entry->setName($city['name']);
-            $entry->setPostcode('00000');
-            $entry->setGeolocation('00000');
+            $entry->setState($city['state']);
+            $entry->setGeolocation($city['geolocation']);
 
             //ld($city);
             $country = $city['country'];

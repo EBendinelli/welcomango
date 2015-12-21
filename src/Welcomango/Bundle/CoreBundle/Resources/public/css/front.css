@@ -264,11 +264,16 @@ div.dotted-line span {
 }
 
 .profile-card{
-    height: 380px;
+    height: 400px;
 }
 
 .profile-card-greyed{
     opacity: 0.5;
+}
+
+.profile-dashboard-card{
+    min-height: 290px;
+    margin-top: 20px;
 }
 
 /* //////////////////////////////////////////////////////// */

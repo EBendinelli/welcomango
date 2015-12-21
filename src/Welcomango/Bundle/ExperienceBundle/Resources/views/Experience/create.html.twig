@@ -49,11 +49,26 @@
             </div>
             <div class="tab-pane slide" id="tab2">
                 <div class="row">
-                    {{ form_row(form.estimated_duration) }}
-                    {{ form_row(form.minimum_duration) }}
-                    {{ form_row(form.maximum_duration) }}
-                    {{ form_row(form.price_per_hour) }}
-                    {{ form_row(form.maximum_participants) }}
+                    <div class="col-md-6">
+                        <div class="small hint-text m-b-10">{{ "experience.create.estimatedDurationNote"|trans }}</div>
+                        {{ form_row(form.estimated_duration) }}
+                    </div>
+                    <div class="col-md-6">
+                        <div class="small hint-text m-b-10">{{ "experience.create.maximumParticipantsNote"|trans }}</div>
+                        {{ form_row(form.maximum_participants) }}
+                    </div>
+                    <div class="col-md-6">
+                        <div class="small hint-text m-b-10 m-t-30">{{ "experience.create.minimumDurationNote"|trans }}</div>
+                        {{ form_row(form.minimum_duration) }}
+                    </div>
+                    <div class="col-md-6">
+                        <div class="small hint-text m-b-10 m-t-30">{{ "experience.create.maximumDurationNote"|trans }}</div>
+                        {{ form_row(form.maximum_duration) }}
+                    </div>
+                    <div class="col-md-12">
+                        <div class="small hint-text m-b-10 m-t-30">{{ "experience.create.pricePerHourNote"|trans }}</div>
+                        {{ form_row(form.price_per_hour) }}
+                    </div>
                 </div>
                 <ul class="pager wizard">
                     <li class="next">

@@ -83,6 +83,19 @@ class ExperienceController extends BaseController
 
         $experiences = $user->getExperiences();
 
+        //If there are experiences with updated status we set it back to false as the user will see it here
+        $update = false;
+        foreach($experiences as $experience){
+            if($experience->hasUpdatedStatus()){
+                $experience->setUpdatedStatus(False);
+                $this->getDoctrine()->getManager()->persist($experience);
+                $update = true;
+            }
+        }
+        if($update){
+            $this->getDoctrine()->getManager()->flush();
+        }
+
         return array(
             'experiences' => $experiences,
         );

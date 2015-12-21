@@ -24,24 +24,30 @@ class City
     /**
      * @var string
      *
-     * @ORM\Column(name="Name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="Postcode", type="integer")
-     */
-    private $postcode;
-
-    /**
      * @var string
      *
-     * @ORM\Column(name="Geolocation", type="string", length=255)
+     * @ORM\Column(name="state", type="string", length=255)
      */
-    private $geolocation;
+    private $state;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="latitude", type="float")
+     */
+    private $latitude;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="longitude", type="float")
+     */
+    private $longitude;
 
     /**
      * @ORM\ManyToOne(targetEntity="Country", inversedBy="cities")
@@ -84,52 +90,78 @@ class City
     }
 
     /**
-     * Set postcode
+     * Get latitude
      *
-     * @param integer $postcode
+     * @return float
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * Set latitude
+     *
+     * @param float $latitude
      *
      * @return City
      */
-    public function setPostcode($postcode)
+    public function setLatitude($latitude)
     {
-        $this->postcode = $postcode;
+        $this->latitude = $latitude;
 
         return $this;
     }
 
     /**
-     * Get postcode
+     * Get longitude
      *
-     * @return integer
+     * @return float
      */
-    public function getPostcode()
+    public function getLongitude()
     {
-        return $this->postcode;
+        return $this->longitude;
     }
 
     /**
-     * Set geolocation
+     * Set longitude
      *
-     * @param string $geolocation
+     * @param float $longitude
      *
      * @return City
      */
-    public function setGeolocation($geolocation)
+    public function setLongitude($longitude)
     {
-        $this->geolocation = $geolocation;
+        $this->longitude = $longitude;
 
         return $this;
     }
 
     /**
-     * Get geolocation
+     * Set state
+     *
+     * @param string $state
+     *
+     * @return City
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * Get state
      *
      * @return string
      */
-    public function getGeolocation()
+    public function getState()
     {
-        return $this->geolocation;
+        return $this->state;
     }
+
+
 
     /**
      * @return mixed

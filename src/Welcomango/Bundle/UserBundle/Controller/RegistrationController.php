@@ -25,6 +25,74 @@ use Welcomango\Model\Experience;
  */
 class RegistrationController extends BaseProfileController
 {
+    public function registerAction(Request $request)
+    {
+        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
+        $formFactory = $this->get('fos_user.registration.form.factory');
+        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+        $userManager = $this->get('fos_user.user_manager');
+        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+        $dispatcher = $this->get('event_dispatcher');
+
+        $user = $userManager->createUser();
+        $user->setEnabled(true);
+
+        $event = new GetResponseUserEvent($user, $request);
+        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
+
+        if (null !== $event->getResponse()) {
+            return $event->getResponse();
+        }
+
+        $form = $formFactory->createForm();
+        $form->setData($user);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            //THIS IS WHY WE OVERRIDE THIS FUNCTION
+            //GET CITIES AND COUNTRIES AND ADD IT TO DATABASE IF WE DON'T ALREADY HAVE IT
+            $cityManager = $this->get('welcomango.front.city.manager');
+            $cityManager->checkAndCreateNewCity(
+                $form->get('fromCity')->getData(),
+                $form->get('fromCityLat')->getData(),
+                $form->get('fromCityLng')->getData(),
+                $form->get('fromCityState')->getData(),
+                $form->get('fromCityCountry')->getData(),
+                $form->get('fromCityCountryCode')->getData(),
+                $user
+            );
+
+            $cityManager->checkAndCreateNewCity(
+                $form->get('currentCity')->getData(),
+                $form->get('currentCityLat')->getData(),
+                $form->get('currentCityLng')->getData(),
+                $form->get('currentCityState')->getData(),
+                $form->get('currentCityCountry')->getData(),
+                $form->get('currentCityCountryCode')->getData(),
+                $user
+            );
+
+            $event = new FormEvent($form, $request);
+            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
+
+            $userManager->updateUser($user);
+
+            if (null === $response = $event->getResponse()) {
+                $url = $this->generateUrl('fos_user_registration_confirmed');
+                $response = new RedirectResponse($url);
+            }
+
+            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+
+            return $response;
+        }
+
+        return $this->render('FOSUserBundle:Registration:register.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
     /**
      * @param Request $request
      *
@@ -70,14 +138,14 @@ class RegistrationController extends BaseProfileController
         if ($request->request->has('query') && $request->request->get('query') != '' && $request->request->has('field') && $request->request->get('field') != '') {
             $query = $request->request->get('query');
             $field = $request->request->get('field');
-            $field = \str_replace('front_user_', '', $field);
-
+            $field = \str_replace('fos_user_registration_form_', '', $field);
             $result = $userRepository->findBy(array($field => $query));
+
             if ($result) {
-                $response['message'] = 'username.taken';
+                $response['message'] = $field.'taken';
                 $response['class']   = 'alert alert-danger';
             } else {
-                $response['message'] = 'username.free';
+                $response['message'] = $field.'.free';
                 $response['class']   = 'alert alert-success';
             }
         }

@@ -77,20 +77,74 @@ class UserType extends AbstractType
             'second_options'  => array('label' => 'form.user.password.validate'),
         ));
 
-        $builder->add('currentCity', 'entity', array(
-            'class'    => 'Model:City',
-            'property' => 'name',
+        $builder->add('currentCityInput', 'text', array(
+            'mapped' => false,
+            'label' => 'form.user.currenCityInput',
         ));
 
-        $builder->add('fromCity', 'entity', array(
-            'class'    => 'Model:City',
-            'property' => 'name',
+        $builder->add('currentCity', 'hidden', array(
+            'mapped' => false,
+            'label' => 'form.user.currenCity',
         ));
 
+        $builder->add('currentCityLat', 'hidden', array(
+            'mapped' => false,
+            'label' => 'form.user.currenCityLat',
+        ));
 
-        $builder->add('current_city', 'entity', array(
-            'class'    => 'Model:City',
-            'property' => 'name',
+        $builder->add('currentCityLng', 'hidden', array(
+            'mapped' => false,
+            'label' => 'form.user.currenCityLng',
+        ));
+
+        $builder->add('currentCityState', 'hidden', array(
+            'mapped' => false,
+            'label' => 'form.user.currenCityState',
+        ));
+
+        $builder->add('currentCityCountry', 'hidden', array(
+            'mapped' => false,
+            'label' => 'form.user.currenCityCountry',
+        ));
+
+        $builder->add('currentCityCountryCode', 'hidden', array(
+            'mapped' => false,
+            'label' => 'form.user.currenCityCountryCode',
+        ));
+
+        $builder->add('fromCityInput', 'text', array(
+            'mapped' => false,
+            'label' => 'form.user.fromCityInput'
+        ));
+
+        $builder->add('fromCity', 'hidden', array(
+            'mapped' => false,
+            'label' => 'form.user.fromCity'
+        ));
+
+        $builder->add('fromCityLat', 'hidden', array(
+            'mapped' => false,
+            'label' => 'form.user.fromCityLat'
+        ));
+
+        $builder->add('fromCityLng', 'hidden', array(
+            'mapped' => false,
+            'label' => 'form.user.fromCityLng'
+        ));
+
+        $builder->add('fromCityState', 'hidden', array(
+            'mapped' => false,
+            'label' => 'form.user.fromCityState'
+        ));
+
+        $builder->add('fromCityCountry', 'hidden', array(
+            'mapped' => false,
+            'label' => 'form.user.fromCityCountry'
+        ));
+
+        $builder->add('fromCityCountryCode', 'hidden', array(
+            'mapped' => false,
+            'label' => 'form.user.fromCityCountryCode'
         ));
 
         $builder->add('gender', 'choice', array(

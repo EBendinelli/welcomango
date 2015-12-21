@@ -148,7 +148,7 @@ class Experience
     /**
      * @var string
      *
-     * @ORM\Column(name="refused_reason", type="string", length=255, nullable=true)
+     * @ORM\Column(name="refused_for", type="string", length=255, nullable=true)
      */
     private $refusedFor;
 

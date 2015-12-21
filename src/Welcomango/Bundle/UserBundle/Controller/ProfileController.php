@@ -32,10 +32,15 @@ class ProfileController extends BaseProfileController
         $userExperiences = $user->getExperiences();
 
         //Get booking for the user's experiences
+        //And check if user has an experience which has been approved or refused
+        $moderatedExperiences = array();
         $bookings = array();
         foreach($userExperiences as $experience){
             $expBookings = $experience->getBookings();
             $bookings = array_merge($bookings, $expBookings->toArray());
+            if($experience->hasUpdatedStatus()){
+                $moderatedExperiences[] = $experience;
+            }
         }
 
         //This get the next visit given by the user. It's basically the accepted booking with the date the closest to today
@@ -105,6 +110,7 @@ class ProfileController extends BaseProfileController
             'newRequest'        => $newRequest,
             'feedbackAsLocal'   => $feedbackAsLocal,
             'feedbackAsTraveler'  => $feedbackAsTraveler,
+            'moderatedExperiences' => $moderatedExperiences,
         ));
     }
 
