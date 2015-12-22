@@ -34,6 +34,11 @@ class RegistrationController extends BaseProfileController
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->get('event_dispatcher');
 
+        $user = $this->getUser();
+        if (is_object($user) || $user instanceof UserInterface) {
+            throw new AccessDeniedException('Why do you want to register again?');
+        }
+
         $user = $userManager->createUser();
         $user->setEnabled(true);
 
@@ -53,25 +58,26 @@ class RegistrationController extends BaseProfileController
             //THIS IS WHY WE OVERRIDE THIS FUNCTION
             //GET CITIES AND COUNTRIES AND ADD IT TO DATABASE IF WE DON'T ALREADY HAVE IT
             $cityManager = $this->get('welcomango.front.city.manager');
-            $cityManager->checkAndCreateNewCity(
+            $fromCity = $cityManager->checkAndCreateNewCity(
                 $form->get('fromCity')->getData(),
                 $form->get('fromCityLat')->getData(),
                 $form->get('fromCityLng')->getData(),
                 $form->get('fromCityState')->getData(),
                 $form->get('fromCityCountry')->getData(),
-                $form->get('fromCityCountryCode')->getData(),
-                $user
+                $form->get('fromCityCountryCode')->getData()
             );
 
-            $cityManager->checkAndCreateNewCity(
+            $currentCity = $cityManager->checkAndCreateNewCity(
                 $form->get('currentCity')->getData(),
                 $form->get('currentCityLat')->getData(),
                 $form->get('currentCityLng')->getData(),
                 $form->get('currentCityState')->getData(),
                 $form->get('currentCityCountry')->getData(),
-                $form->get('currentCityCountryCode')->getData(),
-                $user
+                $form->get('currentCityCountryCode')->getData()
             );
+
+            $user->setCurrentCity($currentCity);
+            $user->setFromCity($fromCity);
 
             $event = new FormEvent($form, $request);
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);

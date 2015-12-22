@@ -130,7 +130,25 @@ class AdminUserController extends BaseController
      */
     public function deleteAction(User $user)
     {
-        $this->getDoctrine()->getManager()->remove($user);
+        $user->setEnabled(false);
+        $user->setDeleted(true);
+        $this->getDoctrine()->getManager()->persist($user);
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirect($this->generateUrl('admin_user_list'));
+    }
+
+    /**
+     * @param User $user
+     *
+     * @Route("/user/{user_id}/validate", name="admin_user_validate")
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function validateAction(User $user)
+    {
+        $user->setEnabled(true);
+        $this->getDoctrine()->getManager()->persist($user);
         $this->getDoctrine()->getManager()->flush();
 
         return $this->redirect($this->generateUrl('admin_user_list'));

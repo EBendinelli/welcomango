@@ -20,14 +20,14 @@ class CityManager
         $this->entityManager   = $entityManager;
     }
 
-    public function checkAndCreateNewCity($city, $lat, $lng, $sate, $country, $countryCode, $user){
+    public function checkAndCreateNewCity($city, $lat, $lng, $sate, $country, $countryCode){
         $CityRepo = $this->entityManager->getRepository('Welcomango\Model\City');
         $CountryRepo = $this->entityManager->getRepository('Welcomango\Model\Country');
 
         //We check if the city and country are in the database and if not we create the entry
         //We can do this since the form fields are autocompleted by Gmaps so we know they are solid
         if($existingCity = $CityRepo->findBy(['name' => $city, 'country' => $country, 'state' => $sate])){
-            $user->setCity($existingCity);
+            return $existingCity;
         }else{
             $newCity = new City();
 
@@ -47,11 +47,13 @@ class CityManager
             $newCity->setName($city);
             $newCity->setLatitude($lat);
             $newCity->setLongitude($lng);
+
             $this->entityManager->persist($newCity);
         }
 
         $this->entityManager->flush();
 
+        return $newCity;
     }
 
 }

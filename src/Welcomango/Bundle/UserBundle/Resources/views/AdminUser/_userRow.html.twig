@@ -24,6 +24,9 @@
             <div class="btn-toolbar">
                 {{ button.edit(path('admin_user_edit', {'user_id': user.id}), false, "btn-xs") }}
                 {{ button.delete(path('admin_user_delete', {'user_id': user.id}), null, "btn-xs") }}
+                {% if not user.enabled %}
+                    {{ button.validate(path('admin_user_validate', {'user_id': user.id}), false, "btn-xs") }}
+                {% endif %}
             </div>
         {% endspaceless %}
     </td>

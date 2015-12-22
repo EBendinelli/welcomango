@@ -57,7 +57,8 @@ class LoadCityData extends AbstractFixture implements FixtureInterface, OrderedF
             $entry = new City();
             $entry->setName($city['name']);
             $entry->setState($city['state']);
-            $entry->setGeolocation($city['geolocation']);
+            $entry->setLatitude($city['geolocation']);
+            $entry->setLongitude($city['geolocation']);
 
             //ld($city);
             $country = $city['country'];
