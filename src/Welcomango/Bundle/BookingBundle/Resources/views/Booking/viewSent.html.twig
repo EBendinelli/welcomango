@@ -27,7 +27,7 @@
             </div>
         {% elseif booking.status == 'Happened' and booking.getFeedbackFromTraveler %}
             {# Handle the case where the feedback has been refused #}
-            {% if booking.getFeedbackFromLocal.isDeleted %}
+            {% if booking.getFeedbackFromTraveler .deleted %}
                 <div class="row bg-white p-l-20 p-b-20 p-t-20 p-r-20 m-b-20 b-a b-thick b-warning">
                     <div class="text-center">
                         <p>

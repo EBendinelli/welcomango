@@ -33,7 +33,8 @@
         "craue/formflow-bundle": "~3.0@dev",
         "oneup/uploader-bundle": "^1.3",
         "knplabs/knp-gaufrette-bundle": "^0.2.0",
-        "liip/imagine-bundle": "^1.3"
+        "liip/imagine-bundle": "^1.3",
+        "excelwebzone/recaptcha-bundle": "~v1.4.1"
     },
     "require-dev": {
         "phpspec/phpspec": "2.1.*",

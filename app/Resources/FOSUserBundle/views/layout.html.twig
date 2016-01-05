@@ -35,6 +35,8 @@
             <div class="panel col-md-3 bg-master-lightest">
                 <div id="user-picture-container">
                     {{ display_avatar(user, true, true, 'user-picture') }}
+                    {% block inside_profile_picture %}
+                    {% endblock inside_profile_picture  %}
                 </div>
 
                 {% block sub_profile_picture %}

@@ -29,13 +29,14 @@ class AppKernel extends Kernel
             new Welcomango\Bundle\ExperienceBundle\WelcomangoExperienceBundle(),
             new Welcomango\Bundle\BookingBundle\WelcomangoBookingBundle(),
             new Welcomango\Bundle\EmailBundle\WelcomangoEmailBundle(),
+            new Welcomango\Bundle\TagBundle\WelcomangoTagBundle(),
 
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new Welcomango\Bundle\TagBundle\WelcomangoTagBundle(),
+            new EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -198,6 +198,10 @@ knp_gaufrette:
             local:
                 directory: %kernel.root_dir%/../web/medias/experiences
                 create: true
+        users:
+            local:
+                directory: %kernel.root_dir%/../web/medias/users
+                create: true
     filesystems:
         real:
             adapter: real
@@ -205,6 +209,8 @@ knp_gaufrette:
             adapter: gallery
         experience:
             adapter: experiences
+        user:
+            adapter: users
 
 liip_imagine:
     resolvers:
@@ -221,6 +227,11 @@ liip_imagine:
             quality: 100
             filters:
                 thumbnail: { size: [250, 250], mode: outbound }
+
+ewz_recaptcha:
+    public_key:  6Lc6hhQTAAAAAF8ye3eP1TaX1rRq53z8rRbue51P
+    private_key: 6Lc6hhQTAAAAAFFAF8YEbNXiHq5Ibj5W3K5-zwMj
+    locale_key:  %kernel.default_locale%
 
 welcomango_booking:
     available_status:

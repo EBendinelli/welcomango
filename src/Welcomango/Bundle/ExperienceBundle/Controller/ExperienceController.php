@@ -169,6 +169,10 @@ class ExperienceController extends BaseController
      */
     public function editAction(Request $request, Experience $experience)
     {
+        if($this->getUser() != $experience->getCreator()){
+            throw new AccessDeniedException('This user cannot edit this experience.');
+        }
+
         //Here we transform the hour and day data to arrays
         $availabilities      = $experience->getAvailabilities();
         $availabilityManager = $this->get('welcomango.front.availability.manager');
@@ -187,6 +191,7 @@ class ExperienceController extends BaseController
             $availabilityManager->updateAvailabilityForExperience($experience, $form, $originalAvailabilities);
             $experience->setPublicationStatus('pending');
             $experience->setMedias($this->get('welcomango.media.manager')->generateMediasFromCsv($form->get('medias_upload')->getData(), $experience));
+
 
             // This cleanly remove the deleted availabilities
             foreach ($originalAvailabilities as $originalAvailability) {

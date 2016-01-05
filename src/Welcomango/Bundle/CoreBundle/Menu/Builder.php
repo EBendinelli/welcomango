@@ -75,7 +75,7 @@ class Builder extends ContainerAware
             ));
 
             if($user->getMedias()->first()){
-                $image = "<img src='/".$user->getMedias()->first()->getWebPath()."' class='front-menu-user-picture' />";
+                $image = "<img src='".$user->getMedias()->first()->getPath().$user->getMedias()->first()->getOriginalFilename()."' class='front-menu-user-picture' />";
             }else{
                 $image = "<img src='/img/front/profile.png' class='front-menu-user-picture' />";
             }

@@ -24,6 +24,10 @@
             <tag name="form.type" alias="front_user"/>
         </service>
 
+        <service id="welcomango.front.form.user.picture.type" class="Welcomango\Bundle\UserBundle\Form\Type\UserPictureType">
+            <tag name="form.type" alias="front_user_picture"/>
+        </service>
+
         <service id="welcomango.front.user.manager" class="Welcomango\Bundle\UserBundle\Manager\UserManager">
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
@@ -35,6 +39,7 @@
         <service id="user.display_avatar" class="Welcomango\Bundle\UserBundle\Twig\DisplayAvatarExtension">
             <tag name="twig.extension"/>
             <argument type="service" id="router"/>
+            <argument type="service" id="security.context" />
         </service>
 
         <service id="welcomango.registration_completed" class="Welcomango\Bundle\UserBundle\Listener\RegistrationConfirmedListener">

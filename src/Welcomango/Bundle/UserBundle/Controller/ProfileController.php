@@ -2,6 +2,7 @@
 
 namespace Welcomango\Bundle\UserBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
@@ -13,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 use Welcomango\Model\Experience;
+use Welcomango\Model\Media;
 
 class ProfileController extends BaseProfileController
 {
@@ -137,6 +139,11 @@ class ProfileController extends BaseProfileController
         $form = $this->createForm($this->get('welcomango.front.form.user.edit.type'), $user);
         $form->setData($user);
 
+        $medias = new ArrayCollection();
+        if ($user->getMedias()){
+            $medias = $user->getMedias();
+        }
+
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -146,11 +153,13 @@ class ProfileController extends BaseProfileController
             $event = new FormEvent($form, $request);
             $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_SUCCESS, $event);
 
+            $user->setMedias($this->get('welcomango.media.manager')->generateMediasFromCsv($form->get('medias_upload')->getData(), $user));
+
             $userManager->updateUser($user);
             $this->addFlash('success', 'profile.edit.success');
 
             if (null === $response = $event->getResponse()) {
-                $url = $this->generateUrl('fos_user_profile_show');
+                $url = $this->generateUrl('fos_user_profile_edit');
                 $response = new RedirectResponse($url);
             }
 
@@ -160,7 +169,8 @@ class ProfileController extends BaseProfileController
         }
 
         return $this->render('FOSUserBundle:Profile:edit.html.twig', array(
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'medias' => $medias,
         ));
     }
 

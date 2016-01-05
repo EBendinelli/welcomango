@@ -753,6 +753,31 @@ a h4:hover{
     cursor:pointer;
 }
 
+.profile-edit-picture-container{
+    position: relative;
+    bottom: 40px;
+    margin:auto;
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+#user-picture-container:hover .profile-edit-picture-container {
+    opacity: 1;
+}
+
+#user-picture-container{
+    height:250px;
+}
+
+.profile-edit-picture{
+    width: 60%;
+    margin:auto;
+    background-color: rgba(0,0,0,0.5);
+    padding: 5px;
+}
+
 .participation-row-bold{
     font-weight:bold !important;
 }

@@ -140,9 +140,7 @@ class User extends BaseUser implements ParticipantInterface
     private $occupation;
 
     /**
-     * @var ArrayCollection
-     *
-     * @ORM\ManyToMany(targetEntity="Media", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="Media", inversedBy="user", cascade={"persist", "remove"})
      * @ORM\JoinTable(name="wm_users_medias")
      **/
     private $medias;
@@ -604,7 +602,6 @@ class User extends BaseUser implements ParticipantInterface
         $this->spokenLanguages = new ArrayCollection();
         $this->experiences     = new ArrayCollection();
         $this->bookings        = new ArrayCollection();
-        $this->medias          = new ArrayCollection();
     }
 
     /**
@@ -631,6 +628,30 @@ class User extends BaseUser implements ParticipantInterface
     public function setMedias($medias)
     {
         $this->medias = $medias;
+    }
+
+    /**
+     * Add medias
+     *
+     * @param Media $medias
+     *
+     * @return User
+     */
+    public function addMedia(\Welcomango\Model\Media $medias)
+    {
+        $this->medias[] = $medias;
+
+        return $this;
+    }
+
+    /**
+     * Remove medias
+     *
+     * @param \Welcomango\Model\Media $medias
+     */
+    public function removeMedia(\Welcomango\Model\Media $medias)
+    {
+        $this->medias->removeElement($medias);
     }
 
     /**
@@ -789,30 +810,6 @@ class User extends BaseUser implements ParticipantInterface
     public function isDeleted()
     {
         return $this->deleted;
-    }
-
-    /**
-     * Add medias
-     *
-     * @param Media $medias
-     *
-     * @return User
-     */
-    public function addMedia(\Welcomango\Model\Media $medias)
-    {
-        $this->medias[] = $medias;
-
-        return $this;
-    }
-
-    /**
-     * Remove medias
-     *
-     * @param \Welcomango\Model\Media $medias
-     */
-    public function removeMedia(\Welcomango\Model\Media $medias)
-    {
-        $this->medias->removeElement($medias);
     }
 
     /**

@@ -102,6 +102,12 @@ class UserEditType extends AbstractType
             'label' => 'form.user.gender'
         ));
 
+        $builder->add('medias_upload', 'hidden', [
+            'required' => false,
+            'mapped'   => false,
+        ]);
+
+
     }
 
     /**
@@ -121,6 +127,6 @@ class UserEditType extends AbstractType
      */
     public function getName()
     {
-        return 'admin_user';
+        return 'front_user';
     }
 }

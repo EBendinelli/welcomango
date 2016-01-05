@@ -51,6 +51,13 @@ class Media
     protected $experiences;
 
     /**
+     * @var User
+     *
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="medias")
+     **/
+    protected $user;
+
+    /**
      * The constructor
      */
     public function __construct()
@@ -163,11 +170,11 @@ class Media
     /**
      * Remove experiences
      *
-     * @param \Welcomango\Model\Experience $experiences
+     * @param \Welcomango\Model\Experience $experience
      */
-    public function removeExperience(\Welcomango\Model\Experience $experiences)
+    public function removeExperience(\Welcomango\Model\Experience $experience)
     {
-        $this->experiences->removeElement($experiences);
+        $this->experiences->removeElement($experience);
     }
 
     /**
@@ -178,5 +185,45 @@ class Media
     public function getExperiences()
     {
         return $this->experiences;
+    }
+
+    /**
+     * Add users
+     *
+     * @param \Welcomango\Model\User $user
+     *
+     * @return Media
+     */
+    public function addUser(\Welcomango\Model\User $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove users
+     *
+     * @param \Welcomango\Model\User $user
+     */
+    public function removeUser(\Welcomango\Model\User $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 }

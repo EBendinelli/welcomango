@@ -13,6 +13,9 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Validator\Constraints\Email;
+use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue as RecaptchaTrue;
+
+
 
 use Welcomango\Bundle\UserBundle\Form\Type\AdminSpokenLanguageType;
 
@@ -67,6 +70,7 @@ class UserType extends AbstractType
             'years'    => range(date('Y') - 100, date('Y') - 10),
             'label'    => 'form.user.birthdate',
             'required' => false,
+            'data'     => new \DateTime('1990-03-01 17:26:30'),
         ]);
 
         $builder->add('plain_password', 'repeated', array(
@@ -151,6 +155,11 @@ class UserType extends AbstractType
             'choices'  => $genders,
             'multiple' => false,
             'label'    => 'form.user.gender',
+        ));
+
+        $builder->add('captcha', 'ewz_recaptcha', array(
+            'constraints' => new RecaptchaTrue(),
+            'mapped'      => false,
         ));
 
         $builder->add('register', 'submit');

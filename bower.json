@@ -4,7 +4,7 @@
     "Jcrop": "~2.0.3",
     "dropzone": "enyo/dropzone#~4.2.0",
     "flag-icon": "~0.11.1",
-    "pages-assets": "git@github.com:jblanchon/pages-assets.git#v0.3.0",
+    "pages-assets": "git@github.com:jblanchon/pages-assets.git#v0.3.1",
     "uploadify": "~3.2.1"
   }
 }

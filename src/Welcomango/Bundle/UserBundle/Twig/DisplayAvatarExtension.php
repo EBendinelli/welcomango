@@ -2,6 +2,7 @@
 
 namespace Welcomango\Bundle\UserBundle\Twig;
 
+use Symfony\Component\Security\Core\SecurityContextInterface;
 use Welcomango\Model\User;
 
 /**
@@ -11,16 +12,23 @@ class DisplayAvatarExtension extends \Twig_Extension
 {
 
     /**
+     * @var SecurityContextInterface security context
+     */
+    private $securityContext;
+
+    /**
      * @var Router $router
      */
     private $router;
 
     /**
      * @param Router $router
+     * @param SecurityContextInterface $securityContext
      */
-    public function __construct($router)
+    public function __construct($router, SecurityContextInterface $securityContext)
     {
         $this->router = $router;
+        $this->securityContext = $securityContext;
     }
 
     /**
@@ -47,9 +55,9 @@ class DisplayAvatarExtension extends \Twig_Extension
             $firstMedia = $medias->first();
             if($background){
                 //Use a background css trick instead of a simple img tag
-                $avatar = '<div class="'.$class.' user-img-1" style="background-image:url('.$firstMedia->getWebPath().')"></div>';
+                $avatar = '<div class="'.$class.' user-img-1" style="background-image:url('.$firstMedia->getPath().$firstMedia->getOriginalFilename().')"></div>';
             }else{
-                $avatar = '<img src="'.$firstMedia->getWebPath().'" class="'.$class.'" />';
+                $avatar = '<img src="'.$firstMedia->getPath().$firstMedia->getOriginalFilename().'" class="'.$class.'" />';
             }
         }else{
             //Check if there is a gravatar picture or use default
@@ -60,7 +68,7 @@ class DisplayAvatarExtension extends \Twig_Extension
             if ($response[0] != "HTTP/1.0 404 Not Found"){
                 $img = $gravsrc;
             }else{*/
-                $img = '/img/front/faces/face'.rand(1,8).'.jpg';
+                $img = '/img/front/faces/profile.png';
             //}
 
             //If not we use the default image
@@ -73,7 +81,11 @@ class DisplayAvatarExtension extends \Twig_Extension
         }
 
         if($withRoute){
-            $routeToUser = $this->router->generate('front_user_view', array('user_id' => $user->getId()));
+            if($this->securityContext->getToken()->getUser() == $user){
+                $routeToUser = $this->router->generate('fos_user_profile_show');
+            }else{
+                $routeToUser = $this->router->generate('front_user_view', array('user_id' => $user->getId()));
+            }
             $avatar = '<a href="'.$routeToUser.'">'.$avatar.'</a>';
         }
 

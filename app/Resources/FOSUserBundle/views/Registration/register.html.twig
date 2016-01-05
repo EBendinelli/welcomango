@@ -2,6 +2,8 @@
 
 {% block body_class 'pace-white' %}
 
+{% form_theme form with ["::frontTheme.html.twig"] %}
+
 {% block fos_user_content %}
     {% include "FOSUserBundle:Registration:register_content.html.twig" %}
 {% endblock fos_user_content %}
@@ -40,8 +42,8 @@
                         <div class="col-md-6">{{ form_row(form.plain_password.second) }}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">{{ form_row(form.birthdate) }}</div>
-                        <div class="col-md-6">{{ form_row(form.gender) }}</div>
+                        <div class="col-md-7 m-b-10">{{ form_row(form.birthdate) }}</div>
+                        <div class="col-md-5">{{ form_row(form.gender) }}</div>
 
                     </div>
                     <div class="row">
@@ -56,9 +58,7 @@
                         <div class="col-md-12">{{ form_row(form.occupation) }}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
-                            Captcha
-                        </div>
+                        <div class="col-md-12">{{ form_row(form.captcha) }}</div>
                     </div>
                     <div class="row">
                         <div class="col-md-12 text-right">{{ form_row(form.register, {'attr': {'class': 'btn-primary'}} ) }}</div>
@@ -163,7 +163,6 @@
     </script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt6eHUKQPmViopocNUR0iShUiKK72dj7g&&signed_in=true&libraries=places&callback=initAutocomplete" async defer></script>
-
 
     <script>
         var timeout;

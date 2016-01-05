@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 use Welcomango\Model\Media;
 use Welcomango\Model\Experience;
+use Welcomango\Model\User;
 use Welcomango\Bundle\MediaBundle\Manager\MediaNamer;
 
 /**
@@ -40,15 +41,16 @@ class MediaManager
 
     /**
      * @param string     $mediaList
-     * @param Experience $experience
+     * @param mixed      $entity
      *
      * @return ArrayCollection
      */
-    public function generateMediasFromCsv($mediaList, $experience)
+    public function generateMediasFromCsv($mediaList, $entity)
     {
         $mediaCollection = new ArrayCollection();
-        $adapter         = $this->filesystemMap->get('experience');
-        $tempadapter     = $this->filesystemMap->get('gallery');
+        $experienceAdapter   = $this->filesystemMap->get('experience');
+        $userAdapter         = $this->filesystemMap->get('user');
+        $tempadapter         = $this->filesystemMap->get('gallery');
 
         $medias = explode(',', $mediaList);
 
@@ -58,16 +60,26 @@ class MediaManager
                 $tempFileName     = $this->mediaNamer->getTempName($media);
                 $mediaEntity      = new Media();
                 $mediaEntity->setOriginalFilename($originalFileName);
-                $mediaEntity->setPath('/medias/experiences/'.$experience->getId().'/');
-                $mediaEntity->addExperience($experience);
-                $mediaCollection->add($mediaEntity);
-                if (!$adapter->has('/'.$experience->getId().'/'.$originalFileName)) {
-                    $fileContent = $tempadapter->read($tempFileName);
-                    $adapter->write('/'.$experience->getId().'/'.$originalFileName, $fileContent);
+                if($entity instanceof Experience){
+                    $mediaEntity->setPath('/medias/experiences/'.$entity->getId().'/');
+                    $mediaEntity->addExperience($entity);
+                }elseif($entity instanceof User){
+                    $mediaEntity->setPath('/medias/users/'.$entity->getId().'/');
+                    $mediaEntity->addUser($entity);
                 }
+                $mediaCollection->add($mediaEntity);
+                if (!$experienceAdapter->has('/'.$entity->getId().'/'.$originalFileName)) {
+                    $fileContent = $tempadapter->read($tempFileName);
+                    $experienceAdapter->write('/'.$entity->getId().'/'.$originalFileName, $fileContent);
+                }
+                if (!$userAdapter->has('/'.$entity->getId().'/'.$originalFileName)) {
+                    $fileContent = $tempadapter->read($tempFileName);
+                    $userAdapter->write('/'.$entity->getId().'/'.$originalFileName, $fileContent);
+                }
+
+
             }
         }
-
         return $mediaCollection;
 
     }

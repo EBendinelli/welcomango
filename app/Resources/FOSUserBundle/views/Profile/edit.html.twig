@@ -91,16 +91,25 @@
             </div>
             <div class="tab-pane slide" id="tab3">
                 <div class="row">
+                    <div class="col-md-12 small hint-text m-b-10">{{ "profile.edit.usernameNote"|trans }}</div>
                     <div class="col-md-12">{{ form_row(form.username) }}</div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">{{ form_row(form.firstName) }}</div>
                     <div class="col-md-6">{{ form_row(form.lastName) }}</div>
                 </div>
+                <div>
+                    <div class="small hint-text m-b-10">{{ "profile.edit.profilePictureNote"|trans }}</div>
+                    {{ form_row(form.medias_upload) }}
+                    <div id="medias" class="dropzone media-dropzone"></div>
+                </div>
                 <div class="row">
+                    <div class="col-md-12 small hint-text m-b-10">{{ "profile.edit.phoneNote"|trans }}</div>
                     <div class="col-md-6">{{ form_row(form.phone) }}</div>
-                    <div class="col-md-4">{{ form_row(form.birthdate) }}</div>
-                    <div class="col-md-2">{{ form_row(form.gender) }}</div>
+                    <div class="col-md-6">{{ form_row(form.gender) }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">{{ form_row(form.birthdate) }}</div>
                 </div>
 
             </div>
@@ -119,6 +128,9 @@
 {% block javascripts %}
     {{ parent() }}
     {{ form_javascript(form) }}
+
+    {{ include('WelcomangoMediaBundle:AdminMedia:_baseJs.html.twig', {'hiddenInput' : 'front_user_medias_upload'}) }}
+
     <script>
         $(document).ready(function() {
             $('#myFormWizard').bootstrapWizard({
@@ -174,4 +186,9 @@
             });
         });
     </script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset("css/dropzone.min.css") }}" rel="stylesheet" type="text/css" />
 {% endblock %}

@@ -54,7 +54,13 @@
 
 
     function computeMediaName() {
-        $('#front_experience_medias_upload').val(medias.join(','));
+        {% if hiddenInput is defined %}
+            var input = '{{ hiddenInput }}';
+            $('#'+input).val(medias.join(','));
+        {% else %}
+            $('#front_experience_medias_upload').val(medias.join(','));
+        {% endif %}
+
     }
 
 </script>
