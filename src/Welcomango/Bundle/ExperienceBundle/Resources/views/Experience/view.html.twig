@@ -363,6 +363,15 @@
 
         //forbiddenDates calculated earlier
         var forbidden = {{ forbiddenDates|json_encode|raw }};
+        var availablePeriodsPerDate = {{ availablePeriodsPerDate|json_encode|raw }};
+
+        var periodNames = [];
+        periodNames[0] = 'Early Morning';
+        periodNames[1] = 'Morning';
+        periodNames[2] = 'Lunchtime';
+        periodNames[3] = 'Afternoon';
+        periodNames[4] = 'Evening';
+        periodNames[5] = 'Night';
 
         $('#front_booking_desired_date').datepicker({
             startDate: startDate,
@@ -377,6 +386,35 @@
                 if (forbidden.indexOf(curr_date)>-1) return false;
             }
         });
+
+        //Update period available based on a date
+        function updateAvailablePeriods(date){
+
+            //first we put the available periods for this day in a table
+            var periods = availablePeriodsPerDate[date].split(',');
+
+            //then we remove all the available periods in the dropdown
+            $('#front_booking_desired_time').find('option').remove().end();
+
+            //And finally we add the only remaining options
+            periods.forEach(function(entry){
+                if(entry){
+                    $('#front_booking_desired_time').append('<option value="'+entry+'">'+periodNames[entry]+'</option>')
+                    $("#front_booking_desired_time").select2("val", entry);
+                }
+            });
+
+
+
+        }
+
+        //Update period available when date is selected
+        $('#front_booking_desired_date').datepicker().on('changeDate', function (ev) {
+            updateAvailablePeriods($('#front_booking_desired_date').val());
+        });
+
+        //execute it on loading to update fields
+        window.onload = updateAvailablePeriods($('#front_booking_desired_date').val());
 
     </script>
 

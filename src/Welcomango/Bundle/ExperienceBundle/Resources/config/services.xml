@@ -17,6 +17,7 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="welcomango.media.repository" />
             <argument type="service" id="filesystem" />
+            <argument type="service" id="welcomango.front.availability.manager" />
         </service>
 
         <service id="security.access.post_voter" class="Welcomango\Bundle\ExperienceBundle\Security\Voter\ExperienceVoter" public="false" >

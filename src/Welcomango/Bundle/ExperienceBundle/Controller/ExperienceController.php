@@ -184,13 +184,24 @@ class ExperienceController extends BaseController
             $originalAvailabilities->add($availability);
         }
 
+        //Experience before edition
+        $oldExperience = clone $experience;
+
+
         $form = $this->createForm($this->get('welcomango.form.experience.create'), $experience);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            if($experience->getPublicationStatus() == 'refused'){
+                $experience->setPublicationStatus('pending');
+            }
+
             $availabilityManager->updateAvailabilityForExperience($experience, $form, $originalAvailabilities);
-            $experience->setPublicationStatus('pending');
-            $experience->setMedias($this->get('welcomango.media.manager')->generateMediasFromCsv($form->get('medias_upload')->getData(), $experience));
+            if($form->get('title')->getData() != $oldExperience ->getTitle() || $form->get('description')->getData() != $oldExperience ->getDescription() || $form->get('city')->getData() != $oldExperience ->getCity()){
+                $experience->setPublicationStatus('pending');
+            }
+            $newMedias = $this->get('welcomango.media.manager')->generateMediasFromCsv($form->get('medias_upload')->getData(), $experience);
+            $experience->setMedias($newMedias);
 
 
             // This cleanly remove the deleted availabilities
@@ -202,6 +213,10 @@ class ExperienceController extends BaseController
 
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', $this->trans('experience.edit.success', array(), 'crm'));
+
+            if($experience->getPublicationStatus() == 'pending'){
+                return $this->redirect($this->generateUrl('front_experience_profile_list'));
+            }
 
             return $this->redirect($this->generateUrl('front_experience_edit', array(
                 'experience_id'        => $experience->getId(),
@@ -259,7 +274,8 @@ class ExperienceController extends BaseController
         $relatedExperiences = $experienceRepository->getFeatured(3);
 
         //Get forbidden dates for datepicker
-        $forbiddenDates = $this->get('welcomango.front.experience.manager')->getAvailableDatesForDatePicker($experience);
+        $forbiddenDates = $this->get('welcomango.front.experience.manager')->getForbiddenDatesForDatePicker($experience);
+        $availablePeriodsPerDate = $this->get('welcomango.front.experience.manager')->getAvailablePeriodPerDate($experience);
 
 
         // Prepare the booking form
@@ -320,6 +336,7 @@ class ExperienceController extends BaseController
             'formSubmitted'      => $formSubmitted,
             'form'               => $form->createView(),
             'forbiddenDates'     => $forbiddenDates,
+            'availablePeriodsPerDate' => $availablePeriodsPerDate,
             'feedbacks'          => $feedbacks,
         ));
 
@@ -373,7 +390,7 @@ class ExperienceController extends BaseController
             $cities = $this->getRepository('Welcomango\Model\City')->findForAutocomplete($query);
 
             foreach ($cities as $city) {
-                $data[] = ['id' => $city['id'], 'text' => $city['text']];
+                $data[] = ['id' => $city['id'], 'text' => $city['text'].', '.$city['countryName']];
             }
         }
 
@@ -409,3 +426,4 @@ class ExperienceController extends BaseController
         return $this->redirect($this->generateUrl('front_experience_list'));
     }
 }
+

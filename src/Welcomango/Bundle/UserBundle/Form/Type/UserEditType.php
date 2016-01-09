@@ -56,6 +56,9 @@ class UserEditType extends AbstractType
             User::ROLE_USER        => User::ROLE_USER,
         );
 
+        $user = $this->securityContext->getToken()->getUser();
+        $userCity = $user->getCurrentCity();
+
         $genders = array(
             'M' => 'M',
             'F' => 'F',
@@ -74,7 +77,8 @@ class UserEditType extends AbstractType
         ]);
 
         $builder->add('description', 'textarea', [
-            'label' => 'form.user.description'
+            'label' => 'form.user.description',
+            'required' => false,
         ]);
 
 
@@ -85,15 +89,46 @@ class UserEditType extends AbstractType
             'by_reference' => false,
         ));*/
 
-
-        $builder->add('from_city', 'entity', array(
-            'class' => 'Model:City',
-            'property' => 'name',
+        $builder->add('currentCityInput', 'text', array(
+            'mapped' => false,
+            'label' => 'form.user.currenCityInput',
+            'data'  => $userCity->getName(),
         ));
 
-        $builder->add('current_city', 'entity', array(
-            'class' => 'Model:City',
-            'property' => 'name',
+        $builder->add('currentCity', 'hidden', array(
+            'mapped' => false,
+            'label' => 'form.user.currenCity',
+            'data'  => $userCity->getName(),
+        ));
+
+        $builder->add('currentCityLat', 'hidden', array(
+            'mapped' => false,
+            'label' => 'form.user.currenCityLat',
+            'data'  => $userCity->getLatitude(),
+        ));
+
+        $builder->add('currentCityLng', 'hidden', array(
+            'mapped' => false,
+            'label' => 'form.user.currenCityLng',
+            'data'  => $userCity->getLongitude(),
+        ));
+
+        $builder->add('currentCityState', 'hidden', array(
+            'mapped' => false,
+            'label' => 'form.user.currenCityState',
+            'data'  => $userCity->getState(),
+        ));
+
+        $builder->add('currentCityCountry', 'hidden', array(
+            'mapped' => false,
+            'label' => 'form.user.currenCityCountry',
+            'data'  => $userCity->getCountry()->getName(),
+        ));
+
+        $builder->add('currentCityCountryCode', 'hidden', array(
+            'mapped' => false,
+            'label' => 'form.user.currenCityCountryCode',
+            'data'  => $userCity->getCountry()->getCountryCode(),
         ));
 
         $builder->add('gender','choice', array(
@@ -127,6 +162,6 @@ class UserEditType extends AbstractType
      */
     public function getName()
     {
-        return 'front_user';
+        return 'front_user_edit';
     }
 }

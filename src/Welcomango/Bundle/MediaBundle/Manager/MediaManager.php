@@ -54,8 +54,18 @@ class MediaManager
 
         $medias = explode(',', $mediaList);
 
+        $currentMedias = $entity->getMedias();
+        $currentMediasName = array();
+        foreach($currentMedias as $media){
+            $currentMediasName[] = $media->getOriginalFilename();
+        }
+
         foreach ($medias as $media) {
             if ($media !== "") {
+                //if one of the media has a different name it mean a new one has been added so we require a new validation
+                if(!in_array($media, $currentMediasName) && $entity instanceof Experience){
+                    $entity->setPublicationStatus('pending');
+                }
                 $originalFileName = $media;
                 $tempFileName     = $this->mediaNamer->getTempName($media);
                 $mediaEntity      = new Media();
@@ -80,6 +90,7 @@ class MediaManager
 
             }
         }
+
         return $mediaCollection;
 
     }

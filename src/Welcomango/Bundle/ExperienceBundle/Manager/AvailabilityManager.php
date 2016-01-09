@@ -148,5 +148,34 @@ class AvailabilityManager
         }
     }
 
+    public function getAvailablePeriodForHours($hours){
+        $periods = ',';
+        $hours = explode(',',$hours);
+
+        if($hours[0] == '*'){
+            for($i=0;$i<6;$i++){
+                $periods = $i.',';
+            }
+        }else{
+            foreach($hours as $hour){
+                if(($hour == 6 || $hour == 7 || $hour == 8) && strpos($periods, ',0,')<-1){
+                    $periods .= '0,';
+                }elseif(($hour == 9 || $hour == 10 || $hour == 11) && strpos($periods, ',1,')<-1){
+                    $periods .= '1,';
+                }elseif(($hour == 12 || $hour == 13 || $hour == 14) && strpos($periods, ',2,')<-1){
+                    $periods .= '2,';
+                }elseif(($hour == 15 || $hour == 16 || $hour == 17) && strpos($periods, ',3,')<-1){
+                    $periods .= '3,';
+                }elseif(($hour == 18 || $hour == 19 || $hour == 20) && strpos($periods, ',4,')<-1){
+                    $periods .= '4,';
+                }elseif(($hour == 21 || $hour == 22 || $hour == 23) && strpos($periods, ',5,')<-1){
+                    $periods .= '5,';
+                }
+            }
+        }
+
+        return $periods;
+    }
+
 }
 

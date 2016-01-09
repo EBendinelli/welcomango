@@ -1,43 +1,13 @@
 {% extends "::front.html.twig" %}
 
+{% trans_default_domain "interface" %}
+
 {% block page_content %}
 
     {% block search_results '' %}
 
 
         {% block page_header %}
-            {% include("WelcomangoCoreBundle:CRUD:subHeader.html.twig") %}
-            {# MAIN DESCRIPTION #}
-            <section class="bg-master-lightest p-b-85 p-t-75">
-                <div class="container">
-                    <div class="md-p-l-20 md-p-r-20 xs-no-padding">
-                        <h5 class="block-title hint-text no-margin">
-                            {% block element_title %}
-                            {% endblock element_title %}
-                        </h5>
-                        <div class="row">
-                            <div class="col-sm-5 col-md-4">
-                                <h1 class="m-t-5">
-                                    {% block element_main_sentence %}
-                                    {% endblock element_main_sentence %}
-                                </h1>
-                            </div>
-                            <div class="col-sm-7 col-md-8 no-padding xs-p-l-15 xs-p-r-15">
-                                <div class="p-t-20 p-l-35 md-p-l-5 md-p-t-15">
-                                    <p>
-                                        {% block element_description %}
-                                        {% endblock element_description %}
-                                    </p>
-                                    <p class="hint-text font-arial small-text col-md-7 no-padding">
-                                        {% block element_last_description  %}
-                                        {% endblock element_last_description %}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
         {% endblock %}
 
 
@@ -51,8 +21,8 @@
                                     {{ form_start(form, {'action': filter_url, 'method': 'POST', 'attr': { 'novalidate': 'novalidate', 'class': 'filter' } }) }}
                                     {% block filters %}{{ form_row(form) }}{% endblock %}
                                     <div class="btn-toolbar text-center m-t-20" role="toolbar">
-                                        <button type="submit" id="btn-filter" class="btn btn-primary btn-sm btn-filter-inversed">{{ 'interface.search'|trans({}, "interface") }}</button>
-                                        <button type="submit" class="btn btn-default btn-sm" name="_reset">{{ 'interface.clear'|trans({}, "interface") }}</button>
+                                        <button type="submit" id="btn-filter" class="btn btn-primary btn-lg btn-filter-inversed">{{ 'interface.search'|trans({}, "interface") }}</button>
+                                        <button type="submit" class="btn btn-default btn-lg" name="_reset">{{ 'interface.clear'|trans({}, "interface") }}</button>
                                     </div>
                                     {{ form_rest(form) }}
                                     {{ form_end(form) }}

@@ -4,21 +4,28 @@
 
 {% trans_default_domain "interface" %}
 
-     {% block element_title %}
-         Experiences
-     {% endblock element_title %}
-
-    {% block element_main_sentence %}
-        This is where your journey starts
-    {% endblock element_main_sentence %}
-
-    {% block element_description %}
-        The following experiences are all proposed by locals willing to show you their cities from their point of view. We are not talking about cheap guides, but a human to human experience.
-    {% endblock element_description %}
-
-    {% block element_last_description  %}
-        Go ahead, check what's in the city you are willing to visit!
-    {% endblock element_last_description %}
+    {% block page_header %}
+        <!-- START CONTENT SECTION -->
+        <section class="p-b-30 p-t-30 bg-master-darkest sm-no-margin" data-pages-bg-image="{{ asset("img/front/experience/banner_2.jpg") }}" data-bg-overlay="black" data-overlay-opacity="0.3" data-pages="parallax">
+            <div class="container p-b-30 p-t-30">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="text-center">
+                            <h1 class="text-white col-sm-12 p-b-10">
+                                {% if form.vars.value.city.name is defined %}
+                                    Experiences in {{ form.vars.value.city.name }}, {{ form.vars.value.city.country.name }}
+                                {% else %}
+                                    {{ 'experience.list.title'|trans }}
+                                {% endif %}
+                            </h1>
+                            <p class="fs-12 font-arial text-white m-t-30"><span class="hint-text">{{ 'experience.list.subHeader'|trans }}</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END CONTENT SECTION -->
+    {% endblock %}
 
     {% block actions %}
         {# {{ button.create(path('experience_create'), 'experience.create'|trans) }}#}

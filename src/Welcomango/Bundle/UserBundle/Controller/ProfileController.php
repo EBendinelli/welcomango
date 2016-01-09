@@ -147,6 +147,19 @@ class ProfileController extends BaseProfileController
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $cityManager = $this->get('welcomango.front.city.manager');
+
+            $currentCity = $cityManager->checkAndCreateNewCity(
+                $form->get('currentCity')->getData(),
+                $form->get('currentCityLat')->getData(),
+                $form->get('currentCityLng')->getData(),
+                $form->get('currentCityState')->getData(),
+                $form->get('currentCityCountry')->getData(),
+                $form->get('currentCityCountryCode')->getData()
+            );
+
+            $user->setCurrentCity($currentCity);
+
             /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
             $userManager = $this->get('fos_user.user_manager');
 
@@ -154,6 +167,7 @@ class ProfileController extends BaseProfileController
             $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_SUCCESS, $event);
 
             $user->setMedias($this->get('welcomango.media.manager')->generateMediasFromCsv($form->get('medias_upload')->getData(), $user));
+
 
             $userManager->updateUser($user);
             $this->addFlash('success', 'profile.edit.success');

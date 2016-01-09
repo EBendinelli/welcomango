@@ -21,7 +21,8 @@ class CityRepository extends EntityRepository
     {
         $queryBuilder = $this->createQueryBuilder('c');
         $queryBuilder
-            ->select('c.id, c.name AS text')
+            ->select('c.id, c.name AS text, co.name AS countryName')
+            ->leftJoin('c.country', 'co')
             ->where('c.name LIKE :name')
             ->setParameter('name', '%'.$query.'%')
         ;

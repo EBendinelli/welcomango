@@ -26,7 +26,7 @@ class AdminCoreController extends BaseController
         $feedbacksCount = count($feedbacks);
 
         //Get new users
-        $newUsers = $this->getRepository('Welcomango\Model\User')->findBy(['createdAt' => new \Datetime]);
+        $newUsers = $this->getRepository('Welcomango\Model\User')->findBy(['createdAt' => new \Datetime(date('d-m-Y'))]);
 
         //Get experience waiting for validation
         $experiences = $this->getRepository('Welcomango\Model\Experience')->findBy(['publicationStatus' => 'pending', 'deleted' => false ]);

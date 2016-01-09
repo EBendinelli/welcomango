@@ -761,8 +761,10 @@ class Experience
 
     /**
      * @return array
+     *
+     * This function returns the available days based on the availabilities attached to this experience
      */
-    public function getAvailableDays()
+    public function getAvailableDays($format = 'text')
     {
         $interval       = \DateInterval::createFromDateString('1 day');
         $availableDates = array();
@@ -774,11 +776,15 @@ class Experience
             $endDate->modify('+1 day');;
             $period = new \DatePeriod($availability->getStartDate(), $interval, $endDate);
             foreach ($period as $day) {
-                if (strrpos($availability->getDay(), ','.$day->format('w').',') > -1 || $availability->getDay() == "*") {
-                    $availableDates[$day->format('Y-m-d')] = $day->format('Y-m-d');
+                if (strpos($availability->getDay(), ','.($day->format('N')-1).',') > -1 || $availability->getDay() == "*") {
+                    if($format == 'text'){
+                        $availableDates[$day->format('Y-m-d')] = $day->format('Y-m-d');
+                    }elseif($format == 'datetime'){
+                        $availableDates[$day->format('Y-m-d')] = $day;
+                    }
+
                 }
             }
-
 
             //Then we remove the days which are FULLY booked
             //So we look for accepted booking happening on the available days
@@ -786,6 +792,7 @@ class Experience
             $availableHours = array();
             foreach ($this->bookings as $booking) {
                 if (isset($availableDates[$booking->getStartDatetime()->format('Y-m-d')]) && $booking->getStatus() == 'Accepted') {
+
                     //Store booking information in variables for clarity
                     $bookingStartTime = $booking->getStartDatetime()->format('G');
                     $bookingEndTime   = $booking->getEndDatetime()->format('G');
@@ -799,10 +806,10 @@ class Experience
                     for ($i = $bookingStartTime; $i <= $bookingEndTime; $i++) {
                         $bookedHours .= $i.',';
                     }
+
                     //Now we removed this booked hours from the available hours
                     $availableHours[$bookingDay] = str_replace($bookedHours, '', $availableHours[$bookingDay]);
-                    //Eventually, if their is no available hours remaining, we remove this day from the available ones
-                    if (empty($availableHours[$bookingDay])) {
+                    if(empty($availableDates[$bookingDay])){
                         unset($availableDates[$bookingDay]);
                     }
                 }
@@ -819,18 +826,18 @@ class Experience
      */
     public function isAvailableForBooking($bookingRequest)
     {
+
         foreach ($this->availabilities as $availability) {
             if ($bookingRequest->getStartDatetime()->format('Y-m-d') > $availability->getStartDate()->format('Y-m-d')
                 && $bookingRequest->getEndDatetime()->format('Y-m-d') < $availability->getEndDate()->format('Y-m-d')
                 && $bookingRequest->getExperience() == $availability->getExperience()
-                && (strrpos($availability->getDay(), ','.$bookingRequest->getStartDatetime()->format('w').',') || $availability->getDay() == "*")
-                && (strrpos($availability->getHour(), ','.$bookingRequest->getStartDatetime()->format('G').',') || $availability->getHour() == "*")
+                && ((strpos($availability->getDay(), ','.($bookingRequest->getStartDatetime()->format('N')-1).',') > -1) || $availability->getDay() == "*")
+                && ((strpos($availability->getHour(), ','.$bookingRequest->getStartDatetime()->format('G').',') > -1) || $availability->getHour() == "*")
             ) {
-                return false;
+                return true;
             }
         }
-
-        return true;
+        return false;
     }
 
     /**

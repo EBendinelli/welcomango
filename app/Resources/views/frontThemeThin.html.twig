@@ -82,8 +82,7 @@
 {% endblock %}
 
 {% block genemu_jqueryselect2_hidden_widget %}
-    <div class="form-group form-group-default form-group-default-select2">
-        {{ form_label(form) }}
+    <div class="form-group ">
         {{ block('form_row') }}
     </div>
 {% endblock genemu_jqueryselect2_hidden_widget %}
@@ -92,7 +91,7 @@
 {% block choice_widget_collapsed %}
     <div class="form-group form-group-default form-group-default-select2">
         {{ form_label(form) }}
-        <select class="full-width select2-offscreen" data-init-plugin="select2" data-disable-search="true" {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+        <select class="full-width select2-offscreen" data-init-plugin="select2" {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
             {%- if placeholder is not none -%}
                 <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ placeholder != '' ? placeholder|trans({}, translation_domain) }}</option>
             {%- endif -%}
@@ -147,8 +146,7 @@
 
 {% block date_widget -%}
     {% if widget == 'single_text' %}
-        <div class="form-group form-group-default input-group">
-            <label>{{ form_label(form) }}</label>
+        <div class="input-group date ">
             {{- block('form_widget_simple') -}}
             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
         </div>

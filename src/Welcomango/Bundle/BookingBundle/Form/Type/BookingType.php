@@ -86,6 +86,7 @@ class BookingType extends AbstractType
                 'data-provide'     => 'datepicker',
                 'data-date-format' => 'dd-mm-yyyy',
             ],
+            'data'     => new \DateTime(),
         ]);
 
         $builder->add('desired_time', 'choice', [

@@ -6,6 +6,8 @@
 
 {% block meta_title %}{{ "profile.editProfile"|trans({}, "interface") }}{% endblock %}
 
+{% trans_default_domain "interface" %}
+
 {% block profile_content %}
     {{ form_errors(form) }}
 
@@ -72,45 +74,40 @@
             </li>
         </ul>
         <!-- Tab panes -->
-        <div class="tab-content bg-white b-l b-r b-b b-grey">
+        {{ form_start(form, {'action': path('fos_user_profile_edit')}) }}
+        <div class="tab-content bg-white p-l-20 p-r-20 p-t-20 p-b-20 ">
             <div class="tab-pane active slide" id="tab1">
-                {{ form_start(form, {'action': path('fos_user_profile_edit')}) }}
                 <div class="row">
-                    <div class="col-md-6">{{ form_row(form.from_city) }}</div>
-                    <div class="col-md-6">{{ form_row(form.current_city) }}</div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">{{ form_row(form.description) }}</div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">{{ form_row(form.occupation) }}</div>
+                    <div class="profile-form-note m-t-10">{{ "profile.edit.currentCityNote"|trans }}</div>
+                    <div>{{ form_row(form.currentCityInput, {'attr': {'onFocus':'geolocate()'}}) }}</div>
+                    <div class=" profile-form-note m-t-20">{{ "profile.edit.descriptionNote"|trans }}</div>
+                    <div>{{ form_row(form.description) }}</div>
+                    <div class="profile-form-note m-t-20">{{ "profile.edit.occupationNote"|trans }}</div>
+                    <div>{{ form_row(form.occupation) }}</div>
                 </div>
             </div>
             <div class="tab-pane slide" id="tab2">
                 ...
             </div>
             <div class="tab-pane slide" id="tab3">
-                <div class="row">
-                    <div class="col-md-12 small hint-text m-b-10">{{ "profile.edit.usernameNote"|trans }}</div>
-                    <div class="col-md-12">{{ form_row(form.username) }}</div>
-                </div>
-                <div class="row">
+                <div class="profile-form-note">{{ "profile.edit.usernameNote"|trans }}</div>
+                <div>{{ form_row(form.username) }}</div>
+                <div class="row m-t-20">
                     <div class="col-md-6">{{ form_row(form.firstName) }}</div>
                     <div class="col-md-6">{{ form_row(form.lastName) }}</div>
                 </div>
                 <div>
-                    <div class="small hint-text m-b-10">{{ "profile.edit.profilePictureNote"|trans }}</div>
+                    <div class="profile-form-note m-t-20">{{ "profile.edit.profilePictureNote"|trans }}</div>
                     {{ form_row(form.medias_upload) }}
                     <div id="medias" class="dropzone media-dropzone"></div>
                 </div>
+                <div class="profile-form-note m-t-20">{{ "profile.edit.phoneNote"|trans }}</div>
                 <div class="row">
-                    <div class="col-md-12 small hint-text m-b-10">{{ "profile.edit.phoneNote"|trans }}</div>
                     <div class="col-md-6">{{ form_row(form.phone) }}</div>
                     <div class="col-md-6">{{ form_row(form.gender) }}</div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">{{ form_row(form.birthdate) }}</div>
-                </div>
+                <div class="m-t-20">{{ form_row(form.birthdate) }}</div>
+
 
             </div>
 
@@ -129,7 +126,64 @@
     {{ parent() }}
     {{ form_javascript(form) }}
 
-    {{ include('WelcomangoMediaBundle:AdminMedia:_baseJs.html.twig', {'hiddenInput' : 'front_user_medias_upload'}) }}
+    {{ include('WelcomangoMediaBundle:AdminMedia:_baseJs.html.twig', {'hiddenInput' : 'front_user_edit_medias_upload'}) }}
+
+    <script type="text/javascript">
+
+        var placeSearch, autocompleteCurrent;
+
+        function initAutocomplete() {
+            // Create the autocomplete object, restricting the search to geographical
+            // location types.
+
+            var input = document.getElementById('front_user_edit_currentCityInput');
+            autocompleteCurrent = new google.maps.places.Autocomplete(input , {types: ['(cities)'], region:'EU'});
+
+
+            autocompleteCurrent.addListener('place_changed', function(){
+                var placeCurrent = autocompleteCurrent.getPlace();
+
+                if(placeCurrent){
+                    var currentCity = document.getElementById('front_user_edit_currentCity');
+                    var currentCityLat = document.getElementById('front_user_edit_currentCityLat');
+                    var currentCityLng = document.getElementById('front_user_edit_currentCityLng');
+                    var currentCityState = document.getElementById('front_user_edit_currentCityState');
+                    var currentCityCountry = document.getElementById('front_user_edit_currentCityCountry');
+                    var currentCityCountryCode = document.getElementById('front_user_edit_currentCityCountryCode');
+
+                    for (var i = 0; i < placeCurrent.address_components.length; i++) {
+                        var addressType = placeCurrent.address_components[i].types[0];
+                        if (addressType == 'country') {
+                            currentCityCountry.value = placeCurrent.address_components[i]['long_name'];
+                            currentCityCountryCode.value = placeCurrent.address_components[i]['short_name'];
+                        }else if(addressType == 'administrative_area_level_1') {
+                            currentCityState.value = placeCurrent.address_components[i]['long_name'];
+                        }else if(addressType == 'locality') {
+                            currentCity.value = placeCurrent.address_components[i]['long_name'];
+                        }
+                    }
+                    currentCityLat.value = placeCurrent.geometry.location.lat();
+                    currentCityLng.value = placeCurrent.geometry.location.lng();
+                }
+            });
+        }
+
+        // Bias the autocomplete object to the user's geographical location,
+        // as supplied by the browser's 'navigator.geolocation' object.
+        function geolocate() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var geolocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                });
+            }
+        }
+
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt6eHUKQPmViopocNUR0iShUiKK72dj7g&&signed_in=true&libraries=places&callback=initAutocomplete" async defer></script>
 
     <script>
         $(document).ready(function() {

@@ -1,5 +1,5 @@
 <!-- BEGIN JUMBOTRON -->
-<section class="jumbotron full-vh" data-pages="parallax">
+<section class="jumbotron vh-80" data-pages="parallax">
     <div class="inner full-height">
         <!-- BEGIN SLIDER -->
         <div class="swiper-container" id="hero">
@@ -8,7 +8,8 @@
                 <div class="swiper-slide fit">
                     <!-- BEGIN IMAGE PARRALAX -->
                     <div class="slider-wrapper">
-                        <div class="image" data-swiper-parallax="30%" data-pages-bg-image="{{ asset("img/front/places-" ~ random(18) ~ ".jpg") }}" data-bg-overlay="black" data-overlay-opacity="0.2">
+                        {#<div class="image" data-swiper-parallax="30%" data-pages-bg-image="{{ asset("img/front/homepage-" ~ random(2) ~ ".jpg") }}" data-bg-overlay="black" data-overlay-opacity="0.2">#}
+                        <div class="image" data-swiper-parallax="30%" data-pages-bg-image="{{ asset("img/front/homepage-2.jpg") }}" data-bg-overlay="black" data-overlay-opacity="0.2">
                         </div>
                     </div>
                     <!-- END IMAGE PARRALAX -->
@@ -21,19 +22,27 @@
                                         <div class="row">
                                             {{ form_start(form, {'action': filter_url, 'method': 'POST', 'attr': { 'novalidate': 'novalidate', 'class': 'filter' } }) }}
                                             <div class="col-md-9 col-md-offset-2 text-center">
-                                                <h1 class="text-white sm-text-center" data-swiper-parallax="-15%">Enjoy your next trip differently</h1>
+                                                <h1 class="text-white sm-text-center bold" data-swiper-parallax="-15%">Places Through People</h1>
                                                 <h4 class="text-white sm-text-center m-b-40">Find enthusiastic people willing to show you a different side of their city</h4>
-                                                <div class="col-md-8">
-                                                    {{ form_row(form.city,  {'attr' : {'class' : 'form-filter-select2'} }) }}
-                                                </div>
-                                                <div class="col-md-4">
-                                                    {{ form_row(form.date) }}
-                                                </div>
-                                                <div style="display: none">{{ form(form) }}</div>
-                                                <button type="submit" id="btn-filter" class="btn btn-primary btn-lg btn-filter-inversed m-t-20">{{ 'interface.search'|trans({}, "interface") }}</button>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container" style="position:absolute; bottom: 100px; right:0px; left: 0px;">
+                        <div class="row">
+                            <div class="col-md-9 col-md-offset-2 text-center p-t-20 p-b-10">
+                                <div class="col-md-7">
+                                    {{ form_row(form.city,  {'attr' : {'class' : 'form-filter-select2'} }) }}
+                                </div>
+                                <div class="col-md-3 text-left">
+                                    {{ form_row(form.date) }}
+                                </div>
+                                <div class="col-md-2">
+                                    <div style="display: none">{{ form(form) }}</div>
+                                    <button type="submit" id="btn-filter" class="btn btn-complete btn-filter-inversed fs-16" style="width: 100%;">{{ 'interface.search'|trans({}, "interface") }}</button>
                                 </div>
                             </div>
                         </div>

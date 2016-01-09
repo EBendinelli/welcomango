@@ -2,6 +2,10 @@
 /* ////////////////   GENERAL UI ////////////////////////// */
 /* //////////////////////////////////////////////////////// */
 
+.vh-80{
+    height: 80vh;
+}
+
 .fs-i{
     font-style: italic;
 }
@@ -778,6 +782,13 @@ a h4:hover{
     padding: 5px;
 }
 
+.profile-form-note{
+    font-family: 'Arial';
+    font-size: 13px;
+    opacity: .7;
+    margin-bottom:15px;
+}
+
 .participation-row-bold{
     font-weight:bold !important;
 }
@@ -1100,4 +1111,17 @@ a .front-menu-user-picture{
 
 .dropzone .dz-preview .dz-remove {
     margin-top: 5px;
+}
+
+/* ///////////// BOOTSTRAP RESPONSIVE TABLE BORDER HACK ////////////////// */
+@media screen and (max-width: 767px){
+    .table-responsive {
+        border: 0px;
+    }
+}
+
+/* //////// CITY SEARCH HEIGHT HACK /////////////// */
+
+.form-group-default .form-control{
+    margin-top: 0px;
 }

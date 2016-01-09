@@ -1,20 +1,22 @@
-{% trans_default_domain "crm" %}
-
 {{ form_errors(form) }}
-<div class="row">
-    <div class="col-md-6 col-vlg-6">
+<div class="row text-left">
+    <div class="col-md-12 col-vlg-12">
         {{ form_row(form.city,  {'attr' : {'class' : 'form-filter-select2'} }) }}
     </div>
-    <div class="col-md-6 col-vlg-6">
-        {{ form_row(form.title) }}
+    <div class="row">
+        <div class="col-md-6 col-vlg-6">
+            {{ form_row(form.title) }}
+        </div>
+        <div class="col-md-6 col-vlg-6">
+            {{ form_row(form.date) }}
+        </div>
     </div>
-    <div class="col-md-4 col-vlg-4">
-        {{ form_row(form.date) }}
-    </div>
-    <div class="col-md-4 col-vlg-4">
-        {{ form_row(form.min_participants_accepted) }}
-    </div>
-    <div class="col-md-4 col-vlg-4">
-        {{ form_row(form.tags) }}
+    <div class="row">
+        <div class="col-md-6 col-vlg-6">
+            {{ form_row(form.min_participants_accepted) }}
+        </div>
+        <div class="col-md-6 col-vlg-6">
+            {{ form_row(form.tags) }}
+        </div>
     </div>
 </div>

@@ -46,7 +46,7 @@ class ExperienceFilterType extends AbstractType
         $builder
             ->add('title', 'text', [
                 'required' => false,
-                'label'    => 'experience.title',
+                'label'    => 'form.experience.keyword',
             ])
             ->add($builder->create('city', 'genemu_jqueryselect2_hidden', [
                 'required' => false,
@@ -89,7 +89,7 @@ class ExperienceFilterType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'translation_domain' => 'crm',
+            'translation_domain' => 'interface',
         ));
     }
 

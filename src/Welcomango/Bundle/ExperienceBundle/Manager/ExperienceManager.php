@@ -27,6 +27,11 @@ class ExperienceManager
     protected $mediaRepository;
 
     /**
+     * @var availabilityManager
+     */
+    protected $availabilityManager;
+
+    /**
      * @var Filesystem
      */
     protected $filesystem;
@@ -36,11 +41,12 @@ class ExperienceManager
      * @param EntityRepository $mediaRepository
      * @param Filesystem $filesystem
      */
-    public function __construct(EntityManager $entityManager, EntityRepository $mediaRepository, Filesystem $filesystem)
+    public function __construct(EntityManager $entityManager, EntityRepository $mediaRepository, Filesystem $filesystem, $availabilityManager)
     {
         $this->entityManager = $entityManager;
         $this->mediaRepository = $mediaRepository;
         $this->filesystem = $filesystem;
+        $this->availabilityManager = $availabilityManager;
     }
 
     /**
@@ -58,7 +64,7 @@ class ExperienceManager
         $this->entityManager->flush();
     }
 
-    public function getAvailableDatesForDatePicker($experience)
+    public function getForbiddenDatesForDatePicker($experience)
     {
         // Create an array with the forbidden dates
         $forbiddenDates = array();
@@ -77,5 +83,52 @@ class ExperienceManager
         }
 
         return $forbiddenDates;
+    }
+
+    public function getAvailablePeriodPerDate($experience){
+        //get available dates
+        $availableDays = $experience->getAvailableDays('datetime');
+        $availablePeriodsPerDate = array();
+
+        foreach($availableDays as $date){
+            foreach($experience->getAvailabilities() as $availability){
+                if (strrpos($availability->getDay(), ','.($date->format('N')-1).',') > -1 || $availability->getDay() == "*") {
+                    $availablePeriodsPerDate[$date->format('d-m-Y')] = $this->availabilityManager->getAvailablePeriodForHours($availability->getHour());
+                }
+            }
+        }
+
+
+        //Now we remove the periods where something is already booked
+        $availableHours = array();
+        foreach ($experience->getBookings() as $booking) {
+            if (isset($availablePeriodsPerDate[$booking->getStartDatetime()->format('d-m-Y')]) && $booking->getStatus() == 'Accepted') {
+                //Store booking information in variables for clarity
+                $bookingStartTime = $booking->getStartDatetime()->format('G');
+                $bookingEndTime   = $booking->getEndDatetime()->format('G');
+                $bookingDay       = $booking->getStartDatetime()->format('d-m-Y');
+
+                //We get a string with the available hours for this day
+                //This string will be used as a basis
+                $availableHours[$bookingDay] = $availability->getHour();
+
+                $bookedHours = ',';
+                for ($i = $bookingStartTime; $i <= $bookingEndTime; $i++) {
+                    $bookedHours .= $i.',';
+                }
+                //Now we removed this booked hours from the available hours
+                $availableHours[$bookingDay] = str_replace($bookedHours, '', $availableHours[$bookingDay]);
+
+                //And we regenerate the periods available with the remaining hours
+                $availablePeriodsPerDate[$bookingDay] = $this->availabilityManager->getAvailablePeriodForHours($availableHours[$bookingDay]);
+
+                //Eventually, if their is no available hours remaining, we remove this day from the available ones
+                if (empty($availablePeriodsPerDate[$bookingDay])) {
+                    unset($availablePeriodsPerDate[$bookingDay]);
+                }
+            }
+        }
+
+        return $availablePeriodsPerDate;
     }
 }

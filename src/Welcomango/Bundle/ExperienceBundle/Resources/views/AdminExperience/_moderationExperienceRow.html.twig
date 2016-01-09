@@ -1,5 +1,8 @@
 <div class="panel panel-default p-l-20 p-r-20 p-t-20 p-b-20">
     <div class="row">
+        {% if experience.createdAt != experience.updatedAt %}
+            <h5 class="col-md-12 text-center m-b-20 text-danger fs-i">Edited on</h5>
+        {% endif %}
         <div class="col-md-6 text-center b-r b-grey">
             <h4>Proposed by <a href="{{ path('admin_user_edit', {'user_id' : experience.getCreator.id }) }}">{{ experience.getCreator.fullname }}</a>, {{ experience.getCreator.getAge }}</h4>
             <div> Member since {{ experience.getCreator.createdAt|time_diff }}</div>
@@ -40,6 +43,7 @@
             {% set refuseRoute = path('admin_experience_refuse', {'experience_id': experience.id}) %}
             <button data-toggle="modal" data-target=".modal-action" class="btn btn-danger" onclick="updateRefuseModal('{{ refuseRoute }}')"><i class="fa fa-times"></i> {{ 'inteface.refuse'|trans }}</button>
             {{ button.validate(path('admin_experience_validate', {'experience_id': experience.id}), false, "btn") }}
+            <div class="m-t-10"><a href="{{ path('admin_experience_edit', {'experience_id': experience.id}) }}">See full experience</a></div>
         </div>
     </div>
 </div>
