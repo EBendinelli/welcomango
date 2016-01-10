@@ -769,6 +769,8 @@ class Experience
         $interval       = \DateInterval::createFromDateString('1 day');
         $availableDates = array();
 
+        //This variable is used to store available hours for specific days
+        $availableHours = array();
         foreach ($this->availabilities as $availability) {
             //First we get the available days according to the period defined and the days selected
             $endDate = $availability->getEndDate();
@@ -783,36 +785,58 @@ class Experience
                         $availableDates[$day->format('Y-m-d')] = $day;
                     }
 
-                }
-            }
-
-            //Then we remove the days which are FULLY booked
-            //So we look for accepted booking happening on the available days
-            //This variable is used to store available hours for specific days
-            $availableHours = array();
-            foreach ($this->bookings as $booking) {
-                if (isset($availableDates[$booking->getStartDatetime()->format('Y-m-d')]) && $booking->getStatus() == 'Accepted') {
-
-                    //Store booking information in variables for clarity
-                    $bookingStartTime = $booking->getStartDatetime()->format('G');
-                    $bookingEndTime   = $booking->getEndDatetime()->format('G');
-                    $bookingDay       = $booking->getStartDatetime()->format('Y-m-d');
-
                     //We get a string with the available hours for this day
                     //This string will be used as a basis
-                    $availableHours[$bookingDay] = $availability->getHour();
-
-                    $bookedHours = ',';
-                    for ($i = $bookingStartTime; $i <= $bookingEndTime; $i++) {
-                        $bookedHours .= $i.',';
-                    }
-
-                    //Now we removed this booked hours from the available hours
-                    $availableHours[$bookingDay] = str_replace($bookedHours, '', $availableHours[$bookingDay]);
-                    if(empty($availableDates[$bookingDay])){
-                        unset($availableDates[$bookingDay]);
-                    }
+                    $availableHours[$day->format('Y-m-d')] = $availability->getHour();
                 }
+            }
+        }
+
+        //Then we remove the days which are FULLY booked
+        //So we look for accepted booking happening on the available days
+        $bookedHours = array();
+        foreach ($this->bookings as $booking) {
+            if (isset($availableDates[$booking->getStartDatetime()->format('Y-m-d')]) && $booking->getStatus() == 'Accepted') {
+
+                //Store booking information in variables for clarity
+                $bookingStartTime = $booking->getStartDatetime()->format('G');
+                $bookingEndTime   = $booking->getEndDatetime()->format('G');
+                $bookingDay       = $booking->getStartDatetime()->format('Y-m-d');
+
+                $bookedHoursTmp = ',';
+                for ($i = $bookingStartTime; $i <= $bookingEndTime; $i++) {
+                    $bookedHoursTmp .= $i.',';
+                }
+                if(isset($bookedHours[$bookingDay])){
+                    $bookedHours[$bookingDay] .= $bookedHoursTmp;
+                }else{
+                    $bookedHours[$bookingDay] = $bookedHoursTmp;
+                }
+
+                //Now we removed this booked hours from the available hours
+                //This work most of the time but if there are more hours booked than available it doesn't
+                $availableHours[$bookingDay] = str_replace($bookedHours[$bookingDay], '', $availableHours[$bookingDay]);
+                if(empty($availableDates[$bookingDay])){
+                    unset($availableDates[$bookingDay]);
+                }
+            }
+        }
+
+        //This function will handle the last case
+        //For example if someone booked a 4h hour experience for morning (which means the substr didn't work)
+        //We handle this by comparing the remaining tables
+        foreach ($bookedHours as $day => $hoursTable) {
+            $bookedHoursTable = explode(',', $hoursTable);
+            $availableHoursTable = explode(',',$availableHours[$day] );
+
+            //We clean the table (remove empty values and duplicates)
+            $availableHoursTable = array_unique($availableHoursTable );
+            $bookedHoursTable = array_unique($bookedHoursTable );
+            $availableHoursTable = array_filter($availableHoursTable);
+            $bookedHoursTable = array_filter($bookedHoursTable);
+
+            if(count($bookedHoursTable) > count($availableHoursTable)){
+                unset($availableDates[$day]);
             }
         }
 

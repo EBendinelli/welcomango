@@ -56,7 +56,7 @@ class LoadExperienceData extends AbstractFixture implements FixtureInterface, Or
             $estimatedDuration = rand(1,8);
             $entry->setEstimatedDuration($estimatedDuration);
 
-            $minimumDuration = 0;
+            $minimumDuration = 1;
             if($estimatedDuration == 1) $minimumDuration == $estimatedDuration;
             else if($estimatedDuration == 2) $minimumDuration == 2;
             else $minimumDuration = rand(1, $estimatedDuration);

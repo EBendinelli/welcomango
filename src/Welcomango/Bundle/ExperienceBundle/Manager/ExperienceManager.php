@@ -89,28 +89,27 @@ class ExperienceManager
         //get available dates
         $availableDays = $experience->getAvailableDays('datetime');
         $availablePeriodsPerDate = array();
+        $availableHours = array();
 
         foreach($availableDays as $date){
             foreach($experience->getAvailabilities() as $availability){
                 if (strrpos($availability->getDay(), ','.($date->format('N')-1).',') > -1 || $availability->getDay() == "*") {
                     $availablePeriodsPerDate[$date->format('d-m-Y')] = $this->availabilityManager->getAvailablePeriodForHours($availability->getHour());
+
+                    //We get a string with the available hours for this day
+                    //This string will be used as a basis
+                    $availableHours[$date->format('d-m-Y')] = $availability->getHour();
                 }
             }
         }
 
-
         //Now we remove the periods where something is already booked
-        $availableHours = array();
         foreach ($experience->getBookings() as $booking) {
             if (isset($availablePeriodsPerDate[$booking->getStartDatetime()->format('d-m-Y')]) && $booking->getStatus() == 'Accepted') {
                 //Store booking information in variables for clarity
                 $bookingStartTime = $booking->getStartDatetime()->format('G');
                 $bookingEndTime   = $booking->getEndDatetime()->format('G');
                 $bookingDay       = $booking->getStartDatetime()->format('d-m-Y');
-
-                //We get a string with the available hours for this day
-                //This string will be used as a basis
-                $availableHours[$bookingDay] = $availability->getHour();
 
                 $bookedHours = ',';
                 for ($i = $bookingStartTime; $i <= $bookingEndTime; $i++) {

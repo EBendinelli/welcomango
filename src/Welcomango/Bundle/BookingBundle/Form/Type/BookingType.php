@@ -15,6 +15,7 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 use Welcomango\Model\Booking;
+use Welcomango\Model\Experience;
 
 /**
  * BookingType Form class
@@ -49,12 +50,13 @@ class BookingType extends AbstractType
         $desiredDuration      = array();
         $numberOfParticipants = array();
         $desiredTime          = array();
+        $experience= $options['experience'];
 
-        for ($i = 1; $i < 8; $i++) {
+        for ($i = $experience->getMinimumDuration(); $i < $experience->getMaximumDuration(); $i++) {
             $desiredDuration[$i] = $i.':00';
         }
 
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < $experience->getMaximumParticipants(); $i++) {
             $numberOfParticipants[$i] = $i;
         }
 
