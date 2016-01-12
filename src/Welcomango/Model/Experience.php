@@ -577,7 +577,7 @@ class Experience
      */
     public function isFeatured()
     {
-        return $this->deleted;
+        return $this->featured;
     }
 
     /**

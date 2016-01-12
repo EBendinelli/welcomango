@@ -56,6 +56,7 @@ class AdminExperienceType extends AbstractType
         for($i=0;$i<48;$i++) $minimumDurations[$i] = $i;
         for($i=0;$i<48;$i++) $maximumDurations[$i] = $i;
         for($i=0;$i<10;$i++) $maximumParticipants[$i] = $i;
+        $publicationStatus = ['published', 'pending', 'deleted'];
 
         $builder->add('title', 'text', ['label' => 'form.experience.title']);
         $builder->add('description', 'textarea', [
@@ -109,6 +110,11 @@ class AdminExperienceType extends AbstractType
                 return $er->createQueryBuilder('m');
             },
         ));
+
+        $builder->add('publication_status', 'choice', [
+            'choices' => $publicationStatus,
+            'label' => 'form.page.content'
+        ]);
     }
 
     /**

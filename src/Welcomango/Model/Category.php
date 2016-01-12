@@ -7,12 +7,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Tag
+ * Category
  *
- * @ORM\Table(name="wm_tag")
+ * @ORM\Table(name="wm_category")
  * @ORM\Entity
  */
-class Tag
+class Category
 {
     /**
      * @var integer
@@ -45,15 +45,22 @@ class Tag
     private $updatedAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Experience", mappedBy="tags")
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Page", mappedBy="categories")
      **/
-    private $experiences;
+    private $pages;
+
+    /**
+     * @ORM\Column(name="deleted", type="boolean")
+     */
+    private $deleted = false;
 
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -73,7 +80,7 @@ class Tag
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -93,7 +100,7 @@ class Tag
     /**
      * Get createdAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -113,7 +120,7 @@ class Tag
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -121,42 +128,66 @@ class Tag
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
-    public function getExperiences()
+    public function getPages()
     {
-        return $this->experiences;
+        return $this->pages;
     }
 
     /**
-     * @param mixed $experiences
+     * @param mixed $pages
      */
-    public function setExperiences($experiences)
+    public function setPages($pages)
     {
-        $this->experiences = $experiences;
+        $this->pages = $pages;
     }
 
     /**
-     * @param Experience $experience
+     * @param Page $page
      */
-    public function addExperience(Experience $experience)
+    public function addPage(Page $page)
     {
-        $this->experiences[] = $experience;
+        $this->pages[] = $page;
     }
 
     /**
-     * Remove experience
+     * Remove page
      *
-     * @param Experience $experience
+     * @param Page $page
      */
-    public function removeExperience(Experience $experience)
+    public function removePage(Page $page)
     {
-        $this->experiences->removeElement($experience);
-        //If not working try this:
-        //$this->experiences->remove($experience);
+        $this->pages->removeElement($page);
+    }
+
+    /**
+     * Set deleted
+     *
+     * @param boolean $deleted
+     *
+     * @return boolean
+     */
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted
+     *
+     * @return boolean
+     */
+    public function isDeleted()
+    {
+        return $this->deleted;
     }
 
     public function __construct() {
-        $this->experiences = new ArrayCollection();
+        $this->pages = new ArrayCollection();
     }
+
+
 }

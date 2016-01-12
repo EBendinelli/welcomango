@@ -170,6 +170,11 @@ class User extends BaseUser implements ParticipantInterface
     private $noteAsTraveler;
 
     /**
+     * @ORM\OneToMany(targetEntity="Page", mappedBy="author")
+     **/
+    private $pages;
+
+    /**
      * @ORM\Column(name="deleted", type="boolean")
      */
     private $deleted = false;
@@ -398,6 +403,22 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @return ArrayCollection
      */
+    public function getPages()
+    {
+        return $this->pages;
+    }
+
+    /**
+     * @param ArrayCollection $pages
+     */
+    public function setPages($pages)
+    {
+        $this->pages = $pages;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
     public function getRefusedExperiences()
     {
         return $this->refusedExperiences;
@@ -577,6 +598,22 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
+     * @param Page $page
+     */
+    public function addPage(Page $page)
+    {
+        $this->pages[] = $page;
+    }
+
+    /**
+     * @param Page $page
+     */
+    public function removePage(Page $page)
+    {
+        $this->pages->removeElement($page);
+    }
+
+    /**
      * @param SpokenLanguage $spokenLanguage
      */
     public function addSpokenLanguage(SpokenLanguage $spokenLanguage)
@@ -602,6 +639,7 @@ class User extends BaseUser implements ParticipantInterface
         $this->spokenLanguages = new ArrayCollection();
         $this->experiences     = new ArrayCollection();
         $this->bookings        = new ArrayCollection();
+        $this->pages        = new ArrayCollection();
     }
 
     /**

@@ -9,6 +9,7 @@
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="security.token_storage" />
             <argument type="service" id="request_stack" />
+            <argument type="service" id="translator"/>
         </service>
 
         <service id="welcomango.front.menu_builder" class="Welcomango\Bundle\CoreBundle\Menu\Builder">

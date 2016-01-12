@@ -1,3 +1,15 @@
 moderation.feedback.FromTo: Feedback from %userFrom% to %userTo%
 
 experience.description: Description
+
+menu.title.home: Home
+menu.title.users: Users
+menu.title.experiences: Experiences
+menu.title.languages: Languages
+menu.title.medias: Medias
+menu.title.booking: Bookings
+menu.title.feedback: Feedbacks
+menu.title.moderation.feedback: Moderate Feedbacks
+menu.title.moderation.experience: Moderate Experiences
+menu.title.tag: Tags
+menu.title.page: Pages

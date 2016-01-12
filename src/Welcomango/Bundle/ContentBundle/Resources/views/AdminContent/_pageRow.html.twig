@@ -1,0 +1,31 @@
+{# Complete with correct informations #}
+<tr>
+    <td>
+{#        {% include "YproxAdminCrmBundle:User:_userLink.html.twig" %}#}
+        {{ page.id }}
+    </td>
+    <td>
+        {{ page.title }}
+    </td>
+    <td>
+        {{ page.content }}
+    </td>
+    <td>
+        {{ page.author.fullname }}
+    </td>
+    <td>
+        {{ page.createdAt|date('Y-m-d')  }}
+    </td>
+    <td>
+        {{ page.updatedAt|date('Y-m-d')   }}
+    </td>
+    <td>
+        {% spaceless %}
+            <div class="btn-toolbar">
+                {{ button.edit(path('admin_page_edit', {'page_id': page.id}), false, "btn-xs") }}
+                {{ button.delete(path('admin_page_delete', {'page_id': page.id}), null, "btn-xs") }}
+            </div>
+        {% endspaceless %}
+    </td>
+</tr>
+

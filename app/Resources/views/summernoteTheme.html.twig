@@ -1,0 +1,8 @@
+{% block textarea_widget %}
+    {% spaceless %}
+        <div {{ block('widget_attributes') }} {% if required %}required{% endif %}">
+            {% if value is not empty %}{{ value }} {% endif %}
+        </div>
+        <textarea class="form-control"  id ="hidden-summernote-textarea" style="display:none; height:200px">{% if value is not empty %}{{ value }} {% endif %}</textarea>
+    {% endspaceless %}
+{% endblock textarea_widget %}

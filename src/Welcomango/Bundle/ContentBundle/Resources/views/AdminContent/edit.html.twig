@@ -1,0 +1,29 @@
+{% extends "::admin.html.twig" %}
+
+{% trans_default_domain "admin" %}
+
+{% set listing = path('admin_page_list') %}
+{% form_theme form with ["::theme.html.twig", "::summernoteTheme.html.twig"] %}
+
+{% block page_content %}
+    {{ include("WelcomangoContentBundle:AdminContent:form.html.twig", {'save_path': path('admin_page_edit', {'page_id' : form.vars.value.id })}) }}
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ form_stylesheet(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $('select').select2();
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#participationForm').validate();
+        });
+    </script>
+{% endblock %}
