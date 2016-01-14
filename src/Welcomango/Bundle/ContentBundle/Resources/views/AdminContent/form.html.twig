@@ -9,16 +9,21 @@
             <div class="tab-content">
                 <div class="tab-pane active slide-left" id="general">
                     <div class="row">
-                        <div class="col-sm-8">
+                        <div class="col-sm-12">
                             {{ form_row(form.title) }}
                         </div>
-                        <div class="col-sm-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
                             {{ form_row(form.author) }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_row(form.banner) }}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12 m-b-10 summernote-wrapper">
-                            {{ form_widget(form.content) }}
+                            {{ form_row(form.content) }}
                         </div>
                     </div>
                     <div class="row">
@@ -26,7 +31,7 @@
                             {{ form_row(form.publication_status) }}
                         </div>
                         <div class="col-sm-6">
-                            {{ form_row(form.categories) }}
+                            {{ form_row(form.category) }}
                         </div>
                     </div>
                     <div class="tab-pane slide-left" id="credentials">
@@ -51,16 +56,5 @@
 </div>
 
 {% block javascripts %}
-    <script>
-        //Since the summernote content is not considered by the form we update the hidden textarea
-        $(document).ready(function() {
-            $('#admin_page_content').summernote({
-                onChange: function(e) {
-                    $("textarea#hidden-summernote-textarea").val('lol');
-                },
-                height: 300,
-            });
-        });
 
-    </script>
 {% endblock %}

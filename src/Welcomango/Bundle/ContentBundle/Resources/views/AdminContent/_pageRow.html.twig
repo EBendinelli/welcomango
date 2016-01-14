@@ -20,6 +20,9 @@
         {{ page.updatedAt|date('Y-m-d')   }}
     </td>
     <td>
+        {{ page.publicationStatus   }}
+    </td>
+    <td>
         {% spaceless %}
             <div class="btn-toolbar">
                 {{ button.edit(path('admin_page_edit', {'page_id': page.id}), false, "btn-xs") }}

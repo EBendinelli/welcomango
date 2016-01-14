@@ -16,7 +16,7 @@ class LoadCategoryData extends AbstractFixture implements FixtureInterface, Orde
      */
     public function load(ObjectManager $manager)
     {
-        $categories = array('Interviews','Documentation', 'News', 'Core');
+        $categories = array('Interviews','How To', 'News', 'About');
 
         foreach($categories as $category){
             $entry = new Category();

@@ -1,8 +1,20 @@
 {% block textarea_widget %}
     {% spaceless %}
-        <div {{ block('widget_attributes') }} {% if required %}required{% endif %}">
-            {% if value is not empty %}{{ value }} {% endif %}
+        <div id ="summernote"  {% if required %}required{% endif %}">
+            {% if value is not empty %}{{ value|raw }} {% endif %}
         </div>
-        <textarea class="form-control"  id ="hidden-summernote-textarea" style="display:none; height:200px">{% if value is not empty %}{{ value }} {% endif %}</textarea>
+        <textarea class="form-control"  {{ block('widget_attributes') }} style="display:none">{% if value is not empty %}{{ value }} {% endif %}</textarea>
     {% endspaceless %}
+    <script>
+        //Since the summernote content is not considered by the form we update the hidden textarea
+        $(document).ready(function() {
+            $('#summernote').summernote({
+                onChange: function(e) {
+                    $("#admin_page_content").val($("#summernote").code());
+                },
+                height: 300,
+            });
+        });
+
+    </script>
 {% endblock textarea_widget %}

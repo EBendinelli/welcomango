@@ -17,8 +17,10 @@
 
 {% block table_head %}
     <tr>
-        <th style="width: 30%;">{{ 'media.thumb'|trans }}</th>
-        <th>{{ knp_pagination_sortable(pagination, 'media.title'|trans, 'media.title')|raw }}</th>
+        <th class="col-md-2">{{ 'media.thumb'|trans }}</th>
+        <th class="col-md-2">{{ knp_pagination_sortable(pagination, 'media.title'|trans, 'media.title')|raw }}</th>
+        <th class="col-md-3">{{ 'media.description'|trans }}</th>
+        <th class="col-md-3">{{ 'media.url'|trans }}</th>
         <th>{{ "interface.actions"|trans }}</th>
     </tr>
 {% endblock %}

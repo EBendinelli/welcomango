@@ -15,17 +15,16 @@ use Welcomango\Bundle\CoreBundle\Controller\Controller as BaseController;
 use Welcomango\Model\Page;
 
 /**
- * Class AdminContentController
+ * Class ContentController
  *
- * @Route("/welcomadmin")
- * @ParamConverter("page", options={"id" = "page_id"})
+ * @ParamConverter("page", options={"id" = "page_id", "slug" = "page_slug"})
  */
-class AdminContentController extends BaseController
+class ContentController extends BaseController
 {
     /**
      * @param Request $request
      *
-     * @Route("/page/list", name="admin_page_list")
+     * @Route("/page/list", name="page_list")
      * @Template()
      *
      * @return array
@@ -48,7 +47,7 @@ class AdminContentController extends BaseController
     /**
      * @param Request $request
      *
-     * @Route("/page/create", name="admin_page_create")
+     * @Route("/page/create", name="page_create")
      * @Template()
      *
      * @return array
@@ -77,38 +76,46 @@ class AdminContentController extends BaseController
     }
 
     /**
-     * @param Request    $request
-     * @param Page $page
+     * @param String $slug
      *
-     * @Route("/page/{page_id}/edit", name="admin_page_edit")
+     * @Route("/page/{slug}", name="page_view_slug")
      * @Template()
      *
      * @return array
      */
-    public function editAction(Request $request, Page $page)
+    public function viewSlugAction($slug)
     {
-        $form = $this->createForm($this->get('welcomango.admin.form.page.create'), $page);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $page->setUpdatedAt(new \DateTime());
-            $this->getDoctrine()->getManager()->persist($page);
-            $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success', $this->trans('page.edit.success', array(), 'crm'));
-
-            return $this->redirect($this->generateUrl('admin_page_list'));
+        $page = $this->getRepository('Welcomango\Model\Page')->findOneBy(['slug' => $slug ]);
+        if($page->getPublicationStatus() != 'published'){
+            return $this->render('WelcomangoCoreBundle:CRUD:notAllowed.html.twig', array(
+                'title'          => 'This article has not been published yet.',
+                'message'        => 'Just wait a moment until we validate it',
+                'return_path'    => $this->get('router')->generate('front_homepage'),
+                'return_message' => 'Back to home',
+                'icon'           => 'fa-clock-o',
+            ));
         }
 
-        return array(
-            'form' => $form->createView(),
-            'page'  => $page
-        );
+        $coreCategories[] = $this->getRepository('Welcomango\Model\Category')->findOneBy(['name' => 'How To' ]);
+        $coreCategories[] = $this->getRepository('Welcomango\Model\Category')->findOneBy(['name' => 'About' ]);
+
+        $pageCategory = $page->getCategory();
+        if(in_array($pageCategory, $coreCategories)){
+            return $this->render('WelcomangoContentBundle:Content:viewPage.html.twig', array(
+                'page'       => $page,
+                'categories' => $coreCategories
+            ));
+        }else{
+            return $this->render('WelcomangoContentBundle:Content:viewArticle.html.twig', array(
+                'page' => $page
+            ));
+        }
     }
 
     /**
      * @param Page $page
      *
-     * @Route("/page/{page_id}/delete", name="admin_page_delete")
+     * @Route("/page/{page_id}/delete", name="page_delete")
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -124,7 +131,7 @@ class AdminContentController extends BaseController
     /**
      * @param Request $request
      *
-     * @Route("/page/_page_search_ajax", name="admin_page_search_ajax")
+     * @Route("/page/_page_search_ajax", name="page_search_ajax")
      * @Method("POST")
      *
      * @return array

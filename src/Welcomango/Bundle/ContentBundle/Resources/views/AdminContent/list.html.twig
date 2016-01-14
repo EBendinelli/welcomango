@@ -23,11 +23,12 @@
 {% block table_head %}
     <tr>
         <th class="col-md-1">{{ knp_pagination_sortable(pagination, 'page.id'|trans, 'p.id')|raw }}</th>
-        <th class="col-md-1">{{ "booking.title"|trans }}</th>
+        <th class="col-md-2">{{ "booking.title"|trans }}</th>
         <th class="col-md-3">{{ 'booking.content'|trans }}</th>
         <th class="col-md-1">{{ 'booking.author'|trans }}</th>
-        <th class="col-md-2">{{ 'booking.createdAt'|trans }}</th>
-        <th class="col-md-2">{{ 'booking.updatedAt'|trans }}</th>
+        <th class="col-md-1">{{ 'booking.createdAt'|trans }}</th>
+        <th class="col-md-1">{{ 'booking.updatedAt'|trans }}</th>
+        <th class="col-md-1">{{ 'booking.status'|trans }}</th>
         <th>{{ "interface.actions"|trans }}</th>
     </tr>
 {% endblock %}

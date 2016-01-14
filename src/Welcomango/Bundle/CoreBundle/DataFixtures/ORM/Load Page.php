@@ -20,8 +20,15 @@ class LoadPageData extends AbstractFixture implements FixtureInterface, OrderedF
         $userRepo = $manager->getRepository('Welcomango\Model\User');
 
         $pages = array(
-            ['title' => 'About us', 'content' => 'We are dreamers, a young cheerful team who wants to believe that traveling should not be reduced to taking pictures of the Eiffel tower', 'category' => $categoryRepo->findOneBy(array('name' => 'Core'))],
-            ['title' => 'Legal', 'content' => 'All rights reserved', 'category' => $categoryRepo->findOneBy(array('name' => 'Core'))],
+            ['title' => 'The Team', 'content' => '<h1>About Us</h1>
+<h1><hr>
+</h1>
+<blockquote>
+<p><span style="line-height: normal;">Young, cheerful and determined, we want Welcomango to become real because we would be the first to use it. Travelers, explorers and discoverers, we are the brain and the hands of this project. Join us in the venture.&nbsp;</span></p>
+<p><span style="line-height: normal;"><br></span></p>
+<p><span style="line-height: normal;">Feel free to contact us or give us feedback about your experience</span></p>
+</blockquote>', 'category' => $categoryRepo->findOneBy(array('name' => 'About'))],
+            ['title' => 'Legal', 'content' => 'All rights reserved', 'category' => $categoryRepo->findOneBy(array('name' => 'About'))],
             ['title' => 'Welcomango is launched!', 'content' => 'Looks like we\'re in!', 'category' => $categoryRepo->findOneBy(array('name' => 'News'))],
         );
 
@@ -30,7 +37,7 @@ class LoadPageData extends AbstractFixture implements FixtureInterface, OrderedF
             $entry->setTitle($page['title']);
             $entry->setContent($page['content']);
             $entry->setAuthor($userRepo->findOneBy(['username' => 'admin']));
-            $entry->addCategory($page['category']);
+            $entry->setCategory($page['category']);
             $entry->setCreatedAt(new \DateTime());
             $entry->setUpdatedAt(new \DateTime());
 

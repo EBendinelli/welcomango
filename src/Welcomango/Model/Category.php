@@ -47,7 +47,7 @@ class Category
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Page", mappedBy="categories")
+     * @ORM\OneToMany(targetEntity="Page", mappedBy="category")
      **/
     private $pages;
 

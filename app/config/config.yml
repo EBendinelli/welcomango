@@ -153,6 +153,7 @@ stof_doctrine_extensions:
             # translatable: true
             loggable: true
             sortable: true
+            sluggable: true
 
 services:
     twig.extension.text:

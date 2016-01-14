@@ -1,0 +1,62 @@
+{% extends '::front.html.twig' %}
+
+{% trans_default_domain "interface" %}
+
+{% block meta_title %}
+{% endblock %}
+
+
+{% block page_content %}
+
+    <section class="p-b-30 p-t-30 bg-master-darkest sm-no-margin" data-pages-bg-image="{{ asset(page.banner.getPath() ~ page.banner.originalFilename) }}" data-bg-overlay="black" data-overlay-opacity="0.3" data-pages="parallax">
+        <div class="container p-b-30 p-t-30">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="text-center">
+                        <h1 class="text-white col-sm-12 p-b-10">
+                            {{ page.title }}
+                        </h1>
+                        <p class="fs-12 font-arial text-white m-t-30"><span class="hint-text">{{ 'experience.list.subHeader'|trans }}</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container-fluid container-fixed-lg p-b-50 p-t-30 bg-master-lightest">
+        <div class="container">
+            <!-- START LEFT MENU CARD -->
+            <div class="panel col-md-3 bg-master-lightest">
+                <div id="content-menu" class="font-montserrat">
+                    {% for category in categories %}
+                        <div class="light font-montserrat fs -15 content-menu-category p-b-10 p-t-10 b-b b-grey">{{ category.name }}</div>
+                        {% for link in category.pages %}
+                            <div class="fs-13 p-t-10"><a class="content-menu-links" href="{{ path('page_view_slug', {'slug': link.slug}) }}">{{ link.title }}</a></div>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- END USER CARD -->
+
+            <!-- START PAGE  CONTENT -->
+            <div class="col-md-9 bg-master-lightest">
+                <div id="content-page" class="bg-white b-a b-grey">
+                    {{ page.content|raw }}
+                </div>
+            </div>
+            <!-- END PAGE CONTENT -->
+        </div>
+    </section>
+
+    {% block extra_content %}
+    {% endblock extra_content %}
+
+
+{% endblock page_content %}
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+

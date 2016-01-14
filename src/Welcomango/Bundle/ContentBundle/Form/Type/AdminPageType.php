@@ -27,7 +27,7 @@ class AdminPageType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $publicationStatus = ['published', 'pending', 'deleted'];
+        $publicationStatus = ['published' => 'published', 'pending' => 'pending', 'deleted' => 'deleted'];
 
         $builder->add('title', 'text', ['label' => 'form.page.title']);
         $builder->add('content', 'textarea', [
@@ -38,15 +38,19 @@ class AdminPageType extends AbstractType
             'label' => 'form.page.content'
         ]);
 
-        $builder->add('categories', 'entity', array(
+        $builder->add('category', 'entity', array(
             'class' => 'Model:Category',
             'property' => 'name',
-            'multiple' => true,
         ));
 
         $builder->add('author', 'entity', array(
             'class' => 'Model:User',
             'property' => 'fullname',
+        ));
+
+        $builder->add('banner', 'entity', array(
+            'class' => 'Model:Media',
+            'property' => 'id',
         ));
 
     }

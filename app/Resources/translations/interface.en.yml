@@ -88,3 +88,5 @@ booking.yourFeedbackWaitingForApproval: Your feedback is waiting for approval, i
 booking.thisUserFeedbackWaitingForApproval: This user's feedback is waiting for approval, it should be validated anytime soon
 booking.noFeedbackFrom: Sorry, no feedback received from %user%
 feedbackRefusedText: Sorry, your feedback has been refused, please give a respectuous feedback!
+
+page.writtenBy: By %author%

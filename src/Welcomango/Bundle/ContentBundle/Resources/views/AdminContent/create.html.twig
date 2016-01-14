@@ -1,12 +1,12 @@
 {% extends "::admin.html.twig" %}
 
-{% trans_default_domain "tag" %}
+{% trans_default_domain "admin" %}
 
-{% set listing = path('admin_tag_list') %}
-{% form_theme form with ["::theme.html.twig"] %}
+{% set listing = path('admin_page_list') %}
+{% form_theme form with ["::theme.html.twig", "::summernoteTheme.html.twig"] %}
 
 {% block page_content %}
-    {{ include("WelcomangoTagBundle:AdminTag:form.html.twig", {'save_path': path('admin_tag_create')}) }}
+    {{ include("WelcomangoContentBundle:AdminContent:form.html.twig", {'save_path': path('admin_page_create')}) }}
 {% endblock %}
 
 {% block stylesheets %}
@@ -22,7 +22,7 @@
 
     <script>
         $(document).ready(function() {
-            $('#bookingForm').validate();
+            $('#pageForm').validate();
         });
     </script>
 {% endblock %}

@@ -64,12 +64,25 @@ class Page
     private $author;
 
     /**
+     * @var Media
+     * @ORM\ManyToOne(targetEntity="Media")
+     * @ORM\JoinColumn(name="banner_id", referencedColumnName="id")
+     **/
+    private $banner;
+
+    /**
      * @var Category
      *
-     * @ORM\ManyToMany(targetEntity="Category", inversedBy="pages")
-     * @ORM\JoinTable(name="wm_pages_categories")
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="pages")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      */
-    private $categories;
+    private $category;
+
+    /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
 
     /**
      * @ORM\Column(name="publication_status", type="string")
@@ -112,6 +125,26 @@ class Page
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
     }
 
     /**
@@ -191,38 +224,37 @@ class Page
     }
 
     /**
-     * @return ArrayCollection
+     * @return Media
      */
-    public function getCategories()
+    public function getBanner()
     {
-        return $this->categories;
+        return $this->banner;
     }
 
     /**
-     * @param ArrayCollection $categories
+     * @param Media $banner
      */
-    public function setCategories($categories)
+    public function setBanner($banner)
     {
-        $this->categories = $categories;
+        $this->banner = $banner;
+    }
+
+    /**
+     * @return Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 
     /**
      * @param Category $category
      */
-    public function addCategory(Category $category)
+    public function setCategory($category)
     {
-        $this->categories[] = $category;
+        $this->category = $category;
     }
 
-    /**
-     * Remove $category
-     *
-     * @param Category $category
-     */
-    public function removeCategory(Category $category)
-    {
-        $this->categories->removeElement($category);
-    }
 
     /**
      * Set publicationStatus
