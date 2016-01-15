@@ -1,0 +1,15 @@
+{# Complete with correct informations #}
+<div class="col-sm-4 m-t-20">
+    <section class="container-fluid b-t b-white">
+        <div class="row">
+            <div class="text-center bg-success hover-push demo-story-block" onclick="window.location.replace('{{ path('page_view_slug', {'slug': portrait.slug}) }}');">
+                <div class="hover-backdrop" style="background:url('{{ asset(portrait.portrayedUser.medias.first.getPath() ~ portrait.portrayedUser.medias.first.originalFilename) }}')"></div>
+                <div class="hover-caption bottom-left bottom-right p-b-40">
+                    <h4 class="text-white m-b-25">{{ portrait.title}}</h4>
+                    <a class="font-montserrat fs-12 hint-text text-white all-caps">By {{ portrait.author.fullname }}</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+

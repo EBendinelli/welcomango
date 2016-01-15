@@ -46,6 +46,13 @@ class AdminPageType extends AbstractType
         $builder->add('author', 'entity', array(
             'class' => 'Model:User',
             'property' => 'fullname',
+            'required' => true,
+        ));
+
+        $builder->add('portrayed_user', 'entity', array(
+            'class' => 'Model:User',
+            'property' => 'fullname',
+            'required' => false,
         ));
 
         $builder->add('banner', 'entity', array(

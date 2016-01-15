@@ -64,6 +64,14 @@ class Page
     private $author;
 
     /**
+     * @var User
+     *
+     * @ORM\OneToOne(targetEntity="User", inversedBy="portrait")
+     * @ORM\JoinColumn(name="portrayed_user_id", referencedColumnName="id")
+     */
+    private $portrayedUser;
+
+    /**
      * @var Media
      * @ORM\ManyToOne(targetEntity="Media")
      * @ORM\JoinColumn(name="banner_id", referencedColumnName="id")
@@ -221,6 +229,22 @@ class Page
     public function setAuthor($author)
     {
         $this->author = $author;
+    }
+
+    /**
+     * @return User
+     */
+    public function getPortrayedUser()
+    {
+        return $this->portrayedUser;
+    }
+
+    /**
+     * @param User $portrayedUser
+     */
+    public function setPortrayedUser($portrayedUser)
+    {
+        $this->portrayedUser = $portrayedUser;
     }
 
     /**

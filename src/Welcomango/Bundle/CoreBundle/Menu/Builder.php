@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class Builder extends ContainerAware
 {
@@ -33,18 +34,25 @@ class Builder extends ContainerAware
     protected $authorizationChecker;
 
     /**
+     * @var TranslatorInterface $translator
+     */
+    private $translator;
+
+    /**
      * @param FactoryInterface              $factory              factory
      * @param SecurityContextInterface      $securityContext      security context
      * @param RequestStack                  $requestStack         requestStack
      * @param SecurityContextInterface      $securityContext      security context
+     * @param TranslatorInterface   $translator translator
      */
-    public function __construct(FactoryInterface $factory, TokenStorageInterface $tokenStorage, RequestStack $requestStack, SecurityContext $securityContext, $router)
+    public function __construct(FactoryInterface $factory, TokenStorageInterface $tokenStorage, RequestStack $requestStack, SecurityContext $securityContext, $router, TranslatorInterface $translator)
     {
         $this->factory              = $factory;
         $this->tokenStorage         = $tokenStorage;
         $this->requestStack         = $requestStack;
         $this->securityContext      = $securityContext;
         $this->router               = $router;
+        $this->translator   = $translator;
     }
 
     public function createMainMenu()
@@ -58,8 +66,19 @@ class Builder extends ContainerAware
             'route'          => 'front_homepage',
         ));*/
 
-        $menu->addChild('menu.title.experiences', array(
+        $menu->addChild($this->translator->trans('menu.title.experiences', array(), 'interface'), array(
             'route'          => 'front_experience_list',
+        ));
+
+        $menu->addChild($this->translator->trans('menu.title.howTo', array(), 'interface'), array(
+            'route'          => 'page_view_slug',
+            'routeParameters' => [
+                'slug'  => 'how-to'
+            ]
+        ));
+
+        $menu->addChild($this->translator->trans('menu.title.portraits', array(), 'interface'), array(
+            'route'          => 'page_portrait_list',
         ));
 
 
@@ -100,7 +119,7 @@ class Builder extends ContainerAware
             );
 
             $registerLink = $this->router->generate('fos_user_registration_register');
-            $registerButton = "<a class='btn btn-primary btn-cons' href='".$registerLink."' data-text='Login'>Sign up</a>";
+            $registerButton = "<a class='btn btn-primary btn-cons' href='".$registerLink."' data-text='Login'>".$this->translator->trans('menu.title.signUp', array(), 'interface')."</a>";
             $menu->addChild( $registerButton ,
                 array(
                     'route' => 'fos_user_security_login',

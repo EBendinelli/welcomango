@@ -175,6 +175,11 @@ class User extends BaseUser implements ParticipantInterface
     private $pages;
 
     /**
+     * @ORM\OneToOne(targetEntity="Page", mappedBy="portrayedUser")
+     **/
+    private $portrait;
+
+    /**
      * @ORM\Column(name="deleted", type="boolean")
      */
     private $deleted = false;
@@ -414,6 +419,22 @@ class User extends BaseUser implements ParticipantInterface
     public function setPages($pages)
     {
         $this->pages = $pages;
+    }
+
+    /**
+     * @return Page
+     */
+    public function getPortrait()
+    {
+        return $this->portrait;
+    }
+
+    /**
+     * @param Page $portrait
+     */
+    public function setPortrait($portrait)
+    {
+        $this->portrait = $portrait;
     }
 
     /**

@@ -1,0 +1,43 @@
+{% extends "WelcomangoContentBundle:Content:layout.html.twig" %}
+
+{% trans_default_domain "interface" %}
+
+{% block header_image %}
+    {{ asset("img/front/experience/banner_2.jpg") }}
+{% endblock %}
+
+{% block header_title %}
+    {{ 'article.portraits'|trans }}
+{% endblock %}
+
+{% block header_text %}
+    {{ 'article.portraitHeader'|trans }}
+{% endblock %}
+
+{% block main_content %}
+    <section class="bg-master-lighter p-b-85 p-t-75">
+        <div class="container">
+            <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+                <h5 class="block-title hint-text no-margin">{{ 'content.portraits'|trans }}</h5>
+                <div class="row">
+                    <div class="col-sm-5 col-md-4">
+                        <h1 class="m-t-5">{{ 'article.portraitTitle'|trans }}</h1>
+                    </div>
+                    <div class="col-sm-7 col-md-8 no-padding xs-p-l-15 xs-p-r-15">
+                        <div class="p-t-20 p-l-35 md-p-l-5 md-p-t-15">
+                            <p>{{ 'article.portraitIntro'|trans }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container-fluid container-fixed-lg p-b-50 p-t-30 bg-master-lightest">
+        <div class="container">
+            {% for entity in pagination %}
+                {% include "WelcomangoContentBundle:Content:_portraitRow.html.twig" with { 'portrait' : entity } %}
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

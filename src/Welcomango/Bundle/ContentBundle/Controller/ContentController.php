@@ -24,15 +24,16 @@ class ContentController extends BaseController
     /**
      * @param Request $request
      *
-     * @Route("/page/list", name="page_list")
+     * @Route("/portraits", name="page_portrait_list")
      * @Template()
      *
      * @return array
      */
-    public function listAction(Request $request)
+    public function portraitListAction(Request $request)
     {
         $paginator = $this->get('knp_paginator');
-        $query     = $this->getRepository('Welcomango\Model\Page')->findAll();
+        $portraitCat = $this->getRepository('Welcomango\Model\Category')->findOneBy(['name' => 'Portrait']);
+        $query     = $this->getRepository('Welcomango\Model\Page')->findBy(['category' => $portraitCat]);
         $pagination = $paginator->paginate(
             $query,
             $request->query->get('page', 1),
@@ -78,7 +79,7 @@ class ContentController extends BaseController
     /**
      * @param String $slug
      *
-     * @Route("/page/{slug}", name="page_view_slug")
+     * @Route("/read/{slug}", name="page_view_slug")
      * @Template()
      *
      * @return array
@@ -100,10 +101,14 @@ class ContentController extends BaseController
         $coreCategories[] = $this->getRepository('Welcomango\Model\Category')->findOneBy(['name' => 'About' ]);
 
         $pageCategory = $page->getCategory();
-        if(in_array($pageCategory, $coreCategories)){
+        if(in_array($pageCategory, $coreCategories)) {
             return $this->render('WelcomangoContentBundle:Content:viewPage.html.twig', array(
-                'page'       => $page,
+                'page' => $page,
                 'categories' => $coreCategories
+            ));
+        }elseif($pageCategory == $this->getRepository('Welcomango\Model\Category')->findOneBy(['name' => 'Portrait' ])){
+            return $this->render('WelcomangoContentBundle:Content:viewPortrait.html.twig', array(
+                'page' => $page
             ));
         }else{
             return $this->render('WelcomangoContentBundle:Content:viewArticle.html.twig', array(

@@ -11,6 +11,14 @@ interface.contact: Contact
 interface.waitingForValidation: Waiting for validation
 interface.search: Search
 
+menu.title.experiences: Experiences
+menu.title.portraits: Portraits
+menu.title.howTo: How To
+menu.title.signUp: Sign Up
+
+
+global.viewProfile: View profile
+
 profile.menu: Menu
 profile.message: Messages
 profile.requestsFromTravelers: Requests from Travelers
@@ -90,3 +98,9 @@ booking.noFeedbackFrom: Sorry, no feedback received from %user%
 feedbackRefusedText: Sorry, your feedback has been refused, please give a respectuous feedback!
 
 page.writtenBy: By %author%
+
+article.portraits: Portraits
+article.portraitHeader: A glance at our amazing community
+article.currentlyLivingIn: Currently living in <span class="text-primary">%city%</span>
+article.portraitIntro: Thanks to Welcomango, you may get the chance to explore new places through new people. But WE live exclusively through these people. People like you and us, with dreams, fears and hopes. This page gives you a chance to learn a bit more about member of the community and inspire you to dare explore their world.
+article.portraitTitle: One community. Different faces

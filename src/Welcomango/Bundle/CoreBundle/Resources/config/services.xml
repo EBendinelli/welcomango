@@ -18,6 +18,7 @@
             <argument type="service" id="request_stack" />
             <argument type="service" id="security.context" />
             <argument type="service" id="router" />
+            <argument type="service" id="translator"/>
         </service>
 
         <service id="welcomango.menu_builder.main" class="Knp\Menu\MenuItem" factory-service="welcomango.menu_builder" factory-method="createMainMenu">

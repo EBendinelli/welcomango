@@ -1,0 +1,82 @@
+{% extends "WelcomangoContentBundle:Content:layout.html.twig" %}
+
+{% trans_default_domain "interface" %}
+
+{% block header_image %}
+    {{ asset(page.banner.getPath() ~ page.banner.originalFilename) }}
+{% endblock %}
+
+{% block header_title %}
+    {{ page.title }}
+{% endblock %}
+
+{% block header_text %}
+{% endblock %}
+
+{% block main_content %}
+    <section class="container-fluid container-fixed-lg p-b-50 p-t-30 bg-master-lightest">
+        <div class="container">
+            <div class="subHeader m-b-30">
+                <a href="{{ path('page_portrait_list') }}"><i class="fa fa-long-arrow-left"></i> {{ 'article.backToInterviews'|trans }}</a>
+            </div>
+
+
+            <!-- START PAGE  CONTENT -->
+            <div>
+                {{ page.content|raw }}
+            </div>
+
+            <hr/>
+
+            {# Complete with correct informations #}
+            <div class="row">
+                <h3 class="text-center">{{ 'global.viewProfile'|trans }}</h3>
+                <div class="col-md-8 col-md-offset-2 m-t-10" style="padding-left:0px; padding-right:0px">
+                    <div class="card featured-card bg-white" >
+                        <a href="{{ path('front_user_view', {'user_id' : page.portrayedUser.id }) }}" >
+                            <div class="row">
+                                <div class="panel-body p-t-0 featured-card-content col-md-5 p-l-60">
+                                    <div class="panel-title semi-bold">
+                                        {{ page.portrayedUser.fullname}}, {{ page.portrayedUser.getAge}}
+                                    </div>
+                                    <div class="text-center m-b-10">
+                                        {{ 'article.currentlyLivingIn'|trans({'%city%' : page.portrayedUser.currentCity.name})|raw }}
+                                    </div>
+                                    <div class="dotted-line"><span></span></div>
+                                    <div class="text-center m-t-20">
+                                        <div class="m-b-5">{{ 'profile.noteTraveler'|trans }}</div>
+                                        <div>{{ include("WelcomangoCoreBundle:Core:note.html.twig", { 'note': page.portrayedUser.getNoteAsLocal, 'mango': true}) }}</div>
+                                        <div class="m-b-5">{{ 'profile.noteLocal'|trans }}</div>
+                                        <div>{{ include("WelcomangoCoreBundle:Core:note.html.twig", { 'note': page.portrayedUser.getNoteAsTraveler, 'mango': true}) }}</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-7">
+                                    <div class="experience-image-separation">
+                                        <div class="experience-image-triangle "></div>
+                                    </div>
+
+                                    <div class="card-clickable" style="z-index:9;">
+                                    </div>
+                                    <div class="experience-image">
+                                        {% if page.portrayedUser.medias.first %}
+                                            <img class="" data-src="{{ asset(page.portrayedUser.medias.first.getPath() ~ page.portrayedUser.medias.first.originalFilename) }}" alt="Card image cap">
+                                        {% else %}
+                                            <img class="" data-src="{{ asset("img/front/places-" ~ random(18) ~ ".jpg") }}" alt="Card image cap">
+                                        {% endif %}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="m-t-30">
+                <a href="{{ path('page_portrait_list') }}"><i class="fa fa-long-arrow-left"></i> {{ 'article.backToInterviews'|trans }}</a>
+            </div>
+            <!-- END PAGE CONTENT -->
+        </div>
+    </section>
+{% endblock %}
