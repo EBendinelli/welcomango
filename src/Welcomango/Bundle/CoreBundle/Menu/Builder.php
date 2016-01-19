@@ -107,11 +107,10 @@ class Builder extends ContainerAware
                 )
             );
         }else{
-            $loginLink = $this->router->generate('fos_user_security_login');
-            $loginButton = "<a class='btn btn-sm btn-bordered btn-black block-title fs-12 hidden-sm hidden-xs' href='".$loginLink."' data-text='Login'>Login</a>";
+            $loginButton = "<a data-toggle='modal' data-target='.modal-login' class='btn btn-sm btn-bordered btn-black block-title fs-12 hidden-sm hidden-xs' data-text='Login'>Login</a>";
             $menu->addChild( $loginButton ,
                 array(
-                    'route' => 'fos_user_security_login',
+
                     'extras' => array(
                         'safe_label' => true
                     )

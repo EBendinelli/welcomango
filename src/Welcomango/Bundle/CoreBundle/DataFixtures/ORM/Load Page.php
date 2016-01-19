@@ -30,6 +30,8 @@ class LoadPageData extends AbstractFixture implements FixtureInterface, OrderedF
 </blockquote>', 'category' => $categoryRepo->findOneBy(array('name' => 'About'))],
             ['title' => 'Legal', 'content' => 'All rights reserved', 'category' => $categoryRepo->findOneBy(array('name' => 'About'))],
             ['title' => 'Welcomango is launched!', 'content' => 'Looks like we\'re in!', 'category' => $categoryRepo->findOneBy(array('name' => 'News'))],
+            ['title' => 'How To', 'content' => '<p style="letter-spacing: 0.14px;">Welcomango is aiming at propose a simple and intuitive experience so that anyone has a chance to find the perfect welcomanguide for their next trip. And become one of them.</p><p style="letter-spacing: 0.14px;">The concept is simple and rely in 5 steps:</p><p style="letter-spacing: 0.14px;"><br></p><h2 class="wow slideInLeft" style="letter-spacing: 0.14px;">Test good?</h2><p style="letter-spacing: 0.14px;"><br></p> ',
+                'category' => $categoryRepo->findOneBy(array('name' => 'How To'))],
         );
 
         foreach($pages as $page){
@@ -40,6 +42,7 @@ class LoadPageData extends AbstractFixture implements FixtureInterface, OrderedF
             $entry->setCategory($page['category']);
             $entry->setCreatedAt(new \DateTime());
             $entry->setUpdatedAt(new \DateTime());
+            $entry->setPublicationStatus('published');
 
             $manager->persist($entry);
         }

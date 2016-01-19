@@ -18,6 +18,8 @@ menu.title.signUp: Sign Up
 
 
 global.viewProfile: View profile
+global.comments: Comments
+global.feedbacks: Feedbacks
 
 profile.menu: Menu
 profile.message: Messages
@@ -59,7 +61,9 @@ profile.edit.occupationNote: You current occupation. You can be a student, an ar
 profile.edit.usernameNote: This is only used by you to login. It is just like you: Unique.
 profile.edit.profilePictureNote: We already know you are beautiful, but people might want to verify that. Upload a photo, just in case.
 profile.edit.phoneNote: This will not be displayed publicly. We might only use it to send you texts and reminders (if you want to).
-
+profile.lastExperiencesAttended: Last experiences attented by %user%
+profile.bestAdventure: Best experience
+profile.about: About %user%
 
 experience.list.subHeader: Time to find your amazing Welcomanguide
 experience.experienceShortText: A %experienceDuration%h adventure proposed by %experienceCreator%
@@ -77,7 +81,8 @@ form.experience.keyword: Search terms...
 form.experience.date: Dates available
 form.experience.minParticipantsAccepted: Minimum number of participants
 experience.list.title: Experiences over the world
-
+experience.noFeedbacksReceived: This user has not received any feedback yet
+experience.noNoteYet: No note received yet
 
 
 experience.manage.introductionText: You may have lived in this current city for years and find the idea of a theme oriented experience a bit limitating... Well, here you can create a new experience with a different flavor to propose another version of your city to travelers. For example, if you already propose a culture oriented visit of your town, you can also propose a second experience about the nightlife and the different things happening by night! Let your knowledge of the city talk and try to intrigued the potential visitors ;)
@@ -104,3 +109,7 @@ article.portraitHeader: A glance at our amazing community
 article.currentlyLivingIn: Currently living in <span class="text-primary">%city%</span>
 article.portraitIntro: Thanks to Welcomango, you may get the chance to explore new places through new people. But WE live exclusively through these people. People like you and us, with dreams, fears and hopes. This page gives you a chance to learn a bit more about member of the community and inspire you to dare explore their world.
 article.portraitTitle: One community. Different faces
+
+contact.pageTitle: Contact & Feedbacks
+contact.text: A question? A problem you faced? A query to our team? Our team is here for you, so just send us a message! We'll use our Delorean to answer you before you even ask if we can.
+contact.subText: If your message concerns a bug, don't hesitate to describe your problem as precisely as possible. The more information we have, the better we will be at fixing the issue!

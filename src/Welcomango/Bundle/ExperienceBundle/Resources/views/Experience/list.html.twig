@@ -14,6 +14,11 @@
                             <h1 class="text-white col-sm-12 p-b-10">
                                 {% if form.vars.value.city.name is defined %}
                                     Experiences in {{ form.vars.value.city.name }}, {{ form.vars.value.city.country.name }}
+                                {% elseif form.vars.value.tags is defined %}
+                                    Experiences about
+                                    {% for tag in form.vars.value.tags %}
+                                        {% if loop.index != 1 %}&{% endif %} {{ tag.name }}
+                                    {% endfor %}
                                 {% else %}
                                     {{ 'experience.list.title'|trans }}
                                 {% endif %}

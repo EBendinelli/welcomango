@@ -65,7 +65,8 @@ gulp.task('assets-js', function() {
         'components/pages-assets/plugins/bootstrap-select2/select2.min.js',
         'components/pages-assets/plugins/bootstrap-tag/bootstrap-tagsinput.js',
         'components/pages-assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.all.min.js',
-        'components/pages-assets/plugins/summernote/js/summernote.js'
+        'components/pages-assets/plugins/summernote/js/summernote.js',
+        'components/pages-assets/plugins/codemirror/lib/codemirror.js',
     ])
         .pipe(uglify())
         .pipe(concat('plugins.js'))
@@ -86,9 +87,13 @@ gulp.task('assets-js', function() {
         'components/pages-assets/pages-front/plugins/jquery/jquery-1.11.1.min.js',
         'components/pages-assets/pages-front/plugins/animateNumber/jquery.animateNumber.js',
         'components/pages-assets/pages-front/plugins/swiper/js/swiper.jquery.min.js',
+
+        'components/wow/dist/wow.js',
+
         /*'components/pages-assets/pages-front/plugins/bootstrap/js/bootstrap.min.js',
         'components/pages-assets/pages-front/plugins/bootstrap/js/npm.js',*/
         'components/pages-assets/pages-front/plugins/boostrap-form-wizard/js/jquery.bootstrap.wizard.min.js',
+
         'components/pages-assets/pages-front/plugins/bootstrap-select2/select2.min.js',
         'components/pages-assets/pages-front/plugins/Jquery-sticky-kit/jquery.sticky-kit.js',
         'components/pages-assets/pages-front/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js',
@@ -203,7 +208,8 @@ gulp.task('assets-css', function() {
         'components/pages-assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.min.css',
         'components/pages-assets/plugins/dropzone/css/dropzone.css',
         'components/pages-assets/plugins/dropzone/css/base.css',
-        'components/pages-assets/plugins/summernote/css/summernote.css'
+        'components/pages-assets/plugins/summernote/css/summernote.css',
+        'components/pages-assets/plugins/codemirror/lib/codemirror.css',
 
     ])
         .pipe(minifyCSS())
@@ -254,7 +260,8 @@ gulp.task('assets-css', function() {
         'components/pages-assets/pages-front/plugins/bootstrap-select2/select2-bootstrap.css',
         'components/pages-assets/pages-front/plugins/bootstrap-datepicker/css/datepicker.css',
         'components/pages-assets/pages-front/plugins/bootstrap-datepicker/css/datepicker3.css',
-        'components/pages-assets/pages-front/plugins/jquery-datatable/media/css/*'
+        'components/pages-assets/pages-front/plugins/jquery-datatable/media/css/*',
+        'components/wow/css/libs/animate.css',
     ])
         .pipe(minifyCSS())
         .pipe(concat('plugins-front.css'))

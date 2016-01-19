@@ -1,12 +1,12 @@
 {% block text_widget %}
-    <div class="form-group form-group-default {% if required %}required{% endif %}">
+    <div class="form-group form-group-default {% if required %}required{% endif %} {% if disabled %}disabled{% endif %}">
         <label>{{ form_label(form) }}</label>
         <input class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
     </div>
 {% endblock text_widget %}
 
 {% block email_widget %}
-    <div class="form-group form-group-default {% if required %}required{% endif %}">
+    <div class="form-group form-group-default {% if required %}required{% endif %} {% if disabled %}disabled{% endif %}">
         <label>{{ form_label(form) }}</label>
         <input type="email" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %} placeholder="ex: name@example.com" />
     </div>

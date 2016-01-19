@@ -16,8 +16,8 @@
                 <section class="container-fluid container-fixed-lg bg-master-lightest">
                     <div class="container large-container">
                         <div class="cold-md-12">
-                            <div class="panel panel-default portlet">
-                                <div class="panel-body">
+                            <div class="panel panel-default portlet m-t-30">
+                                <div class="panel-body bg-master-light">
                                     {{ form_start(form, {'action': filter_url, 'method': 'POST', 'attr': { 'novalidate': 'novalidate', 'class': 'filter' } }) }}
                                     {% block filters %}{{ form_row(form) }}{% endblock %}
                                     <div class="btn-toolbar text-center m-t-20" role="toolbar">

@@ -1,0 +1,50 @@
+{% extends "WelcomangoCoreBundle:Core:pageLayout.html.twig" %}
+
+{% trans_default_domain "interface" %}
+
+{% form_theme form with ["::theme.html.twig"] %}
+
+{% block header_image %}
+    {{ asset('img/front/places-12.jpg') }}
+{% endblock %}
+
+{% block header_title %}
+    {{ 'contact.pageTitle'|trans }}
+{% endblock %}
+
+{% block header_text %}
+{% endblock %}
+
+{% block main_content %}
+    <section class="container-fluid container-fixed-lg p-b-50 p-t-50 bg-master-lightest">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="bold">
+                        {{ 'contact.text'|trans }}
+                    </div>
+                    <div class="hint-text fs-i m-t-10">
+                        {{ 'contact.subText'|trans }}
+                    </div>
+                    <div class="text-center m-t-50">
+                        <i class="fa fa-rocket fa-5x text-primary"></i>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    {{ form_start(form) }}
+                    {{ form_row(form.name) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.category) }}
+                    {{ form_row(form.message) }}
+                    <div class="text-right">{{ form_row(form.submit) }}</div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+            <!-- START PAGE  CONTENT -->
+
+
+
+            <!-- END PAGE CONTENT -->
+        </div>
+    </section>
+{% endblock %}

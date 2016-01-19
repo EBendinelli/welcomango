@@ -1,0 +1,23 @@
+{% trans_default_domain 'email' %}
+
+{% block subject %}
+    {% autoescape false %}
+    {{ 'email.subject.newMessage'|trans({'%user%': name}) }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_text %}
+    {% autoescape false %}
+        Message received from {{ name }}: {{ message }}
+
+        User profile (if any): {{ path('admin_user_edit', {'user_id': user.id}) }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    {% autoescape false %}
+    <div>Message received: {{ message }}</div>
+    <br/>
+    <div>User profile (if any): {{ path('admin_user_edit', {'user_id': user.id}) }}</div>
+    {% endautoescape %}
+{% endblock %}

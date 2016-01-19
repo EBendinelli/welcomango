@@ -25,5 +25,11 @@
         $(document).ready(function() {
             $('#participationForm').validate();
         });
+
+        var editor = CodeMirror.fromTextArea(document.getElementById("textarea#codemirror"), {
+            lineNumbers: true
+        });
+
+
     </script>
 {% endblock %}

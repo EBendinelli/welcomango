@@ -5,6 +5,7 @@
         </div>
         <textarea class="form-control"  {{ block('widget_attributes') }} style="display:none">{% if value is not empty %}{{ value }} {% endif %}</textarea>
     {% endspaceless %}
+
     <script>
         //Since the summernote content is not considered by the form we update the hidden textarea
         $(document).ready(function() {

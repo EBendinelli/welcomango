@@ -1,0 +1,7 @@
+{% block textarea_widget %}
+    {% spaceless %}
+        <textarea class="form-control"  id="codemirror" {{ block('widget_attributes') }} style="display:none value="">{% if value is not empty %}{{ value }} {% endif %}</textarea>
+    {% endspaceless %}
+
+
+{% endblock textarea_widget %}

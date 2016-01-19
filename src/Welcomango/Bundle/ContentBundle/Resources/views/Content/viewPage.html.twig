@@ -1,7 +1,9 @@
-{% extends "WelcomangoContentBundle:Content:layout.html.twig" %}
+{% extends "WelcomangoCoreBundle:Core:pageLayout.html.twig" %}
 
 {% block header_image %}
-    {{ asset(page.banner.getPath() ~ page.banner.originalFilename) }}
+    {% if page.banner %}
+        {{ asset(page.banner.getPath() ~ page.banner.originalFilename) }}
+    {% endif %}
 {% endblock %}
 
 {% block header_title %}
@@ -36,6 +38,13 @@
             <!-- END PAGE CONTENT -->
         </div>
     </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        new WOW().init();
+    </script>
 {% endblock %}
 
 

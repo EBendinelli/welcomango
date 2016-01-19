@@ -1,6 +1,6 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
-{% trans_default_domain "user" %}
+{% trans_default_domain "interface" %}
 
 {#{% form_theme form with ["::frontTheme.html.twig"] %}#}
 
@@ -11,7 +11,7 @@
 {% block sub_profile_picture %}
     <div id="profile-menu-left" class="bg-white m-t-10 p-b-10">
         <div id="profile-menu-title" class="text-center link-black">
-            <h4>{{ 'user.feedbacks'|trans }}</h4>
+            <h4>{{ 'global.feedbacks'|trans }}</h4>
         </div>
         <div class="dotted-line"><span></span></div>
         <div id="user-menu-items" class="text-center">
@@ -36,13 +36,13 @@
     <!-- START USER CONTENT -->
         <div id="user-content" class="m-t-30">
             <div id="user-proposed-experience" class="m-b-20">
-                <h2 class="m-b-30">Adventure</h2>
+                <h2 class="m-b-30">{{ 'profile.bestAdventure'|trans }}</h2>
                 {% if proposedExperiences|first  %}
                     {{ include("WelcomangoExperienceBundle:Experience:_featuredExperience.html.twig", { 'experience': proposedExperiences|first}) }}
                 {% endif %}
             </div>
             <div id="user-description">
-                <h2>About {{ user.firstname}}</h2>
+                <h2>{{ 'profile.about'|trans({'%user%': user.firstname})}}</h2>
                 <hr style="margin-top:25px"/>
                 <p>{{ user.description|nl2br|raw }}</p>
             </div>
@@ -56,9 +56,12 @@
         <div class="row">
             <div class="container">
                 <div class="m-b-40 m-t-40">
-                    <h2 class="text-center m-b-40">Comments</h2>
+                    <h2 class="text-center m-b-40">{{ 'global.comments'|trans }}</h2>
                     <div id="experience-comments">
                         {% include("WelcomangoBookingBundle:Feedback:list.html.twig") with { 'feedbacks': feedbacks } %}
+                        {% if feedbacks is empty %}
+                            <div class="text-center hint-text" style="font-style:italic">{{ 'experience.noFeedbacksReceived'|trans }}</div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -71,7 +74,7 @@
         <div class="row">
             <div class="container">
                 <div class="text-center m-b-40 m-t-40">
-                    <h2>Last experiences attented by {{ user.firstname }}</h2>
+                    <h2>{{ 'profile.lastExperiencesAttended'|trans({'%user%': user.firstname }) }}</h2>
                 </div>
             </div>
         </div>

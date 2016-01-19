@@ -50,5 +50,9 @@
             <argument type="service" id="fos_message.provider"/>
             <tag name="twig.extension"/>
         </service>
+
+        <service id="welcomango.form.contact" class="Welcomango\Bundle\CoreBundle\Form\Type\ContactType">
+            <tag name="form.type" alias="front_contact" />
+        </service>
     </services>
 </container>

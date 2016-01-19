@@ -120,11 +120,13 @@ class ExperienceRepository extends EntityRepository
         }
 
         if ($tags = $this->getFilter('tags', $filters)) {
-            if($tags instanceof ArrayCollection) {
-                foreach ($tags as $tag) {
-                    $queryBuilder->andWhere('t.name = :tag');
-                    $queryBuilder->setParameter('tag', $tag->getName());
-                }
+            if($tags instanceof ArrayCollection && !$tags->isEmpty()) {
+                $tagsId = $tags->toArray();
+                $queryBuilder->andWhere('t.id IN (:tags)');
+                $queryBuilder->setParameter('tags', $tagsId);
+                $queryBuilder->addGroupBy("e.id");
+                $queryBuilder->andHaving("COUNT(DISTINCT t.name) = :count");
+                $queryBuilder->setParameter("count", sizeof($tags));
             }
         }
 

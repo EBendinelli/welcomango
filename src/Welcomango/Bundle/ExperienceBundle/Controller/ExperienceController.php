@@ -47,7 +47,8 @@ class ExperienceController extends BaseController
         $pagination = $paginator->paginate(
             $query,
             $request->query->get('page', 1),
-            9
+            9,
+            ['wrap-queries' => true]
         );
 
         $entityManager = $this->getDoctrine()->getManager();
