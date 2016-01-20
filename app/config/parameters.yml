@@ -6,7 +6,8 @@ parameters:
     database_user: root
     database_password: root
     mailer_transport: smtp
-    mailer_host: 127.0.0.1
-    mailer_user: null
-    mailer_password: null
+    mailer_host: smtp.elasticemail.com
+    mailer_user: 2c82633e-060e-42b8-9adb-776fdb7a5e37
+    mailer_password: 2c82633e-060e-42b8-9adb-776fdb7a5e37
+    mailer_port: 2525
     secret: c0573cd3f6cfd00c17a114b29c31e70e405cdf72

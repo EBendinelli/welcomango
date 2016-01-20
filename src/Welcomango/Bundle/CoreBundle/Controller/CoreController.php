@@ -65,6 +65,7 @@ class CoreController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+
             //transmit the message to us
             $message = \Swift_Message::newInstance()
                 ->setSubject('New '.$form->get('category')->getData().' from '.$form->get('name')->getData())

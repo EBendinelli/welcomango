@@ -10,7 +10,9 @@
     {% autoescape false %}
         Message received from {{ name }}: {{ message }}
 
-        User profile (if any): {{ path('admin_user_edit', {'user_id': user.id}) }}
+        {% if user %}
+            User profile: {{ path('admin_user_edit', {'user_id': user.id}) }}
+        {% endif %}
     {% endautoescape %}
 {% endblock %}
 
@@ -18,6 +20,8 @@
     {% autoescape false %}
     <div>Message received: {{ message }}</div>
     <br/>
-    <div>User profile (if any): {{ path('admin_user_edit', {'user_id': user.id}) }}</div>
+    {% if user %}
+        <div>User profile (if any): {{ path('admin_user_edit', {'user_id': user.id}) }}</div>
+    {% endif %}
     {% endautoescape %}
 {% endblock %}

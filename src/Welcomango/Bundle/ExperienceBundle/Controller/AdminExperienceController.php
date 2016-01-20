@@ -32,7 +32,7 @@ class AdminExperienceController extends BaseController
      */
     public function listAction(Request $request)
     {
-        $filters   = $this->getFilters(array(), 'experienceSearch');
+        $filters   = $this->getFilters(array(), 'admin_experienceSearch');
         $paginator = $this->get('knp_paginator');
         $query     = $this->getRepository('Welcomango\Model\Experience')->createPagerQueryBuilder($filters, true);
 
@@ -41,7 +41,8 @@ class AdminExperienceController extends BaseController
         $pagination = $paginator->paginate(
             $query,
             $request->query->get('page', 1),
-            50
+            50,
+            ['wrap-queries' => true]
         );
 
         return array(
@@ -228,7 +229,7 @@ class AdminExperienceController extends BaseController
     public function filterFormAction(Request $request)
     {
         if ($request->request->has('_reset')) {
-            $this->removeFilters('experienceSearch');
+            $this->removeFilters('admin_experienceSearch');
 
             return $this->redirect($this->generateUrl('admin_experience_list'));
         }
@@ -239,7 +240,7 @@ class AdminExperienceController extends BaseController
         if ($form->isValid()) {
             $datas = $form->getData();
 
-            $this->setFilters($datas, 'experienceSearch');
+            $this->setFilters($datas, 'admin_experienceSearch');
 
         }
 
