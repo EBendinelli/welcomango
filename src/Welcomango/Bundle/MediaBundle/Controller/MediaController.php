@@ -83,6 +83,8 @@ class MediaController extends BaseController
         $src          = $request->request->get('tempName');
         $jpegQuality  = 100;
 
+        $this->
+
         $source        = imagecreatefromjpeg('/home/jaybe/www/welcomango/web'.$src);
         $resourceImage = imagecreatetruecolor($targetWidth, $targetHeight);
 
