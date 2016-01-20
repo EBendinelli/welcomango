@@ -22,12 +22,12 @@ class MediaManager
     /**
      * @var MediaNamer
      */
-    protected $mediaNamer;
+    private $mediaNamer;
 
     /**
      * @var FilesystemMap
      */
-    protected $filesystemMap;
+    private $filesystemMap;
 
     /**
      * @param MediaNamer    $mediaNamer
@@ -40,58 +40,63 @@ class MediaManager
     }
 
     /**
-     * @param string     $mediaList
-     * @param mixed      $entity
+     * @param string $mediaList
+     * @param mixed  $entity
      *
      * @return ArrayCollection
      */
     public function generateMediasFromCsv($mediaList, $entity)
     {
         $mediaCollection = new ArrayCollection();
-        $experienceAdapter   = $this->filesystemMap->get('experience');
-        $userAdapter         = $this->filesystemMap->get('user');
-        $tempadapter         = $this->filesystemMap->get('gallery');
+        $mediaPrefix     = $this->getMediaPrefix($entity);
+        $realAdapter     = $this->filesystemMap->get('real');
+        $tempadapter     = $this->filesystemMap->get('gallery');
+        $pathToUpload    = '/'.\date("Y").'/'.\date("m").'/';
 
         $medias = explode(',', $mediaList);
 
-        $currentMedias = $entity->getMedias();
+        $currentMedias     = $entity->getMedias();
         $currentMediasName = array();
-        foreach($currentMedias as $media){
+        foreach ($currentMedias as $media) {
             $currentMediasName[] = $media->getOriginalFilename();
         }
 
         foreach ($medias as $media) {
             if ($media !== "") {
                 //if one of the media has a different name it mean a new one has been added so we require a new validation
-                if(!in_array($media, $currentMediasName) && $entity instanceof Experience){
+                if (!in_array($media, $currentMediasName) && $entity instanceof Experience) {
                     $entity->setPublicationStatus('pending');
                 }
                 $originalFileName = $media;
                 $tempFileName     = $this->mediaNamer->getTempName($media);
                 $mediaEntity      = new Media();
-                $mediaEntity->setOriginalFilename($originalFileName);
-                if($entity instanceof Experience){
-                    $mediaEntity->setPath('/medias/experiences/'.$entity->getId().'/');
-                    $mediaEntity->addExperience($entity);
-                }elseif($entity instanceof User){
-                    $mediaEntity->setPath('/medias/users/'.$entity->getId().'/');
-                    $mediaEntity->addUser($entity);
-                }
+                $mediaEntity->setOriginalFilename($mediaPrefix.$originalFileName);
+                $mediaEntity->setPath('/uploads'.$pathToUpload);
+                $mediaEntity->addExperience($entity);
                 $mediaCollection->add($mediaEntity);
-                if (!$experienceAdapter->has('/'.$entity->getId().'/'.$originalFileName)) {
+                if (!$realAdapter->has($pathToUpload.$mediaPrefix.$originalFileName)) {
                     $fileContent = $tempadapter->read($tempFileName);
-                    $experienceAdapter->write('/'.$entity->getId().'/'.$originalFileName, $fileContent);
+                    $realAdapter->write($pathToUpload.$mediaPrefix.$originalFileName, $fileContent);
                 }
-                if (!$userAdapter->has('/'.$entity->getId().'/'.$originalFileName)) {
-                    $fileContent = $tempadapter->read($tempFileName);
-                    $userAdapter->write('/'.$entity->getId().'/'.$originalFileName, $fileContent);
-                }
-
-
             }
         }
 
         return $mediaCollection;
+    }
 
+    /**
+     * @param mixed $entity
+     *
+     * @return string
+     */
+    private function getMediaPrefix($entity)
+    {
+        if ($entity instanceof Experience) {
+            return 'experience_'.$entity->getId().'_';
+        } elseif ($entity instanceof User) {
+            return 'user_'.$entity->getId().'_';
+        } else {
+            return '';
+        }
     }
 }

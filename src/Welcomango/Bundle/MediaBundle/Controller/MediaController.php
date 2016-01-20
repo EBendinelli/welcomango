@@ -76,21 +76,21 @@ class MediaController extends BaseController
      */
     public function mediaCropAction(Request $request)
     {
-        ldd($request->request->all());
-        $targetWidth  = $request->request->get('w');
-        $targetHeight = $request->request->get('h');
-        $jpeg_quality = 90;
+        $targetWidth  = (int) $request->request->get('w');
+        $targetHeight = (int) $request->request->get('h');
+        $xPos         = $request->request->get('x');
+        $yPos         = $request->request->get('y');
+        $src          = $request->request->get('tempName');
+        $jpegQuality  = 100;
 
-        $src   = 'demo_files/flowers.jpg';
-        $img_r = imagecreatefromjpeg($src);
-        $dst_r = ImageCreateTrueColor($targetWidth, $targetHeight);
+        $source        = imagecreatefromjpeg('/home/jaybe/www/welcomango/web'.$src);
+        $resourceImage = imagecreatetruecolor($targetWidth, $targetHeight);
 
-        imagecopyresampled($dst_r, $img_r, 0, 0, $_POST['x'], $_POST['y'],
-            $targ_w, $targ_h, $_POST['w'], $_POST['h']);
+        imagecopyresampled($resourceImage, $source, 0, 0, $xPos, $yPos, $targetWidth, $targetHeight, $targetWidth, $targetHeight);
 
         header('Content-type: image/jpeg');
-        imagejpeg($dst_r, null, $jpeg_quality);
+        imagejpeg($resourceImage, '/home/jaybe/www/welcomango/web/medias/resize/filename.jpg', $jpegQuality);
 
-        return new JsonResponse();
+        return new Response();
     }
 }

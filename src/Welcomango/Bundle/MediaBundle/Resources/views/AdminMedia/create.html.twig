@@ -101,6 +101,7 @@
             formData.append("y2", $('#y2').val());
             formData.append("w", $('#w').val());
             formData.append("h", $('#h').val());
+            formData.append("tempName", '/medias/tmp/' + getTempFileName(document.getElementById('admin_media_file').files[0].name));
 
             $.ajax({
                 url: '{{ path('media_crop') }}',  //Server script to process data

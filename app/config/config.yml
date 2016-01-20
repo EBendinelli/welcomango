@@ -190,29 +190,17 @@ knp_gaufrette:
     adapters:
         gallery:
             local:
-                directory: %kernel.root_dir%/../web/medias/tmp
+                directory: %kernel.root_dir%/../web/uploads/tmp
                 create: true
         real:
             local:
-                directory: %kernel.root_dir%/../web/medias
-                create: true
-        experiences:
-            local:
-                directory: %kernel.root_dir%/../web/medias/experiences
-                create: true
-        users:
-            local:
-                directory: %kernel.root_dir%/../web/medias/users
+                directory: %kernel.root_dir%/../web/uploads
                 create: true
     filesystems:
         real:
             adapter: real
         gallery:
             adapter: gallery
-        experience:
-            adapter: experiences
-        user:
-            adapter: users
 
 liip_imagine:
     resolvers:
