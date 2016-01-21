@@ -38,6 +38,8 @@ twig:
     strict_variables: "%kernel.debug%"
     form:
         resources: ['bootstrap_3_layout.html.twig']
+    globals:
+        media_upload_temp_dir : %media_upload_temp_dir%
 
 # Assetic Configuration
 assetic:
@@ -190,29 +192,17 @@ knp_gaufrette:
     adapters:
         gallery:
             local:
-                directory: %kernel.root_dir%/../web/medias/tmp
+                directory: %media_temp_root_dir%
                 create: true
         real:
             local:
-                directory: %kernel.root_dir%/../web/medias
-                create: true
-        experiences:
-            local:
-                directory: %kernel.root_dir%/../web/medias/experiences
-                create: true
-        users:
-            local:
-                directory: %kernel.root_dir%/../web/medias/users
+                directory: %media_root_dir%
                 create: true
     filesystems:
         real:
             adapter: real
         gallery:
             adapter: gallery
-        experience:
-            adapter: experiences
-        user:
-            adapter: users
 
 liip_imagine:
     resolvers:

@@ -1,0 +1,132 @@
+<script src="{{ asset('js/Jcrop.min.js') }}" type="text/javascript"></script>
+<script type="text/javascript">
+    var processDelete = true;
+    $('#{{ file_input_id }}').change(function () {
+        processDelete = true;
+        var filename = document.getElementById('{{ file_input_id }}').files[0].name
+        console.log(filename);
+        var formData = new FormData();
+        formData.append("file", document.getElementById('{{ file_input_id }}').files[0]);
+        $.ajax({
+            url: '{{ oneup_uploader_endpoint('gallery') }}',  //Server script to process data
+            type: 'POST',
+            xhr: function () {  // Custom XMLHttpRequest
+                var myXhr = $.ajaxSettings.xhr();
+                if (myXhr.upload) { // Check if upload property exists
+
+                }
+                return myXhr;
+            },
+            //Ajax events
+            error: function (request) {
+                console.log(request);
+            },
+            success: function (data) {
+                {% if in_modal is not defined %}
+                    $("#media").empty();
+                    $("#media").append('<img id="mediaToCrop" src="{{ media_upload_temp_dir }}/' + getTempFileName(filename) + '">');
+                {% else %}
+                    $("#media-modal").empty();
+                    $("#media-modal").append('<img id="mediaToCrop" src="{{ media_upload_temp_dir }}/' + getTempFileName(filename) + '">');
+                    $("#media-modal-crop").modal({'backdrop':"static"});
+                    $("#media-modal-crop").on('hidden.bs.modal', function () {
+                        removeMedia();
+                    });
+
+                {% endif %}
+                $(function () {
+                    $('#mediaToCrop').Jcrop({
+                        aspectRatio: 1,
+                        boxWidth: 700,
+                        boxHeight: 700,
+                        onChange: showCoords,
+                        onSelect: showCoords
+                    });
+                    $('#datas').show();
+                });
+            },
+            // Form data
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    });
+
+    function removeMedia() {
+        if (processDelete) {
+            var formData = new FormData();
+            formData.append("file", getTempFileName(document.getElementById('{{ file_input_id }}').files[0].name));
+            $.ajax({
+                url: '{{ path('media_delete') }}',  //Server script to process data
+                type: 'POST',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        }
+    }
+
+    function getTempFileName(filename) {
+        var userId = {{ app.user.id }};
+        var explodeFilename = filename.split('.');
+        var extension = explodeFilename[explodeFilename.length - 1];
+        explodeFilename.pop();
+        return explodeFilename.join() + '_' + userId + '.' + extension;
+    }
+
+    function showCoords(c) {
+        $('#x').val(c.x);
+        $('#y').val(c.y);
+        $('#x2').val(c.x2);
+        $('#y2').val(c.y2);
+        $('#w').val(c.w);
+        $('#h').val(c.h);
+    }
+
+    $('#{{ id_crop_button }}').click(function () {
+        if ($('#mediaToCrop').width() == $('#mediaToCrop').height()) {
+            $("#{{ id_croped_media }}").empty();
+            $("#{{ id_croped_media }}").append('<img id="mediaCroped" src="{{ media_upload_temp_dir }}/' + getTempFileName(document.getElementById('{{ file_input_id }}').files[0].name) + '">');
+            {% if in_modal is defined %}
+            processDelete = false;
+            $("#media-modal-crop").modal('hide');
+            {% endif %}
+        } else if ($('#x').val() != "") {
+            var formData = new FormData();
+            formData.append("x", $('#x').val());
+            formData.append("y", $('#y').val());
+            formData.append("x2", $('#x2').val());
+            formData.append("y2", $('#y2').val());
+            formData.append("w", $('#w').val());
+            formData.append("h", $('#h').val());
+            formData.append("tempName", getTempFileName(document.getElementById('{{ file_input_id }}').files[0].name));
+
+            $.ajax({
+                url: '{{ path('media_crop') }}',
+                type: 'POST',
+                //Ajax events
+                error: function (request) {
+                    console.log(request);
+                },
+                success: function (data) {
+                    $("#{{ id_croped_media }}").empty();
+                    $("#{{ id_croped_media }}").append('<img id="mediaCroped" src="{{ media_upload_temp_dir }}/' + data.filename + '?1">');
+                    {% if in_modal is defined %}
+                    processDelete = false;
+                    $("#media-modal-crop").modal('hide');
+                    {% endif %}
+                },
+                // Form data
+                data: formData,
+                //Options to tell jQuery not to process data or worry about content-type.
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        } else {
+            $("#modal-error").append('<div class="alert alert-info m-t-20">Image must be square</div>');
+        }
+    });
+</script>

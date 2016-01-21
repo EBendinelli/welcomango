@@ -56,13 +56,13 @@ class UserEditType extends AbstractType
             User::ROLE_USER        => User::ROLE_USER,
         );
 
-        $user = $this->securityContext->getToken()->getUser();
+        $user     = $this->securityContext->getToken()->getUser();
         $userCity = $user->getCurrentCity();
 
         $genders = array(
             'M' => 'M',
             'F' => 'F',
-            'O' => 'O'
+            'O' => 'O',
         );
 
         $builder->add('username', 'text', ['label' => 'form.user.username']);
@@ -71,13 +71,13 @@ class UserEditType extends AbstractType
         $builder->add('phone', 'text', ['label' => 'form.user.phone', 'required' => false]);
         $builder->add('occupation', 'text', ['label' => 'form.user.occupation']);
         $builder->add('birthdate', 'date', [
-            'years' => range(date('Y') - 100, date('Y') - 10),
-            'label' => 'form.user.birthdate',
-            'required' => false
+            'years'    => range(date('Y') - 100, date('Y') - 10),
+            'label'    => 'form.user.birthdate',
+            'required' => false,
         ]);
 
         $builder->add('description', 'textarea', [
-            'label' => 'form.user.description',
+            'label'    => 'form.user.description',
             'required' => false,
         ]);
 
@@ -91,53 +91,53 @@ class UserEditType extends AbstractType
 
         $builder->add('currentCityInput', 'text', array(
             'mapped' => false,
-            'label' => 'form.user.currenCityInput',
-            'data'  => $userCity->getName(),
+            'label'  => 'form.user.currenCityInput',
+            'data'   => $userCity->getName(),
         ));
 
         $builder->add('currentCity', 'hidden', array(
             'mapped' => false,
-            'label' => 'form.user.currenCity',
-            'data'  => $userCity->getName(),
+            'label'  => 'form.user.currenCity',
+            'data'   => $userCity->getName(),
         ));
 
         $builder->add('currentCityLat', 'hidden', array(
             'mapped' => false,
-            'label' => 'form.user.currenCityLat',
-            'data'  => $userCity->getLatitude(),
+            'label'  => 'form.user.currenCityLat',
+            'data'   => $userCity->getLatitude(),
         ));
 
         $builder->add('currentCityLng', 'hidden', array(
             'mapped' => false,
-            'label' => 'form.user.currenCityLng',
-            'data'  => $userCity->getLongitude(),
+            'label'  => 'form.user.currenCityLng',
+            'data'   => $userCity->getLongitude(),
         ));
 
         $builder->add('currentCityState', 'hidden', array(
             'mapped' => false,
-            'label' => 'form.user.currenCityState',
-            'data'  => $userCity->getState(),
+            'label'  => 'form.user.currenCityState',
+            'data'   => $userCity->getState(),
         ));
 
         $builder->add('currentCityCountry', 'hidden', array(
             'mapped' => false,
-            'label' => 'form.user.currenCityCountry',
-            'data'  => $userCity->getCountry()->getName(),
+            'label'  => 'form.user.currenCityCountry',
+            'data'   => $userCity->getCountry()->getName(),
         ));
 
         $builder->add('currentCityCountryCode', 'hidden', array(
             'mapped' => false,
-            'label' => 'form.user.currenCityCountryCode',
-            'data'  => $userCity->getCountry()->getCountryCode(),
+            'label'  => 'form.user.currenCityCountryCode',
+            'data'   => $userCity->getCountry()->getCountryCode(),
         ));
 
-        $builder->add('gender','choice', array(
-            'choices' => $genders,
+        $builder->add('gender', 'choice', array(
+            'choices'  => $genders,
             'multiple' => false,
-            'label' => 'form.user.gender'
+            'label'    => 'form.user.gender',
         ));
 
-        $builder->add('medias_upload', 'hidden', [
+        $builder->add('media_photo', 'file', [
             'required' => false,
             'mapped'   => false,
         ]);

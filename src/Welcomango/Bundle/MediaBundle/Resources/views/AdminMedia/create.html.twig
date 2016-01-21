@@ -18,7 +18,7 @@
                     <label>Y2 <input type="text" size="4" id="y2" name="y2" /></label>
                     <label>W <input type="text" size="4" id="w" name="w" /></label>
                     <label>H <input type="text" size="4" id="h" name="h" /></label>
-                    <button type="button" class="btn btn-success" id="crop-media" >CROP MODA FUCKA</button>
+                    <button type="button" class="btn btn-success" id="crop-media" >{{ 'crop.media'|trans }}</button>
                 </div>
                 {% include "WelcomangoCoreBundle:Form:formFooter.html.twig" with {'listing' : listing, 'update': form.vars.id } only %}
                 {{ form_end(form) }}
@@ -30,97 +30,15 @@
 {% block stylesheets %}
     {{ parent() }}
     {{ form_stylesheet(form) }}
+    <link rel="stylesheet" href="{{ asset("css/Jcrop.min.css") }}"/>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    <script type="text/javascript">
-
-        $('#admin_media_file').change(function () {
-            var filename = document.getElementById('admin_media_file').files[0].name
-            console.log(filename);
-            var formData = new FormData();
-            formData.append("file", document.getElementById('admin_media_file').files[0]);
-            $.ajax({
-                url: '{{ oneup_uploader_endpoint('gallery') }}',  //Server script to process data
-                type: 'POST',
-                xhr: function () {  // Custom XMLHttpRequest
-                    var myXhr = $.ajaxSettings.xhr();
-                    if (myXhr.upload) { // Check if upload property exists
-
-                    }
-                    return myXhr;
-                },
-                //Ajax events
-                error: function (request) {
-                    console.log(request);
-                },
-                success: function (data) {
-                    console.log(data);
-                    $("#media").append('<img id="mediaToCrop" src="/medias/tmp/' + getTempFileName(filename) + '">');
-                    $(function () {
-                        $('#mediaToCrop').Jcrop({
-                            aspectRatio: 1,
-                            onChange: showCoords,
-                            onSelect: showCoords
-                        });
-                        $('#datas').show();
-                    });
-                },
-                // Form data
-                data: formData,
-                cache: false,
-                contentType: false,
-                processData: false
-            });
-        });
-
-        function getTempFileName(filename) {
-            var userId = {{ app.user.id }};
-            var explodeFilename = filename.split('.');
-            var extension = explodeFilename[explodeFilename.length - 1];
-            explodeFilename.pop();
-            return explodeFilename.join() + '_' + userId + '.' + extension;
-        }
-
-        function showCoords(c)
-        {
-            $('#x').val(c.x);
-            $('#y').val(c.y);
-            $('#x2').val(c.x2);
-            $('#y2').val(c.y2);
-            $('#w').val(c.w);
-            $('#h').val(c.h);
-        };
-
-        $('#crop-media').click(function () {
-            var formData = new FormData();
-            formData.append("x", $('#x').val());
-            formData.append("y", $('#y').val());
-            formData.append("x2", $('#x2').val());
-            formData.append("y2", $('#y2').val());
-            formData.append("w", $('#w').val());
-            formData.append("h", $('#h').val());
-
-            $.ajax({
-                url: '{{ path('media_crop') }}',  //Server script to process data
-                type: 'POST',
-                //Ajax events
-                error: function (request) {
-                    console.log(request);
-                },
-                success: function (data) {
-                    $("#medias").append(data);
-                },
-                // Form data
-                data: formData,
-                //Options to tell jQuery not to process data or worry about content-type.
-                cache: false,
-                contentType: false,
-                processData: false
-            });
-        });
-    </script>
-
+    {% include "WelcomangoMediaBundle:Media:_baseJs.html.twig" with {
+    'file_input_id' : 'admin_media_file',
+    'id_crop_button' : "crop-media",
+    'id_croped_media' : "media"
+    } %}
     {{ form_javascript(form) }}
 {% endblock %}

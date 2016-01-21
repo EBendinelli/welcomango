@@ -52,17 +52,15 @@ class MediaController extends BaseController
      *
      * @param Request $request
      *
-     * @Route("/experience/media/delete", name="experience_media_delete")
+     * @Route("/media/delete", name="media_delete")
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function mediaDeleteAction(Request $request)
     {
         $originalFilename = $request->request->get('file');
-        $tmpFilename      = $this->get('welcomango.media_namer')->getTempName($originalFilename);
-
-        $tmpAdapter = $this->get('knp_gaufrette.filesystem_map')->get('gallery');
-        $tmpAdapter->get($tmpFilename)->delete();
+        $tmpAdapter       = $this->get('knp_gaufrette.filesystem_map')->get('gallery');
+        $tmpAdapter->get($originalFilename)->delete();
 
         return new JsonResponse();
     }
@@ -76,21 +74,30 @@ class MediaController extends BaseController
      */
     public function mediaCropAction(Request $request)
     {
-        ldd($request->request->all());
-        $targetWidth  = $request->request->get('w');
-        $targetHeight = $request->request->get('h');
-        $jpeg_quality = 90;
+        $pathToUpload  = '/'.\date("Y").'/'.\date("m").'/';
+        $targetWidth   = (int) $request->request->get('w');
+        $targetHeight  = (int) $request->request->get('h');
+        $xPos          = $request->request->get('x');
+        $yPos          = $request->request->get('y');
+        $filename      = $request->request->get('tempName');
+        $jpegQuality   = 100;
+        $tempDir       = $this->getParameter('media_temp_root_dir');
+        $filesystemMap = $this->get('knp_gaufrette.filesystem_map');
+        $tempadapter   = $filesystemMap->get('gallery');
+        $fileContent   = $tempadapter->read($filename);
 
-        $src   = 'demo_files/flowers.jpg';
-        $img_r = imagecreatefromjpeg($src);
-        $dst_r = ImageCreateTrueColor($targetWidth, $targetHeight);
+        $source        = imagecreatefromjpeg($tempDir.'/'.$filename);
+        $resourceImage = imagecreatetruecolor($targetWidth, $targetHeight);
 
-        imagecopyresampled($dst_r, $img_r, 0, 0, $_POST['x'], $_POST['y'],
-            $targ_w, $targ_h, $_POST['w'], $_POST['h']);
+        if ($tempadapter->has($filename)) {
+            $tempadapter->delete($filename);
+        }
+
+        imagecopyresampled($resourceImage, $source, 0, 0, $xPos, $yPos, $targetWidth, $targetHeight, $targetWidth, $targetHeight);
 
         header('Content-type: image/jpeg');
-        imagejpeg($dst_r, null, $jpeg_quality);
+        imagejpeg($resourceImage, $tempDir.'/'.$filename, $jpegQuality);
 
-        return new JsonResponse();
+        return new JsonResponse(['filename' => $filename]);
     }
 }

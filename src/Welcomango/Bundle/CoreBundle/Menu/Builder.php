@@ -93,9 +93,10 @@ class Builder extends ContainerAware
                 'route'          => 'fos_user_profile_show',
             ));
 
-            if($user->getMedias()->first()){
-                $image = "<img src='".$user->getMedias()->first()->getPath().$user->getMedias()->first()->getOriginalFilename()."' class='front-menu-user-picture' />";
-            }else{
+
+            if ($profileMedia = $user->getProfileMedia()) {
+                $image = "<img src='".$profileMedia->getPath().$profileMedia->getOriginalFilename()."' class='front-menu-user-picture' />";
+            } else {
                 $image = "<img src='/bundles/welcomangocore/images/profile.png' class='front-menu-user-picture' />";
             }
             $menu->addChild( $image ,

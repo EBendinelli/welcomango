@@ -39,7 +39,7 @@ class AdminBuilder extends ContainerAware
      * @param FactoryInterface      $factory      factory
      * @param TokenStorageInterface $tokenStorage security context
      * @param RequestStack          $requestStack requestStack
-     * @param TranslatorInterface   $translator translator
+     * @param TranslatorInterface   $translator   translator
      */
     public function __construct(FactoryInterface $factory, TokenStorageInterface $tokenStorage, RequestStack $requestStack, TranslatorInterface $translator)
     {
@@ -94,12 +94,16 @@ class AdminBuilder extends ContainerAware
             'linkAttributes' => ['class' => 'fa fa-comment'],
         ));
 
-        $menu->addChild($this->translator->trans('menu.title.moderation.feedback', array(), 'admin'), array(
+        $moderationMenu = $menu->addChild($this->translator->trans('menu.title.moderation', array(), 'admin'), array(
+            'linkAttributes' => ['class' => 'fa-ellipsis-v'],
+        ));
+
+        $moderationMenu->addChild($this->translator->trans('menu.title.moderation.feedback', array(), 'admin'), array(
             'route'          => 'admin_moderation_feedback',
             'linkAttributes' => ['class' => 'pg-social'],
         ));
 
-        $menu->addChild($this->translator->trans('menu.title.moderation.experience', array(), 'admin'), array(
+        $moderationMenu->addChild($this->translator->trans('menu.title.moderation.experience', array(), 'admin'), array(
             'route'          => 'admin_moderation_experience',
             'linkAttributes' => ['class' => 'fa-hand-lizard-o'],
         ));
