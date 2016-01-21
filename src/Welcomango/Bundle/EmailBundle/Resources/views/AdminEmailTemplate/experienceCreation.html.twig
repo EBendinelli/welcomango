@@ -1,0 +1,19 @@
+{% trans_default_domain 'email' %}
+
+{% block subject %}
+    {% autoescape false %}
+    {{ 'email.experience.messageSent'|trans }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_text %}
+    {% autoescape false %}
+    {{ 'email.experience.thanksMessage'|trans({'%user%': user.firstname}) }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    {% autoescape false %}
+    <div>{{ 'email.experience.thanksMessage'|trans({'%user%': user.firstname}) }}</div>
+    {% endautoescape %}
+{% endblock %}

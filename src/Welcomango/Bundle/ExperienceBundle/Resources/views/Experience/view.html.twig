@@ -6,13 +6,9 @@
 
 {% block page_content %}
     <!-- START CONTENT SECTION -->
-    {% if experience.getMedias.first %}
-        {% set imageBanner = asset(experience.getMedias.first.getPath() ~ experience.getMedias.first.originalFilename) %}
-    {% else %}
-        {% set imageBanner = asset("img/front/places-" ~ random(18) ~ ".jpg") %}
-    {% endif %}
+
     <!-- START BANNER SECTION -->
-    <section class="p-b-70 bg-master-darkest sm-no-margin" data-pages-bg-image="{{ asset(imageBanner) }}" data-bg-overlay="black" data-overlay-opacity="0.3" data-pages="parallax">
+    <section class="p-b-70 bg-master-darkest sm-no-margin" data-pages-bg-image="{{ asset(get_banner(experience)) }}" data-bg-overlay="black" data-overlay-opacity="0.3" data-pages="parallax">
         <div class="container p-t-50">
             <div class="row">
                 <div class="col-lg-1 col-min">
@@ -122,28 +118,34 @@
                                 <h3>{{  'experience.pictures'|trans }}</h3>
                                 <p>
                                     {% if experience.getMedias.first %}
-                                        <div class="experience_container_pictures">
+                                        <div class="experience_container_pictures gallery-parent-container">
                                             <div class="col-md-12 ">
                                                 <div class="experience_featured_picture_dark">
-                                                    <div class="experience_featured_pictures experience_featured_picture_large m-b-20" style="background-image:url({{ asset(experience.getMedias.first.getPath() ~ experience.getMedias.first.originalFilename) }})">                                            </div>
+                                                    <a href="{{ asset(experience.getMedias.first.getPath() ~ experience.getMedias.first.originalFilename) }}">
+                                                        <div class="experience_featured_pictures experience_featured_picture_large m-b-20" style="background-image:url({{ asset(experience.getMedias.first.getPath() ~ experience.getMedias.first.originalFilename) }})"></div>
+                                                    </a>
                                                 </div>
                                             </div>
                                             {% for media in experience.getMedias.getValues|slice(1,2) %}
                                                 <div class="col-md-6">
-                                                    <div class="experience_featured_picture_dark">
-                                                        <div class="experience_featured_pictures experience_featured_picture_small m-b-20" style="background-image:url({{ asset(media.getPath() ~ media.originalFilename) }})"></div>
-                                                    </div>
-                                                </div>
-                                            {% endfor %}
-                                            {% for media in experience.getMedias.getValues|slice(3,10) %}
-                                                <div id="experience-hidden-pictures">
-                                                    <div class="col-md-6">
+                                                    <a href="{{ asset(media.getPath() ~ media.originalFilename) }}">
                                                         <div class="experience_featured_picture_dark">
-                                                            <div class="experience_featured_pictures experience_featured_picture_small m-b-20" style="background-image:url({{ asset(media.getPath() ~ media.originalFilename) }})"></div>
+                                                            <div class="experience_featured_pictures experience_featured_picture_small m-b-20" style="background-image:url({{ asset(media.getPath() ~ media.originalFilename)|imagine_filter('thumb250') }})"></div>
                                                         </div>
-                                                    </div>
+                                                    </a>
                                                 </div>
                                             {% endfor %}
+                                            <div id="experience-hidden-pictures">
+                                                {% for media in experience.getMedias.getValues|slice(3,10) %}
+                                                    <div class="col-md-6">
+                                                        <a href="{{ asset(media.getPath() ~ media.originalFilename) }}">
+                                                            <div class="experience_featured_picture_dark">
+                                                                <div class="experience_featured_pictures experience_featured_picture_small m-b-20" style="background-image:url({{ asset(media.getPath() ~ media.originalFilename)|imagine_filter('thumb250') }})"></div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
                                             {% if experience.getMedias.getValues[3] is defined %}
                                                 <div class="col-md-12 text-right">
                                                     <button id="experience-pictures-btn" class="text-center btn btn-sm" onclick="togglePictures();">More</button>
@@ -346,10 +348,10 @@
 
         function togglePictures(){
             if($('#experience-hidden-pictures:visible').length == 0){
-                $('#experience-hidden-pictures').show(400);
+                $('#experience-hidden-pictures').show(200);
                 $('#experience-pictures-btn').html('Less')
             }else{
-                $('#experience-hidden-pictures').hide(400);
+                $('#experience-hidden-pictures').hide(200);
                 $('#experience-pictures-btn').html('More')
             }
         }
@@ -415,6 +417,14 @@
 
         //execute it on loading to update fields
         window.onload = updateAvailablePeriods($('#front_booking_desired_date').val());
+
+        //magnific popup loading
+        $('.gallery-parent-container').magnificPopup({
+            delegate: 'a', // child items selector, by clicking on it popup will open
+            type: 'image',
+            gallery: {enabled: true}
+            // other options
+        });
 
     </script>
 

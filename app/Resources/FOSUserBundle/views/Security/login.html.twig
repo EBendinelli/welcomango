@@ -1,52 +1,83 @@
-{% extends "::loginLayout.html.twig" %}
+{% extends "WelcomangoCoreBundle:Core:pageLayout.html.twig" %}
 
+{% trans_default_domain "interface" %}
 
-{% block content %}
-
-    {% if error %}
-        <div class="alert alert-error">
-            <button class="close" data-dismiss="alert"></button>
-            {{ error.messageKey|trans(error.messageData, 'security') }}
-        </div>
-    {% endif %}
-
-    <form id="login-form" class="login-form" action="{{ path("fos_user_security_check") }}" method="post" novalidate="novalidate">
-        <div class="row">
-            <div class="form-group col-md-10">
-                <label class="form-label">{{ "username"|trans({}, "interface") }}</label>
-                <div class="controls">
-                    <div class="input-with-icon  right">
-                        <i class=""></i>
-                        <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-10">
-                <label class="form-label">{{ "password"|trans({}, "interface") }}</label>
-                <span class="help"></span>
-                <div class="controls">
-                    <div class="input-with-icon right">
-                        <i class=""></i>
-                        <input class="form-control" id="password" type="password" name="_password"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="control-group col-md-10">
-                <div class="checkbox check-default">
-                    <input type="checkbox" name="_remember_me" id="remember_me" value="1"/>
-                    <label for="remember_me">{{ "remember_me"|trans({}, "interface") }}</label>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-10">
-                <input type="submit" class="btn btn-primary btn-cons pull-right" value="{{ "login"|trans({}, "interface") }}" />
-            </div>
-        </div>
-    </form>
-
+{% block header_image %}
+    {{ asset('bundles/welcomangocore/images/experience_default/places-0.jpg') }}
 {% endblock %}
+
+{% block header_title %}
+    {{ 'global.welcomeBack'|trans }}
+{% endblock %}
+
+{% block header_text %}
+{% endblock %}
+
+{% block main_content %}
+    <section class="container-fluid container-fixed-lg p-b-50 p-t-30 bg-master-lightest" >
+        <div class="container">
+            <div class="col-md-5 col-md-offset-4">
+
+                {% if error %}
+                    <div class="m-b-20 alert alert-danger" role="alert">
+                        <strong>{{ 'interface.warning'|trans }}: </strong>{{ error.messageKey|trans(error.messageData, 'security') }}
+                    </div>
+                {% endif %}
+
+                <!-- START PAGE  CONTENT -->
+                <form id="login-form" class="login-form" action="{{ path("fos_user_security_check") }}" method="post" novalidate="novalidate">
+                    <div class="row">
+                        <div class="form-group form-group-default">
+                            <label class="form-label">{{ "username"|trans({}, "interface") }}</label>
+                            <div class="controls">
+                                <div class="input-with-icon  right">
+                                    <i class=""></i>
+                                    <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Username" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group form-group-default">
+                            <label class="form-label">{{ "password"|trans({}, "interface") }}</label>
+                            <span class="help"></span>
+                            <div class="controls">
+                                <div class="input-with-icon right">
+                                    <i class=""></i>
+                                    <input class="form-control" id="password" type="password" name="_password" placeholder="password"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 no-padding">
+                            <div class="control-group ">
+                                <div class="checkbox check-default">
+                                    <input type="checkbox" name="_remember_me" id="remember_me" value="1"/>
+                                    <label for="remember_me">{{ "login.rememberMe"|trans({}) }}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <a href="{{ path('fos_user_resetting_request') }}" class="text-info small">{{ "login.forgotPassword"|trans({}) }}</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="text-center m-t-10">
+                            <input type="submit" class="btn btn-primary btn-cons btn-lg" value="{{ "login"|trans({}, "interface") }}" />
+                        </div>
+                    </div>
+                </form>
+
+                <hr/>
+                <div class="text-center">
+                    <h4 class="m-t-30 m-b-30">{{ 'login.noAccount' }}</h4>
+                    <a href="{{ path('fos_user_registration_register') }}" class="btn btn-lg btn-complete"><i class="fa fa-rocket fa-lg"></i> {{ 'interface.register'|trans }}</a>
+                </div>
+
+                <!-- END PAGE CONTENT -->
+            </div>
+        </div>
+    </section>
+{% endblock %}
+

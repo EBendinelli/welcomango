@@ -1,6 +1,6 @@
 {% form_theme form with ["::frontTheme.html.twig"] %}
 
-{{ form_start(form, {'action': path('front_experience_view', {'experience_id' : experience.id}), 'attr': {'novalidate': 'novalidate' }}) }}
+{{ form_start(form, {'action': path('front_experience_view', {'slug' : experience.slug}), 'attr': {'novalidate': 'novalidate' }}) }}
 
 {% if app.user %}
 <div class="text-white text-center">

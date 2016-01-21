@@ -45,48 +45,19 @@ class ContentController extends BaseController
         );
     }
 
-    /**
-     * @param Request $request
-     *
-     * @Route("/page/create", name="page_create")
-     * @Template()
-     *
-     * @return array
-     */
-    public function createAction(Request $request)
-    {
-        $page = new Page();
-        $page->setCreatedAt(new \DateTime());
-        $page->setUpdatedAt(new \DateTime());
-        $form = $this->createForm($this->get('welcomango.admin.form.page.create'), $page);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($page);
-            $em->flush();
-
-            $this->addFlash('success', $this->trans('page.created.success', array(), 'page'));
-
-            return $this->redirect($this->generateUrl('admin_page_list'));
-        }
-
-        return array(
-            'form' => $form->createView()
-        );
-    }
 
     /**
-     * @param String $slug
+     * @param Page $page
      *
      * @Route("/read/{slug}", name="page_view_slug")
+     * @ParamConverter("page", options={"slug" = "slug"})
      * @Template()
      *
      * @return array
      */
-    public function viewSlugAction($slug)
+    public function viewSlugAction(Page $page)
     {
-        $page = $this->getRepository('Welcomango\Model\Page')->findOneBy(['slug' => $slug ]);
+
         if($page->getPublicationStatus() != 'published'){
             return $this->render('WelcomangoCoreBundle:CRUD:notAllowed.html.twig', array(
                 'title'          => 'This article has not been published yet.',

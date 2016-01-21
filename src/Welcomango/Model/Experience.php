@@ -37,6 +37,12 @@ class Experience
     private $title;
 
     /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
+
+    /**
      * @var User
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="experiences")
@@ -211,6 +217,28 @@ class Experience
     {
         return $this->title;
     }
+
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
 
     /**
      * Set description
@@ -912,4 +940,5 @@ class Experience
 
         return $count;
     }
+
 }

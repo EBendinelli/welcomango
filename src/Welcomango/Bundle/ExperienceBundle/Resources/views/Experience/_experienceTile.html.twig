@@ -7,15 +7,10 @@
          </div>
      </div>#}
     <div id="experience_{{ experience.getId }}" class="card {% if darkBg is defined %}card-bg-master-lightest{% endif %}" >
-        <a href="{{ path('front_experience_view', {'experience_id' : experience.getId }) }}" >
+        <a href="{{ path('front_experience_view', {'slug' : experience.slug }) }}" >
             <div class="card-clickable"></div>
             <div class="experience-image">
-                {% if experience.getMedias.first %}
-                    {% set imageAsset = asset(experience.getMedias.first.getPath() ~ experience.getMedias.first.originalFilename) %}
-                    <img class="" data-src="{{ imageAsset  }}" alt="Card image cap">
-                {% else %}
-                    <img class="" data-src="{{ asset("img/front/places-" ~ random(18) ~ ".jpg") }}" alt="Card image cap">
-                {% endif %}
+                <img class="" data-src="{{ asset(get_banner(experience)) }}" alt="Card image cap">
             </div>
         </a>
 

@@ -60,13 +60,7 @@
                 </div>
                 <div class="col-md-1 p-t-20" style="padding-left:0px">
                     <a href="{{ asset(path('front_user_view', {'user_id': thread.booking.experience.getCreator.id})) }}">
-                        {% if thread.booking.experience.getCreator.getMedias.first %}
-                            <img src='{{ asset(thread.booking.experience.getCreator.getMedias.first.getWebPath) }}'
-                                 class='message-user-picture m-r-10'/>
-                        {% else %}
-                            <img src='{{ asset("img/front/faces/face" ~ random(8) ~ ".jpg") }}'
-                                 class='message-user-picture m-r-10'/>
-                        {% endif %}
+                        {{ display_avatar({'user': thread.booking.experience.getCreator}) }}
                     </a>
                 </div>
             </div>

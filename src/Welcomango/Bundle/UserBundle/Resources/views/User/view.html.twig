@@ -37,9 +37,14 @@
         <div id="user-content" class="m-t-30">
             <div id="user-proposed-experience" class="m-b-20">
                 <h2 class="m-b-30">{{ 'profile.bestAdventure'|trans }}</h2>
-                {% if proposedExperiences|first  %}
-                    {{ include("WelcomangoExperienceBundle:Experience:_featuredExperience.html.twig", { 'experience': proposedExperiences|first}) }}
-                {% endif %}
+                {% for experience in  proposedExperiences %}
+                    {% if experience.featured == true %}
+                        {{ include("WelcomangoExperienceBundle:Experience:_featuredExperience.html.twig", { 'experience': experience}) }}
+                    {% endif %}
+                {% endfor %}
+                {% for experience in  proposedExperiences %}
+                    {{ include("WelcomangoExperienceBundle:Experience:_experienceTile2.html.twig", { 'experience': experience, 'column': 2}) }}
+                {% endfor %}
             </div>
             <div id="user-description">
                 <h2>{{ 'profile.about'|trans({'%user%': user.firstname})}}</h2>
@@ -140,7 +145,7 @@
                         '<div class="dotted-line"><span></span></div>'+
                         '<div id="bodyContent">'+
                         '<p>{% spaceless %}{{ experience.description|raw|truncate(200)|replace({"\n":' ', "\r":' '})}}{% endspaceless %}</p> '+
-                        '<div class="text-right"><a href="{{ path('front_experience_view', {'experience_id' : experience.getId }) }}">See more</a></div>'+
+                        '<div class="text-right"><a href="{{ path('front_experience_view', {'slug' : experience.slug }) }}">See more</a></div>'+
                         '</div>'+
                         '</div>';
 

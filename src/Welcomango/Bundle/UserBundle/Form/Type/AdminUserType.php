@@ -93,13 +93,13 @@ class AdminUserType extends AbstractType
             'label'        => false
         ));
 
-        $builder->add('password', 'repeated', array(
+/*        $builder->add('password', 'repeated', array(
             'type'            => 'password',
             'invalid_message' => 'The passwords don\'t match',
             'options'         => array('required' => true),
             'first_options'   => array('label' => 'form.user.password'),
             'second_options'  => array('label' => 'form.user.password.validate'),
-        ));
+        ));*/
 
         $builder->add('medias', 'entity', array(
             'class' => 'Welcomango\Model\Media',

@@ -38,7 +38,7 @@ class LoadExperienceData extends AbstractFixture implements FixtureInterface, Or
         );
 
 
-        $i = 0;
+        $count = 0;
         foreach($experiences as $experience){
             //Each experience has a creator
             $entry = new Experience();
@@ -50,8 +50,8 @@ class LoadExperienceData extends AbstractFixture implements FixtureInterface, Or
             $entry->setCreatedAt(new \DateTime());
             $entry->setUpdatedAt(new \DateTime());
             $entry->setPublicationStatus('published');
-            ($i%2 == 0 ? $entry->setFeatured(true) : $entry->setFeatured(false));
-            $i++;
+            ($count%2 == 0 ? $entry->setFeatured(true) : $entry->setFeatured(false));
+            $count++;
 
             $estimatedDuration = rand(1,8);
             $entry->setEstimatedDuration($estimatedDuration);

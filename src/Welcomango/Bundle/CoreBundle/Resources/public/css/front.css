@@ -280,6 +280,17 @@ div.dotted-line span {
     margin-top: 20px;
 }
 
+.card-price-tag{
+    -moz-box-shadow: -1px 0px 1px 0px #656565;
+    -webkit-box-shadow: -1px 0px 1px 0px #656565;
+    -o-box-shadow: -1px 0px 1px 0px #656565;
+    box-shadow: -1px 0px 1px 0px #656565;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=180, Strength=1);
+    float:right;
+    margin-right:-15px;
+    padding:5px 10px 5px 10px;
+}
+
 /* //////////////////////////////////////////////////////// */
 /* ////////////////   USER IN CARD UI  //////////////////// */
 /* //////////////////////////////////////////////////////// */
@@ -501,6 +512,8 @@ a h4:hover{
 
 #experience-hidden-pictures {
     display:none;
+    /*-webkit-transition: all 0.2s; *//* Safari *//*
+    transition: all 0.2s;*/
 }
 
 #experience-hidden-pictures.experience-pictures-visible {

@@ -10,16 +10,24 @@ interface.comment: Comment
 interface.contact: Contact
 interface.waitingForValidation: Waiting for validation
 interface.search: Search
+interface.register: Register
+interface.warning: Warning
+
+login.rememberMe: Remember me
+login.forgotPassword: Forgot your password?
+login.resetPassword: Reset your password
+login.password.requestText: So you forgot your password... You should have listen to your mom and eat more carrots!
+login.password.alreadyRequestText: It seems that you have already requested your password. Check your spam folder or report a problem
 
 menu.title.experiences: Experiences
 menu.title.portraits: Portraits
 menu.title.howTo: How To
 menu.title.signUp: Sign Up
 
-
 global.viewProfile: View profile
 global.comments: Comments
 global.feedbacks: Feedbacks
+global.welcomeBack: Welcome back
 
 profile.menu: Menu
 profile.message: Messages
@@ -88,6 +96,12 @@ experience.noNoteYet: No note received yet
 experience.manage.introductionText: You may have lived in this current city for years and find the idea of a theme oriented experience a bit limitating... Well, here you can create a new experience with a different flavor to propose another version of your city to travelers. For example, if you already propose a culture oriented visit of your town, you can also propose a second experience about the nightlife and the different things happening by night! Let your knowledge of the city talk and try to intrigued the potential visitors ;)
 experience.manage.title: A different flavor of your city
 
+experience.create.title: Your experience has been succesfully created!
+experience.create.subTitle: We are just going to have a look at it and it should be published very soon
+experience.create.message: Thanks a lot for proposing this tour of your city! You\'re part of the community and helping us making traveling better</br> Have a look and see what it looks like! Or just go back to your profile
+experience.create.button1Message: Your experiences
+experience.create.button2Message: Back to profile
+
 booking.bookingFor: Your reservation for <span class="text-primary">%title%</span> in <span class="text-primary">%city%</span> with <span class="text-primary">%user%</span>
 booking.requestFor: Request for <span class="text-primary">%title%</span> from <span class="text-primary">%username%</span>
 
@@ -113,3 +127,9 @@ article.portraitTitle: One community. Different faces
 contact.pageTitle: Contact & Feedbacks
 contact.text: A question? A problem you faced? A query to our team? Our team is here for you, so just send us a message! We'll use our Delorean to answer you before you even ask if we can.
 contact.subText: If your message concerns a bug, don't hesitate to describe your problem as precisely as possible. The more information we have, the better we will be at fixing the issue!
+contact.sent.title: Message successfully sent!
+contact.sent.subTitle: We can already hear it flying toward us
+contact.sent.message: Thanks for contacting us, we will do our best to handle your query and come back to you as soon as possible
+contact.sent.button1Message: Back to home
+
+email.experience.requestSubject: You have a new request for your experience %experience%

@@ -89,6 +89,7 @@ gulp.task('assets-js', function() {
         'components/pages-assets/pages-front/plugins/swiper/js/swiper.jquery.min.js',
 
         'components/wow/dist/wow.js',
+        'components/magnific-popup/dist/jquery.magnific-popup.js',
 
         /*'components/pages-assets/pages-front/plugins/bootstrap/js/bootstrap.min.js',
         'components/pages-assets/pages-front/plugins/bootstrap/js/npm.js',*/
@@ -262,6 +263,7 @@ gulp.task('assets-css', function() {
         'components/pages-assets/pages-front/plugins/bootstrap-datepicker/css/datepicker3.css',
         'components/pages-assets/pages-front/plugins/jquery-datatable/media/css/*',
         'components/wow/css/libs/animate.css',
+        'components/magnific-popup/dist/magnific-popup.css',
     ])
         .pipe(minifyCSS())
         .pipe(concat('plugins-front.css'))
