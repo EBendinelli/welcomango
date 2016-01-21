@@ -64,12 +64,10 @@ class AdminMediaController extends BaseController
 
         if ($form->isValid()) {
             $media = $form->getData();
-            $file  = $media->getFile();
-
-            $media->setFilename($file->getBasename('.'.$file->guessExtension()));
-            $media->setExtension($file->guessExtension());
+            $file  = $form['file']->getData();
+            $this->get('welcomango.media.manager')->generateSimpleMedia($file->getClientOriginalName(), $media);
+            $media->setOriginalFilename($file->getClientOriginalName());
             $media->setSize($file->getSize());
-            $media->setMimeType($file->getMimeType());
 
             $this->getDoctrine()->getManager()->persist($media);
             $this->getDoctrine()->getManager()->flush();
@@ -95,10 +93,12 @@ class AdminMediaController extends BaseController
      */
     public function editAction(Request $request, Media $media)
     {
-        $form = $this->createForm($this->get('welcomango.form.media.type'), $media);
+        $form = $this->createForm(AdminMediaType::class, $media);
         $form->handleRequest($request);
         if ($form->isValid()) {
-            $media->upload();
+            $media = $form->getData();
+            $file  = $form['file']->getData();
+            $this->get('welcomango.media.manager')->generateSimpleMedia($file->getClientOriginalName(), $media);
             $this->getDoctrine()->getManager()->persist($media);
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', $this->trans('media.edit.success', array(), 'media'));

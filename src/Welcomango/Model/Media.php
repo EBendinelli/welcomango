@@ -51,13 +51,6 @@ class Media
     protected $experiences;
 
     /**
-     * @var User
-     *
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="medias")
-     **/
-    protected $user;
-
-    /**
      * The constructor
      */
     public function __construct()

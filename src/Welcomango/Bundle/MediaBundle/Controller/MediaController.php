@@ -52,17 +52,15 @@ class MediaController extends BaseController
      *
      * @param Request $request
      *
-     * @Route("/experience/media/delete", name="experience_media_delete")
+     * @Route("/media/delete", name="media_delete")
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function mediaDeleteAction(Request $request)
     {
         $originalFilename = $request->request->get('file');
-        $tmpFilename      = $this->get('welcomango.media_namer')->getTempName($originalFilename);
-
-        $tmpAdapter = $this->get('knp_gaufrette.filesystem_map')->get('gallery');
-        $tmpAdapter->get($tmpFilename)->delete();
+        $tmpAdapter       = $this->get('knp_gaufrette.filesystem_map')->get('gallery');
+        $tmpAdapter->get($originalFilename)->delete();
 
         return new JsonResponse();
     }
@@ -76,21 +74,30 @@ class MediaController extends BaseController
      */
     public function mediaCropAction(Request $request)
     {
-        $targetWidth  = (int) $request->request->get('w');
-        $targetHeight = (int) $request->request->get('h');
-        $xPos         = $request->request->get('x');
-        $yPos         = $request->request->get('y');
-        $src          = $request->request->get('tempName');
-        $jpegQuality  = 100;
+        $pathToUpload  = '/'.\date("Y").'/'.\date("m").'/';
+        $targetWidth   = (int) $request->request->get('w');
+        $targetHeight  = (int) $request->request->get('h');
+        $xPos          = $request->request->get('x');
+        $yPos          = $request->request->get('y');
+        $filename      = $request->request->get('tempName');
+        $jpegQuality   = 100;
+        $tempDir       = $this->getParameter('media_temp_root_dir');
+        $filesystemMap = $this->get('knp_gaufrette.filesystem_map');
+        $tempadapter   = $filesystemMap->get('gallery');
+        $fileContent   = $tempadapter->read($filename);
 
-        $source        = imagecreatefromjpeg('/home/jaybe/www/welcomango/web'.$src);
+        $source        = imagecreatefromjpeg($tempDir.'/'.$filename);
         $resourceImage = imagecreatetruecolor($targetWidth, $targetHeight);
+
+        if ($tempadapter->has($filename)) {
+            $tempadapter->delete($filename);
+        }
 
         imagecopyresampled($resourceImage, $source, 0, 0, $xPos, $yPos, $targetWidth, $targetHeight, $targetWidth, $targetHeight);
 
         header('Content-type: image/jpeg');
-        imagejpeg($resourceImage, '/home/jaybe/www/welcomango/web/medias/resize/filename.jpg', $jpegQuality);
+        imagejpeg($resourceImage, $tempDir.'/'.$filename, $jpegQuality);
 
-        return new Response();
+        return new JsonResponse(['filename' => $filename]);
     }
 }

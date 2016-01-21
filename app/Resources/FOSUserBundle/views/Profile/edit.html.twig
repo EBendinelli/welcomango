@@ -98,8 +98,12 @@
                 </div>
                 <div>
                     <div class="profile-form-note m-t-20">{{ "profile.edit.profilePictureNote"|trans }}</div>
-                    {{ form_row(form.medias_upload) }}
-                    <div id="medias" class="dropzone media-dropzone"></div>
+                    {{ form_row(form.media_photo) }}
+                    <div class="col-md-12" id="profile-media-croped">
+                        {% if user.profileMedia %}
+                            <img src="{{ user.profileMedia.getPath ~ user.profileMedia.getOriginalFilename }}"/>
+                        {% endif%}
+                    </div>
                 </div>
                 <div class="profile-form-note m-t-20">{{ "profile.edit.phoneNote"|trans }}</div>
                 <div class="row">
@@ -107,8 +111,6 @@
                     <div class="col-md-6">{{ form_row(form.gender) }}</div>
                 </div>
                 <div class="m-t-20">{{ form_row(form.birthdate) }}</div>
-
-
             </div>
 
             <div class="text-right m-t-20">
@@ -120,13 +122,21 @@
             {{ form_end(form) }}
         </div>
     </div>
+    {% include "WelcomangoMediaBundle:Media:modal.html.twig" %}
 {% endblock profile_content %}
 
 {% block javascripts %}
     {{ parent() }}
     {{ form_javascript(form) }}
-
+    {% include "WelcomangoMediaBundle:Media:_baseJs.html.twig" with {
+        'file_input_id' : 'front_user_edit_media_photo',
+        'in_modal' : true,
+        'id_crop_button' : "modal-save-crop-button",
+        'id_croped_media' : 'profile-media-croped'
+    } %}
+{#
     {{ include('WelcomangoMediaBundle:AdminMedia:_baseJs.html.twig', {'hiddenInput' : 'front_user_edit_medias_upload'}) }}
+#}
 
     <script type="text/javascript">
 
@@ -244,5 +254,5 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link href="{{ asset("css/dropzone.min.css") }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{ asset("css/Jcrop.min.css") }}"/>
 {% endblock %}

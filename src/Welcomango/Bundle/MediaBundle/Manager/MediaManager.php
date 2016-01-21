@@ -85,6 +85,41 @@ class MediaManager
     }
 
     /**
+     * @param string $mediaName
+     * @param Media  $entity
+     *
+     * @return ArrayCollection
+     */
+    public function generateSimpleMedia($mediaName, $entity)
+    {
+        $realAdapter  = $this->filesystemMap->get('real');
+        $tempadapter  = $this->filesystemMap->get('gallery');
+        $pathToUpload = '/'.\date("Y").'/'.\date("m").'/';
+
+        $currentMedia = $entity->getProfileMedia();
+        if ($currentMedia instanceof Media) {
+            if ($realAdapter->has($pathToUpload.$currentMedia->getOriginalFilename())) {
+                $realAdapter->delete($pathToUpload.$currentMedia->getOriginalFilename());
+            }
+        } else {
+            $currentMedia = new Media();
+        }
+
+        $mediaPrefix = $this->getMediaPrefix($entity);
+        if ($mediaName !== "") {
+            $tempFileName = $this->mediaNamer->getTempName($mediaName);
+            $currentMedia->setOriginalFilename($mediaPrefix.$mediaName);
+            $currentMedia->setPath('/uploads'.$pathToUpload);
+            if (!$realAdapter->has('/uploads'.$pathToUpload.$mediaName)) {
+                $fileContent = $tempadapter->read($tempFileName);
+                $realAdapter->write($pathToUpload.$mediaPrefix.$mediaName, $fileContent);
+            }
+        }
+
+        return $currentMedia;
+    }
+
+    /**
      * @param mixed $entity
      *
      * @return string

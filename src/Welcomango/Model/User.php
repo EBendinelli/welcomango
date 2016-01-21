@@ -140,10 +140,10 @@ class User extends BaseUser implements ParticipantInterface
     private $occupation;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Media", inversedBy="user", cascade={"persist", "remove"})
-     * @ORM\JoinTable(name="wm_users_medias")
-     **/
-    private $medias;
+     * @ORM\OneToOne(targetEntity="Media", cascade={"persist"})
+     * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
+     */
+    private $profileMedia;
 
     /**
      * @ORM\OneToMany(targetEntity="Feedback", mappedBy="poster", cascade={"persist", "remove"})
@@ -660,7 +660,7 @@ class User extends BaseUser implements ParticipantInterface
         $this->spokenLanguages = new ArrayCollection();
         $this->experiences     = new ArrayCollection();
         $this->bookings        = new ArrayCollection();
-        $this->pages        = new ArrayCollection();
+        $this->pages           = new ArrayCollection();
     }
 
     /**
@@ -674,43 +674,19 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * @return ArrayCollection
+     * @return Media
      */
-    public function getMedias()
+    public function getProfileMedia()
     {
-        return $this->medias;
+        return $this->profileMedia;
     }
 
     /**
-     * @param ArrayCollection $medias
+     * @param Media $profileMedia
      */
-    public function setMedias($medias)
+    public function setProfileMedia($profileMedia)
     {
-        $this->medias = $medias;
-    }
-
-    /**
-     * Add medias
-     *
-     * @param Media $medias
-     *
-     * @return User
-     */
-    public function addMedia(\Welcomango\Model\Media $medias)
-    {
-        $this->medias[] = $medias;
-
-        return $this;
-    }
-
-    /**
-     * Remove medias
-     *
-     * @param \Welcomango\Model\Media $medias
-     */
-    public function removeMedia(\Welcomango\Model\Media $medias)
-    {
-        $this->medias->removeElement($medias);
+        $this->profileMedia = $profileMedia;
     }
 
     /**
@@ -781,7 +757,7 @@ class User extends BaseUser implements ParticipantInterface
      */
     public function setPostedFeedbacks($postedFeedbacks)
     {
-        $this->postedFeedbacks= $postedFeedbacks;
+        $this->postedFeedbacks = $postedFeedbacks;
     }
 
     /**
