@@ -47,7 +47,10 @@
 
             <!-- START USER CONTENT -->
             <div class="col-md-9">
+                {% include "::flash.html.twig" with{'class': 'm-t-20'} %}
+
                 {% block profile_content %}
+
 
                 <!-- BEGIN MAIN INFO BLOCK -->
                     <div id="user-content" class="m-t-30">

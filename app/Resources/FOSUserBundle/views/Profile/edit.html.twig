@@ -54,29 +54,30 @@
         </div>
     </div>#}
 
-    <div class="alert alert-info m-t-20">
-        <button class="close" data-dismiss="alert"></button>
+    <div class=" p-l-10 p-b-10 p-t-10 m-t-20 b-a b-grey profile-form-note m-t-10 bg-master-light">
         This section defines what the other traveler will see from you. <br/>
         Make sure to tell them how you see yourself as a travel as well as a local when you're not on a trip!
     </div>
 
+
+
     <div id="myFormWizard" class="m-t-20">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs nav-tabs-linetriangle nav-tabs-separator">
-            <li class="active">
+            <li class="{% if activeTab == 'current' %}active{% endif %}">
                 <a data-toggle="tab" href="#tab1"><i class="fa pg-map tab-icon"></i> <span>Current situation</span></a>
             </li>
             <li class="">
                 <a data-toggle="tab" href="#tab2"><i class="fa fa-language tab-icon"></i> <span>Languages</span></a>
             </li>
-            <li class="">
+            <li class=" {% if activeTab == 'about' %}active{% endif %}">
                 <a data-toggle="tab" href="#tab3"><i class="fa fa-user tab-icon"></i> <span>About you</span></a>
             </li>
         </ul>
         <!-- Tab panes -->
         {{ form_start(form, {'action': path('fos_user_profile_edit')}) }}
         <div class="tab-content bg-white p-l-20 p-r-20 p-t-20 p-b-20 ">
-            <div class="tab-pane active slide" id="tab1">
+            <div class="tab-pane {% if activeTab == 'current' %}active{% endif %} slide" id="tab1">
                 <div class="row">
                     <div class="profile-form-note m-t-10">{{ "profile.edit.currentCityNote"|trans }}</div>
                     <div>{{ form_row(form.currentCityInput, {'attr': {'onFocus':'geolocate()'}}) }}</div>
@@ -89,7 +90,7 @@
             <div class="tab-pane slide" id="tab2">
                 ...
             </div>
-            <div class="tab-pane slide" id="tab3">
+            <div class="tab-pane slide {% if activeTab == 'about' %}active{% endif %}" id="tab3">
                 <div class="profile-form-note">{{ "profile.edit.usernameNote"|trans }}</div>
                 <div>{{ form_row(form.username) }}</div>
                 <div class="row m-t-20">
@@ -110,7 +111,16 @@
                     <div class="col-md-6">{{ form_row(form.phone) }}</div>
                     <div class="col-md-6">{{ form_row(form.gender) }}</div>
                 </div>
-                <div class="m-t-20">{{ form_row(form.birthdate) }}</div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="profile-form-note m-t-20">{{ "profile.edit.birthdayNote"|trans }}</div>
+                        <div class="m-t-20">{{ form_row(form.birthdate) }}</div>
+                    </div>
+                </div>
+                <hr/>
+                <div>
+                    <a data-toggle='modal' data-target='.modal-change-password'  data-text='Change password'>Change password</a>
+                </div>
             </div>
 
             <div class="text-right m-t-20">
@@ -122,7 +132,10 @@
             {{ form_end(form) }}
         </div>
     </div>
+
     {% include "WelcomangoMediaBundle:Media:modal.html.twig" %}
+    {% include "WelcomangoUserBundle:User:changePasswordModal.html.twig" with {'form': passwordForm } %}
+
 {% endblock profile_content %}
 
 {% block javascripts %}

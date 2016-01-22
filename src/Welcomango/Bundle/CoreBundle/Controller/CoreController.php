@@ -107,7 +107,7 @@ class CoreController extends BaseController
                 'sub_title'       => $this->trans('contact.sent.subTitle', array(), 'interface'),
                 'message'         => $this->trans('contact.sent.message', array(), 'interface'),
                 'button1_path'    => $this->get('router')->generate('front_homepage'),
-                'button1_message' => $this->trans('contact.sent.button1Message', array(), 'interface'),
+                'button1_message' => $this->trans('global.backHome', array(), 'interface'),
             ));
         }
 

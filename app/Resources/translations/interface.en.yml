@@ -16,8 +16,13 @@ interface.warning: Warning
 login.rememberMe: Remember me
 login.forgotPassword: Forgot your password?
 login.resetPassword: Reset your password
-login.password.requestText: So you forgot your password... You should have listen to your mom and eat more carrots!
+login.password.requestText: So you forgot your password... You should have listen to your mom and eaten more carrots!
 login.password.alreadyRequestText: It seems that you have already requested your password. Check your spam folder or report a problem
+login.password.changeTitle: Change your password
+login.password.currentHint: Please give your current password before proceding
+login.password.passwordHint: Try to keep something strong with letter, special characters and uppercase
+login.resetting.successTitle: Reset email Sent
+login.resetting.successSubTitle: Try not to forget it the next time!
 
 menu.title.experiences: Experiences
 menu.title.portraits: Portraits
@@ -28,6 +33,7 @@ global.viewProfile: View profile
 global.comments: Comments
 global.feedbacks: Feedbacks
 global.welcomeBack: Welcome back
+global.backHome: Back to home
 
 profile.menu: Menu
 profile.message: Messages
@@ -69,9 +75,13 @@ profile.edit.occupationNote: You current occupation. You can be a student, an ar
 profile.edit.usernameNote: This is only used by you to login. It is just like you: Unique.
 profile.edit.profilePictureNote: We already know you are beautiful, but people might want to verify that. Upload a photo, just in case.
 profile.edit.phoneNote: This will not be displayed publicly. We might only use it to send you texts and reminders (if you want to).
+profile.edit.birthdayNote: We're not santa but if we can send you a message or a gift on your birthday we will do it
 profile.lastExperiencesAttended: Last experiences attented by %user%
 profile.bestAdventure: Best experience
 profile.about: About %user%
+profile.picture.cropNote: Help us make you beautiful and crop your picture
+profile.picture.saveAndCrop: Crop and save your picture
+profile.picture.mustBeSquare: Sorry, but you profile picture must be a square!
 
 experience.list.subHeader: Time to find your amazing Welcomanguide
 experience.experienceShortText: A %experienceDuration%h adventure proposed by %experienceCreator%
@@ -130,6 +140,5 @@ contact.subText: If your message concerns a bug, don't hesitate to describe your
 contact.sent.title: Message successfully sent!
 contact.sent.subTitle: We can already hear it flying toward us
 contact.sent.message: Thanks for contacting us, we will do our best to handle your query and come back to you as soon as possible
-contact.sent.button1Message: Back to home
 
 email.experience.requestSubject: You have a new request for your experience %experience%

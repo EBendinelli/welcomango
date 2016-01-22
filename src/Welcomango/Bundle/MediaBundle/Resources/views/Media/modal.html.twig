@@ -10,9 +10,12 @@
                 </div>
                 <div class="modal-body">
                     <div id="modal-error"></div>
+                    <div class="profile-form-note m-b-10">{{ "profile.picture.cropNote"|trans }}</div>
                     <div id="media-modal"></div>
-                    <button type="button" data-dismiss="modal" class="btn btn-info  btn-cons"><i class="fa fa-arrow-left "></i> Cancel</button>
-                    <a id="modal-save-crop-button" class="btn btn-success btn-cons"><i class="fa sa-save"></i>{{ 'save.and.crop'|trans }}</a>
+                    <div class="m-t-10">
+                        <button type="button" data-dismiss="modal" class="btn btn-info  btn-cons"><i class="fa fa-arrow-left "></i> Cancel</button>
+                        <a id="modal-save-crop-button" class="btn btn-success btn-cons"><i class="fa sa-save"></i>{{ 'profile.picture.saveAndCrop'|trans }}</a>
+                    </div>
                     <div style="display: none">
                         <label>X1 <input type="text" size="4" id="x" name="x" /></label>
                         <label>Y1 <input type="text" size="4" id="y" name="y" /></label>
@@ -20,7 +23,6 @@
                         <label>Y2 <input type="text" size="4" id="y2" name="y2" /></label>
                         <label>W <input type="text" size="4" id="w" name="w" /></label>
                         <label>H <input type="text" size="4" id="h" name="h" /></label>
-                        <button type="button" class="btn btn-success" id="crop-media" >CROP MODA FUCKA</button>
                     </div>
                 </div>
             </div>

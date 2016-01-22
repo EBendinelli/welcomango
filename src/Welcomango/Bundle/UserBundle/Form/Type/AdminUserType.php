@@ -101,10 +101,9 @@ class AdminUserType extends AbstractType
             'second_options'  => array('label' => 'form.user.password.validate'),
         ));*/
 
-        $builder->add('medias', 'entity', array(
+        $builder->add('profileMedia', 'entity', array(
             'class' => 'Welcomango\Model\Media',
             'property' => 'title',
-            'multiple' => true,
             'required' => false,
             'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('m');

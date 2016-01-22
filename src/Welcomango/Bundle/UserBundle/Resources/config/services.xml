@@ -46,6 +46,11 @@
             <argument type="service" id="router"/>
             <tag name="kernel.event_subscriber"/>
         </service>
+
+        <service id="welcomango.password_changed" class="Welcomango\Bundle\UserBundle\Listener\PasswordChangedListener">
+            <argument type="service" id="router"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
     </services>
 
 </container>
