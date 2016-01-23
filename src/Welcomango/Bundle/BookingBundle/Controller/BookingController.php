@@ -210,7 +210,7 @@ class BookingController extends BaseController
 
         $this->getDoctrine()->getManager()->persist($booking);
         $this->getDoctrine()->getManager()->flush();
-        $this->addFlash('success', $this->trans('booking.edit.success', array(), 'crm'));
+        $this->addFlash('success', $this->trans('booking.action.message', array('%status%' => $booking->getStatus()), 'interface'));
 
         //We get the user who made the request
         $user = $booking->getUser();

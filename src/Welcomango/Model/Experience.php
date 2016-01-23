@@ -478,7 +478,7 @@ class Experience
     }
 
     /**
-     * @return mixed
+     * @return User
      */
     public function getCreator()
     {
@@ -486,7 +486,7 @@ class Experience
     }
 
     /**
-     * @param mixed $user
+     * @param User $user
      */
     public function setCreator($creator)
     {

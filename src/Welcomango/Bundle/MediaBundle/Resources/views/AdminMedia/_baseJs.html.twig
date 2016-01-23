@@ -43,7 +43,7 @@
                     }
                 });
                 this.on("removedfile", function(file) {
-                    $.post("{{ path('experience_media_delete') }}", {'file': file.name}, function (response) {}, 'html');
+                    $.post("{{ path('media_delete') }}", {'file': file.name}, function (response) {}, 'html');
                     var index = medias.indexOf(file.name);
                     medias.splice(index, 1);
                     computeMediaName();

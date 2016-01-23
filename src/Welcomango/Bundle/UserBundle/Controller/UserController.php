@@ -32,7 +32,7 @@ class UserController extends BaseController
      */
     public function viewAction(Request $request, User $user)
     {
-        $proposedExperiences = $user->getExperiences();
+        $proposedExperiences = $user->getPublishedExperiences();
 
         $attendedExperiences = $this
             ->getRepository('Welcomango\Model\Experience')

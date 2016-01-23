@@ -85,7 +85,7 @@ class ExperienceType extends AbstractType
                 'choices' => $maximumDurations,
                 'label'   => 'form.experience.maximumDuration',
             ])
-            ->add('price_per_hour', 'text', ['label' => 'form.experience.pricePerHour'])
+            ->add('price_per_hour', 'integer', ['label' => 'form.experience.pricePerHour'])
             ->add('maximum_participants', 'choice', [
                 'choices' => $maximumParticipants,
                 'label'   => 'form.experience.maximumParticipants',
@@ -97,6 +97,7 @@ class ExperienceType extends AbstractType
                 'allow_delete' => true,
                 'label'        => false,
             ]);
+
 
     }
 

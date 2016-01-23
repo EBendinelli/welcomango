@@ -76,15 +76,19 @@ class ExperienceRepository extends EntityRepository
      *
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function createPagerQueryBuilder(array $filters = array(), $isDeleted = false)
+    public function createPagerQueryBuilder(array $filters = array(), $admin = false)
     {
         $queryBuilder = $this
             ->createQueryBuilder('e')
             ->leftJoin('e.availabilities', 'a')
-            ->leftJoin('e.tags', 't')
-            ->where('e.publicationStatus = \'published\'');
+            ->leftJoin('e.tags', 't');
 
-        if(!$isDeleted) $queryBuilder->andWhere('e.deleted = false');
+        if(!$admin){
+            $queryBuilder
+                ->andWhere('e.deleted = false')
+                ->andWhere('e.publicationStatus = \'published\'');
+        }
+
 
         if ($city = $this->getFilter('city', $filters)) {
             $queryBuilder->andWhere('e.city = :city');

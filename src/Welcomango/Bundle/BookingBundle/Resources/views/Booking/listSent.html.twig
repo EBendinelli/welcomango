@@ -2,35 +2,33 @@
 
 {% form_theme ratingForm with ["::frontTheme.html.twig"] %}
 
+{% trans_default_domain 'interface' %}
+
 {% block profile_content %}
     <div class="text-center m-b-20">
         <h2>{{ 'booking.requestsSent'|trans }}</h2>
-        <div class="hint">{{ 'booking.requestSentExplanation' }}</div>
+        <div class="hint">{{ 'booking.requestSentExplanation'|trans }}</div>
     </div>
 
     <div class="row m-b-20">
-        <div class="col-md-6 text-right"><button id="participation-pending-filter" class="btn btn-dark {%  if activeTab == 'sent' %}btn-primary{% endif %}" onClick="filterStatus(this, 'sent');  toggleFilterClass(this)">Pending</button></div>
-        <div class="col-md-6 text-left"><button id="participation-happened-filter" class="btn btn-dark {%  if activeTab == 'happened' %}btn-primary{% endif %}" onClick="filterStatus(this, 'happened');  toggleFilterClass(this)">Happened</button></div>
+        <div class="col-md-6 text-center col-md-offset-3">
+            <button id="participation-pending-filter" class="btn btn-dark {%  if activeTab == 'sent' %}btn-primary{% endif %}" onClick="filterStatus(this, 'sent');  toggleFilterClass(this)">Pending</button>
+            <button id="participation-happened-filter" class="btn btn-dark {%  if activeTab == 'happened' %}btn-primary{% endif %}" onClick="filterStatus(this, 'happened');  toggleFilterClass(this)">Happened</button>
+        </div>
     </div>
 
     <div class="panel panel-default portlet">
         <!-- TABLE OF REQUEST SEND BY THE USER-->
         <div class="panel-body" id="profile_request_sent">
             <div class="table-responsive">
-                {% if activeTab == 'sent' %}
-                    {% set timeColumnName = 'booking.requestedTime'|trans  %}
-                {% elseif activeTab == 'happened' %}
-                    {% set timeColumnName = 'booking.happenedTime'|trans  %}
-                {% endif %}
-
                 <table class="entity-table table table-condensed" >
                     <thead>
                     <tr>
-                        <th class="col-md-3">{{ 'booking.experience'|trans }}</th>
-                        <th class="col-md-2">{{ 'booking.date'|trans }}</th>
-                        <th class="col-md-1">{{ 'booking.meetingTime'|trans }}</th>
-                        <th class="col-md-2">{{ 'booking.status'|trans }}</th>
-                        <th class="col-md-2">{{ 'booking.control'|trans }}</th>
+                        <th class="col-md-3">{{ 'global.experience'|trans }}</th>
+                        <th class="col-md-2">{{ 'global.date'|trans }}</th>
+                        <th class="col-md-1">{{ 'global.meetingTime'|trans }}</th>
+                        <th class="col-md-2">{{ 'global.status'|trans }}</th>
+                        <th class="col-md-2">{{ 'global.actions'|trans }}</th>
                     </tr>
                     </thead>
 
@@ -73,24 +71,21 @@
                             <td colspan="5">
                                 <div class="row">
                                     <div class="col-md-12 semi-bold text-center m-b-20">
-                                        {{ 'booking.sentTo'|trans }}
-                                        <a href="{{ asset(path('front_user_view', {'user_id': booking.user.id})) }}" class="text-primary semi-bold">
-                                            {{ booking.experience.getCreator.fullname }}
-                                        </a>
+                                        {{ 'booking.sentTo'|trans({'%name%': booking.experience.getCreator.fullname, '%route%': asset(path('front_user_view', {'user_id': booking.experience.getCreator.id}))})|raw }}
                                     </div>
                                 </div>
                                 <div class="row m-b-10">
                                     <div class="col-md-6">
                                         <div>
                                             <i class="fa fa-user p-r-5"></i>
-                                            <span class="semi-bold">{{ booking.numberOfParticipants }}</span> {{ 'booking.participants'|trans }}
+                                            {{ 'booking.participants'|trans({'%number%': booking.numberOfParticipants })|raw }}
                                         </div>
                                         <div><i class="fa fa-street-view p-r-5"></i>
-                                            {{ 'booking.meetingAt'|trans }}: <span class="semi-bold">{{ booking.startDatetime|date('H:i') }}</span></div>
+                                            {{ 'booking.meetingAt'|trans({'%time%': booking.startDatetime|date('H:i') })|raw }}</div>
                                         <div><i class="fa fa-clock-o "></i>
-                                            {{ 'booking.duration'|trans }}: <span class="semi-bold">{{ date_difference(booking.startDatetime, booking.endDatetime) }}</span></div>
+                                            {{ 'booking.duration'|trans({'%duration%': date_difference(booking.startDatetime, booking.endDatetime)})|raw }}</div>
                                         <div><i class="fa fa-globe p-r-5"></i>
-                                            {{ 'booking.experiencesAttendedBy'|trans }}: <span class="semi-bold">{{ booking.user.getAttendedExperiences|length }}</span></div>
+                                            {{ 'booking.experiencesAttendedBy'|trans({'%number%': booking.experience.getNumberOfTimeAttended|length})|raw }}</div>
                                     </div>
                                     <div class="col-md-6">
                                         {% if activeTab == 'happened'  %}
@@ -107,7 +102,7 @@
                                                 {% endif %}
                                             {% endif %}
                                             {% if not feedbackFound %}
-                                                <div class="text-center p-t-20">{{ 'booking.noCommentReceived'|trans }}</div>
+                                                <div class="text-center p-t-20">{{ 'booking.noComment'|trans }}</div>
                                             {% endif %}
                                         {% else %}
                                             <div class="text-center m-t-20"><a href="{{ path('booking_sent_view', {'booking_id' : booking.id}) }}"  class="btn btn-complete">See more</a></div>

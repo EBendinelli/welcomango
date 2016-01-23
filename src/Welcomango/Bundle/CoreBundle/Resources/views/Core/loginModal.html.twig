@@ -1,3 +1,4 @@
+{% trans_default_domain 'interface' %}
 
 <div class="modal fade slide-up disable-scroll modal-login" tabindex="-1" role="dialog" aria-labelledby="modalSlideUpLabel" aria-hidden="false">
     <div class="modal-dialog ">
@@ -18,7 +19,7 @@
                                         <div class="controls">
                                             <div class="input-with-icon  right">
                                                 <i class=""></i>
-                                                <input class="form-control" type="text" id="username" name="_username"  placeholder="Username" />
+                                                <input class="form-control" type="text" id="username" name="_username"  placeholder="{{ 'interface.username'|trans({}, 'interface') }}" />
                                             </div>
                                         </div>
                                     </div>
@@ -30,7 +31,7 @@
                                         <div class="controls">
                                             <div class="input-with-icon right">
                                                 <i class=""></i>
-                                                <input class="form-control" id="password" type="password" name="_password" placeholder="password"/>
+                                                <input class="form-control" id="password" type="password" name="_password" placeholder="{{ 'interface.password'|trans({}, 'interface') }}"/>
                                             </div>
                                         </div>
                                     </div>
@@ -51,7 +52,7 @@
                                 <div class="row m-t-10">
                                     <div class="col-md-12 text-center">
                                         <button type="button" data-dismiss="modal" class="btn btn-info  btn-cons"><i class="fa fa-arrow-left "></i> Cancel</button>
-                                        <input type="submit" class="btn btn-primary btn-cons " value="{{ "login"|trans({}, "interface") }}" />
+                                        <input type="submit" class="btn btn-primary btn-cons " value="{{ "interface.login"|trans({}, "interface") }}" />
                                     </div>
                                 </div>
                             </form>

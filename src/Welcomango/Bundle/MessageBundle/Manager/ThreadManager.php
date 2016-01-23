@@ -100,7 +100,8 @@ class ThreadManager extends BaseThreadManager
             ->andWhere('tm.isDeleted = :isDeleted')
             ->setParameter('isDeleted', false, \PDO::PARAM_BOOL)
             // there is at least one message written by an other participant
-            ->andWhere('tm.lastMessageDate IS NOT NULL')
+            // WELCOMANGO: We removed this because we want the inbox to include sent messages
+            //->andWhere('tm.lastMessageDate IS NOT NULL')
             // sort by date of last message written by an other participant
             ->orderBy('tm.lastMessageDate', 'DESC');
     }

@@ -130,4 +130,15 @@ class ExperienceManager
 
         return $availablePeriodsPerDate;
     }
+
+    /**
+     * Change the status of the hasUpdatedStatus when this experience is viewed by its creator (so we don't keep notifying him)
+     *
+     * @param Experience $experience
+     */
+    public function clearUpdatedStatus($experience){
+        $experience->setUpdatedStatus(false);
+        $this->entityManager->persist($experience);
+        $this->entityManager->flush();
+    }
 }

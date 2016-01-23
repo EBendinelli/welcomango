@@ -375,6 +375,7 @@
         periodNames[4] = 'Evening';
         periodNames[5] = 'Night';
 
+        //Remove the forbidden date from the datepicker
         $('#front_booking_desired_date').datepicker({
             startDate: startDate,
             endDate: endDate,
@@ -387,6 +388,11 @@
 
                 if (forbidden.indexOf(curr_date)>-1) return false;
             }
+        });
+
+        //Close the datepicker when a date is selected
+        $('#front_booking_desired_date').on('changeDate', function(ev){
+            $(this).datepicker('hide');
         });
 
         //Update period available based on a date

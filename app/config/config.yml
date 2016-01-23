@@ -178,6 +178,9 @@ fos_message:
     message_class: Welcomango\Model\Message
     composer: welcomango.message.composer
     sender: welcomango.message.sender
+    thread_manager: welcomango.thread_manager
+    reply_form:
+        type: welcomango.new.thread.type
 
 oneup_uploader:
     mappings:

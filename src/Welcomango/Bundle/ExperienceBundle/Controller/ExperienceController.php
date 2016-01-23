@@ -154,9 +154,9 @@ class ExperienceController extends BaseController
                 'sub_title'       => $this->trans('experience.create.subTitle', array(), 'interface'),
                 'message'         => $this->trans('experience.create.message', array(), 'interface'),
                 'button1_path'    => $this->get('router')->generate('front_experience_profile_list'),
-                'button1_message' => $this->trans('experience.create.button1Message', array(), 'interface'),
+                'button1_message' => $this->trans('global.backToYourExperiences', array(), 'interface'),
                 'button2_path'    => $this->get('router')->generate('fos_user_profile_show'),
-                'button2_message' => $this->trans('experience.create.button2Message', array(), 'interface'),
+                'button2_message' => $this->trans('global.backProfile', array(), 'interface'),
             ));
         }
 
@@ -267,7 +267,7 @@ class ExperienceController extends BaseController
                 'return_message' => 'Return to experiences',
             ));
         }
-        if ($experience->getPublicationStatus() == 'pending') {
+        if ($experience->getPublicationStatus() == 'pending' || $experience->getPublicationStatus() == 'refused') {
             return $this->render('WelcomangoCoreBundle:CRUD:notAllowed.html.twig', array(
                 'title'          => 'This experience has not been approved yet.',
                 'message'        => 'Just wait a moment until we validate it',
@@ -277,7 +277,12 @@ class ExperienceController extends BaseController
             ));
         }
 
+        $experienceManager = $this->get('welcomango.front.experience.manager');
+
         $user = $this->getUser();
+        if ($user == $experience->getCreator() && $experience->hasUpdatedStatus()) {
+            $experienceManager->clearUpdatedStatus($experience);
+        }
 
         //Get Comments
         $feedbacks = $experienceRepository->getCommentsForExperience($experience);
@@ -286,8 +291,8 @@ class ExperienceController extends BaseController
         $relatedExperiences = $experienceRepository->getFeatured(3);
 
         //Get forbidden dates for datepicker
-        $forbiddenDates = $this->get('welcomango.front.experience.manager')->getForbiddenDatesForDatePicker($experience);
-        $availablePeriodsPerDate = $this->get('welcomango.front.experience.manager')->getAvailablePeriodPerDate($experience);
+        $forbiddenDates = $experienceManager->getForbiddenDatesForDatePicker($experience);
+        $availablePeriodsPerDate = $experienceManager->getAvailablePeriodPerDate($experience);
 
 
         // Prepare the booking form
@@ -356,7 +361,15 @@ class ExperienceController extends BaseController
                 $this->get('welcomango.message.creator')->createThread($booking, $user, $booking->getExperience()->getCreator(), $message);
             }
 
-            return $this->render('WelcomangoExperienceBundle:Experience:requestSent.html.twig');
+            //Success page if booking done successfully
+            $experienceCreator = $booking->getExperience()->getCreator();
+            return $this->render('WelcomangoCoreBundle:Core:success.html.twig', [
+                'title'           => $this->trans('experience.booking.title', array(), 'interface'),
+                'sub_title'       => $this->trans('experience.booking.subTitle', array(), 'interface'),
+                'message'         => $this->trans('experience.booking.message', array('%user%' => $experienceCreator->getFirstName()), 'interface'),
+                'button1_path'    => $this->get('router')->generate('front_experience_list'),
+                'button1_message' => $this->trans('global.backExperiences', array(), 'interface'),
+            ]);
         }
 
         return $this->render('WelcomangoExperienceBundle:Experience:view.html.twig', array(

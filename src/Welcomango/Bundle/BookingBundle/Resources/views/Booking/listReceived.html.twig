@@ -1,18 +1,17 @@
 {% extends "FOSUserBundle:Profile:show.html.twig" %}
 
+{% trans_default_domain 'interface' %}
+
 {% form_theme ratingForm with ["::frontTheme.html.twig"] %}
 
 {% block profile_content %}
 
     {% if user.getExperiences.isEmpty %}
-        <div class="row" >
-            <div class="col-md-12 text-center m-t-20 p-b-30 bg-white b-a b-grey">
-                <h2 >Oops</h2>
-                <i class="fa fa-meh-o fa-5x m-b-20"></i>
-                <p>{{ 'booking.noExperienceCreated' }}</p>
-                <a href={{ path('front_experience_create') }} class="m-t-20 btn btn-primary"><i class="fa fa-plus fa-lg m-r-5"></i>{{ 'booking.createExperience' }}</a>
-            </div>
-        </div>
+        {% include 'WelcomangoCoreBundle:Core:oopsBox.html.twig' with {
+            'message': 'booking.noExperienceCreated'|trans,
+            'route': path('front_experience_create'),
+            'buttonMsg': 'experience.createExperience'|trans
+        } %}
     {% else %}
         <div class="text-center m-b-20">
             <h2>{{ 'booking.requestReceivedFor'|trans }}</h2>
@@ -25,8 +24,10 @@
         </div>
 
         <div class="row m-b-20">
-            <div class="col-md-6 text-right"><a id="participation-pending-filter" class="btn btn-dark {%  if activeTab == 'received' %}btn-primary{% endif %}" onClick="filterStatus(this, 'received'); toggleFilterClass(this);">Pending</a></div>
-            <div class="col-md-6 text-left"><a id="participation-happened-filter" class="btn btn-dark {%  if activeTab == 'happened' %}btn-primary{% endif %}" onClick="filterStatus(this, 'happened'); toggleFilterClass(this);">Happened</a></div>
+            <div class="col-md-6 text-center col-md-offset-3">
+                <a id="participation-pending-filter" class="btn btn-dark {%  if activeTab == 'received' %}btn-primary{% endif %}" onClick="filterStatus(this, 'received'); toggleFilterClass(this);">Pending</a>
+                <a id="participation-happened-filter" class="btn btn-dark {%  if activeTab == 'happened' %}btn-primary{% endif %}" onClick="filterStatus(this, 'happened'); toggleFilterClass(this);">Happened</a>
+            </div>
         </div>
 
         <!-- NOTE: if we want to add an effect on the content display, we shall use div instead of table. See bellow -->
@@ -37,14 +38,14 @@
                     <table class="entity-table table table-condensed">
                         <thead>
                         <tr>
-                            <th class="col-md-3" >{{ 'booking.user'|trans }}</th>
+                            <th class="col-md-3" >{{ 'global.user'|trans }}</th>
                             {% if activeTab == 'received' %}
-                                <th class="col-md-2">{{ 'booking.requestedTime'|trans  }}</th>
+                                <th class="col-md-2">{{ 'global.requestedTime'|trans  }}</th>
                             {% else %}
-                                <th class="col-md-2">{{ 'booking.date'|trans }}</th>
+                                <th class="col-md-2">{{ 'global.date'|trans }}</th>
                             {% endif %}
-                            <th class="col-md-2">{{ 'booking.status'|trans }}</th>
-                            <th class="col-md-2">{{ 'booking.controls'|trans }}</th>
+                            <th class="col-md-2">{{ 'global.status'|trans }}</th>
+                            <th class="col-md-2">{{ 'global.actions'|trans }}</th>
                         </tr>
                         </thead>
 
@@ -78,24 +79,21 @@
                                 <td colspan="4">
                                     <div class="row">
                                         <div class="col-md-12 semi-bold text-center m-b-20">
-                                            {{ 'booking.requestFrom'|trans }}
-                                            <a href="{{ asset(path('front_user_view', {'user_id': booking.user.id})) }}" class="text-primary semi-bold">
-                                                {{ booking.user.firstname }} {{ booking.user.lastname }}
-                                            </a> for <span class="text-primary">{{ booking.startDatetime|date('d-m-Y')  }}</span>
+                                            {{ 'booking.requestFrom'|trans({'%name%': booking.user.fullname,'%route%': asset(path('front_user_view', {'user_id': booking.user.id})), '%time%': booking.startDatetime|date('d-m-Y')  })|raw }}
                                         </div>
                                     </div>
                                     <div class="row m-b-10">
                                         <div class="col-md-6">
                                             <div>
                                                 <i class="fa fa-user p-r-5"></i>
-                                                <span class="semi-bold">{{ booking.numberOfParticipants }}</span> {{ 'booking.participants'|trans }}
+                                                {{ 'booking.participants'|trans({'%number%': booking.numberOfParticipants })|raw }}
                                             </div>
                                             <div><i class="fa fa-street-view p-r-5"></i>
-                                                {{ 'booking.meetingAt'|trans }}: <span class="semi-bold">{{ booking.startDatetime|date('H:i') }}</span></div>
+                                                {{ 'booking.meetingAt'|trans({'%time%': booking.startDatetime|date('H:i') })|raw }}</div>
                                             <div><i class="fa fa-clock-o "></i>
-                                                {{ 'booking.duration'|trans }}: <span class="semi-bold">{{ date_difference(booking.startDatetime, booking.endDatetime) }}</span></div>
+                                                {{ 'booking.duration'|trans({'%duration%':date_difference(booking.startDatetime, booking.endDatetime)})|raw }}</div>
                                             <div><i class="fa fa-globe p-r-5"></i>
-                                                {{ 'booking.experiencesAttendedBy'|trans }}: <span class="semi-bold">{{ booking.user.getAttendedExperiences|length }}</span></div>
+                                                {{ 'booking.experiencesAttendedBy'|trans({'%number%':booking.user.getAttendedExperiences|length })|raw }}</div>
                                         </div>
                                         <div class="col-md-6">
                                             {% if activeTab == 'happened'  %}
@@ -135,7 +133,7 @@
                     } %}
 
                     {% if bookings.count == 0 %}
-                        <div class="col-md-12 text-center alert alert-warning"><i class="fa fa-frown-o m-r-5"></i>{{ 'booking.noRequestFound' }}</div>
+                        <div class="col-md-12 text-center alert alert-warning"><i class="fa fa-frown-o m-r-5"></i>{{ 'booking.noRequestFound'|trans }}</div>
                     {% endif %}
 
                 </div>
