@@ -66,7 +66,7 @@ gulp.task('assets-js', function() {
         'components/pages-assets/plugins/bootstrap-tag/bootstrap-tagsinput.js',
         'components/pages-assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.all.min.js',
         'components/pages-assets/plugins/summernote/js/summernote.js',
-        'components/pages-assets/plugins/codemirror/lib/codemirror.js',
+        'components/codemirror/lib/codemirror.js',
     ])
         .pipe(uglify())
         .pipe(concat('plugins.js'))
@@ -210,7 +210,7 @@ gulp.task('assets-css', function() {
         'components/pages-assets/plugins/dropzone/css/dropzone.css',
         'components/pages-assets/plugins/dropzone/css/base.css',
         'components/pages-assets/plugins/summernote/css/summernote.css',
-        'components/pages-assets/plugins/codemirror/lib/codemirror.css',
+        'components/codemirror/lib/codemirror.css',
 
     ])
         .pipe(minifyCSS())
