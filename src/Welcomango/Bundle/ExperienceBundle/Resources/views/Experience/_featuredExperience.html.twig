@@ -1,7 +1,7 @@
 {# Complete with correct informations #}
 <div class="col-md-12 {% if profile is not defined %}m-b-30{% endif %}" style="padding-left:0px; padding-right:0px">
     <div id="experience_{{ experience.id }}" class="card featured-card {% if darkBg is defined %}card-bg-master-lightest{% endif %}" >
-        <a href="{{ path('front_experience_view', {'experience_id' : experience.getId }) }}" >
+        <a href="{{ path('front_experience_view', {'slug' : experience.slug }) }}" >
             <div class="row">
                 <div class="panel-body p-t-0 featured-card-content col-md-5 p-l-60">
                     <div class="panel-title semi-bold">
@@ -24,11 +24,7 @@
                     <div class="card-clickable" style="z-index:9;">
                     </div>
                     <div class="experience-image">
-                        {% if experience.getMedias.first %}
-                            <img class="" data-src="{{ asset(experience.getMedias.first.getPath() ~ experience.getMedias.first.originalFilename) }}" alt="Card image cap">
-                        {% else %}
-                            <img class="" data-src="{{ asset("img/front/places-" ~ random(18) ~ ".jpg") }}" alt="Card image cap">
-                        {% endif %}
+                        <img class="" data-src="{{ asset(get_banner(experience)) }}" alt="Card image cap">
                     </div>
 
                 </div>

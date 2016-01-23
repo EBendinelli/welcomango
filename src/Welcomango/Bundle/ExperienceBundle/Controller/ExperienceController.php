@@ -26,7 +26,6 @@ use Welcomango\Model\Media;
 /**
  * Class ExperienceController
  *
- * @ParamConverter("experience", options={"id" = "experience_id"})
  */
 class ExperienceController extends BaseController
 {
@@ -147,8 +146,17 @@ class ExperienceController extends BaseController
             $em->persist($experience);
             $em->flush();
 
-            return $this->render('WelcomangoExperienceBundle:Experience:createSuccess.html.twig', array(
-                'experience' => $experience,
+            $mailManager = $this->get('welcomango.front.email.manager');
+            $mailManager->sendEmailAfterExperienceCreation($user);
+
+            return $this->render('WelcomangoCoreBundle:Core:success.html.twig', array(
+                'title'           => $this->trans('experience.create.title', array(), 'interface'),
+                'sub_title'       => $this->trans('experience.create.subTitle', array(), 'interface'),
+                'message'         => $this->trans('experience.create.message', array(), 'interface'),
+                'button1_path'    => $this->get('router')->generate('front_experience_profile_list'),
+                'button1_message' => $this->trans('experience.create.button1Message', array(), 'interface'),
+                'button2_path'    => $this->get('router')->generate('fos_user_profile_show'),
+                'button2_message' => $this->trans('experience.create.button2Message', array(), 'interface'),
             ));
         }
 
@@ -215,6 +223,9 @@ class ExperienceController extends BaseController
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', $this->trans('experience.edit.success', array(), 'crm'));
 
+            $mailManager = $this->get('welcomango.front.email.manager');
+            $mailManager->sendEmailAfterExperienceCreation($this->getUser());
+
             if($experience->getPublicationStatus() == 'pending'){
                 return $this->redirect($this->generateUrl('front_experience_profile_list'));
             }
@@ -236,8 +247,8 @@ class ExperienceController extends BaseController
      * @param Request    $request
      * @param Experience $experience
      *
-     * @Route("/experience/{experience_id}", name="front_experience_view")
-     * @ParamConverter("experience", options={"id" = "experience_id"})
+     * @Route("/experience/{slug}", name="front_experience_view")
+     * @ParamConverter("experience", options={"slug" = "slug"})
      * @Template()
      *
      * @return array
@@ -287,6 +298,7 @@ class ExperienceController extends BaseController
             'available_status' => $this->container->getParameter('available_status'),
             'meeting_times'    => $this->container->getParameter('meeting_times'),
             'experience'       => $experience,
+            'forbiddenDates'   => $forbiddenDates,
         ]);
         $form->handleRequest($request);
 
@@ -303,7 +315,7 @@ class ExperienceController extends BaseController
                 return $this->render('WelcomangoCoreBundle:CRUD:notAllowed.html.twig', array(
                     'title'          => 'Hm. Want to go on an adventure with yourself? ',
                     'message'        => 'Well maybe you just wanted to edit your experience',
-                    'return_path'    => $this->get('router')->generate('front_experience_view', array('experience_id' => $experience->getId())),
+                    'return_path'    => $this->get('router')->generate('front_experience_view', array('slug' => $experience->getSlug())),
                     'return_message' => 'Return to experience',
                 ));
             }
@@ -314,7 +326,7 @@ class ExperienceController extends BaseController
                 return $this->render('WelcomangoCoreBundle:CRUD:notAllowed.html.twig', array(
                     'title'          => 'Oops, something went wrong.',
                     'message'        => 'This experience is not available at this time... Try another time or another day',
-                    'return_path'    => $this->get('router')->generate('front_experience_view', array('experience_id' => $experience->getId())),
+                    'return_path'    => $this->get('router')->generate('front_experience_view', array('slug' => $experience->getSlug())),
                     'return_message' => 'Return to experience',
                 ));
             }
@@ -323,6 +335,22 @@ class ExperienceController extends BaseController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($booking);
             $entityManager->flush();
+
+            $experienceCreator = $experience->getCreator();
+
+            //send a notification to the experience creator
+            $email = \Swift_Message::newInstance()
+                ->setSubject($this->trans('email.experience.requestSubject', array('%experience%' => $experience->getTitle()), 'interface'))
+                ->setFrom('no-reply@welcomango.com')
+                ->setTo($experienceCreator->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'WelcomangoEmailBundle:EmailTemplate:newBookingRequest.html.twig',[
+                        'booking' => $booking,
+                    ]),
+                    'text/html'
+                );
+            $this->get('mailer')->send($email);
 
             if (null !== $message) {
                 $this->get('welcomango.message.creator')->createThread($booking, $user, $booking->getExperience()->getCreator(), $message);

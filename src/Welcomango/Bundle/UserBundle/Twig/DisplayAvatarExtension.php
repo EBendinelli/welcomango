@@ -71,9 +71,9 @@ class DisplayAvatarExtension extends \Twig_Extension
             $response = get_headers($gravcheck);
             if ($response[0] != "HTTP/1.0 404 Not Found"){
                 $img = $gravsrc;
-            }else{*/
-            $img = '/img/front/faces/profile.png';
-            //}
+            }*/
+
+            $img = '/bundles/welcomangocore/images/profile.png';
 
             //If not we use the default image
             if ($background) {

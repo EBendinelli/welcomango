@@ -134,7 +134,7 @@
                             {{ 'profile.experienceAcceptededText'|trans({'%experience%': experience.title})|raw }}
                         </div>
                         <div class="m-t-20 text-center">
-                            <a href="{{ path('front_experience_view', {'experience_id': experience.id}) }}" class="btn btn-complete">{{ 'interface.view'|trans }}</a>
+                            <a href="{{ path('front_experience_view', {'slug': experience.slug}) }}" class="btn btn-complete">{{ 'interface.view'|trans }}</a>
                         </div>
                     </div>
                 {% endif %}

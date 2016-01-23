@@ -47,5 +47,11 @@
         <service id="welcomango.front.availability.manager" class="Welcomango\Bundle\ExperienceBundle\Manager\AvailabilityManager">
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
+
+        <service id="user.display_experience_banner" class="Welcomango\Bundle\ExperienceBundle\Twig\GetExperienceBannerExtension">
+            <tag name="twig.extension"/>
+            <argument type="service" id="router"/>
+            <argument type="service" id="security.context" />
+        </service>
     </services>
 </container>

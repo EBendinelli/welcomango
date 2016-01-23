@@ -66,7 +66,7 @@ gulp.task('assets-js', function() {
         'components/pages-assets/plugins/bootstrap-tag/bootstrap-tagsinput.js',
         'components/pages-assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.all.min.js',
         'components/pages-assets/plugins/summernote/js/summernote.js',
-        'components/pages-assets/plugins/codemirror/lib/codemirror.js',
+        'components/codemirror/lib/codemirror.js',
     ])
         .pipe(uglify())
         .pipe(concat('plugins.js'))
@@ -89,6 +89,7 @@ gulp.task('assets-js', function() {
         'components/pages-assets/pages-front/plugins/swiper/js/swiper.jquery.min.js',
 
         'components/wow/dist/wow.js',
+        'components/magnific-popup/dist/jquery.magnific-popup.js',
 
         /*'components/pages-assets/pages-front/plugins/bootstrap/js/bootstrap.min.js',
         'components/pages-assets/pages-front/plugins/bootstrap/js/npm.js',*/
@@ -209,7 +210,7 @@ gulp.task('assets-css', function() {
         'components/pages-assets/plugins/dropzone/css/dropzone.css',
         'components/pages-assets/plugins/dropzone/css/base.css',
         'components/pages-assets/plugins/summernote/css/summernote.css',
-        'components/pages-assets/plugins/codemirror/lib/codemirror.css',
+        'components/codemirror/lib/codemirror.css',
 
     ])
         .pipe(minifyCSS())
@@ -262,6 +263,7 @@ gulp.task('assets-css', function() {
         'components/pages-assets/pages-front/plugins/bootstrap-datepicker/css/datepicker3.css',
         'components/pages-assets/pages-front/plugins/jquery-datatable/media/css/*',
         'components/wow/css/libs/animate.css',
+        'components/magnific-popup/dist/magnific-popup.css',
     ])
         .pipe(minifyCSS())
         .pipe(concat('plugins-front.css'))

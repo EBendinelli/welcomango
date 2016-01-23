@@ -65,15 +65,19 @@ class CoreController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $sendTo = "contact@welcomango.com";
+            if($form->get('category')->getData() == "Bug"){
+                $sendTo = "dev@welcomango.com";
+            }
 
             //transmit the message to us
             $message = \Swift_Message::newInstance()
                 ->setSubject('New '.$form->get('category')->getData().' from '.$form->get('name')->getData())
                 ->setFrom($form->get('email')->getData())
-                ->setTo('contact@welcomango.com')
+                ->setTo($sendTo)
                 ->setBody(
                     $this->renderView(
-                        'WelcomangoEmailBundle:EmailTemplate:contact.html.twig',[
+                        'WelcomangoEmailBundle:AdminEmailTemplate:contact.html.twig',[
                             'user' => $user,
                         'ip' => $request->getClientIp(),
                         'name' => $form->get('name')->getData(),
@@ -86,7 +90,7 @@ class CoreController extends BaseController
             //send a confirmation message to the user
             $message = \Swift_Message::newInstance()
                 ->setSubject('Your message has been successfully sent!')
-                ->setFrom('contact@welcomango.com')
+                ->setFrom('no-reply@welcomango.com')
                 ->setTo($form->get('email')->getData())
                 ->setBody(
                     $this->renderView(
@@ -97,7 +101,14 @@ class CoreController extends BaseController
                 );
             $this->get('mailer')->send($message);
 
-            return $this->redirect($this->generateUrl('front_validation'));
+
+            return $this->render('WelcomangoCoreBundle:Core:success.html.twig', array(
+                'title'           => $this->trans('contact.sent.title', array(), 'interface'),
+                'sub_title'       => $this->trans('contact.sent.subTitle', array(), 'interface'),
+                'message'         => $this->trans('contact.sent.message', array(), 'interface'),
+                'button1_path'    => $this->get('router')->generate('front_homepage'),
+                'button1_message' => $this->trans('global.backHome', array(), 'interface'),
+            ));
         }
 
         return array(

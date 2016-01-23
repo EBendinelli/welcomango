@@ -137,12 +137,24 @@ class ProfileController extends BaseProfileController
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->get('event_dispatcher');
 
+        //This is used to determine the active tab
+        $activeTab = $request->get('activeTab');
+        if(!$activeTab){
+            $activeTab = 'current';
+        }
+
         $event = new GetResponseUserEvent($user, $request);
         $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_INITIALIZE, $event);
 
         if (null !== $event->getResponse()) {
             return $event->getResponse();
         }
+
+        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
+        $passwordFormFactory = $this->get('fos_user.change_password.form.factory');
+
+        $passwordForm = $passwordFormFactory->createForm();
+        $passwordForm->setData($user);
 
         $form = $this->createForm($this->get('welcomango.front.form.user.edit.type'), $user);
         $form->setData($user);
@@ -172,7 +184,6 @@ class ProfileController extends BaseProfileController
             $user->setProfileMedia($media);
 
             $userManager->updateUser($user);
-            $this->addFlash('success', 'profile.edit.success');
 
             if (null === $response = $event->getResponse()) {
                 $url      = $this->generateUrl('fos_user_profile_edit');
@@ -186,6 +197,8 @@ class ProfileController extends BaseProfileController
 
         return $this->render('FOSUserBundle:Profile:edit.html.twig', array(
             'form' => $form->createView(),
+            'passwordForm' => $passwordForm->createView(),
+            'activeTab' => $activeTab,
         ));
     }
 

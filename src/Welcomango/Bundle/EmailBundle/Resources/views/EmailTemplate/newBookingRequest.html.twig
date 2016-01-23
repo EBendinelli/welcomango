@@ -1,0 +1,19 @@
+{% trans_default_domain 'email' %}
+
+{% block subject %}
+    {% autoescape false %}
+    {{ 'email.experience.requestSubject'|trans }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_text %}
+    {% autoescape false %}
+    {{ 'email.experience.requestMessage'|trans({'%user%': booking.user.fullname, '%date%': booking.startDatetime|date('Y-m-d'), '%title%': booking.experience.title}) }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    {% autoescape false %}
+    <div>{{ 'email.experience.requestMessage'|trans({'%user%': booking.user.fullname, '%date%': booking.startDatetime|date('Y-m-d'), '%title%': booking.experience.title}) }}</div>
+    {% endautoescape %}
+{% endblock %}

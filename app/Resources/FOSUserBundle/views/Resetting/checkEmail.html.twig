@@ -1,0 +1,14 @@
+{% trans_default_domain "interface" %}
+
+{# This is the sucess page where we ask the user to check his mailbox #}
+{% block main_content %}
+    {% include'WelcomangoCoreBundle:Core:success.html.twig' with {
+        'title': 'login.resetting.successTitle'|trans,
+        'sub_title': 'login.resetting.successSubTitle'|trans,
+        'message': 'resetting.check_email'|trans({'%email%': email}, 'FOSUserBundle'),
+        'button1_path': path('front_homepage'),
+        'button1_message': 'global.backHome'|trans
+        }
+    %}
+{% endblock %}
+

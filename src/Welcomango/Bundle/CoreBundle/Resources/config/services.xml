@@ -54,5 +54,10 @@
         <service id="welcomango.form.contact" class="Welcomango\Bundle\CoreBundle\Form\Type\ContactType">
             <tag name="form.type" alias="front_contact" />
         </service>
+
+        <service id="welcomango.front.email.manager" class="Welcomango\Bundle\EmailBundle\Manager\EmailManager">
+            <argument type="service" id="mailer"/>
+            <argument type="service" id="twig"/>
+        </service>
     </services>
 </container>

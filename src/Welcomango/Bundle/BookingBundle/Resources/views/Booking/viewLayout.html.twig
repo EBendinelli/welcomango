@@ -70,7 +70,7 @@
     {% block experience_details %}
         <!-- BOOKING EXPERIENCE BEGIN -->
         <div class="text-center">
-            <a href="{{ path('front_experience_view', {'experience_id': booking.experience.id}) }}" class="btn btn-complete btn-xl">{{ 'view.experience'|trans }}</a>
+            <a href="{{ path('front_experience_view', {'slug': booking.experience.slug}) }}" class="btn btn-complete btn-xl">{{ 'view.experience'|trans }}</a>
         </div>
         <!-- BOOKING EXPERIENCE END -->
     {% endblock %}

@@ -18,7 +18,7 @@
             <h2>{{ 'booking.requestReceivedFor'|trans }}</h2>
             <h4>
                 {% for experience in user.experiences %}
-                    <a class="text-primary" href="{{ path('front_experience_view', {'experience_id': experience.id}) }}">{{ experience.title }}</a>
+                    <a class="text-primary" href="{{ path('front_experience_view', {'slug': experience.slug}) }}">{{ experience.title }}</a>
                     {% if not loop.last %} & {% endif %}
                 {% endfor %}
             </h4>

@@ -72,7 +72,7 @@
     {% if booking.experience.getMedias.first %}
 
     {% else %}
-        {% set imageBanner = asset("img/front/places-" ~ random(18) ~ ".jpg") %}
+        {% set imageBanner = asset("bundles/welcomangocore/images/experience_default/places-" ~ random(18) ~ ".jpg") %}
     {% endif %}
 
     <div class="row bg-white panel panel-default p-b-20">
@@ -99,7 +99,7 @@
         'main_text': 'If you have not yet exchanged with this person, please send him a little message.',
         'valid_button_name': 'Decline',
         'icon': 'fa-times-circle ',
-        'path_valid': path('front_experience_view', {'experience_id': booking.experience.id}),
+        'path_valid': path('front_experience_view', {'slug': booking.experience.slug}),
     })}}
     <!-- END DELETE CONFIRMATION MODAL -->
 {% endblock profile_content %}

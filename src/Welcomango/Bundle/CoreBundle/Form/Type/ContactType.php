@@ -28,8 +28,15 @@ class ContactType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $categories = array('Bug', 'Question', 'Suggestion', 'Issue', 'Contact', 'Other');
-        $name =''; $email='';
+        $categories = array(
+            'Bug' => 'Bug',
+            'Question' => 'Question',
+            'Suggestion' => 'Suggestion',
+            'Issue' => 'Issue',
+            'Contact' => 'Contact',
+            'Other' => 'Other'
+        );
+
         if($this->user){
             $builder
                 ->add('name', 'text', [

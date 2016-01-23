@@ -1,5 +1,5 @@
 <!-- BEGIN FOOTER -->
-<section class="p-b-55 p-t-75 xs-p-b-20 bg-master-darker ">
+<section class="p-b-55 p-t-75 xs-p-b-20 bg-master-darker">
     <div class="container">
         <div class="row">
             <div class="col-sm-4 col-xs-12 xs-m-b-40">
@@ -8,10 +8,10 @@
             <div class="col-sm-2 col-xs-6 xs-m-b-20">
                 <h6 class="font-montserrat text-uppercase fs-14 text-white p-b-10">Sitemap</h6>
                 <ul class="no-style">
-                    <li class="m-b-5 no-padding"><a href="#" class="link text-white ">News</a></li>
-                    <li class="m-b-5 no-padding"><a href="#" class="link text-white">About</a></li>
-                    <li class="m-b-5 no-padding"><a href="#" class="link text-white">Portraits</a></li>
-                    <li class="m-b-5 no-padding"><a href="#" class="link text-white">Experiences</a></li>
+                    <li class="m-b-5 no-padding"><a href="{{ path('page_view_slug', {'slug': 'news'}) }}" class="link text-white ">News</a></li>
+                    <li class="m-b-5 no-padding"><a href="{{ path('page_view_slug', {'slug': 'the-team'}) }}" class="link text-white">About</a></li>
+                    <li class="m-b-5 no-padding"><a href="{{ path('page_portrait_list') }}" class="link text-white">Portraits</a></li>
+                    <li class="m-b-5 no-padding"><a href="{{ path('front_experience_list') }}" class="link text-white">Experiences</a></li>
                 </ul>
             </div>
             <div class="col-sm-2 col-xs-6 xs-m-b-20">
@@ -23,9 +23,9 @@
             <div class="col-sm-2 col-xs-6 xs-m-b-20">
                 <h6 class="font-montserrat text-uppercase fs-14 text-white p-b-10">Discover</h6>
                 <ul class="no-style">
-                    <li class="m-b-5 no-padding"><a href="#" class="link text-white ">Register</a></li>
-                    <li class="m-b-5 no-padding"><a href="#" class="link text-white">Give us Feedbacks</a></li>
-                    <li class="m-b-5 no-padding"><a href="#" class="link text-white">Contact Us</a></li>
+                    <li class="m-b-5 no-padding"><a href="{{ path('fos_user_registration_register') }}" class="link text-white ">Register</a></li>
+                    <li class="m-b-5 no-padding"><a href="{{ path('front_contact_us') }}" class="link text-white">Give us Feedbacks</a></li>
+                    <li class="m-b-5 no-padding"><a href="{{ path('front_contact_us') }}" class="link text-white">Contact Us</a></li>
                 </ul>
             </div>
         </div>

@@ -7,7 +7,7 @@
 
 {% block inside_profile_picture %}
     <div class="text-center profile-edit-picture-container">
-        <div class="profile-edit-picture"><a href="{{ path('fos_user_profile_edit') }}" class="text-white"><i class="fa fa-camera "></i> {{ 'profile.edit.picture'|trans }}</a></div>
+        <div class="profile-edit-picture"><a href="{{ path('fos_user_profile_edit', {'activeTab': 'about'}) }}" class="text-white"><i class="fa fa-camera "></i> {{ 'profile.edit.picture'|trans }}</a></div>
     </div>
 {% endblock inside_profile_picture  %}
 

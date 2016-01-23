@@ -10,13 +10,8 @@
     </div>#}
 
     <div id="experience_{{ experience.getId }}" class="card profile-card {% if darkBg is defined %}card-bg-master-lightest{% endif %} {% if experience.publicationStatus == 'pending' %} profile-card-greyed {% elseif experience.publicationStatus == 'refused' %} b-thick b-a b-danger{% endif %}">
-        <a href="{{ path('front_experience_view', {'experience_id' : experience.getId }) }}" >
-            {% if experience.getMedias.first %}
-                {% set imageAsset = 'medias/experiences/' ~ experience.id ~ '/' ~ experience.getMedias.first.originalFilename %}
-            {% else %}
-                {% set imageAsset= "img/front/places-" ~ random(18) ~ ".jpg" %}
-            {% endif %}
-            <div class="text-white p-t-20 p-b-20" data-pages-bg-image="{{ asset(imageAsset) }}" data-bg-overlay="black" data-overlay-opacity="0.3">
+        <a href="{{ path('front_experience_view', {'slug' : experience.slug }) }}" >
+            <div class="text-white p-t-20 p-b-20" data-pages-bg-image="{{ asset(get_banner(experience)) }}" data-bg-overlay="black" data-overlay-opacity="0.3">
                 <div class="panel-title semi-bold ">
                     {{ experience.getTitle }}
                 </div>

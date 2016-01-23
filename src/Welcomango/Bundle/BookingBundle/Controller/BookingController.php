@@ -212,6 +212,23 @@ class BookingController extends BaseController
         $this->getDoctrine()->getManager()->flush();
         $this->addFlash('success', $this->trans('booking.edit.success', array(), 'crm'));
 
+        //We get the user who made the request
+        $user = $booking->getUser();
+
+        //And we send him a message about the status update
+        $message = \Swift_Message::newInstance()
+            ->setSubject($this->trans('email.booking.requestUpdated', array('%status%' => $booking->getStatus()), 'interface'))
+            ->setFrom('no-reply@welcomango.com')
+            ->setTo($user->getEmail())
+            ->setBody(
+                $this->renderView(
+                    'WelcomangoEmailBundle:EmailTemplate:requestUpdated.html.twig',[
+                    'booking' => $booking,
+                ]),
+                'text/html'
+            );
+        $this->get('mailer')->send($message);
+
         if(substr($view, -5) == '_view'){
             return $this->redirect($this->generateUrl($view, ['booking_id' => $booking->getId()]));
         }else{
