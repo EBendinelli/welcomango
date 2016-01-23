@@ -87,7 +87,11 @@
                 </div>
             </div>
             <div class="tab-pane slide" id="tab2">
-                ...
+                <ul id="languages" class="languages list-unstyled" data-prototype="{% filter escape %}{% include 'WelcomangoUserBundle:AdminUser:_spokenLanguages.html.twig' with {'form': form.spokenLanguages.vars.prototype } %}{% endfilter %}">
+                    {% for language in form.spokenLanguages %}
+                        {% include 'WelcomangoUserBundle:AdminUser:_spokenLanguages.html.twig' with {'form': language } %}
+                    {% endfor %}
+                </ul>
             </div>
             <div class="tab-pane slide" id="tab3">
                 <div class="profile-form-note">{{ "profile.edit.usernameNote"|trans }}</div>
@@ -139,6 +143,12 @@
 #}
 
     <script type="text/javascript">
+
+        function removeField(obj) {
+            $(obj).closest(".new_field").fadeOut(function () {
+                $(this).remove();
+            });
+        }
 
         var placeSearch, autocompleteCurrent;
 
@@ -216,36 +226,6 @@
 
                     var btnNext = $('#myFormWizard').find('.pager .next').find('button');
                     var btnPrev = $('#myFormWizard').find('.pager .previous').find('button');
-
-                    // remove fontAwesome icon classes
-                    function removeIcons(btn) {
-                        btn.removeClass(function(index, css) {
-                            return (css.match(/(^|\s)fa-\S+/g) || []).join(' ');
-                        });
-                    }
-
-                    if ($current > 1 && $current < $total) {
-
-                        var nextIcon = li.next().find('.fa');
-                        var nextIconClass = nextIcon.attr('class').match(/fa-[\w-]*/).join();
-
-                        removeIcons(btnNext);
-                        btnNext.addClass(nextIconClass + ' btn-animated from-left fa');
-
-                        var prevIcon = li.prev().find('.fa');
-                        var prevIconClass = prevIcon.attr('class').match(/fa-[\w-]*/).join();
-
-                        removeIcons(btnPrev);
-                        btnPrev.addClass(prevIconClass + ' btn-animated from-left fa');
-                    } else if ($current == 1) {
-                        // remove classes needed for button animations from previous button
-                        btnPrev.removeClass('btn-animated from-left fa');
-                        removeIcons(btnPrev);
-                    } else {
-                        // remove classes needed for button animations from next button
-                        btnNext.removeClass('btn-animated from-left fa');
-                        removeIcons(btnNext);
-                    }
                 }
             });
         });

@@ -5,6 +5,7 @@ namespace Welcomango\Bundle\UserBundle\Form\Type;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -22,6 +23,16 @@ use Welcomango\Model\User;
 class AdminSpokenLanguageType extends AbstractType
 {
     /**
+     * @var array
+     */
+    private $levels;
+
+    function __construct($levels)
+    {
+        $this->levels = $levels;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -35,9 +46,10 @@ class AdminSpokenLanguageType extends AbstractType
                     return $er->createQueryBuilder('l');
                 },
             ])
-            ->add('level', 'mark', [
+            ->add('level', ChoiceType::class, [
                 'label'    => 'form.user.level',
                 'required' => true,
+                'choices'  => $this->levels,
             ]);
     }
 

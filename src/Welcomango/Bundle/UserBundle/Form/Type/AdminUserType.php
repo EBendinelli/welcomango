@@ -34,15 +34,22 @@ class AdminUserType extends AbstractType
     protected $entityManager;
 
     /**
+     * @var array
+     */
+    protected $levels;
+
+    /**
      * __construct
      *
      * @param SecurityContextInterface $securityContext
      * @param EntityManager            $entityManager
+     * @param array                    $levels
      */
-    public function __construct(SecurityContextInterface $securityContext, EntityManager $entityManager)
+    public function __construct(SecurityContextInterface $securityContext, EntityManager $entityManager, $levels)
     {
         $this->securityContext = $securityContext;
         $this->entityManager   = $entityManager;
+        $this->levels          = $levels;
     }
 
     /**
@@ -59,7 +66,7 @@ class AdminUserType extends AbstractType
         $genders = array(
             'M' => 'M',
             'F' => 'F',
-            'O' => 'O'
+            'O' => 'O',
         );
 
         $builder->add('username', 'text', ['label' => 'form.user.username']);
@@ -69,14 +76,12 @@ class AdminUserType extends AbstractType
         $builder->add('lastName', 'text', ['label' => 'form.user.lastname']);
         $builder->add('phone', 'text', ['label' => 'form.user.phone', 'required' => false]);
         $builder->add('birthdate', 'date', [
-            'years' => range(date('Y') - 100, date('Y') - 10),
-            'label' => 'form.user.birthdate',
-            'required' => false
+            'years'    => range(date('Y') - 100, date('Y') - 10),
+            'label'    => 'form.user.birthdate',
+            'required' => false,
         ]);
 
-        $builder->add('description', 'textarea', [
-            'label' => 'form.user.description'
-        ]);
+        $builder->add('description', 'textarea', ['label' => 'form.user.description']);
 
         $builder->add('roles', 'choice', [
             'label'    => 'form.user.roles',
@@ -86,11 +91,11 @@ class AdminUserType extends AbstractType
         ]);
 
         $builder->add('spokenLanguages', 'collection', array(
-            'type'         => new AdminSpokenLanguageType(),
+            'type'         => new AdminSpokenLanguageType($this->levels),
             'allow_add'    => true,
             'allow_delete' => true,
             'by_reference' => false,
-            'label'        => false
+            'label'        => false,
         ));
 
         $builder->add('password', 'repeated', array(
@@ -101,33 +106,21 @@ class AdminUserType extends AbstractType
             'second_options'  => array('label' => 'form.user.password.validate'),
         ));
 
-        $builder->add('medias', 'entity', array(
-            'class' => 'Welcomango\Model\Media',
-            'property' => 'title',
-            'multiple' => true,
-            'required' => false,
-            'query_builder' => function (EntityRepository $er) {
-                return $er->createQueryBuilder('m');
-            },
-
-        ));
-
         $builder->add('from_city', 'entity', array(
-            'class' => 'Model:City',
+            'class'    => 'Model:City',
             'property' => 'name',
         ));
 
         $builder->add('current_city', 'entity', array(
-            'class' => 'Model:City',
+            'class'    => 'Model:City',
             'property' => 'name',
         ));
 
-        $builder->add('gender','choice', array(
-            'choices' => $genders,
+        $builder->add('gender', 'choice', array(
+            'choices'  => $genders,
             'multiple' => false,
-            'label' => 'form.user.gender'
+            'label'    => 'form.user.gender',
         ));
-
 
 
         $builder->add('save', 'submit');

@@ -14,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-use Welcomango\Bundle\UserBundle\Form\Type\SpokenLanguageType;
+use Welcomango\Bundle\UserBundle\Form\Type\AdminSpokenLanguageType;
 
 use Welcomango\Model\User;
 
@@ -34,15 +34,22 @@ class UserEditType extends AbstractType
     protected $entityManager;
 
     /**
+     * @var array
+     */
+    protected $levels;
+
+    /**
      * __construct
      *
      * @param SecurityContextInterface $securityContext
      * @param EntityManager            $entityManager
+     * @param array                    $levels
      */
-    public function __construct(SecurityContextInterface $securityContext, EntityManager $entityManager)
+    public function __construct(SecurityContextInterface $securityContext, EntityManager $entityManager, $levels)
     {
         $this->securityContext = $securityContext;
         $this->entityManager   = $entityManager;
+        $this->levels          = $levels;
     }
 
     /**
@@ -82,12 +89,13 @@ class UserEditType extends AbstractType
         ]);
 
 
-        /*$builder->add('spokenLanguages', 'collection', array(
-            'type'         => new SpokenLanguageType(),
+        $builder->add('spokenLanguages', 'collection', array(
+            'type'         => new AdminSpokenLanguageType($this->levels),
             'allow_add'    => true,
             'allow_delete' => true,
             'by_reference' => false,
-        ));*/
+            'required'     => false,
+        ));
 
         $builder->add('currentCityInput', 'text', array(
             'mapped' => false,

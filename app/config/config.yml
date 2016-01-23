@@ -242,3 +242,11 @@ welcomango_booking:
         - Evening
         - Night
 
+welcomango_user:
+        language_levels:
+        - Bad
+        - Great
+        - Not good
+        - good
+        - Mother tongue
+        - Director dictionary

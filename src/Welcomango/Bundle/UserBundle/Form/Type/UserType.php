@@ -15,8 +15,6 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Validator\Constraints\Email;
 use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue as RecaptchaTrue;
 
-
-
 use Welcomango\Bundle\UserBundle\Form\Type\AdminSpokenLanguageType;
 
 use Welcomango\Model\User;
@@ -83,72 +81,72 @@ class UserType extends AbstractType
 
         $builder->add('currentCityInput', 'text', array(
             'mapped' => false,
-            'label' => 'form.user.currenCityInput',
+            'label'  => 'form.user.currenCityInput',
         ));
 
         $builder->add('currentCity', 'hidden', array(
             'mapped' => false,
-            'label' => 'form.user.currenCity',
+            'label'  => 'form.user.currenCity',
         ));
 
         $builder->add('currentCityLat', 'hidden', array(
             'mapped' => false,
-            'label' => 'form.user.currenCityLat',
+            'label'  => 'form.user.currenCityLat',
         ));
 
         $builder->add('currentCityLng', 'hidden', array(
             'mapped' => false,
-            'label' => 'form.user.currenCityLng',
+            'label'  => 'form.user.currenCityLng',
         ));
 
         $builder->add('currentCityState', 'hidden', array(
             'mapped' => false,
-            'label' => 'form.user.currenCityState',
+            'label'  => 'form.user.currenCityState',
         ));
 
         $builder->add('currentCityCountry', 'hidden', array(
             'mapped' => false,
-            'label' => 'form.user.currenCityCountry',
+            'label'  => 'form.user.currenCityCountry',
         ));
 
         $builder->add('currentCityCountryCode', 'hidden', array(
             'mapped' => false,
-            'label' => 'form.user.currenCityCountryCode',
+            'label'  => 'form.user.currenCityCountryCode',
         ));
 
         $builder->add('fromCityInput', 'text', array(
             'mapped' => false,
-            'label' => 'form.user.fromCityInput'
+            'label'  => 'form.user.fromCityInput',
         ));
 
         $builder->add('fromCity', 'hidden', array(
             'mapped' => false,
-            'label' => 'form.user.fromCity'
+            'label'  => 'form.user.fromCity',
         ));
 
         $builder->add('fromCityLat', 'hidden', array(
             'mapped' => false,
-            'label' => 'form.user.fromCityLat'
+            'label'  => 'form.user.fromCityLat',
         ));
 
         $builder->add('fromCityLng', 'hidden', array(
             'mapped' => false,
-            'label' => 'form.user.fromCityLng'
+            'label'  => 'form.user.fromCityLng',
         ));
 
         $builder->add('fromCityState', 'hidden', array(
             'mapped' => false,
-            'label' => 'form.user.fromCityState'
+            'label'  => 'form.user.fromCityState',
         ));
 
         $builder->add('fromCityCountry', 'hidden', array(
             'mapped' => false,
-            'label' => 'form.user.fromCityCountry'
+            'label'  => 'form.user.fromCityCountry',
         ));
 
         $builder->add('fromCityCountryCode', 'hidden', array(
             'mapped' => false,
-            'label' => 'form.user.fromCityCountryCode'
+            'label'  => 'form.user.fromCityCountryCode',
         ));
 
         $builder->add('gender', 'choice', array(

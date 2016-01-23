@@ -17,7 +17,6 @@
                     <div class="col-md-6">{{ form_row(form.password.first) }}</div>
                     <div class="col-md-6">{{ form_row(form.password.second) }}</div>
                 </div>
-                {{ form_row(form.medias) }}
                 {{ form_row(form.roles, { 'label_helper' :  'admin.faq.email_sender.helper'|trans } ) }}
                 <div class="row">
                     <div class="col-md-6">{{ form_row(form.phone) }}</div>
@@ -37,18 +36,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="é-pane slide-left" id="spokenLanguages">
-        <ul id="languages" class="languages"
-            data-prototype="{% filter escape %}{% include 'WelcomangoUserBundle:AdminUser:_spokenLanguages.html.twig' with {'form': form.spokenLanguages.vars.prototype } %}{% endfilter %}">
-            {% if update is defined %}
-            <div id="languages">
-                {% for language in form.spokenLanguages %}
-                    {% include 'WelcomangoUserBundle:AdminUser:_spokenLanguages.html.twig' with {'form': language } %}
-                {% endfor %}
-            </div>
-        {% endif %}
-        </ul>
     </div>
 </div>
 
