@@ -151,6 +151,7 @@
         'id_crop_button' : "modal-save-crop-button",
         'id_croped_media' : 'profile-media-croped'
     } %}
+    {% include "WelcomangoUserBundle:AdminUser:_baseJs.html.twig" %}
 {#
     {{ include('WelcomangoMediaBundle:AdminMedia:_baseJs.html.twig', {'hiddenInput' : 'front_user_edit_medias_upload'}) }}
 #}
@@ -158,7 +159,7 @@
     <script type="text/javascript">
 
         function removeField(obj) {
-            $(obj).closest(".new_field").fadeOut(function () {
+            $(obj).closest(".spoken_language_row").fadeOut(function () {
                 $(this).remove();
             });
         }

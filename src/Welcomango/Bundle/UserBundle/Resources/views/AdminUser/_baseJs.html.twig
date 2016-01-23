@@ -1,6 +1,5 @@
 <script type="text/javascript">
     $(function () {
-        $('.portlet').portlet();
         var $collectionHolder = $('ul.languages');
         var index = $collectionHolder.find(':input').length;
 
@@ -8,8 +7,8 @@
             addSpokenLanguageFormDeleteLink($(this));
         });
 
-        var $addTagLink = $('<a href="#" class="add_tag_link"><i class="fa fa-plus">form.add.language</i></a>');
-        var $newLinkLi = $('<li></li>').append($addTagLink);
+        var $addTagLink = $('<button type="button" style="position: absolute; left:37px; bottom:25px;" href="#" id="form.add.language" class="add-field-button btn btn-complete pull-right"><i class="fa fa-plus"></i> {{ 'form.add.language'|trans }}</button>');
+        var $newLinkLi = $('<li class="clearfix"></li>').append($addTagLink);
 
         jQuery(document).ready(function () {
             $collectionHolder = $('ul.languages');

@@ -193,6 +193,9 @@ class Experience
      */
     private $averageNote;
 
+    /**
+     * @return int
+     */
     public function getId()
     {
         return $this->id;
@@ -486,7 +489,7 @@ class Experience
     }
 
     /**
-     * @param User $user
+     * @param User $creator
      */
     public function setCreator($creator)
     {
@@ -725,13 +728,16 @@ class Experience
     }
 
     /**
-     * @ORM\PreUpdate
+     * @ORM\PrePersist
      */
     public function createDate()
     {
         $this->setCreatedAt(new \Datetime());
     }
 
+    /**
+     * __construct
+     */
     public function __construct()
     {
         $this->tags    = new ArrayCollection();
@@ -780,14 +786,8 @@ class Experience
     }
 
     /**
-     * Arrff
-     */
-    public function isAvailableForDate()
-    {
-
-    }
-
-    /**
+     * @param string $format
+     *
      * @return array
      *
      * This function returns the available days based on the availabilities attached to this experience
@@ -803,13 +803,13 @@ class Experience
             //First we get the available days according to the period defined and the days selected
             $endDate = $availability->getEndDate();
             // The interval doesn't include the last day if we don't do this
-            $endDate->modify('+1 day');;
+            $endDate->modify('+1 day');
             $period = new \DatePeriod($availability->getStartDate(), $interval, $endDate);
             foreach ($period as $day) {
-                if (strpos($availability->getDay(), ','.($day->format('N')-1).',') > -1 || $availability->getDay() == "*") {
-                    if($format == 'text'){
+                if (strpos($availability->getDay(), ','.($day->format('N') - 1).',') > -1 || $availability->getDay() == "*") {
+                    if ($format == 'text') {
                         $availableDates[$day->format('Y-m-d')] = $day->format('Y-m-d');
-                    }elseif($format == 'datetime'){
+                    } elseif ($format == 'datetime') {
                         $availableDates[$day->format('Y-m-d')] = $day;
                     }
 
@@ -835,16 +835,16 @@ class Experience
                 for ($i = $bookingStartTime; $i <= $bookingEndTime; $i++) {
                     $bookedHoursTmp .= $i.',';
                 }
-                if(isset($bookedHours[$bookingDay])){
+                if (isset($bookedHours[$bookingDay])) {
                     $bookedHours[$bookingDay] .= $bookedHoursTmp;
-                }else{
+                } else {
                     $bookedHours[$bookingDay] = $bookedHoursTmp;
                 }
 
                 //Now we removed this booked hours from the available hours
                 //This work most of the time but if there are more hours booked than available it doesn't
                 $availableHours[$bookingDay] = str_replace($bookedHours[$bookingDay], '', $availableHours[$bookingDay]);
-                if(empty($availableDates[$bookingDay])){
+                if (empty($availableDates[$bookingDay])) {
                     unset($availableDates[$bookingDay]);
                 }
             }
@@ -854,16 +854,16 @@ class Experience
         //For example if someone booked a 4h hour experience for morning (which means the substr didn't work)
         //We handle this by comparing the remaining tables
         foreach ($bookedHours as $day => $hoursTable) {
-            $bookedHoursTable = explode(',', $hoursTable);
-            $availableHoursTable = explode(',',$availableHours[$day] );
+            $bookedHoursTable    = explode(',', $hoursTable);
+            $availableHoursTable = explode(',', $availableHours[$day]);
 
             //We clean the table (remove empty values and duplicates)
-            $availableHoursTable = array_unique($availableHoursTable );
-            $bookedHoursTable = array_unique($bookedHoursTable );
+            $availableHoursTable = array_unique($availableHoursTable);
+            $bookedHoursTable    = array_unique($bookedHoursTable);
             $availableHoursTable = array_filter($availableHoursTable);
-            $bookedHoursTable = array_filter($bookedHoursTable);
+            $bookedHoursTable    = array_filter($bookedHoursTable);
 
-            if(count($bookedHoursTable) > count($availableHoursTable)){
+            if (count($bookedHoursTable) > count($availableHoursTable)) {
                 unset($availableDates[$day]);
             }
         }
@@ -872,7 +872,7 @@ class Experience
     }
 
     /**
-     * @param $bookingRequest
+     * @param Booking $bookingRequest
      *
      * @return bool
      */
@@ -883,17 +883,18 @@ class Experience
             if ($bookingRequest->getStartDatetime()->format('Y-m-d') > $availability->getStartDate()->format('Y-m-d')
                 && $bookingRequest->getEndDatetime()->format('Y-m-d') < $availability->getEndDate()->format('Y-m-d')
                 && $bookingRequest->getExperience() == $availability->getExperience()
-                && ((strpos($availability->getDay(), ','.($bookingRequest->getStartDatetime()->format('N')-1).',') > -1) || $availability->getDay() == "*")
+                && ((strpos($availability->getDay(), ','.($bookingRequest->getStartDatetime()->format('N') - 1).',') > -1) || $availability->getDay() == "*")
                 && ((strpos($availability->getHour(), ','.$bookingRequest->getStartDatetime()->format('G').',') > -1) || $availability->getHour() == "*")
             ) {
                 return true;
             }
         }
+
         return false;
     }
 
     /**
-     * @param $booking
+     * @param Booking $booking
      *
      * @return bool
      */
@@ -940,5 +941,4 @@ class Experience
 
         return $count;
     }
-
 }
