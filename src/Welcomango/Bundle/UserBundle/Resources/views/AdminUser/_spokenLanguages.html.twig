@@ -1,15 +1,7 @@
-<div class="row">
+<div class="row spoken_language_row">
         <div class="col-md-5">{{ form_row(form.language) }}</div>
         <div class="col-md-5">{{ form_row(form.level) }}</div>
         <div class="col-md-2">
             <a onclick="removeField(this)"><button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button></a>
         </div>
-    {% if update is defined %}
-        <a onclick="deleteRow(this.parentNode)" href="#">delete this tag</a>
-        <script type="application/javascript">
-            function deleteRow(element) {
-                element.remove();
-            }
-        </script>
-    {% endif %}
 </div>

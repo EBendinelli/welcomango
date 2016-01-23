@@ -139,8 +139,13 @@ class ProfileController extends BaseProfileController
 
         //This is used to determine the active tab
         $activeTab = $request->get('activeTab');
-        if(!$activeTab){
+        if (!$activeTab) {
             $activeTab = 'current';
+        }
+
+        $originalSpokenLanguages = new ArrayCollection();
+        foreach ($user->getSpokenLanguages() as $spokenLanguage) {
+            $originalSpokenLanguages->add($spokenLanguage);
         }
 
         $event = new GetResponseUserEvent($user, $request);
@@ -162,6 +167,16 @@ class ProfileController extends BaseProfileController
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $user = $form->getData();
+            foreach ($originalSpokenLanguages as $originalSpokenLanguage) {
+                if (false === $user->getSpokenLanguages()->contains($originalSpokenLanguage)) {
+                    $this->getDoctrine()->getManager()->remove($originalSpokenLanguage);
+                }
+            }
+
+            $spokenLanguages = $this->get('welcomango.front.user.manager')->uniqueSpokenLanguage($user->getSpokenLanguages());
+            $user->setSpokenLanguages($spokenLanguages);
+
             $cityManager = $this->get('welcomango.front.city.manager');
 
             $currentCity = $cityManager->checkAndCreateNewCity(
@@ -180,8 +195,12 @@ class ProfileController extends BaseProfileController
 
             $event = new FormEvent($form, $request);
             $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_SUCCESS, $event);
-            $media = $this->get('welcomango.media.manager')->generateSimpleMedia($form->get('media_photo')->getData()->getClientOriginalName(), $user);
-            $user->setProfileMedia($media);
+
+            if ($form->get('media_photo')->getData()) {
+                $media = $this->get('welcomango.media.manager')->generateSimpleMedia($form->get('media_photo')->getData()->getClientOriginalName(), $user);
+                $user->setProfileMedia($media);
+            }
+
 
             $userManager->updateUser($user);
 
@@ -196,9 +215,9 @@ class ProfileController extends BaseProfileController
         }
 
         return $this->render('FOSUserBundle:Profile:edit.html.twig', array(
-            'form' => $form->createView(),
+            'form'         => $form->createView(),
             'passwordForm' => $passwordForm->createView(),
-            'activeTab' => $activeTab,
+            'activeTab'    => $activeTab,
         ));
     }
 

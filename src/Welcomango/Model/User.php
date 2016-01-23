@@ -14,7 +14,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass="Welcomango\Model\Repository\UserRepository")
  * @ORM\Table(name="wm_user")
- *
+ * @ORM\HasLifecycleCallbacks
  * @UniqueEntity("email")
  * @UniqueEntity("username")
  *
@@ -310,7 +310,7 @@ class User extends BaseUser implements ParticipantInterface
      */
     public function setSpokenLanguages(ArrayCollection $spokenLanguages)
     {
-        $this->$spokenLanguages = $spokenLanguages;
+        $this->spokenLanguages = $spokenLanguages;
     }
 
     /**

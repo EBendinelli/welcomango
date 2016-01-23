@@ -45,7 +45,7 @@
 
     function deleteMedia(mediaId) {
         var data = {request: mediaId};
-        $.post("{{ path('experience_media_delete') }}", {'mediaId': mediaId}, function (response) {
+        $.post("{{ path('media_delete') }}", {'mediaId': mediaId}, function (response) {
             $("#media_" + mediaId).remove();
             updateMediaListField();
         }, 'html');

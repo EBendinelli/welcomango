@@ -244,9 +244,8 @@ welcomango_booking:
 
 welcomango_user:
         language_levels:
+        - good
         - Bad
         - Great
         - Not good
-        - good
         - Mother tongue
-        - Director dictionary

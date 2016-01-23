@@ -88,7 +88,6 @@ class UserEditType extends AbstractType
             'required' => false,
         ]);
 
-
         $builder->add('spokenLanguages', 'collection', array(
             'type'         => new AdminSpokenLanguageType($this->levels),
             'allow_add'    => true,
