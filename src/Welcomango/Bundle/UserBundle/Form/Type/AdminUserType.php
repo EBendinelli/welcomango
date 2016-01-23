@@ -105,7 +105,7 @@ class AdminUserType extends AbstractType
             'first_options'   => array('label' => 'form.user.password'),
             'second_options'  => array('label' => 'form.user.password.validate'),
         ));*/
-        
+
         $builder->add('profileMedia', 'entity', array(
             'class' => 'Welcomango\Model\Media',
             'property' => 'title',
