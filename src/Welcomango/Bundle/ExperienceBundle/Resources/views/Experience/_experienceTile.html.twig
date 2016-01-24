@@ -15,7 +15,7 @@
                 <img class="" data-src="{{ asset(get_banner(experience)) }}" alt="Card image cap">
             </div>
             <div class="image-separation-horizontal">
-                <div class="experience-image-triangle-horizontal"></div>
+                <div class="experience-image-triangle-horizontal {% if darkBg is defined %}experience-image-triangle-horizontal-dark{% endif %}"></div>
             </div>
         </a>
 
@@ -51,7 +51,7 @@
         </div>
 
         <div class="card-bottom bg-master-dark ">
-            <div class="card-bottom-triangle ">
+            <div class="card-bottom-triangle {% if darkBg is defined %}card-bottom-triangle-dark{% endif %}">
             </div>
             <div class="card-bottom-price text-right text-white fs-14 font-montserrat">
                 {{ experience.pricePerHour}}€/h

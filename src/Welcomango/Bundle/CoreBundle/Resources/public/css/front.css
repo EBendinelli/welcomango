@@ -328,6 +328,10 @@ div.dotted-line span {
     z-index: -20;
 }
 
+.card .experience-image-triangle-horizontal-dark {
+    border-bottom: 40px solid #fafafa !important;
+}
+
 .card-bottom{
     width:100%;
     height:40px;
@@ -339,6 +343,10 @@ div.dotted-line span {
     border-top: 40px solid white;
     border-right: 350px solid transparent;
     z-index: -20;
+}
+
+.card .card-bottom-triangle-dark {
+    border-top: 40px solid #fafafa !important;
 }
 
 .card-bottom-price{

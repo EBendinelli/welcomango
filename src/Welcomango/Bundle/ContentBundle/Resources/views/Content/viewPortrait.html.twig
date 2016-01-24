@@ -76,3 +76,15 @@
         </div>
     </section>
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        //magnific popup loading
+        $('.img').magnificPopup({
+            type: 'image',
+            gallery: {enabled: true}
+            // other options
+        });
+    </script>
+{% endblock %}

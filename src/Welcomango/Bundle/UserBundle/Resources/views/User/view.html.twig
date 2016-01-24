@@ -41,9 +41,13 @@
                 {% if proposedExperiences.first %}
                     {% for experience in  proposedExperiences %}
                         {% if experience == proposedExperiences.first%}
-                            {{ include("WelcomangoExperienceBundle:Experience:_featuredExperience.html.twig", { 'experience': experience}) }}
+                            <div class="row">
+                                {{ include("WelcomangoExperienceBundle:Experience:_featuredExperience.html.twig", { 'experience': experience}) }}
+                            </div>
                         {% else %}
-                            {{ include("WelcomangoExperienceBundle:Experience:_experienceTile2.html.twig", { 'experience': experience, 'column': 2}) }}
+                            <div class="row">
+                                {{ include("WelcomangoExperienceBundle:Experience:_experienceTile2.html.twig", { 'experience': experience, 'column': 2}) }}
+                            </div>
                         {% endif %}
                     {% endfor %}
                 {% else %}

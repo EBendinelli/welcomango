@@ -1,5 +1,5 @@
 {# Complete with correct informations #}
-<div class="col-sm-12 {% if profile is not defined %}m-b-30{% endif %}" style="padding-left:0px; padding-right:0px">
+<div class="col-sm-12 {#{% if profile is not defined %}m-b-30{% endif %}"#} style="padding-left:0px; padding-right:0px">
     <div id="experience_{{ experience.id }}" class="card featured-card {% if darkBg is defined %}card-bg-master-lightest{% endif %}" >
         <a href="{{ path('front_experience_view', {'slug' : experience.slug }) }}" >
             <div class="row">

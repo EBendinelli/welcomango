@@ -20,15 +20,38 @@ class LoadPageData extends AbstractFixture implements FixtureInterface, OrderedF
         $userRepo = $manager->getRepository('Welcomango\Model\User');
 
         $pages = array(
-            ['title' => 'The Team', 'content' => '<h1>About Us</h1>
-<h1><hr>
-</h1>
+            ['title' => 'The Team',
+                'content' => '<h1>The Team</h1>
+<hr />
 <blockquote>
 <p><span style="line-height: normal;">Young, cheerful and determined, we want Welcomango to become real because we would be the first to use it. Travelers, explorers and discoverers, we are the brain and the hands of this project. Join us in the venture.&nbsp;</span></p>
-<p><span style="line-height: normal;"><br></span></p>
-<p><span style="line-height: normal;">Feel free to contact us or give us feedback about your experience</span></p>
-</blockquote>', 'category' => $categoryRepo->findOneBy(array('name' => 'About'))],
+</blockquote>
+<p><span style="line-height: normal;">&nbsp;<img class="wow fadeInUp animated" style="border-radius: 50%; display: block; margin-left: auto; margin-right: auto;" src="../../../../bundles/welcomangocore/images/team/Eliot.jpg" alt="" width="200" height="200" /></span></p>
+<h3 style="text-align: center;"><span style="line-height: normal;">Eliot</span></h3>
+<p>Born in Lyon, France, Eliot has a double background in Political Science and IT and&nbsp;is willing to put it at use! Fond of music and a musican himselft,&nbsp;he&nbsp;lived&nbsp;in Taiwan, Brussels, Geneva, and the&nbsp;US, worked for web agencies and International Organizations for some time before deciding to forge&nbsp;his own way.&nbsp;Leading the Welcomango project,&nbsp;he manage&nbsp;a wide range of aspects of the project from development to management and social&nbsp;outreach.&nbsp;</p>
+<p>&nbsp;</p>
+<p><img class="wow fadeInLeft animated" style="border-radius: 50%; display: block; margin-left: auto; margin-right: auto;" src="../../../../bundles/welcomangocore/images/team/Jean-Baptiste.jpg" alt="" width="200" height="200" /></p>
+<h3 style="text-align: center;">Jean-Baptiste</h3>
+<p style="text-align: left;">Born in Lyon,&nbsp;Jean-Baptiste made his way in the web development field with his own teeth! Not only typing on his keyboard he&nbsp;loves hitting things that make sound (Especially brazilians ones, ever heard of Batucada?). JB is the lead&nbsp;developper and&nbsp;is making magic with his computer to support this cute little website. Any tech question? He\'s the one!</p>
+<p style="text-align: left;"><img class="wow fadeInDown animated" style="border-radius: 50%; display: block; margin-left: auto; margin-right: auto;" src="../../../../bundles/welcomangocore/images/team/Matthieu.jpg" alt="" width="200" height="200" /></p>
+<h3 style="text-align: center;">Matthieu&nbsp;</h3>
+<p>Born in Besan&ccedil;on (France) in 1987, Matthieu holds a BA degree in Communication studies and a MA degree in Human Rights. He began to travel during his studies doing a communication internship in Canada before going to the Netherlands for a year with the Erasmus exchange programme. In 2010, Matthieu volunteered in Burkina Faso for a year where he decided to give a new perspective to his career. He was selected to be part of the Erasmus Mundus Human Rights Practice MA programme run as a joint partnership between Gothenburg University (Sweden), Roehampton University (UK) and Troms&oslash; University (Norway). This programme gave him the opportunity to have some professional experience in the UK, Norway and Denmark. He is in charge of the communication aspect of the project, definitely the coolest guy you\'ll have the chance to meet. If you ignore the fact he supports a forgotten french foot team called&nbsp;FCSM.</p>',
+                'category' => $categoryRepo->findOneBy(array('name' => 'About'))],
+
             ['title' => 'Legal', 'content' => 'All rights reserved', 'category' => $categoryRepo->findOneBy(array('name' => 'About'))],
+
+            ['title' => 'Thanks',
+                'content' => '<h1>Thanks</h1>
+<hr />
+<p>A list of the different free&nbsp;tools we used that helped us to build this awesome website</p><br/>
+<p><a href="https://symfony.com/">The Symfony project</a>: The main framework of the project. We could not say here how much we love Symfony so we\'re going to let you check by yourself</p>
+<p><a href="http://mynameismatthieu.com/WOW/">Wow.js</a>: Funny little tool which provides good looking animation. Plus the website contains Doge, how awesome</p>
+<p><a href="http://fontawesome.io">Fontawesome</a>: Which help us have these wonderful little icons everywhere</p>
+<p><a href="http://dimsemenov.com/plugins/magnific-popup/">Magnific Popup</a>:&nbsp;For the great image slideshow on the experience page</p>
+<p>&nbsp;</p>
+<p>We would also like to give a special thanks to Riccardo David Marriano and Daniel Hernandez without whom this idea would not exist. Another special thanks to Karoliina&nbsp;Lohiniva for the help and support. And of course to anyone would support and help us&nbsp;to make Welcomango alive.</p>',
+                'category' => $categoryRepo->findOneBy(array('name' => 'About'))],
+
             ['title' => 'Welcomango is launched!', 'content' => 'Looks like we\'re in!', 'category' => $categoryRepo->findOneBy(array('name' => 'News'))],
             ['title' => 'How To', 'content' => '<p style="letter-spacing: 0.14px;">Welcomango is aiming at propose a simple and intuitive experience so that anyone has a chance to find the perfect welcomanguide for their next trip. And become one of them.</p><p style="letter-spacing: 0.14px;">The concept is simple and rely in 5 steps:</p><p style="letter-spacing: 0.14px;"><br></p><h2 class="wow slideInLeft" style="letter-spacing: 0.14px;">Test good?</h2><p style="letter-spacing: 0.14px;"><br></p> ',
                 'category' => $categoryRepo->findOneBy(array('name' => 'How To'))],

@@ -120,7 +120,10 @@
                 <a href="{{ path('front_experience_create') }}" class="btn btn-primary btn-cons" ><i class="fa fa-plus-circle "></i> {{ 'profile.createExperience'|trans }}</a>
             {% else %}
                 <h3 class="m-b-30">{{ 'profile.yourExperience'|trans }}</h3>
-                {{ include("WelcomangoExperienceBundle:Experience:_featuredExperience.html.twig", { 'experience': userExperiences|first,  'profile': true}) }}
+                <hr/>
+                <div class="row">
+                    {{ include("WelcomangoExperienceBundle:Experience:_featuredExperience.html.twig", { 'experience': userExperiences|first,  'profile': true}) }}
+                </div>
                 <div id="profile-experience-action" class="text-right">
                     <a href="{{ path('front_experience_edit', {'experience_id': userExperiences|first.id}) }}" class="btn btn-bordered btn-black btn-cons"><i class="fa fa-pencil"></i> {{ 'interface.edit'|trans }}</a>
                     <button class="btn btn-danger btn-cons" data-toggle="modal" data-target=".modal-action"><i class="fa fa-trash "></i> {{ 'interface.delete'|trans }}</button>
