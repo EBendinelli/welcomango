@@ -4,7 +4,7 @@
             <div class="dz-filename"><span data-dz-name></span></div>
             <div class="dz-size" data-dz-size></div>
             <div class="dz-id" data-dz-id></div>
-            <img data-dz-thumbnail />
+            <img data-dz-thumbnail/>
         </div>
         <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
         <div class="dz-error-message"><span data-dz-errormessage></span></div>
@@ -16,7 +16,7 @@
 <script type="text/javascript">
     Dropzone.autoDiscover = false;
     var medias = [];
-    $(function() {
+    $(function () {
         var dropzone = new Dropzone("div#medias", {
             url: "{{ oneup_uploader_endpoint('gallery') }}",
             uploadMultiple: true,
@@ -27,40 +27,54 @@
             dictDefaultMessage: "{{ 'medias.drop_files_here'|trans }}",
             addRemoveLinks: true,
             init: function () {
-                {% for media in medias %}
-                var mockFile = { name: "{{ media.originalFilename }}", size: 99999 };
-                medias.push('{{ media.originalFilename }}');
-                this.options.addedfile.call(this, mockFile);
-                this.options.thumbnail.call(this, mockFile, "{{ asset(media.getPath() | imagine_filter('thumb120')) ~ media.originalFilename }}");
-                mockFile.previewElement.classList.add('dz-success');
-                mockFile.previewElement.classList.add('dz-complete');
-                {% endfor %}
-                computeMediaName();
-                this.on("addedfile", function(file) {
-                    if(file.size < 5000000) {
-                        medias.push(file.name);
-                        computeMediaName();
-                    }
-                });
-                this.on("removedfile", function(file) {
-                    $.post("{{ path('media_delete') }}", {'file': file.name}, function (response) {}, 'html');
-                    var index = medias.indexOf(file.name);
-                    medias.splice(index, 1);
-                    computeMediaName();
-                });
+                {% if form.vars.data.id and experience is defined %}
+                    {% for media in experience.medias %}
+                    var mockFile = {name: "{{ media.originalFilename }}", size: 99999};
+                    this.options.addedfile.call(this, mockFile);
+                    this.options.thumbnail.call(this, mockFile, "{{ asset(media.getPath() | imagine_filter('thumb120')) ~ media.originalFilename }}");
+                    mockFile.previewElement.classList.add('dz-success');
+                    mockFile.previewElement.classList.add('dz-complete');
+                    {% endfor %}
+                {% endif %}
             }
         });
+
+        var $container = $('div#front_experience_medias');
+        $container.data('index', $container.find(':input').length);
+
+        dropzone.on('successmultiple', function (file) {
+            file.forEach(function (fileName) {
+                addPicture(fileName, $container);
+            });
+        });
+
+        dropzone.on('removedfile', function (file) {
+            if ($('input:hidden[value="' + file.name + '"]').parent().parent().hasClass('tmp-file')) {
+                deleteTmpMedia(file.name);
+            }
+            $('input:hidden[value="' + file.name + '"]').parent().parent().remove();
+        });
+
+        function addPicture(file, $container) {
+            var index = $container.data('index');
+            console.log(index);
+            $container.append('<div class="tmp-file" ><div id="front_experience_medias_' + index + '"><input type="hidden" id="front_experience_medias_' + index + '_originalFilename" name="front_experience[medias][' + index + '][originalFilename]" value="' + file.name + '" /></div></div>');
+            $container.data('index', index + 1);
+        }
+
+        function deleteTmpMedia(filename) {
+            var formData = new FormData();
+            formData.append("tempName", filename);
+
+            $.ajax({
+                url: '{{ path('media_delete') }}',
+                type: 'POST',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        }
+
     });
-
-
-    function computeMediaName() {
-        {% if hiddenInput is defined %}
-            var input = '{{ hiddenInput }}';
-            $('#'+input).val(medias.join(','));
-        {% else %}
-            $('#front_experience_medias_upload').val(medias.join(','));
-        {% endif %}
-
-    }
-
 </script>

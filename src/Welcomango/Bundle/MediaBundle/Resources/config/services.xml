@@ -11,6 +11,8 @@
         <service id="welcomango.media.manager" class="Welcomango\Bundle\MediaBundle\Manager\MediaManager">
             <argument type="service" id="welcomango.media_namer"/>
             <argument type="service" id="knp_gaufrette.filesystem_map"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument>%media_upload_base_dir%</argument>
         </service>
     </services>
 </container>

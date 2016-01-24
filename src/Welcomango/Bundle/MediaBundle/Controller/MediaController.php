@@ -58,9 +58,9 @@ class MediaController extends BaseController
      */
     public function mediaDeleteAction(Request $request)
     {
-        $originalFilename = $request->request->get('file');
+        $originalFilename = $this->get('welcomango.media_namer')->getTempName($request->request->get('tempName'));
         $tmpAdapter       = $this->get('knp_gaufrette.filesystem_map')->get('gallery');
-        $tmpAdapter->get($originalFilename)->delete();
+        $tmpAdapter->delete($originalFilename);
 
         return new JsonResponse();
     }

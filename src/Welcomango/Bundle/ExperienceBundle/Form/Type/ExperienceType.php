@@ -69,9 +69,12 @@ class ExperienceType extends AbstractType
                 'property' => 'name',
                 'multiple' => true,
             ))
-            ->add('medias_upload', 'hidden', [
-                'required' => false,
-                'mapped'   => false,
+            ->add('medias', 'collection', [
+                'type'         => new MediaType(),
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'label'        => false,
+                'by_reference' => false,
             ])
             ->add('estimated_duration', 'choice', [
                 'choices' => $estimatedDurations,

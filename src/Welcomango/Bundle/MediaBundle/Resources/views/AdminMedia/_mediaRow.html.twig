@@ -1,6 +1,6 @@
 <tr>
     <td>
-        <img src="{{ asset(media.getPath() ~ media.originalFilename)| imagine_filter('thumb120') }}" />
+        <img src="{{ asset(media.path ~ media.originalFilename)| imagine_filter('thumb120') }}" />
     </td>
     <td>
         {{ media.title}}

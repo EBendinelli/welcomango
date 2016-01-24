@@ -12,5 +12,6 @@ parameters:
     mailer_password: 2c82633e-060e-42b8-9adb-776fdb7a5e37
     secret: c0573cd3f6cfd00c17a114b29c31e70e405cdf72
     media_upload_temp_dir : /uploads/tmp
+    media_upload_base_dir : /uploads
     media_temp_root_dir: %kernel.root_dir%/../web%media_upload_temp_dir%
-    media_root_dir: %kernel.root_dir%/../web/uploads
+    media_root_dir: %kernel.root_dir%/../web%media_upload_base_dir%

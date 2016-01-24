@@ -133,8 +133,7 @@ class Experience
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Media", inversedBy="experiences", cascade={"persist"})
-     * @ORM\JoinTable(name="wm_experiences_medias")
+     * @ORM\OneToMany(targetEntity="Media", mappedBy="experience", cascade={"persist"})
      **/
     private $medias;
 

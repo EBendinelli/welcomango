@@ -46,9 +46,10 @@ class Media
     protected $path;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Experience", mappedBy="medias")
+     * @ORM\ManyToOne(targetEntity="Experience", inversedBy="medias")
+     * @ORM\JoinColumn(name="experience_id", referencedColumnName="id", onDelete="CASCADE")
      **/
-    protected $experiences;
+    protected $experience;
 
     /**
      * The constructor
@@ -147,40 +148,6 @@ class Media
     }
 
     /**
-     * Add experiences
-     *
-     * @param \Welcomango\Model\Experience $experiences
-     *
-     * @return Media
-     */
-    public function addExperience(\Welcomango\Model\Experience $experiences)
-    {
-        $this->experiences[] = $experiences;
-
-        return $this;
-    }
-
-    /**
-     * Remove experiences
-     *
-     * @param \Welcomango\Model\Experience $experience
-     */
-    public function removeExperience(\Welcomango\Model\Experience $experience)
-    {
-        $this->experiences->removeElement($experience);
-    }
-
-    /**
-     * Get experiences
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getExperiences()
-    {
-        return $this->experiences;
-    }
-
-    /**
      * Add users
      *
      * @param \Welcomango\Model\User $user
@@ -218,5 +185,21 @@ class Media
     public function setUser($user)
     {
         $this->user = $user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExperience()
+    {
+        return $this->experience;
+    }
+
+    /**
+     * @param mixed $experience
+     */
+    public function setExperience($experience)
+    {
+        $this->experience = $experience;
     }
 }

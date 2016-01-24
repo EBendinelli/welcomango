@@ -2,16 +2,17 @@
 
 namespace Welcomango\Bundle\MediaBundle\Manager;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityManager;
 use Knp\Bundle\GaufretteBundle\FilesystemMap;
+use Symfony\Component\Filesystem\Filesystem;
+use Doctrine\Common\Collections\ArrayCollection;
 use Oneup\UploaderBundle\Uploader\File\FileInterface;
 use Oneup\UploaderBundle\Uploader\Naming\NamerInterface;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 use Welcomango\Model\Media;
-use Welcomango\Model\Experience;
 use Welcomango\Model\User;
+use Welcomango\Model\Experience;
 use Welcomango\Bundle\MediaBundle\Manager\MediaNamer;
 
 /**
@@ -30,58 +31,62 @@ class MediaManager
     private $filesystemMap;
 
     /**
+     * @var EntityManager
+     */
+    private $entityManager;
+
+    /**
+     * @var string
+     */
+    private $uploadsBaseDir;
+
+    /**
      * @param MediaNamer    $mediaNamer
      * @param FilesystemMap $filesystemMap
+     * @param EntityManager $entityManager
+     * @param string        $uploadsBaseDir
      */
-    public function __construct(MediaNamer $mediaNamer, FilesystemMap $filesystemMap)
+    public function __construct(MediaNamer $mediaNamer, FilesystemMap $filesystemMap, EntityManager $entityManager, $uploadsBaseDir)
     {
-        $this->mediaNamer    = $mediaNamer;
-        $this->filesystemMap = $filesystemMap;
+        $this->mediaNamer     = $mediaNamer;
+        $this->filesystemMap  = $filesystemMap;
+        $this->entityManager  = $entityManager;
+        $this->uploadsBaseDir = $uploadsBaseDir;
     }
 
     /**
-     * @param string $mediaList
-     * @param mixed  $entity
-     *
-     * @return ArrayCollection
+     * @param Experience $experience
+     * @param array      $originalMedias
      */
-    public function generateMediasFromCsv($mediaList, $entity)
+    public function processMediasExperience($experience, $originalMedias = array())
     {
-        $mediaCollection = new ArrayCollection();
-        $mediaPrefix     = $this->getMediaPrefix($entity);
-        $realAdapter     = $this->filesystemMap->get('real');
-        $tempadapter     = $this->filesystemMap->get('gallery');
-        $pathToUpload    = '/'.\date("Y").'/'.\date("m").'/';
+        $realAdapter  = $this->filesystemMap->get('real');
+        $tempadapter  = $this->filesystemMap->get('gallery');
+        $pathToUpload = '/'.\date("Y").'/'.\date("m").'/';
+        $mediaPrefix  = $this->getMediaPrefix($experience);
 
-        $medias = explode(',', $mediaList);
-
-        $currentMedias     = $entity->getMedias();
-        $currentMediasName = array();
-        foreach ($currentMedias as $media) {
-            $currentMediasName[] = $media->getOriginalFilename();
-        }
-
-        foreach ($medias as $media) {
-            if ($media !== "") {
-                //if one of the media has a different name it mean a new one has been added so we require a new validation
-                if (!in_array($media, $currentMediasName) && $entity instanceof Experience) {
-                    $entity->setPublicationStatus('pending');
-                }
-                $originalFileName = $media;
-                $tempFileName     = $this->mediaNamer->getTempName($media);
-                $mediaEntity      = new Media();
-                $mediaEntity->setOriginalFilename($mediaPrefix.$originalFileName);
-                $mediaEntity->setPath('/uploads'.$pathToUpload);
-                $mediaEntity->addExperience($entity);
-                $mediaCollection->add($mediaEntity);
-                if (!$realAdapter->has($pathToUpload.$mediaPrefix.$originalFileName)) {
-                    $fileContent = $tempadapter->read($tempFileName);
-                    $realAdapter->write($pathToUpload.$mediaPrefix.$originalFileName, $fileContent);
+        if (!empty($originalMedias)) {
+            foreach ($originalMedias as $originalMedia) {
+                if (false === $experience->getMedias()->contains($originalMedia)) {
+                    $this->entityManager->remove($originalMedia);
+                    $realAdapter->delete($pathToUpload.$originalMedia->getOriginalFilename());
                 }
             }
         }
 
-        return $mediaCollection;
+        foreach ($experience->getMedias() as $media) {
+            $tempFileName = $this->mediaNamer->getTempName($media->getOriginalFilename());
+            if ($tempadapter->has($tempFileName)) {
+                $fileContent = $tempadapter->read($tempFileName);
+                if (!$realAdapter->has($pathToUpload.$media->getOriginalFilename())) {
+                    $media->setPath($this->uploadsBaseDir.$pathToUpload);
+                    $media->setExperience($experience);
+                    $media->setOriginalFileName($mediaPrefix.$media->getOriginalFilename());
+                    $realAdapter->write($pathToUpload.$media->getOriginalFilename(), $fileContent);
+                    $this->entityManager->persist($media);
+                }
+            }
+        }
     }
 
     /**

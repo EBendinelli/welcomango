@@ -85,14 +85,14 @@ class ExperienceController extends BaseController
 
         //If there are experiences with updated status we set it back to false as the user will see it here
         $update = false;
-        foreach($experiences as $experience){
-            if($experience->hasUpdatedStatus()){
-                $experience->setUpdatedStatus(False);
+        foreach ($experiences as $experience) {
+            if ($experience->hasUpdatedStatus()) {
+                $experience->setUpdatedStatus(false);
                 $this->getDoctrine()->getManager()->persist($experience);
                 $update = true;
             }
         }
-        if($update){
+        if ($update) {
             $this->getDoctrine()->getManager()->flush();
         }
 
@@ -142,7 +142,7 @@ class ExperienceController extends BaseController
             $em = $this->getDoctrine()->getManager();
             $em->persist($experience);
             $em->flush();
-            $experience->setMedias($this->get('welcomango.media.manager')->generateMediasFromCsv($form->get('medias_upload')->getData(), $experience));
+            $this->get('welcomango.media.manager')->processMediasExperience($experience);
             $em->persist($experience);
             $em->flush();
 
@@ -178,7 +178,7 @@ class ExperienceController extends BaseController
      */
     public function editAction(Request $request, Experience $experience)
     {
-        if($this->getUser() != $experience->getCreator()){
+        if ($this->getUser() != $experience->getCreator()) {
             throw new AccessDeniedException('This user cannot edit this experience.');
         }
 
@@ -187,10 +187,14 @@ class ExperienceController extends BaseController
         $availabilityManager = $this->get('welcomango.front.availability.manager');
         $availabilityManager->prepareAvailabilityForForm($availabilities);
 
-
         $originalAvailabilities = new ArrayCollection();
         foreach ($availabilities as $availability) {
             $originalAvailabilities->add($availability);
+        }
+
+        $originalMedias = new ArrayCollection();
+        foreach ($experience->getMedias() as $media) {
+            $originalMedias->add($media);
         }
 
         //Experience before edition
@@ -201,17 +205,17 @@ class ExperienceController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            if($experience->getPublicationStatus() == 'refused'){
+            if ($experience->getPublicationStatus() == 'refused') {
                 $experience->setPublicationStatus('pending');
             }
-
+            $uow = $this->getDoctrine()->getEntityManager()->getUnitOfWork();
+            $uow->recomputeSingleEntityChangeSet($this->getDoctrine()->getEntityManager()->getClassMetadata(Experience::class), $experience);
             $availabilityManager->updateAvailabilityForExperience($experience, $form, $originalAvailabilities);
-            if($form->get('title')->getData() != $oldExperience ->getTitle() || $form->get('description')->getData() != $oldExperience ->getDescription() || $form->get('city')->getData() != $oldExperience ->getCity()){
+            if ($form->get('title')->getData() != $oldExperience->getTitle() || $form->get('description')->getData() != $oldExperience->getDescription() || $form->get('city')->getData() != $oldExperience->getCity()) {
                 $experience->setPublicationStatus('pending');
             }
-            $newMedias = $this->get('welcomango.media.manager')->generateMediasFromCsv($form->get('medias_upload')->getData(), $experience);
-            $experience->setMedias($newMedias);
 
+            $this->get('welcomango.media.manager')->processMediasExperience($experience, $originalMedias);
 
             // This cleanly remove the deleted availabilities
             foreach ($originalAvailabilities as $originalAvailability) {
@@ -226,7 +230,7 @@ class ExperienceController extends BaseController
             $mailManager = $this->get('welcomango.front.email.manager');
             $mailManager->sendEmailAfterExperienceCreation($this->getUser());
 
-            if($experience->getPublicationStatus() == 'pending'){
+            if ($experience->getPublicationStatus() == 'pending') {
                 return $this->redirect($this->generateUrl('front_experience_profile_list'));
             }
 
@@ -286,7 +290,7 @@ class ExperienceController extends BaseController
         $relatedExperiences = $experienceRepository->getFeatured(3);
 
         //Get forbidden dates for datepicker
-        $forbiddenDates = $this->get('welcomango.front.experience.manager')->getForbiddenDatesForDatePicker($experience);
+        $forbiddenDates          = $this->get('welcomango.front.experience.manager')->getForbiddenDatesForDatePicker($experience);
         $availablePeriodsPerDate = $this->get('welcomango.front.experience.manager')->getAvailablePeriodPerDate($experience);
 
 
@@ -343,13 +347,8 @@ class ExperienceController extends BaseController
                 ->setSubject($this->trans('email.experience.requestSubject', array('%experience%' => $experience->getTitle()), 'interface'))
                 ->setFrom('no-reply@welcomango.com')
                 ->setTo($experienceCreator->getEmail())
-                ->setBody(
-                    $this->renderView(
-                        'WelcomangoEmailBundle:EmailTemplate:newBookingRequest.html.twig',[
-                        'booking' => $booking,
-                    ]),
-                    'text/html'
-                );
+                ->setBody($this->renderView('WelcomangoEmailBundle:EmailTemplate:newBookingRequest.html.twig', ['booking' => $booking]), 'text/html')
+            ;
             $this->get('mailer')->send($email);
 
             if (null !== $message) {
@@ -360,13 +359,13 @@ class ExperienceController extends BaseController
         }
 
         return $this->render('WelcomangoExperienceBundle:Experience:view.html.twig', array(
-            'experience'         => $experience,
-            'relatedExperiences' => $relatedExperiences,
-            'formSubmitted'      => $formSubmitted,
-            'form'               => $form->createView(),
-            'forbiddenDates'     => $forbiddenDates,
+            'experience'              => $experience,
+            'relatedExperiences'      => $relatedExperiences,
+            'formSubmitted'           => $formSubmitted,
+            'form'                    => $form->createView(),
+            'forbiddenDates'          => $forbiddenDates,
             'availablePeriodsPerDate' => $availablePeriodsPerDate,
-            'feedbacks'          => $feedbacks,
+            'feedbacks'               => $feedbacks,
         ));
 
     }
@@ -455,4 +454,3 @@ class ExperienceController extends BaseController
         return $this->redirect($this->generateUrl('front_experience_list'));
     }
 }
-

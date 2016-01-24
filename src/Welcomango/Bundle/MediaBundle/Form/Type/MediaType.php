@@ -17,7 +17,10 @@ class MediaType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('mediaList', 'hidden', ['required' => false]);
+        $builder->add('originalFilename', HiddenType::class, [
+            'required' => false,
+            'label'    => false,
+        ]);
     }
 
     /**
@@ -26,17 +29,15 @@ class MediaType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'translation_domain' => 'media',
-            'compound'           => true,
+            'data_class' => 'Welcomango\Model\Media',
         ]);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function getName()
     {
-        return HiddenType::class;
+        return 'media_form';
     }
-
 }
