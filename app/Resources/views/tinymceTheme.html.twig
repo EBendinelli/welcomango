@@ -1,0 +1,5 @@
+{% block textarea_widget %}
+    {% spaceless %}
+        <textarea class="form-control tinymce"  {{ block('widget_attributes') }} >{% if value is not empty %}{{ value }} {% endif %}</textarea>
+    {% endspaceless %}
+{% endblock textarea_widget %}

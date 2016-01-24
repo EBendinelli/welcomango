@@ -32,6 +32,10 @@ class AdminPageType extends AbstractType
         $builder->add('title', 'text', ['label' => 'form.page.title']);
         $builder->add('content', 'textarea', [
             'label' => 'form.page.content',
+            'attr' => [
+                'class' => 'tinymce',
+                'data-theme' => 'advanced'
+            ]
         ]);
         $builder->add('publication_status', 'choice', [
             'choices' => $publicationStatus,

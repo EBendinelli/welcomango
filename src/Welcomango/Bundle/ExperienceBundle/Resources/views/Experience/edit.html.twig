@@ -7,10 +7,16 @@
 {% block profile_content %}
     {{ form_errors(form) }}
 
-    <div class="alert alert-info m-t-20">
-        <button class="close" data-dismiss="alert"></button>
-        {{ 'experience.editTopMessage'|trans }}
+    <div class=" p-l-10 p-b-10 p-t-10 m-t-20 b-a b-grey profile-form-note m-t-10 bg-master-light">
+        {{ 'experience.edit.messageTop'|trans|raw }}
     </div>
+
+    {% if experience.getConfirmedRequest|length > 0 %}
+        <div class="alert alert-danger" role="alert">
+            <button class="close" data-dismiss="alert"></button>
+            <strong>{{ 'interface.warning'|trans }}: </strong>{{ 'experience.edit.warningAlreadyBooked'|trans({'%number%': experience.getConfirmedRequest|length, '%route%': path('message_inbox')})|raw }}
+        </div>
+    {% endif %}
 
     <div id="myFormWizard" class="m-t-20">
         <!-- Nav tabs -->

@@ -228,6 +228,26 @@ ewz_recaptcha:
     private_key: 6Lc6hhQTAAAAAFFAF8YEbNXiHq5Ibj5W3K5-zwMj
     locale_key:  %kernel.default_locale%
 
+stfalcon_tinymce:
+    include_jquery: true
+    tinymce_jquery: true
+    selector: ".tinymce"
+    language: %locale%
+    theme:
+        # Simple theme: same as default theme
+        simple: ~
+        # Advanced theme with almost all enabled plugins
+        advanced:
+            plugins:
+               - "advlist autolink lists link image charmap print preview hr anchor pagebreak"
+               - "searchreplace wordcount visualblocks visualchars code fullscreen"
+               - "insertdatetime media nonbreaking save table contextmenu directionality"
+               - "template paste textcolor"
+            toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | preview media | forecolor backcolor | stfalcon | example"
+            image_advtab: true
+            height: 400
+            theme: "modern"
+
 welcomango_booking:
     available_status:
         - Available

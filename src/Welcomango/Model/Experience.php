@@ -940,4 +940,19 @@ class Experience
 
         return $count;
     }
+
+    /**
+     * @return int
+     */
+    public function getConfirmedRequest()
+    {
+        $confirmedBookings = array();
+        foreach ($this->bookings as $booking) {
+            if ($booking->getStatus() == 'Accepted') {
+                $confirmedBookings[] = $booking;
+            }
+        }
+
+        return $confirmedBookings;
+    }
 }

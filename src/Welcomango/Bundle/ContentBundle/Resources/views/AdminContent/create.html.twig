@@ -3,7 +3,7 @@
 {% trans_default_domain "admin" %}
 
 {% set listing = path('admin_page_list') %}
-{% form_theme form with ["::theme.html.twig", "::summernoteTheme.html.twig"] %}
+{% form_theme form with ["::theme.html.twig", '::tinymceTheme.html.twig'] %}
 
 {% block page_content %}
     {{ include("WelcomangoContentBundle:AdminContent:form.html.twig", {'save_path': path('admin_page_create')}) }}

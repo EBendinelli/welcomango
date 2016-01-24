@@ -105,6 +105,7 @@ profile.edit.usernameNote: This is only used by you to login. It is just like yo
 profile.edit.profilePictureNote: We already know you are beautiful, but people might want to verify that. Upload a photo, just in case.
 profile.edit.phoneNote: This will not be displayed publicly. We might only use it to send you texts and reminders (if you want to).
 profile.edit.birthdayNote: We're not santa but if we can send you a message or a gift on your birthday we will do it
+profile.edit.messageTop: This section defines what the other traveler will see from you. <br/> Make sure to tell them how you see yourself as a travel as well as a local when you're not on a trip!
 profile.lastExperiencesAttended: Last experiences attented by %user%
 profile.bestAdventure: Best experience
 profile.about: About %user%
@@ -147,7 +148,8 @@ experience.booking.title: Your request has been successfully sent!
 experience.booking.subTitle: This is getting exciting isn't it?
 experience.booking.message: %user% will answer you as soon as possible and you'll be notified by email of his answer. Try to be patient... ;)
 experience.createExperience: Create a new Experience
-
+experience.edit.messageTop: Not available on Tuesday anymore? Want to add some details or picture to improve your chances of atracting travelers? <br/>Here you can edit your experience and make it even better! <br/><br/><span class="bold">Note:</span> if you are completely changing your experience we suggest deleting this one and creating a new one.<br/><span class="bold">Note 2:</span> Once saved, we will review this experience like we did when you created it so it will be unavailable for a few hours.
+experience.edit.warningAlreadyBooked: You already have %number% reservation planned for this experience. Please <a href="%route%">contact the travelers</a> to altert them about the changes you made.
 
 booking.bookingFor: Your reservation for <span class="text-primary">%title%</span> in <span class="text-primary">%city%</span> with <span class="text-primary">%user%</span>
 booking.requestFor: Request for <span class="text-primary">%title%</span> from <span class="text-primary">%username%</span>
@@ -175,6 +177,7 @@ booking.action.message: This booking has been successfuly %status%
 booking.requestReceivedFor: Request received for
 booking.noRequestFound: No request found yet
 booking.requestFrom: Request from <a href="%route%" class="text-primary semi-bold">%name%</a> for </a> for <span class="text-primary">%time%</span>
+booking.action.acceptedMessage: You can now rigt a message to %name% and give him more details for the meeting point :)
 
 page.writtenBy: By %author%
 
