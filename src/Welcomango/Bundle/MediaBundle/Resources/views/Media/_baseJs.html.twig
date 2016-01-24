@@ -32,7 +32,6 @@
                     $("#media-modal-crop").on('hidden.bs.modal', function () {
                         removeMedia();
                     });
-
                 {% endif %}
                 $(function () {
                     $('#mediaToCrop').Jcrop({
@@ -40,7 +39,8 @@
                         boxWidth: 700,
                         boxHeight: 700,
                         onChange: showCoords,
-                        onSelect: showCoords
+                        onSelect: showCoords,
+                        setSelect: [0,0,2000,2000]
                     });
                     $('#datas').show();
                 });
