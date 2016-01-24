@@ -78,11 +78,12 @@ class MediaManager
             $tempFileName = $this->mediaNamer->getTempName($media->getOriginalFilename());
             if ($tempadapter->has($tempFileName)) {
                 $fileContent = $tempadapter->read($tempFileName);
-                if (!$realAdapter->has($pathToUpload.$media->getOriginalFilename())) {
+                if (!$realAdapter->has($pathToUpload.$mediaPrefix.$media->getOriginalFilename())) {
                     $media->setPath($this->uploadsBaseDir.$pathToUpload);
                     $media->setExperience($experience);
                     $media->setOriginalFileName($mediaPrefix.$media->getOriginalFilename());
                     $realAdapter->write($pathToUpload.$media->getOriginalFilename(), $fileContent);
+                    $tempadapter->delete($tempFileName);
                     $this->entityManager->persist($media);
                 }
             }
