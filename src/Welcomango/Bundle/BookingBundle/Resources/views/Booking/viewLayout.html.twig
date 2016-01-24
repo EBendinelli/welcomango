@@ -44,19 +44,19 @@
             <div class="col-md-6">
                 <div>
                     <i class="fa fa-user p-b-10"></i>
-                    <span class="semi-bold">{{ booking.numberOfParticipants }}</span> {{ 'booking.participants'|trans }}
+                    {{ 'booking.participants'|trans({'%number%': booking.numberOfParticipants })|raw }}
                 </div>
                 <div >
                     <i class="fa fa-street-view  p-b-10"></i>
-                    {{ 'booking.meetingAt'|trans }}: <span class="semi-bold">{{ booking.startDatetime|date('H:i') }}</span>
+                    {{ 'booking.meetingAt'|trans({'%time%': booking.startDatetime|date('H:i') })|raw }}
                 </div>
                 <div>
                     <i class="fa fa-clock-o p-b-10 "></i>
-                    {{ 'booking.duration'|trans }}: <span class="semi-bold">{{ date_difference(booking.startDatetime, booking.endDatetime) }}</span>
+                    {{ 'booking.duration'|trans({'%duration%':date_difference(booking.startDatetime, booking.endDatetime)})|raw }}
                 </div>
                 <div>
                     <i class="fa fa-globe "></i>
-                    {{ 'booking.experiencesAttendedBy'|trans }}: <span class="semi-bold">{{ booking.user.getAttendedExperiences|length }}</span>
+                    {{ 'booking.experiencesAttendedBy'|trans({'%number%':booking.user.getAttendedExperiences|length })|raw }}
                 </div>
             </div>
             <div class="col-md-6 text-center">

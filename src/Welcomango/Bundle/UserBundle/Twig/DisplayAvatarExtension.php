@@ -52,11 +52,16 @@ class DisplayAvatarExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function displayAvatar(User $user, $withRoute = false, $background = false, $class = '')
+    public function displayAvatar(User $user, $withRoute = false, $background = false, $class = '', $routeOnly = false)
     {
         $avatar = '';
         if ($user->getProfileMedia()) {
             $profileMedia = $user->getProfileMedia();
+
+            if($routeOnly){
+                return $profileMedia->getPath().$profileMedia->getOriginalFilename();
+            }
+
             if ($background) {
                 //Use a background css trick instead of a simple img tag
                 $avatar = '<div class="'.$class.' user-img-1" style="background-image:url('.$profileMedia->getPath().$profileMedia->getOriginalFilename().')"></div>';
@@ -75,6 +80,10 @@ class DisplayAvatarExtension extends \Twig_Extension
 
             $img = '/bundles/welcomangocore/images/profile.png';
 
+            if($routeOnly){
+                return $img;
+            }
+
             //If not we use the default image
             if ($background) {
                 //Use a background css trick instead of a simple img tag
@@ -85,6 +94,7 @@ class DisplayAvatarExtension extends \Twig_Extension
         }
 
         if ($withRoute) {
+
             if ($this->securityContext->getToken()->getUser() == $user) {
                 $routeToUser = $this->router->generate('fos_user_profile_show');
             } else {

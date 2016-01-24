@@ -133,8 +133,8 @@ class MessageController extends BaseController
      */
     public function threadAction(Request $request, User $currentUser, Thread $thread)
     {
-        if (!in_array($currentUser, $thread->getParticipants())) {
-            ldd("Template security You cannot access a thread that does not belong to you");
+        if ($currentUser !=  $this->getUser()) {
+            return $this->render('WelcomangoCoreBundle:CRUD:notAllowed.html.twig');
         }
 
         $thread      = $this->getProvider()->getThread($thread->getId());
