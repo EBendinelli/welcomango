@@ -27,30 +27,30 @@
         <div id="profile-menu-items">
             <ul>
                 <a href="{{ path('message_inbox') }}" class="profile-menu-item {%if path('message_inbox') in currentUrl  or 'messages' in currentUrl  %}{{ activeClass }}{% endif %}">
-                    <li class="profile-menu-item">
+                    <li>
                         <i class="fa fa-envelope fa-lg m-r-10"></i>{{ 'profile.message'|trans }}
                         {{ notification_display(user, 'inbox') }}
                     </li>
                 </a>
                 <a href="{{ path('booking_received_list', {'display': 'received'}) }}" class="profile-menu-item {% if path('booking_received_list') in currentUrl  or 'received' in currentUrl %}{{ activeClass }}{% endif %}">
-                    <li class="profile-menu-item">
+                    <li>
                         <i class="fa fa-bullhorn fa-lg m-r-10"></i>{{ 'profile.requestsFromTravelers'|trans }}
                         {{ notification_display(user, 'received') }}
                     </li>
                 </a>
                 <a href="{{ path('booking_sent_list') }}" class="profile-menu-item {% if path('booking_sent_list') in currentUrl  or 'booking' in currentUrl %}{{ activeClass }}{% endif %}">
-                    <li class="profile-menu-item">
+                    <li>
                         <i class="fa fa-suitcase fa-lg m-r-10"></i>{{ 'profile.yourRequests'|trans }}
                         {{ notification_display(user, 'sent') }}
                     </li>
                 </a>
                 <a href="{{ path('front_experience_profile_list') }}" class="profile-menu-item {% if path('front_experience_profile_list') in currentUrl or 'experience' in currentUrl %}{{ activeClass }}{% endif %}">
-                    <li class="profile-menu-item">
+                    <li>
                         <i class="fa fa-road fa-lg m-r-10"></i>{{ 'profile.yourExperiences'|trans }}
                     </li>
                 </a>
                 <a href="{{ path('fos_user_profile_edit') }}" class="profile-menu-item {% if path('fos_user_profile_edit') in currentUrl  %}{{ activeClass }}{% endif %}">
-                    <li class="profile-menu-item">
+                    <li>
                         <i class="fa fa-pencil fa-lg m-r-10"></i>{{ 'profile.editProfile'|trans }}
                     </li>
                 </a>

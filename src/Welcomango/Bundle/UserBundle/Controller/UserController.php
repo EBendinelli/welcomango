@@ -24,15 +24,15 @@ class UserController extends BaseController
      * @param Request $request
      * @param User    $user
      *
-     * @Route("/user/{user_id}", name="front_user_view")
-     * @ParamConverter("user", options={"id" = "user_id"})
+     * @Route("/user/{slug}", name="front_user_view")
+     * @ParamConverter("user", options={"slug" = "slug"})
      * @Template()
      *
      * @return array
      */
     public function viewAction(Request $request, User $user)
     {
-        $proposedExperiences = $user->getExperiences();
+        $proposedExperiences = $user->getPublishedExperiences();
 
         $attendedExperiences = $this
             ->getRepository('Welcomango\Model\Experience')

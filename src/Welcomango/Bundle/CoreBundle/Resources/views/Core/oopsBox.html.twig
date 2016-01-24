@@ -1,0 +1,10 @@
+<div class="row" >
+    <div class="col-md-12 text-center m-t-20 p-b-30 bg-white b-a b-grey">
+        <h2 >Oops</h2>
+        <i class="fa {{ icon|default('fa-meh-o') }} fa-5x m-b-20"></i>
+        <p>{{ message|raw }}</p>
+        {% if route is defined %}
+            <a href="{{ route }}" class="m-t-20 btn btn-primary"><i class="fa fa-plus fa-lg m-r-5"></i>{{ buttonMsg }}</a>
+        {% endif %}
+    </div>
+</div>

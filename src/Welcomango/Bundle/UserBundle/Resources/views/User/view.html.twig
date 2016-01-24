@@ -36,20 +36,30 @@
     <!-- START USER CONTENT -->
         <div id="user-content" class="m-t-30">
             <div id="user-proposed-experience" class="m-b-20">
-                <h2 class="m-b-30">{{ 'profile.bestAdventure'|trans }}</h2>
-                {% for experience in  proposedExperiences %}
-                    {% if experience.featured == true %}
-                        {{ include("WelcomangoExperienceBundle:Experience:_featuredExperience.html.twig", { 'experience': experience}) }}
-                    {% endif %}
-                {% endfor %}
-                {% for experience in  proposedExperiences %}
-                    {{ include("WelcomangoExperienceBundle:Experience:_experienceTile2.html.twig", { 'experience': experience, 'column': 2}) }}
-                {% endfor %}
+                <h2 class="m-b-30">{{ 'profile.proposedExperiences'|trans }}</h2>
+                <hr/>
+                {% if proposedExperiences.first %}
+                    {% for experience in  proposedExperiences %}
+                        {% if experience == proposedExperiences.first%}
+                            {{ include("WelcomangoExperienceBundle:Experience:_featuredExperience.html.twig", { 'experience': experience}) }}
+                        {% else %}
+                            {{ include("WelcomangoExperienceBundle:Experience:_experienceTile2.html.twig", { 'experience': experience, 'column': 2}) }}
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                        <div class="hint-text fs-i">{{ 'profile.noExperienceProposed'|trans }}</div>
+                {% endif %}
             </div>
             <div id="user-description">
-                <h2>{{ 'profile.about'|trans({'%user%': user.firstname})}}</h2>
-                <hr style="margin-top:25px"/>
-                <p>{{ user.description|nl2br|raw }}</p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>{{ 'profile.about'|trans({'%user%': user.firstname})}}</h2>
+                        <hr style="margin-top:25px"/>
+                    </div>
+                    <div class="col-md-12">
+                        <p>{{ user.description|nl2br|raw }}</p>
+                    </div>
+                </div>
             </div>
         </div>
     <!-- END USER CONTENT -->

@@ -108,7 +108,7 @@ class Builder extends ContainerAware
                 )
             );
         }else{
-            $loginButton = "<a data-toggle='modal' data-target='.modal-login' class='btn btn-sm btn-bordered btn-black block-title fs-12 hidden-sm hidden-xs' data-text='Login'>Login</a>";
+            $loginButton = "<a data-toggle='modal' data-target='.modal-login' class='btn btn-sm btn-bordered btn-black block-title fs-12 ' data-text='Login'>Login</a>";
             $menu->addChild( $loginButton ,
                 array(
 

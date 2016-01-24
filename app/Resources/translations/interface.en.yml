@@ -12,6 +12,15 @@ interface.waitingForValidation: Waiting for validation
 interface.search: Search
 interface.register: Register
 interface.warning: Warning
+interface.send: Send
+interface.clear: Clear
+interface.login: Login
+interface.username: Username
+interface.password: Password
+interface.first: First
+interface.previous: Previous
+interface.next: Next
+interface.last: Last
 
 login.rememberMe: Remember me
 login.forgotPassword: Forgot your password?
@@ -23,6 +32,8 @@ login.password.currentHint: Please give your current password before proceding
 login.password.passwordHint: Try to keep something strong with letter, special characters and uppercase
 login.resetting.successTitle: Reset email Sent
 login.resetting.successSubTitle: Try not to forget it the next time!
+login.rememberMe: Remember me
+login.forgotPassword: Forgot your password?
 
 menu.title.experiences: Experiences
 menu.title.portraits: Portraits
@@ -34,6 +45,24 @@ global.comments: Comments
 global.feedbacks: Feedbacks
 global.welcomeBack: Welcome back
 global.backHome: Back to home
+global.backExperiences: Back to the experiences
+global.backToYourExperiences: Your experiences
+global.backProfile: Back to profile
+global.joinNow: Join now
+global.experience: Experience
+global.date: Date
+global.meetingTime: Meeting time
+global.status: Status
+global.actions: Actions
+global.requestedTime: Request time
+global.user: User
+
+homepage.title1: Places Through People
+homepage.subTitle1: Find enthusiastic people willing to show you a different side of their city
+homepage.nextSubTitle1: And never travel like a tourist anymore
+homepage.title2: Join the community
+homepage.subTitle2: And show the world what is awesome about where you live
+homepage.nextSubTitle2: Meet people with common interested, get intrigued by your destination, discover a different side of the places you visit
 
 profile.menu: Menu
 profile.message: Messages
@@ -82,6 +111,12 @@ profile.about: About %user%
 profile.picture.cropNote: Help us make you beautiful and crop your picture
 profile.picture.saveAndCrop: Crop and save your picture
 profile.picture.mustBeSquare: Sorry, but you profile picture must be a square!
+profile.created.success: Your account has been successfully created
+profile.created.emailSent: You should receive a confirmation email anytime soon. Please verify your account by clicking the link included
+profile.yourProfile: Your profile
+profile.edit.picture: Edit your picture
+profile.proposedExperiences: Proposed experiences
+profile.noExperienceProposed: No experience proposed yet
 
 experience.list.subHeader: Time to find your amazing Welcomanguide
 experience.experienceShortText: A %experienceDuration%h adventure proposed by %experienceCreator%
@@ -102,29 +137,44 @@ experience.list.title: Experiences over the world
 experience.noFeedbacksReceived: This user has not received any feedback yet
 experience.noNoteYet: No note received yet
 
-
 experience.manage.introductionText: You may have lived in this current city for years and find the idea of a theme oriented experience a bit limitating... Well, here you can create a new experience with a different flavor to propose another version of your city to travelers. For example, if you already propose a culture oriented visit of your town, you can also propose a second experience about the nightlife and the different things happening by night! Let your knowledge of the city talk and try to intrigued the potential visitors ;)
 experience.manage.title: A different flavor of your city
 
 experience.create.title: Your experience has been succesfully created!
 experience.create.subTitle: We are just going to have a look at it and it should be published very soon
 experience.create.message: Thanks a lot for proposing this tour of your city! You\'re part of the community and helping us making traveling better</br> Have a look and see what it looks like! Or just go back to your profile
-experience.create.button1Message: Your experiences
-experience.create.button2Message: Back to profile
+experience.booking.title: Your request has been successfully sent!
+experience.booking.subTitle: This is getting exciting isn't it?
+experience.booking.message: %user% will answer you as soon as possible and you'll be notified by email of his answer. Try to be patient... ;)
+experience.createExperience: Create a new Experience
+
 
 booking.bookingFor: Your reservation for <span class="text-primary">%title%</span> in <span class="text-primary">%city%</span> with <span class="text-primary">%user%</span>
 booking.requestFor: Request for <span class="text-primary">%title%</span> from <span class="text-primary">%username%</span>
-
 booking.noteReceived: Note received as a local
 booking.noteGiven: Note for %user% as traveler
 booking.noNote: No note yet
 booking.noComment: No comment yet
-
-
 booking.yourFeedbackWaitingForApproval: Your feedback is waiting for approval, it should be validated anytime soon
 booking.thisUserFeedbackWaitingForApproval: This user's feedback is waiting for approval, it should be validated anytime soon
 booking.noFeedbackFrom: Sorry, no feedback received from %user%
+booking.noExperienceCreated: Looks like you are not proposing any experience in your city yet, how sad...<br/>Go ahead and create a new experience to welcome travelers!
 feedbackRefusedText: Sorry, your feedback has been refused, please give a respectuous feedback!
+booking.requestsSent: Booking request
+booking.requestSentExplanation: See a summary of your recent or past booking requests to other people
+booking.participants: <span class="semi-bold">%number%</span>  participants
+booking.meetingAt: Meeting requested at <span class="semi-bold">%time%</span>
+booking.duration: Requested duration: <span class="semi-bold">%duration%</span>
+booking.experiencesAttendedBy: Experience attended by <span class="semi-bold">%number%</span> person(s)
+booking.sentTo: Booking request sent to <a href="%route%" class="text-primary semi-bold">%name%</a>
+booking.viewRequest: View details about this request
+booking.rateAdventure: Rate this adventure
+booking.ratingText: Give a feedback for the time you had during this experience. Try to be objective and honest
+booking.ratingNote: Please note that we reserve oursevlves the right not to accept your feedback if it is offensive of inapropriate
+booking.action.message: This booking has been successfuly %status%
+booking.requestReceivedFor: Request received for
+booking.noRequestFound: No request found yet
+booking.requestFrom: Request from <a href="%route%" class="text-primary semi-bold">%name%</a> for </a> for <span class="text-primary">%time%</span>
 
 page.writtenBy: By %author%
 
@@ -140,5 +190,11 @@ contact.subText: If your message concerns a bug, don't hesitate to describe your
 contact.sent.title: Message successfully sent!
 contact.sent.subTitle: We can already hear it flying toward us
 contact.sent.message: Thanks for contacting us, we will do our best to handle your query and come back to you as soon as possible
+content.portraits: Portraits
 
 email.experience.requestSubject: You have a new request for your experience %experience%
+
+message.noMessage: Looks like you haven't received a message yet
+
+form.city: City
+form.rating.comment: Comment

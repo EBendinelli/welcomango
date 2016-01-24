@@ -1,46 +1,50 @@
 <div class="row message-list">
-    {% if threads %}
-        <ul class="bg-white">
-        {% for thread in threads %}
-            <li class="item p-t-15 p-b-15 {% if not fos_message_is_read(thread) %}message-unread{% endif %}" onclick="location.href='{{ url('message_thread_view', {'thread_id': thread.id, 'user_id': user.id}) }}'">
-                <div class="row">
-                    <div class="col-md-1 text-center ">
-                        <a href="{{ asset(path('front_user_view', {'user_id': thread.booking.experience.getCreator.id})) }}">
-                            {{ display_avatar(thread.booking.experience.getCreator, false, false, 'message-user-picture') }}
-                            {% if not fos_message_is_read(thread) %}
-                                {{ notification_display(user, 'message') }}
-                            {% endif %}
-                        </a>
-                    </div>
-                    <div class="col-md-11 p-l-30">
-                        <div style="width:88%">
-                            <p class="recipients no-margin ">{{ thread.booking.experience.getCreator.fullname }} ({{ thread.booking.experience.getCreator.currentCity.name }} - {{ thread.booking.experience.getCreator.currentCity.country.name }})</p>
-                            <p class="subject no-margin">{{ thread.subject }}{% if not fos_message_is_read(thread) %} <span class="text-complete">[New]</span>{% endif %}</p>
-                            <p class="body no-margin">{{ thread.lastMessage.body|truncate(100) }}</p>
-                        </div>
-                        {% if thread.lastMessage %}
-                            <p class="datetime">{{ thread.lastMessage.createdAt|time_diff }}</p>
-                        {% endif %}
-                        {% if fos_message_can_delete_thread(thread) %}
-                            {% if fos_message_deleted_by_participant(thread) %}
-                                {% set formAction %}{{ url('fos_message_thread_undelete', {'threadId': thread.id}) }}{% endset %}
-                                {% set submitValue %}{% trans from 'FOSMessageBundle' %}undelete{% endtrans %}{% endset %}
-                            {% else %}
-                                {% set formAction %}{{ url('fos_message_thread_delete', {'threadId': thread.id}) }}{% endset %}
-                                {% set submitValue %}{% trans from 'FOSMessageBundle' %}delete{% endtrans %}{% endset %}
-                            {% endif %}
-                            <form action="{{ formAction }}" method="post">
-                                <i class="message-delete fa fa-times" type="submit" value="{{ submitValue }}"></i>
-                            </form>
-                        {% endif %}
-                        <i ></i>
-                    </div>
-                </div>
-            </li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <div class="col-md-12">{% trans from 'FOSMessageBundle' %}no_thread{% endtrans %}.</div>
-    {% endif %}
+    <ul class="bg-white">
+    {% for thread in threads %}
 
+        {# This define the user with whome the messages are exchanged #}
+        {% set recipient = ''%}
+        {%  for participant in thread.participants %}
+            {% if participant != user %}
+                {% set recipient = participant %}
+            {% endif %}
+        {% endfor %}
+
+        <li class="item p-t-15 p-b-15 {% if not fos_message_is_read(thread) %}message-unread{% endif %}" onclick="location.href='{{ url('message_thread_view', {'thread_id': thread.id, 'user_id': user.id}) }}'">
+            <div class="row">
+                <div class="col-md-1 text-center ">
+                    <a href="{{ asset(path('front_user_view', {'slug': recipient.slug})) }}">
+                        {{ display_avatar(recipient, false, false, 'message-user-picture') }}
+                        {% if not fos_message_is_read(thread) %}
+                            {{ notification_display(user, 'message') }}
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="col-md-11 p-l-30">
+                    <div style="width:88%">
+                        <p class="recipients no-margin ">{{ recipient.fullname }} ({{ recipient.currentCity.name }} - {{ recipient.currentCity.country.name }})</p>
+                        <p class="subject no-margin">{{ thread.subject }}{% if not fos_message_is_read(thread) %} <span class="text-complete">[New]</span>{% endif %}</p>
+                        <p class="body no-margin">{{ thread.lastMessage.body|truncate(100) }}</p>
+                    </div>
+                    {% if thread.lastMessage %}
+                        <p class="datetime">{{ thread.lastMessage.createdAt|time_diff }}</p>
+                    {% endif %}
+                    {% if fos_message_can_delete_thread(thread) %}
+                        {% if fos_message_deleted_by_participant(thread) %}
+                            {% set formAction %}{{ url('fos_message_thread_undelete', {'threadId': thread.id}) }}{% endset %}
+                            {% set submitValue %}{% trans from 'FOSMessageBundle' %}undelete{% endtrans %}{% endset %}
+                        {% else %}
+                            {% set formAction %}{{ url('fos_message_thread_delete', {'threadId': thread.id}) }}{% endset %}
+                            {% set submitValue %}{% trans from 'FOSMessageBundle' %}delete{% endtrans %}{% endset %}
+                        {% endif %}
+                        <form action="{{ formAction }}" method="post">
+                            <i class="message-delete fa fa-times" type="submit" value="{{ submitValue }}"></i>
+                        </form>
+                    {% endif %}
+                    <i ></i>
+                </div>
+            </div>
+        </li>
+    {% endfor %}
+    </ul>
 </div>

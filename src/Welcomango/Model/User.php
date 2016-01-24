@@ -47,6 +47,12 @@ class User extends BaseUser implements ParticipantInterface
     private $lastName;
 
     /**
+     * @Gedmo\Slug(fields={"firstName", "lastName"}, separator="-")
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="phone", type="string", length=255, nullable=true)
@@ -251,6 +257,26 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+    /**
      * Set phone
      *
      * @param string $phone
@@ -390,6 +416,23 @@ class User extends BaseUser implements ParticipantInterface
         //remove deleted experiences
         foreach ($this->experiences as $experience) {
             if (!$experience->isDeleted()) {
+                $availableExperiences[] = $experience;
+            }
+        }
+
+        return $availableExperiences;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getPublishedExperiences()
+    {
+        $availableExperiences = new ArrayCollection();
+
+        //remove deleted experiences
+        foreach ($this->experiences as $experience) {
+            if (!$experience->isDeleted() && $experience->getPublicationStatus() == 'published') {
                 $availableExperiences[] = $experience;
             }
         }

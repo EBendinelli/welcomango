@@ -5,11 +5,21 @@
 {% block profile_content %}
 
     <h2 class="text-center m-t-20">{{ thread.subject }}</h2>
+    {% set recipient = '' %}
     {% for participant in thread.participants %}
-        {% if app.user !=  participant %}
+        {% if app.user != participant %}
             <h4 class="text-center m-b-20">With <span class="text-primary">{{ participant.fullname }}</span></h4>
+            {% set recipient = participant %}
         {% endif %}
     {% endfor %}
+
+    <div class="text-center">
+        {% if app.user ==  thread.booking.experience.getCreator %}
+            <a href="{{ path('booking_received_view', {'booking_id': thread.booking.id}) }}">{{ 'booking.view' }}</a>
+        {% else %}
+            <a href="{{ path('booking_sent_list', {'booking_id': thread.booking.id}) }}">{{ 'booking.view' }}</a>
+        {% endif %}
+    </div>
 
     <!-- BOOKING SUMMARY BEGIN -->
     <div class="row bg-white panel panel-default p-l-20 p-t-20 p-b-20">
@@ -43,7 +53,7 @@
         {% if message.sender == user %}
             <div class="row message">
                 <div class="col-md-1 p-t-20">
-                    {{ display_avatar(thread.booking.experience.getCreator, true, false, 'message-user-picture m-r-10') }}
+                    {{ display_avatar(user, true, false, 'message-user-picture m-r-10') }}
                 </div>
                 <div class="col-md-11 p-l-30">
                     <div class="name bold">{{ message.sender.fullname }}</div>
@@ -59,8 +69,8 @@
                     <p class="message-content bg-primary-lighter" >{{ message.body|nl2br|raw }}</p>
                 </div>
                 <div class="col-md-1 p-t-20" style="padding-left:0px">
-                    <a href="{{ asset(path('front_user_view', {'user_id': thread.booking.experience.getCreator.id})) }}">
-                        {{ display_avatar({'user': thread.booking.experience.getCreator}) }}
+                    <a href="{{ asset(path('front_user_view', {'slug': thread.booking.experience.getCreator.slug})) }}">
+                        {{ display_avatar(recipient,true, false, 'message-user-picture m-r-10' ) }}
                     </a>
                 </div>
             </div>
@@ -68,10 +78,10 @@
     </div>
 {% endfor %}
 
-<form action="{{ url('message_thread', {'thread_id': thread.id, 'user_id' : user.id}) }}" method="post" class="m-t-20">
+<form action="{{ url('message_thread_view', {'thread_id': thread.id, 'user_id' : user.id}) }}" method="post" class="m-t-20">
     {{ form_widget(form) }}
     <div class="row text-right">
-        <button class="btn btn-primary" type="submit">Send</button>
+        <button class="btn btn-primary" type="submit">{{ 'interface.send'|trans({}, 'interface') }}</button>
     </div>
 </form>
 

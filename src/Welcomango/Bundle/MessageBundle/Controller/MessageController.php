@@ -5,6 +5,7 @@ namespace Welcomango\Bundle\MessageBundle\Controller;
 use FOS\MessageBundle\FormModel\NewThreadMessage;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -139,7 +140,13 @@ class MessageController extends BaseController
         $thread      = $this->getProvider()->getThread($thread->getId());
         $form        = $this->container->get('fos_message.reply_form.factory')->create($thread);
         $formHandler = $this->container->get('fos_message.reply_form.handler');
-        $formHandler->process($form);
+
+        if ($message = $formHandler->process($form)) {
+            return new RedirectResponse($this->container->get('router')->generate('fos_message_thread_view', array(
+                'threadId' => $message->getThread()->getId()
+            )));
+        }
+
 
         return $this->render('FOSMessageBundle:Message:thread.html.twig', array(
             'form'   => $form->createView(),

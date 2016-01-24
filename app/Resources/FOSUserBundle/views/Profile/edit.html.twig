@@ -243,6 +243,14 @@
                 }
             });
         });
+
+        //Close the datepicker when a date is selected
+        $('#front_experience_availabilities_0_end_date').on('changeDate', function(ev){
+            $(this).datepicker('hide');
+        });
+        $('#front_experience_availabilities_0_start_date').on('changeDate', function(ev){
+            $(this).datepicker('hide');
+        });
     </script>
 {% endblock %}
 

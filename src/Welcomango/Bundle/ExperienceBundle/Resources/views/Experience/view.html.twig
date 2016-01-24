@@ -170,7 +170,7 @@
                 <div class="bg-master-lighter row" id="experience-user">
                     <!-- MAIN USER DISPLAY -->
                     <div id="user-main">
-                        <div class="user" onclick="location.href='{{ path('front_user_view', {'user_id' : experience.getCreator.id }) }}'">
+                        <div class="user" onclick="location.href='{{ path('front_user_view', {'slug' : experience.getCreator.slug }) }}'">
                             <div class="user-item user-img-1">
                                 <div class="user-info-wrap">
                                     <div class="user-info">
@@ -184,7 +184,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="{{ path('front_user_view', {'user_id' : experience.getCreator.id }) }}">
+                        <a href="{{ path('front_user_view', {'slug' : experience.getCreator.slug }) }}">
                             <h2 class="text-center">{{ experience.getCreator.firstname }}, {{ experience.getCreator.getAge }}</h2>
                         </a>
                     </div>
@@ -375,6 +375,7 @@
         periodNames[4] = 'Evening';
         periodNames[5] = 'Night';
 
+        //Remove the forbidden date from the datepicker
         $('#front_booking_desired_date').datepicker({
             startDate: startDate,
             endDate: endDate,
@@ -387,6 +388,11 @@
 
                 if (forbidden.indexOf(curr_date)>-1) return false;
             }
+        });
+
+        //Close the datepicker when a date is selected
+        $('#front_booking_desired_date').on('changeDate', function(ev){
+            $(this).datepicker('hide');
         });
 
         //Update period available based on a date

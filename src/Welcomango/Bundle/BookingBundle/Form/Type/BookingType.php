@@ -70,7 +70,7 @@ class BookingType extends AbstractType
             $desiredDuration[$i] = $i.':00';
         }
 
-        for ($i = 0; $i < $experience->getMaximumParticipants(); $i++) {
+        for ($i = 1; $i < $experience->getMaximumParticipants()+1; $i++) {
             $numberOfParticipants[$i] = $i;
         }
 

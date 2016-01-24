@@ -172,7 +172,7 @@ div.dotted-line span {
 }
 
 .card-content{
-    height:200px !important;
+    height:200px;
 }
 
 
@@ -197,6 +197,17 @@ div.dotted-line span {
     height: 150px;
     overflow: hidden;
 }
+
+.card .experience-image-horizontal-split {
+    height: 170px;
+}
+
+@media (max-width: 991px){
+    .card .experience-image-horizontal-split {
+        height: 120px;
+    }
+}
+
 
 .card .experience-image:after {
     content: '\A';
@@ -296,6 +307,245 @@ div.dotted-line span {
 }
 
 /* //////////////////////////////////////////////////////// */
+/* /////////////   EXPERIENCE CARDS UI 2  ///////////////// */
+/* //////////////////////////////////////////////////////// */
+
+
+/* HANDLING THE CASE WHERE IT'S IN CLASSIC CONTAINER */
+.card .image-separation-horizontal{
+    width: 100%;
+    height: 20%;
+    position: absolute;
+    z-index: 0;
+    margin-top:-40px;
+}
+
+.card .experience-image-triangle-horizontal{
+    width: 0px;
+    height: 0px;
+    border-bottom: 40px solid white;
+    border-left: 350px solid transparent;
+    z-index: -20;
+}
+
+.card-bottom{
+    width:100%;
+    height:40px;
+}
+
+.card .card-bottom-triangle {
+    width: 0px;
+    height: 0px;
+    border-top: 40px solid white;
+    border-right: 350px solid transparent;
+    z-index: -20;
+}
+
+.card-bottom-price{
+    margin-top: -27px;
+    padding-right: 10px;
+}
+
+@media (min-width: 1600px) {
+    .card-content {
+        height: 200px !important;
+    }
+}
+
+/* Handling the triangle behaviors for different screen */
+@media (min-width: 1200px) and (max-width: 1600px) {
+
+
+    .card-content {
+        height: 200px !important;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+    .card-bottom-price{
+        margin-top: -24px;
+    }
+
+    .card-content {
+        height: 200px !important;
+    }
+
+    .basic-card-content{
+        height: 250px !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px){
+    .card .experience-image-triangle-horizontal{
+        border-left: 210px solid transparent;
+    }
+
+    .card-bottom-price{
+        margin-top: -25px;
+    }
+
+    .card-content{
+        height: 250px !important;
+    }
+
+    .basic-card-content{
+        height: 300px !important;
+    }
+
+    .card .card-bottom-triangle {
+        border-right: 210px solid transparent;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 767px){
+    .card .experience-image-triangle-horizontal{
+        border-left: 662px solid transparent;
+    }
+
+    .card .card-bottom-triangle {
+        border-right: 662px solid transparent;
+    }
+
+
+
+    .card-content{
+        height: initial !important;
+    }
+}
+
+@media (max-width: 480px){
+    .card .experience-image-triangle-horizontal{
+        border-left: 400px solid transparent;
+    }
+
+    .card .card-bottom-triangle {
+        border-right: 400px solid transparent;
+    }
+
+    .card-bottom{
+        height:50px;
+    }
+
+    .card-bottom-price{
+        margin-top: -18px;
+    }
+}
+
+
+/* HANDLING THE CASE WHERE IT'S IN LARGE CONTAINER */
+.large-container .card .image-separation-horizontal{
+    width: 100%;
+    height: 20%;
+    position: absolute;
+    z-index: 0;
+    margin-top:-39px;
+}
+
+.large-container .card .experience-image-triangle-horizontal{
+    width: 0px;
+    height: 0px;
+    border-bottom: 40px solid white;
+    border-left: 450px solid transparent;
+    z-index: -20;
+}
+
+.large-container .card-bottom{
+    width:100%;
+    height:40px;
+}
+
+.large-container .card .card-bottom-triangle {
+    width: 0px;
+    height: 0px;
+    border-top: 40px solid white;
+    border-right: 450px solid transparent;
+    z-index: -20;
+}
+
+.large-container .card-bottom-price{
+    margin-top: -27px;
+    padding-right: 10px;
+}
+
+@media (min-width: 1600px) {
+    .large-container .card-content {
+        height: 200px !important;
+    }
+}
+
+/* Handling the triangle behaviors for different screen */
+@media (min-width: 1200px) and (max-width: 1600px) {
+    .large-container .card-bottom-price{
+        margin-top: -24px;
+    }
+
+    .large-container .card-content {
+        height: 200px !important;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+    .large-container .card-bottom-price{
+        margin-top: -20px;
+    }
+
+    .large-container .card-content {
+        height: 200px !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px){
+    .large-container .card .experience-image-triangle-horizontal{
+        border-left: 200px solid transparent;
+    }
+
+    .large-container .card-bottom-price{
+        margin-top: -12px;
+    }
+
+    .large-container .card-bottom{
+        height:50px;
+    }
+
+    .large-container .card-content{
+        height: 250px !important;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 767px){
+    .large-container .card .experience-image-triangle-horizontal{
+        border-left: 620px solid transparent;
+    }
+
+    .large-container .card .card-bottom-triangle {
+        border-right: 620px solid transparent;
+    }
+
+    .large-container .card-content{
+        height: initial !important;
+    }
+}
+
+@media (max-width: 480px){
+    .large-container .card .experience-image-triangle-horizontal{
+        border-left: 450px solid transparent;
+    }
+
+    .large-container .card .card-bottom-triangle {
+        border-right: 450px solid transparent;
+    }
+
+    .large-container .card-bottom{
+        height:50px;
+    }
+
+    .large-container .card-bottom-price{
+        margin-top: -18px;
+    }
+}
+
+
+/* //////////////////////////////////////////////////////// */
 /* ////////////////   USER IN CARD UI  //////////////////// */
 /* //////////////////////////////////////////////////////// */
 
@@ -303,6 +553,13 @@ div.dotted-line span {
     width: 120px;
     height: 120px;
     margin: -55px auto 0;
+    cursor: pointer;
+}
+
+.user-horitonzal-split{
+    width: 120px;
+    height: 120px;
+    margin: -75px auto 0;
     cursor: pointer;
 }
 

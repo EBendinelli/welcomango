@@ -43,6 +43,7 @@ class ProfileController extends BaseProfileController
         //And check if user has an experience which has been approved or refused
         $moderatedExperiences = array();
         $bookings             = array();
+
         foreach ($userExperiences as $experience) {
             $expBookings = $experience->getBookings();
             $bookings    = array_merge($bookings, $expBookings->toArray());

@@ -1,3 +1,5 @@
+{% trans_default_domain 'interface' %}
+
 {{ form_start(form, {'action': path('booking_rate', {'booking_id' : booking.id|default('#'), 'view': view} ), 'attr': {'id': form.vars.id}}) }}
 <div id="ratingForm">
     {{ form_row(form.note) }}

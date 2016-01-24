@@ -88,7 +88,7 @@ class DisplayAvatarExtension extends \Twig_Extension
             if ($this->securityContext->getToken()->getUser() == $user) {
                 $routeToUser = $this->router->generate('fos_user_profile_show');
             } else {
-                $routeToUser = $this->router->generate('front_user_view', array('user_id' => $user->getId()));
+                $routeToUser = $this->router->generate('front_user_view', array('slug' => $user->getSlug()));
             }
             $avatar = '<a href="'.$routeToUser.'">'.$avatar.'</a>';
         }

@@ -97,7 +97,7 @@ class RequestActionExtension extends \Twig_Extension
                             $availableActions = '<span style="font-style: italic">'.$this->translator->trans('interface.waitingForValidation', array(), 'interface').'</span>';
                         }
                     }else{
-                        $availableActions = '<a class="btn btn-sm btn-complete" data-toggle="modal" data-target=".modal-rating" onClick="updateRatingModal(\''.$ratingRoute .'\')">Rate</a>';
+                        $availableActions = '<a class="btn btn-sm btn-complete m-r-5" data-toggle="modal" data-target=".modal-rating" onClick="updateRatingModal(\''.$ratingRoute .'\')">Rate</a>';
                     }
                     break;
                 case 'Accepted':
@@ -138,7 +138,7 @@ class RequestActionExtension extends \Twig_Extension
                             $availableActions = '<span style="font-style: italic">'.$this->translator->trans('interface.waitingForValidation', array(), 'interface').'</span>';
                         }
                     }else{
-                        $availableActions = '<a class="btn btn-sm btn-complete" data-toggle="modal" data-target=".modal-rating" onClick="updateRatingModal(\''.$ratingRoute .'\')">Rate</a>';
+                        $availableActions = '<a class="btn btn-sm btn-complete m-r-5" data-toggle="modal" data-target=".modal-rating" onClick="updateRatingModal(\''.$ratingRoute .'\')">Rate</a>';
                     }
                     break;
                 case 'Accepted':

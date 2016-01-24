@@ -1,3 +1,7 @@
+interface.published: Published
+interface.refused: Refused
+interface.pending: Pending
+
 moderation.feedback.FromTo: Feedback from %userFrom% to %userTo%
 
 experience.description: Description
