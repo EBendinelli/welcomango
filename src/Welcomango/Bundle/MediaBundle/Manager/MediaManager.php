@@ -83,9 +83,9 @@ class MediaManager
                     $media->setExperience($experience);
                     $media->setOriginalFileName($mediaPrefix.$media->getOriginalFilename());
                     $realAdapter->write($pathToUpload.$media->getOriginalFilename(), $fileContent);
-                    $tempadapter->delete($tempFileName);
                     $this->entityManager->persist($media);
                 }
+                $tempadapter->delete($tempFileName);
             }
         }
     }
