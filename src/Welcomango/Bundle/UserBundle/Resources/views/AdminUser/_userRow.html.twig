@@ -1,8 +1,10 @@
 {# Complete with correct informations #}
 <tr>
     <td>
-{#        {% include "YproxAdminCrmBundle:User:_userLink.html.twig" %}#}
         {{ user.getFullName }}
+        {% if user.deleted %}
+            <span class="label label-danger">Deleted</span>
+        {% endif %}
     </td>
     <td>
         {% set roles = user.roles %}
@@ -11,7 +13,7 @@
         {% endfor %}
     </td>
     <td>
-      {#  {{ user.lastLogin ? user.lastLogin|distance_of_time_in_words() : 'interface.never'|trans({}, 'interface') }}#}
+      {{ user.lastLogin ? user.lastLogin|date('d/m/Y H:i:s') : 'interface.never'|trans({}, 'interface') }}
     </td>
     <td>
         {% if user.enabled %}

@@ -58,6 +58,7 @@
 
 {% block javascripts %}
     {{ parent() }}
+    {% include "WelcomangoUserBundle:AdminUser:_baseJs.html.twig" %}
     <script type="text/javascript">
         $('select').select2();
     </script>

@@ -98,13 +98,20 @@ class AdminUserType extends AbstractType
             'label'        => false,
         ));
 
-/*        $builder->add('password', 'repeated', array(
-            'type'            => 'password',
-            'invalid_message' => 'The passwords don\'t match',
-            'options'         => array('required' => true),
-            'first_options'   => array('label' => 'form.user.password'),
-            'second_options'  => array('label' => 'form.user.password.validate'),
-        ));*/
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            $user = $event->getData();
+            $form = $event->getForm();
+
+            if (!$user || null === $user->getId()) {
+                $form->add('plain_password', 'repeated', array(
+                    'type'            => 'password',
+                    'invalid_message' => 'The passwords don\'t match',
+                    'options'         => array('required' => true),
+                    'first_options'   => array('label' => 'form.user.password'),
+                    'second_options'  => array('label' => 'form.user.password.validate'),
+                ));
+            }
+        });
 
         $builder->add('profileMedia', 'entity', array(
             'class' => 'Welcomango\Model\Media',
@@ -132,8 +139,10 @@ class AdminUserType extends AbstractType
             'label'    => 'form.user.gender',
         ));
 
-
-        $builder->add('save', 'submit');
+        $builder->add('media_profile', 'file', [
+            'required' => false,
+            'mapped'   => false,
+        ]);
     }
 
     /**

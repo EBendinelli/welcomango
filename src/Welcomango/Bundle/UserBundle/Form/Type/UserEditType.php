@@ -148,8 +148,6 @@ class UserEditType extends AbstractType
             'required' => false,
             'mapped'   => false,
         ]);
-
-
     }
 
     /**

@@ -105,6 +105,11 @@ class AdminUserController extends BaseController
                 }
             }
 
+            if ($form->get('media_profile')->getData()) {
+                $media = $this->get('welcomango.media.manager')->generateSimpleMedia($form->get('media_profile')->getData()->getClientOriginalName(), $user);
+                $user->setProfileMedia($media);
+            }
+
             $this->get('fos_user.user_manager')->updateUser($user);
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', $this->trans('user.edit.success', array(), 'crm'));
