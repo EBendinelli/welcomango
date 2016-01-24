@@ -170,7 +170,7 @@
                 <div class="bg-master-lighter row" id="experience-user">
                     <!-- MAIN USER DISPLAY -->
                     <div id="user-main">
-                        <div class="user" onclick="location.href='{{ path('front_user_view', {'user_id' : experience.getCreator.id }) }}'">
+                        <div class="user" onclick="location.href='{{ path('front_user_view', {'slug' : experience.getCreator.slug }) }}'">
                             <div class="user-item user-img-1">
                                 <div class="user-info-wrap">
                                     <div class="user-info">
@@ -184,7 +184,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="{{ path('front_user_view', {'user_id' : experience.getCreator.id }) }}">
+                        <a href="{{ path('front_user_view', {'slug' : experience.getCreator.slug }) }}">
                             <h2 class="text-center">{{ experience.getCreator.firstname }}, {{ experience.getCreator.getAge }}</h2>
                         </a>
                     </div>

@@ -47,6 +47,12 @@ class User extends BaseUser implements ParticipantInterface
     private $lastName;
 
     /**
+     * @Gedmo\Slug(fields={"firstName", "lastName"}, separator="-")
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="phone", type="string", length=255, nullable=true)
@@ -248,6 +254,26 @@ class User extends BaseUser implements ParticipantInterface
     public function getLastName()
     {
         return $this->lastName;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
     }
 
     /**

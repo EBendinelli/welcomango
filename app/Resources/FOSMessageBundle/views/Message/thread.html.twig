@@ -69,7 +69,7 @@
                     <p class="message-content bg-primary-lighter" >{{ message.body|nl2br|raw }}</p>
                 </div>
                 <div class="col-md-1 p-t-20" style="padding-left:0px">
-                    <a href="{{ asset(path('front_user_view', {'user_id': thread.booking.experience.getCreator.id})) }}">
+                    <a href="{{ asset(path('front_user_view', {'slug': thread.booking.experience.getCreator.slug})) }}">
                         {{ display_avatar(recipient,true, false, 'message-user-picture m-r-10' ) }}
                     </a>
                 </div>

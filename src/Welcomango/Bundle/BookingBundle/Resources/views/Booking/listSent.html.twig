@@ -55,7 +55,7 @@
                                             </a>
                                         </div>
                                         <div class="requested-experience-user">
-                                            by <a href="{{ asset(path('front_user_view', {'user_id': booking.experience.getCreator.id})) }}" class="text-primary ">{{ booking.experience.getCreator.firstname }}</a>
+                                            by <a href="{{ asset(path('front_user_view', {'slug': booking.experience.getCreator.slug})) }}" class="text-primary ">{{ booking.experience.getCreator.firstname }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -71,7 +71,7 @@
                             <td colspan="5">
                                 <div class="row">
                                     <div class="col-md-12 semi-bold text-center m-b-20">
-                                        {{ 'booking.sentTo'|trans({'%name%': booking.experience.getCreator.fullname, '%route%': asset(path('front_user_view', {'user_id': booking.experience.getCreator.id}))})|raw }}
+                                        {{ 'booking.sentTo'|trans({'%name%': booking.experience.getCreator.fullname, '%route%': asset(path('front_user_view', {'slug': booking.experience.getCreator.slug}))})|raw }}
                                     </div>
                                 </div>
                                 <div class="row m-b-10">

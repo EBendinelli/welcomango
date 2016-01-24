@@ -79,7 +79,7 @@
                                 <td colspan="4">
                                     <div class="row">
                                         <div class="col-md-12 semi-bold text-center m-b-20">
-                                            {{ 'booking.requestFrom'|trans({'%name%': booking.user.fullname,'%route%': asset(path('front_user_view', {'user_id': booking.user.id})), '%time%': booking.startDatetime|date('d-m-Y')  })|raw }}
+                                            {{ 'booking.requestFrom'|trans({'%name%': booking.user.fullname,'%route%': asset(path('front_user_view', {'slug': booking.user.slug})), '%time%': booking.startDatetime|date('d-m-Y')  })|raw }}
                                         </div>
                                     </div>
                                     <div class="row m-b-10">

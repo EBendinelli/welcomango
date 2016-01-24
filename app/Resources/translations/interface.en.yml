@@ -115,6 +115,8 @@ profile.created.success: Your account has been successfully created
 profile.created.emailSent: You should receive a confirmation email anytime soon. Please verify your account by clicking the link included
 profile.yourProfile: Your profile
 profile.edit.picture: Edit your picture
+profile.proposedExperiences: Proposed experiences
+profile.noExperienceProposed: No experience proposed yet
 
 experience.list.subHeader: Time to find your amazing Welcomanguide
 experience.experienceShortText: A %experienceDuration%h adventure proposed by %experienceCreator%
