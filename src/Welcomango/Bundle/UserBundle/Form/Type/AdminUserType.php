@@ -120,7 +120,6 @@ class AdminUserType extends AbstractType
             'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('m');
             },
-
         ));
 
         $builder->add('from_city', 'entity', array(
