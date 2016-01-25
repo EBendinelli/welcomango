@@ -83,6 +83,11 @@ class UserEditType extends AbstractType
             'required' => false,
         ]);
 
+        $builder->add('email', 'email', [
+            'label'    => 'form.user.email',
+            'disabled'  => true,
+        ]);
+
         $builder->add('description', 'textarea', [
             'label'    => 'form.user.description',
             'required' => false,
@@ -147,6 +152,7 @@ class UserEditType extends AbstractType
         $builder->add('media_photo', 'file', [
             'required' => false,
             'mapped'   => false,
+            'label'    => 'form.profile.uploadPhoto',
         ]);
     }
 
@@ -157,7 +163,7 @@ class UserEditType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class'         => 'Welcomango\Model\User',
-            'translation_domain' => 'crm',
+            'translation_domain' => 'interface',
             'roles_user'         => null,
         ]);
     }

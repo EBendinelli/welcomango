@@ -145,7 +145,7 @@
     {% spaceless %}
         <div>
             <div class="fallback">{% set type = type|default('file') %}
-                <input type="{{ type }}" {{ block('widget_attributes') }}/>
+                <input class="btn btn-complete" type="{{ type }}" {{ block('widget_attributes') }}/>
             </div>
         </div>
     {% endspaceless %}

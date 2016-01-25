@@ -11,54 +11,9 @@
 {% block profile_content %}
     {{ form_errors(form) }}
 
-    {#<h2>{{ 'profile.editYourInformations'|trans }}</h2>
-    <div id="profile-edit-information" class="m-t-20">
-        <div class="row">
-            <div class="col-md-12 bg-master-lighter">
-                {{ form_start(form, {'action': path('fos_user_profile_edit')}) }}
-                <h4>{{ 'profile.edit.aboutYou'|trans }}</h4>
-                <hr>
-                <div class="row">
-                    <div class="col-md-12">{{ form_row(form.username) }}</div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">{{ form_row(form.firstName) }}</div>
-                    <div class="col-md-6">{{ form_row(form.lastName) }}</div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">{{ form_row(form.phone) }}</div>
-                    <div class="col-md-4">{{ form_row(form.birthdate) }}</div>
-                    <div class="col-md-2">{{ form_row(form.gender) }}</div>
-
-                </div>
-                <h4>{{ 'profile.edit.currentSituation'|trans }}</h4>
-                <hr>
-                <div class="row">
-                    <div class="col-md-6">{{ form_row(form.from_city) }}</div>
-                    <div class="col-md-6">{{ form_row(form.current_city) }}</div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">{{ form_row(form.description) }}</div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">{{ form_row(form.occupation) }}</div>
-                </div>
-                <div class="row text-right m-b-20">
-                    <a href="{{ path('fos_user_profile_show') }}" class="btn btn-default">{{ 'interface.cancel'|trans({}, "interface") }}</a>
-                    <button type="submit" class="btn btn-complete">
-                     <i class="fa fa-save"></i>{{ 'interface.save'|trans({}, "interface") }}
-                    </button>
-                </div>
-                {{ form_end(form) }}
-            </div>
-        </div>
-    </div>#}
-
     <div class=" p-l-10 p-b-10 p-t-10 m-t-20 b-a b-grey profile-form-note m-t-10 bg-master-light">
         {{ 'profile.edit.topMessage'|trans|raw }}
     </div>
-
-
 
     <div id="myFormWizard" class="m-t-20">
         <!-- Nav tabs -->
@@ -78,15 +33,16 @@
         <div class="tab-content bg-white p-l-20 p-r-20 p-t-20 p-b-20 ">
             <div class="tab-pane {% if activeTab == 'current' %}active{% endif %} slide" id="tab1">
                 <div class="row">
-                    <div class="profile-form-note m-t-10">{{ "profile.edit.currentCityNote"|trans }}</div>
+                    <div class="profile-form-note m-t-10"><i class="fa pg-map"></i> {{ "profile.edit.currentCityNote"|trans }}</div>
                     <div>{{ form_row(form.currentCityInput, {'attr': {'onFocus':'geolocate()'}}) }}</div>
-                    <div class=" profile-form-note m-t-20">{{ "profile.edit.descriptionNote"|trans }}</div>
+                    <div class=" profile-form-note m-t-20"><i class="fa fa-pencil-square-o"></i> {{ "profile.edit.descriptionNote"|trans }}</div>
                     <div>{{ form_row(form.description) }}</div>
-                    <div class="profile-form-note m-t-20">{{ "profile.edit.occupationNote"|trans }}</div>
+                    <div class="profile-form-note m-t-20"><i class="fa fa-building"></i> {{ "profile.edit.occupationNote"|trans }}</div>
                     <div>{{ form_row(form.occupation) }}</div>
                 </div>
             </div>
             <div class="tab-pane slide" id="tab2">
+                <div class="profile-form-note"><i class="fa fa-language"></i> {{ "profile.edit.languageNote"|trans }}</div>
                 <ul id="languages" class="languages list-unstyled" data-prototype="{% filter escape %}{% include 'WelcomangoUserBundle:AdminUser:_spokenLanguages.html.twig' with {'form': form.spokenLanguages.vars.prototype } %}{% endfilter %}">
                     {% for language in form.spokenLanguages %}
                         {% include 'WelcomangoUserBundle:AdminUser:_spokenLanguages.html.twig' with {'form': language } %}
@@ -94,29 +50,37 @@
                 </ul>
             </div>
             <div class="tab-pane slide {% if activeTab == 'about' %}active{% endif %}" id="tab3">
-                <div class="profile-form-note">{{ "profile.edit.usernameNote"|trans }}</div>
+                <div class="profile-form-note"><i class="fa fa-user"></i> {{ "profile.edit.usernameNote"|trans }}</div>
                 <div>{{ form_row(form.username) }}</div>
                 <div class="row m-t-20">
                     <div class="col-md-6">{{ form_row(form.firstName) }}</div>
                     <div class="col-md-6">{{ form_row(form.lastName) }}</div>
                 </div>
-                <div>
-                    <div class="profile-form-note m-t-20">{{ "profile.edit.profilePictureNote"|trans }}</div>
-                    {{ form_row(form.media_photo) }}
-                    <div class="col-md-12" id="profile-media-croped">
+                <div class="row m-t-20">
+                    <div class="profile-form-note"><i class="fa fa-envelope-o"></i> {{ "profile.edit.emailNote"|trans }}</div>
+                    <div>{{ form_row(form.email) }}</div>
+                </div>
+                <div class="row">
+                    <div class="profile-form-note m-t-20"><i class="fa fa-picture-o"></i> {{ "profile.edit.profilePictureNote"|trans }}</div>
+                    <div id="profile-media-croped">
                         {% if user.profileMedia %}
                             <img src="{{ user.profileMedia.getPath ~ user.profileMedia.getOriginalFilename }}"/>
+                        {% else %}
+                            <div class="text-center" id="profile-upload-message" >{{ 'profile.edit.clickUpload'|trans }}</div>
                         {% endif%}
                     </div>
+                    <div class="text-center">
+                        {{ form_row(form.media_photo) }}
+                    </div>
                 </div>
-                <div class="profile-form-note m-t-20">{{ "profile.edit.phoneNote"|trans }}</div>
+                <div class="profile-form-note m-t-20"><i class="fa fa-phone"></i> {{ "profile.edit.phoneNote"|trans }}</div>
                 <div class="row">
                     <div class="col-md-6">{{ form_row(form.phone) }}</div>
                     <div class="col-md-6">{{ form_row(form.gender) }}</div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="profile-form-note m-t-20">{{ "profile.edit.birthdayNote"|trans }}</div>
+                        <div class="profile-form-note m-t-20"><i class="fa fa-birthday-cake"></i> {{ "profile.edit.birthdayNote"|trans }}</div>
                         <div class="m-t-20">{{ form_row(form.birthdate) }}</div>
                     </div>
                 </div>
@@ -250,6 +214,13 @@
         $('#front_experience_availabilities_0_start_date').on('changeDate', function(ev){
             $(this).datepicker('hide');
         });
+
+        //PROFILE PICTURE
+        //Trigger the ipunt button when clicking the dropzone
+        $('#profile-media-croped').click(function(){
+            $('#front_user_edit_media_photo').trigger('click');
+        });
+
     </script>
 {% endblock %}
 

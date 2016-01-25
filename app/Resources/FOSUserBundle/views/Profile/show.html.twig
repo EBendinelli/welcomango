@@ -97,45 +97,45 @@
     <!-- END PROFILE TOP MENU-->
 
     <!-- BEGIN DASHBOARD -->
+    {% if nextVisitGiven or nextTrip or newRequest or feedbackAsLocal or feedbackAsTraveler or moderatedExperiences %}
         <h3>{{ 'profile.latestUpdate'|trans }}</h3>
-        <div id="dashboard" class="p-l-10 p-r-10 m-t-20">
+        <div id="dashboard" class="p-l-10 p-r-10">
             {{ include("WelcomangoUserBundle:User:_profileDashboard.html.twig", {
-                'userExperiences'   : userExperiences,
                 'nextVisitGiven'    : nextVisitGiven,
                 'nextTrip'          : nextTrip,
-                'feedbacks'         : feedbacks,
                 'newRequest'        : newRequest,
                 'feedbackAsLocal'   : feedbackAsLocal,
                 'feedbackAsTraveler'  : feedbackAsTraveler,
                 'moderatedExperiences' : moderatedExperiences,
             }) }}
         </div>
+    {% endif %}
     <!-- END DASHBOARD-->
 
     {{ parent() }}
 
     <!-- BEGIN PROFILE CONTENT-->
-        <div id="user-proposed-experience" class="m-b-20">
-            {% if userExperiences.isEmpty %}
-                <a href="{{ path('front_experience_create') }}" class="btn btn-primary btn-cons" ><i class="fa fa-plus-circle "></i> {{ 'profile.createExperience'|trans }}</a>
-            {% else %}
-                <h3 class="m-b-30">{{ 'profile.yourExperience'|trans }}</h3>
-                <hr/>
-                <div class="row">
-                    {{ include("WelcomangoExperienceBundle:Experience:_featuredExperience.html.twig", { 'experience': userExperiences|first,  'profile': true}) }}
-                </div>
-                <div id="profile-experience-action" class="text-right">
-                    <a href="{{ path('front_experience_edit', {'experience_id': userExperiences|first.id}) }}" class="btn btn-bordered btn-black btn-cons"><i class="fa fa-pencil"></i> {{ 'interface.edit'|trans }}</a>
-                    <button class="btn btn-danger btn-cons" data-toggle="modal" data-target=".modal-action"><i class="fa fa-trash "></i> {{ 'interface.delete'|trans }}</button>
-                </div>
-                <br/>
-            {% endif %}
-        </div>
-        <div id="user-description">
-            <h3>{{ 'profile.aboutYou'|trans }}</h3>
-            <hr style="margin-top:25px"/>
-            <p>{{ app.user.description|nl2br|raw }}</p>
-        </div>
+    <div id="user-proposed-experience" class="m-b-20">
+        {% if userExperiences.isEmpty %}
+            <a href="{{ path('front_experience_create') }}" class="btn btn-primary btn-cons" ><i class="fa fa-plus-circle "></i> {{ 'profile.createExperience'|trans }}</a>
+        {% else %}
+            <h3 class="m-b-30">{{ 'profile.yourExperience'|trans }}</h3>
+            <hr/>
+            <div class="row">
+                {{ include("WelcomangoExperienceBundle:Experience:_featuredExperience.html.twig", { 'experience': userExperiences|first,  'profile': true}) }}
+            </div>
+            <div id="profile-experience-action" class="text-right">
+                <a href="{{ path('front_experience_edit', {'experience_id': userExperiences|first.id}) }}" class="btn btn-bordered btn-black btn-cons"><i class="fa fa-pencil"></i> {{ 'interface.edit'|trans }}</a>
+                <button class="btn btn-danger btn-cons" data-toggle="modal" data-target=".modal-action"><i class="fa fa-trash "></i> {{ 'interface.delete'|trans }}</button>
+            </div>
+            <br/>
+        {% endif %}
+    </div>
+    <div id="user-description">
+        <h3>{{ 'profile.aboutYou'|trans }}</h3>
+        <hr style="margin-top:25px"/>
+        <p>{{ app.user.description|nl2br|raw }}</p>
+    </div>
     <!-- END PROFILE CONTENT-->
 
 

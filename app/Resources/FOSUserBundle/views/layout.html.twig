@@ -16,7 +16,7 @@
 
 {% block page_content %}
 
-    <section class="p-b-20 {% block profile_header_class 'bg-primary' %} sm-no-margin ">
+    <section class="p-b-20 {% block profile_header_class 'bg-pattern-orange-inverted' %} sm-no-margin">
         <div class="container p-t-50">
             <div class="row">
                 <div class="col-md-3"><br/></div>
@@ -32,7 +32,7 @@
     <section class="container-fluid container-fixed-lg p-b-50  bg-master-lightest">
         <div class="container">
             <!-- START USER CARD -->
-            <div class="panel col-md-3 bg-master-lightest">
+            <div class="panel col-md-3 profile-left-col">
                 <div id="user-picture-container">
                     {{ display_avatar(user, true, true, 'user-picture') }}
                     {% block inside_profile_picture %}

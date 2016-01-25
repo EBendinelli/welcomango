@@ -47,6 +47,15 @@
     <button class="btn btn-complete btn-sm" type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ label|trans({}, translation_domain) }}</button>
 {% endblock button_widget %}
 
+{% block file_widget %}
+    {% spaceless %}
+        <div class="btn btn-success file-upload">
+            <span>{{ form_label(form) }}</span>
+            <input class="file-upload-input" type="{{ type }}" {{ block('widget_attributes') }}/>
+        </div>
+    {% endspaceless %}
+{% endblock %}
+
 
 {% block genemu_jqueryselect2_hidden_javascript %}
     <script type="text/javascript">

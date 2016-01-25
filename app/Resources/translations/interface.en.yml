@@ -98,6 +98,8 @@ profile.occupation: Occupation
 profile.hometown: Hometown
 profile.gender: Gender
 profile.spokenLanguages: Spoken languages
+profile.edit.emailNote: Emails cannot be modified directly, please contact us if you want to change the address used
+profile.edit.languageNote: You can here manage the different languages you speak or understand. That's a great way to make sur you'll be able to communicate properly with your next guide or guest!
 profile.edit.currentCityNote: This indicates the city you are currently living in. The one you'll guide people throught. The chosen one!
 profile.edit.descriptionNote: Give people a few words about you! Let them know what you love, what you hate, inspires you and how being with is the probably the best thing that could ever happen to them.
 profile.edit.occupationNote: You current occupation. You can be a student, an architect, a gardener, an hedonist , and even a dentist. We will still love you.
@@ -105,7 +107,7 @@ profile.edit.usernameNote: This is only used by you to login. It is just like yo
 profile.edit.profilePictureNote: We already know you are beautiful, but people might want to verify that. Upload a photo, just in case.
 profile.edit.phoneNote: This will not be displayed publicly. We might only use it to send you texts and reminders (if you want to).
 profile.edit.birthdayNote: We're not santa but if we can send you a message or a gift on your birthday we will do it
-profile.edit.messageTop: This section defines what the other traveler will see from you. <br/> Make sure to tell them how you see yourself as a travel as well as a local when you're not on a trip!
+profile.edit.topMessage: This section defines what the other traveler will see from you. <br/> Make sure to tell them how you see yourself as a traveler as well as a local when you're not on a trip!
 profile.lastExperiencesAttended: Last experiences attented by %user%
 profile.bestAdventure: Best experience
 profile.about: About %user%
@@ -118,6 +120,9 @@ profile.yourProfile: Your profile
 profile.edit.picture: Edit your picture
 profile.proposedExperiences: Proposed experiences
 profile.noExperienceProposed: No experience proposed yet
+profile.edit.clickUpload: Click to upload a photo
+profile.editExperience: Edit your experience
+profile.deleteExperience: Delete your experience
 
 experience.list.subHeader: Time to find your amazing Welcomanguide
 experience.experienceShortText: A %experienceDuration%h adventure proposed by %experienceCreator%
@@ -137,6 +142,18 @@ form.experience.minParticipantsAccepted: Minimum number of participants
 experience.list.title: Experiences over the world
 experience.noFeedbacksReceived: This user has not received any feedback yet
 experience.noNoteYet: No note received yet
+experience.attended: Experience attended
+experience.pendingRequest: Pending request
+
+experience.create.titleNote: This is the title of your experience, it should describe what will happen with you in your city in a few word. Try to make it appealing and simple like <i>"A fantastic bike journey"</i> for a bike tour, <i>"A city under siege"</i> for a history related experience or <i>"The crazy underground side of a business city"</i> for a tour of the underground places. <span class="bold">Make it sound like a movie title!</span> <br/><br/>There is <span class="bold">no need to include the name of the city</span>.
+experience.create.descriptionNote: Now we are talking! This is the core of your experience! This section must give a good overview of what a traveler should expect when meeting with you. No need to talk too much about the city, tell a bit more about what is the experience going to be about about and how it represents the way you live and love your city.
+experience.create.mediaNote: Add some photos to your experience. This give some falvor to your page while giving a snapshot of what the adventure with you will look like
+experience.create.cityNote: This can be usefull right? Better ask you just in case... So where is this happening?
+experience.create.tagsNote: The tags are the the keywords in which falls your experience. It's kind of the category but a bit more expressive. Don't add too many of them, just make sure it reflects the content of your experience
+experience.create.estimatedDurationNote: This is how long you think you experience should last
+experience.create.maximumParticipantsNote: The maximum number of people you are willing to take with you
+experience.create.minimumDurationNote: How long should your experience last at least
+experience.create.maximumDurationNote: How long can your experience last
 
 experience.manage.introductionText: You may have lived in this current city for years and find the idea of a theme oriented experience a bit limitating... Well, here you can create a new experience with a different flavor to propose another version of your city to travelers. For example, if you already propose a culture oriented visit of your town, you can also propose a second experience about the nightlife and the different things happening by night! Let your knowledge of the city talk and try to intrigued the potential visitors ;)
 experience.manage.title: A different flavor of your city
@@ -201,3 +218,4 @@ message.noMessage: Looks like you haven't received a message yet
 
 form.city: City
 form.rating.comment: Comment
+form.profile.uploadPhoto: Upload a photo

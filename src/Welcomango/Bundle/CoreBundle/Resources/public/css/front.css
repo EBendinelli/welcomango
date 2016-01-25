@@ -73,6 +73,37 @@ p{
     word-wrap: break-word;
 }
 
+.file-upload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+    display:none;
+}
+
+.file-upload input.file-upload-input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+.bg-pattern-dark{
+    background: url('/bundles/welcomangocore/images/background/bg-pattern-dark.jpg');
+}
+
+.bg-pattern-orange{
+    background: url('/bundles/welcomangocore/images/background/bg-pattern-orange.jpg');
+}
+
+.bg-pattern-orange-inverted{
+    background: url('/bundles/welcomangocore/images/background/bg-pattern-orange-inverted.jpg');
+}
+
 /* //////////////////////////////////////////////////////// */
 /* ////////////////////   DOTED LINE  ////////////////////// */
 /* //////////////////////////////////////////////////////// */
@@ -302,8 +333,23 @@ div.dotted-line span {
     padding: 5px 10px 5px 10px;
 }
 
+#profile-media-croped{
+    width: 270px;
+    height: 270px;
+    padding: 10px;
+    border: dashed rgba(0, 0, 0, 0.3) 2px !important;
+    margin:auto;
+    cursor: pointer;
+}
+
 #profile-media-croped img{
     width: 250px;
+}
+
+#profile-upload-message{
+    margin-top:100px;
+    font-size: 20px;
+    font-weight: 400;
 }
 
 /* //////////////////////////////////////////////////////// */
@@ -966,6 +1012,10 @@ a h4:hover{
 /* ////////////////   PROFILE  //////////////////////////// */
 /* //////////////////////////////////////////////////////// */
 
+.profile-left-col{
+    background: transparent;
+}
+
 #profile-header{
     border-bottom:solid 1px #e6e6e6;
     border-left:solid 1px #e6e6e6;
@@ -1427,4 +1477,9 @@ a .front-menu-user-picture{
 
 .form-group-default .form-control{
     margin-top: 0px;
+}
+
+/* /////// LANGUAGE REMOVE BUTTON //////////// */
+.form-height-button{
+    margin-top: 19px;
 }

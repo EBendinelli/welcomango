@@ -4,6 +4,8 @@
 
 {% trans_default_domain "interface" %}
 
+{% block meta_title %}{{ "profile.editExperience"|trans }}{% endblock %}
+
 {% block profile_content %}
     {{ form_errors(form) }}
 
@@ -36,7 +38,7 @@
         <div class="tab-content p-l-20 p-r-20 p-t-20 p-b-20 bg-white">
             <div class="tab-pane active slide" id="tab1">
                 <div class="row">
-                    <div class="small hint-text m-b-10">{{ "experience.create.titleNote"|trans }}</div>
+                    <div class="small hint-text m-b-10">{{ "experience.create.titleNote"|trans|raw }}</div>
                     {{ form_row(form.title) }}
                     <div class="small hint-text m-b-10 m-t-30">{{ "experience.create.descriptionNote"|trans }}</div>
                     {{ form_row(form.description) }}
