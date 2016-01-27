@@ -103,43 +103,43 @@ class UserEditType extends AbstractType
 
         $builder->add('currentCityInput', 'text', array(
             'mapped' => false,
-            'label'  => 'form.user.currenCityInput',
+            'label'  => 'form.user.currentCityInput',
             'data'   => $userCity->getName(),
         ));
 
         $builder->add('currentCity', 'hidden', array(
             'mapped' => false,
-            'label'  => 'form.user.currenCity',
+            'label'  => 'form.user.currentCity',
             'data'   => $userCity->getName(),
         ));
 
         $builder->add('currentCityLat', 'hidden', array(
             'mapped' => false,
-            'label'  => 'form.user.currenCityLat',
+            'label'  => 'form.user.currentCityLat',
             'data'   => $userCity->getLatitude(),
         ));
 
         $builder->add('currentCityLng', 'hidden', array(
             'mapped' => false,
-            'label'  => 'form.user.currenCityLng',
+            'label'  => 'form.user.currentCityLng',
             'data'   => $userCity->getLongitude(),
         ));
 
         $builder->add('currentCityState', 'hidden', array(
             'mapped' => false,
-            'label'  => 'form.user.currenCityState',
+            'label'  => 'form.user.currentCityState',
             'data'   => $userCity->getState(),
         ));
 
         $builder->add('currentCityCountry', 'hidden', array(
             'mapped' => false,
-            'label'  => 'form.user.currenCityCountry',
+            'label'  => 'form.user.currentCityCountry',
             'data'   => $userCity->getCountry()->getName(),
         ));
 
         $builder->add('currentCityCountryCode', 'hidden', array(
             'mapped' => false,
-            'label'  => 'form.user.currenCityCountryCode',
+            'label'  => 'form.user.currentCityCountryCode',
             'data'   => $userCity->getCountry()->getCountryCode(),
         ));
 

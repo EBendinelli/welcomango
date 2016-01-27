@@ -1,3 +1,5 @@
+{% trans_default_domain 'interface' %}
+
 <script type="text/javascript">
 
     updateBtnGroup();
@@ -63,6 +65,10 @@
         $panelControls.append($removeFormA);
 
         $removeFormA.on('click', function() {
+            if($("#availabilities > div").length <4){
+                alert("{{ 'availability.error.oneRequired'|trans }}");
+                return false;
+            }
             $('#confirmModalButton').on('click', function(e) {
                 // prevent the link from creating a "#" on the URL
                 e.preventDefault();

@@ -81,37 +81,37 @@ class UserType extends AbstractType
 
         $builder->add('currentCityInput', 'text', array(
             'mapped' => false,
-            'label'  => 'form.user.currenCityInput',
+            'label'  => 'form.user.currentCityInput',
         ));
 
         $builder->add('currentCity', 'hidden', array(
             'mapped' => false,
-            'label'  => 'form.user.currenCity',
+            'label'  => 'form.user.currentCity',
         ));
 
         $builder->add('currentCityLat', 'hidden', array(
             'mapped' => false,
-            'label'  => 'form.user.currenCityLat',
+            'label'  => 'form.user.currentCityLat',
         ));
 
         $builder->add('currentCityLng', 'hidden', array(
             'mapped' => false,
-            'label'  => 'form.user.currenCityLng',
+            'label'  => 'form.user.currentCityLng',
         ));
 
         $builder->add('currentCityState', 'hidden', array(
             'mapped' => false,
-            'label'  => 'form.user.currenCityState',
+            'label'  => 'form.user.currentCityState',
         ));
 
         $builder->add('currentCityCountry', 'hidden', array(
             'mapped' => false,
-            'label'  => 'form.user.currenCityCountry',
+            'label'  => 'form.user.currentCityCountry',
         ));
 
         $builder->add('currentCityCountryCode', 'hidden', array(
             'mapped' => false,
-            'label'  => 'form.user.currenCityCountryCode',
+            'label'  => 'form.user.currentCityCountryCode',
         ));
 
         $builder->add('fromCityInput', 'text', array(
@@ -170,7 +170,7 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class'         => 'Welcomango\Model\User',
-            'translation_domain' => 'crm',
+            'translation_domain' => 'interface',
             'roles_user'         => null,
         ]);
     }

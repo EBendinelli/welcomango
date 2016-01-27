@@ -60,7 +60,7 @@ class AdminSpokenLanguageType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class'         => 'Welcomango\Model\SpokenLanguage',
-            'translation_domain' => 'crm',
+            'translation_domain' => 'interface',
             'roles_user'         => null,
         ]);
     }

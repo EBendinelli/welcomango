@@ -16,7 +16,7 @@ class LoadTagData extends AbstractFixture implements FixtureInterface, OrderedFi
      */
     public function load(ObjectManager $manager)
     {
-        $tags = array('Photography','Art','Cinema','Music','Politic','Culture','Wine','Food','Beer','Nature','Sport', 'Nightlife', 'History', 'Literature', 'Must See', 'Fashion');
+        $tags = array('Photography','Art','Cinema','Music','Politics','Culture','Wine','Food','Beer','Nature','Sport', 'Nightlife', 'History', 'Literature', 'Must See', 'Fashion', 'Unusual');
 
         foreach($tags as $tag){
             $entry = new Tag();

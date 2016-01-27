@@ -38,7 +38,7 @@
         <div class="tab-content p-l-20 p-r-20 p-t-20 p-b-20 bg-white">
             <div class="tab-pane active slide" id="tab1">
                 <div class="row">
-                    <div class="note-text small hint-textnote-text">{{ "experience.create.titleNote"|trans|raw }}</div>
+                    <div class="note-text small hint-text note-text">{{ "experience.create.titleNote"|trans|raw }}</div>
                     {{ form_row(form.title) }}
                     <div class="small hint-text m-t-30 note-text">{{ "experience.create.descriptionNote"|trans }}</div>
                     {{ form_row(form.description) }}
@@ -85,9 +85,9 @@
 
                 {#Delete confirmation modal#}
                 {% include 'WelcomangoCoreBundle:Core:stickUpModal.html.twig' with {
-                    'title': 'Remove availability',
+                    'title': 'availability.modal.remove'|trans,
                     'text': 'availability.modal.removeText'|trans ,
-                    'confirm' : 'delete'|trans
+                    'confirm' : 'interface.delete'|trans
                 } %}
             </div>
 

@@ -22,7 +22,9 @@
                     {% for category in categories %}
                         <div class="light font-montserrat fs -15 content-menu-category p-b-10 p-t-10 b-b b-grey">{{ category.name }}</div>
                         {% for link in category.pages %}
-                            <div class="fs-13 p-t-10"><a class="content-menu-links" href="{{ path('page_view_slug', {'slug': link.slug}) }}">{{ link.title }}</a></div>
+                            {% if link.publicationStatus == 'published' %}
+                                <div class="fs-13 p-t-10"><a class="content-menu-links" href="{{ path('page_view_slug', {'slug': link.slug}) }}">{{ link.title }}</a></div>
+                            {% endif %}
                         {% endfor %}
                     {% endfor %}
                 </div>

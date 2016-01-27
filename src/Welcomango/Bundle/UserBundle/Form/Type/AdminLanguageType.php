@@ -47,7 +47,7 @@ class AdminLanguageType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class'         => 'Welcomango\Model\Language',
-            'translation_domain' => 'language',
+            'translation_domain' => 'interface',
             'roles_user'         => null,
         ]);
     }

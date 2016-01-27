@@ -55,6 +55,17 @@ class LoadPageData extends AbstractFixture implements FixtureInterface, OrderedF
             ['title' => 'Welcomango is launched!', 'content' => 'Looks like we\'re in!', 'category' => $categoryRepo->findOneBy(array('name' => 'News'))],
             ['title' => 'How To', 'content' => '<p style="letter-spacing: 0.14px;">Welcomango is aiming at propose a simple and intuitive experience so that anyone has a chance to find the perfect welcomanguide for their next trip. And become one of them.</p><p style="letter-spacing: 0.14px;">The concept is simple and rely in 5 steps:</p><p style="letter-spacing: 0.14px;"><br></p><h2 class="wow slideInLeft" style="letter-spacing: 0.14px;">Test good?</h2><p style="letter-spacing: 0.14px;"><br></p> ',
                 'category' => $categoryRepo->findOneBy(array('name' => 'How To'))],
+            ['title' => 'Proposing and Experience', 'content' => '<h3>Me guide? But I ain\'t got nothing to show!</h3>
+<h5>Proposing an experience of your city, a not&nbsp;as complicate task as you imagine it</h5>
+<hr />
+<p>Most of the time when we suggested the idea of Welcomango to travelers, adventurers or even random friends who like to travel from time to time, they loved the idea. But when it came to proposing a tour of their city, a lot of them had the same answer:</p>
+<blockquote>
+<p><em>Me? But I don\'t know&nbsp;anything&nbsp;about this city!&nbsp;What could I show, people would get bored!</em></p>
+</blockquote>
+<p>Well, that the whole point of Welcomango. It\'s not because you don\'t know when your city was build, who&nbsp;was the last mayor and when the main&nbsp;square was built that you don\'t have anything to give to travelers. Actually, <strong>that\'s even better that way!</strong></p>
+<p>&nbsp;</p>
+<p>You may ignore it, but you actually know a lot about your city. And when I say a lot, it\'s A LOT!</p>',
+         'category' => $categoryRepo->findOneBy(array('name' => 'How To'))],
         );
 
         foreach($pages as $page){

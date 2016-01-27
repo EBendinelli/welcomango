@@ -164,7 +164,9 @@ availabilities.whatTime: Moments where you are available
 availabilities.whatTimeNote: It's not because you are available on saturday that it means you are available all day long. Use this pickup to define at what you are available for the dates selected above.
 availabilities.howLong: For how much time
 availabilities.howLongNote: Vacations planned? You already know that you won't be in this city anymore in 6 months? The two dates above allow you to limit the period during which you are available. Therefor, travelers won't be able to make a request outside of this date range.
-
+availability.modal.removeText: Are you sure you want to remove this availability?
+availability.error.oneRequired: You need to specify at least one availabily! If you are available anytyme just check the Always option ;)
+availability.modal.remove: Remove availability
 
 experience.manage.introductionText: You may have lived in this current city for years and find the idea of a theme oriented experience a bit limitating... Well, here you can create a new experience with a different flavor to propose another version of your city to travelers. For example, if you already propose a culture oriented visit of your town, you can also propose a second experience about the nightlife and the different things happening by night! Let your knowledge of the city talk and try to intrigued the potential visitors ;)
 experience.manage.title: A different flavor of your city
@@ -178,6 +180,7 @@ experience.booking.message: %user% will answer you as soon as possible and you'l
 experience.createExperience: Create a new Experience
 experience.edit.messageTop: Not available on Tuesday anymore? Want to add some details or picture to improve your chances of atracting travelers? <br/>Here you can edit your experience and make it even better! <br/><br/><span class="bold">Note:</span> if you are completely changing your experience we suggest deleting this one and creating a new one.<br/><span class="bold">Note 2:</span> Once saved, we will review this experience like we did when you created it so it will be unavailable for a few hours.
 experience.edit.warningAlreadyBooked: You already have %number% reservation planned for this experience. Please <a href="%route%">contact the travelers</a> to altert them about the changes you made.
+experience.edit.success: Your experience has been successfully edited
 
 booking.bookingFor: Your reservation for <span class="text-primary">%title%</span> in <span class="text-primary">%city%</span> with <span class="text-primary">%user%</span>
 booking.requestFor: Request for <span class="text-primary">%title%</span> from <span class="text-primary">%username%</span>
@@ -239,3 +242,16 @@ form.experience.minimumDuration: Minimum duration
 form.experience.maximumDuration: Maximum duration
 form.experience.startDate: Start date
 form.experience.endDate: End date
+form.user.currentCityInput: Current City
+form.user.description: Description
+form.user.occupation: Occupation
+form.user.languages: Language
+form.user.level: Level
+form.add.language: Add a language
+form.user.username: Username
+form.user.firstname: Firstname
+form.user.lastname: Lastname
+form.user.email: Email
+form.user.phone: Phone
+form.user.gender: Gender
+
