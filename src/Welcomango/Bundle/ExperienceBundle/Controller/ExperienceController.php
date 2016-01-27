@@ -147,7 +147,7 @@ class ExperienceController extends BaseController
             $em->flush();
 
             $mailManager = $this->get('welcomango.front.email.manager');
-            $mailManager->sendEmailAfterExperienceCreation($user);
+            $mailManager->sendEmailAfterExperienceCreation($experience);
 
             return $this->render('WelcomangoCoreBundle:Core:success.html.twig', array(
                 'title'           => $this->trans('experience.create.title', array(), 'interface'),
@@ -228,7 +228,7 @@ class ExperienceController extends BaseController
             $this->addFlash('success', $this->trans('experience.edit.success', array(), 'crm'));
 
             $mailManager = $this->get('welcomango.front.email.manager');
-            $mailManager->sendEmailAfterExperienceCreation($this->getUser());
+            $mailManager->sendEmailAfterExperienceCreation($experience);
 
             if ($experience->getPublicationStatus() == 'pending') {
                 return $this->redirect($this->generateUrl('front_experience_profile_list'));

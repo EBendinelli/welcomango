@@ -23,7 +23,9 @@ class EmailManager
     }
 
 
-    public function sendEmailAfterExperienceCreation($user){
+    public function sendEmailAfterExperienceCreation($experience){
+
+        $user= $experience->getCreator();
 
         //Message to us so we can validate quickly
         $message = \Swift_Message::newInstance()
@@ -33,7 +35,7 @@ class EmailManager
             ->setBody(
                 $this->twig->render(
                     'WelcomangoEmailBundle:AdminEmailTemplate:experienceCreation.html.twig',[
-                    'user' => $user,
+                    'experience' => $experience,
                 ]),
                 'text/html'
             );
@@ -47,7 +49,7 @@ class EmailManager
             ->setBody(
                 $this->twig->render(
                     'WelcomangoEmailBundle:EmailTemplate:experienceCreationConfirmation.html.twig',[
-                    'user' => $user
+                    'experience' => $experience
                 ]),
                 'text/html'
             );

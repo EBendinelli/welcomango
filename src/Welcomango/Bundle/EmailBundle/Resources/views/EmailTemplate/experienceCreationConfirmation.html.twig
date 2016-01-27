@@ -24,13 +24,13 @@
 
 {% block subTitle %}
     {% autoescape false %}
-    {{ 'email.experience.creation.subTitle'|trans({'%user%': name}) }}
+    {{ 'email.experience.creation.subTitle'|trans({'%user%': experience.getCreator}) }}
     {% endautoescape %}
 {% endblock %}
 
 {% block message %}
     {% autoescape false %}
-    {{ 'email.experience.creation.message' }}
+    {{ 'email.experience.creation.message'|trans }}
     {% endautoescape %}
 {% endblock %}
 
