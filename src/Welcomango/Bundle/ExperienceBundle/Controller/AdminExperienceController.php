@@ -146,7 +146,9 @@ class AdminExperienceController extends BaseController
             ->setBody(
                 $this->renderView(
                     'WelcomangoEmailBundle:EmailTemplate:experienceValidation.html.twig',
-                    array('user' => $experience->getCreator())
+                    array(
+                        'experience' => $experience,
+                    )
                 ),
                 'text/html'
             );

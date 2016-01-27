@@ -64,7 +64,21 @@ class LoadPageData extends AbstractFixture implements FixtureInterface, OrderedF
 </blockquote>
 <p>Well, that the whole point of Welcomango. It\'s not because you don\'t know when your city was build, who&nbsp;was the last mayor and when the main&nbsp;square was built that you don\'t have anything to give to travelers. Actually, <strong>that\'s even better that way!</strong></p>
 <p>&nbsp;</p>
-<p>You may ignore it, but you actually know a lot about your city. And when I say a lot, it\'s A LOT!</p>',
+<p>You may ignore it, but you actually know a lot about your city. And when I say a lot, it's A LOT! You've probably been around for some time and I am sure you&nbsp;experienced the city in many ways. Let me show you what you probably:</p>
+<ul>
+<li>You got lost in your city. And discovered some weird spots that are still in your mind</li>
+<li>You had a marvelous dinner with friends at this super cool place which you loved</li>
+<li>You played with your basketball team in&nbsp;a full of screet-art area which blown your mind</li>
+<li>You&nbsp;shopped in this really cute shop,&nbsp;lost in the suburb, which sells such awesome items</li>
+<li>You had a drink (or more?) with people you like and enjoyed the music in the back in this underground place you would have never suspected to exist.</li>
+<li>Talking about music, you probably went to see concert in a pub and discovered a magical band</li>
+</ul>
+<p>And of course, <strong>you lived the city</strong>. You got used to its public transport delay. You worked or studied in a specific place with a great&nbsp;sandwich-seller which fullfilled your stomach so many times&nbsp;without kiling your budget. If you\'ve been living here for a long time maybe you also know this place where your grand father used to paint. <strong>And the beauty of this is that everywhere you go, you write little stories</strong>, you experience the city, its habits, its culture, and that gives you plenty of anecdotes to tell.</p>
+<p>See the point? You don\'t have to be an expert in something, an architecture lover or a perfect tour guide to experience and know your own city. <strong>You already have something to show</strong> since you live in&nbsp;this&nbsp;city, <strong>and that\'s exactly what we want&nbsp;you&nbsp;to share </strong>:).</p>
+<br/>
+<p><em>Now, think about it the other way around.</em></p>
+<p>Read what I\'ve listed above and imagine yourself discovering a new place through these spots. Wouldn\'t it be awesome? Sit with someone living in the city in a bar he randomly discovered? Go to a concert in a place that doesn\'t even have a Facebook page? See where this person\'s grand father used to fight for revolution? I\'m sure you see the point now.</p>
+<p>I\'m sure you now understand why we wanted Welcomango to exist and what it really. <strong>In a few words: It\'s about experiencing places through people and through their personal habits</strong></p>',
          'category' => $categoryRepo->findOneBy(array('name' => 'How To'))],
         );
 

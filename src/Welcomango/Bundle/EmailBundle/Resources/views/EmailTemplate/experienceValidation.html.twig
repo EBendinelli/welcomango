@@ -1,19 +1,35 @@
 {% trans_default_domain 'email' %}
 
+{% extends "WelcomangoEmailBundle:EmailTemplate:template.html.twig" %}
+
+{% trans_default_domain 'interface' %}
+
 {% block subject %}
     {% autoescape false %}
-    {{ 'email.subject.experienceValidated'|trans({'%experience%': user.username}) }}
+    {{ 'email.experience.validation.subject'|trans }}
     {% endautoescape %}
 {% endblock %}
 
-{% block body_text %}
+{% block mainTitle %}
     {% autoescape false %}
-    {{ 'email.message.experienceValidatedText'|trans({'%username%': user.username, '%experience%': 'a'}) }}
+    {{ 'global.experience'|trans }}
     {% endautoescape %}
 {% endblock %}
 
-{% block body_html %}
+{% block coreTitle %}
     {% autoescape false %}
-    <div>{{ 'email.message.experienceValidatedText'|trans({'%username%': user.username, '%experience%': 'a'}) }}</div>
+    {{ 'email.experience.validation.coreTitle'|trans }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block subTitle %}
+    {% autoescape false %}
+    {{ 'email.experience.validation.subTitle'|trans({'%user%': experience.getCreator}) }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block message %}
+    {% autoescape false %}
+    {{ 'email.experience.validation.message'|trans({'%route%': path('front_experience_view', {'slug': experience.slug})}) }}
     {% endautoescape %}
 {% endblock %}
