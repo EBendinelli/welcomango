@@ -21,6 +21,9 @@ interface.first: First
 interface.previous: Previous
 interface.next: Next
 interface.last: Last
+interface.save: Save
+interface.cancel: Cancel
+interface.remove: Remove
 
 login.rememberMe: Remember me
 login.forgotPassword: Forgot your password?
@@ -154,6 +157,14 @@ experience.create.estimatedDurationNote: This is how long you think you experien
 experience.create.maximumParticipantsNote: The maximum number of people you are willing to take with you
 experience.create.minimumDurationNote: How long should your experience last at least
 experience.create.maximumDurationNote: How long can your experience last
+experience.create.pricePerHourNote: Now that's an important point! You are totally free to decide the price you think you deserve for an hour of your time. If you really have no idea, try to fix a price that you would be willing to pay for a similar adventure, that's a good start! Note that you can make you experience free simply by putting zero in this field!
+availabilities.whichDays: Days where you are available
+availabilities.whichDaysNote: You're not available 24/7? Well that's normal, use the pickup below to select the days where you have some free time
+availabilities.whatTime: Moments where you are available
+availabilities.whatTimeNote: It's not because you are available on saturday that it means you are available all day long. Use this pickup to define at what you are available for the dates selected above.
+availabilities.howLong: For how much time
+availabilities.howLongNote: Vacations planned? You already know that you won't be in this city anymore in 6 months? The two dates above allow you to limit the period during which you are available. Therefor, travelers won't be able to make a request outside of this date range.
+
 
 experience.manage.introductionText: You may have lived in this current city for years and find the idea of a theme oriented experience a bit limitating... Well, here you can create a new experience with a different flavor to propose another version of your city to travelers. For example, if you already propose a culture oriented visit of your town, you can also propose a second experience about the nightlife and the different things happening by night! Let your knowledge of the city talk and try to intrigued the potential visitors ;)
 experience.manage.title: A different flavor of your city
@@ -219,3 +230,12 @@ message.noMessage: Looks like you haven't received a message yet
 form.city: City
 form.rating.comment: Comment
 form.profile.uploadPhoto: Upload a photo
+
+form.experience.title: Experience title
+form.experience.description: Experience description
+form.experience.estimatedDuration: Estimated duration
+form.experience.maximumParticipants: Number of maximum participants
+form.experience.minimumDuration: Minimum duration
+form.experience.maximumDuration: Maximum duration
+form.experience.startDate: Start date
+form.experience.endDate: End date

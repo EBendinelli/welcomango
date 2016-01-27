@@ -111,7 +111,7 @@ class ExperienceType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class'         => 'Welcomango\Model\Experience',
-            'translation_domain' => 'experience',
+            'translation_domain' => 'interface',
         ]);
     }
 

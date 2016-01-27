@@ -104,6 +104,13 @@ p{
     background: url('/bundles/welcomangocore/images/background/bg-pattern-orange-inverted.jpg');
 }
 
+.note-text{
+    font-family: 'Arial';
+    font-size: 13px;
+    opacity: .7;
+    margin-bottom:15px;
+}
+
 /* //////////////////////////////////////////////////////// */
 /* ////////////////////   DOTED LINE  ////////////////////// */
 /* //////////////////////////////////////////////////////// */
