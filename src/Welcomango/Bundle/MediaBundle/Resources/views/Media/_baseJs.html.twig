@@ -53,6 +53,14 @@
         });
     });
 
+    $('#deleteProfileMedia').click(function(){
+        console.log('sf');
+        $('#profile-media-croped img').remove();
+        $('#profile-media-croped').html('<div class="text-center" id="profile-upload-message">Click to upload a photo</div>');
+        var inputFile = $('front_user_edit_media_photo');
+        inputFile.replaceWith( inputFile = inputFile.clone( true ));
+    });
+
     function removeMedia() {
         if (processDelete) {
             var formData = new FormData();

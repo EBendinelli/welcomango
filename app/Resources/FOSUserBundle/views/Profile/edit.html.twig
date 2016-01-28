@@ -62,6 +62,11 @@
                 </div>
                 <div class="row">
                     <div class="profile-form-note m-t-20"><i class="fa fa-picture-o"></i> {{ "profile.edit.profilePictureNote"|trans }}</div>
+                    {% if user.profileMedia %}
+                        <div id="deleteProfileMedia" class="m-t-20">
+                            <p>Supprimer</p>
+                        </div>
+                    {% endif%}
                     <div id="profile-media-croped">
                         {% if user.profileMedia %}
                             <img src="{{ user.profileMedia.getPath ~ user.profileMedia.getOriginalFilename }}"/>
