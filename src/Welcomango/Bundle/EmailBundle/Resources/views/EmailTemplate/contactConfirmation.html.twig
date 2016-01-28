@@ -2,12 +2,6 @@
 
 {% trans_default_domain 'interface' %}
 
-{% block subject %}
-    {% autoescape false %}
-    {{ 'email.message.subject'|trans }}
-    {% endautoescape %}
-{% endblock %}
-
 {% block mainTitle %}
     {% autoescape false %}
     {{ 'email.message.title'|trans }}

@@ -219,7 +219,7 @@ class BookingController extends BaseController
         //And we send him a mail about the status update
         $message = \Swift_Message::newInstance()
             ->setSubject($this->trans('email.booking.requestUpdated', array('%status%' => $booking->getStatus()), 'interface'))
-            ->setFrom('no-reply@welcomango.com')
+            ->setFrom(['no-reply@welcomango.com' => 'Welcomango Team'])
             ->setTo($bookingUser->getEmail())
             ->setBody(
                 $this->renderView(

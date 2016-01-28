@@ -58,6 +58,7 @@
         <service id="welcomango.front.email.manager" class="Welcomango\Bundle\EmailBundle\Manager\EmailManager">
             <argument type="service" id="mailer"/>
             <argument type="service" id="twig"/>
+            <argument type="service" id="translator"/>
         </service>
     </services>
 </container>

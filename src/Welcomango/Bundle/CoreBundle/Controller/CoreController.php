@@ -78,8 +78,8 @@ class CoreController extends BaseController
                 ->setBody(
                     $this->renderView(
                         'WelcomangoEmailBundle:AdminEmailTemplate:contact.html.twig',[
-                            'user' => $user,
-                        'ip' => $request->getClientIp(),
+                        'user' => $user,
+                        'category' => $form->get('category')->getData(),
                         'name' => $form->get('name')->getData(),
                         'message' => $form->get('message')->getData(),
                         ]),
@@ -89,7 +89,7 @@ class CoreController extends BaseController
 
             //send a confirmation message to the user
             $message = \Swift_Message::newInstance()
-                ->setSubject('Your message has been successfully sent!')
+                ->setSubject($this->trans('email.message.subject', array(), 'interface'))
                 ->setFrom('no-reply@welcomango.com')
                 ->setTo($form->get('email')->getData())
                 ->setBody(

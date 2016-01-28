@@ -1,12 +1,10 @@
-{% trans_default_domain 'email' %}
-
 {% extends "WelcomangoEmailBundle:EmailTemplate:template.html.twig" %}
 
 {% trans_default_domain 'interface' %}
 
 {% block subject %}
     {% autoescape false %}
-    {{ 'email.experience.creation.subject'|trans }}
+
     {% endautoescape %}
 {% endblock %}
 
@@ -18,13 +16,13 @@
 
 {% block coreTitle %}
     {% autoescape false %}
-    {{ 'email.experience.creation.coreTitle'|trans }}
+    {{ 'email.experience.creation.coreTitle'|trans({'%title%': experience.title}) }}
     {% endautoescape %}
 {% endblock %}
 
 {% block subTitle %}
     {% autoescape false %}
-    {{ 'email.experience.creation.subTitle'|trans({'%user%': experience.getCreator}) }}
+    {{ 'email.experience.creation.subTitle'|trans({'%name%': experience.getCreator.firstname}) }}
     {% endautoescape %}
 {% endblock %}
 

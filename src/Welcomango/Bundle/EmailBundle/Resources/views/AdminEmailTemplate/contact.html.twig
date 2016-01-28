@@ -1,27 +1,29 @@
-{% trans_default_domain 'email' %}
+{% extends "WelcomangoEmailBundle:EmailTemplate:template.html.twig" %}
 
-{% block subject %}
+{% trans_default_domain 'interface' %}
+
+{% block mainTitle %}
     {% autoescape false %}
-    {{ 'email.subject.newMessage'|trans({'%user%': name}) }}
+    Contact
     {% endautoescape %}
 {% endblock %}
 
-{% block body_text %}
+{% block coreTitle %}
     {% autoescape false %}
-        Message received from {{ name }}: {{ message }}
-
-        {% if user %}
-            User profile: {{ path('admin_user_edit', {'user_id': user.id}) }}
-        {% endif %}
+    New contact received about {{ category }} from {{ name }}
     {% endautoescape %}
 {% endblock %}
 
-{% block body_html %}
+{% block message %}
     {% autoescape false %}
-    <div>Message received: {{ message }}</div>
-    <br/>
+    Message received: {{ message }}<br/><br/>
     {% if user %}
         <div>User profile (if any): {{ path('admin_user_edit', {'user_id': user.id}) }}</div>
     {% endif %}
     {% endautoescape %}
 {% endblock %}
+
+
+
+
+

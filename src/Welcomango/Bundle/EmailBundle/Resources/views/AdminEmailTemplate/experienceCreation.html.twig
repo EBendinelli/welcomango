@@ -1,19 +1,26 @@
-{% trans_default_domain 'email' %}
+{% extends "WelcomangoEmailBundle:EmailTemplate:template.html.twig" %}
 
-{% block subject %}
+{% trans_default_domain 'interface' %}
+
+{% block mainTitle %}
     {% autoescape false %}
-    {{ 'email.experience.messageSent'|trans }}
+    {{ 'global.experience'|trans }}
     {% endautoescape %}
 {% endblock %}
 
-{% block body_text %}
+{% block coreTitle %}
     {% autoescape false %}
-    {{ 'email.experience.thanksMessage'|trans({'%user%': user.firstname}) }}
+    New experience created '{{ experience.title }}' in {{ experience.city.name }} by {{ user.firstname }}
     {% endautoescape %}
 {% endblock %}
 
-{% block body_html %}
+{% block btn %}
     {% autoescape false %}
-    <div>{{ 'email.experience.thanksMessage'|trans({'%user%': user.firstname}) }}</div>
+        <a style="margin:auto; color: #fff; background-color: #F34B1F; border-color: #F34B1F; padding: 10px 20px 10px 20px;font-size: 14px; letter-spacing: 0.14px; line-height: 21px; text-transform: uppercase;  font-family: Montserrat; font-weight: 400;" href="{{ path('admin_moderation_experience') }}" style="">{{ 'interface.moderate'|trans }}</a>
     {% endautoescape %}
 {% endblock %}
+
+
+
+
+

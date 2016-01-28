@@ -1,19 +1,33 @@
-{% trans_default_domain 'email' %}
+{% extends "WelcomangoEmailBundle:EmailTemplate:template.html.twig" %}
 
-{% block subject %}
+{% trans_default_domain 'interface' %}
+
+{% block mainTitle %}
     {% autoescape false %}
-    {{ 'email.experience.requestSubject'|trans }}
+    {{ 'global.booking'|trans }}
     {% endautoescape %}
 {% endblock %}
 
-{% block body_text %}
+{% block coreTitle %}
     {% autoescape false %}
-    {{ 'email.experience.requestMessage'|trans({'%user%': booking.user.fullname, '%date%': booking.startDatetime|date('Y-m-d'), '%title%': booking.experience.title}) }}
+    {{ 'email.booking.new.coreTitle'|trans }}
     {% endautoescape %}
 {% endblock %}
 
-{% block body_html %}
+{% block subTitle %}
     {% autoescape false %}
-    <div>{{ 'email.experience.requestMessage'|trans({'%user%': booking.user.fullname, '%date%': booking.startDatetime|date('Y-m-d'), '%title%': booking.experience.title}) }}</div>
+    {{ 'email.booking.new.subTitle'|trans({'%title%': booking.experience.title, '%name%': booking.user.firstname}) }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block btn%}
+    {% autoescape false %}
+        <a style="border-radius:3px; text-decoration: none; margin:auto; color: #fff; background-color: #F34B1F; border-color: #F34B1F; padding: 10px 20px 10px 20px;font-size: 14px; letter-spacing: 0.14px; line-height: 21px; text-transform: uppercase;  font-family: Montserrat; font-weight: 400;" href="{{ path('booking_received_view', {'booking_id': booking.id}) }}" style="">{{ 'email.booking.update.btn'|trans }}</a>
+    {% endautoescape %}
+{% endblock %}
+
+{% block message %}
+    {% autoescape false %}
+    {{ 'email.booking.new.message'|trans}}
     {% endautoescape %}
 {% endblock %}

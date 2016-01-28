@@ -66,7 +66,7 @@ class BookingType extends AbstractType
             }
         }
 
-        for ($i = $experience->getMinimumDuration(); $i < $experience->getMaximumDuration(); $i++) {
+        for ($i = $experience->getMinimumDuration(); $i <= $experience->getMaximumDuration(); $i++) {
             $desiredDuration[$i] = $i.':00';
         }
 

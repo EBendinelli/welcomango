@@ -4,12 +4,6 @@
 
 {% trans_default_domain 'interface' %}
 
-{% block subject %}
-    {% autoescape false %}
-    {{ 'email.experience.validation.subject'|trans }}
-    {% endautoescape %}
-{% endblock %}
-
 {% block mainTitle %}
     {% autoescape false %}
     {{ 'global.experience'|trans }}
@@ -24,7 +18,7 @@
 
 {% block subTitle %}
     {% autoescape false %}
-    {{ 'email.experience.validation.subTitle'|trans({'%user%': experience.getCreator}) }}
+    {{ 'email.experience.validation.subTitle'|trans({'%user%': experience.getCreator.firstname}) }}
     {% endautoescape %}
 {% endblock %}
 

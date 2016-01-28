@@ -213,7 +213,6 @@ div.dotted-line span {
     height:200px;
 }
 
-
 .card p {
     margin: 0;
 }
@@ -240,9 +239,19 @@ div.dotted-line span {
     height: 170px;
 }
 
+.card-content-profile{
+    height: 260px !important;
+}
+
 @media (max-width: 991px){
     .card .experience-image-horizontal-split {
         height: 120px;
+    }
+}
+
+@media (max-width: 768px){
+    .card-content-profile{
+        height: initial !important;
     }
 }
 

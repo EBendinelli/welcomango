@@ -60,6 +60,9 @@ global.actions: Actions
 global.requestedTime: Request time
 global.user: User
 global.experience: Experience
+global.booking: Booking
+global.registration: Registration
+global.email: Email
 
 homepage.title1: Places Through People
 homepage.subTitle1: Find enthusiastic people willing to show you a different side of their city
@@ -209,7 +212,7 @@ booking.action.message: This booking has been successfuly %status%
 booking.requestReceivedFor: Request received for
 booking.noRequestFound: No request found yet
 booking.requestFrom: Request from <a href="%route%" class="text-primary semi-bold">%name%</a> for </a> for <span class="text-primary">%time%</span>
-booking.action.acceptedMessage: You can now rigt a message to %name% and give him more details for the meeting point :)
+booking.action.acceptedMessage: You can now write a message to %name% and give him more details for the meeting point :)
 
 page.writtenBy: By %author%
 
@@ -262,12 +265,30 @@ email.message.title: Contact request
 email.message.coreTitle: Your contact request has been successfully submited
 email.message.subTitle: Thanks for taking the time to write to us <3
 email.message.message: We will try to answer as quickly as you can. Stop refreshing your mailbox for a moment, drink a tea, and when you're back, our answer will be waiting in your mailbox
-email.experience.creation.subject: Your Experience has been successfully created
+email.experience.creation.subject: Your Experience has been successfully submitted
 email.experience.creation.title: Your lovely Experience
-email.experience.creation.coreTitle: Your experience has been successfully created
+email.experience.creation.coreTitle: Your experience <i>"%title%"</i> has been successfully submitted
 email.experience.creation.subTitle: Thank you %name% for your participation
 email.experience.creation.message: We really appreciate your effort in taking part of the community. Just give us moment to review your experience (we don't judge, we just check nothing is insulting or innapropriate) and you'll be able to see it on Welcomango soon.
 email.experience.validation.subject: Your Experience has been validated
 email.experience.validation.coreTitle: Your experience has been successfully validated
 email.experience.validation.subTitle: Hey %name% , our team just review your experience!
 email.experience.validation.message: Despite the fact that we loved what you proposed, you experience is now available online, <a href="%route%">click here to check it out</a>.
+email.booking.update.coreTitle: Your request has been %status%
+email.booking.update.subTitle: %user% has %status your request for his experience %title
+email.booking.update.message: Click on the button above to see the detail about this booking. You should now be able to contact %user% directly via this page.
+email.booking.update.btn: View booking
+email.booking.new.coreTitle: Your have a new request
+email.booking.new.subTitle: You have a new request from %name% for %title%
+email.booking.new.message: Click on the button above to see the detail about this booking.
+email.booking.requestUpdated: Your request has been %status%
+email.registration.coreTitle: Registration confirmation to Welcomango
+email.registration.subTitle: Thank you for registering %user%!
+email.registration.message: You're just a step ahead! Simply click on the button above to confirm your email address and validate your registration.
+email.registration.btn: Validate your account
+email.resetting.coreTitle: Resetting your password
+email.resetting.subTitle: Hi %user%, it seems that you have requested a new passord
+email.resetting.message: Simply click on the button above to be redirected to a page where you'll be able to define your new password. Don't forget this one ;)
+email.resetting.btn: Reset password
+
+

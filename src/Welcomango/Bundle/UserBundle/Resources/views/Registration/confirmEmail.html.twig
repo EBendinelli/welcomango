@@ -1,5 +1,7 @@
 {% extends "::front.html.twig" %}
 
+{% trans_default_domain 'interface' %}
+
 {% block page_content %}
     <section class="p-b-50 p-t-50 bg-master-lighter sm-no-margin">
         <div class="container p-b-70 p-t-30">
@@ -8,7 +10,7 @@
                     <div class="text-center">
                         <i class="fa fa-check veryBigIcon text-info"></i>
                         <h1 class="col-sm-12 p-b-10">{{ 'profile.created.success'|trans }}</h1>
-                        <p class="font-arial m-t-30"><span class="hint-text">{{ 'profile.created.emailSent'|trans }}</br>
+                        <p class="font-arial m-t-30"><span class="hint-text">{{ 'profile.created.emailSent'|trans }}</span></br>
                         {# TODO path to replace once the contact and report pages are done #}
                     </div>
                 </div>

@@ -224,8 +224,9 @@ class ExperienceController extends BaseController
                 }
             }
 
+            $this->getDoctrine()->getManager()->persist($experience);
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success', $this->trans('experience.edit.success', array(), 'crm'));
+            $this->addFlash('success', $this->trans('experience.edit.success', array(), 'interface'));
 
             $mailManager = $this->get('welcomango.front.email.manager');
             $mailManager->sendEmailAfterExperienceCreation($experience);
@@ -350,7 +351,7 @@ class ExperienceController extends BaseController
             //send a notification to the experience creator
             $email = \Swift_Message::newInstance()
                 ->setSubject($this->trans('email.experience.requestSubject', array('%experience%' => $experience->getTitle()), 'interface'))
-                ->setFrom('no-reply@welcomango.com')
+                ->setFrom(['no-reply@welcomango.com' => 'Welcomango team'])
                 ->setTo($experienceCreator->getEmail())
                 ->setBody($this->renderView('WelcomangoEmailBundle:EmailTemplate:newBookingRequest.html.twig', ['booking' => $booking]), 'text/html')
             ;

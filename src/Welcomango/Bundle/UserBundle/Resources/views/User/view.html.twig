@@ -45,9 +45,7 @@
                                 {{ include("WelcomangoExperienceBundle:Experience:_featuredExperience.html.twig", { 'experience': experience}) }}
                             </div>
                         {% else %}
-                            <div class="row">
-                                {{ include("WelcomangoExperienceBundle:Experience:_experienceTile2.html.twig", { 'experience': experience, 'column': 2}) }}
-                            </div>
+                            {{ include("WelcomangoExperienceBundle:Experience:_experienceTile4.html.twig", { 'experience': experience, 'column': 2}) }}
                         {% endif %}
                     {% endfor %}
                 {% else %}

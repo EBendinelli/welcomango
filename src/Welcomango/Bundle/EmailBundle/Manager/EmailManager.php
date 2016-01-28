@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Twig_Environment;
 use Swift_Mailer;
+use Symfony\Component\Translation\TranslatorInterface;
 
 use Welcomango\Model\Availability;
 
@@ -16,10 +17,16 @@ class EmailManager
 
     protected $twig;
 
-    public function __construct(Swift_Mailer $mailer, Twig_Environment $twig)
+    /**
+     * @var TranslatorInterface $translator
+     */
+    private $translator;
+
+    public function __construct(Swift_Mailer $mailer, Twig_Environment $twig, TranslatorInterface $translator)
     {
         $this->mailer = $mailer;
         $this->twig = $twig;
+        $this->translator = $translator;
     }
 
 
@@ -29,13 +36,14 @@ class EmailManager
 
         //Message to us so we can validate quickly
         $message = \Swift_Message::newInstance()
-            ->setSubject('New experience created by')
+            ->setSubject('New experience created by '.$user)
             ->setFrom($user->getEmail())
             ->setTo('eliot@welcomango.com')
             ->setBody(
                 $this->twig->render(
                     'WelcomangoEmailBundle:AdminEmailTemplate:experienceCreation.html.twig',[
                     'experience' => $experience,
+                    'user' => $user,
                 ]),
                 'text/html'
             );
@@ -43,8 +51,8 @@ class EmailManager
 
         //send a confirmation message to the user
         $message = \Swift_Message::newInstance()
-            ->setSubject('Your experience has been successfully submitted!')
-            ->setFrom('no-reply@welcomango.com')
+            ->setSubject($this->translator->trans('email.experience.creation.subject',array(), 'interface'))
+            ->setFrom(['no-reply@welcomango.com' => 'Welcomango Team'])
             ->setTo($user->getEmail())
             ->setBody(
                 $this->twig->render(
@@ -53,6 +61,7 @@ class EmailManager
                 ]),
                 'text/html'
             );
+        
         $this->mailer->send($message);
 
     }

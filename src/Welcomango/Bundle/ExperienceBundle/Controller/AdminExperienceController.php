@@ -140,8 +140,8 @@ class AdminExperienceController extends BaseController
         $experience->setModeratedBy($this->getUser());
 
         $message = \Swift_Message::newInstance()
-            ->setSubject('Your Experience has been validated')
-            ->setFrom('no-reply@welcomango.com')
+            ->setSubject($this->trans('email.experience.validation.subject',array(), 'interface'))
+            ->setFrom(['no-reply@welcomango.com' => 'Welcomango Team'])
             ->setTo($experience->getCreator()->getEmail())
             ->setBody(
                 $this->renderView(

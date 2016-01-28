@@ -1,0 +1,43 @@
+{% trans_default_domain "interface" %}
+
+{# Complete with correct informations #}
+<div class="col-sm-{{ 12/column }} m-t-20">
+    {#<div class="card-city-picto" style="background-image:url({{ asset('img/welcomango-picto.png') }}">
+        &#123;&#35; TODO see if we add the note in this mango. If so, add white BG to the picture &#35;&#125;
+        <div class="card-picto-note">
+            <h4 class="text-primary bold">{{ experience.getAverageNote }}<i class="fa fa-star fa-sm"></i></h4>
+        </div>
+    </div>#}
+    <div id="experience_{{ experience.getId }}" class="card {% if darkBg is defined %}card-bg-master-lightest{% endif %}" >
+        <a href="{{ path('front_experience_view', {'slug' : experience.slug }) }}" >
+            <div class="card-clickable"></div>
+            <div class="experience-image experience-image-horizontal-split">
+                <img class="" data-src="{{ asset(get_banner(experience)) }}" alt="Card image cap">
+            </div>
+        </a>
+
+        <div class="panel-body p-t-0 card-content-profile">
+            <div class="panel-title semi-bold">
+                {{ experience.getTitle }} with <span class="text-primary">{{ experience.getCreator.firstname }}</span>
+            </div>
+            <div class="text-center m-b-10">
+                in <span class="semi-bold">{% if experience.getCity %}{{ experience.getCity.Name }}{% endif %}</span>
+            </div>
+            <div class="m-b-10 text-center">
+                {{ include("WelcomangoCoreBundle:Core:note.html.twig", { 'note': experience.getAverageNote, 'mango': true}) }}
+            </div>
+            <div class="dotted-line"><span></span></div>
+            <div class="text-center m-t-20 m-b-20">
+                <p class="fs-14">{{ experience.getDescription | truncate(150)}}</p>
+            </div>
+        </div>
+
+        <div class="card-bottom bg-pattern-dark " >
+            <div class="card-bottom-price text-right text-white fs-14 font-montserrat" style="padding-top: 7px;">
+                {{ experience.pricePerHour}}€/h
+            </div>
+        </div>
+    </div>
+
+</div>
+
