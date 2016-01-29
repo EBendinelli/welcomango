@@ -33,6 +33,7 @@
                         removeMedia();
                     });
                 {% endif %}
+                $('#front_user_edit_profileMedia_originalFilename').val(filename);
                 $(function () {
                     $('#mediaToCrop').Jcrop({
                         aspectRatio: 1,
@@ -54,11 +55,10 @@
     });
 
     $('#deleteProfileMedia').click(function(){
-        console.log('sf');
         $('#profile-media-croped img').remove();
         $('#profile-media-croped').html('<div class="text-center" id="profile-upload-message">Click to upload a photo</div>');
-        var inputFile = $('front_user_edit_media_photo');
-        inputFile.replaceWith( inputFile = inputFile.clone( true ));
+        var inputFile = $('#front_user_edit_profileMedia_originalFilename');
+        inputFile.val('');
     });
 
     function removeMedia() {

@@ -75,7 +75,7 @@
                         {% endif%}
                     </div>
                     <div class="text-center">
-                        {{ form_row(form.media_photo) }}
+                        {{ form_row(form.profileMedia.media_photo) }}
                     </div>
                 </div>
                 <div class="profile-form-note m-t-20"><i class="fa fa-phone"></i> {{ "profile.edit.phoneNote"|trans }}</div>
@@ -114,7 +114,7 @@
     {{ parent() }}
     {{ form_javascript(form) }}
     {% include "WelcomangoMediaBundle:Media:_baseJs.html.twig" with {
-        'file_input_id' : 'front_user_edit_media_photo',
+        'file_input_id' : 'front_user_edit_profileMedia_media_photo',
         'in_modal' : true,
         'id_crop_button' : "modal-save-crop-button",
         'id_croped_media' : 'profile-media-croped'
@@ -223,7 +223,7 @@
         //PROFILE PICTURE
         //Trigger the ipunt button when clicking the dropzone
         $('#profile-media-croped').click(function(){
-            $('#front_user_edit_media_photo').trigger('click');
+            $('#front_user_edit_profileMedia_media_photo').trigger('click');
         });
 
     </script>

@@ -10,8 +10,8 @@ use Oneup\UploaderBundle\Uploader\File\FileInterface;
 use Oneup\UploaderBundle\Uploader\Naming\NamerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-use Welcomango\Model\Media;
 use Welcomango\Model\User;
+use Welcomango\Model\Media;
 use Welcomango\Model\Experience;
 use Welcomango\Bundle\MediaBundle\Manager\MediaNamer;
 
@@ -91,38 +91,37 @@ class MediaManager
     }
 
     /**
-     * @param string $mediaName
-     * @param Media  $entity
+     * @param mixed  $entity
+     * @param string $oldMedia
      *
      * @return ArrayCollection
      */
-    public function generateSimpleMedia($mediaName, $entity)
+    public function generateSimpleMedia($entity, $oldMedia)
     {
         $realAdapter  = $this->filesystemMap->get('real');
         $tempadapter  = $this->filesystemMap->get('gallery');
         $pathToUpload = '/'.\date("Y").'/'.\date("m").'/';
 
         $currentMedia = $entity->getProfileMedia();
-        if ($currentMedia instanceof Media) {
-            if ($realAdapter->has($pathToUpload.$currentMedia->getOriginalFilename())) {
-                $realAdapter->delete($pathToUpload.$currentMedia->getOriginalFilename());
-            }
-        } else {
-            $currentMedia = new Media();
+
+        if ($currentMedia->getOriginalFilename() != $oldMedia && $oldMedia != "") {
+            $realAdapter->delete($pathToUpload.$oldMedia);
         }
 
         $mediaPrefix = $this->getMediaPrefix($entity);
-        if ($mediaName !== "") {
+        if ($entity->getProfileMedia()->getOriginalFilename() !== null) {
+            $mediaName    = $entity->getProfileMedia()->getOriginalFilename();
             $tempFileName = $this->mediaNamer->getTempName($mediaName);
             $currentMedia->setOriginalFilename($mediaPrefix.$mediaName);
             $currentMedia->setPath('/uploads'.$pathToUpload);
             if (!$realAdapter->has('/uploads'.$pathToUpload.$mediaName)) {
                 $fileContent = $tempadapter->read($tempFileName);
                 $realAdapter->write($pathToUpload.$mediaPrefix.$mediaName, $fileContent);
+                $tempadapter->delete($tempFileName);
             }
+        } else {
+            $this->entityManager->remove($currentMedia);
         }
-
-        return $currentMedia;
     }
 
     /**

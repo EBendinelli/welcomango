@@ -4,6 +4,7 @@ namespace Welcomango\Bundle\UserBundle\Form\Type;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -13,7 +14,9 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
+use Welcomango\Bundle\MediaBundle\Form\Type\SimpleMediaType;
 use Welcomango\Bundle\UserBundle\Form\Type\AdminSpokenLanguageType;
 
 use Welcomango\Model\User;
@@ -85,7 +88,7 @@ class UserEditType extends AbstractType
 
         $builder->add('email', 'email', [
             'label'    => 'form.user.email',
-            'disabled'  => true,
+            'disabled' => true,
         ]);
 
         $builder->add('description', 'textarea', [
@@ -149,11 +152,27 @@ class UserEditType extends AbstractType
             'label'    => 'form.user.gender',
         ));
 
-        $builder->add('media_photo', 'file', [
+        $builder->add('profileMedia', new SimpleMediaType(), [
             'required' => false,
-            'mapped'   => false,
             'label'    => 'form.profile.uploadPhoto',
         ]);
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            $media = $event->getData()->getProfileMedia();
+            $form  = $event->getForm();
+            $data  = '';
+
+            if ($media) {
+                $data = $media->getOriginalFileName();
+            }
+
+            $form->add('oldOriginalFilename', HiddenType::class, [
+                'required' => false,
+                'label'    => false,
+                'mapped'   => false,
+                'data'     => $data,
+            ]);
+        });
     }
 
     /**
