@@ -1,0 +1,63 @@
+<script type="text/javascript">
+
+    var placeSearch
+    {% for field_id in field_ids %}
+        var autocomplete{{ field_id }};
+    {% endfor %}
+
+    function initAutocomplete() {
+        {% for field_id in field_ids %}
+            // Create the autocomplete object, restricting the search to geographical
+            // location types.
+            var input = document.getElementById('{{ form_id }}_{{ field_id }}_cityInput');
+            autocomplete{{ field_id }} = new google.maps.places.Autocomplete(input , {types: ['(cities)'], region:'EU'});
+
+            // When the user selects an address from the dropdown, populate the address
+            // fields in the form.
+            autocomplete{{ field_id }}.addListener('place_changed', function(){
+                var place{{ field_id }} = autocomplete{{ field_id }}.getPlace();
+
+                if(place{{ field_id }}){
+                    var {{ field_id }}City = document.getElementById('{{ form_id }}_{{ field_id }}_city');
+                    var {{ field_id }}CityLat = document.getElementById('{{ form_id }}_{{ field_id }}_cityLat');
+                    var {{ field_id }}CityLng = document.getElementById('{{ form_id }}_{{ field_id }}_cityLng');
+                    var {{ field_id }}CityState = document.getElementById('{{ form_id }}_{{ field_id }}_cityState');
+                    var {{ field_id }}CityCountry = document.getElementById('{{ form_id }}_{{ field_id }}_cityCountry');
+                    var {{ field_id }}CityCountryCode = document.getElementById('{{ form_id }}_{{ field_id }}_cityCountryCode');
+                    for (var i = 0; i < place{{ field_id }}.address_components.length; i++) {
+                        var addressType = place{{ field_id }}.address_components[i].types[0];
+                        if (addressType == 'country') {
+                            {{ field_id }}CityCountry.value = place{{ field_id }}.address_components[i]['long_name'];
+                            {{ field_id }}CityCountryCode.value = place{{ field_id }}.address_components[i]['short_name'];
+                        }else if(addressType == 'administrative_area_level_1') {
+                            {{ field_id }}CityState.value = place{{ field_id }}.address_components[i]['long_name'];
+                        }else if(addressType == 'locality') {
+                            {{ field_id }}City.value = place{{ field_id }}.address_components[i]['long_name'];
+                        }
+                    }
+
+                    {{ field_id }}CityLat.value = place{{ field_id }}.geometry.location.lat();
+                    {{ field_id }}CityLng.value = place{{ field_id }}.geometry.location.lng();
+                }
+            });
+
+        {% endfor %}
+    }
+
+    // Bias the autocomplete object to the user's geographical location,
+    // as supplied by the browser's 'navigator.geolocation' object.
+    function geolocate() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var geolocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+            });
+        }
+    }
+
+</script>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt6eHUKQPmViopocNUR0iShUiKK72dj7g&&signed_in=true&libraries=places&callback=initAutocomplete" async defer></script>

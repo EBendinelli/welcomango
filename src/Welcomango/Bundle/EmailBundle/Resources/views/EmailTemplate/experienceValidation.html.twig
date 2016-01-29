@@ -18,12 +18,18 @@
 
 {% block subTitle %}
     {% autoescape false %}
-    {{ 'email.experience.validation.subTitle'|trans({'%user%': experience.getCreator.firstname}) }}
+    {{ 'email.experience.validation.subTitle'|trans({'%name%': experience.getCreator.firstname}) }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block btn%}
+    {% autoescape false %}
+        <a style="font-family: 'Open Sans',sans-serif; font-size: 20px; border-radius:3px; text-decoration: none; margin:auto; color: #fff; background-color: #F34B1F; border-color: #F34B1F; padding: 10px 20px 10px 20px;font-size: 14px; letter-spacing: 0.14px; line-height: 21px; text-transform: uppercase;  font-family: Montserrat; font-weight: 400;" href="{{ path('front_experience_view', {'slug': experience.slug}) }}" style="">{{ 'email.experience.validation.btn'|trans }}</a>
     {% endautoescape %}
 {% endblock %}
 
 {% block message %}
     {% autoescape false %}
-    {{ 'email.experience.validation.message'|trans({'%route%': path('front_experience_view', {'slug': experience.slug})}) }}
+    {{ 'email.experience.validation.message'|trans }}
     {% endautoescape %}
 {% endblock %}

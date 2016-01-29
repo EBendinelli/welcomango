@@ -126,6 +126,9 @@
     {% include 'WelcomangoExperienceBundle:Availability:_availabilityJs.html.twig' with {
         'datepickerId' : 'front_experience_availabilities_0_start_date',
     } %}
+
+    {% include 'WelcomangoCoreBundle:Core:_cityJs.html.twig' with {'form_id': 'front_experience', 'field_ids': ['city']} %}
+
 {% endblock %}
 
 {% block stylesheets %}

@@ -49,10 +49,10 @@
                     <div class="row">
                     </div>
                     <div class="row">
-                        <div class="col-md-12">{{ form_row(form.fromCityInput, {'attr': {'onFocus':'geolocate()'}}) }}</div>
+                        <div class="col-md-12">{{ form_row(form.fromCity) }}</div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">{{ form_row(form.currentCityInput, {'attr': {'onFocus':'geolocate()'}}) }}</div>
+                        <div class="col-md-12">{{ form_row(form.currentCity) }}</div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">{{ form_row(form.occupation) }}</div>
@@ -76,93 +76,7 @@
 {% block javascripts %}
     {{ parent() }}
 
-    <script type="text/javascript">
-
-        var placeSearch, autocompleteFrom;
-        var placeSearch, autocompleteCurrent;
-
-        function initAutocomplete() {
-            // Create the autocomplete object, restricting the search to geographical
-            // location types.
-            var input = document.getElementById('fos_user_registration_form_fromCityInput');
-            autocompleteFrom = new google.maps.places.Autocomplete(input , {types: ['(cities)'], region:'EU'});
-
-            var input = document.getElementById('fos_user_registration_form_currentCityInput');
-            autocompleteCurrent = new google.maps.places.Autocomplete(input , {types: ['(cities)'], region:'EU'});
-
-            // When the user selects an address from the dropdown, populate the address
-            // fields in the form.
-            autocompleteFrom.addListener('place_changed', function(){
-                var placeFrom = autocompleteFrom.getPlace();
-
-                if(placeFrom){
-                    var fromCity = document.getElementById('fos_user_registration_form_fromCity');
-                    var fromCityLat = document.getElementById('fos_user_registration_form_fromCityLat');
-                    var fromCityLng = document.getElementById('fos_user_registration_form_fromCityLng');
-                    var fromCityState = document.getElementById('fos_user_registration_form_fromCityState');
-                    var fromCityCountry = document.getElementById('fos_user_registration_form_fromCityCountry');
-                    var fromCityCountryCode = document.getElementById('fos_user_registration_form_fromCityCountryCode');
-                    for (var i = 0; i < placeFrom.address_components.length; i++) {
-                        var addressType = placeFrom.address_components[i].types[0];
-                        if (addressType == 'country') {
-                            fromCityCountry.value = placeFrom.address_components[i]['long_name'];
-                            fromCityCountryCode.value = placeFrom.address_components[i]['short_name'];
-                        }else if(addressType == 'administrative_area_level_1') {
-                            fromCityState.value = placeFrom.address_components[i]['long_name'];
-                        }else if(addressType == 'locality') {
-                            fromCity.value = placeFrom.address_components[i]['long_name'];
-                        }
-                    }
-
-                    fromCityLat.value = placeFrom.geometry.location.lat();
-                    fromCityLng.value = placeFrom.geometry.location.lng();
-                }
-            });
-
-            autocompleteCurrent.addListener('place_changed', function(){
-                var placeCurrent = autocompleteCurrent.getPlace();
-
-                if(placeCurrent){
-                    var currentCity = document.getElementById('fos_user_registration_form_currentCity');
-                    var currentCityLat = document.getElementById('fos_user_registration_form_currentCityLat');
-                    var currentCityLng = document.getElementById('fos_user_registration_form_currentCityLng');
-                    var currentCityState = document.getElementById('fos_user_registration_form_currentCityState');
-                    var currentCityCountry = document.getElementById('fos_user_registration_form_currentCityCountry');
-                    var currentCityCountryCode = document.getElementById('fos_user_registration_form_currentCityCountryCode');
-
-                    for (var i = 0; i < placeCurrent.address_components.length; i++) {
-                        var addressType = placeCurrent.address_components[i].types[0];
-                        if (addressType == 'country') {
-                            currentCityCountry.value = placeCurrent.address_components[i]['long_name'];
-                            currentCityCountryCode.value = placeCurrent.address_components[i]['short_name'];
-                        }else if(addressType == 'administrative_area_level_1') {
-                            currentCityState.value = placeCurrent.address_components[i]['long_name'];
-                        }else if(addressType == 'locality') {
-                            currentCity.value = placeCurrent.address_components[i]['long_name'];
-                        }
-                    }
-                    currentCityLat.value = placeCurrent.geometry.location.lat();
-                    currentCityLng.value = placeCurrent.geometry.location.lng();
-                }
-            });
-        }
-
-        // Bias the autocomplete object to the user's geographical location,
-        // as supplied by the browser's 'navigator.geolocation' object.
-        function geolocate() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    var geolocation = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    };
-                });
-            }
-        }
-
-    </script>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt6eHUKQPmViopocNUR0iShUiKK72dj7g&&signed_in=true&libraries=places&callback=initAutocomplete" async defer></script>
+    {% include 'WelcomangoCoreBundle:Core:_cityJs.html.twig' with {'form_id': 'fos_user_registration_form', 'field_ids': ['currentCity', 'fromCity']} %}
 
     <script>
         var timeout;
