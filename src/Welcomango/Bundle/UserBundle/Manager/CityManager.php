@@ -20,7 +20,15 @@ class CityManager
         $this->entityManager   = $entityManager;
     }
 
-    public function checkAndCreateNewCity($city, $lat, $lng, $state, $country, $countryCode){
+    public function checkAndCreateNewCity($parentField){
+
+        $city = $parentField->get('city')->getData();
+        $lat = $parentField->get('cityLat')->getData();
+        $lng = $parentField->get('cityLng')->getData();
+        $state = $parentField->get('cityState')->getData();
+        $country = $parentField->get('cityCountry')->getData();
+        $countryCode = $parentField->get('cityCountryCode')->getData();
+
         $CityRepo = $this->entityManager->getRepository('Welcomango\Model\City');
         $CountryRepo = $this->entityManager->getRepository('Welcomango\Model\Country');
 
@@ -48,7 +56,6 @@ class CityManager
                 $newCity->setCountry($newCountry);
             }
         }
-
         $newCity->setState($state);
         $newCity->setName($city);
         $newCity->setLatitude($lat);

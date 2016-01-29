@@ -37,6 +37,10 @@
             <tag name="form.type" alias="mark" />
         </service>
 
+        <service id="welcomango.form.type.city" class="Welcomango\Bundle\CoreBundle\Form\Type\CityType">
+            <tag name="form.type" alias="city" />
+        </service>
+
         <service id="welcomango.front.menu_builder.main" class="Knp\Menu\MenuItem" factory-service="welcomango.front.menu_builder" factory-method="createMainMenu">
             <tag name="knp_menu.menu" alias="menu_front" />
         </service>

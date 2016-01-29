@@ -14,6 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Welcomango\Bundle\MediaBundle\Form\Type\MediaType;
+use Welcomango\Bundle\CoreBundle\Form\Type\CityType;
 
 use Welcomango\Model\Experience;
 use Welcomango\Model\City;
@@ -60,10 +61,6 @@ class ExperienceType extends AbstractType
         $builder
             ->add('title', 'text', ['label' => 'form.experience.title'])
             ->add('description', 'textarea', ['label' => 'form.experience.description'])
-            ->add('city', 'entity', array(
-                'class'    => 'Model:City',
-                'property' => 'name',
-            ))
             ->add('tags', 'entity', array(
                 'class'    => 'Model:Tag',
                 'property' => 'name',
@@ -101,6 +98,18 @@ class ExperienceType extends AbstractType
                 'label'        => false,
             ]);
 
+        //Add the city field only for creation
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            $experience = $event->getData();
+            $form = $event->getForm();
+
+            // check if the Product object is "new"
+            // If no data is passed to the form, the data is "null".
+            // This should be considered a new "Product"
+            if (!$experience || null === $experience->getId()) {
+                $form->add('city', new CityType());
+            }
+        });
 
     }
 

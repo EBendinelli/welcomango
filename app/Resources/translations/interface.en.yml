@@ -273,7 +273,8 @@ email.experience.creation.message: We really appreciate your effort in taking pa
 email.experience.validation.subject: Your Experience has been validated
 email.experience.validation.coreTitle: Your experience has been successfully validated
 email.experience.validation.subTitle: Hey %name% , our team just review your experience!
-email.experience.validation.message: Despite the fact that we loved what you proposed, you experience is now available online, <a href="%route%">click here to check it out</a>.
+email.experience.validation.message: In addition to the fact that we loved what you proposed, you experience is now available online, click tjhe button above to see what it looks like!
+email.experience.validation.btn: Check it out!
 email.booking.update.coreTitle: Your request has been %status%
 email.booking.update.subTitle: %user% has %status your request for his experience %title
 email.booking.update.message: Click on the button above to see the detail about this booking. You should now be able to contact %user% directly via this page.

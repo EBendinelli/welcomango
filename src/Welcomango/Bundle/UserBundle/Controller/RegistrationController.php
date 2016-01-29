@@ -58,23 +58,8 @@ class RegistrationController extends BaseProfileController
             //THIS IS WHY WE OVERRIDE THIS FUNCTION
             //GET CITIES AND COUNTRIES AND ADD IT TO DATABASE IF WE DON'T ALREADY HAVE IT
             $cityManager = $this->get('welcomango.front.city.manager');
-            $fromCity = $cityManager->checkAndCreateNewCity(
-                $form->get('fromCity')->getData(),
-                $form->get('fromCityLat')->getData(),
-                $form->get('fromCityLng')->getData(),
-                $form->get('fromCityState')->getData(),
-                $form->get('fromCityCountry')->getData(),
-                $form->get('fromCityCountryCode')->getData()
-            );
-
-            $currentCity = $cityManager->checkAndCreateNewCity(
-                $form->get('currentCity')->getData(),
-                $form->get('currentCityLat')->getData(),
-                $form->get('currentCityLng')->getData(),
-                $form->get('currentCityState')->getData(),
-                $form->get('currentCityCountry')->getData(),
-                $form->get('currentCityCountryCode')->getData()
-            );
+            $fromCity = $cityManager->checkAndCreateNewCity($form->get('fromCity'));
+            $currentCity = $cityManager->checkAndCreateNewCity($form->get('currentCity'));
 
             $user->setCurrentCity($currentCity);
             $user->setFromCity($fromCity);
