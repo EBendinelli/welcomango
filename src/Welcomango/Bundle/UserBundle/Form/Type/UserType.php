@@ -90,6 +90,11 @@ class UserType extends AbstractType
             'label'    => 'form.user.gender',
         ));
 
+        $builder->add('captcha', 'ewz_recaptcha', array(
+            'constraints' => new RecaptchaTrue(),
+            'mapped'      => false,
+        ));
+
         $builder->add('register', 'submit');
     }
 
