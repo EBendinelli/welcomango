@@ -103,9 +103,6 @@ class ExperienceType extends AbstractType
             $experience = $event->getData();
             $form = $event->getForm();
 
-            // check if the Product object is "new"
-            // If no data is passed to the form, the data is "null".
-            // This should be considered a new "Product"
             if (!$experience || null === $experience->getId()) {
                 $form->add('city', new CityType());
             }

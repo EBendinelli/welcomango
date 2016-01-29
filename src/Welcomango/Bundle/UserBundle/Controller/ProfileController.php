@@ -165,6 +165,7 @@ class ProfileController extends BaseProfileController
         $form = $this->createForm($this->get('welcomango.front.form.user.edit.type'), $user);
         $form->setData($user);
 
+
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -179,15 +180,7 @@ class ProfileController extends BaseProfileController
             $user->setSpokenLanguages($spokenLanguages);
 
             $cityManager = $this->get('welcomango.front.city.manager');
-
-            $currentCity = $cityManager->checkAndCreateNewCity(
-                $form->get('currentCity')->getData(),
-                $form->get('currentCityLat')->getData(),
-                $form->get('currentCityLng')->getData(),
-                $form->get('currentCityState')->getData(),
-                $form->get('currentCityCountry')->getData(),
-                $form->get('currentCityCountryCode')->getData()
-            );
+            $currentCity = $cityManager->checkAndCreateNewCity($form->get('currentCity'));
 
             $user->setCurrentCity($currentCity);
 

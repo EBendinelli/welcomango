@@ -2,6 +2,8 @@
 
 {% form_theme form with ["::frontThemeThin.html.twig"] %}
 
+{% trans_default_domain 'interface' %}
+
 {% set filter_url = path('experience_filters') %}
 
 {% block page_container %}
@@ -11,19 +13,42 @@
     {% endblock jumbotron %}
 
     {% block page_content %}
-        <section class="bg-master-lightest p-b-85 p-t-75">
-            <div class="container">
-                <div class="md-p-l-20 md-p-r-20 xs-no-padding">
-                    <h5 class="block-title hint-text no-margin">Explore</h5>
-                    <div class="row">
-                        <div class="col-sm-5 col-md-4">
-                            <h1 class="m-t-5">Different ways to Organize your Content.</h1>
+
+        <section class="bg-master-lightest p-b-65 p-t-75 p-t-55">
+            <div class="container large-container">
+                <div class="row">
+                    <div class="text-center">
+                        <h6 class="block-title m-b-0 hint-text ">{{ 'homepage.howItWorks'|trans }}</h6>
+                        <h1 class="m-t-5 light">{{ 'homepage.3steps'|trans }}</h1>
+                        <p class="m-t-20">{{ 'homepage.stepsText'|trans }}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="bg-master-lightest p-b-85 p-b-65 ">
+            <div class="container large-container">
+                <div class="md-p-l-20 xs-no-padding clearfix">
+                    <div class="col-sm-4 no-padding text-center">
+                        <div class="p-r-40 md-pr-30">
+                            <img alt="" class="m-b-20" src="{{ asset('bundles/welcomangocore/images/graphics/step1.png') }}">
+                            <h6 class="block-title p-b-5">1 - {{ 'homepage.step1'|trans }}</h6>
+                            <p class="m-b-30">{{ 'homepage.step1Note'|trans }}</p>
                         </div>
-                        <div class="col-sm-7 col-md-8 no-padding xs-p-l-15 xs-p-r-15">
-                            <div class="p-t-20 p-l-35 md-p-l-5 md-p-t-15">
-                                <p>Our long standing vision has been to bypass the usual admin dashboard structure, and move forward with a more sophisticated yet simple framework that would create a credible impact on the many conventional dashboard users.</p>
-                                <p class="hint-text font-arial small-text col-md-7 no-padding">A product is accessible when all people regardless of ability can navigate it, understand it, and use it to achieve goals.</p>
-                            </div>
+                        <div class="visible-xs b-b b-grey-light m-t-30 m-b-30"></div>
+                    </div>
+                    <div class="col-sm-4 no-padding text-center">
+                        <div class="p-r-40 md-pr-30 ">
+                            <img alt="" class="m-b-20" src="{{ asset('bundles/welcomangocore/images/graphics/step2.png') }}">
+                            <h6 class="block-title p-b-5">2 - {{ 'homepage.step2'|trans }}</h6>
+                            <p class="m-b-30">{{ 'homepage.step2Note'|trans }}</p>
+                        </div>
+                        <div class="visible-xs b-b b-grey-light m-t-30 m-b-30"></div>
+                    </div>
+                    <div class="col-sm-4 no-padding text-center">
+                        <div class="p-r-40 md-pr-30">
+                            <img alt="" class="m-b-20" src="{{ asset('bundles/welcomangocore/images/graphics/step3.png') }}">
+                            <h6 class=" block-title p-b-5">3 -{{ 'homepage.step3'|trans }}</h6>
+                            <p class="m-b-30">{{ 'homepage.step3Note'|trans }}</p>
                         </div>
                     </div>
                 </div>
@@ -32,45 +57,58 @@
 
         <section class="bg-master-lighter p-b-85 p-t-75">
             <div class="container">
-                <h3 class="text-center m-b-30">Here are our favorites experience</h3>
-                {% for experience in featuredExperiences  %}
-                    {{ include("WelcomangoExperienceBundle:Experience:_experienceTile.html.twig", { 'experiences': featuredExperiences, 'column': 3 }) }}
-                {% endfor %}
-                <div>
-                    <h3 class="text-center m-b-30">And the ones people prefered</h3>
+                <h6 class="block-title m-b-0 hint-text text-center">{{ 'homepage.whereItStarts'|trans }}</h6>
+                <h1 class="text-center m-b-10 light">{{ 'homepage.featuredExperiences'|trans }}</h1>
+                <div class="row">
+                    {% for experience in featuredExperiences  %}
+                        {{ include("WelcomangoExperienceBundle:Experience:_experienceTile.html.twig", { 'experience': experience, 'column': 3 }) }}
+                    {% endfor %}
                 </div>
+                <hr/>
+                <h6 class="block-title m-t-60 m-b-0 hint-text text-center">{{ 'homepage.bestOfBest'|trans }}</h6>
+                <h1 class="text-center m-b-30 m-t-20 light">{{ 'homepage.bestRated'|trans }}</h1>
                 {% for experience in bestExperiences  %}
-                    {{ include("WelcomangoExperienceBundle:Experience:_experienceTile3.html.twig", { 'experiences': bestExperiences, 'column': 4 }) }}
+                    {{ include("WelcomangoExperienceBundle:Experience:_experienceTile3.html.twig", { 'experience': experience, 'column': 4 }) }}
                 {% endfor %}
                 </div>
         </section>
 
-        <!-- START CONTENT SECTION -->
+        <!-- START NEWSLETTER SECTION -->
         <section id="meet" class="p-b-60 p-t-60 bg-master-lightest">
             <div class="">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-7">
-                            <h1 class="light m-t-5">Keep in touch</h1>
-                            <h5 class="hint-text">Stay informed and up to date with notifications from your favorite
-                                apps and details</h5>
-                            <form class="m-t-30 m-b-20">
-                                <div class="form-group form-group-default input-group col-md-12  col-sm-12">
-                                    <label>Email Address</label>
-                                    <input type="email" placeholder="johnsmith@abc.com" class="form-control">
-                      <span class="input-group-btn">
-                                <button type="button" class="btn btn-white  btn-cons">Subscribe</button>
-                            </span>
+                            <h1 class="light m-t-5">{{ 'homepage.keepInTouch'|trans }}</h1>
+                            <h5 class="hint-text">{{ 'homepage.newsletterText'|trans }}</h5>
+                            <form class="m-t-30 m-b-20"  action="//welcomango.us9.list-manage.com/subscribe/post?u=587ed8bac6b041cfc8674b49a&amp;id=aa3b3d5014" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                                <div id="mc_embed_signup_scroll" class="form-group form-group-default input-group col-md-12  col-sm-12">
+                                    <label for="mce-EMAIL">Email Address </label>
+                                    <input type="email" value=""  name="EMAIL" placeholder="awesomeyou@mail.com" class="form-control" id="mce-EMAIL">
+                                      <span class="input-group-btn">
+                                           <button type="button" class="btn btn-white btn-cons" onClick="$('#mc-embedded-subscribe-form').submit();">Subscribe</button>
+                                      </span>
                                     <br>
                                 </div>
-                                <p class="font-arial fs-12 hint-text">We value your <strong>privacy</strong>. None of the details supplied will be shared with external parties</p>
+                                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button" style="display:none">
+                                <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_587ed8bac6b041cfc8674b49a_aa3b3d5014" tabindex="-1" value=""></div>
+                                <div id="mce-responses" class="clear">
+                                    <div class="response" id="mce-error-response" style="display:none"></div>
+                                    <div class="response" id="mce-success-response" style="display:none"></div>
+                                </div>
+                                <p class="font-arial fs-12 hint-text">{{ 'homepage.subscribeNote'|trans|raw }}</p>
                             </form>
+
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- END CONTENT SECTION -->
+
+
+
+
+        <!-- END NEWSLETTER SECTION -->
     {% endblock page_content %}
 
     {% block footer %}

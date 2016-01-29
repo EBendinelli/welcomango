@@ -111,6 +111,8 @@ p{
     margin-bottom:15px;
 }
 
+
+
 /* //////////////////////////////////////////////////////// */
 /* ////////////////////   DOTED LINE  ////////////////////// */
 /* //////////////////////////////////////////////////////// */
@@ -386,7 +388,7 @@ div.dotted-line span {
     width: 0px;
     height: 0px;
     border-bottom: 40px solid white;
-    border-left: 350px solid transparent;
+    border-left: 360px solid transparent;
     z-index: -20;
 }
 
@@ -403,7 +405,7 @@ div.dotted-line span {
     width: 0px;
     height: 0px;
     border-top: 40px solid white;
-    border-right: 350px solid transparent;
+    border-right: 360px solid transparent;
     z-index: -20;
 }
 
@@ -447,7 +449,7 @@ div.dotted-line span {
 
 @media (min-width: 768px) and (max-width: 991px){
     .card .experience-image-triangle-horizontal{
-        border-left: 210px solid transparent;
+        border-left: 220px solid transparent;
     }
 
     .card-bottom-price{
@@ -463,17 +465,17 @@ div.dotted-line span {
     }
 
     .card .card-bottom-triangle {
-        border-right: 210px solid transparent;
+        border-right: 220px solid transparent;
     }
 }
 
 @media (min-width: 481px) and (max-width: 767px){
     .card .experience-image-triangle-horizontal{
-        border-left: 662px solid transparent;
+        border-left: 720px solid transparent;
     }
 
     .card .card-bottom-triangle {
-        border-right: 662px solid transparent;
+        border-right: 720px solid transparent;
     }
 
 
@@ -485,11 +487,11 @@ div.dotted-line span {
 
 @media (max-width: 480px){
     .card .experience-image-triangle-horizontal{
-        border-left: 400px solid transparent;
+        border-left: 440px solid transparent;
     }
 
     .card .card-bottom-triangle {
-        border-right: 400px solid transparent;
+        border-right: 440px solid transparent;
     }
 
     .card-bottom{

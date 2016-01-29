@@ -17,7 +17,9 @@
             <div class="col-sm-2 col-xs-6 xs-m-b-20">
                 <h6 class="font-montserrat text-uppercase fs-14 text-white p-b-10">About</h6>
                 <ul class="no-style">
-                    {# code a twig extension to load all about article #}
+                    <li class="m-b-5 no-padding"><a href="{{ path('page_view_slug', {'slug': 'the-team'}) }}" class="link text-white">About</a></li>
+                    <li class="m-b-5 no-padding"><a href="{{ path('page_view_slug', {'slug': 'thanks'}) }}" class="link text-white">Thanks</a></li>
+                    <li class="m-b-5 no-padding"><a href="{{ path('page_view_slug', {'slug': 'legal'}) }}" class="link text-white">Legal</a></li>
                 </ul>
             </div>
             <div class="col-sm-2 col-xs-6 xs-m-b-20">

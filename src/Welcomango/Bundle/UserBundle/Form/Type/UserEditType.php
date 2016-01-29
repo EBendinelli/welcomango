@@ -16,6 +16,7 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
+use Welcomango\Bundle\CoreBundle\Form\Type\CityType;
 use Welcomango\Bundle\MediaBundle\Form\Type\SimpleMediaType;
 use Welcomango\Bundle\UserBundle\Form\Type\AdminSpokenLanguageType;
 
@@ -104,47 +105,7 @@ class UserEditType extends AbstractType
             'required'     => false,
         ));
 
-        $builder->add('currentCityInput', 'text', array(
-            'mapped' => false,
-            'label'  => 'form.user.currentCityInput',
-            'data'   => $userCity->getName(),
-        ));
-
-        $builder->add('currentCity', 'hidden', array(
-            'mapped' => false,
-            'label'  => 'form.user.currentCity',
-            'data'   => $userCity->getName(),
-        ));
-
-        $builder->add('currentCityLat', 'hidden', array(
-            'mapped' => false,
-            'label'  => 'form.user.currentCityLat',
-            'data'   => $userCity->getLatitude(),
-        ));
-
-        $builder->add('currentCityLng', 'hidden', array(
-            'mapped' => false,
-            'label'  => 'form.user.currentCityLng',
-            'data'   => $userCity->getLongitude(),
-        ));
-
-        $builder->add('currentCityState', 'hidden', array(
-            'mapped' => false,
-            'label'  => 'form.user.currentCityState',
-            'data'   => $userCity->getState(),
-        ));
-
-        $builder->add('currentCityCountry', 'hidden', array(
-            'mapped' => false,
-            'label'  => 'form.user.currentCityCountry',
-            'data'   => $userCity->getCountry()->getName(),
-        ));
-
-        $builder->add('currentCityCountryCode', 'hidden', array(
-            'mapped' => false,
-            'label'  => 'form.user.currentCityCountryCode',
-            'data'   => $userCity->getCountry()->getCountryCode(),
-        ));
+        $builder->add('currentCity', new CityType($userCity));
 
         $builder->add('gender', 'choice', array(
             'choices'  => $genders,
@@ -183,7 +144,6 @@ class UserEditType extends AbstractType
         $resolver->setDefaults([
             'data_class'         => 'Welcomango\Model\User',
             'translation_domain' => 'interface',
-            'roles_user'         => null,
         ]);
     }
 
