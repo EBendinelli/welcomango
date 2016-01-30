@@ -30,7 +30,7 @@
                 <div class="md-p-l-20 xs-no-padding clearfix">
                     <div class="col-sm-4 no-padding text-center">
                         <div class="p-r-40 md-pr-30">
-                            <img alt="" class="m-b-20" src="{{ asset('bundles/welcomangocore/images/graphics/step1.png') }}">
+                            <img alt="" class="wow fadeInDown animated m-b-20 svg-auto-scale" src="{{ asset('bundles/welcomangocore/images/graphics/step1.min.svg') }}">
                             <h6 class="block-title p-b-5">1 - {{ 'homepage.step1'|trans }}</h6>
                             <p class="m-b-30">{{ 'homepage.step1Note'|trans }}</p>
                         </div>
@@ -38,7 +38,7 @@
                     </div>
                     <div class="col-sm-4 no-padding text-center">
                         <div class="p-r-40 md-pr-30 ">
-                            <img alt="" class="m-b-20" src="{{ asset('bundles/welcomangocore/images/graphics/step2.png') }}">
+                            <img alt="" class="wow fadeInUp animated m-b-20 svg-auto-scale" data-wow-delay="0.2s" src="{{ asset('bundles/welcomangocore/images/graphics/step2.min.svg') }}">
                             <h6 class="block-title p-b-5">2 - {{ 'homepage.step2'|trans }}</h6>
                             <p class="m-b-30">{{ 'homepage.step2Note'|trans }}</p>
                         </div>
@@ -46,12 +46,15 @@
                     </div>
                     <div class="col-sm-4 no-padding text-center">
                         <div class="p-r-40 md-pr-30">
-                            <img alt="" class="m-b-20" src="{{ asset('bundles/welcomangocore/images/graphics/step3.png') }}">
+                            <img alt="" class="wow fadeInDown animated m-b-20 svg-auto-scale" data-wow-delay="0.4s" src="{{ asset('bundles/welcomangocore/images/graphics/step3.min.svg') }}">
                             <h6 class=" block-title p-b-5">3 -{{ 'homepage.step3'|trans }}</h6>
                             <p class="m-b-30">{{ 'homepage.step3Note'|trans }}</p>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="text-center">
+                <a href="{{ path('page_view_slug', {'slug': 'how-to'}) }}" type="button" class="btn btn-lg btn-primary btn-cons btn-rounded m-t-20">{{ 'homepage.learnMore'|trans }}</a>
             </div>
         </section>
 
@@ -71,6 +74,24 @@
                     {{ include("WelcomangoExperienceBundle:Experience:_experienceTile3.html.twig", { 'experience': experience, 'column': 4 }) }}
                 {% endfor %}
                 </div>
+        </section>
+
+        <section class="p-b-30 p-t-30 bg-master-darkest sm-no-margin" data-pages-bg-image="{{ asset('bundles/welcomangocore/images/experience_default/places-0.jpg') }}" data-bg-overlay="black" data-overlay-opacity="0.2" data-pages="parallax">
+            <div class="container p-b-30 p-t-30">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="text-center">
+                            <h1 class="text-white col-sm-12 p-b-10">
+                                {{ 'homage.shareEnjoy'|trans }}
+                            </h1>
+                            <div class="text-center m-t-30">
+                                <a href="{{ path('page_view_slug', {'slug': 'proposing-an-experience'}) }}" type="button" class="btn btn-lg btn-primary btn-cons btn-rounded m-t-20">{{ 'homepage.meAGuide'|trans }}</a>
+                            </div>
+                            <h5 class="text-white m-t-30">{{ 'homepage.welcomangoIsAbout'|trans|raw }}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- START NEWSLETTER SECTION -->
@@ -140,5 +161,7 @@
                 }
             });
         });
+
+        new WOW().init();
     </script>
 {% endblock %}

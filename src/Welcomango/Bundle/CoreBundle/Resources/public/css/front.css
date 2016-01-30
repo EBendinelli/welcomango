@@ -111,7 +111,39 @@ p{
     margin-bottom:15px;
 }
 
+.svg-auto-scale{
+    width:100%;
+    height:auto;
+}
 
+.bottom-feedback-button{
+    position: fixed;
+    bottom: -7px;
+    right: 5%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 7px;
+    padding-bottom: 15px;
+    z-index: 1090;
+    -moz-box-shadow: 1px 1px 3px 0px #656565;
+    -webkit-box-shadow: 1px 1px 3px 0px #656565;
+    -o-box-shadow: 1px 1px 3px 0px #656565;
+    box-shadow: 1px 1px 3px 0px #656565;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=134, Strength=3);
+
+    transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+}
+
+.bottom-feedback-button:hover{
+    bottom: 0px;
+}
+
+@media (max-width: 481px){
+    .bottom-feedback-button{
+        display:none;
+    }
+}
 
 /* //////////////////////////////////////////////////////// */
 /* ////////////////////   DOTED LINE  ////////////////////// */

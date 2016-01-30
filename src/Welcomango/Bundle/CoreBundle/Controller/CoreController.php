@@ -60,6 +60,8 @@ class CoreController extends BaseController
      */
     public function contactAction(Request $request)
     {
+        $feedbackUrl = $request->get('feedback_url');
+
         $user = $this->getUser();
         $form = $this->createForm(new ContactType($user));
         $form->handleRequest($request);
@@ -82,6 +84,7 @@ class CoreController extends BaseController
                         'category' => $form->get('category')->getData(),
                         'name' => $form->get('name')->getData(),
                         'message' => $form->get('message')->getData(),
+                        'issue_url' => $feedbackUrl,
                         ]),
                     'text/html'
                 );

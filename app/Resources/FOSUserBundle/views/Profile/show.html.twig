@@ -26,7 +26,7 @@
         <div class="dotted-line"><span></span></div>
         <div id="profile-menu-items">
             <ul>
-                <a href="{{ path('message_inbox') }}" class="profile-menu-item {%if path('message_inbox') in currentUrl  or 'messages' in currentUrl  %}{{ activeClass }}{% endif %}">
+                <a href="{{ path('message_inbox') }}" class="profile-menu-item {% if path('message_inbox') in currentUrl  or 'messages' in currentUrl  %}{{ activeClass }}{% endif %}">
                     <li>
                         <i class="fa fa-envelope fa-lg m-r-10"></i>{{ 'profile.message'|trans }}
                         {{ notification_display(user, 'inbox') }}

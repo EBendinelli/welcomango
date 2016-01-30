@@ -20,6 +20,9 @@
     {% if user %}
         <div>User profile (if any): {{ path('admin_user_edit', {'user_id': user.id}) }}</div>
     {% endif %}
+    {% if issue_url  %}
+        <div>Url of the issue (if any): {{ issue_url }}</div>
+    {% endif %}
     {% endautoescape %}
 {% endblock %}
 

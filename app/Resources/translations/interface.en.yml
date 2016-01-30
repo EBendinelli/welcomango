@@ -63,6 +63,7 @@ global.experience: Experience
 global.booking: Booking
 global.registration: Registration
 global.email: Email
+global.feedbackButton: A bug? An error? <br/> Click and give us your feedback!
 
 homepage.title1: Places Through People
 homepage.subTitle1: Find enthusiastic people willing to show you a different side of their city
@@ -86,6 +87,10 @@ homepage.bestOfBest: The best of the best
 homepage.keepInTouch: Keep in touch
 homepage.newsletterText: Leave your email and stay updated about the evolution of Welcomango
 homepage.subscribeNote: We value your <strong>privacy</strong>. None of the details supplied will be shared with external parties
+homepage.learnMore: Lear more
+homage.shareEnjoy: Share/Enjoy - Take/Give
+homepage.meAGuide: Me a guide?
+homepage.welcomangoIsAbout: Welcomango is about traveling thorough people but also welcoming travelers in your town.<br/>Join the community and propose a personal tour of your city.
 
 profile.menu: Menu
 profile.message: Messages

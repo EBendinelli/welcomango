@@ -35,6 +35,19 @@
 
 {% block body %}
 <body class="{% block body_class 'fixed-header' %} bg-master-darker">
+
+{% set currentUrl = app.request.uri %}
+
+{% if path('front_contact_us') not in currentUrl %}
+    <!-- BEGIN FEEDBACK BUTTON -->
+    <a href="{{ path('front_contact_us', {'feedback_url': currentUrl}) }}" class="text-white fs-12 text-white font-arial">
+        <div class="bottom-feedback-button text-center bg-complete-light ">
+            <i class="fa fa-bug"></i> {{ 'global.feedbackButton'|trans|raw }}
+        </div>
+    </a>
+    <!-- END FEEDBACK BUTTON -->
+{% endif %}
+
 {% block inner_body %}
 
 {% block header %}
