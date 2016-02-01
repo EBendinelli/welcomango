@@ -119,7 +119,7 @@ p{
 .bottom-feedback-button{
     position: fixed;
     bottom: -7px;
-    right: 5%;
+    right: 3%;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     padding: 7px;
@@ -144,6 +144,52 @@ p{
         display:none;
     }
 }
+@media (max-width: 992px){
+    .menu-btn{
+        margin: 0px 35px 0px 35px;
+    }
+}
+
+@media (max-width: 335px){
+    #login-buttons-container{
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -moz-box-orient: vertical;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        /* optional */
+        -webkit-box-align: start;
+        -moz-box-align: start;
+        -ms-flex-align: start;
+        -webkit-align-items: flex-start;
+        align-items: flex-start;
+    }
+
+    #login-cancel-button{
+        -webkit-box-ordinal-group: 2;
+        -moz-box-ordinal-group: 2;
+        -ms-flex-order: 2;
+        -webkit-order: 2;
+        order: 2;
+        margin:auto;
+    }
+
+    #login-submit-button{
+        -webkit-box-ordinal-group: 1;
+        -moz-box-ordinal-group: 1;
+        -ms-flex-order: 1;
+        -webkit-order: 1;
+        order: 1;
+        margin:auto;
+        margin-bottom:10px;
+    }
+}
+
 
 /* //////////////////////////////////////////////////////// */
 /* ////////////////////   DOTED LINE  ////////////////////// */
@@ -459,16 +505,12 @@ div.dotted-line span {
 /* Handling the triangle behaviors for different screen */
 @media (min-width: 1200px) and (max-width: 1600px) {
 
-
     .card-content {
         height: 200px !important;
     }
 }
 
 @media (min-width: 992px) and (max-width: 1200px) {
-    .card-bottom-price{
-        margin-top: -24px;
-    }
 
     .card-content {
         height: 200px !important;
@@ -480,13 +522,6 @@ div.dotted-line span {
 }
 
 @media (min-width: 768px) and (max-width: 991px){
-    .card .experience-image-triangle-horizontal{
-        border-left: 220px solid transparent;
-    }
-
-    .card-bottom-price{
-        margin-top: -25px;
-    }
 
     .card-content{
         height: 250px !important;
@@ -496,35 +531,26 @@ div.dotted-line span {
         height: 300px !important;
     }
 
-    .card .card-bottom-triangle {
-        border-right: 220px solid transparent;
-    }
 }
 
 @media (min-width: 481px) and (max-width: 767px){
-    .card .experience-image-triangle-horizontal{
-        border-left: 720px solid transparent;
-    }
-
-    .card .card-bottom-triangle {
-        border-right: 720px solid transparent;
-    }
-
-
-
     .card-content{
         height: initial !important;
     }
 }
 
-@media (max-width: 480px){
-    .card .experience-image-triangle-horizontal{
-        border-left: 440px solid transparent;
+@media (min-width: 321px) and (max-width: 480px){
+
+    .card-bottom{
+        height:50px;
     }
 
-    .card .card-bottom-triangle {
-        border-right: 440px solid transparent;
+    .card-bottom-price{
+        margin-top: -18px;
     }
+}
+
+@media (max-width: 480px){
 
     .card-bottom{
         height:50px;
@@ -539,10 +565,9 @@ div.dotted-line span {
 /* HANDLING THE CASE WHERE IT'S IN LARGE CONTAINER */
 .large-container .card .image-separation-horizontal{
     width: 100%;
-    height: 20%;
     position: absolute;
     z-index: 0;
-    margin-top:-39px;
+    margin-top:-40px;
 }
 
 .large-container .card .experience-image-triangle-horizontal{
@@ -579,9 +604,6 @@ div.dotted-line span {
 
 /* Handling the triangle behaviors for different screen */
 @media (min-width: 1200px) and (max-width: 1600px) {
-    .large-container .card-bottom-price{
-        margin-top: -24px;
-    }
 
     .large-container .card-content {
         height: 200px !important;
@@ -589,9 +611,6 @@ div.dotted-line span {
 }
 
 @media (min-width: 992px) and (max-width: 1200px) {
-    .large-container .card-bottom-price{
-        margin-top: -20px;
-    }
 
     .large-container .card-content {
         height: 200px !important;
@@ -599,31 +618,13 @@ div.dotted-line span {
 }
 
 @media (min-width: 768px) and (max-width: 991px){
-    .large-container .card .experience-image-triangle-horizontal{
-        border-left: 200px solid transparent;
-    }
-
-    .large-container .card-bottom-price{
-        margin-top: -12px;
-    }
-
-    .large-container .card-bottom{
-        height:50px;
-    }
 
     .large-container .card-content{
-        height: 250px !important;
+        height: 270px !important;
     }
 }
 
 @media (min-width: 481px) and (max-width: 767px){
-    .large-container .card .experience-image-triangle-horizontal{
-        border-left: 620px solid transparent;
-    }
-
-    .large-container .card .card-bottom-triangle {
-        border-right: 620px solid transparent;
-    }
 
     .large-container .card-content{
         height: initial !important;
@@ -631,20 +632,12 @@ div.dotted-line span {
 }
 
 @media (max-width: 480px){
-    .large-container .card .experience-image-triangle-horizontal{
-        border-left: 450px solid transparent;
-    }
-
-    .large-container .card .card-bottom-triangle {
-        border-right: 450px solid transparent;
+    .large-container .card-bottom-price {
+        margin-top: -20px;
     }
 
     .large-container .card-bottom{
         height:50px;
-    }
-
-    .large-container .card-bottom-price{
-        margin-top: -18px;
     }
 }
 
@@ -1062,6 +1055,12 @@ a h4:hover{
 /* ////////////////   PROFILE  //////////////////////////// */
 /* //////////////////////////////////////////////////////// */
 
+@media (min-width: 768px) and (max-width: 992px) {
+    .profile-container {
+        width: 100%;
+    }
+}
+
 .profile-left-col{
     background: transparent;
 }
@@ -1185,6 +1184,18 @@ a h4:hover{
 
 .participation-row-refused{
     opacity:0.5;
+}
+
+@media (max-width: 768px){
+    #user-picture-container {
+        display:none;
+    }
+}
+
+@media (max-width: 992px) {
+    .profile-dashboard-card{
+        min-height: 190px;
+    }
 }
 
 /* //////////////////////////////////////////////////////// */
@@ -1403,7 +1414,6 @@ a .front-menu-user-picture{
     }
 }
 
-
 .test {
     background-color: #f87f73;
     background-image: -webkit-linear-gradient(-28deg, #f87f73 0%, #f87f73 60%, #292423 60%, #292423 60%);
@@ -1532,4 +1542,11 @@ a .front-menu-user-picture{
 /* /////// LANGUAGE REMOVE BUTTON //////////// */
 .form-height-button{
     margin-top: 19px;
+}
+
+/* /////// BOOTSTRAP COL PADDING HACK //////////// */
+@media (max-width: 400px){
+    .col-sm-4{
+        padding:0px;
+    }
 }

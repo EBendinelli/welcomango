@@ -114,6 +114,9 @@
 
 {% block javascripts %}
     {{ parent() }}
+
+    {% include "WelcomangoExperienceBundle:Experience:_experienceTileJs.html.twig" %}
+
     <script type="text/javascript">
 
         var map;

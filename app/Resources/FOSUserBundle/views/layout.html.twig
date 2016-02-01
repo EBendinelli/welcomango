@@ -19,8 +19,8 @@
     <section class="p-b-20 {% block profile_header_class 'bg-pattern-orange-inverted' %} sm-no-margin">
         <div class="container p-t-50">
             <div class="row">
-                <div class="col-md-3"><br/></div>
-                <div class="col-md-9">
+                <div class="col-sm-3"><br/></div>
+                <div class="col-sm-9">
                     <h2 class="text-white">{% block profile_welcome_message %} {{ user.firstname }} {{ user.lastname|upper }} {% endblock %}</h2>
                     <h4 class="text-white">{{ user.currentCity.name}}, {{ user.currentCity.country.name}}</h4>
                     <h4 class="text-white">{{ user.getAge}}</h4>
@@ -30,9 +30,9 @@
     </section>
 
     <section class="container-fluid container-fixed-lg p-b-50  bg-master-lightest">
-        <div class="container">
+        <div class="container profile-container">
             <!-- START USER CARD -->
-            <div class="panel col-md-3 profile-left-col">
+            <div class="panel col-sm-3 profile-left-col">
                 <div id="user-picture-container">
                     {{ display_avatar(user, true, true, 'user-picture') }}
                     {% block inside_profile_picture %}
@@ -46,7 +46,7 @@
             <!-- END USER CARD -->
 
             <!-- START USER CONTENT -->
-            <div class="col-md-9">
+            <div class="col-sm-9">
                 {% include "::flash.html.twig" with{'class': 'm-t-20'} %}
 
                 {% block profile_content %}

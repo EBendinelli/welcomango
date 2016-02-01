@@ -1,25 +1,22 @@
 {% trans_default_domain 'interface' %}
 
 <!-- BEGIN JUMBOTRON -->
-<section class="jumbotron vh-80" data-pages="parallax">
+<section id="homepage-swiper" class="jumbotron full-vh bg-master-darkest" data-pages="parallax">
     <div class="inner full-height">
         <!-- BEGIN SLIDER -->
-        <div class="swiper-container" id="hero">
-            <div class="swiper-wrapper" >
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
                 <!-- BEGIN SLIDE -->
-                <div class="swiper-slide fit">
+                <div class="swiper-slide fit slide-1" data-pages-bg-image="{{ asset("bundles/welcomangocore/images/homepage/homepage-2.jpg") }}" data-bg-overlay="black" data-overlay-opacity="0.2">
                     <!-- BEGIN IMAGE PARRALAX -->
                     <div class="slider-wrapper">
-                        {#<div class="image" data-swiper-parallax="30%" data-pages-bg-image="{{ asset("img/front/homepage-" ~ random(2) ~ ".jpg") }}" data-bg-overlay="black" data-overlay-opacity="0.2">#}
-                        <div class="image" data-pages-bg-image="{{ asset("bundles/welcomangocore/images/homepage/homepage-2.jpg") }}" data-bg-overlay="black" data-overlay-opacity="0.2">
-                        </div>
                     </div>
                     <!-- END IMAGE PARRALAX -->
                     <!-- BEGIN CONTENT -->
                     <div class="content-layer">
                         <div class="inner full-height">
                             <div class="container-xs-height full-height">
-                                <div class="col-xs-height col-middle text-left">
+                                <div class="col-xs-height col-middle text-center">
                                     <div class="container">
                                         <div class="row">
                                             {{ form_start(form, {'action': filter_url, 'method': 'POST', 'attr': { 'novalidate': 'novalidate', 'class': 'filter' } }) }}
@@ -52,24 +49,24 @@
                 </div>
                 <!-- END SLIDE -->
                 <!-- BEGIN SLIDE -->
-                <div class="swiper-slide fit">
+                <div class="swiper-slide fit slide-1" data-pages-bg-image="{{ asset("bundles/welcomangocore/images/experience_default/places-" ~ random(18) ~ ".jpg") }}" data-bg-overlay="black" data-overlay-opacity="0.2">
                     <!-- BEGIN IMAGE PARRALAX -->
                     <div class="slider-wrapper">
-                        <div class="image" data-swiper-parallax="30%" data-pages-bg-image="{{ asset("bundles/welcomangocore/images/experience_default/places-" ~ random(18) ~ ".jpg") }}" data-bg-overlay="black" data-overlay-opacity="0.2">
-                        </div>
                     </div>
                     <!-- END IMAGE PARRALAX -->
                     <!-- BEGIN CONTENT -->
                     <div class="content-layer">
                         <div class="inner full-height">
                             <div class="container-xs-height full-height">
-                                <div class="col-xs-height col-middle text-left">
+                                <div class="col-xs-height col-middle text-center">
                                     <div class="container">
-                                        <div class="col-md-9 col-md-offset-2 text-center">
-                                            <h1 class="text-white sm-text-center" data-swiper-parallax="-15%"> {{ 'homepage.title2'|trans }}</h1>
-                                            <h4 class="text-white sm-text-center">{{ 'homepage.subTitle2'|trans }}</h4>
-                                            <p class="fs-14 font-arial text-white sm-text-center">{{ 'homepage.nextSubTitle2'|trans }}</p>
-                                            <a href="{{ path('fos_user_registration_register') }}" class="btn btn-primary btn-lg m-t-40 fs-16">{{ 'global.joinNow'|trans }}</a>
+                                        <div class="row">
+                                            <div class="col-md-8 col-md-offset-2">
+                                                <h1 class="text-white sm-text-center" data-swiper-parallax="-15%"> {{ 'homepage.title2'|trans }}</h1>
+                                                <h4 class="text-white sm-text-center">{{ 'homepage.subTitle2'|trans }}</h4>
+                                                <p class="fs-14 font-arial text-white sm-text-center">{{ 'homepage.nextSubTitle2'|trans }}</p>
+                                                <a href="{{ path('fos_user_registration_register') }}" class="btn btn-primary btn-lg m-t-40 fs-16">{{ 'global.joinNow'|trans }}</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -81,8 +78,8 @@
                 <!-- END SLIDE -->
             </div>
             <!-- Add Navigation -->
-            <div class="swiper-navigation swiper-dark-solid swiper-button-prev"></div>
-            <div class="swiper-navigation swiper-dark-solid swiper-button-next"></div>
+            <div class="swiper-navigation swiper-dark-solid swiper-button-prev auto-reveal"></div>
+            <div class="swiper-navigation swiper-dark-solid swiper-button-next auto-reveal"></div>
         </div>
     </div>
     <!-- END SLIDER -->

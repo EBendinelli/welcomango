@@ -64,7 +64,7 @@ class LoadPageData extends AbstractFixture implements FixtureInterface, OrderedF
 </blockquote>
 <p>Well, that the whole point of Welcomango. It\'s not because you don\'t know when your city was build, who&nbsp;was the last mayor and when the main&nbsp;square was built that you don\'t have anything to give to travelers. Actually, <strong>that\'s even better that way!</strong></p>
 <p>&nbsp;</p>
-<p>You may ignore it, but you actually know a lot about your city. And when I say a lot, it's A LOT! You've probably been around for some time and I am sure you&nbsp;experienced the city in many ways. Let me show you what you probably:</p>
+<p>You may ignore it, but you actually know a lot about your city. And when I say a lot, it\'s A LOT! You\'ve probably been around for some time and I am sure you&nbsp;experienced the city in many ways. Let me show you what you probably:</p>
 <ul>
 <li>You got lost in your city. And discovered some weird spots that are still in your mind</li>
 <li>You had a marvelous dinner with friends at this super cool place which you loved</li>
@@ -80,6 +80,41 @@ class LoadPageData extends AbstractFixture implements FixtureInterface, OrderedF
 <p>Read what I\'ve listed above and imagine yourself discovering a new place through these spots. Wouldn\'t it be awesome? Sit with someone living in the city in a bar he randomly discovered? Go to a concert in a place that doesn\'t even have a Facebook page? See where this person\'s grand father used to fight for revolution? I\'m sure you see the point now.</p>
 <p>I\'m sure you now understand why we wanted Welcomango to exist and what it really. <strong>In a few words: It\'s about experiencing places through people and through their personal habits</strong></p>',
          'category' => $categoryRepo->findOneBy(array('name' => 'How To'))],
+            ['title' => 'How to', 'content' => '<blockquote>
+<p style="letter-spacing: 0.14px;">Welcomango is aiming at propose a simple and intuitive experience so that travelers&nbsp;ands&nbsp;local have a chance to meet and share their perception of a&nbsp;place. Bored of traveling with guides or blog post visited a million time? Welcomango allows you to&nbsp;explore a destination through the eyes of a local in a few click. Follow the five steps to get started!</p>
+<p style="letter-spacing: 0.14px;">&nbsp;</p>
+</blockquote>
+<h3 style="letter-spacing: 0.14px; text-align: center;">1 - Type your next destination</h3>
+<p style="letter-spacing: 0.14px;"><img style="display: block; margin-left: auto; margin-right: auto;" src="../../../../bundles/welcomangocore/images/graphics/step1.min.svg" alt="" width="390" height="245" /></p>
+<p style="letter-spacing: 0.14px;">&nbsp;</p>
+<p style="letter-spacing: 0.14px;">How could it be simpler? If you already have a trip planned or if you already know&nbsp;what is your next destination, just type the name of the city in the search box! If the welcomango community&nbsp;has planted its seeds there, the locals should show up.&nbsp;</p>
+<p style="letter-spacing: 0.14px;"><em>No idea yet?:&nbsp;</em>Go to the&nbsp;<a href="../../../../experiences">experience page</a>&nbsp;and search by tags or dates to find people with common interests&nbsp;willing to&nbsp;show you how their city can be interesting in a specific way!</p>
+<h2 style="letter-spacing: 0.14px; text-align: center;">&nbsp;</h2>
+<h3 style="letter-spacing: 0.14px; text-align: center;">2 - Find a local who match your interests</h3>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" src="../../../../bundles/welcomangocore/images/graphics/step2.min.svg" alt="" width="390" height="245" /></p>
+<p>&nbsp;</p>
+<p>Anyone registered on the website can propose what we call an <strong>experience</strong>. We do not control experiences, we do not exerce any kind of influence and we only moderate in case of&nbsp;very innapropriate language or images.</p>
+<p>These experiences reflect one\'s unique perception of a city. It may be through a&nbsp;passion like art, sport, nature, food, or it may simply be the way this person lives and enjoys his city. We believe everybody has something to share about his place as soon as he has lived there for some time. That\'s why anyone can become a member of the community and propose an experience (and if you doubt this, go read <a href="../../../../read/proposing-an-experience">Me? Showing my city?</a>&nbsp;right now!)</p>
+<p>Once you found the perfect match, send him a booking request with a message and some details about the meeting&nbsp;(such as how many persons will be there and for how long. We like the idea that people can manage their time the way they want). As soon as it\'s accepted,&nbsp;things can become serious!&nbsp;</p>
+<h3 style="text-align: center;">3 - Book and meet the person and enjoy your visit</h3>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" src="../../../../bundles/welcomangocore/images/graphics/step3.min.svg" alt="" width="390" height="245" /></p>
+<p>&nbsp;</p>
+<p><strong>Now it\'s all about the fun!</strong> Decide of a meeting point and enjoy a unique visit of your destination!</p>
+<p>You know better that us, it\'s not only about the city but&nbsp;mostly<strong> about the people</strong>. And now you have the possiblity to enjoy both without having to fight cultural bareers or shyness.</p>
+<p>Eventually, pay a contribution to your new local friend according to what was decided and go back home richer than ever.</p>
+<h3 style="text-align: center;">4 -&nbsp;Give a feedback to the person you met</h3>
+<p>&nbsp;</p>
+<p>Welcomango as we dream it is only made of super nice people. But some might not be as optimistic as we are. So we give you the opportunity to give a feedback about the person you met.&nbsp;Although, we are not fond of rating systems and we don\'t want the travelers to become overpowered judges whil ethe locals would be the merchandise. That\'s why <strong>both locals and travelers can rate each others</strong>. This way people can learn more about how a potential visitor is and make sure things are going to be alright.</p>
+<h3 style="text-align: center;">5 - Propose&nbsp;an experience in your own city&nbsp;</h3>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" src="../../../../bundles/welcomangocore/images/graphics/step5.min.svg" alt="" width="390" height="245" /></p>
+<p>&nbsp;</p>
+<p>We would all love to be travelers 24/7, all year long. But it\'s not the reality for most of us. So while you are back home, saving for your next trip, how about giving some of your time to<strong> propose an experience in your own city</strong>?</p>
+<p>We all have something to show about our place and you are no exception. And being really busy is not an excuse. Welcomango allows you to define&nbsp;a very precise period during which you are available whether&nbsp;it\'s only on saturday afternoon or&nbsp;during&nbsp;work days in the early morning (for those who love hiking, running or photographing).&nbsp;</p>
+<p>Convinced? Time to get started!</p>
+<p>&nbsp;</p>
+<div class="text-center"><a class="btn btn-primary" href="../../../../experiences">Search for an experience </a> <strong>or</strong> <a class="btn btn-primary" href="../../../../experience/create">create your own!</a></div>
+<div class="text-center">&nbsp;</div>',
+                'category' => $categoryRepo->findOneBy(array('name' => 'How To'))],
         );
 
         foreach($pages as $page){

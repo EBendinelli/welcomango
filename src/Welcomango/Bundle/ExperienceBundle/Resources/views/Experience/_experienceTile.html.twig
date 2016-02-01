@@ -1,14 +1,14 @@
 {% trans_default_domain "interface" %}
 
 {# Complete with correct informations #}
-<div class="col-sm-{{ 12/column }} m-t-20">
+<div class="col-sm-{{ 12/column }} m-t-20 ">
     {#<div class="card-city-picto" style="background-image:url({{ asset('img/welcomango-picto.png') }}">
         &#123;&#35; TODO see if we add the note in this mango. If so, add white BG to the picture &#35;&#125;
         <div class="card-picto-note">
             <h4 class="text-primary bold">{{ experience.getAverageNote }}<i class="fa fa-star fa-sm"></i></h4>
         </div>
     </div>#}
-    <div id="experience_{{ experience.getId }}" class="card {% if darkBg is defined %}card-bg-master-lightest{% endif %}" >
+    <div id="experience_{{ experience.getId }}" class="diagonal-card card {% if darkBg is defined %}card-bg-master-lightest{% endif %}" >
         <a href="{{ path('front_experience_view', {'slug' : experience.slug }) }}" >
             <div class="card-clickable"></div>
             <div class="experience-image experience-image-horizontal-split">

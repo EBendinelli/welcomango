@@ -25,27 +25,27 @@
                 </div>
             </div>
         </section>
-        <section class="bg-master-lightest p-b-85 p-b-65 ">
-            <div class="container large-container">
+        <section class="p-b-85 p-b-65  text-center bg-master-lightest">
+            <div class="container">
                 <div class="md-p-l-20 xs-no-padding clearfix">
-                    <div class="col-sm-4 no-padding text-center">
-                        <div class="p-r-40 md-pr-30">
+                    <div class="col-sm-4 no-padding">
+                        <div class="p-r-40 md-pr-30 xs-no-padding clearfix">
                             <img alt="" class="wow fadeInDown animated m-b-20 svg-auto-scale" src="{{ asset('bundles/welcomangocore/images/graphics/step1.min.svg') }}">
                             <h6 class="block-title p-b-5">1 - {{ 'homepage.step1'|trans }}</h6>
                             <p class="m-b-30">{{ 'homepage.step1Note'|trans }}</p>
                         </div>
                         <div class="visible-xs b-b b-grey-light m-t-30 m-b-30"></div>
                     </div>
-                    <div class="col-sm-4 no-padding text-center">
-                        <div class="p-r-40 md-pr-30 ">
+                    <div class="col-sm-4 no-padding">
+                        <div class="p-r-40 md-pr-30 xs-no-padding clearfix">
                             <img alt="" class="wow fadeInUp animated m-b-20 svg-auto-scale" data-wow-delay="0.2s" src="{{ asset('bundles/welcomangocore/images/graphics/step2.min.svg') }}">
                             <h6 class="block-title p-b-5">2 - {{ 'homepage.step2'|trans }}</h6>
                             <p class="m-b-30">{{ 'homepage.step2Note'|trans }}</p>
                         </div>
                         <div class="visible-xs b-b b-grey-light m-t-30 m-b-30"></div>
                     </div>
-                    <div class="col-sm-4 no-padding text-center">
-                        <div class="p-r-40 md-pr-30">
+                    <div class="col-sm-4 no-padding">
+                        <div class="p-r-40 md-pr-30 xs-no-padding clearfix">
                             <img alt="" class="wow fadeInDown animated m-b-20 svg-auto-scale" data-wow-delay="0.4s" src="{{ asset('bundles/welcomangocore/images/graphics/step3.min.svg') }}">
                             <h6 class=" block-title p-b-5">3 -{{ 'homepage.step3'|trans }}</h6>
                             <p class="m-b-30">{{ 'homepage.step3Note'|trans }}</p>
@@ -53,10 +53,8 @@
                     </div>
                 </div>
             </div>
-            <div class="text-center">
-                <a href="{{ path('page_view_slug', {'slug': 'how-to'}) }}" type="button" class="btn btn-lg btn-primary btn-cons btn-rounded m-t-20">{{ 'homepage.learnMore'|trans }}</a>
-            </div>
         </section>
+
 
         <section class="bg-master-lighter p-b-85 p-t-75">
             <div class="container">
@@ -140,7 +138,25 @@
 {% block javascripts %}
     {{ parent() }}
     {{ form_javascript(form) }}
+
+    {% include "WelcomangoExperienceBundle:Experience:_experienceTileJs.html.twig" %}
+
     <script type="text/javascript">
+
+        //Swiper
+        'use strict';
+        $(document).ready(function() {
+            //Intialize Slider
+            var slider = new Swiper('#homepage-swiper .swiper-container', {
+                pagination: '.swiper-pagination',
+                paginationClickable: true,
+                nextButton: '.swiper-button-next',
+                prevButton: '.swiper-button-prev',
+                parallax: true,
+                speed: 1000
+            });
+        })
+
         var timeout;
         $(document).ready(function () {
             $('.form-filter-select2').select2();

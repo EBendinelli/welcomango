@@ -85,6 +85,9 @@
     {% block javascripts %}
         {{ parent() }}
         {{ form_javascript(form) }}
+
+        {% include "WelcomangoExperienceBundle:Experience:_experienceTileJs.html.twig" %}
+
         <script type="text/javascript">
             var timeout;
             $(document).ready(function () {
@@ -102,7 +105,7 @@
                                 $('#spinner').css('display', 'none');
                                 $('#experience_results').html(response);
                             }, 'html');
-                        }, 500);
+                        }, 500);x
                     }
                 });
             });

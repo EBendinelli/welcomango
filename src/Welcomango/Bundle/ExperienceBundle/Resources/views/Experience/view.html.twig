@@ -275,6 +275,9 @@
 
 {% block javascripts %}
     {{ parent() }}
+
+    {% include "WelcomangoExperienceBundle:Experience:_experienceTileJs.html.twig" %}
+
     <script type="text/javascript">
 
         //Smooth scroll + update active menu item

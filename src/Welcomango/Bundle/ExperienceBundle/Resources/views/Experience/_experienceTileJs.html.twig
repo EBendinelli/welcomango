@@ -1,0 +1,13 @@
+<script>
+    // Auto adjust diagonal width
+    $(document).ready(resizeTriangles());
+
+    $(window).resize(resizeTriangles());
+
+    function resizeTriangles(){
+        var el = $(".diagonal-card");
+        var w = el.width(); // calculate & trim decimals
+        $('.card-bottom-triangle').css('border-right-width', w + 'px');
+        $('.experience-image-triangle-horizontal').css('border-left-width', w + 'px');
+    }
+</script>

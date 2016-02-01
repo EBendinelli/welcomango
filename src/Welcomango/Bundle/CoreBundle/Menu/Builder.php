@@ -108,7 +108,7 @@ class Builder extends ContainerAware
                 )
             );
         }else{
-            $loginButton = "<a data-toggle='modal' data-target='.modal-login' class='btn btn-sm btn-bordered btn-black block-title fs-12 ' data-text='Login'>Login</a>";
+            $loginButton = "<a data-toggle='modal' data-target='.modal-login' class='btn btn-sm btn-bordered btn-black block-title fs-12 menu-btn' data-text='Login'>Login</a>";
             $menu->addChild( $loginButton ,
                 array(
 
@@ -119,7 +119,7 @@ class Builder extends ContainerAware
             );
 
             $registerLink = $this->router->generate('fos_user_registration_register');
-            $registerButton = "<a class='btn btn-primary btn-cons' href='".$registerLink."' data-text='Login'>".$this->translator->trans('menu.title.signUp', array(), 'interface')."</a>";
+            $registerButton = "<a class='btn btn-primary btn-cons menu-btn' href='".$registerLink."' data-text='Login'>".$this->translator->trans('menu.title.signUp', array(), 'interface')."</a>";
             $menu->addChild( $registerButton ,
                 array(
                     'route' => 'fos_user_security_login',
