@@ -97,7 +97,7 @@
     <!-- END PROFILE TOP MENU-->
 
     <!-- BEGIN DASHBOARD -->
-    {% if nextVisitGiven or nextTrip or newRequest or feedbackAsLocal or feedbackAsTraveler or moderatedExperiences %}
+    {% if nextVisitGiven or nextTrip or newRequest or feedbackAsLocal or feedbackAsTraveler or moderatedExperiences or completeProfile or createExperience %}
         <h3>{{ 'profile.latestUpdate'|trans }}</h3>
         <div id="dashboard" class="p-l-10 p-r-10">
             {{ include("WelcomangoUserBundle:User:_profileDashboard.html.twig", {
@@ -116,9 +116,7 @@
 
     <!-- BEGIN PROFILE CONTENT-->
     <div id="user-proposed-experience" class="m-b-20">
-        {% if userExperiences.isEmpty %}
-            <a href="{{ path('front_experience_create') }}" class="btn btn-primary btn-cons" ><i class="fa fa-plus-circle "></i> {{ 'profile.createExperience'|trans }}</a>
-        {% else %}
+        {% if not userExperiences.isEmpty %}
             <h3 class="m-b-30">{{ 'profile.yourExperience'|trans }}</h3>
             <hr/>
             <div class="row">

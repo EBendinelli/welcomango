@@ -10,6 +10,11 @@
     {{ form_start(form, {'attr': {'id': form.vars.id}}) }}
     {{ form_errors(form) }}
 
+    <div class="bg-white p-l-20 p-b-20 p-t-10 m-t-20 b-a b-warning">
+        <h4>{{ 'experience.create.header.title'|trans }}</h4>
+        <p>{{ 'experience.create.header.message'|trans({'%route%': path('page_view_slug', {'slug': 'proposing-an-experience'})})|raw }}</p>
+    </div>
+
     <div id="myFormWizard" class="m-t-20">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs nav-tabs-linetriangle nav-tabs-separator">

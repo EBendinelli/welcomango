@@ -39,6 +39,12 @@ class ProfileController extends BaseProfileController
         $entityManager   = $this->getDoctrine()->getManager();
         $userExperiences = $user->getExperiences();
 
+        //Ii no experience we suggest to create one
+        $createExperience = false;
+        if($userExperiences->isEmpty()){
+            $createExperience = true;
+        }
+
         //Get booking for the user's experiences
         //And check if user has an experience which has been approved or refused
         $moderatedExperiences = array();
@@ -108,6 +114,14 @@ class ProfileController extends BaseProfileController
             $feedbackAsTraveler = $feedbackAsTraveler[0];
         }
 
+        //Check profile completion
+        $desc = $user->getDescription();
+        $lang = $user->getSpokenLanguages();
+        $completeProfile = false;
+        if(empty($desc) || empty($lang)){
+            $completeProfile = true;
+        }
+
         //Get Comments
         $feedbacks = $user->getReceivedFeedbacks();
 
@@ -120,6 +134,8 @@ class ProfileController extends BaseProfileController
             'feedbackAsLocal'      => $feedbackAsLocal,
             'feedbackAsTraveler'   => $feedbackAsTraveler,
             'moderatedExperiences' => $moderatedExperiences,
+            'completeProfile'      => $completeProfile,
+            'createExperience'    => $createExperience
         ));
     }
 

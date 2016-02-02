@@ -78,4 +78,5 @@ class UserManager
 
         return $realUsedLanguages;
     }
+
 }

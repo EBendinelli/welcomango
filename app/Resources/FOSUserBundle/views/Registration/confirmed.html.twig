@@ -1,0 +1,11 @@
+{% trans_default_domain 'interface' %}
+
+{% include '@WelcomangoCore/Core/success.html.twig' with {
+    'title': 'registration.confirmed'|trans({'%username%': user.username}, 'FOSUserBundle'),
+    'sub_title': 'registration.confirmation.subTitle'|trans,
+    'message': 'registration.confirmation.message'|trans,
+    'button1_path': path('fos_user_profile_show'),
+    'button1_message': 'global.viewProfile'|trans,
+    'button2_path': path('front_experience_list'),
+    'button2_message': 'global.explore'|trans,
+} %}
