@@ -63,6 +63,8 @@ global.experience: Experience
 global.booking: Booking
 global.registration: Registration
 global.email: Email
+global.you: You
+global.theTeam: The team
 global.feedbackButton: A bug? An error? <br/> Click and give us your feedback!
 
 homepage.title1: Places Through People
@@ -160,6 +162,7 @@ experience.minimunDuration: Minimum duration
 experience.maximumDuration: Maximum duration
 experience.maximumParticipants: Maximum Participants
 experience.minimumParticipants: Minimum Participants
+experience.happenedTimes: experience already happened <span class="text-black semi-bold">%number% time(s)</span>
 experience.description: Description
 experience.pictures: Pictures
 experience.sorryNoPictures: Sorry, it seems that this user did not add any photo...
@@ -251,6 +254,11 @@ contact.sent.subTitle: We can already hear it flying toward us
 contact.sent.message: Thanks for contacting us, we will do our best to handle your query and come back to you as soon as possible
 content.portraits: Portraits
 
+registration.title: The first step of your next adventure
+registration.joinWelcomango: Join the Welcomango community to discover a new way of traveling and enhance your life experience.
+registration.meetLocals: Meet locals, be a local, share different perspective on places through people
+
+
 message.noMessage: Looks like you haven't received a message yet
 
 form.city: City
@@ -265,7 +273,8 @@ form.experience.minimumDuration: Minimum duration
 form.experience.maximumDuration: Maximum duration
 form.experience.startDate: Start date
 form.experience.endDate: End date
-form.user.currentCityInput: Current City
+form.user.currentCity: City where you currently live
+form.user.fromCity: City you are from
 form.user.description: Description
 form.user.occupation: Occupation
 form.user.languages: Language
@@ -277,6 +286,9 @@ form.user.lastname: Lastname
 form.user.email: Email
 form.user.phone: Phone
 form.user.gender: Gender
+form.user.password: Password
+form.user.password.validate: Confirm password
+
 
 email.generic.lovelyMail: A lovely mail sent by
 email.generic.contactUs: Contact us at:

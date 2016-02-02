@@ -18,9 +18,12 @@ class CityType extends AbstractType
      */
     private $city;
 
-    function __construct($city = null)
+    private $labelName;
+
+    function __construct($city = null, $labelName = '')
     {
         $this->city = $city;
+        $this->labelName = $labelName;
     }
 
     /**
@@ -39,9 +42,14 @@ class CityType extends AbstractType
             $countryCode = $this->city->getCountry()->getCountryCode();
         }
 
+        $label = 'form.user.cityInput';
+        if($this->labelName){
+            $label = 'form.user.'.$this->labelName;
+        }
+
         $builder->add('cityInput', 'text', array(
             'mapped' => false,
-            'label'  => 'form.user.cityInput',
+            'label'  => $label,
             'attr' => [
                 'onFocus' => 'geolocate()'
             ],

@@ -38,6 +38,19 @@
             {% for entity in pagination %}
                 {% include "WelcomangoContentBundle:Content:_portraitRow.html.twig" with { 'portrait' : entity } %}
             {% endfor %}
+            <div class="col-sm-4 m-t-20">
+                <section class="container-fluid b-t b-white">
+                    <div class="row">
+                        <div class="text-center bg-success hover-push demo-story-block " onclick="window.location.replace('{{ path('front_contact_us', {'category': 'Portrait'}) }}');">
+                            <div class="hover-backdrop" style="background:url('{{ asset('bundles/welcomangocore/images/graphics/you.svg') }}')"></div>
+                            <div class="hover-caption bottom-left bottom-right p-b-40">
+                                <h4 class="text-white m-b-25">{{ 'global.you'|trans }}?</h4>
+                                <a class="font-montserrat fs-12 hint-text text-white all-caps">By {{ 'global.theTeam'|trans }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </div>
     </section>
 {% endblock %}

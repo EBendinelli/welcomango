@@ -4,6 +4,8 @@
 
 {% form_theme form with ["::frontTheme.html.twig"] %}
 
+{% trans_default_domain 'interface' %}
+
 {% block fos_user_content %}
     {% include "FOSUserBundle:Registration:register_content.html.twig" %}
 {% endblock fos_user_content %}
@@ -17,10 +19,10 @@
             <div class="container m-t-50 m-b-100">
                 <!-- BEGIN TEXT PART -->
                 <div class="col-md-6 col-md-push-6">
-                    <h1 class="light text-white m-b-40">The first step of your next adventure</h1>
-                    <h5 class="text-white">Join the Welcomango community to discover a new way of traveling and enhance your life experience. </h5>
+                    <h1 class="light text-white m-b-40">{{ 'registration.title'|trans }}</h1>
+                    <h5 class="text-white">{{ 'registration.joinWelcomango'|trans }}</h5>
                     <br/>
-                    <h5 class="text-white">Feel a European city and create boundaries with the locals</h5>
+                    <h5 class="text-white">{{ 'registration.meetLocals'|trans }}</h5>
                 </div>
                 <!-- END TEXT PART -->
 

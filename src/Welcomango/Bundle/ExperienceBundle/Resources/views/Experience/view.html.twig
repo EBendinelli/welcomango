@@ -87,7 +87,7 @@
                                                 {% set experienceHappened = experienceHappened + 1  %}
                                             {% endif %}
                                         {% endfor %}
-                                        {{  'experience.happenedTimes'|trans }}: <span class="text-black semi-bold">{{ experienceHappened}}</span>
+                                        {{  'experience.happenedTimes'|trans({'%number%': experienceHappened})|raw }}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -247,7 +247,13 @@
                 <div class="m-b-40 m-t-40">
                     <h2 class="text-center m-b-40">Comments</h2>
                     <div id="experience-comments">
-                        {% include("WelcomangoBookingBundle:Feedback:list.html.twig") with { 'feedbacks': feedbacks } %}
+                        {% if feedbacks  %}
+                            {% include("WelcomangoBookingBundle:Feedback:list.html.twig") with { 'feedbacks': feedbacks } %}
+                        {% else %}
+                        <div class="comment row text-center fs-i">
+                            {{ 'booking.noComment'|trans }}
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

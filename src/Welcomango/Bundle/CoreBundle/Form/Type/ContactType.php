@@ -20,16 +20,19 @@ class ContactType extends AbstractType
 
     /**
      * @param User $user
+     * @param String $category
      */
-    public function __construct(User $user = null)
+    public function __construct(User $user = null, $category = '')
     {
         $this->user = $user;
+        $this->category = $category;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $categories = array(
             'Bug' => 'Bug',
+            'Portrait' => 'Portrait',
             'Question' => 'Question',
             'Suggestion' => 'Suggestion',
             'Issue' => 'Issue',
@@ -69,11 +72,19 @@ class ContactType extends AbstractType
                 ]);
         }
 
-
-        $builder->add('category', 'choice', [
+        if($this->category){
+            $builder->add('category', 'choice', [
                 'choices' => $categories,
-        ])
-            ->add('message', 'textarea', [
+                'data' => $this->category,
+            ]);
+        }else{
+            $builder->add('category', 'choice', [
+                'choices' => $categories,
+            ]);
+        }
+
+
+        $builder->add('message', 'textarea', [
                 'attr' => [
                     'cols' => 90,
                     'rows' => 10,

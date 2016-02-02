@@ -61,9 +61,10 @@ class CoreController extends BaseController
     public function contactAction(Request $request)
     {
         $feedbackUrl = $request->get('feedback_url');
+        $category = $request->get('category');
 
         $user = $this->getUser();
-        $form = $this->createForm(new ContactType($user));
+        $form = $this->createForm(new ContactType($user, $category));
         $form->handleRequest($request);
 
         if ($form->isValid()) {
