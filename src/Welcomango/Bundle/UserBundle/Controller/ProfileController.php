@@ -150,7 +150,6 @@ class ProfileController extends BaseProfileController
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
-
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->get('event_dispatcher');
 
@@ -206,11 +205,12 @@ class ProfileController extends BaseProfileController
             $event = new FormEvent($form, $request);
             $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_SUCCESS, $event);
 
-            $currentMedia = $form->getData()->getProfileMedia()->getOriginalFilename();
-            $oldMedia     = $form->get("oldOriginalFilename")->getData();
-
-            if ($currentMedia != $oldMedia) {
-                $this->get('welcomango.media.manager')->generateSimpleMedia($user, $oldMedia);
+            if ($form->getData()->getProfileMedia()) {
+                $currentMedia = $form->getData()->getProfileMedia()->getOriginalFilename();
+                $oldMedia     = $form->get("oldOriginalFilename")->getData();
+                if ($currentMedia != $oldMedia) {
+                    $this->get('welcomango.media.manager')->generateSimpleMedia($user, $oldMedia);
+                }
             }
 
             $userManager->updateUser($user);

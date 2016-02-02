@@ -120,6 +120,7 @@ class MediaManager
                 $tempadapter->delete($tempFileName);
             }
         } else {
+            $entity->setProfileMedia(null);
             $this->entityManager->remove($currentMedia);
         }
     }
