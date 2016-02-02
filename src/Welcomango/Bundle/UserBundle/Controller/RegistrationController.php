@@ -133,10 +133,10 @@ class RegistrationController extends BaseProfileController
             $result = $userRepository->findBy(array($field => $query));
 
             if ($result) {
-                $response['message'] = $field.'taken';
+                $response['message'] = $this->trans($field.'taken', [], 'interface');
                 $response['class']   = 'alert alert-danger';
             } else {
-                $response['message'] = $field.'.free';
+                $response['message'] = $this->trans($field.'.free', [], 'interface');
                 $response['class']   = 'alert alert-success';
             }
         }

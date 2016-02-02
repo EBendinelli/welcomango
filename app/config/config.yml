@@ -111,12 +111,10 @@ fos_user:
             template: WelcomangoEmailBundle:EmailTemplate:registration.html.twig
     resetting:
         email:
-            template: WelcomangoEmailBundle:EmailTemplate:reseting.html.twig
-    resetting:
-        email:
             from_email:
                 address: no-reply@welcomango.com
                 sender_name: Welcomango team
+            template: WelcomangoEmailBundle:EmailTemplate:reseting.html.twig
 
 knp_menu:
     twig:

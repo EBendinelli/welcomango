@@ -1,34 +1,21 @@
-{% extends "WelcomangoEmailBundle:EmailTemplate:template.html.twig" %}
-
 {% trans_default_domain 'interface' %}
 
-{% block mainTitle %}
+{% block subject %}
     {% autoescape false %}
-    {{ 'global.email'|trans }}
+    {{ 'resetting.email.subject'|trans({'%username%': user.username}, 'FOSUserBundle') }}
     {% endautoescape %}
 {% endblock %}
 
-{% block coreTitle %}
-    {% autoescape false %}
-    {{ 'email.resetting.coreTitle'|trans }}
-    {% endautoescape %}
-{% endblock %}
+{% block body_html %}
 
-{% block subTitle %}
-    {% autoescape false %}
-    {{ 'email.resetting.subTitle'|trans({"%user%": user.firstname}) }}
-    {% endautoescape %}
-{% endblock %}
+    {% include "WelcomangoEmailBundle:EmailTemplate:templateWithParams.html.twig" with {
+        'mainTitle': 'global.email'|trans,
+        'coreTitle': 'email.resetting.coreTitle'|trans ,
+        'SubTitle': 'email.resetting.subTitle'|trans({"%user%": user.firstname}),
+        'btn': 'email.resetting.btn'|trans,
+        'btn_url': confirmationUrl,
+        'message' : 'email.resetting.message'|trans
+    } %}
 
-{% block btn%}
-    {% autoescape false %}
-        <a style="font-family: 'Open Sans',sans-serif; font-size: 20px;  border-radius:3px; text-decoration: none; margin:auto; color: #fff; background-color: #F34B1F; border-color: #F34B1F; padding: 10px 20px 10px 20px;font-size: 14px; letter-spacing: 0.14px; line-height: 21px; text-transform: uppercase;  font-family: Montserrat; font-weight: 400;" href="{{ confirmationUrl }}" style="">{{ 'email.resetting.btn'|trans }}</a>
-    {% endautoescape %}
-{% endblock %}
 
-{% block message %}
-    {% autoescape false %}
-    {{ 'email.registration.message'|trans }}
-    {% endautoescape %}
 {% endblock %}
-

@@ -325,4 +325,8 @@ email.resetting.subTitle: Hi %user%, it seems that you have requested a new pass
 email.resetting.message: Simply click on the button above to be redirected to a page where you'll be able to define your new password. Don't forget this one ;)
 email.resetting.btn: Reset password
 
+username.taken: Username already taken
+username.free: Username free
+email.taken: Email adress already used
+email.free: Email address available
 
