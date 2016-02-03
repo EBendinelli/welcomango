@@ -265,8 +265,7 @@ welcomango_booking:
 
 welcomango_user:
         language_levels:
-        - good
-        - Bad
+        - Beginner
+        - Good
         - Great
-        - Not good
-        - Mother tongue
+        - Fluent

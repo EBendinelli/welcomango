@@ -118,22 +118,11 @@ class ExperienceController extends BaseController
         }
 
         $experience = new Experience();
-        $experience->setCreator($user);
-        $experience->setPublicationStatus('pending');
-
-        //Set availabilities
-        $availabilities = new ArrayCollection();
-        $availability   = new Availability();
-        $availability->setDay(array('0', '1', '3', '4'));
-        $availability->setHour(array('1', '3'));
-        $availability->setExperience($experience);
-        $availabilities->add($availability);
-        $experience->setAvailabilities($availabilities);
+        $experienceManager = $this->get('welcomango.front.experience.manager');
+        $experienceManager->prepareExperienceForCreation($experience, $user);
 
         $em = $this->getDoctrine()->getManager();
-        $experience->setMedias(new ArrayCollection());
         $form = $this->createForm($this->get('welcomango.form.experience.create'), $experience);
-        $experience->setMedias(new ArrayCollection());
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -472,4 +461,5 @@ class ExperienceController extends BaseController
 
         return $this->redirect($this->generateUrl('front_experience_list'));
     }
+
 }

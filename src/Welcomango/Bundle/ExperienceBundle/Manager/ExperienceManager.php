@@ -6,10 +6,12 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Filesystem\Filesystem;
-
+use Doctrine\Common\Collections\ArrayCollection;
 
 use Welcomango\Model\Media;
 use Welcomango\Model\Experience;
+use Welcomango\Model\User;
+use Welcomango\Model\Availability;
 
 /**
  * Class ExperienceManager
@@ -140,5 +142,28 @@ class ExperienceManager
         $experience->setUpdatedStatus(false);
         $this->entityManager->persist($experience);
         $this->entityManager->flush();
+    }
+
+    /**
+     * Prepare experience before creation to avoid having a huge controller
+     *
+     * @param Experience $experience
+     * @param User $user
+     *
+     * @return Experience $experience
+     */
+    public function prepareExperienceForCreation($experience, $user){
+        $experience->setCreator($user);
+        $experience->setPublicationStatus('pending');
+
+        //Set availabilities
+        $availabilities = new ArrayCollection();
+        $availability   = new Availability();
+        $availability->setDay(array('7'));
+        $availability->setHour(array('6'));
+        $availability->setExperience($experience);
+        $availabilities->add($availability);
+        $experience->setAvailabilities($availabilities);
+
     }
 }
