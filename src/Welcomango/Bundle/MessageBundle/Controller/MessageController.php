@@ -104,7 +104,7 @@ class MessageController extends BaseController
             }
             $thread = $this->get('welcomango.message.creator')->createThread($booking, $currentUser, $recipient, $message);
 
-            return $this->forward('WelcomangoMessageBundle:Message:thread', array(
+            return $this->redirectToRoute('message_thread_view', array(
                 'user_id'   => $currentUser->getId(),
                 'thread_id' => $thread->getId(),
             ));
@@ -142,8 +142,9 @@ class MessageController extends BaseController
         $formHandler = $this->container->get('fos_message.reply_form.handler');
 
         if ($message = $formHandler->process($form)) {
-            return new RedirectResponse($this->container->get('router')->generate('fos_message_thread_view', array(
-                'threadId' => $message->getThread()->getId()
+            return new RedirectResponse($this->container->get('router')->generate('message_thread_view', array(
+                'thread_id' => $message->getThread()->getId(),
+                'user_id' => $currentUser->getId(),
             )));
         }
 
