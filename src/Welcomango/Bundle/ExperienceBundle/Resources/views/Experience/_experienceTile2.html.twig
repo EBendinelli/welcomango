@@ -28,7 +28,13 @@
                 <p class="fs-14">{{ experience.getDescription | truncate(200)}}</p>
             </div>
             <div class="card-price-tag bg-primary-light text-white fs-14">
-                {{ experience.pricePerHour }}€/h
+                {% if experience.pricePerHour %}
+                    {{ experience.pricePerHour }}€/h
+                {% elseif experience.contribution %}
+                    {{ 'global.contribution'|trans }}
+                {% else %}
+                    {{ 'global.free'|trans }}
+                {% endif %}
             </div>
         </div>
     </div>

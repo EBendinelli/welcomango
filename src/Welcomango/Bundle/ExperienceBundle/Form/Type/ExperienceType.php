@@ -96,6 +96,10 @@ class ExperienceType extends AbstractType
                 'by_reference' => false,
                 'allow_delete' => true,
                 'label'        => false,
+            ])
+            ->add('contribution', 'text', [
+                'label' => 'form.experience.contribution',
+                'required' => false,
             ]);
 
         //Add the city field only for creation

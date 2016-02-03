@@ -226,9 +226,21 @@
                                     <div class="experience-image-triangle"></div>
                                 </div>
                                 <div class="experience-bottom-price bg-master-light" {% if app.user != experience.getCreator %}onclick="userToggleBooking(){% endif %}">
-                                    <div class=" experience-price">
-                                        {{ experience.pricePerHour }}€/h
-                                    </div>
+                                    {% if experience.pricePerHour %}
+                                        <div class="experience-price">
+                                            {{ experience.pricePerHour }}€/h
+                                        </div>
+                                    {% elseif experience.contribution %}
+                                        <div class="experience-contribution-container">
+                                            <div class="experience-contribution">
+                                                {{ experience.contribution }}
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <div class="experience-price">
+                                            {{ 'global.free'|trans }}
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

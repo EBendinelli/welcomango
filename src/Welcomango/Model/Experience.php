@@ -97,15 +97,22 @@ class Experience
     /**
      * @var integer
      *
-     * @ORM\Column(name="price_per_hour", type="integer")
+     * @ORM\Column(name="price_per_hour", type="integer", nullable=true)
      * @Assert\Range(
      *      min = 0,
      *      max = 800,
-     *      minMessage = "Min % is 0",
-     *      maxMessage = "Max % is 100"
+     *      minMessage = "The price cannot be less than 0",
+     *      maxMessage = "The price cannot be over 800 (really?)"
      * )
      */
     private $pricePerHour;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="contribution", type="string", length=255)
+     */
+    private $contribution;
 
     /**
      * @var integer
@@ -208,6 +215,26 @@ class Experience
     public function setTitle($title)
     {
         $this->title = $title;
+    }
+
+    /**
+     * Get contribution
+     *
+     * @return string
+     */
+    public function getContribution()
+    {
+        return $this->contribution;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $contribution
+     */
+    public function setContribution($contribution)
+    {
+        $this->contribution = $contribution;
     }
 
     /**

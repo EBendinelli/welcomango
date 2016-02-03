@@ -115,6 +115,10 @@ class AdminExperienceType extends AbstractType
             'choices' => $publicationStatus,
             'label' => 'form.page.content'
         ]);
+
+        $builder->add('featured', 'checkbox', [
+            'label' => 'form.page.featured'
+        ]);
     }
 
     /**
