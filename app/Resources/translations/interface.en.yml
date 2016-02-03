@@ -67,6 +67,8 @@ global.you: You
 global.theTeam: The team
 global.feedbackButton: A bug? An error? <br/> Click and give us your feedback!
 global.explore: Explore
+global.free: Free
+global.contribution: Contribution
 
 homepage.title1: Places Through People
 homepage.subTitle1: Find enthusiastic people willing to show you a different side of their city
@@ -217,6 +219,11 @@ experience.createExperience: Create a new Experience
 experience.edit.messageTop: Not available on Tuesday anymore? Want to add some details or picture to improve your chances of atracting travelers? <br/>Here you can edit your experience and make it even better! <br/><br/><span class="bold">Note:</span> if you are completely changing your experience we suggest deleting this one and creating a new one.<br/><span class="bold">Note 2:</span> Once saved, we will review this experience like we did when you created it so it will be unavailable for a few hours.
 experience.edit.warningAlreadyBooked: You already have %number% reservation planned for this experience. Please <a href="%route%">contact the travelers</a> to altert them about the changes you made.
 experience.edit.success: Your experience has been successfully edited
+experience.create.noPriceNote: Don't feel like asking for money? How about something different! You can suggest a contribution in nature to the travelers instead of money. It can be a drink, a bus ticket or whatever you want.
+experience.create.noPrice: Suggest a contribution instead of money
+experience.create.contributionNote: The contribution is a way for the traveler to thank you without giving you money directly. I can be paying your ticket for the entrance of a museum, paying for a beer or bringing something from his country! Let your imagination talk :)
+experience.create.contribution: Contribution
+
 
 booking.bookingFor: Your reservation for <span class="text-primary">%title%</span> in <span class="text-primary">%city%</span> with <span class="text-primary">%user%</span>
 booking.requestFor: Request for <span class="text-primary">%title%</span> from <span class="text-primary">%username%</span>

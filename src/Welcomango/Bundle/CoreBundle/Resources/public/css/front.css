@@ -915,6 +915,7 @@ a h4:hover{
     margin-left:-6%;
     -webkit-transition: text-shadow 0.2s; /* Safari */
     transition: text-shadow 0.2s;
+    display: table;
 }
 
 .experience-price{
@@ -924,6 +925,23 @@ a h4:hover{
     font-weight: bold;
     margin-top: 40px;
     margin-left:30px;
+}
+
+.experience-contribution{
+    #position: relative;
+    #top: -50%;
+    font-size: 20px;
+    line-height: 25px;
+    letter-spacing: -.009em;
+    font-weight: bold;
+    margin:0 auto;
+    width:80%;
+    text-align: center;
+}
+
+.experience-contribution-container{
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .experience-bottom-price:hover{

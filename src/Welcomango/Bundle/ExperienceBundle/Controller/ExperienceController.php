@@ -216,7 +216,7 @@ class ExperienceController extends BaseController
             $uow = $this->getDoctrine()->getEntityManager()->getUnitOfWork();
             $uow->recomputeSingleEntityChangeSet($this->getDoctrine()->getEntityManager()->getClassMetadata(Experience::class), $experience);
             $availabilityManager->updateAvailabilityForExperience($experience, $form, $originalAvailabilities);
-            if ($form->get('title')->getData() != $oldExperience->getTitle() || $form->get('description')->getData() != $oldExperience->getDescription() || $form->get('city')->getData() != $oldExperience->getCity()) {
+            if ($form->get('title')->getData() != $oldExperience->getTitle() || $form->get('description')->getData() != $oldExperience->getDescription() ) {
                 $experience->setPublicationStatus('pending');
             }
 

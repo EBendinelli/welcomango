@@ -69,6 +69,15 @@
                     <div class="col-md-12">
                         <div class="small hint-text m-t-30 note-text">{{ "experience.create.pricePerHourNote"|trans }}</div>
                         {{ form_row(form.price_per_hour) }}
+                        <div class="small hint-text m-t-30 note-text">{{ 'experience.create.noPriceNote'|trans }}</div>
+                        <div class="checkbox check-complete">
+                            <input {% if form.vars.value.contribution %}checked="checked"{% endif %} type="checkbox" value="1" id="experience-no-price" onclick="toggleContribution();">
+                            <label for="experience-no-price">{{ 'experience.create.noPrice'|trans }}</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12" id="experience-contribution-field" style="display:none;">
+                        <div class="small hint-text m-t-30 note-text">{{ "experience.create.contributionNote"|trans }}</div>
+                        {{ form_row(form.contribution) }}
                     </div>
                 </div>
             </div>
@@ -107,6 +116,19 @@
 
     {% include 'WelcomangoExperienceBundle:Availability:_availabilityJs.html.twig' %}
     {% include 'WelcomangoExperienceBundle:Experience:_baseJs.html.twig' %}
+
+    <script>
+        function toggleContribution() {
+            $('#experience-contribution-field').slideToggle();
+            $('#front_experience_contribution').prop('required',function(i, v) { return !v; });
+            $('#front_experience_price_per_hour').val('0');
+            $('#front_experience_price_per_hour').prop('disabled', function(i, v) { return !v; });
+        }
+
+        {% if form.vars.value.contribution %}
+            $(document).ready(toggleContribution());
+        {% endif %}
+    </script>
 
 {% endblock %}
 
