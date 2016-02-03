@@ -103,6 +103,7 @@ profile.requestsFromTravelers: Requests from Travelers
 profile.yourRequests: Your bookings
 profile.yourExperiences: Your experiences
 profile.editProfile: Edit your profile
+profile.editProfile2: Edit profile
 profile.feedbacks: Feedbacks
 profile.noteTraveler: Note as a Traveler
 profile.noteLocal: Note as a Local
@@ -158,7 +159,7 @@ profile.editExperience: Edit your experience
 profile.deleteExperience: Delete your experience
 profile.hiThere: Hi there!
 profile.completeProfile: Your profile is a bit empty, how about completing it a bit? Add a description and the language you master!
-profile.createExperience: Create an experience!
+profile.createExperience: Create an<br/> experience!
 profile.atHome: At home?
 profile.createExperienceSuggestion: How about proposing a tour of your city? Go and create your first experience! (No idea? <a href="%route%">Read this!</a>)
 
@@ -284,14 +285,16 @@ form.profile.uploadPhoto: Upload a photo
 
 form.experience.title: Experience title
 form.experience.description: Experience description
-form.experience.estimatedDuration: Estimated duration
+form.experience.estimatedDuration: Estimated duration (hours)
 form.experience.maximumParticipants: Number of maximum participants
-form.experience.minimumDuration: Minimum duration
-form.experience.maximumDuration: Maximum duration
+form.experience.minimumDuration: Minimum duration (hours)
+form.experience.maximumDuration: Maximum duration (hours)
 form.experience.startDate: Start date
+form.experience.pricePerHour: Price per hour
 form.experience.endDate: End date
 form.user.currentCity: City where you currently live
 form.user.fromCity: City you are from
+form.user.cityInput: City
 form.user.description: Description
 form.user.occupation: Occupation
 form.user.languages: Language

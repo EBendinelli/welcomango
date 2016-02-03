@@ -151,9 +151,6 @@
             $('#front_experience_price_per_hour').prop('disabled', function(i, v) { return !v; });
         }
 
-        {% if form.vars.value.contribution %}
-        $(document).ready(toggleContribution());
-        {% endif %}
     </script>
 
 {% endblock %}

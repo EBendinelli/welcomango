@@ -16,7 +16,13 @@
     {% endspaceless %}
 {% endblock textarea_widget %}
 
-
+{% block integer_widget %}
+    {%- set type = type|default('number') -%}
+    <div class="form-group form-group-default {% if required %}required{% endif %}">
+        <label>{{ form_label(form) }}</label>
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock integer_widget %}
 
 {% block email_widget %}
     <div class="form-group form-group-default {% if required %}required{% endif %}">

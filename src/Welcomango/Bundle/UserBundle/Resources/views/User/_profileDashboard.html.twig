@@ -152,7 +152,7 @@
                         {{ 'profile.completeProfile'|trans }}
                     </div>
                     <div class="m-t-20 text-center">
-                        <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-complete">{{ 'interface.edit'|trans }}</a>
+                        <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-complete">{{ 'profile.editProfile2'|trans }}</a>
                     </div>
                 </div>
             </div>
@@ -168,7 +168,7 @@
                     {{ 'profile.createExperienceSuggestion'|trans({'%route%': path('page_view_slug', {'slug':'proposing-an-experience'})})|raw }}
                 </div>
                 <div class="m-t-20 text-center">
-                    <a href="{{ path('front_experience_create') }}" class="btn btn-complete">{{ 'profile.createExperience'|trans }}</a>
+                    <a href="{{ path('front_experience_create') }}" class="btn btn-complete">{{ 'profile.createExperience'|trans|raw }}</a>
                 </div>
             </div>
         </div>
