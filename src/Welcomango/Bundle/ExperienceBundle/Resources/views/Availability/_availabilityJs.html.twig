@@ -65,7 +65,7 @@
         $panelControls.append($removeFormA);
 
         $removeFormA.on('click', function() {
-            if($("#availabilities > div").length <4){
+            if($("div.availability").length < 2 ){
                 alert("{{ 'availability.error.oneRequired'|trans }}");
                 return false;
             }
@@ -115,7 +115,7 @@
         });
     }
 
-    function updateDatePickers(){
+    function updateDatePickers() {
         //Display only certain dates in the datepicker
         var startDate = new Date();
         var endDate = new Date();

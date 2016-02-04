@@ -54,6 +54,12 @@
             if ($('input:hidden[value="' + file.name + '"]').parent().parent().hasClass('tmp-file')) {
                 deleteTmpMedia(file.name);
             }
+            console.log($("#medias > div.dz-preview").length);
+            if ($("#medias > div.dz-preview").length > 0) {
+                $('.dz-default').hide();
+            } else {
+                $('.dz-default').show();
+            }
             $('input:hidden[value="' + file.name + '"]').parent().parent().remove();
         });
 
