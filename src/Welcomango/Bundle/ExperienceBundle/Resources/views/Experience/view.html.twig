@@ -387,7 +387,7 @@
         //forbiddenDates calculated earlier
         var forbidden = {{ forbiddenDates|json_encode|raw }};
         var availablePeriodsPerDate = {{ availablePeriodsPerDate|json_encode|raw }};
-
+        console.log(availablePeriodsPerDate);
         var periodNames = [];
         periodNames[0] = 'Early Morning';
         periodNames[1] = 'Morning';
@@ -421,7 +421,7 @@
 
             //first we put the available periods for this day in a table
             var periods = availablePeriodsPerDate[date].split(',');
-
+            console.log(availablePeriodsPerDate[date]);
             //then we remove all the available periods in the dropdown
             $('#front_booking_desired_time').find('option').remove().end();
 
