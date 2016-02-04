@@ -19,13 +19,13 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs nav-tabs-linetriangle nav-tabs-separator">
             <li class="active">
-                <a data-toggle="tab" href="#tab1"><i class="fa pg-map tab-icon"></i> <span>Experience</span></a>
+                <a id="experience-tab1" data-toggle="tab" href="#tab1"><i class="fa pg-map tab-icon"></i> <span>Experience</span></a>
             </li>
             <li class="">
-                <a data-toggle="tab" href="#tab2"><i class="fa fa-user tab-icon"></i> <span>Travelers</span></a>
+                <a id="experience-tab2" data-toggle="tab" href="#tab2"><i class="fa fa-user tab-icon"></i> <span>Travelers</span></a>
             </li>
             <li class="">
-                <a data-toggle="tab" href="#tab3"><i class="fa fa-calendar-o tab-icon"></i> <span>Availability</span></a>
+                <a id="experience-tab3" data-toggle="tab" href="#tab3"><i class="fa fa-calendar-o tab-icon"></i> <span>Availability</span></a>
             </li>
         </ul>
         <!-- Tab panes -->
@@ -114,7 +114,7 @@
 
                 <ul class="pager wizard">
                     <li class="next finish">
-                        <button id="modal-rating-button" class="btn btn-primary btn-cons pull-right"><i class="fa fa-valid"></i>{{ 'submit'|trans }}</button>
+                        <button id="modal-rating-button" class="btn btn-primary btn-cons pull-right" onclick="validateStep(event);"><i class="fa fa-valid"></i>{{ 'submit'|trans }}</button>
                     </li>
                     <li class="previous disabled">
                         <button class="btn btn-default btn-cons pull-right" type="button">
@@ -151,6 +151,24 @@
             $('#front_experience_price_per_hour').prop('disabled', function(i, v) { return !v; });
         }
 
+        var stepFields = {title: 1, description: 1, city_cityInput:1, s2id_front_experience_tags: 1, maximum_participants: 2, estimated_duration:2, minimum_duration:2, maximum_duration:2, price_per_hour:2};
+
+        function validateStep(event){
+            event = event || window.event;
+            for(var key in stepFields){
+                if(key == 's2id_front_experience_tags'){
+                    if($("#s2id_front_experience_tags ul li.select2-search-choice").length < 1){
+                        $('#experience-tab'+stepFields[key]).click();
+                        event.stopPropagation();
+                        break;
+                    }
+                }else if(!$('#front_experience_'+key).val()){
+                    $('#experience-tab'+stepFields[key]).click();
+                    event.stopPropagation();
+                    break;
+                }
+            };
+        }
     </script>
 
 {% endblock %}

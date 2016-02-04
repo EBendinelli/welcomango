@@ -32,7 +32,7 @@ class Experience
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"step1"})
      */
     private $title;
 
@@ -54,6 +54,7 @@ class Experience
      * @var string
      *
      * @ORM\Column(name="description", type="text")
+     * @Assert\NotBlank(groups={"step1"});
      */
     private $description;
 
@@ -134,6 +135,7 @@ class Experience
     /**
      * @ORM\ManyToMany(targetEntity="Tag", inversedBy="users")
      * @ORM\JoinTable(name="wm_experiences_tags")
+     * @Assert\NotBlank(groups={"step1"});
      **/
     private $tags;
 

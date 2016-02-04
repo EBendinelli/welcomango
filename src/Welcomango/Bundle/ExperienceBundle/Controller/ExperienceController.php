@@ -122,6 +122,7 @@ class ExperienceController extends BaseController
         $experienceManager->prepareExperienceForCreation($experience, $user);
 
         $em = $this->getDoctrine()->getManager();
+
         $form = $this->createForm($this->get('welcomango.form.experience.create'), $experience);
         $form->handleRequest($request);
 
@@ -129,11 +130,11 @@ class ExperienceController extends BaseController
             $cityManager = $this->get('welcomango.front.city.manager');
             $experienceCity = $cityManager->checkAndCreateNewCity($form->get('city'));
             $experience->setCity($experienceCity);
+            $em->persist($experience);
 
             $availabilityManager = $this->get('welcomango.front.availability.manager');
             $availabilityManager->generateAvailabilityForExperience($experience, $form);
 
-            $em = $this->getDoctrine()->getManager();
             $em->persist($experience);
             $em->flush();
             $this->get('welcomango.media.manager')->processMediasExperience($experience);
@@ -152,6 +153,7 @@ class ExperienceController extends BaseController
                 'button2_path'    => $this->get('router')->generate('fos_user_profile_show'),
                 'button2_message' => $this->trans('global.backProfile', array(), 'interface'),
             ));
+
         }
 
         return $this->render('WelcomangoExperienceBundle:Experience:create.html.twig', array(

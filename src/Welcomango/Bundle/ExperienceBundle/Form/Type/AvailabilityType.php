@@ -39,6 +39,9 @@ class AvailabilityType extends AbstractType
         $days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Always');
         $hours = array('Early Morning', 'Morning', 'Lunchtime', 'Afternoon', 'Evening', 'Night', 'Always');
         /*$months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');*/
+        $today = new \Datetime;
+        $aYearFromNow = new \Datetime;
+        $aYearFromNow->add(new \DateInterval('P1Y'));
 
         $builder->add('day', 'choice',[
             'required' => true,
@@ -67,7 +70,7 @@ class AvailabilityType extends AbstractType
         $builder->add('start_date', 'date', [
             'label'    => 'form.experience.startDate',
             'required' => true,
-            'data'     => new \Datetime,
+            'data'     => $today,
             'years'    => range(date('Y'), date('Y') + 1),
             'months'   => range(date('m'), 12),
             'days'     => range(date('d'), 31),
@@ -83,6 +86,7 @@ class AvailabilityType extends AbstractType
         $builder->add('end_date', 'date', [
             'label'    => 'form.experience.endDate',
             'required' => true,
+            'data'     => $aYearFromNow,
             'years'    => range(date('Y'), date('Y') + 1),
             'months'   => range(date('m'), 12),
             'days'     => range(date('d'), 31),
