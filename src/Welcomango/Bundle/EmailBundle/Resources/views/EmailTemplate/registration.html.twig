@@ -1,5 +1,10 @@
 {% trans_default_domain 'interface' %}
 
+{% block subject %}
+    {% autoescape false %}
+    {{ 'registration.email.subject'|trans({'%username%': user.username}, 'FOSUserBundle') }}
+    {% endautoescape %}
+{% endblock %}
 
 {% block body_html %}
 

@@ -1,6 +1,7 @@
 interface.published: Published
 interface.refused: Refused
 interface.pending: Pending
+interface.deleted: Deleted
 
 moderation.feedback.FromTo: Feedback from %userFrom% to %userTo%
 

@@ -132,6 +132,12 @@ class BookingController extends BaseController
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
+        $experience = $booking->getExperience();
+        $creator = $experience->getCreator();
+        if($experience->getPublicationStatus() == 'deleted'){
+            $this->addFlash('danger', $this->trans('booking.experience.deleted', array('%name%' => $creator->getFirstName()), 'interface'));
+        }
+
         $feedbackForm = $this->createForm($this->get('welcomango.form.feedback.type'));
 
         return array(
@@ -184,8 +190,6 @@ class BookingController extends BaseController
             $em->persist($booking);
             $em->flush();
 
-            $this->addFlash('success', $this->trans('booking.created.success', array(), 'booking'));
-
             return $this->redirect($this->generateUrl('booking_list'));
         }
 
@@ -233,7 +237,7 @@ class BookingController extends BaseController
         $thread = $booking->getThread();
 
         if($booking->getStatus() == 'Accepted'){
-            $this->addFlash('success', $this->trans('booking.action.acceptedMessage', array('%user%' => $user->getFullName()), 'interface'));
+            $this->addFlash('success', $this->trans('booking.action.acceptedMessage', array('%name%' => $user->getFullName()), 'interface'));
             return $this->redirect($this->generateUrl('message_thread_view', ['user_id' => $user->getId(), 'thread_id' => $thread->getId()]));
         }
 

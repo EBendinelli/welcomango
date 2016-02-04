@@ -253,6 +253,7 @@ booking.requestReceivedFor: Request received for
 booking.noRequestFound: No request found yet
 booking.requestFrom: Request from <a href="%route%" class="text-primary semi-bold">%name%</a> for </a> for <span class="text-primary">%time%</span>
 booking.action.acceptedMessage: You can now write a message to %name% and give him more details for the meeting point :)
+booking.experience.deleted: It's seems that %name% deleted this experience. Get in touch with him/her to know more about this.
 
 page.writtenBy: By %author%
 
@@ -329,7 +330,7 @@ email.experience.validation.subTitle: Hey %name% , our team just review your exp
 email.experience.validation.message: In addition to the fact that we loved what you proposed, you experience is now available online, click tjhe button above to see what it looks like!
 email.experience.validation.btn: Check it out!
 email.booking.update.coreTitle: Your request has been %status%
-email.booking.update.subTitle: %user% has %status your request for his experience %title
+email.booking.update.subTitle: %user% has %status% your request for his experience %title%
 email.booking.update.message: Click on the button above to see the detail about this booking. You should now be able to contact %user% directly via this page.
 email.booking.update.btn: View booking
 email.booking.new.coreTitle: Your have a new request

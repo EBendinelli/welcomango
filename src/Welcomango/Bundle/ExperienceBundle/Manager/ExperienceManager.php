@@ -130,6 +130,7 @@ class ExperienceManager
             }
         }
 
+
         return $availablePeriodsPerDate;
     }
 

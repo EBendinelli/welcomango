@@ -3,6 +3,8 @@
 {% block header_image %}
     {% if page.banner %}
         {{ asset(page.banner.getPath() ~ page.banner.originalFilename) }}
+    {% else %}
+        {{ asset('bundles/welcomangocore/images/experience_default/places-' ~ random(18) ~'.jpg') }}
     {% endif %}
 {% endblock %}
 

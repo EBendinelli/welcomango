@@ -209,6 +209,8 @@ class ExperienceController extends BaseController
             $availabilityManager->updateAvailabilityForExperience($experience, $form, $originalAvailabilities);
             if ($form->get('title')->getData() != $oldExperience->getTitle() || $form->get('description')->getData() != $oldExperience->getDescription() ) {
                 $experience->setPublicationStatus('pending');
+                $mailManager = $this->get('welcomango.front.email.manager');
+                $mailManager->sendEmailAfterExperienceCreation($experience);
             }
 
             $this->get('welcomango.media.manager')->processMediasExperience($experience, $originalMedias);
@@ -220,12 +222,14 @@ class ExperienceController extends BaseController
                 }
             }
 
+            //Bad tweak to avoid maximum duration to be higher than minimum
+            if($experience->getMaximumDuration() < $experience->getMinimumDuration()){
+                $experience->setMaximumDuration($experience->getMinimumDuration()+1);
+            }
+
             $this->getDoctrine()->getManager()->persist($experience);
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', $this->trans('experience.edit.success', array(), 'interface'));
-
-            $mailManager = $this->get('welcomango.front.email.manager');
-            $mailManager->sendEmailAfterExperienceCreation($experience);
 
             if ($experience->getPublicationStatus() == 'pending') {
                 return $this->redirect($this->generateUrl('front_experience_profile_list'));
@@ -368,6 +372,7 @@ class ExperienceController extends BaseController
             ]);
         }
 
+
         return $this->render('WelcomangoExperienceBundle:Experience:view.html.twig', array(
             'experience'              => $experience,
             'relatedExperiences'      => $relatedExperiences,
@@ -397,6 +402,7 @@ class ExperienceController extends BaseController
         $entityManager = $this->getDoctrine()->getManager();
 
         $experience->setDeleted(true);
+        $experience->setPublicationStatus("deleted");
         $availabilities = $experience->getAvailabilities();
 
         foreach ($availabilities as $availability) {
