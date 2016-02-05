@@ -14,13 +14,15 @@ use Welcomango\Model\Feedback;
 class AdminCoreController extends BaseController
 {
     /**
-     * @Route("/welcomadmin", name="admin_homepage")
+     * @Route("/welcomadmin/", name="admin_homepage")
      * @Template()
      *
      * @return array
      */
     public function indexAction()
     {
+
+
         //Get feedbacks waiting for moderation
         $feedbacks = $this->getRepository('Welcomango\Model\Feedback')->findBy(['validated' => false, 'deleted' => false ]);
         $feedbacksCount = count($feedbacks);

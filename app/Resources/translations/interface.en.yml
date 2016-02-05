@@ -37,6 +37,7 @@ login.resetting.successTitle: Reset email Sent
 login.resetting.successSubTitle: Try not to forget it the next time!
 login.rememberMe: Remember me
 login.forgotPassword: Forgot your password?
+login.noAccount: No account yet?
 
 menu.title.experiences: Experiences
 menu.title.portraits: Portraits
