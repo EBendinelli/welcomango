@@ -1,3 +1,5 @@
+{% trans_default_domain 'interface' %}
+
 <script type="text/javascript">
 
     var placeSearch
@@ -17,13 +19,21 @@
             autocomplete{{ field_id }}.addListener('place_changed', function(){
                 var place{{ field_id }} = autocomplete{{ field_id }}.getPlace();
 
+                var {{ field_id }}City = document.getElementById('{{ form_id }}_{{ field_id }}_city');
+                var {{ field_id }}CityLat = document.getElementById('{{ form_id }}_{{ field_id }}_cityLat');
+                var {{ field_id }}CityLng = document.getElementById('{{ form_id }}_{{ field_id }}_cityLng');
+                var {{ field_id }}CityState = document.getElementById('{{ form_id }}_{{ field_id }}_cityState');
+                var {{ field_id }}CityCountry = document.getElementById('{{ form_id }}_{{ field_id }}_cityCountry');
+                var {{ field_id }}CityCountryCode = document.getElementById('{{ form_id }}_{{ field_id }}_cityCountryCode');
+
+                {{ field_id }}City.value = "";
+                {{ field_id }}CityLat.value = "";
+                {{ field_id }}CityLng.value = "";
+                {{ field_id }}CityState.value = "";
+                {{ field_id }}CityCountry.value = "";
+                {{ field_id }}CityCountryCode.value = "";
+
                 if(place{{ field_id }}){
-                    var {{ field_id }}City = document.getElementById('{{ form_id }}_{{ field_id }}_city');
-                    var {{ field_id }}CityLat = document.getElementById('{{ form_id }}_{{ field_id }}_cityLat');
-                    var {{ field_id }}CityLng = document.getElementById('{{ form_id }}_{{ field_id }}_cityLng');
-                    var {{ field_id }}CityState = document.getElementById('{{ form_id }}_{{ field_id }}_cityState');
-                    var {{ field_id }}CityCountry = document.getElementById('{{ form_id }}_{{ field_id }}_cityCountry');
-                    var {{ field_id }}CityCountryCode = document.getElementById('{{ form_id }}_{{ field_id }}_cityCountryCode');
                     for (var i = 0; i < place{{ field_id }}.address_components.length; i++) {
                         var addressType = place{{ field_id }}.address_components[i].types[0];
                         if (addressType == 'country') {
@@ -31,15 +41,30 @@
                             {{ field_id }}CityCountryCode.value = place{{ field_id }}.address_components[i]['short_name'];
                         }else if(addressType == 'administrative_area_level_1') {
                             {{ field_id }}CityState.value = place{{ field_id }}.address_components[i]['long_name'];
-                        }else if(addressType == 'locality') {
-                            {{ field_id }}City.value = place{{ field_id }}.address_components[i]['long_name'];
                         }
                     }
+                    {{ field_id }}City.value = place{{ field_id }}.name;
 
                     {{ field_id }}CityLat.value = place{{ field_id }}.geometry.location.lat();
                     {{ field_id }}CityLng.value = place{{ field_id }}.geometry.location.lng();
+
+                    $("#{{ form_id }}_city_message").removeClass('alert alert-danger');
+                    $("#{{ form_id }}_city_message").html('');
                 }
             });
+
+            //Avoid people to enter BS and not select a city
+            $(document).ready(function(){
+                $('#{{ form_id }}_{{ field_id }}_city').parent().hide();
+                $('#{{ form_id }}_{{ field_id }}_city').prop('required', true);
+
+                $('#{{ form_id }}_{{ field_id }}_cityInput').focusout(function(){
+                    if(!$('#{{ form_id }}_{{ field_id }}_city').val()){
+                        $("#{{ form_id }}_{{ field_id }}_message").addClass('alert alert-danger');
+                        $("#{{ form_id }}_{{ field_id }}_message").html("{{ 'city.pleaseSelect'|trans }}");
+                    }
+                });
+            })
 
         {% endfor %}
     }

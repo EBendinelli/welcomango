@@ -180,6 +180,9 @@ experience.refusedWhy: Why has my experience been refused?
 form.experience.keyword: Search terms...
 form.experience.date: Dates available
 form.experience.minParticipantsAccepted: Minimum number of participants
+form.experience.contribution: Contribution
+form.experience.endDate: Start date
+form.experience.startDate: End date
 experience.list.title: Experiences over the world
 experience.noFeedbacksReceived: This user has not received any feedback yet
 experience.noNoteYet: No note received yet
@@ -352,3 +355,5 @@ username.free: Username free
 email.taken: Email adress already used
 email.free: Email address available
 
+media.drop_files_here: Drop your photos here
+city.pleaseSelect: Please select a city among the suggestions

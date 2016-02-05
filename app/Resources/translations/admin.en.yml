@@ -3,6 +3,8 @@ interface.refused: Refused
 interface.pending: Pending
 interface.deleted: Deleted
 
+form.add.language: Add language
+
 moderation.feedback.FromTo: Feedback from %userFrom% to %userTo%
 
 experience.description: Description

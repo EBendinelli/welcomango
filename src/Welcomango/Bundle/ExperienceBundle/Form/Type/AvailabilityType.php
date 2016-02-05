@@ -107,7 +107,7 @@ class AvailabilityType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class'         => 'Welcomango\Model\Availability',
-            'translation_domain' => 'availability'
+            'translation_domain' => 'interface'
         ]);
     }
 

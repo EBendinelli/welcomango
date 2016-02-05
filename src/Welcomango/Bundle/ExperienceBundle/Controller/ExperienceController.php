@@ -130,7 +130,6 @@ class ExperienceController extends BaseController
             $cityManager = $this->get('welcomango.front.city.manager');
             $experienceCity = $cityManager->checkAndCreateNewCity($form->get('city'));
             $experience->setCity($experienceCity);
-            $em->persist($experience);
 
             $availabilityManager = $this->get('welcomango.front.availability.manager');
             $availabilityManager->generateAvailabilityForExperience($experience, $form);
