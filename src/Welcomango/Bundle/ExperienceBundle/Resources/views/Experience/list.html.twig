@@ -45,9 +45,12 @@
     {% endblock %}
 
     {% block no_results %}
-        <div class="alert">
-            <strong>{{ 'interface.noresult'|trans({}, "interface") }}</strong>
-        </div>
+
+        {% include 'WelcomangoCoreBundle:Core:oopsBox.html.twig' with {
+            'message': "experience.noExperience"|trans({}, 'interface'),
+            'icon': 'fa-meh-o',
+        } %}
+
     {% endblock %}
 
 {# {% block table_head %}

@@ -136,7 +136,7 @@ profile.spokenLanguages: Spoken languages
 profile.edit.emailNote: Emails cannot be modified directly, please contact us if you want to change the address used
 profile.edit.languageNote: You can here manage the different languages you speak or understand. That's a great way to make sur you'll be able to communicate properly with your next guide or guest!
 profile.edit.currentCityNote: This indicates the city you are currently living in. The one you'll guide people throught. The chosen one!
-profile.edit.descriptionNote: Give people a few words about you! Let them know what you love, what you hate, inspires you and how being with is the probably the best thing that could ever happen to them.
+profile.edit.descriptionNote: Give people a few words about you! Let them know what you love, what you hate, inspires you and how being with you is the probably the best thing that could ever happen to them.
 profile.edit.occupationNote: You current occupation. You can be a student, an architect, a gardener, an hedonist , and even a dentist. We will still love you.
 profile.edit.usernameNote: This is only used by you to login. It is just like you: Unique.
 profile.edit.profilePictureNote: We already know you are beautiful, but people might want to verify that. Upload a photo, just in case.
@@ -228,6 +228,7 @@ experience.create.noPriceNote: Don't feel like asking for money? How about somet
 experience.create.noPrice: Suggest a contribution instead of money
 experience.create.contributionNote: The contribution is a way for the traveler to thank you without giving you money directly. I can be paying your ticket for the entrance of a museum, paying for a beer or bringing something from his country! Let your imagination talk :)
 experience.create.contribution: Contribution
+experience.noExperience: Dang! It seems that no experience fits your criteria... <br/>Try to be less restrictive (date, search terms...), being open is always a plus.
 
 
 booking.bookingFor: Your reservation for <span class="text-primary">%title%</span> in <span class="text-primary">%city%</span> with <span class="text-primary">%user%</span>
