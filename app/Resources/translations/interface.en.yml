@@ -181,8 +181,8 @@ form.experience.keyword: Search terms...
 form.experience.date: Dates available
 form.experience.minParticipantsAccepted: Minimum number of participants
 form.experience.contribution: Contribution
-form.experience.endDate: Start date
-form.experience.startDate: End date
+form.experience.endDate: End date
+form.experience.startDate: Start date
 experience.list.title: Experiences over the world
 experience.noFeedbacksReceived: This user has not received any feedback yet
 experience.noNoteYet: No note received yet
