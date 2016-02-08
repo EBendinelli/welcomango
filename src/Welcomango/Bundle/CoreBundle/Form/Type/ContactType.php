@@ -52,7 +52,7 @@ class ContactType extends AbstractType
                 ])
                 ->add('email', 'email', [
                     'attr' => [
-                        'placeholder' => 'Can be usefull if we want to anwser you rigth?'
+                        'placeholder' => 'Can be useful if we want to answer you right?'
                     ],
                     'data' => $this->user->getEmail(),
                     // 'disabled' => true,
@@ -67,7 +67,7 @@ class ContactType extends AbstractType
                 ])
                 ->add('email', 'email', [
                     'attr' => [
-                        'placeholder' => 'Can be usefull if we want to anwser you rigth?'
+                        'placeholder' => 'Can be useful if we want to answer you right?'
                     ]
                 ]);
         }

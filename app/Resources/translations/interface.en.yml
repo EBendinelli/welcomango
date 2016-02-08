@@ -76,7 +76,7 @@ homepage.subTitle1: Find enthusiastic people willing to show you a different sid
 homepage.nextSubTitle1: And never travel like a tourist anymore
 homepage.title2: Join the community
 homepage.subTitle2: And show the world what is awesome about where you live
-homepage.nextSubTitle2: Meet people with common interested, get intrigued by your destination, discover a different side of the places you visit
+homepage.nextSubTitle2: Meet people with common interested, get intrigued by yout destination, discover a different side of the places you visit
 homepage.featuredExperiences: Our favourite experiences
 homepage.bestRated: Best rated experiences
 homepage.howItWorks: How it works
@@ -85,9 +85,9 @@ homepage.stepsText: Welcomango put travelers and locals in contact to explore pl
 homepage.step1: Type your next destination
 homepage.step2: Book an experience with a local
 homepage.step3: Explore the city
-homepage.step1Note: Search for the city where you planned you next trip or get intrigued by a destination where an experience is proposed.
+homepage.step1Note: Search for the city where you planned you next trip or get yourself be surprised by a destination where an experience is proposed.
 homepage.step2Note: Find a unique and human experience with a particulare perception of the city. Music, nature, nightlife, everything is possible.
-homepage.step3Note: Discover the place with a local and get intrigued by your destination in a completely new way.
+homepage.step3Note: Discover the place with a local and explore your destination in a completely new way.
 homepage.whereItStarts: This is where it all starts
 homepage.bestOfBest: The best of the best
 homepage.keepInTouch: Keep in touch
@@ -252,7 +252,7 @@ booking.sentTo: Booking request sent to <a href="%route%" class="text-primary se
 booking.viewRequest: View details about this request
 booking.rateAdventure: Rate this adventure
 booking.ratingText: Give a feedback for the time you had during this experience. Try to be objective and honest
-booking.ratingNote: Please note that we reserve oursevlves the right not to accept your feedback if it is offensive of inapropriate
+booking.ratingNote: Please note that we reserve oursevlves the right not to accept your feedback if it is offensive of inappropriate
 booking.action.message: This booking has been successfuly %status%
 booking.requestReceivedFor: Request received for
 booking.noRequestFound: No request found yet
@@ -263,13 +263,13 @@ booking.experience.deleted: It's seems that %name% deleted this experience. Get 
 page.writtenBy: By %author%
 
 article.portraits: Portraits
-article.portraitHeader: A glance at our amazing community
+article.portraitHeader: A glance at our amazing cotranslate.emmunity
 article.currentlyLivingIn: Currently living in <span class="text-primary">%city%</span>
-article.portraitIntro: Thanks to Welcomango, you may get the chance to explore new places through new people. But WE live exclusively through these people. People like you and us, with dreams, fears and hopes. This page gives you a chance to learn a bit more about member of the community and inspire you to dare explore their world.
+article.portraitIntro: Thanks to Welcomango, you may get the chance to explore new places through new people. But WE live exclusively through these people. People like you and us, with dreams, fears and hopes. This page gives you a chance to learn a bit more about the members of the community and encourage you to take a leap into their world.
 article.portraitTitle: One community. Different faces
 
 contact.pageTitle: Contact & Feedbacks
-contact.text: A question? A problem you faced? A query to our team? Our team is here for you, so just send us a message! We'll use our Delorean to answer you before you even ask if we can.
+contact.text: A question? A problem you faced? A query to our team? Were are here for you, so just send us a message! We'll use our Delorean to answer you before you even ask if we could.
 contact.subText: If your message concerns a bug, don't hesitate to describe your problem as precisely as possible. The more information we have, the better we will be at fixing the issue!
 contact.sent.title: Message successfully sent!
 contact.sent.subTitle: We can already hear it flying toward us
