@@ -29,9 +29,6 @@
                     $("#media-modal").empty();
                     $("#media-modal").append('<img id="mediaToCrop" src="{{ media_upload_temp_dir }}/' + getTempFileName(filename) + '">');
                     $("#media-modal-crop").modal({'backdrop':"static"});
-                    $("#media-modal-crop").on('hidden.bs.modal', function () {
-                        removeMedia();
-                    });
                 {% endif %}
                 $('#front_user_edit_profileMedia_originalFilename').val(filename);
                 $(function () {
@@ -54,12 +51,30 @@
         });
     });
 
-    $('#deleteProfileMedia').click(function(){
+    $('#deleteProfileMedia').click(function() {
+        removeMediaField();
+    });
+
+    $('.btn-cancel-modal').click(function() {
+        removeMedia();
+        removeMediaField();
+    });
+
+    $(document).keydown(function (e) {
+        if (e.keyCode == 27) {
+            removeMedia();
+            removeMediaField();
+        }
+    });
+
+    function removeMediaField() {
         $('#profile-media-croped img').remove();
         $('#profile-media-croped').html('<div class="text-center" id="profile-upload-message">Click to upload a photo</div>');
         var inputFile = $('#front_user_edit_profileMedia_originalFilename');
         inputFile.val('');
-    });
+        $('#front_user_edit_profileMedia').remove();
+        $('#front_user_edit_oldOriginalFilename').remove();
+    }
 
     function removeMedia() {
         if (processDelete) {

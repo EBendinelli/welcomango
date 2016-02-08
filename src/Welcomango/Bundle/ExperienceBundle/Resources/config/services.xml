@@ -28,6 +28,11 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
+
+        <service id="welcomango.form.experience.home.filter" class="Welcomango\Bundle\ExperienceBundle\Form\Type\ExperienceHomeType">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
         <service id="welcomango.form.experience.create" class="Welcomango\Bundle\ExperienceBundle\Form\Type\ExperienceType">
             <argument type="service" id="security.context" />
             <argument type="service" id="doctrine.orm.entity_manager" />
