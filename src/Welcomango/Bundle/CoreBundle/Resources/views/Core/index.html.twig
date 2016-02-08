@@ -1,6 +1,6 @@
 {% extends "::front.html.twig" %}
 
-{% form_theme form with ["::frontThemeThin.html.twig"] %}
+{% form_theme form with ["::frontThemeHome.html.twig"] %}
 
 {% trans_default_domain 'interface' %}
 
@@ -146,6 +146,16 @@
         //Swiper
         'use strict';
         $(document).ready(function() {
+                var availableTags = [
+                    "Ville 1",
+                    "Ville 2",
+                    "Ville 3",
+                    "Ville 4",
+                ];
+                $( "#experience_home_research_city" ).autocomplete({
+                    source: availableTags
+                });
+
             //Intialize Slider
             var slider = new Swiper('#homepage-swiper .swiper-container', {
                 pagination: '.swiper-pagination',
@@ -179,5 +189,7 @@
         });
 
         new WOW().init();
+    </script>
+    <script>
     </script>
 {% endblock %}

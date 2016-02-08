@@ -53,12 +53,13 @@ class MediaController extends BaseController
      * @param Request $request
      *
      * @Route("/media/delete", name="media_delete")
+     * @Method("POST")
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function mediaDeleteAction(Request $request)
     {
-        $originalFilename = $this->get('welcomango.media_namer')->getTempName($request->request->get('tempName'));
+        $originalFilename = $request->request->get('file');
         $tmpAdapter       = $this->get('knp_gaufrette.filesystem_map')->get('gallery');
         $tmpAdapter->delete($originalFilename);
 
