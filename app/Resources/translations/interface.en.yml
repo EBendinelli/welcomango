@@ -363,3 +363,4 @@ form.booking.desiredDate: Desired date
 form.booking.desiredTime: Desired time
 form.booking.desiredDuration: Desired duration
 form.booking.numberOfParticipants: Number of participants
+form.booking.message: Write a message to introduce yourself and give some details about your trip
