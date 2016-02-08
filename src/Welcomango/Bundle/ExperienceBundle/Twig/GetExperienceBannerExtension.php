@@ -59,7 +59,7 @@ class GetExperienceBannerExtension extends \Twig_Extension
             //The default picture is related to the first tag selected (or city)
 
             //WE USE THIS FOR NOW BUT IT SHOULD NOT BE THE FINAL SOLUTION
-            return 'bundles/welcomangocore/images/experience_default/places-'.rand(0,18).'.jpg';
+            //return 'bundles/welcomangocore/images/experience_default/places-'.rand(0,18).'.jpg';
 
             $tags = $experience->getTags();
             $firstTag =$tags->first();
