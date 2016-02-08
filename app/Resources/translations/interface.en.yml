@@ -358,3 +358,8 @@ email.free: Email address available
 
 media.drop_files_here: Drop your photos here
 city.pleaseSelect: Please select a city among the suggestions
+
+form.booking.desiredDate: Desired date
+form.booking.desiredTime: Desired time
+form.booking.desiredDuration: Desired duration
+form.booking.numberOfParticipants: Number of participants
