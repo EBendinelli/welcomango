@@ -32,7 +32,7 @@ class Thread extends BaseThread
     protected $messages;
 
     /**
-     * @ORM\OneToOne(targetEntity="Booking")
+     * @ORM\OneToOne(targetEntity="Booking", inversedBy="thread")
      * @ORM\JoinColumn(name="booking_id", referencedColumnName="id")
      */
     protected $booking;

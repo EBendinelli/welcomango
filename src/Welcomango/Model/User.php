@@ -99,9 +99,9 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Experience", mappedBy="refusedBy")
+     * @ORM\OneToMany(targetEntity="Experience", mappedBy="moderatedBy")
      */
-    private $refusedExperiences;
+    private $moderatedExperiences;
 
     /**
      * @var \DateTime
@@ -152,7 +152,7 @@ class User extends BaseUser implements ParticipantInterface
     private $profileMedia;
 
     /**
-     * @ORM\OneToMany(targetEntity="Feedback", mappedBy="poster", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Feedback", mappedBy="sender", cascade={"persist", "remove"})
      **/
     private $postedFeedbacks;
 
@@ -483,15 +483,15 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @return ArrayCollection
      */
-    public function getRefusedExperiences()
+    public function getModeratedExperiences()
     {
-        return $this->refusedExperiences;
+        return $this->moderatedExperiences;
     }
 
     /**
      * @param ArrayCollection $experiences
      */
-    public function setRefusedExperiences($experiences)
+    public function setModeratedExperiences($experiences)
     {
         $this->experiences = $experiences;
     }

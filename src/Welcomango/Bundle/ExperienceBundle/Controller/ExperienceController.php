@@ -195,7 +195,6 @@ class ExperienceController extends BaseController
         //Experience before edition
         $oldExperience = clone $experience;
 
-
         $form = $this->createForm($this->get('welcomango.form.experience.create'), $experience);
         $form->handleRequest($request);
 
@@ -203,9 +202,10 @@ class ExperienceController extends BaseController
             if ($experience->getPublicationStatus() == 'refused') {
                 $experience->setPublicationStatus('pending');
             }
-            $uow = $this->getDoctrine()->getEntityManager()->getUnitOfWork();
+
+            $em = $this->getDoctrine()->getEntityManager();
+            $uow = $em->getUnitOfWork();
             $uow->recomputeSingleEntityChangeSet($this->getDoctrine()->getEntityManager()->getClassMetadata(Experience::class), $experience);
-            $availabilityManager->updateAvailabilityForExperience($experience, $form, $originalAvailabilities);
             if ($form->get('title')->getData() != $oldExperience->getTitle() || $form->get('description')->getData() != $oldExperience->getDescription() ) {
                 $experience->setPublicationStatus('pending');
                 $mailManager = $this->get('welcomango.front.email.manager');
@@ -214,6 +214,7 @@ class ExperienceController extends BaseController
 
             $this->get('welcomango.media.manager')->processMediasExperience($experience, $originalMedias);
 
+            $availabilityManager->updateAvailabilityForExperience($experience, $form, $originalAvailabilities);
             // This cleanly remove the deleted availabilities
             foreach ($originalAvailabilities as $originalAvailability) {
                 if (false === $form->getData()->getAvailabilities()->contains($originalAvailability)) {
@@ -226,8 +227,9 @@ class ExperienceController extends BaseController
                 $experience->setMaximumDuration($experience->getMinimumDuration()+1);
             }
 
-            $this->getDoctrine()->getManager()->persist($experience);
-            $this->getDoctrine()->getManager()->flush();
+
+            $em->persist($experience);
+            $em->flush();
             $this->addFlash('success', $this->trans('experience.edit.success', array(), 'interface'));
 
             if ($experience->getPublicationStatus() == 'pending') {
