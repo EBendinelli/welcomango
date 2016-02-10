@@ -222,6 +222,12 @@ class ProfileController extends BaseProfileController
 
             $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
 
+            //change Tab if necessary
+            if($activeTab != 'current'){
+                $url = $response->getTargetUrl();
+                $response->setTargetUrl($url.'?activeTab='.$activeTab);
+            }
+
             return $response;
         }
 

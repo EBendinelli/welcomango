@@ -10,7 +10,7 @@
 
 {% block coreTitle %}
     {% autoescape false %}
-    New experience created '{{ experience.title }}' in {{ experience.city.name }} by {{ user.firstname }}
+    New experience '{{ status  }}' '{{ experience.title }}' in {{ experience.city.name }} by {{ user.firstname }}
     {% endautoescape %}
 {% endblock %}
 

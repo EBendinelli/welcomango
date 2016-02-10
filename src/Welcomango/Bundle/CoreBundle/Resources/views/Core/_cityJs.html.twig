@@ -48,8 +48,8 @@
                     {{ field_id }}CityLat.value = place{{ field_id }}.geometry.location.lat();
                     {{ field_id }}CityLng.value = place{{ field_id }}.geometry.location.lng();
 
-                    $("#{{ form_id }}_city_message").removeClass('alert alert-danger');
-                    $("#{{ form_id }}_city_message").html('');
+                    $("#{{ form_id }}_{{ field_id }}_message").removeClass('alert alert-danger');
+                    $("#{{ form_id }}_{{ field_id }}_message").html('');
                 }
             });
 

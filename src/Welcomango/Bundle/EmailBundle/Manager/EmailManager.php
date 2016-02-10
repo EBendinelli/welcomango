@@ -9,6 +9,7 @@ use Swift_Mailer;
 use Symfony\Component\Translation\TranslatorInterface;
 
 use Welcomango\Model\Availability;
+use Welcomango\Model\Experience;
 
 class EmailManager
 {
@@ -29,21 +30,28 @@ class EmailManager
         $this->translator = $translator;
     }
 
-
+    /**
+     * @var Experience $experience
+     */
     public function sendEmailAfterExperienceCreation($experience){
 
         $user= $experience->getCreator();
+        $status = 'created';
+        if($experience->getCreatedAt() != $experience->getUpdatedAt ()){
+            $status = 'edited';
+        }
 
         //Message to us so we can validate quickly
         $message = \Swift_Message::newInstance()
-            ->setSubject('New experience created by '.$user)
-            ->setFrom('moderation@welcomango.com')
+            ->setSubject('New experience '.$status.' by '.$user)
+            ->setFrom(['moderation@welcomango.com' => 'Experience moderation'])
             ->setTo('eliot@welcomango.com')
             ->setBody(
                 $this->twig->render(
                     'WelcomangoEmailBundle:AdminEmailTemplate:experienceCreation.html.twig',[
                     'experience' => $experience,
                     'user' => $user,
+                    'status' => $status,
                 ]),
                 'text/html'
             );
@@ -61,7 +69,7 @@ class EmailManager
                 ]),
                 'text/html'
             );
-        
+                
         $this->mailer->send($message);
 
     }

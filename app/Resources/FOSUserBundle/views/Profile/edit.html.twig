@@ -15,13 +15,13 @@
         {{ 'profile.edit.topMessage'|trans|raw }}
     </div>
 
-    <div id="myFormWizard" class="m-t-20">
+    <div id="profileFormWizard" class="m-t-20">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs nav-tabs-linetriangle nav-tabs-separator">
             <li class="{% if activeTab == 'current' %}active{% endif %}">
                 <a data-toggle="tab" href="#tab1"><i class="fa pg-map tab-icon"></i> <span>Current situation</span></a>
             </li>
-            <li class="">
+            <li class="{% if activeTab == 'languages' %}active{% endif %}">
                 <a data-toggle="tab" href="#tab2"><i class="fa fa-language tab-icon"></i> <span>Languages</span></a>
             </li>
             <li class=" {% if activeTab == 'about' %}active{% endif %}">
@@ -29,7 +29,7 @@
             </li>
         </ul>
         <!-- Tab panes -->
-        {{ form_start(form, {'action': path('fos_user_profile_edit')}) }}
+        {{ form_start(form, {'action': path('fos_user_profile_edit'), 'attr': {'id': 'profileEditForm'}}) }}
         <div class="tab-content bg-white p-l-20 p-r-20 p-t-20 p-b-20 ">
             <div class="tab-pane {% if activeTab == 'current' %}active{% endif %} slide" id="tab1">
                 <div class="row">
@@ -41,7 +41,7 @@
                     <div>{{ form_row(form.occupation) }}</div>
                 </div>
             </div>
-            <div class="tab-pane slide" id="tab2">
+            <div class="tab-pane slide {% if activeTab == 'languages' %}active{% endif %}" id="tab2">
                 <div class="profile-form-note"><i class="fa fa-language"></i> {{ "profile.edit.languageNote"|trans }}</div>
                 <ul id="languages" class="languages list-unstyled" data-prototype="{% filter escape %}{% include 'WelcomangoUserBundle:AdminUser:_spokenLanguages.html.twig' with {'form': form.spokenLanguages.vars.prototype } %}{% endfilter %}">
                     {% for language in form.spokenLanguages %}
@@ -97,7 +97,7 @@
 
             <div class="text-right m-t-20">
                 <a href="{{ path('fos_user_profile_show') }}" class="btn btn-default">{{ 'interface.cancel'|trans({}, "interface") }}</a>
-                <button type="submit" class="btn btn-complete">
+                <button type="submit" class="btn btn-complete" onclick="getCurrentTab();">
                     <i class="fa fa-save"></i> {{ 'interface.save'|trans({}, "interface") }}
                 </button>
             </div>
@@ -132,31 +132,41 @@
             });
         }
 
+        //Get current tab when saving to redirect on this tab
+        function getCurrentTab(){
+            if($('#profileFormWizard').bootstrapWizard('currentIndex') == 1){
+                $('#profileEditForm').attr('action', 'edit?activeTab=languages');
+            }else if($('#profileFormWizard').bootstrapWizard('currentIndex') == 2){
+                $('#profileEditForm').attr('action', 'edit?activeTab=about');
+            }
+
+        }
+
     </script>
 
     {% include 'WelcomangoCoreBundle:Core:_cityJs.html.twig' with {'form_id': 'front_user_edit', 'field_ids': ['currentCity']} %}
 
     <script>
         $(document).ready(function() {
-            $('#myFormWizard').bootstrapWizard({
+            $('#profileFormWizard').bootstrapWizard({
                 onTabShow: function(tab, navigation, index) {
                     var $total = navigation.find('li').length;
                     var $current = index + 1;
 
                     // If it's the last tab then hide the last button and show the finish instead
                     if ($current >= $total) {
-                        $('#myFormWizard').find('.pager .next').hide();
-                        $('#myFormWizard').find('.pager .finish').show();
-                        $('#myFormWizard').find('.pager .finish').removeClass('disabled');
+                        $('#profileFormWizard').find('.pager .next').hide();
+                        $('#profileFormWizard').find('.pager .finish').show();
+                        $('#profileFormWizard').find('.pager .finish').removeClass('disabled');
                     } else {
-                        $('#myFormWizard').find('.pager .next').show();
-                        $('#myFormWizard').find('.pager .finish').hide();
+                        $('#profileFormWizard').find('.pager .next').show();
+                        $('#profileFormWizard').find('.pager .finish').hide();
                     }
 
                     var li = navigation.find('li.active');
 
-                    var btnNext = $('#myFormWizard').find('.pager .next').find('button');
-                    var btnPrev = $('#myFormWizard').find('.pager .previous').find('button');
+                    var btnNext = $('#profileFormWizard').find('.pager .next').find('button');
+                    var btnPrev = $('#profileFormWizard').find('.pager .previous').find('button');
                 }
             });
         });
