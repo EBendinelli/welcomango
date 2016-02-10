@@ -37,7 +37,7 @@ class EmailManager
         //Message to us so we can validate quickly
         $message = \Swift_Message::newInstance()
             ->setSubject('New experience created by '.$user)
-            ->setFrom($user->getEmail())
+            ->setFrom('moderation@welcomango.com')
             ->setTo('eliot@welcomango.com')
             ->setBody(
                 $this->twig->render(
