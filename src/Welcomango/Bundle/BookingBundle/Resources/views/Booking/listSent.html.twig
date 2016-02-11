@@ -42,6 +42,9 @@
                                 {% set extraClass = 'participation-row-bold danger' %}
                             {% endif %}
                         {% endif %}
+                        {% if booking.experience.publicationStatus == "deleted" %}
+                            {% set extraClass = "participation-row-refused" %}
+                        {% endif %}
                         <tr id="booking-row-{{ booking.id }}" class="participation-row clickable table-details hover-bg-master-lightest hover-pointer {{ extraClass|default('') }}" onClick="rowToggle(this, {{ booking.id }}, event)">
                             <td class="col-md-3">
                                 <div class="row">

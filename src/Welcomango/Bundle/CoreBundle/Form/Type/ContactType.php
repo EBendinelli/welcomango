@@ -52,10 +52,9 @@ class ContactType extends AbstractType
                 ])
                 ->add('email', 'email', [
                     'attr' => [
-                        'placeholder' => 'Can be usefull if we want to anwser you rigth?'
+                        'placeholder' => 'Can be useful if we want to answer you right?'
                     ],
                     'data' => $this->user->getEmail(),
-                    // 'disabled' => true,
                 ]);
         }else{
             $builder
@@ -67,7 +66,7 @@ class ContactType extends AbstractType
                 ])
                 ->add('email', 'email', [
                     'attr' => [
-                        'placeholder' => 'Can be usefull if we want to anwser you rigth?'
+                        'placeholder' => 'Can be useful if we want to answer you right?'
                     ]
                 ]);
         }
@@ -113,14 +112,18 @@ class ContactType extends AbstractType
                 new NotBlank(array('message' => 'Email should not be blank.')),
                 new Email(array('message' => 'Invalid email address.'))
             ),
-            'subject' => array(
-                new NotBlank(array('message' => 'Subject should not be blank.')),
-                new Length(array('min' => 3))
-            ),
             'message' => array(
                 new NotBlank(array('message' => 'Message should not be blank.')),
                 new Length(array('min' => 5))
             ),
+            'category' => array(
+                new NotBlank(array('message' => 'Please select a category.')),
+            ),
+            'page_from' => array(),
+        ));
+
+        $resolver->setDefaults(array(
+            'constraints' => $collectionConstraint
         ));
 
     }

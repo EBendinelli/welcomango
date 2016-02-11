@@ -1,6 +1,9 @@
 interface.published: Published
 interface.refused: Refused
 interface.pending: Pending
+interface.deleted: Deleted
+
+form.add.language: Add language
 
 moderation.feedback.FromTo: Feedback from %userFrom% to %userTo%
 
@@ -17,3 +20,4 @@ menu.title.moderation.feedback: Moderate Feedbacks
 menu.title.moderation.experience: Moderate Experiences
 menu.title.tag: Tags
 menu.title.page: Pages
+menu.title.moderation: Moderation

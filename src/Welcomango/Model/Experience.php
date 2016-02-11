@@ -54,6 +54,7 @@ class Experience
      * @var string
      *
      * @ORM\Column(name="description", type="text")
+     * @Assert\NotBlank();
      */
     private $description;
 
@@ -132,8 +133,9 @@ class Experience
     private $availabilities;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="experiences")
      * @ORM\JoinTable(name="wm_experiences_tags")
+     * @Assert\NotBlank();
      **/
     private $tags;
 
@@ -167,7 +169,7 @@ class Experience
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="refusedExperiences")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="moderatedExperiences")
      * @ORM\JoinColumn(name="moderated_by_id", referencedColumnName="id", nullable=true)
      */
     private $moderatedBy;

@@ -59,5 +59,10 @@
             <argument type="service" id="security.context" />
         </service>
 
+        <service id="welcomango.from.experience.flow.create"
+                 class="Welcomango\Bundle\ExperienceBundle\Form\Flow\CreateExperienceFlow"
+                 parent="craue.form.flow">
+        </service>
+
     </services>
 </container>

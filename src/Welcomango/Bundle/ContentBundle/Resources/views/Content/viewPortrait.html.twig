@@ -6,6 +6,10 @@
     {{ asset(page.banner.getPath() ~ page.banner.originalFilename) }}
 {% endblock %}
 
+{% block meta_title %}
+    {{ page.title }} - Welcomango
+{% endblock %}
+
 {% block header_title %}
     {{ page.title }}
 {% endblock %}

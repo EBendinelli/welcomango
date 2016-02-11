@@ -125,6 +125,7 @@ class ExperienceController extends BaseController
         $experienceManager->prepareExperienceForCreation($experience, $user);
 
         $em = $this->getDoctrine()->getManager();
+
         $form = $this->createForm($this->get('welcomango.form.experience.create'), $experience);
         $form->handleRequest($request);
 
@@ -136,7 +137,6 @@ class ExperienceController extends BaseController
             $availabilityManager = $this->get('welcomango.front.availability.manager');
             $availabilityManager->generateAvailabilityForExperience($experience, $form);
 
-            $em = $this->getDoctrine()->getManager();
             $em->persist($experience);
             $em->flush();
             $this->get('welcomango.media.manager')->processMediasExperience($experience);
@@ -155,6 +155,7 @@ class ExperienceController extends BaseController
                 'button2_path'    => $this->get('router')->generate('fos_user_profile_show'),
                 'button2_message' => $this->trans('global.backProfile', array(), 'interface'),
             ));
+
         }
 
         return $this->render('WelcomangoExperienceBundle:Experience:create.html.twig', array(
@@ -197,7 +198,6 @@ class ExperienceController extends BaseController
         //Experience before edition
         $oldExperience = clone $experience;
 
-
         $form = $this->createForm($this->get('welcomango.form.experience.create'), $experience);
         $form->handleRequest($request);
 
@@ -205,15 +205,19 @@ class ExperienceController extends BaseController
             if ($experience->getPublicationStatus() == 'refused') {
                 $experience->setPublicationStatus('pending');
             }
-            $uow = $this->getDoctrine()->getEntityManager()->getUnitOfWork();
+
+            $em = $this->getDoctrine()->getEntityManager();
+            $uow = $em->getUnitOfWork();
             $uow->recomputeSingleEntityChangeSet($this->getDoctrine()->getEntityManager()->getClassMetadata(Experience::class), $experience);
-            $availabilityManager->updateAvailabilityForExperience($experience, $form, $originalAvailabilities);
             if ($form->get('title')->getData() != $oldExperience->getTitle() || $form->get('description')->getData() != $oldExperience->getDescription() ) {
                 $experience->setPublicationStatus('pending');
+                $mailManager = $this->get('welcomango.front.email.manager');
+                $mailManager->sendEmailAfterExperienceCreation($experience);
             }
 
             $this->get('welcomango.media.manager')->processMediasExperience($experience, $originalMedias);
 
+            $availabilityManager->updateAvailabilityForExperience($experience, $form, $originalAvailabilities);
             // This cleanly remove the deleted availabilities
             foreach ($originalAvailabilities as $originalAvailability) {
                 if (false === $form->getData()->getAvailabilities()->contains($originalAvailability)) {
@@ -221,12 +225,15 @@ class ExperienceController extends BaseController
                 }
             }
 
-            $this->getDoctrine()->getManager()->persist($experience);
-            $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success', $this->trans('experience.edit.success', array(), 'interface'));
+            //Bad tweak to avoid maximum duration to be higher than minimum
+            if($experience->getMaximumDuration() < $experience->getMinimumDuration()){
+                $experience->setMaximumDuration($experience->getMinimumDuration()+1);
+            }
 
-            $mailManager = $this->get('welcomango.front.email.manager');
-            $mailManager->sendEmailAfterExperienceCreation($experience);
+
+            $em->persist($experience);
+            $em->flush();
+            $this->addFlash('success', $this->trans('experience.edit.success', array(), 'interface'));
 
             if ($experience->getPublicationStatus() == 'pending') {
                 return $this->redirect($this->generateUrl('front_experience_profile_list'));
@@ -369,6 +376,7 @@ class ExperienceController extends BaseController
             ]);
         }
 
+
         return $this->render('WelcomangoExperienceBundle:Experience:view.html.twig', array(
             'experience'              => $experience,
             'relatedExperiences'      => $relatedExperiences,
@@ -398,6 +406,7 @@ class ExperienceController extends BaseController
         $entityManager = $this->getDoctrine()->getManager();
 
         $experience->setDeleted(true);
+        $experience->setPublicationStatus("deleted");
         $availabilities = $experience->getAvailabilities();
 
         foreach ($availabilities as $availability) {

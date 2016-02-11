@@ -496,9 +496,17 @@ div.dotted-line span {
     padding-right: 10px;
 }
 
+.basic-card-content{
+    height: 300px !important;
+}
+
 @media (min-width: 1600px) {
     .card-content {
         height: 200px !important;
+    }
+
+    .basic-card-content{
+        height: 300px !important;
     }
 }
 
@@ -598,7 +606,7 @@ div.dotted-line span {
 
 @media (min-width: 1600px) {
     .large-container .card-content {
-        height: 200px !important;
+        height: 250px !important;
     }
 }
 

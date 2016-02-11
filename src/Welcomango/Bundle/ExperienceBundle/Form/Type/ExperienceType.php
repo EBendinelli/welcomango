@@ -108,7 +108,9 @@ class ExperienceType extends AbstractType
             $form = $event->getForm();
 
             if (!$experience || null === $experience->getId()) {
-                $form->add('city', new CityType());
+                $form->add('city', new CityType(), [
+                    'required' => false,
+                ]);
             }
         });
 

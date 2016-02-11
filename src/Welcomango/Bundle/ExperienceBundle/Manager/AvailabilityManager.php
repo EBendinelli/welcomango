@@ -154,7 +154,7 @@ class AvailabilityManager
 
         if($hours[0] == '*'){
             for($i=0;$i<6;$i++){
-                $periods = $i.',';
+                $periods .= $i.',';
             }
         }else{
             foreach($hours as $hour){

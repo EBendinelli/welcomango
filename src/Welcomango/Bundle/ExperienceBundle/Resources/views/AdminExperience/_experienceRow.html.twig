@@ -17,6 +17,8 @@
             <span class="text-success">{{ 'interface.published'|trans }}</span>
         {% elseif experience.publicationStatus  == 'refused' %}
             <span class="text-warning">{{ 'interface.refused'|trans }}</span>
+        {% elseif experience.publicationStatus  == 'deleted' %}
+            <span class="text-danger">{{ 'interface.deleted'|trans }}</span>
         {% else %}
             <span class="text-warning">{{ 'interface.pending'|trans }}</span>
         {% endif %}

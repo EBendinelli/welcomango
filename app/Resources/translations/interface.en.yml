@@ -37,6 +37,7 @@ login.resetting.successTitle: Reset email Sent
 login.resetting.successSubTitle: Try not to forget it the next time!
 login.rememberMe: Remember me
 login.forgotPassword: Forgot your password?
+login.noAccount: No account yet?
 
 menu.title.experiences: Experiences
 menu.title.portraits: Portraits
@@ -75,7 +76,7 @@ homepage.subTitle1: Find enthusiastic people willing to show you a different sid
 homepage.nextSubTitle1: And never travel like a tourist anymore
 homepage.title2: Join the community
 homepage.subTitle2: And show the world what is awesome about where you live
-homepage.nextSubTitle2: Meet people with common interested, get intrigued by your destination, discover a different side of the places you visit
+homepage.nextSubTitle2: Meet people with common interested, get intrigued by yout destination, discover a different side of the places you visit
 homepage.featuredExperiences: Our favourite experiences
 homepage.bestRated: Best rated experiences
 homepage.howItWorks: How it works
@@ -84,9 +85,9 @@ homepage.stepsText: Welcomango put travelers and locals in contact to explore pl
 homepage.step1: Type your next destination
 homepage.step2: Book an experience with a local
 homepage.step3: Explore the city
-homepage.step1Note: Search for the city where you planned you next trip or get intrigued by a destination where an experience is proposed.
+homepage.step1Note: Search for the city where you planned you next trip or get yourself be surprised by a destination where an experience is proposed.
 homepage.step2Note: Find a unique and human experience with a particulare perception of the city. Music, nature, nightlife, everything is possible.
-homepage.step3Note: Discover the place with a local and get intrigued by your destination in a completely new way.
+homepage.step3Note: Discover the place with a local and explore your destination in a completely new way.
 homepage.whereItStarts: This is where it all starts
 homepage.bestOfBest: The best of the best
 homepage.keepInTouch: Keep in touch
@@ -135,7 +136,7 @@ profile.spokenLanguages: Spoken languages
 profile.edit.emailNote: Emails cannot be modified directly, please contact us if you want to change the address used
 profile.edit.languageNote: You can here manage the different languages you speak or understand. That's a great way to make sur you'll be able to communicate properly with your next guide or guest!
 profile.edit.currentCityNote: This indicates the city you are currently living in. The one you'll guide people throught. The chosen one!
-profile.edit.descriptionNote: Give people a few words about you! Let them know what you love, what you hate, inspires you and how being with is the probably the best thing that could ever happen to them.
+profile.edit.descriptionNote: Give people a few words about you! Let them know what you love, what you hate, inspires you and how being with you is the probably the best thing that could ever happen to them.
 profile.edit.occupationNote: You current occupation. You can be a student, an architect, a gardener, an hedonist , and even a dentist. We will still love you.
 profile.edit.usernameNote: This is only used by you to login. It is just like you: Unique.
 profile.edit.profilePictureNote: We already know you are beautiful, but people might want to verify that. Upload a photo, just in case.
@@ -179,6 +180,9 @@ experience.refusedWhy: Why has my experience been refused?
 form.experience.keyword: Search terms...
 form.experience.date: Dates available
 form.experience.minParticipantsAccepted: Minimum number of participants
+form.experience.contribution: Contribution
+form.experience.endDate: End date
+form.experience.startDate: Start date
 experience.list.title: Experiences over the world
 experience.noFeedbacksReceived: This user has not received any feedback yet
 experience.noNoteYet: No note received yet
@@ -225,6 +229,7 @@ experience.create.noPriceNote: Don't feel like asking for money? How about somet
 experience.create.noPrice: Suggest a contribution instead of money
 experience.create.contributionNote: The contribution is a way for the traveler to thank you without giving you money directly. I can be paying your ticket for the entrance of a museum, paying for a beer or bringing something from his country! Let your imagination talk :)
 experience.create.contribution: Contribution
+experience.noExperience: Dang! It seems that no experience fits your criteria... <br/>Try to be less restrictive (date, search terms...), being open is always a plus.
 
 
 booking.bookingFor: Your reservation for <span class="text-primary">%title%</span> in <span class="text-primary">%city%</span> with <span class="text-primary">%user%</span>
@@ -248,24 +253,25 @@ booking.sentTo: Booking request sent to <a href="%route%" class="text-primary se
 booking.viewRequest: View details about this request
 booking.rateAdventure: Rate this adventure
 booking.ratingText: Give a feedback for the time you had during this experience. Try to be objective and honest
-booking.ratingNote: Please note that we reserve oursevlves the right not to accept your feedback if it is offensive of inapropriate
+booking.ratingNote: Please note that we reserve oursevlves the right not to accept your feedback if it is offensive of inappropriate
 booking.action.message: This booking has been successfuly %status%
 booking.requestReceivedFor: Request received for
 booking.noRequestFound: No request found yet
 booking.requestFrom: Request from <a href="%route%" class="text-primary semi-bold">%name%</a> for </a> for <span class="text-primary">%time%</span>
 booking.action.acceptedMessage: You can now write a message to %name% and give him more details for the meeting point :)
+booking.experience.deleted: It's seems that %name% deleted this experience. Get in touch with him/her to know more about this.
 
 
 page.writtenBy: By %author%
 
 article.portraits: Portraits
-article.portraitHeader: A glance at our amazing community
+article.portraitHeader: A glance at our amazing cotranslate.emmunity
 article.currentlyLivingIn: Currently living in <span class="text-primary">%city%</span>
-article.portraitIntro: Thanks to Welcomango, you may get the chance to explore new places through new people. But WE live exclusively through these people. People like you and us, with dreams, fears and hopes. This page gives you a chance to learn a bit more about member of the community and inspire you to dare explore their world.
+article.portraitIntro: Thanks to Welcomango, you may get the chance to explore new places through new people. But WE live exclusively through these people. People like you and us, with dreams, fears and hopes. This page gives you a chance to learn a bit more about the members of the community and encourage you to take a leap into their world.
 article.portraitTitle: One community. Different faces
 
 contact.pageTitle: Contact & Feedbacks
-contact.text: A question? A problem you faced? A query to our team? Our team is here for you, so just send us a message! We'll use our Delorean to answer you before you even ask if we can.
+contact.text: A question? A problem you faced? A query to our team? Were are here for you, so just send us a message! We'll use our Delorean to answer you before you even ask if we could.
 contact.subText: If your message concerns a bug, don't hesitate to describe your problem as precisely as possible. The more information we have, the better we will be at fixing the issue!
 contact.sent.title: Message successfully sent!
 contact.sent.subTitle: We can already hear it flying toward us
@@ -331,7 +337,7 @@ email.experience.validation.subTitle: Hey %name% , our team just review your exp
 email.experience.validation.message: In addition to the fact that we loved what you proposed, you experience is now available online, click tjhe button above to see what it looks like!
 email.experience.validation.btn: Check it out!
 email.booking.update.coreTitle: Your request has been %status%
-email.booking.update.subTitle: %user% has %status your request for his experience %title
+email.booking.update.subTitle: %user% has %status% your request for his experience %title%
 email.booking.update.message: Click on the button above to see the detail about this booking. You should now be able to contact %user% directly via this page.
 email.booking.update.btn: View booking
 email.booking.new.coreTitle: Your have a new request
@@ -352,3 +358,11 @@ username.free: Username free
 email.taken: Email adress already used
 email.free: Email address available
 
+media.drop_files_here: Drop your photos here
+city.pleaseSelect: Please select a city among the suggestions
+
+form.booking.desiredDate: Desired date
+form.booking.desiredTime: Desired time
+form.booking.desiredDuration: Desired duration
+form.booking.numberOfParticipants: Number of participants
+form.booking.message: Write a message to introduce yourself and give some details about your trip

@@ -56,10 +56,11 @@ class CityType extends AbstractType
             'data' => $city,
         ));
 
-        $builder->add('city', 'hidden', array(
+        $builder->add('city', 'text', array(
             'mapped' => false,
             'label'  => 'form.user.city',
             'data' => $city,
+            'required' => true,
         ));
 
         $builder->add('cityLat', 'hidden', array(

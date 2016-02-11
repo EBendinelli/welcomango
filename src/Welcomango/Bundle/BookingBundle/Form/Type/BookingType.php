@@ -130,7 +130,7 @@ class BookingType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class'         => 'Welcomango\Model\Booking',
-            'translation_domain' => 'booking',
+            'translation_domain' => 'interface',
         ]);
         $resolver->setRequired(array('available_status', 'meeting_times', 'experience', 'forbiddenDates'));
     }

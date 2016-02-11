@@ -40,7 +40,7 @@ class CoreController extends BaseController
                 $entityManager->persist($tag);
             }
         }
-        $form = $this->createForm($this->get('welcomango.form.experience.filter'), $filters);
+        $form = $this->createForm($this->get('welcomango.form.experience.home.filter'), $filters);
 
         $cities = $this->get('welcomango.front.city.manager')->getCitiesForAutocomplete();
 

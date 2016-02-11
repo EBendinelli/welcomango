@@ -21,7 +21,6 @@ class CityManager
     }
 
     public function checkAndCreateNewCity($parentField){
-
         $city = $parentField->get('city')->getData();
         $lat = $parentField->get('cityLat')->getData();
         $lng = $parentField->get('cityLng')->getData();

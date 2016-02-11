@@ -7,6 +7,7 @@
     "pages-assets": "git@github.com:jblanchon/pages-assets.git#v0.3.3",
     "uploadify": "~3.2.1",
     "magnific-popup": "~1.0.1",
-    "codemirror": "CodeMirror#~5.11.0"
+    "codemirror": "CodeMirror#~5.11.0",
+    "wow": "wowjs#^1.1.2"
   }
 }

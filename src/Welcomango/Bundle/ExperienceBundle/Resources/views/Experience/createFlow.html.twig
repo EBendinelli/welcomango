@@ -1,0 +1,136 @@
+{% extends "FOSUserBundle:Profile:show.html.twig" %}
+
+{% form_theme form with ["::frontTheme.html.twig"] %}
+
+{% block meta_title %}{{ "profile.createExperience"|trans({}, "interface") }}{% endblock %}
+
+{% trans_default_domain 'interface' %}
+
+{% block profile_content %}
+    {{ form_start(form, {'attr': {'id': form.vars.id}}) }}
+    {{ form_errors(form) }}
+
+    <div class="bg-white p-l-20 p-b-20 p-t-10 m-t-20 b-a b-warning">
+        <h4>{{ 'experience.create.header.title'|trans }}</h4>
+        <p>{{ 'experience.create.header.message'|trans({'%route%': path('page_view_slug', {'slug': 'proposing-an-experience'})})|raw }}</p>
+    </div>
+
+    <div id="myFormWizard" class="m-t-20">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs nav-tabs-linetriangle nav-tabs-separator">
+            <li {% if flow.getCurrentStepNumber() == 1 %}class="active"{% endif %}>
+                <a data-toggle="tab" href="#tab1"><i class="fa pg-map tab-icon"></i> <span>Experience</span></a>
+            </li>
+            <li {% if flow.getCurrentStepNumber() == 2 %}class="active"{% endif %}>
+                <a data-toggle="tab" href="#tab2"><i class="fa fa-user tab-icon"></i> <span>Travelers</span></a>
+            </li>
+            <li {% if flow.getCurrentStepNumber() == 3 %}class="active"{% endif %}>
+                <a data-toggle="tab" href="#tab3"><i class="fa fa-calendar-o tab-icon"></i> <span>Availability</span></a>
+            </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content p-l-20 p-r-20 p-t-20 p-b-20">
+            <div class="tab-pane active slide" id="tab1">
+                <div class="row">
+                    {% if flow.getCurrentStepNumber() == 1 %}
+                        <div class="small hint-text note-text">{{ "experience.create.titleNote"|trans|raw }}</div>
+                        {{ form_row(form.title) }}
+                        <div class="small hint-text note-text m-t-30">{{ "experience.create.descriptionNote"|trans|raw }}</div>
+                        {{ form_row(form.description) }}
+                        <div class="small hint-text note-text m-t-30">{{ "experience.create.mediaNote"|trans|raw }}</div>
+                        <div id="medias" class="dropzone media-dropzone"></div>
+                        <div class="small hint-text note-text m-t-30">{{ "experience.create.cityNote"|trans|raw }}</div>
+                        {{ form_row(form.city) }}
+                        <div class="small hint-text note-text m-t-30">{{ "experience.create.tagsNote"|trans|raw }}</div>
+                        {{ form_row(form.tags) }}
+                    {% elseif flow.getCurrentStepNumber() == 2 %}
+                        <div class="col-md-6">
+                            <div class="small hint-text note-text">{{ "experience.create.estimatedDurationNote"|trans|raw }}</div>
+                            {{ form_row(form.estimated_duration) }}
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small hint-text note-text">{{ "experience.create.maximumParticipantsNote"|trans|raw }}</div>
+                            {{ form_row(form.maximum_participants) }}
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small hint-text note-text m-t-30">{{ "experience.create.minimumDurationNote"|trans|raw }}</div>
+                            {{ form_row(form.minimum_duration) }}
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small hint-text note-text m-t-30">{{ "experience.create.maximumDurationNote"|trans|raw }}</div>
+                            {{ form_row(form.maximum_duration) }}
+                        </div>
+                        <div class="col-md-12">
+                            <div class="small hint-text note-text m-t-30">{{ "experience.create.pricePerHourNote"|trans|raw }}</div>
+                            {{ form_row(form.price_per_hour) }}
+                            <div class="small hint-text m-t-30 note-text">{{ 'experience.create.noPriceNote'|trans }}</div>
+                            <div class="checkbox check-complete">
+                                <input {% if form.vars.value.contribution %}checked="checked"{% endif %} type="checkbox" value="1" id="experience-no-price" onclick="toggleContribution();">
+                                <label for="experience-no-price">{{ 'experience.create.noPrice'|trans }}</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12" id="experience-contribution-field" style="display:none;">
+                            <div class="small hint-text m-t-30 note-text">{{ "experience.create.contributionNote"|trans }}</div>
+                            {{ form_row(form.contribution) }}
+                        </div>
+                    {% elseif flow.getCurrentStepNumber() == 3 %}
+                        <div id="availabilities" class="availabilities"
+                             data-prototype="{% filter escape %}{% include 'WelcomangoExperienceBundle:Availability:_availabilities.html.twig' with {'form': form.availabilities.vars.prototype } %}{% endfilter %}">
+                            {% for availability in form.availabilities %}
+                                {% include 'WelcomangoExperienceBundle:Availability:_availabilities.html.twig' with {'form': availability } %}
+                            {% endfor %}
+
+                            {#Delete confirmation modal#}
+                            {% include 'WelcomangoCoreBundle:Core:stickUpModal.html.twig' with {
+                            'title': 'availability.modal.remove'|trans,
+                            'text': 'availability.modal.removeText'|trans ,
+                            'confirm' : 'interface.delete'|trans
+                            } %}
+                        </div>
+                    {% endif %}
+                </div>
+                <ul class="pager wizard">
+                    <li class="next">
+                        <button class="btn btn-primary btn-cons btn-animated from-left fa pull-right fa-user" type="button">
+                            <span>Next</span>
+                        </button>
+                    </li>
+                </ul>
+                {% include 'CraueFormFlowBundle:FormFlow:buttons.html.twig' %}
+            </div>
+
+            {{ form_end(form) }}
+
+
+        </div>
+    </div>
+
+{% endblock profile_content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ include('WelcomangoMediaBundle:AdminMedia:_baseJs.html.twig') }}
+    {% include 'WelcomangoExperienceBundle:Experience:_baseJs.html.twig' %}
+    {% include 'WelcomangoExperienceBundle:Availability:_availabilityJs.html.twig' with {
+        'datepickerId' : 'front_experience_availabilities_0_start_date',
+    } %}
+
+    {% include 'WelcomangoCoreBundle:Core:_cityJs.html.twig' with {'form_id': 'createExperience', 'field_ids': ['city']} %}
+
+    <script>
+        function toggleContribution() {
+            $('#experience-contribution-field').slideToggle();
+            $('#createExperience_contribution').prop('required',function(i, v) { return !v; });
+            $('#createExperience_price_per_hour').val('0');
+            $('#createExperience_price_per_hour').prop('disabled', function(i, v) { return !v; });
+        }
+
+    </script>
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset("css/dropzone.min.css") }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
