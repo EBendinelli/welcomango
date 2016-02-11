@@ -146,15 +146,10 @@
         //Swiper
         'use strict';
         $(document).ready(function() {
-                var availableTags = [
-                    "Ville 1",
-                    "Ville 2",
-                    "Ville 3",
-                    "Ville 4",
-                ];
-                $( "#experience_home_research_city" ).autocomplete({
-                    source: availableTags
-                });
+            var cities = {{ cities|json_encode|raw }};
+            $( "#experience_research_city" ).autocomplete({
+                source: cities
+            });
 
             //Intialize Slider
             var slider = new Swiper('#homepage-swiper .swiper-container', {
@@ -190,6 +185,5 @@
 
         new WOW().init();
     </script>
-    <script>
-    </script>
+
 {% endblock %}

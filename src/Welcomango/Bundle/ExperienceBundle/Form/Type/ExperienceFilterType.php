@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 use Welcomango\Bundle\CoreBundle\DataTransformer\CityTransformer;
 use Welcomango\Model\Experience;
@@ -48,11 +49,12 @@ class ExperienceFilterType extends AbstractType
                 'required' => false,
                 'label'    => 'form.experience.keyword',
             ])
-            ->add($builder->create('city', 'genemu_jqueryselect2_hidden', [
+            ->add($builder->create('city', TextType::class, [
                 'required' => false,
-                'configs' => [],
-                'label'   => 'form.city',
-            ])->addModelTransformer($transformer))
+                'label'    => 'form.city',
+                'attr'     => [
+                    'placeholder' => 'Where do you wanna go...',
+                ]])->addModelTransformer($transformer));
         ;
 
         $builder->add('date', 'date', [

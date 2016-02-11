@@ -184,6 +184,7 @@ experience.noFeedbacksReceived: This user has not received any feedback yet
 experience.noNoteYet: No note received yet
 experience.attended: Experience attended
 experience.pendingRequest: Pending request
+experience.sendRequest: Send a request
 
 experience.create.titleNote: This is the title of your experience, it should describe what will happen with you in your city in a few word. Try to make it appealing and simple like <i>"A fantastic bike journey"</i> for a bike tour, <i>"A city under siege"</i> for a history related experience or <i>"The crazy underground side of a business city"</i> for a tour of the underground places. <span class="bold">Make it sound like a movie title!</span> <br/><br/>There is <span class="bold">no need to include the name of the city</span>.
 experience.create.descriptionNote: Now we are talking! This is the core of your experience! This section must give a good overview of what a traveler should expect when meeting with you. No need to talk too much about the city, tell a bit more about what is the experience going to be about about and how it represents the way you live and love your city.
@@ -253,6 +254,7 @@ booking.requestReceivedFor: Request received for
 booking.noRequestFound: No request found yet
 booking.requestFrom: Request from <a href="%route%" class="text-primary semi-bold">%name%</a> for </a> for <span class="text-primary">%time%</span>
 booking.action.acceptedMessage: You can now write a message to %name% and give him more details for the meeting point :)
+
 
 page.writtenBy: By %author%
 

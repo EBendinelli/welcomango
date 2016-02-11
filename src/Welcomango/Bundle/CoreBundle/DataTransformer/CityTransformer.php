@@ -39,7 +39,7 @@ class CityTransformer implements DataTransformerInterface
             return "";
         }
 
-        return (string) $city->getId().';'.$city->getName();
+        return (string) $city->getName();
     }
 
     /**
@@ -52,18 +52,18 @@ class CityTransformer implements DataTransformerInterface
      * @return Issue|null
      *
      */
-    public function reverseTransform($id)
+    public function reverseTransform($cityName)
     {
-        if (!$id) {
+        if (!$cityName) {
             return null;
         }
 
-        $city = $this->objectManager->getRepository('Welcomango\Model\City')->findOneById($id);
+        $city = $this->objectManager->getRepository('Welcomango\Model\City')->findOneByName($cityName);
 
         if (null === $city) {
             throw new TransformationFailedException(sprintf(
                 'Le problème avec l\'id "%s" ne peut pas être trouvé!',
-                $id
+                $cityName
             ));
         }
 
