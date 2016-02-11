@@ -29,6 +29,7 @@
                     {% else %}
                     $("#media-modal").empty();
                     $("#media-modal").append('<img id="mediaToCrop" src="{{ media_upload_temp_dir }}/' + getTempFileName(filename) + '">');
+<<<<<<< HEAD
                     $("#media-modal-crop").modal({'backdrop': "static"});
                     $("#media-modal-crop").on('hidden.bs.modal', function () {
                         removeMedia();
@@ -45,6 +46,19 @@
                             setSelect: [0, 0, 2000, 2000]
                         });
                         $('#datas').show();
+=======
+                    $("#media-modal-crop").modal({'backdrop':"static"});
+                {% endif %}
+                $('#front_user_edit_profileMedia_originalFilename').val(filename);
+                $(function () {
+                    $('#mediaToCrop').Jcrop({
+                        aspectRatio: 1,
+                        boxWidth: 700,
+                        boxHeight: 700,
+                        onChange: showCoords,
+                        onSelect: showCoords,
+                        setSelect: [0,0,2000,2000]
+>>>>>>> 21567c312f56397a7e2f2298a13fd4f050a6eac3
                     });
                 },
                 // Form data
@@ -58,6 +72,7 @@
         }
     });
 
+<<<<<<< HEAD
     function validateFile(file) {
         console.log(file);
         if( file.type.indexOf("image/") == -1) {
@@ -70,12 +85,30 @@
         return true
     }
 
-    $('#deleteProfileMedia').click(function(){
+    $('#deleteProfileMedia').click(function() {
+        removeMediaField();
+    });
+
+    $('.btn-cancel-modal').click(function() {
+        removeMedia();
+        removeMediaField();
+    });
+
+    $(document).keydown(function (e) {
+        if (e.keyCode == 27) {
+            removeMedia();
+            removeMediaField();
+        }
+    });
+
+    function removeMediaField() {
         $('#profile-media-croped img').remove();
         $('#profile-media-croped').html('<div class="text-center" id="profile-upload-message">Click to upload a photo</div>');
         var inputFile = $('#front_user_edit_profileMedia_originalFilename');
         inputFile.val('');
-    });
+        $('#front_user_edit_profileMedia').remove();
+        $('#front_user_edit_oldOriginalFilename').remove();
+    }
 
     function removeMedia() {
         if (processDelete) {

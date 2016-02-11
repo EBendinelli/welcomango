@@ -57,11 +57,14 @@ class ExperienceController extends BaseController
             }
         }
 
+        $cities = $this->get('welcomango.front.city.manager')->getCitiesForAutocomplete();
+
         $form = $this->createForm($this->get('welcomango.form.experience.filter'), $filters);
 
         return array(
             'pagination' => $pagination,
             'form'       => $form->createView(),
+            'cities'     => $cities,
         );
     }
 

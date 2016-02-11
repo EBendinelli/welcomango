@@ -112,7 +112,7 @@ gulp.task('assets-js', function() {
 
         'components/pages-assets/pages-front/plugins/jquery/jquery-easy.js',
         'components/pages-assets/pages-front/plugins/jquery-appear/jquery.appear.js',
-        'components/pages-assets/pages-front/plugins/jquery-ui/jquery-ui.min.js',
+        'components/pages-assets/pages-front/plugins/jquery-ui/jquery-ui.js',
         'components/pages-assets/pages-front/plugins/jquery-fit-text/jquery.fittext.js',
         'components/pages-assets/pages-front/plugins/jquery-isotope/isotope.pkgd.min.js',
         'components/pages-assets/pages-front/plugins/jquery-isotope/masonry-horizontal.js',
@@ -262,6 +262,7 @@ gulp.task('assets-css', function() {
         'components/pages-assets/pages-front/plugins/bootstrap-datepicker/css/datepicker.css',
         'components/pages-assets/pages-front/plugins/bootstrap-datepicker/css/datepicker3.css',
         'components/pages-assets/pages-front/plugins/jquery-datatable/media/css/*',
+        'components/pages-assets/pages-front/plugins/jquery-ui/jquery-ui.css',
         'components/wow/css/libs/animate.css',
         'components/magnific-popup/dist/magnific-popup.css',
     ])

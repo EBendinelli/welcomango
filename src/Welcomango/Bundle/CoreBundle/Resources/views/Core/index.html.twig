@@ -1,6 +1,6 @@
 {% extends "::front.html.twig" %}
 
-{% form_theme form with ["::frontThemeThin.html.twig"] %}
+{% form_theme form with ["::frontThemeHome.html.twig"] %}
 
 {% trans_default_domain 'interface' %}
 
@@ -146,6 +146,11 @@
         //Swiper
         'use strict';
         $(document).ready(function() {
+            var cities = {{ cities|json_encode|raw }};
+            $( "#experience_research_city" ).autocomplete({
+                source: cities
+            });
+
             //Intialize Slider
             var slider = new Swiper('#homepage-swiper .swiper-container', {
                 pagination: '.swiper-pagination',
@@ -180,4 +185,5 @@
 
         new WOW().init();
     </script>
+
 {% endblock %}

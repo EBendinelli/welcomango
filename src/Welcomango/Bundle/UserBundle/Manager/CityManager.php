@@ -66,5 +66,17 @@ class CityManager
         return $newCity;
     }
 
+    public function getCitiesForAutocomplete(){
+        //load cities for autocomplete
+        $cityRepository = $this->entityManager->getRepository('Welcomango\Model\City');
+        $citiesObject = $cityRepository->findAll();
+        $cities = array();
+        foreach($citiesObject as $city){
+            $cities[] = $city->getName();
+        }
+
+        return $cities;
+    }
+
 }
 
