@@ -69,7 +69,7 @@ class EmailManager
                 ]),
                 'text/html'
             );
-                
+
         $this->mailer->send($message);
 
     }
