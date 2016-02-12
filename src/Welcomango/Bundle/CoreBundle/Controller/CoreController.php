@@ -89,7 +89,20 @@ class CoreController extends BaseController
                         'name' => $form->get('name')->getData(),
                         'message' => $form->get('message')->getData(),
                         'issue_url' => $feedbackUrl,
+                        'type' => 'Text',
                         ]),
+                    'text/plain'
+                )
+                ->addPart(
+                    $this->renderView(
+                        'WelcomangoEmailBundle:AdminEmailTemplate:contact.html.twig',[
+                        'user' => $user,
+                        'category' => $form->get('category')->getData(),
+                        'name' => $form->get('name')->getData(),
+                        'message' => $form->get('message')->getData(),
+                        'issue_url' => $feedbackUrl,
+                        'type' => 'Text',
+                    ]),
                     'text/html'
                 );
             $this->get('mailer')->send($message);
@@ -100,6 +113,14 @@ class CoreController extends BaseController
                 ->setFrom('no-reply@welcomango.com')
                 ->setTo($form->get('email')->getData())
                 ->setBody(
+                    $this->renderView(
+                        'WelcomangoEmailBundle:EmailTemplate:contactConfirmation.html.twig',[
+                        'name' => $form->get('name')->getData(),
+                        'type' => 'Text',
+                    ]),
+                    'text/plain'
+                )
+                ->addPart(
                     $this->renderView(
                         'WelcomangoEmailBundle:EmailTemplate:contactConfirmation.html.twig',[
                         'name' => $form->get('name')->getData(),

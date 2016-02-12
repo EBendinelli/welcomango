@@ -52,6 +52,16 @@ class EmailManager
                     'experience' => $experience,
                     'user' => $user,
                     'status' => $status,
+                    'type' => 'Text',
+                ]),
+                'text/plain'
+            )
+            ->addPart(
+                $this->twig->render(
+                    'WelcomangoEmailBundle:AdminEmailTemplate:experienceCreation.html.twig',[
+                    'experience' => $experience,
+                    'user' => $user,
+                    'status' => $status,
                 ]),
                 'text/html'
             );
@@ -63,6 +73,14 @@ class EmailManager
             ->setFrom(['no-reply@welcomango.com' => 'Welcomango Team'])
             ->setTo($user->getEmail())
             ->setBody(
+                $this->twig->render(
+                    'WelcomangoEmailBundle:EmailTemplate:experienceCreationConfirmation.html.twig',[
+                    'experience' => $experience,
+                    'type' => 'Text',
+                ]),
+                'text/plain'
+            )
+            ->addPart(
                 $this->twig->render(
                     'WelcomangoEmailBundle:EmailTemplate:experienceCreationConfirmation.html.twig',[
                     'experience' => $experience

@@ -8,7 +8,7 @@
 
 {% block body_html %}
 
-    {% include "WelcomangoEmailBundle:EmailTemplate:templateWithParams.html.twig" with {
+    {% include "WelcomangoEmailBundle:EmailTemplate:template" ~ type|default('') ~ "WithParams.html.twig" with {
         'mainTitle': 'global.email'|trans,
         'coreTitle': 'email.resetting.coreTitle'|trans ,
         'SubTitle': 'email.resetting.subTitle'|trans({"%user%": user.firstname}),

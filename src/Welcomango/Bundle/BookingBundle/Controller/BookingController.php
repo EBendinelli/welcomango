@@ -225,13 +225,8 @@ class BookingController extends BaseController
             ->setSubject($this->trans('email.booking.requestUpdated', array('%status%' => $booking->getStatus()), 'interface'))
             ->setFrom(['no-reply@welcomango.com' => 'Welcomango Team'])
             ->setTo($bookingUser->getEmail())
-            ->setBody(
-                $this->renderView(
-                    'WelcomangoEmailBundle:EmailTemplate:requestUpdated.html.twig',[
-                    'booking' => $booking,
-                ]),
-                'text/html'
-            );
+            ->setBody($this->renderView('WelcomangoEmailBundle:EmailTemplate:requestUpdated.html.twig',['booking' => $booking, 'type' => 'Text']),'text/plain')
+            ->addPart($this->renderView('WelcomangoEmailBundle:EmailTemplate:requestUpdated.html.twig', ['booking' => $booking]), 'text/html');
         $this->get('mailer')->send($message);
 
         $thread = $booking->getThread();

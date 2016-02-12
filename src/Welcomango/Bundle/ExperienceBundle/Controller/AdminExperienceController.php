@@ -148,6 +148,16 @@ class AdminExperienceController extends BaseController
                     'WelcomangoEmailBundle:EmailTemplate:experienceValidation.html.twig',
                     array(
                         'experience' => $experience,
+                        'text' => 'Text'
+                    )
+                ),
+                'text/plain'
+            )
+            ->addPart(
+                $this->renderView(
+                    'WelcomangoEmailBundle:EmailTemplate:experienceValidation.html.twig',
+                    array(
+                        'experience' => $experience,
                     )
                 ),
                 'text/html'
