@@ -120,7 +120,9 @@ class MediaManager
             $currentMedia->setPath('/uploads'.$pathToUpload);
             if (!$realAdapter->has('/uploads'.$pathToUpload.$slugifyFileName)) {
                 $fileContent = $tempadapter->read($tempFileName);
-                $realAdapter->write($pathToUpload.$mediaPrefix.$slugifyFileName, $fileContent);
+                if (!$realAdapter->has($pathToUpload.$mediaPrefix.$slugifyFileName)) {
+                    $realAdapter->write($pathToUpload.$mediaPrefix.$slugifyFileName, $fileContent);
+                }
                 $tempadapter->delete($tempFileName);
             }
         } else {

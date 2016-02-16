@@ -41,7 +41,7 @@ class ProfileController extends BaseProfileController
 
         //Ii no experience we suggest to create one
         $createExperience = false;
-        if($userExperiences->isEmpty()){
+        if ($userExperiences->isEmpty()) {
             $createExperience = true;
         }
 
@@ -115,10 +115,10 @@ class ProfileController extends BaseProfileController
         }
 
         //Check profile completion
-        $desc = $user->getDescription();
-        $lang = $user->getSpokenLanguages();
+        $desc            = $user->getDescription();
+        $lang            = $user->getSpokenLanguages();
         $completeProfile = false;
-        if(empty($desc) || empty($lang)){
+        if (empty($desc) || empty($lang)) {
             $completeProfile = true;
         }
 
@@ -135,7 +135,7 @@ class ProfileController extends BaseProfileController
             'feedbackAsTraveler'   => $feedbackAsTraveler,
             'moderatedExperiences' => $moderatedExperiences,
             'completeProfile'      => $completeProfile,
-            'createExperience'    => $createExperience
+            'createExperience'     => $createExperience,
         ));
     }
 
@@ -208,9 +208,7 @@ class ProfileController extends BaseProfileController
             if ($form->getData()->getProfileMedia()) {
                 $currentMedia = $form->getData()->getProfileMedia()->getOriginalFilename();
                 $oldMedia     = $form->get("oldOriginalFilename")->getData();
-                if ($currentMedia != $oldMedia) {
-                    $this->get('welcomango.media.manager')->generateSimpleMedia($user, $oldMedia);
-                }
+                $this->get('welcomango.media.manager')->generateSimpleMedia($user, $oldMedia, $currentMedia);
             }
 
             $userManager->updateUser($user);
@@ -223,7 +221,7 @@ class ProfileController extends BaseProfileController
             $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
 
             //change Tab if necessary
-            if($activeTab != 'current'){
+            if ($activeTab != 'current') {
                 $url = $response->getTargetUrl();
                 $response->setTargetUrl($url.'?activeTab='.$activeTab);
             }

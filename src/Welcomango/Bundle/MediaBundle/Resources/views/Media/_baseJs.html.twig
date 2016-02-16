@@ -3,58 +3,65 @@
     var processDelete = true;
     $('#{{ file_input_id }}').change(function () {
         processDelete = true;
-        var filename = document.getElementById('{{ file_input_id }}').files[0].name
+        var file = document.getElementById('{{ file_input_id }}').files[0];
+        var filename = file.name;
         console.log(filename);
         var formData = new FormData();
         formData.append("file", document.getElementById('{{ file_input_id }}').files[0]);
-        $.ajax({
-            url: '{{ oneup_uploader_endpoint('gallery') }}',  //Server script to process data
-            type: 'POST',
-            xhr: function () {  // Custom XMLHttpRequest
-                var myXhr = $.ajaxSettings.xhr();
-                if (myXhr.upload) { // Check if upload property exists
+        var fileValid = validateFile(file);
+        if(fileValid === true) {
+            $.ajax({
+                url: '{{ oneup_uploader_endpoint('gallery') }}',  //Server script to process data
+                type: 'POST',
+                xhr: function () {  // Custom XMLHttpRequest
+                    var myXhr = $.ajaxSettings.xhr();
+                    if (myXhr.upload) { // Check if upload property exists
 
-                }
-                return myXhr;
-            },
-            //Ajax events
-            error: function (request) {
-                console.log(request);
-            },
-            success: function (data) {
-                {% if in_modal is not defined %}
-                $("#media").empty();
-                $("#media").append('<img id="mediaToCrop" src="{{ media_upload_temp_dir }}/' + getTempFileName(filename) + '">');
-                {% else %}
-                $("#media-modal").empty();
-                $("#media-modal").append('<img id="mediaToCrop" src="{{ media_upload_temp_dir }}/' + getTempFileName(filename) + '">');
-                $("#media-modal-crop").modal({'backdrop': "static"});
-                {% endif %}
-                $('#front_user_edit_profileMedia_originalFilename').val(filename);
-                $(function () {
-                    $('#mediaToCrop').Jcrop({
-                        aspectRatio: 1,
-                        boxWidth: 700,
-                        boxHeight: 700,
-                        onChange: showCoords,
-                        onSelect: showCoords,
-                        setSelect: [0, 0, 2000, 2000]
+                    }
+                    return myXhr;
+                },
+                //Ajax events
+                error: function (request) {
+                    console.log(request);
+                },
+                success: function (data) {
+                    {% if in_modal is not defined %}
+                    $("#media").empty();
+                    $("#media").append('<img id="mediaToCrop" src="{{ media_upload_temp_dir }}/' + getTempFileName(filename) + '">');
+                    {% else %}
+                    $("#media-modal").empty();
+                    $("#media-modal").append('<img id="mediaToCrop" src="{{ media_upload_temp_dir }}/' + getTempFileName(filename) + '">');
+                    $("#media-modal-crop").modal({'backdrop': "static"});
+                    {% endif %}
+                    $('#front_user_edit_profileMedia_originalFilename').val(filename);
+                    $(function () {
+                        $('#mediaToCrop').Jcrop({
+                            aspectRatio: 1,
+                            boxWidth: 700,
+                            boxHeight: 700,
+                            onChange: showCoords,
+                            onSelect: showCoords,
+                            setSelect: [0, 0, 2000, 2000]
+                        });
+                        $('#datas').show();
                     });
-                    $('#datas').show();
-                });
-            },
-            // Form data
-            data: formData,
-            cache: false,
-            contentType: false,
-            processData: false
-        });
+                },
+                // Form data
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        } else {
+            alert(fileValid);
+        }
     });
 
     $('#deleteProfileMedia').click(function () {
         removeMediaField();
     });
 
+/*
     $('.btn-cancel-modal').click(function () {
         removeMedia();
         removeMediaField();
@@ -66,6 +73,7 @@
             removeMediaField();
         }
     });
+*/
 
     function validateFile(file) {
         console.log(file);
@@ -85,7 +93,6 @@
         var inputFile = $('#front_user_edit_profileMedia_originalFilename');
         inputFile.val('');
         $('#front_user_edit_profileMedia').remove();
-        $('#front_user_edit_oldOriginalFilename').remove();
     }
 
     function removeMedia() {
