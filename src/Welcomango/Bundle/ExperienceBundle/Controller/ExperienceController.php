@@ -57,14 +57,11 @@ class ExperienceController extends BaseController
             }
         }
 
-        $cities = $this->get('welcomango.front.city.manager')->getCitiesForAutocomplete();
-
         $form = $this->createForm($this->get('welcomango.form.experience.filter'), $filters);
 
         return array(
             'pagination' => $pagination,
             'form'       => $form->createView(),
-            'cities'     => $cities,
         );
     }
 
@@ -207,15 +204,13 @@ class ExperienceController extends BaseController
             }
 
             $em = $this->getDoctrine()->getEntityManager();
-            $uow = $em->getUnitOfWork();
-            $uow->recomputeSingleEntityChangeSet($this->getDoctrine()->getEntityManager()->getClassMetadata(Experience::class), $experience);
+            /*$uow = $em->getUnitOfWork();
+            $uow->recomputeSingleEntityChangeSet($this->getDoctrine()->getEntityManager()->getClassMetadata(Experience::class), $experience);*/
             if ($form->get('title')->getData() != $oldExperience->getTitle() || $form->get('description')->getData() != $oldExperience->getDescription() ) {
                 $experience->setPublicationStatus('pending');
                 $mailManager = $this->get('welcomango.front.email.manager');
                 $mailManager->sendEmailAfterExperienceCreation($experience);
             }
-
-            $this->get('welcomango.media.manager')->processMediasExperience($experience, $originalMedias);
 
             $availabilityManager->updateAvailabilityForExperience($experience, $form, $originalAvailabilities);
             // This cleanly remove the deleted availabilities
@@ -230,7 +225,9 @@ class ExperienceController extends BaseController
                 $experience->setMaximumDuration($experience->getMinimumDuration()+1);
             }
 
-
+            $em->persist($experience);
+            $em->flush();
+            $this->get('welcomango.media.manager')->processMediasExperience($experience, $originalMedias);
             $em->persist($experience);
             $em->flush();
             $this->addFlash('success', $this->trans('experience.edit.success', array(), 'interface'));
@@ -357,7 +354,8 @@ class ExperienceController extends BaseController
                 ->setSubject($this->trans('email.experience.requestSubject', array('%experience%' => $experience->getTitle()), 'interface'))
                 ->setFrom(['no-reply@welcomango.com' => 'Welcomango team'])
                 ->setTo($experienceCreator->getEmail())
-                ->setBody($this->renderView('WelcomangoEmailBundle:EmailTemplate:newBookingRequest.html.twig', ['booking' => $booking]), 'text/html')
+                ->setBody($this->renderView('WelcomangoEmailBundle:EmailTemplate:newBookingRequest.html.twig', ['booking' => $booking, 'type' => 'Text']), 'text/plain')
+                ->addPart($this->renderView('WelcomangoEmailBundle:EmailTemplate:newBookingRequest.html.twig', ['booking' => $booking]), 'text/html')
             ;
             $this->get('mailer')->send($email);
 
@@ -439,6 +437,31 @@ class ExperienceController extends BaseController
 
             foreach ($cities as $city) {
                 $data[] = ['id' => $city['id'], 'text' => $city['text'].', '.$city['countryName']];
+            }
+        }
+
+        return new JsonResponse($data);
+    }
+
+    /**
+     * List cities for autocomplete Calls
+     *
+     * @param Request $request
+     *
+     * @Route("/json/cities/list", name="experience_search_autocomplete", defaults={"_format"="json"})
+     *
+     * @return JsonResponse
+     */
+    public function citiesAutocompleteAction(Request $request)
+    {
+        $data = array();
+
+        $term = $request->get('term');
+        if ($term != '') {
+            $cities = $this->getRepository('Welcomango\Model\City')->findForAutocomplete($term);
+
+            foreach ($cities as $city) {
+                $data[] = ['value' => $city['id'], 'label' => $city['text'].', '.$city['countryName']];
             }
         }
 

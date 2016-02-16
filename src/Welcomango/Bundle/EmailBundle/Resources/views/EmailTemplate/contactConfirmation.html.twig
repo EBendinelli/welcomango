@@ -1,4 +1,4 @@
-{% extends "WelcomangoEmailBundle:EmailTemplate:template.html.twig" %}
+{% extends "WelcomangoEmailBundle:EmailTemplate:template" ~ type|default('') ~ ".html.twig" %}
 
 {% trans_default_domain 'interface' %}
 

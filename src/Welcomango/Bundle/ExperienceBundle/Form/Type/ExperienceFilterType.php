@@ -53,7 +53,7 @@ class ExperienceFilterType extends AbstractType
                 'required' => false,
                 'label'    => 'form.city',
                 'attr'     => [
-                    'placeholder' => 'Where do you wanna go...',
+                    'placeholder' => 'Type your next destination...',
                 ]])->addModelTransformer($transformer));
         ;
 
@@ -69,6 +69,7 @@ class ExperienceFilterType extends AbstractType
                 'class'            => 'form-control input-inline datepicker',
                 'data-provide'     => 'datepicker',
                 'data-date-format' => 'dd-mm-yyyy',
+                'placeholder' => 'Date',
             ],
         ]);
 

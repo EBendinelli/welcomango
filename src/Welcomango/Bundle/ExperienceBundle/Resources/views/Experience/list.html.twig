@@ -95,9 +95,12 @@
             var timeout;
             $(document).ready(function () {
                 //Cities autocomplete
-                var cities = {{ cities|json_encode|raw }};
                 $( "#experience_research_city" ).autocomplete({
-                    source: cities
+                    source: "{{ path('experience_search_autocomplete') }}",
+                    select: function(event, ui) {
+                        event.preventDefault()
+                        $(this).val(ui.item.label);
+                    }
                 });
 
                 $('.form-filter-select2').select2();

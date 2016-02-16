@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <pages>
     <item>
+        <title>In a few words</title>
+        <category>About</category>
+        <content>
+            <![CDATA[
+            <h3>Welcomango? Is that a fruit company?</h3>
+            <p>Hmm... nope. And we're definitely not the "Uber of tourism" either</p>
+            <hr />
+            <p>&nbsp;</p>
+            <p>As travelers ourselves, we enjoy visiting places through the eyes of a friend&nbsp;who know the city.&nbsp;But since we don't have friends all over the world, it is unfortunately not something we could do. That's the reason why we made Welcomango. We wanted to build a community which could recreate this experience anywhere, anytime, with people willing to share their time as well as&nbsp;their&nbsp;perception of the place they live in.&nbsp;&nbsp;</p>
+            <h5 style="text-align: center;">And that's what Welcomango is. A platform where you can find people eager to show you how they&nbsp;experience&nbsp;and love their city. And where you can also share&nbsp;a vision of your own city by proposing an experience.</h5>
+            <p>But don't get us wrong, the people you'll find here are no professional guides and they don't claim to be. In fact, they are not guides at all. They are&nbsp;the human face of&nbsp;their city and&nbsp;we enforce this idea&nbsp;by allowing&nbsp;anyone registered on Welcomango to&nbsp;propose an experience. Because we believe traveling is a two sides adventure where you should both take and share.</p>
+            <p>And because we believe any work deserve compensation, we let&nbsp;our users decide if they want to be rewarded for their work and how. So they can ask for a financial&nbsp;compensation but&nbsp;they can also&nbsp;ask you to bring something from your place to enforce the cultural exchange.</p>
+            ]]>
+        </content>
+    </item>
+
+
+    <item>
         <title>Thanks</title>
         <category>About</category>
         <content>

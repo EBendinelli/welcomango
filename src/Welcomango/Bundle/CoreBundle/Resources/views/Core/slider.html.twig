@@ -1,4 +1,4 @@
-{% trans_default_domain 'interface' %}
+{% trans_default_domain 'interface' %}lcomangocore/images/homepage/homepage-3
 
 <!-- BEGIN JUMBOTRON -->
 <section id="homepage-swiper" class="jumbotron full-vh bg-master-darkest" data-pages="parallax">
@@ -7,7 +7,7 @@
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 <!-- BEGIN SLIDE -->
-                <div class="swiper-slide fit slide-1" data-pages-bg-image="{{ asset("bundles/welcomangocore/images/homepage/homepage-2.jpg") }}" data-bg-overlay="black" data-overlay-opacity="0.2">
+                <div class="swiper-slide fit slide-1" data-pages-bg-image="{{ asset("bundles/we.jpg") }}" data-bg-overlay="black" data-overlay-opacity="0.2">
                     <!-- BEGIN IMAGE PARRALAX -->
                     <div class="slider-wrapper">
                     </div>
@@ -26,19 +26,20 @@
                                                 <h4 class="text-white sm-text-center m-b-40">{{ 'homepage.nextSubTitle1'|trans }}</h4>
                                             </div>
                                             <div class="row" >
-                                                <div class="col-md-7 col-md-offset-3 text-center p-t-20 p-b-10" style="">
-                                                    <div class="col-md-7">
-                                                        {{ form_widget(form.city,  {'attr' : {'class' : 'form-filter-select2'} }) }}
+                                                <div class="col-md-7 col-md-offset-3 text-center p-t-20 p-b-10">
+                                                    <div class="col-md-7 homepage-form">
+                                                        {{ form_widget(form.city) }}
                                                     </div>
-                                                    <div class="col-md-3 text-left">
-                                                        {{ form_widget(form.date) }}
+                                                    <div class="col-md-3 text-left homepage-form">
+                                                        {{ form_widget(form.date, {'attr': {'class': 'input-lg'}}) }}
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <div style="display: none">{{ form(form) }}</div>
-                                                        <button type="submit" id="btn-filter" class="btn btn-complete btn-filter-inversed fs-16" style="width: 99%; float:left">{{ 'interface.search'|trans({}, "interface") }}</button>
+                                                        <div style="display: none">{{ form_rest(form) }}</div>
+                                                        <button type="submit" id="btn-filter" class="btn btn-primary btn-filter-inversed" style="font-size: 18px; width: 99%; float:left; height: 45px;">{{ 'interface.search'|trans({}, "interface") }}</button>
                                                     </div>
                                                 </div>
                                             </div>
+                                            {{ form_end(form) }}
                                         </div>
                                     </div>
                                 </div>

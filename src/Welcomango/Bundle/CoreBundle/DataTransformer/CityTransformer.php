@@ -35,11 +35,12 @@ class CityTransformer implements DataTransformerInterface
      */
     public function transform($city)
     {
+
         if (null === $city) {
             return "";
         }
 
-        return (string) $city->getName();
+        return (string) $city->getName().', '.$city->getCountry()->getName();
     }
 
     /**
@@ -58,7 +59,12 @@ class CityTransformer implements DataTransformerInterface
             return null;
         }
 
-        $city = $this->objectManager->getRepository('Welcomango\Model\City')->findOneByName($cityName);
+        $cityName = str_replace(' ', '', $cityName);
+        $cityExploded = explode(',', $cityName);
+
+        $country = $this->objectManager->getRepository('Welcomango\Model\Country')->findOneByName($cityExploded[1]);
+
+        $city = $this->objectManager->getRepository('Welcomango\Model\City')->findOneBy(['name' => $cityExploded[0], 'country' => $country]);
 
         if (null === $city) {
             throw new TransformationFailedException(sprintf(
