@@ -4,50 +4,31 @@
     $('#{{ file_input_id }}').change(function () {
         processDelete = true;
         var filename = document.getElementById('{{ file_input_id }}').files[0].name
+        console.log(filename);
         var formData = new FormData();
-        var file = document.getElementById('{{ file_input_id }}').files[0];
-        var fileIsValid = validateFile(file);
-        if(fileIsValid === true) {
-            formData.append("file", document.getElementById('{{ file_input_id }}').files[0]);
-            $.ajax({
-                url: '{{ oneup_uploader_endpoint('gallery') }}',  //Server script to process data
-                type: 'POST',
-                xhr: function () {  // Custom XMLHttpRequest
-                    var myXhr = $.ajaxSettings.xhr();
-                    if (myXhr.upload) { // Check if upload property exists
+        formData.append("file", document.getElementById('{{ file_input_id }}').files[0]);
+        $.ajax({
+            url: '{{ oneup_uploader_endpoint('gallery') }}',  //Server script to process data
+            type: 'POST',
+            xhr: function () {  // Custom XMLHttpRequest
+                var myXhr = $.ajaxSettings.xhr();
+                if (myXhr.upload) { // Check if upload property exists
 
-                    }
-                    return myXhr;
-                },
-                //Ajax events
-                error: function (request) {
-                },
-                success: function (data) {
-                    {% if in_modal is not defined %}
-                    $("#media").empty();
-                    $("#media").append('<img id="mediaToCrop" src="{{ media_upload_temp_dir }}/' + getTempFileName(filename) + '">');
-                    {% else %}
-                    $("#media-modal").empty();
-                    $("#media-modal").append('<img id="mediaToCrop" src="{{ media_upload_temp_dir }}/' + getTempFileName(filename) + '">');
-<<<<<<< HEAD
-                    $("#media-modal-crop").modal({'backdrop': "static"});
-                    $("#media-modal-crop").on('hidden.bs.modal', function () {
-                        removeMedia();
-                    });
-                    {% endif %}
-                    $('#front_user_edit_profileMedia_originalFilename').val(filename);
-                    $(function () {
-                        $('#mediaToCrop').Jcrop({
-                            aspectRatio: 1,
-                            boxWidth: 450,
-                            boxHeight: 450,
-                            onChange: showCoords,
-                            onSelect: showCoords,
-                            setSelect: [0, 0, 2000, 2000]
-                        });
-                        $('#datas').show();
-=======
-                    $("#media-modal-crop").modal({'backdrop':"static"});
+                }
+                return myXhr;
+            },
+            //Ajax events
+            error: function (request) {
+                console.log(request);
+            },
+            success: function (data) {
+                {% if in_modal is not defined %}
+                $("#media").empty();
+                $("#media").append('<img id="mediaToCrop" src="{{ media_upload_temp_dir }}/' + getTempFileName(filename) + '">');
+                {% else %}
+                $("#media-modal").empty();
+                $("#media-modal").append('<img id="mediaToCrop" src="{{ media_upload_temp_dir }}/' + getTempFileName(filename) + '">');
+                $("#media-modal-crop").modal({'backdrop': "static"});
                 {% endif %}
                 $('#front_user_edit_profileMedia_originalFilename').val(filename);
                 $(function () {
@@ -57,39 +38,24 @@
                         boxHeight: 700,
                         onChange: showCoords,
                         onSelect: showCoords,
-                        setSelect: [0,0,2000,2000]
->>>>>>> 21567c312f56397a7e2f2298a13fd4f050a6eac3
+                        setSelect: [0, 0, 2000, 2000]
                     });
-                },
-                // Form data
-                data: formData,
-                cache: false,
-                contentType: false,
-                processData: false
-            });
-        } else {
-            console.log(fileIsValid);
-        }
+                    $('#datas').show();
+                });
+            },
+            // Form data
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false
+        });
     });
 
-<<<<<<< HEAD
-    function validateFile(file) {
-        console.log(file);
-        if( file.type.indexOf("image/") == -1) {
-            return ('You must upmoad an image');
-        }
-        if (file.size > 5000000) {
-            return ('Your image is too big');
-        }
-
-        return true
-    }
-
-    $('#deleteProfileMedia').click(function() {
+    $('#deleteProfileMedia').click(function () {
         removeMediaField();
     });
 
-    $('.btn-cancel-modal').click(function() {
+    $('.btn-cancel-modal').click(function () {
         removeMedia();
         removeMediaField();
     });
@@ -101,7 +67,19 @@
         }
     });
 
+    function validateFile(file) {
+        console.log(file);
+        if (file.type.indexOf("image/") == -1) {
+            return ('You must upload an image');
+        }
+        if (file.size > 5000000) {
+            return ('Your image is too big');
+        }
+        return true
+    }
+
     function removeMediaField() {
+
         $('#profile-media-croped img').remove();
         $('#profile-media-croped').html('<div class="text-center" id="profile-upload-message">Click to upload a photo</div>');
         var inputFile = $('#front_user_edit_profileMedia_originalFilename');
@@ -113,7 +91,7 @@
     function removeMedia() {
         if (processDelete) {
             var formData = new FormData();
-            formData.append("tempName", document.getElementById('{{ file_input_id }}').files[0].name);
+            formData.append("file", getTempFileName(document.getElementById('{{ file_input_id }}').files[0].name));
             $.ajax({
                 url: '{{ path('media_delete') }}',  //Server script to process data
                 type: 'POST',

@@ -75,14 +75,15 @@ class MediaManager
         }
 
         foreach ($experience->getMedias() as $media) {
-            $tempFileName = $this->mediaNamer->getTempName($media->getOriginalFilename());
+            $tempFileName    = $this->mediaNamer->getTempName($media->getOriginalFilename());
+            $slugifyFileName = $this->mediaNamer->getSlugifyFileName($media->getOriginalFilename());
             if ($tempadapter->has($tempFileName)) {
                 $fileContent = $tempadapter->read($tempFileName);
-                if (!$realAdapter->has($pathToUpload.$mediaPrefix.$media->getOriginalFilename())) {
+                if (!$realAdapter->has($pathToUpload.$mediaPrefix.$slugifyFileName)) {
                     $media->setPath($this->uploadsBaseDir.$pathToUpload);
                     $media->setExperience($experience);
-                    $media->setOriginalFileName($mediaPrefix.$media->getOriginalFilename());
-                    $realAdapter->write($pathToUpload.$media->getOriginalFilename(), $fileContent);
+                    $media->setOriginalFileName($mediaPrefix.$slugifyFileName);
+                    $realAdapter->write($pathToUpload.$mediaPrefix.$slugifyFileName, $fileContent);
                     $this->entityManager->persist($media);
                 }
                 $tempadapter->delete($tempFileName);
@@ -105,18 +106,21 @@ class MediaManager
         $currentMedia = $entity->getProfileMedia();
 
         if ($currentMedia->getOriginalFilename() != $oldMedia && $oldMedia != "") {
-            $realAdapter->delete($pathToUpload.$oldMedia);
+            if ($realAdapter->has($pathToUpload.$oldMedia)) {
+                $realAdapter->delete($pathToUpload.$oldMedia);
+            }
         }
 
         $mediaPrefix = $this->getMediaPrefix($entity);
         if ($entity->getProfileMedia()->getOriginalFilename() !== null) {
-            $mediaName    = $entity->getProfileMedia()->getOriginalFilename();
-            $tempFileName = $this->mediaNamer->getTempName($mediaName);
-            $currentMedia->setOriginalFilename($mediaPrefix.$mediaName);
+            $mediaName       = $entity->getProfileMedia()->getOriginalFilename();
+            $slugifyFileName = $this->mediaNamer->getSlugifyFileName($mediaName);
+            $tempFileName    = $this->mediaNamer->getTempName($mediaName);
+            $currentMedia->setOriginalFilename($mediaPrefix.$slugifyFileName);
             $currentMedia->setPath('/uploads'.$pathToUpload);
-            if (!$realAdapter->has('/uploads'.$pathToUpload.$mediaName)) {
+            if (!$realAdapter->has('/uploads'.$pathToUpload.$slugifyFileName)) {
                 $fileContent = $tempadapter->read($tempFileName);
-                $realAdapter->write($pathToUpload.$mediaPrefix.$mediaName, $fileContent);
+                $realAdapter->write($pathToUpload.$mediaPrefix.$slugifyFileName, $fileContent);
                 $tempadapter->delete($tempFileName);
             }
         } else {

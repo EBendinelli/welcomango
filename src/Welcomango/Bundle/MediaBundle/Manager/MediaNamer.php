@@ -5,6 +5,7 @@ namespace Welcomango\Bundle\MediaBundle\Manager;
 use Oneup\UploaderBundle\Uploader\File\FileInterface;
 use Oneup\UploaderBundle\Uploader\Naming\NamerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Welcomango\Bundle\CoreBundle\Util\Util;
 
 /**
  * Class MediaNamer
@@ -12,14 +13,14 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class MediaNamer implements NamerInterface
 {
     /**
-     * @var TokenStorageInterface
+     * @var TokenStorageInterface $tokenStorageInterface
      */
     protected $tokenStorageInterface;
 
     /**
-     * @param $tokenStorageInterface
+     * @param TokenStorageInterface $tokenStorageInterface
      */
-    function __construct(TokenStorageInterface $tokenStorageInterface)
+    public function __construct(TokenStorageInterface $tokenStorageInterface)
     {
         $this->tokenStorageInterface = $tokenStorageInterface;
     }
@@ -35,7 +36,7 @@ class MediaNamer implements NamerInterface
     /**
      * retrieve the real tempFileName
      *
-     * @param $fileName
+     * @param string $fileName
      *
      * @return string
      */
@@ -44,15 +45,29 @@ class MediaNamer implements NamerInterface
         return $this->getName($fileName);
     }
 
-    protected function getName($fileName)
+    /**
+     * @param string $fileName
+     *
+     * @return string
+     */
+    public function getSlugifyFileName($fileName)
+    {
+        return $this->getName($fileName, true);
+    }
+
+    protected function getName($fileName, $slugify = false)
     {
         $currentUser = $this->tokenStorageInterface->getToken()->getUser();
 
-        $explodeFilename   = explode('.', $fileName);
-        $extension = '.'.end($explodeFilename);
-        $filename = str_replace($extension, '', $fileName);
+        $explodeFilename = explode('.', $fileName);
+        $extension       = '.'.end($explodeFilename);
+        $filename        = str_replace($extension, '', $fileName);
 
-        return $filename.'_'.$currentUser->getId().$extension;
+        if ($slugify) {
+            return Util::slugify($filename.'_'.$currentUser->getId()).$extension;
+        } else {
+            return $filename.'_'.$currentUser->getId().$extension;
+        }
+
     }
-
 }
