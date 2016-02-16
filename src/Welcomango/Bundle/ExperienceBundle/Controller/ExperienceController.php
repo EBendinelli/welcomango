@@ -57,14 +57,11 @@ class ExperienceController extends BaseController
             }
         }
 
-        $cities = $this->get('welcomango.front.city.manager')->getCitiesForAutocomplete();
-
         $form = $this->createForm($this->get('welcomango.form.experience.filter'), $filters);
 
         return array(
             'pagination' => $pagination,
             'form'       => $form->createView(),
-            'cities'     => $cities,
         );
     }
 
@@ -440,6 +437,31 @@ class ExperienceController extends BaseController
 
             foreach ($cities as $city) {
                 $data[] = ['id' => $city['id'], 'text' => $city['text'].', '.$city['countryName']];
+            }
+        }
+
+        return new JsonResponse($data);
+    }
+
+    /**
+     * List cities for autocomplete Calls
+     *
+     * @param Request $request
+     *
+     * @Route("/json/cities/list", name="experience_search_autocomplete", defaults={"_format"="json"})
+     *
+     * @return JsonResponse
+     */
+    public function citiesAutocompleteAction(Request $request)
+    {
+        $data = array();
+
+        $term = $request->get('term');
+        if ($term != '') {
+            $cities = $this->getRepository('Welcomango\Model\City')->findForAutocomplete($term);
+
+            foreach ($cities as $city) {
+                $data[] = ['value' => $city['id'], 'label' => $city['text'].', '.$city['countryName']];
             }
         }
 

@@ -24,6 +24,7 @@ class CityRepository extends EntityRepository
             ->select('c.id, c.name AS text, co.name AS countryName')
             ->leftJoin('c.country', 'co')
             ->where('c.name LIKE :name')
+            ->orWhere('co.name LIKE :name')
             ->setParameter('name', '%'.$query.'%')
         ;
 

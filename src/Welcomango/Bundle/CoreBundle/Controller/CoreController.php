@@ -42,13 +42,10 @@ class CoreController extends BaseController
         }
         $form = $this->createForm($this->get('welcomango.form.experience.filter'), $filters);
 
-        $cities = $this->get('welcomango.front.city.manager')->getCitiesForAutocomplete();
-
         return array(
             'featuredExperiences' => $featuredExperiences,
             'bestExperiences'     => $bestExperiences,
             'form'                => $form->createView(),
-            'cities'              => $cities,
         );
     }
 

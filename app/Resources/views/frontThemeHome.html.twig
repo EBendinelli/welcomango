@@ -1,14 +1,14 @@
 {% block text_widget %}
     <div class="form-group {% if required %}required{% endif %}">
-        <input class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        <input class="form-control input-lg" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
     </div>
 {% endblock text_widget %}
 
 {% block date_widget -%}
     {% if widget == 'single_text' %}
-        <div class="input-group date ">
+        <div class="input-group form-group date ">
             {{- block('form_widget_simple') -}}
-            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            <span class="input-group-addon "><i class="fa fa-calendar"></i></span>
         </div>
     {% else -%}
         {% set attr = attr|merge({class: (attr.class|default('') ~ ' form-inline')|trim}) -%}

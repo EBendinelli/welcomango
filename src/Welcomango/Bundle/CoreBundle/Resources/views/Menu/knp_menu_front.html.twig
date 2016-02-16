@@ -93,7 +93,10 @@
     {% endblock %}
 
     {% block spanElement %}
-        <a href="javascript:;">{{ block('label') }}</a>
+        {# old element
+            <a href="javascript:;">{{ block('label') }}</a>
+        #}
+        {{ block('label') }}
         {{ block('extraElement') }}
     {% endblock %}
 
