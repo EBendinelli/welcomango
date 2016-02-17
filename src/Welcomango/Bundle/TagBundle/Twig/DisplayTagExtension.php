@@ -2,7 +2,7 @@
 
 namespace Welcomango\Bundle\TagBundle\Twig;
 
-use Welcomango\Model\Tag;
+use Welcomango\Model\SpokenLanguage;
 
 /**
  * Class DisplayTagExtension

@@ -43,6 +43,11 @@
             <argument type="service" id="security.context" />
         </service>
 
+        <service id="user.display_langauge" class="Welcomango\Bundle\UserBundle\Twig\DisplayLanguageExtension">
+            <argument>%language_levels%</argument>
+            <tag name="twig.extension"/>
+        </service>
+
         <service id="welcomango.registration_completed" class="Welcomango\Bundle\UserBundle\Listener\RegistrationConfirmedListener">
             <argument type="service" id="router"/>
             <tag name="kernel.event_subscriber"/>

@@ -760,9 +760,7 @@ div.dotted-line span {
     height:100px;
     width:70px;
     margin-top:-100px;
-    background-size:   cover;
-    background-repeat: no-repeat;
-    background-position: center center;
+    background: url('/bundles/welcomangocore/images/welcomango-picto-md.svg') no-repeat center center;
 }
 
 .experience-city-picto .experience-picto-note{
@@ -989,12 +987,11 @@ a h4:hover{
     float:left;
 }
 
-/* //////////////////////////////////////////////////////// */
-/* ////////////////   AVAILABILITIES  ///////////////////// */
-/* //////////////////////////////////////////////////////// */
-
-.availability{
-
+.experience-user-info-title{
+    font-family: Montserrat;
+    font-weight: 400;
+    text-transform: uppercase;
+    opacity: .9;
 }
 
 
@@ -1591,4 +1588,31 @@ a .front-menu-user-picture{
     form .row [class*='col-']:first-child {
         padding-left: 7px !important;
     }
+}
+
+body .ui-autocomplete .ui-menu-item{
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: .01em;
+    line-height: 25px;
+    padding: 5px 0 5px 35px;
+    font-style: normal;
+    white-space: normal;
+    color: #2c2c2c;
+    background: url('/bundles/welcomangocore/images/welcomango-picto-full-grey.svg') no-repeat 6px;
+}
+
+body .ui-autocomplete .ui-menu-item.ui-state-focus{
+    /*background: #fddbd2;*/
+
+    background: #F34B1F url('/bundles/welcomangocore/images/welcomango-picto-full-grey.svg') no-repeat 6px;
+    color: white !important;
+    border:white;
+}
+
+.ui-autocomplete {
+    max-height: 200px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
 }

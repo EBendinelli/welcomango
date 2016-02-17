@@ -58,9 +58,9 @@
                     <div id="experience-city">
                         <div class="experience-city">
                             <div class="m-l-20 p-b-20">
-                                <div class="experience-city-picto" style="background-image:url({{ asset('img/welcomango-picto.png') }}">
                                     {# TODO see if we add the note in this mango. If so, add white BG to the picture #}
-                                    {#<div class="experience-picto-note">
+                                <div class="experience-city-picto">
+                                {#<div class="experience-picto-note">
                                         <h4 class="text-primary bold">{{ experience.getAverageNote }}<i class="fa fa-star fa-sm"></i></h4>
                                     </div>#}
                                 </div>
@@ -207,13 +207,16 @@
                     <!-- USER INFO CONTENT-->
                     <div class="experience-user-info">
                         <div class="dotted-line"><span></span></div>
+                        <h6 class="text-center experience-user-info-title p-t-15">
+                            {{ 'global.about'|trans }}
+                        </h6>
+                        <p class="p-t-5">{{ experience.getCreator.getDescription|truncate(200) }}</p>
+                        <h6 class="text-center experience-user-info-title p-t-15">
+                            {{ 'global.spokenLanguages'|trans }}
+                        </h6>
                         <div class="text-center m-b-15 ">
-                            {% for language in experience.getCreator.getSpokenLanguages.getValues %}
-                                <div class="flag flag-xs" role="image"  style="background: url({{ asset('img/countries/'~ language.language.flagLabel|lower ~'.svg') }});"></div>
-                            {% endfor %}
-
+                            {{ display_language(experience.getCreator.getSpokenLanguages)|raw }}
                         </div>
-                        <p>{{ experience.getCreator.getDescription|truncate(200) }}</p>
                     </div>
                     <!-- BOOKING  AND PRICE PART -->
                     <div class="bg-master-lighter experience-bottom-user">
