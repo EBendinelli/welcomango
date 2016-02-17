@@ -78,9 +78,7 @@
                                             <i class="fa fa-language fa-lg"></i>
                                             <span class="text-black semi-bold">{{ 'profile.spokenLanguages'|trans }}</span>
                                         </div>
-                                        {% for language in user.getSpokenLanguages.getValues %}
-                                            <div class="flag flag-xs" role="image"  style="background: url({{ asset('img/countries/'~ language.language.flagLabel|lower ~'.svg') }});"></div>
-                                        {% endfor %}
+                                        {{ display_language(user.getSpokenLanguages)|raw }}
 
                                     </div>
                                 </div>

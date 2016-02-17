@@ -50,7 +50,7 @@ class DisplayLanguageExtension extends \Twig_Extension
         //TODO: return the icon once they are done
         $icons = array();
         foreach($languages as $languages){
-            $icons[] = '<div class="fs-16 m-b-5">'.$languages->getLanguage().' ('.$this->levels[$languages->getLevel()].')</div>';
+            $icons[] = '<div class="m-b-5">'.$languages->getLanguage().' ('.$this->levels[$languages->getLevel()].')</div>';
         }
         $languageResult = implode('', $icons);
         return $languageResult;
