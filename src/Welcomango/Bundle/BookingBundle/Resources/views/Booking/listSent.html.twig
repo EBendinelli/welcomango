@@ -124,8 +124,8 @@
                 </table>
                 {% if bookings.count == 0 %}
                     <div class="col-md-12 text-center alert alert-warning">
-                        <i class="fa fa-frown-o m-r-5"></i>{{ 'booking.noRequestFound' }}
-                        <div><strong><a class="alert-warning" href="{{ path('front_experience_list') }}">{{ 'booking.explore' }}</a></strong></div>
+                        <i class="fa fa-frown-o m-r-5"></i>{{ 'booking.noRequestFound'|trans }}
+                        <div><strong><a class="alert-warning" href="{{ path('front_experience_list') }}">{{ 'booking.explore'|trans }}</a></strong></div>
                     </div>
                 {% endif %}
                 {% include 'WelcomangoCoreBundle:CRUD:pagination.html.twig' with {

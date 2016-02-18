@@ -80,7 +80,7 @@ class UserType extends AbstractType
             'second_options'  => array('label' => 'form.user.password.validate'),
         ));
 
-        $builder->add('currentCity', new CityType(null, 'currentyCity'));
+        $builder->add('currentCity', new CityType(null, 'currentCity'));
 
         $builder->add('fromCity', new CityType(null, 'fromCity'));
 

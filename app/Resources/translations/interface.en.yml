@@ -163,6 +163,7 @@ profile.deleteExperience: Delete your experience
 profile.hiThere: Hi there!
 profile.completeProfile: Your profile is a bit empty, how about completing it a bit? Add a description and the language you master!
 profile.createExperience: Create an<br/> experience!
+profile.title.createExperience: Create an experience
 profile.atHome: At home?
 profile.createExperienceSuggestion: How about proposing a tour of your city? Go and create your first experience! (No idea? <a href="%route%">Read this!</a>)
 
@@ -262,6 +263,7 @@ booking.noRequestFound: No request found yet
 booking.requestFrom: Request from <a href="%route%" class="text-primary semi-bold">%name%</a> for </a> for <span class="text-primary">%time%</span>
 booking.action.acceptedMessage: You can now write a message to %name% and give him more details for the meeting point :)
 booking.experience.deleted: It's seems that %name% deleted this experience. Get in touch with him/her to know more about this.
+booking.explore: Explore experiences available
 
 
 page.writtenBy: By %author%
@@ -360,7 +362,7 @@ username.free: Username free
 email.taken: Email adress already used
 email.free: Email address available
 
-media.drop_files_here: Drop your photos here
+medias.drop_files_here: Drop your photos here
 city.pleaseSelect: Please select a city among the suggestions
 
 form.booking.desiredDate: Desired date
