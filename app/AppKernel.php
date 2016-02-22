@@ -39,7 +39,8 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
-            new Craue\FormFlowBundle\CraueFormFlowBundle()
+            new Craue\FormFlowBundle\CraueFormFlowBundle(),
+            new Welcomango\Bundle\CurrencyBundle\WelcomangoCurrencyBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

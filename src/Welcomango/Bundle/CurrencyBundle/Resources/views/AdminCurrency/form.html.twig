@@ -1,0 +1,52 @@
+<div class="col-md-12">
+    <div class="panel panel-default portlet">
+        <div class="panel-body">
+            {{ form_start(form, {'action': save_path, 'attr': {'id': 'tagForm'}}) }}
+            {{ form_errors(form) }}
+            <ul class="nav nav-tabs nav-tabs-fillup">
+                <li class="active"><a data-toggle="tab" href="#general"><span>{{ "tag.informations.tab"|trans }}</span></a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active slide-left" id="general">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {{ form_row(form.name) }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_row(form.symbol) }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_row(form.code) }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_row(form.format) }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_row(form.position) }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_row(form.rate) }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_row(form.published) }}
+                        </div>
+                    </div>
+                    <div class="tab-pane slide-left" id="credentials">
+                        <div class="col-md-8">
+                            {#                                {{ form_row(form.roles, { 'label_helper' :  'user.helper.role'|trans }) }}
+                                                            {{ form_row(form.enabled) }}#}
+                        </div>
+                    </div>
+                    <div class="tab-pane slide-left" id="password">
+                        <div class="col-md-8">
+                            {#                                {{ form_row(form.plainPassword.first) }}
+                                                            {{ form_row(form.plainPassword.second) }}#}
+                        </div>
+                    </div>
+                </div>
+                {% include "WelcomangoCoreBundle:Form:formFooter.html.twig" with {listing : listing, update: true } only %}
+                {{ form_rest(form) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>

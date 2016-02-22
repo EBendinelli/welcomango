@@ -1,0 +1,92 @@
+{% extends "WelcomangoCoreBundle:AdminCRUD:index.html.twig" %}
+
+{% trans_default_domain "admin" %}
+
+{% block actions %}
+    {{ button.create(path('admin_currency_create'), 'currency.create'|trans) }}
+{% endblock %}
+
+{% set pager_url = path('admin_currency_list') %}
+{% set number_per_page = false %}
+{#{% set filter_url = path('experience_filters') %}#}
+
+{% block filters %}
+    {# {% include "YproxAdminCrmBundle:Experience:filter.html.twig" %}#}
+{% endblock %}
+
+{% block no_results %}
+    <div class="alert">
+        <strong>{{ 'interface.noresult'|trans({}, "interface") }}</strong>
+    </div>
+{% endblock %}
+
+{% block table_head %}
+    <tr>
+        <th class="col-md-1">{{ knp_pagination_sortable(pagination, 'currency.id'|trans, 'p.id')|raw }}</th>
+        <th class="col-md-3">{{ "booking.name"|trans }}</th>
+        <th class="col-md-1">{{ 'booking.symbol'|trans }}</th>
+        <th class="col-md-1">{{ 'booking.code'|trans }}</th>
+        <th class="col-md-2">{{ 'booking.rate'|trans }}</th>
+        <th class="col-md-1">{{ 'booking.format'|trans }}</th>
+        <th class="col-md-1">{{ 'booking.position'|trans }}</th>
+        <th>{{ "interface.actions"|trans }}</th>
+    </tr>
+{% endblock %}
+
+{% block table_body %}
+    {% include "WelcomangoCurrencyBundle:AdminCurrency:_currencyRow.html.twig" with { 'currency' : entity } %}
+{% endblock %}
+
+{% block additionnal_content %}
+
+    {# render(controller("YproxAdminCrmBundle:Experience:experiencesByLastLogin")) #}
+{% endblock %}
+
+{% block dashboard_search %}
+    <input id="experience_search" name="" type="text" class="no-boarder" placeholder="{{ "search.currency"|trans }}" style="width:250px;">
+{% endblock %}
+
+{% block search_results %}
+    <div id="currency_update_rates" class="text-center m-b-20">
+        <a href="{{ path('admin_currency_update_rates') }}" class="btn btn-lg btn-primary">{{ 'currency.updateRates'|trans }}</a>
+    </div>
+    <div id="currency_results"></div>
+{% endblock %}
+
+{% block extra_actions %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+/*
+        var timeout;
+        $(document).ready(function () {
+            $('#participation_search').val('');
+            $('#participation_search').on('keyup', function (event) {
+                var query = $(this).val();
+
+                clearTimeout(timeout);
+
+                if (query.length > 2) {
+                    timeout = setTimeout(function() {
+                        $('#spinner').css('display', 'inline');
+                        $.post("{{ path('admin_currency_search_ajax') }}", {'query': query}, function (response) {
+                        $.post("{{ path('admin_currency_search_ajax') }}", {'query': query}, function (response) {
+                            $('#spinner').css('display', 'none');
+                            $('#participation_results').html(response);
+                        }, 'html');
+                    }, 500);
+                }
+            };
+
+            $('.form-filter-select2').select2({
+            });
+        });*/
+    </script>
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}

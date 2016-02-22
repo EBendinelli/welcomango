@@ -1,0 +1,29 @@
+{% extends "::admin.html.twig" %}
+
+{% trans_default_domain "currency" %}
+
+{% set listing = path('admin_currency_list') %}
+{% form_theme form with ["::theme.html.twig"] %}
+
+{% block page_content %}
+    {{ include("WelcomangoCurrencyBundle:AdminCurrency:form.html.twig", {'save_path': path('admin_currency_edit', {'currency_id' : form.vars.value.id })}) }}
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ form_stylesheet(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $('select').select2();
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#participationForm').validate();
+        });
+    </script>
+{% endblock %}

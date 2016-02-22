@@ -1,0 +1,34 @@
+{# Complete with correct informations #}
+<tr>
+    <td>
+{#        {% include "YproxAdminCrmBundle:User:_userLink.html.twig" %}#}
+        {{ currency.getId }}
+    </td>
+    <td>
+        {{ currency.getName }}
+    </td>
+    <td>
+        {{ currency.getSymbol }}
+    </td>
+    <td>
+        {{ currency.getCode }}
+    </td>
+    <td>
+        {{ currency.rate}}
+    </td>
+    <td>
+        {{ currency.getFormat }}
+    </td>
+    <td>
+        {{ currency.getPosition }}
+    </td>
+    <td>
+        {% spaceless %}
+            <div class="btn-toolbar">
+                {{ button.edit(path('admin_currency_edit', {'currency_id': currency.id}), false, "btn-xs") }}
+                {{ button.delete(path('admin_currency_delete', {'currency_id': currency.id}), null, "btn-xs") }}
+            </div>
+        {% endspaceless %}
+    </td>
+</tr>
+

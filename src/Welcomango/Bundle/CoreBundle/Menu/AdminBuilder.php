@@ -108,6 +108,11 @@ class AdminBuilder extends ContainerAware
             'linkAttributes' => ['class' => 'fa-hand-lizard-o'],
         ));
 
+        $menu->addChild($this->translator->trans('menu.title.currency', array(), 'admin'), array(
+            'route'          => 'admin_currency_list',
+            'linkAttributes' => ['class' => 'fa fa-eur'],
+        ));
+
         $menu->addChild($this->translator->trans('menu.title.tag', array(), 'admin'), array(
             'route'          => 'admin_tag_list',
             'linkAttributes' => ['class' => 'fa fa-tag'],
