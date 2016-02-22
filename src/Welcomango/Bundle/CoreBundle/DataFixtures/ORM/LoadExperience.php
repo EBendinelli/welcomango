@@ -8,6 +8,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
 use Welcomango\Model\Experience;
+use Welcomango\Model\Currency;
 
 class LoadExperienceData extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface
 {
@@ -20,6 +21,9 @@ class LoadExperienceData extends AbstractFixture implements FixtureInterface, Or
 
         $userRepo = $manager->getRepository('Welcomango\Model\User');
         $users = $userRepo->findAll();
+
+        $currencyRepo = $manager->getRepository('Welcomango\Model\Currency');
+        $currencies = $currencyRepo->findAll();
 
         $tagRepo = $manager->getRepository('Welcomango\Model\Tag');
         $tags = $tagRepo->findAll();
@@ -66,6 +70,8 @@ class LoadExperienceData extends AbstractFixture implements FixtureInterface, Or
             $entry->setPricePerHour(rand(5,50));
             $entry->setMaximumParticipants(rand(1,10));
 
+            $entry->setCurrency($currencies[rand(0,4)]);
+
             $randTags = array();
             for($i=0;$i<4;$i++){
                 $randTag = rand(0,15);
@@ -87,6 +93,6 @@ class LoadExperienceData extends AbstractFixture implements FixtureInterface, Or
     public function getOrder()
     {
         //Define the order in which the fixtures are executed
-        return 7;
+        return 8;
     }
 }

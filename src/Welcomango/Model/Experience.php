@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\Validator\Constraints as Assert;
 
 use Welcomango\Bundle\ExperienceBundle\Validator\Constraints as WelcomangoAssert;
+use Welcomango\Model\Currency;
 
 /**
  * Experience
@@ -107,6 +108,14 @@ class Experience
      * )
      */
     private $pricePerHour;
+
+    /**
+     * @var Currency
+     *
+     * @ORM\ManyToOne(targetEntity="Currency")
+     * @ORM\JoinColumn(name="currency_id", referencedColumnName="id", nullable=true)
+     */
+    private $currency;
 
     /**
      * @var string
@@ -410,6 +419,26 @@ class Experience
     public function getPricePerHour()
     {
         return $this->pricePerHour;
+    }
+
+    /**
+     * Set currency
+     *
+     * @param Currency $currency
+     */
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
+    }
+
+    /**
+     * Get currency
+     *
+     * @return Currency
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
     }
 
     /**

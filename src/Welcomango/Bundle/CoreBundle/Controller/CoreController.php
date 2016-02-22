@@ -52,6 +52,32 @@ class CoreController extends BaseController
     /**
      * @param Request    $request
      *
+     * @Route("/currency", name="front_currency_select")
+     * @Method({"GET", "POST"})
+     * @Template()
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function currencyAction(Request $request)
+    {
+        $currencyCode = $request->get('currency');
+        $page = $request->get('page');
+
+        $session = $this->get('session');
+        $currencyRepo = $this->getRepository('Welcomango\Model\Currency');
+        $currency = $currencyRepo->findOneBy(['code' => $currencyCode]);
+
+        $session->set('currency', $currency );
+
+        return $this->redirect($page);
+
+        die();
+    }
+
+
+    /**
+     * @param Request    $request
+     *
      * @Route("/contact", name="front_contact_us")
      * @Method({"GET", "POST"})
      * @Template()

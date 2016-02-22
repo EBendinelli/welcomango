@@ -54,13 +54,7 @@
             <div class="card-bottom-triangle {% if darkBg is defined %}card-bottom-triangle-dark{% endif %}">
             </div>
             <div class="card-bottom-price text-right text-white fs-14 font-montserrat">
-                {% if experience.pricePerHour %}
-                    {{ experience.pricePerHour }}€/h
-                {% elseif experience.contribution %}
-                    {{ 'global.contribution'|trans }}
-                {% else %}
-                    {{ 'global.free'|trans }}
-                {% endif %}
+                {{ display_price(experience) }}
             </div>
         </div>
     </div>

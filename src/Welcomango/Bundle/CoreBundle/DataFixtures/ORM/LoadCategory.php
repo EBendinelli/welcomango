@@ -36,6 +36,6 @@ class LoadCategoryData extends AbstractFixture implements FixtureInterface, Orde
     public function getOrder()
     {
         //Define the order in which the fixtures are executed
-        return 11;
+        return 12;
     }
 }

@@ -264,12 +264,14 @@ booking.requestFrom: Request from <a href="%route%" class="text-primary semi-bol
 booking.action.acceptedMessage: You can now write a message to %name% and give him more details for the meeting point :)
 booking.experience.deleted: It's seems that %name% deleted this experience. Get in touch with him/her to know more about this.
 booking.explore: Explore experiences available
+booking.status: Status:
+booking.contribution: Contribution
 
 
 page.writtenBy: By %author%
 
 article.portraits: Portraits
-article.portraitHeader: A glance at our amazing cotranslate.emmunity
+article.portraitHeader: A glance at our amazing community
 article.currentlyLivingIn: Currently living in <span class="text-primary">%city%</span>
 article.portraitIntro: Thanks to Welcomango, you may get the chance to explore new places through new people. But WE live exclusively through these people. People like you and us, with dreams, fears and hopes. This page gives you a chance to learn a bit more about the members of the community and encourage you to take a leap into their world.
 article.portraitTitle: One community. Different faces

@@ -34,13 +34,7 @@
 
         <div class="card-bottom bg-pattern-dark " >
             <div class="card-bottom-price text-right text-white fs-14 font-montserrat" style="padding-top: 7px;">
-                {% if experience.pricePerHour %}
-                    {{ experience.pricePerHour }}€/h
-                {% elseif experience.contribution %}
-                    {{ 'global.contribution'|trans }}
-                {% else %}
-                    {{ 'global.free'|trans }}
-                {% endif %}
+                {{ display_price(experience) }}
             </div>
         </div>
     </div>

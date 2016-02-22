@@ -43,6 +43,6 @@ class LoadPageData extends AbstractFixture implements FixtureInterface, OrderedF
     public function getOrder()
     {
         //Define the order in which the fixtures are executed
-        return 12;
+        return 13;
     }
 }

@@ -14,6 +14,10 @@
         {{ parent() }}
     {% endblock %}
 
+    {% block contribution %}
+        {{ parent() }}
+    {% endblock %}
+
     {% block booking_review %}
         {% if booking.status == 'Happened' and not booking.getFeedbackFromTraveler %}
             <div class="row bg-white p-l-20 p-b-20 p-t-20 p-r-20 m-b-20 b-a b-thick b-warning">

@@ -231,7 +231,7 @@
                                 <div class="experience-bottom-price bg-master-light" {% if app.user != experience.getCreator %}onclick="userToggleBooking(){% endif %}">
                                     {% if experience.pricePerHour %}
                                         <div class="experience-price">
-                                            {{ experience.pricePerHour }}€/h
+                                            {{ display_price(experience) }}
                                         </div>
                                     {% elseif experience.contribution %}
                                         <div class="experience-contribution-container">

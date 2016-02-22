@@ -129,6 +129,6 @@ class LoadAvailabilityData extends AbstractFixture implements FixtureInterface, 
     public function getOrder()
     {
         //Define the order in which the fixtures are executed
-        return 8;
+        return 9;
     }
 }
