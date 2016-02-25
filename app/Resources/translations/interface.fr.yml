@@ -1,115 +1,104 @@
-generic.title.meta: Welcomango - Places through people
+generic.title.meta: Welcomango - Des lieux à travers leurs occupants
 
-interface.edit: Edit
-interface.delete: Delete
-interface.moderate: Moderate
-interface.pending: Pending
-interface.giveFeedback: Give feedback
-interface.view: View
-interface.comment: Comment
+interface.edit: Editer
+interface.delete: Supprimer
+interface.moderate: Modérer
+interface.pending: En attente
+interface.giveFeedback: Faire un retour
+interface.view: Voir
+interface.comment: Commenter
 interface.contact: Contact
-interface.waitingForValidation: Waiting for validation
-interface.search: Search
-interface.warning: Warning
-interface.send: Send
-interface.clear: Clear
+interface.waitingForValidation: En attente de validation
+interface.search: Rechercher
+interface.warning: Attention
+interface.send: Envoyer
+interface.clear: Reset
 interface.login: Login
 interface.username: Username
-interface.password: Password
-interface.first: First
-interface.previous: Previous
-interface.next: Next
-interface.last: Last
-interface.save: Save
-interface.cancel: Cancel
-interface.remove: Remove
+interface.password: Mot de passe
+interface.first: Premier
+interface.previous: Precedent
+interface.next: Suivant
+interface.last: Dernier
+interface.save: Sauvegarder
+interface.cancel: Annuler
+interface.remove: Supprimer
 
-language.english: English
-language.french: French
+language.english: Anglais
+language.french: Français
 
-login.rememberMe: Remember me
-login.forgotPassword: Forgot your password?
-login.resetPassword: Reset your password
-login.password.requestText: So you forgot your password... You should have listen to your mom and eaten more carrots!
-login.password.alreadyRequestText: It seems that you have already requested your password. Check your spam folder or report a problem
-login.password.changeTitle: Change your password
-login.password.currentHint: Please give your current password before proceding
-login.password.passwordHint: Try to keep something strong with letter, special characters and uppercase
-login.resetting.successTitle: Reset email Sent
-login.resetting.successSubTitle: Try not to forget it the next time!
-login.noAccount: No account yet?
+login.rememberMe: Se souvenir de moi
+login.forgotPassword: Mot de passe oublié?
+login.resetPassword: Réinitialiser votre mot de passe
+login.password.requestText: Alors comme ça vous avez oublié votre mot de passe.... Vous auriez du écouter votre maman et manger plus de carottes!
+login.password.alreadyRequestText: Il semble que vous ayez déjà demandé votre mot de passe. Vérifiez dans vos spams ou signalez un problème
+login.password.changeTitle: Changer votre mot de passe
+login.password.currentHint: Merci de taper votre mot de passe actuel avant de continuer
+login.password.passwordHint: Essayez de garder un mot de passe solide avec des lettres, des chiffres et des caractères spéciaux
+login.resetting.successTitle: Email de réinitialisation envoyé
+login.resetting.successSubTitle: Essayez de ne pas l'oublier la prochaine fois!
+login.noAccount: Pas encore de compte?
 
 menu.title.experiences: Experiences
 menu.title.portraits: Portraits
-menu.title.howTo: How To
-menu.title.signUp: Sign Up
+menu.title.howTo: Comment faire
+menu.title.signUp: S'inscrire
 
-global.viewProfile: View profile
-global.comments: Comments
-global.feedbacks: Feedbacks
-global.welcomeBack: Welcome back
-global.backHome: Back to home
-global.backExperiences: Back to the experiences
-global.backToYourExperiences: Your experiences
-global.backProfile: Back to profile
-global.joinNow: Join now
+global.viewProfile: Voir son profil
+global.comments: Commentaire
+global.feedbacks: Retours
+global.welcomeBack: Bienvenue
+global.backHome: Retour à l'accueil
+global.backExperiences: Retour aux experiences
+global.backToYourExperiences: Vos experiences
+global.backProfile: Retour au profil
+global.joinNow: Nous rejoindre
 global.experience: Experience
 global.date: Date
-global.meetingTime: Meeting time
+global.meetingTime: Heure du rendez-vous
 global.status: Status
 global.actions: Actions
-global.requestedTime: Request time
-global.user: User
+global.requestedTime: Heure demandée
+global.user: Utilisateur
 global.experience: Experience
-global.booking: Booking
-global.registration: Registration
+global.booking: Reservation
+global.registration: Inscription
 global.email: Email
-global.you: You
-global.theTeam: The team
-global.feedbackButton: A bug? An error? <br/> Click and give us your feedback!
-global.explore: Explore
-global.free: Free
+global.you: Vous
+global.theTeam: L'équipe
+global.feedbackButton: Un bug? Une erreur? <br/> Clickez et dites nous!
+global.explore: Explorer
+global.free: Gratuit
 global.contribution: Contribution
-global.about: About
-global.spokenLanguages: Spoken languages
-global.sitemap: Sitemap
-global.news: News
-global.portraits: Portraits
-global.experiences: Experiences
-global.thanks: Thanks
-global.legal: Legal
-global.giveUsFeedback: Give us a feedback
-global.register: Register
-global.contactUs: Contact us
-global.discover: Discover
-global.currencyAndLanguage: Currency & Language
+global.about: A propos
+global.spokenLanguages: Langues parlées
 
-homepage.title1: Places Through People
-homepage.subTitle1: Find enthusiastic people willing to show you a different side of their city
-homepage.nextSubTitle1: And never travel like a tourist again
-homepage.title2: Join the community
-homepage.subTitle2: And show the world what is awesome about where you live
-homepage.nextSubTitle2: Meet people with common interested, get intrigued by yout destination, discover a different side of the places you visit
-homepage.featuredExperiences: Our favourite experiences
-homepage.bestRated: Best rated experiences
-homepage.howItWorks: How it works
-homepage.3steps: 3 steps to enter a new traveling dimension
-homepage.stepsText: Welcomango put travelers and locals in contact to explore places through humans and and passions
-homepage.step1: Type your next destination
-homepage.step2: Book an experience with a local
-homepage.step3: Explore the city
-homepage.step1Note: Search for the city where you planned you next trip or get yourself be surprised by a destination where an experience is proposed.
-homepage.step2Note: Find a unique and human experience with a particulare perception of the city. Music, nature, nightlife, everything is possible.
-homepage.step3Note: Discover the place with a local and explore your destination in a completely new way.
-homepage.whereItStarts: This is where it all starts
-homepage.bestOfBest: The best of the best
-homepage.keepInTouch: Keep in touch
-homepage.newsletterText: Leave your email and stay updated about the evolution of Welcomango
-homepage.subscribeNote: We value your <strong>privacy</strong>. None of the details supplied will be shared with external parties
-homepage.learnMore: Lear more
-homage.shareEnjoy: Share/Enjoy - Take/Give
-homepage.meAGuide: Me a guide?
-homepage.welcomangoIsAbout: Welcomango is about traveling thorough people but also welcoming travelers in your town.<br/>Join the community and propose a personal tour of your city.
+homepage.title1: Des lieux à travers leurs occupants
+homepage.subTitle1: Trouvez des locaux prêts à vous montrez leu ville comme ils l'aiment
+homepage.nextSubTitle1: Et ne voyagez plus jamais comme un touriste
+homepage.title2: Rejoignez la communauté
+homepage.subTitle2: Et montrez au monde à quel point votre lieu de vie est génial
+homepage.nextSubTitle2: Rencontrez des gens avec des intérêts communs, soyez surpris par votre destination et découvrer une autre facette des lieux que vous visitez
+homepage.featuredExperiences: Nos experiences préferées
+homepage.bestRated: Les experiences les mieux notées
+homepage.howItWorks: Comment ça marche
+homepage.3steps: 3 étapes pour voyager différement
+homepage.stepsText: Welcomango met en contact les locaux et les voyageurs pour vous permettre de découvrir des lieux à travers des personnes et leurs passions
+homepage.step1: Tapez votre destination
+homepage.step2: Réserver une experience avec un local
+homepage.step3: Explorez la ville
+homepage.step1Note: Recherchez un experience sur votre prochain lieu de destination ou laissez vous surprendre par des experiences dans des lieux inconnus.
+homepage.step2Note: Trouvez une experience humain avec une perception unique de la ville. Musique, nature, histoire, tout est possible .
+homepage.step3Note: Découvrez un lieu avec un local et explorer votre destination d'une nouvelle manière.
+homepage.whereItStarts: C'est ici que tout commence
+homepage.bestOfBest: La crème de la crème
+homepage.keepInTouch: Restez en contact
+homepage.newsletterText: Laissez votre email et restez informés de l'évolution de Welcomango
+homepage.subscribeNote: Nous tenons à votre <strong>vie privé</strong>. Aucun des détails fournis ne sera partagé avec qui que ce soit
+homepage.learnMore: En savoir plus
+homage.shareEnjoy: Partagez/Profitez - Prenez/Donnez
+homepage.meAGuide: Moi, un guide?
+homepage.welcomangoIsAbout: Welcomango est une histoire de voyage mais aussi d'accueil.<br/> Rejoignez la communauté et proposez un tour personnel de votre ville
 
 profile.menu: Menu
 profile.message: Messages
@@ -282,6 +271,7 @@ booking.contribution: Contribution
 
 page.writtenBy: By %author%
 
+article.portraits: Portraits
 article.portraitHeader: A glance at our amazing community
 article.currentlyLivingIn: Currently living in <span class="text-primary">%city%</span>
 article.portraitIntro: Thanks to Welcomango, you may get the chance to explore new places through new people. But WE live exclusively through these people. People like you and us, with dreams, fears and hopes. This page gives you a chance to learn a bit more about the members of the community and encourage you to take a leap into their world.
@@ -293,6 +283,7 @@ contact.subText: If your message concerns a bug, don't hesitate to describe your
 contact.sent.title: Message successfully sent!
 contact.sent.subTitle: We can already hear it flying toward us
 contact.sent.message: Thanks for contacting us, we will do our best to handle your query and come back to you as soon as possible
+content.portraits: Portraits
 
 registration.title: The first step of your next adventure
 registration.joinWelcomango: Join the Welcomango community to discover a new way of traveling and enhance your life experience.

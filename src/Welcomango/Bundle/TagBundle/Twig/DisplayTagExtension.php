@@ -15,7 +15,7 @@ class DisplayTagExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('display_tag', array($this, 'displayTag'))
+            new \Twig_SimpleFunction('display_tag', array($this, 'displayTag'), ['is_safe' => ['html']])
         );
     }
 
@@ -24,18 +24,26 @@ class DisplayTagExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function displayTag($tags)
+    public function displayTag($tags, $onlyText = false)
     {
         if($tags->isEmpty()){
             return '';
         }
 
-        //TODO: return the icon once they are done
+        if($onlyText){
+            foreach($tags as $tag){
+                $icons[] = $tag->getName();
+            }
+            $tagsResult = implode(' | ', $icons);
+            return $tagsResult;
+        }
+
+        $tagsResult = '<ul class="tags-container">';
         $icons = array();
         foreach($tags as $tag){
-            $icons[] = $tag->getName();
+            $icons[] = '<li><img class="tags-svg m-b-5" src="/bundles/welcomangocore/images/icons/v2/'.str_replace(' ','', strtolower($tag->getName())).'.svg"><br/>'.$tag->getName().'</li>';
         }
-        $tagsResult = implode(' | ', $icons);
+        $tagsResult .= implode('', $icons).'</ul>';
         return $tagsResult;
     }
 

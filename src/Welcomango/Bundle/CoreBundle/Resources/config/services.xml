@@ -5,6 +5,13 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="app.locale_listener"
+                 class="Welcomango\Bundle\CoreBundle\EventListener\LocaleListener">
+            <argument>%kernel.default_locale%</argument>
+
+            <tag name="kernel.event_subscriber" />
+        </service>
+
         <service id="welcomango.menu_builder" class="Welcomango\Bundle\CoreBundle\Menu\AdminBuilder">
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="security.token_storage" />

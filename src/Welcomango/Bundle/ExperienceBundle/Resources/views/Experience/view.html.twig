@@ -18,7 +18,7 @@
                             {{ include("WelcomangoCoreBundle:Core:note.html.twig", { 'note': experience.getAverageNote, 'size': 'medium'}) }}
                         </div>
                         <p class="fs-12 font-arial text-white ">{{ 'experience.experienceShortText'|trans({'%experienceDuration%': experience.estimatedDuration, '%experienceCreator%': experience.getCreator.firstname}) }}</p>
-                        <div class="text-center text-white">{{ display_tag(experience.getTags) }}</div>
+                        <div class="text-center text-white">{{ display_tag(experience.getTags, true) }}</div>
                         {% if app.user == experience.getCreator %}
                             <a href="{{ path('front_experience_edit', {'experience_id': experience.id}) }}" class="btn btn-lg btn-complete btn-cons btn-rounded m-t-20"><i class="fa fa-pencil"></i> {{ 'profile.editExperience'|trans }}</a>
                         {% else %}
@@ -69,40 +69,54 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane" id="experience-details">
+                    <div class="tab-pane m-l-10 " id="experience-tags">
                         <div class="row">
                             <div class="col-md-12 m-t-20">
-                                <h3>{{  'experience.details'|trans }}</h3>
-                                <div class="col-md-6">
-                                    <div >
-                                        {{  'experience.estimatedDuration'|trans }}: <span class="text-black semi-bold">{{ experience.getEstimatedDuration}}h</span>
-                                    </div>
-                                    <div >
-                                        {{  'experience.maximumParticipants'|trans }}: <span class="text-black semi-bold">{{ experience.maximumParticipants}}</span>
-                                    </div>
-                                    <div >
-                                        {% set experienceHappened = 0 %}
-                                        {% for booking in experience.bookings %}
-                                            {% if booking.status == "Happened" %}
-                                                {% set experienceHappened = experienceHappened + 1  %}
-                                            {% endif %}
-                                        {% endfor %}
-                                        {{  'experience.happenedTimes'|trans({'%number%': experienceHappened})|raw }}
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-
-                                    <div >
-                                        {{  'experience.minimunDuration'|trans }}: <span class="text-black semi-bold">{{ experience.getMinimumDuration}}h</span>
-                                    </div>
-                                    <div >
-                                        {{  'experience.maximumDuration'|trans }}: <span class="text-black semi-bold">{{ experience.getMaximumDuration}}h</span>
+                                <h3>{{  'experience.tags'|trans }}</h3>
+                                <div class="row">
+                                    <div class="col-md-12 m-t-10">
+                                        {{ display_tag(experience.getTags) }}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane" id="experience-description">
+                    <div class="tab-pane m-l-10 " id="experience-details">
+                        <div class="row">
+                            <div class="col-md-12 m-t-10">
+                                <h3>{{  'experience.details'|trans }}</h3>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div >
+                                            {{  'experience.estimatedDuration'|trans }}: <span class="text-black semi-bold">{{ experience.getEstimatedDuration}}h</span>
+                                        </div>
+                                        <div >
+                                            {{  'experience.maximumParticipants'|trans }}: <span class="text-black semi-bold">{{ experience.maximumParticipants}}</span>
+                                        </div>
+                                        <div >
+                                            {% set experienceHappened = 0 %}
+                                            {% for booking in experience.bookings %}
+                                                {% if booking.status == "Happened" %}
+                                                    {% set experienceHappened = experienceHappened + 1  %}
+                                                {% endif %}
+                                            {% endfor %}
+                                            {{  'experience.happenedTimes'|trans({'%number%': experienceHappened})|raw }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+
+                                        <div >
+                                            {{  'experience.minimunDuration'|trans }}: <span class="text-black semi-bold">{{ experience.getMinimumDuration}}h</span>
+                                        </div>
+                                        <div >
+                                            {{  'experience.maximumDuration'|trans }}: <span class="text-black semi-bold">{{ experience.getMaximumDuration}}h</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane m-l-10 " id="experience-description">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="experience-description m-t-20">
@@ -112,7 +126,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane" id="experience-pictures">
+                    <div class="tab-pane m-l-10 " id="experience-pictures">
                         <div class="row">
                             <div class="col-md-12">
                                 <h3>{{  'experience.pictures'|trans }}</h3>
@@ -390,7 +404,6 @@
         //forbiddenDates calculated earlier
         var forbidden = {{ forbiddenDates|json_encode|raw }};
         var availablePeriodsPerDate = {{ availablePeriodsPerDate|json_encode|raw }};
-        console.log(availablePeriodsPerDate);
         var periodNames = [];
         periodNames[0] = 'Early Morning';
         periodNames[1] = 'Morning';

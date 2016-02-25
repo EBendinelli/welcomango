@@ -31,6 +31,7 @@ class AppKernel extends Kernel
             new Welcomango\Bundle\EmailBundle\WelcomangoEmailBundle(),
             new Welcomango\Bundle\TagBundle\WelcomangoTagBundle(),
             new Welcomango\Bundle\ContentBundle\WelcomangoContentBundle(),
+            new Welcomango\Bundle\CurrencyBundle\WelcomangoCurrencyBundle(),
 
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
@@ -40,7 +41,6 @@ class AppKernel extends Kernel
             new EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new Craue\FormFlowBundle\CraueFormFlowBundle(),
-            new Welcomango\Bundle\CurrencyBundle\WelcomangoCurrencyBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -1,3 +1,5 @@
+{% trans_default_domain 'interface' %}
+
 <!-- BEGIN FOOTER -->
 <section class="p-b-55 p-t-75 xs-p-b-20 bg-pattern-dark">
     <div class="container">
@@ -6,32 +8,32 @@
                 <img src="{{ asset("bundles/welcomangocore/images/graphics/logo_white.png") }}" width="170" height="29" data-src-retina="{{ asset("bundles/welcomangocore/images/graphics/logo_white.png") }}" class="alt" alt="">
             </div>
             <div class="col-sm-2 col-xs-6 xs-m-b-20">
-                <h6 class="font-montserrat text-uppercase fs-14 text-white p-b-10">Sitemap</h6>
+                <h6 class="font-montserrat text-uppercase fs-14 text-white p-b-10">{{ 'global.sitemap'|trans }}</h6>
                 <ul class="no-style">
-                    <li class="m-b-5 no-padding"><a href="{{ path('page_view_slug', {'slug': 'news'}) }}" class="link text-white ">News</a></li>
-                    <li class="m-b-5 no-padding"><a href="{{ path('page_view_slug', {'slug': 'the-team'}) }}" class="link text-white">About</a></li>
-                    <li class="m-b-5 no-padding"><a href="{{ path('page_portrait_list') }}" class="link text-white">Portraits</a></li>
-                    <li class="m-b-5 no-padding"><a href="{{ path('front_experience_list') }}" class="link text-white">Experiences</a></li>
+                    <li class="m-b-5 no-padding"><a href="{{ path('page_view_slug', {'slug': 'news'}) }}" class="link text-white ">{{ 'global.news'|trans }}</a></li>
+                    <li class="m-b-5 no-padding"><a href="{{ path('page_view_slug', {'slug': 'the-team'}) }}" class="link text-white">{{ 'global.about'|trans }}</a></li>
+                    <li class="m-b-5 no-padding"><a href="{{ path('page_portrait_list') }}" class="link text-white">{{ 'global.portraits'|trans }}</a></li>
+                    <li class="m-b-5 no-padding"><a href="{{ path('front_experience_list') }}" class="link text-white">{{ 'global.experiences'|trans }}</a></li>
                 </ul>
             </div>
             <div class="col-sm-2 col-xs-6 xs-m-b-20">
-                <h6 class="font-montserrat text-uppercase fs-14 text-white p-b-10">About</h6>
+                <h6 class="font-montserrat text-uppercase fs-14 text-white p-b-10">{{ 'global.about'|trans }}</h6>
                 <ul class="no-style">
-                    <li class="m-b-5 no-padding"><a href="{{ path('page_view_slug', {'slug': 'the-team'}) }}" class="link text-white">About</a></li>
-                    <li class="m-b-5 no-padding"><a href="{{ path('page_view_slug', {'slug': 'thanks'}) }}" class="link text-white">Thanks</a></li>
-                    <li class="m-b-5 no-padding"><a href="{{ path('page_view_slug', {'slug': 'legal'}) }}" class="link text-white">Legal</a></li>
+                    <li class="m-b-5 no-padding"><a href="{{ path('page_view_slug', {'slug': 'the-team'}) }}" class="link text-white">{{ 'global.news'|trans }}</a></li>
+                    <li class="m-b-5 no-padding"><a href="{{ path('page_view_slug', {'slug': 'thanks'}) }}" class="link text-white">{{ 'global.thanks'|trans }}</a></li>
+                    <li class="m-b-5 no-padding"><a href="{{ path('page_view_slug', {'slug': 'legal'}) }}" class="link text-white">{{ 'global.legal'|trans }}</a></li>
                 </ul>
             </div>
             <div class="col-sm-2 col-xs-6 xs-m-b-20">
-                <h6 class="font-montserrat text-uppercase fs-14 text-white p-b-10">Discover</h6>
+                <h6 class="font-montserrat text-uppercase fs-14 text-white p-b-10">{{ 'global.discover'|trans }}</h6>
                 <ul class="no-style">
-                    <li class="m-b-5 no-padding"><a href="{{ path('fos_user_registration_register') }}" class="link text-white ">Register</a></li>
-                    <li class="m-b-5 no-padding"><a href="{{ path('front_contact_us') }}" class="link text-white">Give us Feedbacks</a></li>
-                    <li class="m-b-5 no-padding"><a href="{{ path('front_contact_us') }}" class="link text-white">Contact Us</a></li>
+                    <li class="m-b-5 no-padding"><a href="{{ path('fos_user_registration_register') }}" class="link text-white ">{{ 'global.register'|trans }}</a></li>
+                    <li class="m-b-5 no-padding"><a href="{{ path('front_contact_us') }}" class="link text-white">{{ 'global.giveUsFeedback'|trans }}</a></li>
+                    <li class="m-b-5 no-padding"><a href="{{ path('front_contact_us') }}" class="link text-white">{{ 'global.contactUs'|trans }}</a></li>
                 </ul>
             </div>
             <div class="col-sm-2 col-xs-6 xs-m-b-20">
-                <h6 class="font-montserrat text-uppercase fs-14 text-white p-b-10">Currency</h6>
+                <h6 class="font-montserrat text-uppercase fs-14 text-white p-b-10">{{ 'global.currencyAndLanguage'|trans }}</h6>
                 <form role="form" action="{{ path('front_currency_select') }}" method="post">
                     <div class="form-group">
                         {% set currency = app.session.get('currency') %}
@@ -45,6 +47,19 @@
                                 <option value="GBP" {% if currency_code == 'GBP' %}selected="selected"{% endif %}>GBP</option>
                                 <option value="CHF" {% if currency_code == 'CHF' %}selected="selected"{% endif %}>CHF</option>
                                 <option value="USD" {% if currency_code == 'USD' %}selected="selected"{% endif %}>USD</option>
+                        </select>
+                    </div>
+                    <input name="page" type="hidden" class="form-control" value="{{ app.request.uri }}">
+                </form>
+                <form role="form" action="{{ path('front_change_language') }}" method="post">
+                    <div class="form-group">
+                        {% set language = app.session.get('_locale') %}
+                        {% if not language %}
+                            {% set language = 'en' %}
+                        {% endif %}
+                        <select name="language" class="full-width" data-init-plugin="select2" data-disable-search="true" onchange="this.form.submit()">
+                            <option value="en" {% if language == 'en' %}selected="selected"{% endif %}>{{ 'language.english'|trans }}</option>
+                            <option value="fr" {% if language == 'fr' %}selected="selected"{% endif %}>{{ 'language.french'|trans }}</option>
                         </select>
                     </div>
                     <input name="page" type="hidden" class="form-control" value="{{ app.request.uri }}">
