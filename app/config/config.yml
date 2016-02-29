@@ -247,6 +247,25 @@ stfalcon_tinymce:
             theme: "modern"
             browser_spellcheck: true
 
+hwi_oauth:
+    connect:
+        confirmation: true
+        registration_form: welcomango.front.form.user.type
+    firewall_name: main
+    fosub:
+        username_iterations: 30
+        properties:
+            facebook: facebookId
+    resource_owners:
+        # Facebook Access
+        facebook:
+            type:                facebook
+            client_id:           1109739712422558
+            client_secret:       d804179f5070da0e874214bd07fbd34a
+            scope:               "email"
+            options:
+                display: popup
+
 welcomango_booking:
     available_status:
         - Available

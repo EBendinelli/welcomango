@@ -133,9 +133,9 @@ profile.nextVisitDetails: Is a flavor of <span class="text-primary">%experienceT
 profile.giveFeedbackToTitle: Give a feedback to <span class="text-primary">%user%</span>
 profile.giveFeedbackTitle: Give a feedback for your last experiences
 profile.rateAsLocal: Give a feedback about %user% on the time you had together!
-profile.rateMultipleAsLocal: Give a feedback to the local you met recently!
+profile.rateMultipleAsLocal: Give a feedback to the travelers you met recently!
 profile.rateAsTraveler: Give a feedback about on the time you had in <span class="text-primary">%city%</span>!
-profile.rateMultipleAsTraveler: Give a feedback to the people you guided recently!
+profile.rateMultipleAsTraveler: Give a feedback to the people who welcomed you!
 profile.newRequest: You have a new request
 profile.newRequestText: From <span class="text-primary">%user%</span> for <span class="text-primary">%experience%</span>
 profile.experienceAccepted: Your experience has been published!

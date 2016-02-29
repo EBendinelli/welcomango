@@ -46,7 +46,7 @@ menu.title.signUp: S'inscrire
 
 global.viewProfile: Voir son profil
 global.comments: Commentaire
-global.feedbacks: Retours
+global.feedbacks: Réactions
 global.welcomeBack: Bienvenue
 global.backHome: Retour à l'accueil
 global.backExperiences: Retour aux experiences
@@ -102,119 +102,119 @@ homepage.welcomangoIsAbout: Welcomango est une histoire de voyage mais aussi d'a
 
 profile.menu: Menu
 profile.message: Messages
-profile.requestsFromTravelers: Requests from Travelers
-profile.yourRequests: Your bookings
-profile.yourExperiences: Your experiences
-profile.editProfile: Edit your profile
-profile.editProfile2: Edit profile
-profile.feedbacks: Feedbacks
-profile.noteTraveler: Note as a Traveler
-profile.noteLocal: Note as a Local
-profile.welcomeBack: Welcome back %name%!
-profile.latestUpdate: Latest News
+profile.requestsFromTravelers: Demandes de voyageurs
+profile.yourRequests: Vos réservations
+profile.yourExperiences: Vos experiences
+profile.editProfile: Editer votre profil
+profile.editProfile2: Editez profil
+profile.feedbacks: Réactions
+profile.noteTraveler: Note en tant que voyageur
+profile.noteLocal: Note en tant que local
+profile.welcomeBack: Salut %name%!
+profile.latestUpdate: Dernières nouvelles
 profile.mainInfo: Information
-profile.yourExperience: Your Main Adventure
-profile.aboutYou: About You
-profile.yourNextTrip: Your next trip
-profile.nextTripDetails: Is <span class="text-primary">%experienceTitle%</span> happening in <span class="text-primary">%experienceCity%</span> with <span class="text-primary">%experienceGuide%</span> <span class="bold">%time%</span>
-profile.nextVisitGiven: Next visit planned
-profile.nextVisitDetails: Is a flavor of <span class="text-primary">%experienceTitle%</span> in which you will bring <span class="text-primary">%experienceTraveler%</span> in <span class="bold">%time%</span>
-profile.giveFeedbackToTitle: Give a feedback to <span class="text-primary">%user%</span>
-profile.giveFeedbackTitle: Give a feedback for your last experiences
-profile.rateAsLocal: Give a feedback about %user% on the time you had together!
-profile.rateMultipleAsLocal: Give a feedback to the local you met recently!
-profile.rateAsTraveler: Give a feedback about on the time you had in <span class="text-primary">%city%</span>!
-profile.rateMultipleAsTraveler: Give a feedback to the people you guided recently!
-profile.newRequest: You have a new request
-profile.newRequestText: From <span class="text-primary">%user%</span> for <span class="text-primary">%experience%</span>
-profile.experienceAccepted: Your experience has been published!
-profile.experienceAcceptededText: <span class="text-primary">%experience%</span> is now visible and bookable
-profile.experienceRefused: Your experience has been refused
-profile.experienceRefusedText: %experience% has been refused for the following reason <span class="text-danger">"%reason%"</span>
+profile.yourExperience: Votre experience phare
+profile.aboutYou: A propos de vous
+profile.yourNextTrip: Votre prochain voyage
+profile.nextTripDetails: Sera <span class="text-primary">%experienceTitle%</span> à <span class="text-primary">%experienceCity%</span> avec <span class="text-primary">%experienceGuide%</span> à <span class="bold">%time%</span>
+profile.nextVisitGiven: Prochaine visite donnée
+profile.nextVisitDetails: Est une variante de <span class="text-primary">%experienceTitle%</span> dans laquelle vous embarquerez <span class="text-primary">%experienceTraveler%</span> à <span class="bold">%time%</span>
+profile.giveFeedbackToTitle: Faites un retour à <span class="text-primary">%user%</span>
+profile.giveFeedbackTitle: Donner votre avis sur la dernière experiences que vous avez vécu
+profile.rateAsLocal: Donner votre avis à %user% sur le moment que vous avez partagés!
+profile.rateMultipleAsLocal: Donner votre avis sur les voyageurs que vous avez accueilli dernièrement!
+profile.rateAsTraveler: Donner un retour sur le temps que vous avez passé à <span class="text-primary">%city%</span>!
+profile.rateMultipleAsTraveler: Faites un retour aux gens qui vous ont accueilli récemment!
+profile.newRequest: Vous avez une nouvelle demande
+profile.newRequestText: De la part de <span class="text-primary">%user%</span> pour <span class="text-primary">%experience%</span>
+profile.experienceAccepted: Votre experience à été publiée!
+profile.experienceAcceptededText: <span class="text-primary">%experience%</span> est maintenant visible et réservable par tous!
+profile.experienceRefused: Votre expérience à été refusée
+profile.experienceRefusedText: %experience% à été refusé pour la raison suivante: <span class="text-danger">"%reason%"</span>
 profile.occupation: Occupation
-profile.hometown: Hometown
-profile.gender: Gender
-profile.spokenLanguages: Spoken languages
-profile.edit.emailNote: Emails cannot be modified directly, please contact us if you want to change the address used
-profile.edit.languageNote: You can here manage the different languages you speak or understand. That's a great way to make sur you'll be able to communicate properly with your next guide or guest!
-profile.edit.currentCityNote: This indicates the city you are currently living in. The one you'll guide people throught. The chosen one!
-profile.edit.descriptionNote: Give people a few words about you! Let them know what you love, what you hate, inspires you and how being with you is the probably the best thing that could ever happen to them.
-profile.edit.occupationNote: You current occupation. You can be a student, an architect, a gardener, an hedonist , and even a dentist. We will still love you.
-profile.edit.usernameNote: This is only used by you to login. It is just like you: Unique.
-profile.edit.profilePictureNote: We already know you are beautiful, but people might want to verify that. Upload a photo, just in case.
-profile.edit.phoneNote: This will not be displayed publicly. We might only use it to send you texts and reminders (if you want to).
-profile.edit.birthdayNote: We're not santa but if we can send you a message or a gift on your birthday we will do it
-profile.edit.topMessage: This section defines what the other traveler will see from you. <br/> Make sure to tell them how you see yourself as a traveler as well as a local when you're not on a trip!
-profile.lastExperiencesAttended: Last experiences attented by %user%
-profile.bestAdventure: Best experience
-profile.about: About %user%
-profile.picture.cropNote: Help us make you beautiful and crop your picture
-profile.picture.saveAndCrop: Crop and save your picture
-profile.picture.mustBeSquare: Sorry, but you profile picture must be a square!
-profile.created.success: Your account has been successfully created
-profile.created.emailSent: You should receive a confirmation email anytime soon. Please verify your account by clicking the link included
-profile.yourProfile: Your profile
-profile.edit.picture: Edit your picture
-profile.proposedExperiences: Proposed experiences
-profile.noExperienceProposed: No experience proposed yet
-profile.edit.clickUpload: Click to upload a photo
-profile.editExperience: Edit your experience
-profile.deleteExperience: Delete your experience
-profile.hiThere: Hi there!
-profile.completeProfile: Your profile is a bit empty, how about completing it a bit? Add a description and the language you master!
-profile.createExperience: Create an<br/> experience!
-profile.title.createExperience: Create an experience
-profile.atHome: At home?
-profile.createExperienceSuggestion: How about proposing a tour of your city? Go and create your first experience! (No idea? <a href="%route%">Read this!</a>)
+profile.hometown: Ville de naissance
+profile.gender: Genre
+profile.spokenLanguages: Langues parlées
+profile.edit.emailNote: Votre adresse email ne peut pas être modifiée directement, merci de nous contacter si besoin.
+profile.edit.languageNote: Vous pouvez ici gérer les différentes langues que vous parlez ou comprenez. Sans aucun doute le meilleur moyen de communiquer avec votre prochaine rencontre!
+profile.edit.currentCityNote: Ce champ indique la ville dans laquelle vous vivez actuellement. La ville que vous pouvez faire découvrir. l'élue!
+profile.edit.descriptionNote: Donner une petite description de vous! Faites savoir aux autre utilisateurs ce que vous aimez, ce que vous détestez, ce qui vous inspire et pourquoi vous rencontrer est probablement la chose la plus incroyable qui puisse leur arriver!
+profile.edit.occupationNote: Votre activité actuelle. Vous pouvez être étudiant, architecte, jardinnier, hédoniste ou même un dentiste. On vous aime quand même.
+profile.edit.usernameNote: Ce nom d'utilisateur est uniquement utilisé quand vous vous connectez. Il est comme vous: Unique.
+profile.edit.profilePictureNote: Nous savons déjà que vous êtes beau. Mais certaines personnes vont peut être vouloir vérifier. Ajoutez une photo, juste au cas où.
+profile.edit.phoneNote: Cette information ne sera pas diffusée publiquement.Nous ne l'utiliserons que pour vous envoyer des messages de rappels (si vous le voulez bien).
+profile.edit.birthdayNote: Nous n'avons pas encore de partenariat avec le père noel mais on peut toujours vous envoyer un petit mot gentil pour votre anniversaire
+profile.edit.topMessage: Ce section définit ce que les autres utilisateurs vont savoir de vous.<br/> Essayez de leur faire sentir comment vous vous percevez en tant que voyageur mais aussi en temps de local quand vous n'êtes pas en voyage!
+profile.lastExperiencesAttended: Dernières experiences à laquelle à participé %user%
+profile.bestAdventure: Meilleur experience
+profile.about: A propos de  %user%
+profile.picture.cropNote: Aidez nous à vous rendre encore plus beau et placez votre visage dans le carré
+profile.picture.saveAndCrop: Découper et sauver
+profile.picture.mustBeSquare: Désolé, mais votre photo doit être dans un carré!
+profile.created.success: Votre compte à été créé avec succès
+profile.created.emailSent: Vous devriez recevoir un email de confirmation dans les plus brefs délais. Merci de vérifier votre compte en cliquant sur le lien inclu dans l'email
+profile.yourProfile: Votre profile
+profile.edit.picture: Editer votre photo
+profile.proposedExperiences: Experiences proposées
+profile.noExperienceProposed: Pas d'experience proposée
+profile.edit.clickUpload: Cliquer pour ajouter une photo
+profile.editExperience: Editer votre experience
+profile.deleteExperience: Supprimer votre experience
+profile.hiThere: Salut!
+profile.completeProfile: Votre profile est un peu vide, et si vous ajoutiez deux trois infos? Commence par remplir votre description et renseigner les langues que vous maitrisez!
+profile.createExperience: Créer une <br/> expérience!
+profile.title.createExperience: Créer une expérience
+profile.atHome: A la maison?
+profile.createExperienceSuggestion: Et si vous proposier une visite de votre ville? Suivez le lien et créer votre première experience! (Pas d'idée? <a href="%route%">Jetez un oeil à cet article!</a>)
 
 experience.tags: Tags
-experience.list.subHeader: Time to find your amazing Welcomanguide
-experience.experienceShortText: A %experienceDuration%h adventure proposed by %experienceCreator%
+experience.list.subHeader: Il est temps de trouver votre prochaine rencontre
+experience.experienceShortText: Une aventure de %experienceDuration%h proposée par %experienceCreator%
 experience.details: Details
-experience.estimatedDuration: Estimated duration
-experience.minimunDuration: Minimum duration
-experience.maximumDuration: Maximum duration
-experience.maximumParticipants: Maximum Participants
-experience.minimumParticipants: Minimum Participants
-experience.happenedTimes: experience already happened <span class="text-black semi-bold">%number% time(s)</span>
+experience.estimatedDuration: Durée estimée
+experience.minimunDuration: Durée minimum
+experience.maximumDuration: Durée maximum
+experience.maximumParticipants: Nombre maximum de participants
+experience.minimumParticipants: Nombre minimum de participants
+experience.happenedTimes: Experience déjà vécue <span class="text-black semi-bold">%number% fois</span>
 experience.description: Description
-experience.pictures: Pictures
-experience.sorryNoPictures: Sorry, it seems that this user did not add any photo...
-experience.refusedWhy: Why has my experience been refused?
-form.experience.keyword: Search terms...
-form.experience.date: Dates available
-form.experience.minParticipantsAccepted: Minimum number of participants
+experience.pictures: Photos
+experience.sorryNoPictures: Désolé, il semble qu'il n'y a pas de photo pour cette experience...
+experience.refusedWhy: Pourquoi mon experience a-t-elle été refusée
+form.experience.keyword: Mots-clefs...
+form.experience.date: Dates disponibles
+form.experience.minParticipantsAccepted: Nombre minimum de participants
 form.experience.contribution: Contribution
-form.experience.endDate: End date
-form.experience.startDate: Start date
-experience.list.title: Experiences over the world
-experience.noFeedbacksReceived: This user has not received any feedback yet
-experience.noNoteYet: No note received yet
-experience.attended: Experience attended
-experience.pendingRequest: Pending request
-experience.sendRequest: Send a request
+form.experience.endDate: Date de fin
+form.experience.startDate: Date de fin
+experience.list.title: Experiences partout dans le monde
+experience.noFeedbacksReceived: Cet utilisateur n'a pas encore reçu de retours
+experience.noNoteYet: Pas de notes reçu
+experience.attended: Experience proposée
+experience.pendingRequest: Requête en attente
+experience.sendRequest: Envoyer une demande
 
-experience.create.titleNote: This is the title of your experience, it should describe what will happen with you in your city in a few word. Try to make it appealing and simple like <i>"A fantastic bike journey"</i> for a bike tour, <i>"A city under siege"</i> for a history related experience or <i>"The crazy underground side of a business city"</i> for a tour of the underground places. <span class="bold">Make it sound like a movie title!</span> <br/><br/>There is <span class="bold">no need to include the name of the city</span>.
-experience.create.descriptionNote: Now we are talking! This is the core of your experience! This section must give a good overview of what a traveler should expect when meeting with you. No need to talk too much about the city, tell a bit more about what is the experience going to be about about and how it represents the way you live and love your city.
-experience.create.mediaNote: Add some photos to your experience. This give some falvor to your page while giving a snapshot of what the adventure with you will look like
-experience.create.cityNote: This can be usefull right? Better ask you just in case... So where is this happening?
-experience.create.tagsNote: The tags are the the keywords in which falls your experience. It's kind of the category but a bit more expressive. Don't add too many of them, just make sure it reflects the content of your experience
-experience.create.estimatedDurationNote: This is how long you think you experience should last
-experience.create.maximumParticipantsNote: The maximum number of people you are willing to take with you
-experience.create.minimumDurationNote: How long should your experience last at least
-experience.create.maximumDurationNote: How long can your experience last
-experience.create.pricePerHourNote: Now that's an important point! You are totally free to decide the price you think you deserve for an hour of your time. If you really have no idea, try to fix a price that you would be willing to pay for a similar adventure, that's a good start! Note that you can make you experience free simply by putting zero in this field!
-experience.create.header.title: Creating your experience
-experience.create.header.message: So you decided to do the first step? You have no idea how glad we are about that! Proposing an experience is not as complicate as you might think in the first place. But still, it must be coherent if you want to see people's request in your inbox. Make sure to follow the instructions and it should be fine ;). If you still have no idea of what you could propose, <a href="%route%">check this article!</a>
-availabilities.whichDays: Days where you are available
-availabilities.whichDaysNote: You're not available 24/7? Well that's normal, use the pickup below to select the days where you have some free time
-availabilities.whatTime: Moments where you are available
-availabilities.whatTimeNote: It's not because you are available on saturday that it means you are available all day long. Use this pickup to define at what you are available for the dates selected above.
-availabilities.howLong: For how much time
-availabilities.howLongNote: Vacations planned? You already know that you won't be in this city anymore in 6 months? The two dates above allow you to limit the period during which you are available. Therefor, travelers won't be able to make a request outside of this date range.
-availability.modal.removeText: Are you sure you want to remove this availability?
-availability.error.oneRequired: You need to specify at least one availabily! If you are available anytyme just check the Always option ;)
-availability.modal.remove: Remove availability
+experience.create.titleNote: Ceci est le titre de votre experience, il doit décrire en quelques mots ce que vous voulez mettre en avant de votre experience. Essayez de le rendre simpe et attirant comme "<i>"Une aventure magique à vélo"</i> pour une visite nature, <i>"Un ville assiegée"</i> pour une experience plus historique ou <i>"La face cachée d'une ville endormie"</i> pour une aventure plus underground. <span class="bold"> Essayez de faire sonner ça comme un titre de film!</span> <br/><br/>Notez <span class="bold">qu'il n'y pas besoin d'inclure le nom de la ville</span>.
+experience.create.descriptionNote: Maintenant passons aux choses serieuse! C'est ici le coeur de votre experience. Cette section donne un aperçu de ce qu'un voyageur peut attendre d'une recontre avec vous. Pas besoin de parler de votre ville, prennez plutôt le temps de parler de ce que votre experience va mettre en avant et comment elle représente la façon dont vous aimez et vivez votre ville.
+experience.create.mediaNote: Ajoutez quelques photos à votre experience. Cela donnera un certain charme à votre page tout en donnant un aperçu de ce que vous pouvez faire découvrir.
+experience.create.cityNote: Information utile n'est pas? On préfère demander, jusqu'au cas ou... Où se passe votre experience?
+experience.create.tagsNote: Les tags sont les mots clefs qui définissent grossièrement votre experience. Ce sont des genre de catégories mais plus expressive. Pas besoin d'en ajouter des dizaines, faites simplement en sorte que cela reflète le contenu de votre experience.
+experience.create.estimatedDurationNote: La durée parfaite de votre experience selon vous
+experience.create.maximumParticipantsNote: Le nombre maximum de personnes que vous êtes prêt à emmener avec vous
+experience.create.minimumDurationNote: Combien de temps votre experience doit durer au minimum
+experience.create.maximumDurationNote: Et combien de temps elle peut durer au maximum
+experience.create.pricePerHourNote: Oula! Voilà des choses bien serieuses... Vous êtes entièrement de libre de décider de ce que vous estimez mériter pour une heure de vtre temps. Si vous n'avez vraiment pas d'idée, fixez un prix que vous seriez prêt à payer pour une experience similaire dans une autre ville. Vous pouvez aussi rendre votre experience gratuire en mettant simplement zéro dans le champ!
+experience.create.header.title: Créer votre experience
+experience.create.header.message: Alors vous vous êtes décidé à faire le premier pas? Génial, vous n'avez pas idée comme ça nous rend heureux! Proposer une experience n'est pas une chose aussi compliquée que vous pourriez le croire. Mais cela se doit d'être un minimum cohérent si vous voulez pouvoir accueillir du monde. Suivez les instructions et tout devrait bien se passer! Si vous n'avez vraiment aucune idée quant à ce que vous pouvez proposer, <a href="%route%">allez lire cet article</a>!
+availabilities.whichDays: Les jours où vous êtes disponible
+availabilities.whichDaysNote: Pas disponible 24h sur 24? C'est bien normal! Utilisez le selecteur ci-dessous pour définir les jours et heures où vous avez du temps libre
+availabilities.whatTime: Les moments de la journée où vous êtes disponible
+availabilities.whatTimeNote: Ce n'est pas parce que vous avez du temps le samedi que vous vez toute la journée à consacrer à des voyageurs. Utilisez ce selecteur pour définir les moments de la journée où vous êtes disponibles pour les dates sélectionnées au dessus.
+availabilities.howLong: Pour combien de temps
+availabilities.howLongNote: Des vacances de prévues? Vous savez déjà que vous ne serez disponible que pour quelques moits? Les deux dates ci-dessous définissent la période sur laquelle vous êtes disponible. De cette amnière, personne ne pourra vous importuner en dehors de vos disponibilités.
+availability.modal.removeText: Etes vous sur de vouloir supprimer cette disponibilité?
+availability.error.oneRequired: Vous devez au moins ajouter une disponibilité! Si vous êtes disponible tout le temps, selectionnez simplement l'otpion "Toujours" ;)
+availability.modal.remove: Supprimer disponibilité
 
 experience.manage.introductionText: You may have lived in this current city for years and find the idea of a theme oriented experience a bit limitating... Well, here you can create a new experience with a different flavor to propose another version of your city to travelers. For example, if you already propose a culture oriented visit of your town, you can also propose a second experience about the nightlife and the different things happening by night! Let your knowledge of the city talk and try to intrigued the potential visitors ;)
 experience.manage.title: A different flavor of your city

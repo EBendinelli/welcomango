@@ -19,6 +19,15 @@ security:
                login_path: /login
                provider: fos_userbundle
                default_target_path: /profile
+               csrf_provider: form.csrf_provider
+           oauth:
+               resource_owners:
+                   facebook:           "/connect/check-facebook"
+               login_path:        /connect
+               failure_path:      /connect
+
+               oauth_user_provider:
+                   service: hwi_oauth.user.provider.fosub_bridge
            logout:
                path:    /logout
                target: /
@@ -26,6 +35,15 @@ security:
               # csrf_provider: form.csrf_provider
 
            anonymous:    true
+       login:
+           pattern:  ^/login$
+           security: false
+
+           remember_me:
+               key: "%secret%"
+               lifetime: 31536000
+               path: /
+               domain: ~
 
    access_control:
        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
@@ -33,3 +51,4 @@ security:
        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
        - { path: ^/welcomadmin/, role: ROLE_ADMIN }
        - { path: ^/welcomadmin, role: ROLE_ADMIN }
+

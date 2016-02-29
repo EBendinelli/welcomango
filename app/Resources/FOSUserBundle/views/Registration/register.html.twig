@@ -23,6 +23,11 @@
                     <h5 class="text-white">{{ 'registration.joinWelcomango'|trans }}</h5>
                     <br/>
                     <h5 class="text-white">{{ 'registration.meetLocals'|trans }}</h5>
+
+                    <a href="{{ path('facebook_connect') }}" class="btn btn-complete">Log with FB</a>
+
+                    <div id="status">
+                    </div>
                 </div>
                 <!-- END TEXT PART -->
 
@@ -113,4 +118,5 @@
             });
         });
     </script>
+
 {% endblock javascripts %}

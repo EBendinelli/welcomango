@@ -35,6 +35,13 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @var string
      *
+     * @ORM\Column(name="facebook_id", type="string", nullable=true)
+     */
+    protected $facebookId;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="first_name", type="string", length=255)
      */
     private $firstName;
@@ -210,6 +217,28 @@ class User extends BaseUser implements ParticipantInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set facebookId
+     *
+     * @param string $facebookId
+     *
+     * @return string
+     */
+    public function setFacebookId($facebookId)
+    {
+        $this->facebookId = $facebookId;
+    }
+
+    /**
+     * Get facebookId
+     *
+     * @return string
+     */
+    public function getFacebookId()
+    {
+        return $this->facebookId;
     }
 
     /**
