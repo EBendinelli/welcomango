@@ -97,7 +97,7 @@ class MediaManager
      *
      * @return ArrayCollection
      */
-    public function generateSimpleMedia($entity, $oldMedia)
+    public function generateSimpleMedia($entity, $deleteOldFile,  $oldFile)
     {
         $realAdapter  = $this->filesystemMap->get('real');
         $tempadapter  = $this->filesystemMap->get('gallery');
@@ -105,29 +105,29 @@ class MediaManager
 
         $currentMedia = $entity->getProfileMedia();
 
-        if ($currentMedia->getOriginalFilename() != $oldMedia && $oldMedia != "") {
-            if ($realAdapter->has($pathToUpload.$oldMedia)) {
-                $realAdapter->delete($pathToUpload.$oldMedia);
-            }
-        }
-
-        $mediaPrefix = $this->getMediaPrefix($entity);
-        if ($entity->getProfileMedia()->getOriginalFilename() !== null) {
-            $mediaName       = $entity->getProfileMedia()->getOriginalFilename();
-            $slugifyFileName = $this->mediaNamer->getSlugifyFileName($mediaName);
-            $tempFileName    = $this->mediaNamer->getTempName($mediaName);
-            $currentMedia->setOriginalFilename($mediaPrefix.$slugifyFileName);
-            $currentMedia->setPath('/uploads'.$pathToUpload);
-            if (!$realAdapter->has('/uploads'.$pathToUpload.$slugifyFileName)) {
-                $fileContent = $tempadapter->read($tempFileName);
-                if (!$realAdapter->has($pathToUpload.$mediaPrefix.$slugifyFileName)) {
-                    $realAdapter->write($pathToUpload.$mediaPrefix.$slugifyFileName, $fileContent);
-                }
-                $tempadapter->delete($tempFileName);
+        if ($deleteOldFile === true) {
+            if ($realAdapter->has($pathToUpload.$oldFile)) {
+                $realAdapter->delete($pathToUpload.$oldFile);
             }
         } else {
-            $entity->setProfileMedia(null);
-            $this->entityManager->remove($currentMedia);
+            $mediaPrefix = $this->getMediaPrefix($entity);
+            if ($entity->getProfileMedia()->getOriginalFilename() !== null) {
+                $mediaName       = $entity->getProfileMedia()->getOriginalFilename();
+                $slugifyFileName = $this->mediaNamer->getSlugifyFileName($mediaName);
+                $tempFileName    = $this->mediaNamer->getTempName($mediaName);
+                $currentMedia->setOriginalFilename($mediaPrefix.$slugifyFileName);
+                $currentMedia->setPath('/uploads'.$pathToUpload);
+                if (!$realAdapter->has('/uploads'.$pathToUpload.$slugifyFileName)) {
+                    $fileContent = $tempadapter->read($tempFileName);
+                    if (!$realAdapter->has($pathToUpload.$mediaPrefix.$slugifyFileName)) {
+                        $realAdapter->write($pathToUpload.$mediaPrefix.$slugifyFileName, $fileContent);
+                    }
+                    $tempadapter->delete($tempFileName);
+                }
+            } else {
+                $entity->setProfileMedia(null);
+                $this->entityManager->remove($currentMedia);
+            }
         }
     }
 

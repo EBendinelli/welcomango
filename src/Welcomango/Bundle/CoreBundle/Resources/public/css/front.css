@@ -1592,3 +1592,14 @@ a .front-menu-user-picture{
         padding-left: 7px !important;
     }
 }
+
+
+/* ///////////  LOADER FOR MEDIAS   //////////////// */
+
+.loaderImage {
+    position: absolute;
+    z-index: 1000;
+    margin-left: 48px;
+    margin-top: 15px;
+    font-size: 150px;
+}

@@ -113,27 +113,10 @@ class UserEditType extends AbstractType
             'label'    => 'form.user.gender',
         ));
 
-        $builder->add('profileMedia', new SimpleMediaType(), [
+        $builder->add('profileMedia', new SimpleMediaType($user->getProfileMedia()), [
             'required' => false,
             'label'    => 'form.profile.uploadPhoto',
         ]);
-
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-            $media = $event->getData()->getProfileMedia();
-            $form  = $event->getForm();
-            $data  = '';
-
-            if ($media) {
-                $data = $media->getOriginalFileName();
-            }
-
-            $form->add('oldOriginalFilename', HiddenType::class, [
-                'required' => false,
-                'label'    => false,
-                'mapped'   => false,
-                'data'     => $data,
-            ]);
-        });
     }
 
     /**

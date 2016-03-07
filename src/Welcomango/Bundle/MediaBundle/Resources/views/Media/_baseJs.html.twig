@@ -1,6 +1,7 @@
 <script src="{{ asset('js/Jcrop.min.js') }}" type="text/javascript"></script>
 <script type="text/javascript">
     var processDelete = true;
+    var loader = '<div id="loaderImage" class="loaderImage" style=""><i class="fa fa-circle-o-notch fa-spin"></i></div>';
     $('#{{ file_input_id }}').change(function () {
         processDelete = true;
         var file = document.getElementById('{{ file_input_id }}').files[0];
@@ -10,6 +11,7 @@
         formData.append("file", document.getElementById('{{ file_input_id }}').files[0]);
         var fileValid = validateFile(file);
         if(fileValid === true) {
+            $("#profile-media-croped").html(loader);
             $.ajax({
                 url: '{{ oneup_uploader_endpoint('gallery') }}',  //Server script to process data
                 type: 'POST',
@@ -25,6 +27,8 @@
                     console.log(request);
                 },
                 success: function (data) {
+                    console.log('success');
+                    $("#loaderImage").hide();
                     {% if in_modal is not defined %}
                     $("#media").empty();
                     $("#media").append('<img id="mediaToCrop" src="{{ media_upload_temp_dir }}/' + getTempFileName(filename) + '">');
@@ -58,22 +62,19 @@
     });
 
     $('#deleteProfileMedia').click(function () {
-        removeMediaField();
+        removeMediaField(true);
     });
 
-/*
     $('.btn-cancel-modal').click(function () {
-        removeMedia();
         removeMediaField();
+        //removeMedia();
     });
 
     $(document).keydown(function (e) {
         if (e.keyCode == 27) {
-            removeMedia();
             removeMediaField();
         }
     });
-*/
 
     function validateFile(file) {
         console.log(file);
@@ -86,13 +87,33 @@
         return true
     }
 
-    function removeMediaField() {
+    function removeModalMedia() {
+        if (processDelete) {
+            var formData = new FormData();
+            formData.append("file", getTempFileName(document.getElementById('{{ file_input_id }}').files[0].name));
+            $.ajax({
+                url: '{{ path('media_delete') }}',  //Server script to process data
+                type: 'POST',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        }
+    }
+
+    function removeMediaField(forceDelete) {
 
         $('#profile-media-croped img').remove();
-        $('#profile-media-croped').html('<div class="text-center" id="profile-upload-message">Click to upload a photo</div>');
-        var inputFile = $('#front_user_edit_profileMedia_originalFilename');
-        inputFile.val('');
-        $('#front_user_edit_profileMedia').remove();
+
+        if ($('#front_user_edit_profileMedia_oldFilename').val()!='' && forceDelete == false) {
+            removeMedia();
+            var oldFilePath = $('#front_user_edit_profileMedia_oldFilePath').val();
+            var oldFileName = $('#front_user_edit_profileMedia_oldFilename').val();
+            $("#{{ id_croped_media }}").append('<img id="mediaCroped" src="'+ oldFilePath + oldFileName + '?1">');
+        } else {
+            $('#profile-media-croped').html('<div class="text-center" id="profile-upload-message">Click to upload a photo</div>');
+        }
     }
 
     function removeMedia() {

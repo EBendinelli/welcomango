@@ -205,11 +205,11 @@ class ProfileController extends BaseProfileController
             $event = new FormEvent($form, $request);
             $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_SUCCESS, $event);
 
-            if ($form->getData()->getProfileMedia()) {
-                $currentMedia = $form->getData()->getProfileMedia()->getOriginalFilename();
-                $oldMedia     = $form->get("oldOriginalFilename")->getData();
-                $this->get('welcomango.media.manager')->generateSimpleMedia($user, $oldMedia, $currentMedia);
-            }
+            $currentMedia  = $user->getProfileMedia()->getOriginalFilename();
+            $deleteOldFile = $form['profileMedia']['deleteOldFile']->getData();
+            dump($deleteOldFile);
+            $deleteOldFilename = $form['profileMedia']['oldFilename']->getData();
+            $this->get('welcomango.media.manager')->generateSimpleMedia($user, $deleteOldFile, $deleteOldFilename);
 
             $userManager->updateUser($user);
 

@@ -48,7 +48,7 @@ class MediaController extends BaseController
     }
 
     /**
-     * Process delete for a non used media (experience front form)
+     * Process delete for a non used media
      *
      * @param Request $request
      *
