@@ -24,8 +24,6 @@
                     <br/>
                     <h5 class="text-white">{{ 'registration.meetLocals'|trans }}</h5>
 
-                    <a href="{{ path('facebook_connect') }}" class="btn btn-complete">Log with FB</a>
-
                     <div id="status">
                     </div>
                 </div>
@@ -36,10 +34,18 @@
                     <h4 class="text-center bold m-b-30">Join Welcomango Now</h4>
                     {{ form_start(form, {'attr': {'id': 'registration_form'}}) }}
                     {{ form_errors(form) }}
-                    {{ form_row(form.username) }}
-                    <div id="fos_user_registration_form_username_message"></div>
-                    {{ form_row(form.email) }}
-                    <div id="fos_user_registration_form_email_message"></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(form.username) }}
+                            <div id="fos_user_registration_form_username_message"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ form_row(form.email) }}
+                            <div id="fos_user_registration_form_email_message"></div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-6">{{ form_row(form.firstName) }}</div>
                         <div class="col-md-6">{{ form_row(form.lastName) }}</div>

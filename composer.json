@@ -36,8 +36,7 @@
         "liip/imagine-bundle": "^1.3",
         "excelwebzone/recaptcha-bundle": "~v1.4.1",
         "stfalcon/tinymce-bundle": "dev-master",
-        "guzzlehttp/guzzle": "^6.1",
-        "hwi/oauth-bundle": "^0.4.0"
+        "guzzlehttp/guzzle": "^6.1"
     },
     "require-dev": {
         "phpspec/phpspec": "2.1.*",

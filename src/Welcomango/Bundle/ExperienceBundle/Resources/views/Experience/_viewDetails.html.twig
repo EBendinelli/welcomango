@@ -1,0 +1,127 @@
+{% trans_default_domain "interface" %}
+
+<div id="experience-city">
+    <div class="experience-city">
+        <div class="m-l-20 {% if small is not defined %}p-b-20{% endif %}">
+            {# TODO see if we add the note in this mango. If so, add white BG to the picture #}
+            <div class="experience-city-picto">
+                {#<div class="experience-picto-note">
+                        <h4 class="text-primary bold">{{ experience.getAverageNote }}<i class="fa fa-star fa-sm"></i></h4>
+                    </div>#}
+            </div>
+            <h1 class="experience-city-title">{{ experience.getCity.name }}</h1>
+            <h4>{{ experience.getCity.getCountry.name }}</h4>
+        </div>
+    </div>
+</div>
+<div class="tab-pane m-l-10 " id="experience-tags">
+    <div class="row">
+        <div class="col-md-12 m-t-20">
+            <h3>{{  'experience.tags'|trans }}</h3>
+            <div class="row">
+                <div class="col-md-12 m-t-10">
+                    {{ display_tag(experience.getTags) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% if small is defined %}<hr/>{% endif %}
+<div class="tab-pane m-l-10 " id="experience-details">
+    <div class="row">
+        <div class="col-md-12 {% if small is not defined %}m-t-10{% endif %}">
+            <h3>{{  'experience.details'|trans }}</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <div >
+                        {{  'experience.estimatedDuration'|trans }}: <span class="text-black semi-bold">{{ experience.getEstimatedDuration}}h</span>
+                    </div>
+                    <div >
+                        {{  'experience.maximumParticipants'|trans }}: <span class="text-black semi-bold">{{ experience.maximumParticipants}}</span>
+                    </div>
+                    <div >
+                        {% set experienceHappened = 0 %}
+                        {% for booking in experience.bookings %}
+                            {% if booking.status == "Happened" %}
+                                {% set experienceHappened = experienceHappened + 1  %}
+                            {% endif %}
+                        {% endfor %}
+                        {{  'experience.happenedTimes'|trans({'%number%': experienceHappened})|raw }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                    <div >
+                        {{  'experience.minimunDuration'|trans }}: <span class="text-black semi-bold">{{ experience.getMinimumDuration}}h</span>
+                    </div>
+                    <div >
+                        {{  'experience.maximumDuration'|trans }}: <span class="text-black semi-bold">{{ experience.getMaximumDuration}}h</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% if small is defined %}<hr/>{% endif %}
+<div class="tab-pane m-l-10 " id="experience-description">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="experience-description {% if small is not defined %}m-t-20{% endif %}">
+                <h3>{{  'experience.description'|trans }}</h3>
+                <p>{{ experience.description|nl2br|raw }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% if small is defined %}<hr/>{% endif %}
+<div class="tab-pane m-l-10 " id="experience-pictures">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>{{  'experience.pictures'|trans }}</h3>
+            <p>
+                {% if experience.getMedias.first %}
+            <div class="experience_container_pictures gallery-parent-container">
+                <div class="col-md-12 ">
+                    <div class="experience_featured_picture_dark">
+                        <a href="{{ asset(experience.getMedias.first.getPath() ~ experience.getMedias.first.originalFilename) }}">
+                            <div class="experience_featured_pictures experience_featured_picture_large m-b-20" style="background-image:url({{ asset(experience.getMedias.first.getPath() ~ experience.getMedias.first.originalFilename) }})"></div>
+                        </a>
+                    </div>
+                </div>
+                {% for media in experience.getMedias.getValues|slice(1,2) %}
+                    <div class="col-md-6">
+                        <a href="{{ asset(media.getPath() ~ media.originalFilename) }}">
+                            <div class="experience_featured_picture_dark">
+                                <div class="experience_featured_pictures experience_featured_picture_small m-b-20" style="background-image:url({{ asset(media.getPath() ~ media.originalFilename)|imagine_filter('thumb250') }})"></div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+                <div id="experience-hidden-pictures">
+                    {% for media in experience.getMedias.getValues|slice(3,10) %}
+                        <div class="col-md-6">
+                            <a href="{{ asset(media.getPath() ~ media.originalFilename) }}">
+                                <div class="experience_featured_picture_dark">
+                                    <div class="experience_featured_pictures experience_featured_picture_small m-b-20" style="background-image:url({{ asset(media.getPath() ~ media.originalFilename)|imagine_filter('thumb250') }})"></div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+                {% if experience.getMedias.getValues[3] is defined %}
+                    <div class="col-md-12 text-right">
+                        <button id="experience-pictures-btn" class="text-center btn btn-sm" onclick="togglePictures();">More</button>
+                    </div>
+                {% endif %}
+
+            </div>
+            {% else %}
+                <div>
+                    {{ 'experience.sorryNoPictures'|trans }}
+                    <i class="fa fa-meh-o"></i>
+                </div>
+            {% endif %}
+            </p>
+        </div>
+    </div>
+</div>

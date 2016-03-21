@@ -60,23 +60,3 @@ oneup_uploader:
 
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
-
-# HWIOAuthBundle
-hwi_oauth_security:
-    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
-    prefix: /connect
-
-hwi_oauth_redirect:
-    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
-    prefix:   /connect
-
-# We override this part of the routing
-hwi_oauth_connect:
-     resource: "@WelcomangoUserBundle/Resources/config/connect.xml"
-     prefix: /connect
-
-facebook_login:
-    pattern: /connect/check-facebook
-
-facebook_connect:
-    pattern: /connect/facebook

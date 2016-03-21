@@ -994,6 +994,41 @@ a h4:hover{
     opacity: .9;
 }
 
+/* *********** RESPONSIVE TIME ******************* */
+@media (max-width: 768px) {
+    #experience-main-large {
+        display: none;
+    }
+
+    #experience-main-small {
+        display: block;
+    }
+
+    #user-main {
+        display: none !important;
+    }
+
+    #user-mini {
+        display: block !important;
+    }
+
+    #experience-actions-button-large{
+        display: none;
+    }
+}
+
+@media (min-width: 768px) {
+    #experience-main-large {
+        display: block;
+    }
+
+    #experience-main-small {
+        display: none;
+    }
+
+
+}
+
 
 /* //////////////////////////////////////////////////////// */
 /* ////////////////////   USER VIEW  ////////////////////// */
@@ -1500,15 +1535,6 @@ a .front-menu-user-picture{
 .pagination > li > span:focus {
     color: #c3330c;
 }
-
-/* ///// BOOTSTRAP OVERRIDE FOR EXPERIENCE HEADER ////// */
-.col-min {
-    /* custom min width */
-    min-width:520px;
-    margin: 0 auto;
-    float: none;
-}
-
 
 /* //// MEH ICON ON NOT ALLOWED PAGE  //// */
 .veryBigIcon{
