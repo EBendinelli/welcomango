@@ -257,7 +257,7 @@ booking.yourFeedbackWaitingForApproval: Your feedback is waiting for approval, i
 booking.thisUserFeedbackWaitingForApproval: This user's feedback is waiting for approval, it should be validated anytime soon
 booking.noFeedbackFrom: Sorry, no feedback received from %user%
 booking.noExperienceCreated: Looks like you are not proposing any experience in your city yet, how sad...<br/>Go ahead and create a new experience to welcome travelers!
-feedbackRefusedText: Sorry, your feedback has been refused, please give a respectuous feedback!
+feedbackRefusedText: Sorry, your feedback has been refused, please give a feedback respectuous of our charter!
 booking.requestsSent: Booking request
 booking.requestSentExplanation: See a summary of your recent or past booking requests to other people
 booking.participants: <span class="semi-bold">%number%</span>  participants
@@ -296,7 +296,7 @@ contact.sent.message: Thanks for contacting us, we will do our best to handle yo
 
 registration.title: The first step of your next adventure
 registration.joinWelcomango: Join the Welcomango community to discover a new way of traveling and enhance your life experience.
-registration.meetLocals: Meet locals, be a local, share different perspective on places through people
+registration.meetLocals: Meet locals, be a local, share different perspectives on places through people
 registration.confirmed: Congratulation! Your account has been confirmed! Click around and enjoy :)
 registration.confirmation.subTitle: This is where it all starts
 registration.confirmation.message: Go visit your profile to enhance it or start browsing the website for experiences!
