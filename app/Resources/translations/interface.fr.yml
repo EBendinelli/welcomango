@@ -216,24 +216,24 @@ availability.modal.removeText: Etes vous sur de vouloir supprimer cette disponib
 availability.error.oneRequired: Vous devez au moins ajouter une disponibilité! Si vous êtes disponible tout le temps, selectionnez simplement l'otpion "Toujours" ;)
 availability.modal.remove: Supprimer disponibilité
 
-experience.manage.introductionText: You may have lived in this current city for years and find the idea of a theme oriented experience a bit limitating... Well, here you can create a new experience with a different flavor to propose another version of your city to travelers. For example, if you already propose a culture oriented visit of your town, you can also propose a second experience about the nightlife and the different things happening by night! Let your knowledge of the city talk and try to intrigued the potential visitors ;)
-experience.manage.title: A different flavor of your city
+experience.manage.introductionText: Il se peut que vous viviez dans votre ville actuelle depuis plusieurs années et que vous trouviez le concept d'experiences thematiques un peu limité... Nous avons pensé à vous et vous avez la possibilité de proposer plusieurs experiences dans une seule et même ville, plusieurs saveur d'un même aliment en somme. Par exemple, si vous proposez déjà un experience orienté sur la culture et l'histoire, vous pouvez parfaitement créer une seconde experiences plus débridées autout de la vie nocture! laissez vos connaissances parler et tenté d'intriguer les visiteurs potentiels ;)
+experience.manage.title: Une autre vision de votre ville
 
-experience.create.title: Your experience has been succesfully created!
-experience.create.subTitle: We are just going to have a look at it and it should be published very soon
-experience.create.message: Thanks a lot for proposing this tour of your city! You\'re part of the community and helping us making traveling better</br> Have a look and see what it looks like! Or just go back to your profile
-experience.booking.title: Your request has been successfully sent!
-experience.booking.subTitle: This is getting exciting isn't it?
-experience.booking.message: %user% will answer you as soon as possible and you'll be notified by email of his answer. Try to be patient... ;)
-experience.createExperience: Create a new Experience
-experience.edit.messageTop: Not available on Tuesday anymore? Want to add some details or picture to improve your chances of atracting travelers? <br/>Here you can edit your experience and make it even better! <br/><br/><span class="bold">Note:</span> if you are completely changing your experience we suggest deleting this one and creating a new one.<br/><span class="bold">Note 2:</span> Once saved, we will review this experience like we did when you created it so it will be unavailable for a few hours.
-experience.edit.warningAlreadyBooked: You already have %number% reservation planned for this experience. Please <a href="%route%">contact the travelers</a> to altert them about the changes you made.
-experience.edit.success: Your experience has been successfully edited
-experience.create.noPriceNote: Don't feel like asking for money? How about something different! You can suggest a contribution in nature to the travelers instead of money. It can be a drink, a bus ticket or whatever you want.
-experience.create.noPrice: Suggest a contribution instead of money
-experience.create.contributionNote: The contribution is a way for the traveler to thank you without giving you money directly. I can be paying your ticket for the entrance of a museum, paying for a beer or bringing something from his country! Let your imagination talk :)
+experience.create.title: Votre experience à été créée avec succès!
+experience.create.subTitle: Nous allons simplement y jeter un oeil, elle devrait ensuite être publié très rapidement
+experience.create.message: Un grand merci à vous de proposer cette experience! Vous faites partie de notre communité et nous aidez à faire du voyage quelque chose de plus humain. <br/> Jetez un oeil au résultat ou retournez simplement à votre profil.
+experience.booking.title: Votre demande à été envoyée avec succès!
+experience.booking.subTitle: Cela devient intéressant n'est-ce pas?
+experience.booking.message: %user% vous répondra dès que possible et vous serez averti par email de sa réponse. Essayez d'être patient... ;)
+experience.createExperience: Créer une nouvelle experience
+experience.edit.messageTop: Plus disponible les mardi? Vous voulez ajouter des détails ou des information?<br/> Vous pouvez ici éditer votre experience pour la rendre encore meilleur! <br/><br/><span class="bold">Note:</span> Si vous changez complètement votre experience nous vous suggerons de supprimer celle ci et d'en créer une nouvelle.<br/><span class="bold">Note 2:</span>  Une fois sauvegardé, nous validerons votre experence de la même manière que nous l'avons fait la première fois. Elle sera donc indisponible quelques heures.
+experience.edit.warningAlreadyBooked:Vous avez déjà %number% réservation(s) prévues pour cette experience. Merci de <a href="%route%">contacter les voyageurs</a> pour les avertir des changements que vous vous appretez à faire.
+experience.edit.success: Votre experience à été modifiée avec succès
+experience.create.noPriceNote: Pas envie de demander de l'argent? Faites les choses différements! Vous pouvez suggerer aux voyageurs de vous amener une contribution en nature plutôt que de l'argent. Cela peut être une spécialité de chez eux, un ticket de bus, n'importe quoi!
+experience.create.noPrice: Suggerer une contribution au lieu de l'argent
+experience.create.contributionNote: La contribution est moyen pour le voyageur de vous remercier sans vous donner de l'argent directement. Cela peut être en payant votre ticket pour le musée, en vous offrant un verre ou en amenant quelque chose de chez lui! Laissez parler votre imagination :)
 experience.create.contribution: Contribution
-experience.noExperience: Dang! It seems that no experience fits your criteria... <br/>Try to be less restrictive (date, search terms...), being open is always a plus.
+experience.noExperience: Zut! il semble qu'aucune experience ne correspondent à vos critères... <br/> Essayez d'être moins selectif (dates, termes de la recheches...), être ouvert est toujours une bonne chose.
 
 
 booking.bookingFor: Your reservation for <span class="text-primary">%title%</span> in <span class="text-primary">%city%</span> with <span class="text-primary">%user%</span>

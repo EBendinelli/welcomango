@@ -242,7 +242,7 @@ experience.edit.warningAlreadyBooked: You already have %number% reservation plan
 experience.edit.success: Your experience has been successfully edited
 experience.create.noPriceNote: Don't feel like asking for money? How about something different! You can suggest a contribution in nature to the travelers instead of money. It can be a drink, a bus ticket or whatever you want.
 experience.create.noPrice: Suggest a contribution instead of money
-experience.create.contributionNote: The contribution is a way for the traveler to thank you without giving you money directly. I can be paying your ticket for the entrance of a museum, paying for a beer or bringing something from his country! Let your imagination talk :)
+experience.create.contributionNote: The contribution is a way for the traveler to thank you without giving you money directly. It can be paying your ticket for the entrance of a museum, paying for a beer or bringing something from his country! Let your imagination talk :)
 experience.create.contribution: Contribution
 experience.noExperience: Dang! It seems that no experience fits your criteria... <br/>Try to be less restrictive (date, search terms...), being open is always a plus.
 

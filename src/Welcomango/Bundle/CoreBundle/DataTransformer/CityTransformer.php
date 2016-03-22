@@ -62,9 +62,15 @@ class CityTransformer implements DataTransformerInterface
         $cityName = str_replace(' ', '', $cityName);
         $cityExploded = explode(',', $cityName);
 
-        $country = $this->objectManager->getRepository('Welcomango\Model\Country')->findOneByName($cityExploded[1]);
+        if(count($cityExploded)>1){
+            $country = $this->objectManager->getRepository('Welcomango\Model\Country')->findOneByName($cityExploded[1]);
+            $city = $this->objectManager->getRepository('Welcomango\Model\City')->findOneBy(['name' => $cityExploded[0], 'country' => $country]);
+        }else{
+            // In case the person didn't selected a city proposed we do a search only for the name
+            $city = $this->objectManager->getRepository('Welcomango\Model\City')->findOneBy(['name' => $cityExploded[0]]);
 
-        $city = $this->objectManager->getRepository('Welcomango\Model\City')->findOneBy(['name' => $cityExploded[0], 'country' => $country]);
+        }
+
 
         if (null === $city) {
             throw new TransformationFailedException(sprintf(
