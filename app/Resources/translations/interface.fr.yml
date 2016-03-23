@@ -23,6 +23,7 @@ interface.last: Dernier
 interface.save: Sauvegarder
 interface.cancel: Annuler
 interface.remove: Supprimer
+interface.logout: Déconnexion
 
 language.english: Anglais
 language.french: Français
@@ -87,9 +88,9 @@ homepage.stepsText: Welcomango met en contact les locaux et les voyageurs pour v
 homepage.step1: Tapez votre destination
 homepage.step2: Réserver une experience avec un local
 homepage.step3: Explorez la ville
-homepage.step1Note: Recherchez un experience sur votre prochain lieu de destination ou laissez vous surprendre par des experiences dans des lieux inconnus.
-homepage.step2Note: Trouvez une experience humain avec une perception unique de la ville. Musique, nature, histoire, tout est possible .
-homepage.step3Note: Découvrez un lieu avec un local et explorer votre destination d'une nouvelle manière.
+homepage.step1Note: Recherchez une experience sur votre prochain lieu de destination ou laissez vous surprendre par des experiences dans des lieux inconnus.
+homepage.step2Note: Trouvez une experience humaine avec une perception unique de la ville. Musique, nature, histoire, tout est possible .
+homepage.step3Note: Découvrez un lieu avec un local et explorez votre destination d'une nouvelle manière.
 homepage.whereItStarts: C'est ici que tout commence
 homepage.bestOfBest: La crème de la crème
 homepage.keepInTouch: Restez en contact
@@ -322,7 +323,7 @@ form.user.email: Email
 form.user.phone: Telephone
 form.user.gender: Sexe
 form.user.password: Mot de passe
-form.user.password.validate: Confirmer mot de password
+form.user.password.validate: Confirmation
 
 
 email.generic.lovelyMail: Un délicat email envoyé par

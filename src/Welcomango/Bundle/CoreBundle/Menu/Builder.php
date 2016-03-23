@@ -85,8 +85,8 @@ class Builder extends ContainerAware
         if ($this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $user= $this->securityContext->getToken()->getUser();
 
-            $menu->addChild('log Out', array(
-                'route'          => 'fos_user_security_logout',
+            $menu->addChild($this->translator->trans('interface.logout', array(), 'interface'), array(
+                    'route'          => 'fos_user_security_logout',
             ));
 
             $menu->addChild($user->getUsername(), array(

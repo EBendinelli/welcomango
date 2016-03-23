@@ -23,6 +23,7 @@ interface.last: Last
 interface.save: Save
 interface.cancel: Cancel
 interface.remove: Remove
+interface.logout: Log out
 
 language.english: English
 language.french: French
