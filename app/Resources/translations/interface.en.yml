@@ -369,6 +369,12 @@ email.resetting.coreTitle: Resetting your password
 email.resetting.subTitle: Hi %user%, it seems that you have requested a new passord
 email.resetting.message: Simply click on the button above to be redirected to a page where you'll be able to define your new password. Don't forget this one ;)
 email.resetting.btn: Reset password
+email.experience.creation.reminder.title: Hey! long time no see!
+email.experience.creation.reminder.coreTitle: Hey %name%, how have you been?
+email.experience.creation.reminder.subTitle: We were looking at your profile and noticed you aren't proposing anything in your city yet... Maybe now is a good time for you?
+email.experience.creation.reminder.message: Hi %name%, you've been registered on Welcomango for some time now and we hope you enjoy the exeperience. You may know that the website only exists thanks to the users like you who take some of their spare time to open the doors of their world to travelers. Well, how about you?<br/><br/>You can create an experience in your city to welcome people and show them how awesome it is where you live right now. It's a super quick 3 steps process and in 10 minutes you could have you experience created. Ready? Click the button above and simply follow the instructions!
+email.experience.creation.reminder.subject: Time to show your world to the community!
+email.experience.creation.reminder.btn: Create your Experience
 
 username.taken: Username already taken
 username.free: Username free

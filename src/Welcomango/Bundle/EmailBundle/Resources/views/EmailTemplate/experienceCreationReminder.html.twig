@@ -1,0 +1,36 @@
+{% extends "WelcomangoEmailBundle:EmailTemplate:template" ~ type|default('') ~ ".html.twig" %}
+
+{% trans_default_domain 'interface' %}
+
+{% block mainTitle %}
+    {% autoescape false %}
+    {{ 'email.experience.creation.reminder.title'|trans }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block coreTitle %}
+    {% autoescape false %}
+    {{ 'email.experience.creation.reminder.coreTitle'|trans({'%name%': user.firstname}) }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block subTitle %}
+    {% autoescape false %}
+    {{ 'email.experience.creation.reminder.subTitle'|trans({'%name%': user.firstname}) }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block btn %}
+    {% autoescape false %}
+    <a style="font-family: 'Open Sans',sans-serif; font-size: 20px;  border-radius:3px; text-decoration: none; margin:auto; color: #fff; background-color: #F34B1F; border-color: #F34B1F; padding: 10px 20px 10px 20px;font-size: 14px; letter-spacing: 0.14px; line-height: 21px; text-transform: uppercase;  font-family: Montserrat; font-weight: 400;" href="{{ url('front_experience_create') }}" style="">{{ 'email.experience.creation.reminder.btn'|trans }}</a>
+    {% endautoescape %}
+{% endblock %}
+
+{% block message %}
+    {% autoescape false %}
+    {{ 'email.experience.creation.reminder.message'|trans({'%name%': user.firstname}) }}
+    {% endautoescape %}
+{% endblock %}
+
+
+
