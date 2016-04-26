@@ -131,12 +131,13 @@ class RegistrationController extends BaseProfileController
             $field = $request->request->get('field');
             $field = \str_replace('fos_user_registration_form_', '', $field);
             $result = $userRepository->findBy(array($field => $query));
+            $translator = $this->get('translator');
 
             if ($result) {
-                $response['message'] = $this->trans($field.'taken', [], 'interface');
+                $response['message'] = $translator->trans($field.'.taken', [], 'interface');
                 $response['class']   = 'alert alert-danger';
             } else {
-                $response['message'] = $this->trans($field.'.free', [], 'interface');
+                $response['message'] = $translator->trans($field.'.free', [], 'interface');
                 $response['class']   = 'alert alert-success';
             }
         }

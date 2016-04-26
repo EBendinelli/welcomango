@@ -18,3 +18,4 @@ parameters:
     media_upload_base_dir : /uploads
     media_temp_root_dir: %kernel.root_dir%/../web%media_upload_temp_dir%
     media_root_dir: %kernel.root_dir%/../web%media_upload_base_dir%
+    router.request_context.host: welcomango.com
