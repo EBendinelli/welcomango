@@ -116,14 +116,16 @@ class MediaManager
             $mediaName       = $entity->getProfileMedia()->getOriginalFilename();
             $slugifyFileName = $this->mediaNamer->getSlugifyFileName($mediaName);
             $tempFileName    = $this->mediaNamer->getTempName($mediaName);
-            $currentMedia->setOriginalFilename($mediaPrefix.$slugifyFileName);
-            $currentMedia->setPath('/uploads'.$pathToUpload);
-            if (!$realAdapter->has('/uploads'.$pathToUpload.$slugifyFileName)) {
-                $fileContent = $tempadapter->read($tempFileName);
-                if (!$realAdapter->has($pathToUpload.$mediaPrefix.$slugifyFileName)) {
-                    $realAdapter->write($pathToUpload.$mediaPrefix.$slugifyFileName, $fileContent);
+            if ($tempadapter->has($tempFileName)) {
+                $currentMedia->setOriginalFilename($mediaPrefix.$slugifyFileName);
+                $currentMedia->setPath('/uploads'.$pathToUpload);
+                if (!$realAdapter->has('/uploads'.$pathToUpload.$slugifyFileName)) {
+                    $fileContent = $tempadapter->read($tempFileName);
+                    if (!$realAdapter->has($pathToUpload.$mediaPrefix.$slugifyFileName)) {
+                        $realAdapter->write($pathToUpload.$mediaPrefix.$slugifyFileName, $fileContent);
+                    }
+                    $tempadapter->delete($tempFileName);
                 }
-                $tempadapter->delete($tempFileName);
             }
         } else {
             $entity->setProfileMedia(null);
