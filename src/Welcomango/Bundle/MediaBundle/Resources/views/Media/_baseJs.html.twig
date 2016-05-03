@@ -1,6 +1,7 @@
 <script src="{{ asset('js/Jcrop.min.js') }}" type="text/javascript"></script>
 <script type="text/javascript">
     var processDelete = true;
+    var loader = '<div id="loaderImage" class="loaderImage" style=""><i class="fa fa-circle-o-notch fa-spin"></i></div>';
     $('#{{ file_input_id }}').change(function () {
         processDelete = true;
         var file = document.getElementById('{{ file_input_id }}').files[0];
@@ -10,6 +11,7 @@
         formData.append("file", document.getElementById('{{ file_input_id }}').files[0]);
         var fileValid = validateFile(file);
         if(fileValid === true) {
+            $("#profile-media-croped").html(loader);
             $.ajax({
                 url: '{{ oneup_uploader_endpoint('gallery') }}',  //Server script to process data
                 type: 'POST',
@@ -25,6 +27,7 @@
                     console.log(request);
                 },
                 success: function (data) {
+                    $("#loaderImage").hide();
                     {% if in_modal is not defined %}
                     $("#media").empty();
                     $("#media").append('<img id="mediaToCrop" src="{{ media_upload_temp_dir }}/' + getTempFileName(filename) + '">');

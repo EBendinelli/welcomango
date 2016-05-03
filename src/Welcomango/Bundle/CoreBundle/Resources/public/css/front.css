@@ -1681,3 +1681,13 @@ body .ui-autocomplete .ui-menu-item.ui-state-focus{
 .jcrop-active{
     margin:auto;
 }
+
+/* ///////////  LOADER FOR MEDIAS   //////////////// */
+
+.loaderImage {
+    position: absolute;
+    z-index: 1000;
+    margin-left: 48px;
+    margin-top: 15px;
+    font-size: 150px;
+}
