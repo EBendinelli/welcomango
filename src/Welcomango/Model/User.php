@@ -147,7 +147,7 @@ class User extends BaseUser implements ParticipantInterface
 
     /**
      * @ORM\OneToOne(targetEntity="Media", cascade={"persist"})
-     * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true)
      */
     private $profileMedia;
 

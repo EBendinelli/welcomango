@@ -34,7 +34,7 @@
         <div class="col-md-6 text-center">
             <h4>Title: {{ experience.title }}</h4>
             <div class="bold">Taking place in {{ experience.city.name }}, {{ experience.city.country.name }}</div>
-            <div class="m-t-10 fs-i">{{ display_tag(experience.tags) }}</div>
+            <div class="m-t-10 fs-i">{{ display_tag(experience.tags, true) }}</div>
             <div class="m-t-20 ">
                 {{ experience.description }}
             </div>

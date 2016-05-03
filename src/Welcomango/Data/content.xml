@@ -41,6 +41,9 @@
         <category>How To</category>
         <content>
         <![CDATA[
+            <h3>Discovering Welcomango</h3>
+            <h5>A simple first approach of the idea behind this website</h5>
+            <hr />
             <blockquote>
                 <p style="letter-spacing: 0.14px;">Welcomango is aiming to propose a simple and intuitive experience so that travelers&nbsp;ands&nbsp;local have a chance to meet and share their perception of a&nbsp;place. Bored of traveling with guides or blog post visited a million time? Welcomango allows you to&nbsp;explore a destination through the eyes of a local in a few click. Follow the five steps to get started!</p>
                 <p style="letter-spacing: 0.14px;">&nbsp;</p>
@@ -92,9 +95,9 @@
                 <p class="text-primary"><em>Me? But I don't know&nbsp;anything&nbsp;about this city!&nbsp;What could I show? people would get bored!</em></p>
             </blockquote>
             <p>Well, that the whole point of Welcomango. It's not because you don't know when your city was build, who&nbsp;was the last mayor and when the main&nbsp;square was built that you don't have anything to give to travelers. Actually, <strong>that's even better that way!</strong></p>
-            <p>&nbsp;</p>
+            <p>&nbsp;</p><p>&nbsp;</p>
             <p><img style="display: block; margin-left: auto; margin-right: auto;" src="../../../../bundles/welcomangocore/images/graphics/step5.min.svg" alt="" width="390" height="245" /></p>
-            <p>&nbsp;</p>
+            <p>&nbsp;</p><p>&nbsp;</p>
             <p>You may ignore it, but you actually know a lot about your city. And when I say a lot, it's A LOT! You've probably been around for some time and I am sure you&nbsp;experienced the city in many ways. Let us show you what you probably already did:</p>
             <ul style="list-style-type: circle;">
                 <li>You got lost in your city. And discovered some weird spots that are still in your mind</li>
@@ -104,6 +107,7 @@
                 <li>You had a drink (or more?) with people you like and enjoyed the music in this underground place you would have never suspected to exist</li>
                 <li>Talking about music, you probably went to see concert in a pub and discovered a magical band</li>
             </ul>
+            <p>&nbsp;</p>
             <p>And of course, <strong>you lived the city</strong>. You got used to its public transport delay. You worked or studied in a specific place with a great&nbsp;sandwich-bar which fulfilled your stomach so many times&nbsp;without killing your budget. If you've been living here for a long time maybe you also know this place where your grand father used to paint. And <strong>the beauty of this is that everywhere you go, you write little&nbsp;stories</strong>, you experience the city, its habits, its culture, and that gives you plenty of anecdotes to tell.</p>
             <p>See the point? If you like the place where you live it's because you make it beautiful.</p>
             <p>&nbsp;</p>
@@ -111,6 +115,30 @@
             <p>&nbsp;</p>
             <p style="text-align: left;">Now, think about it the other way around. Read what is listed above and imagine yourself discovering a new place through these spots. Wouldn't it be awesome? Sit with someone living in the city in a bar he randomly discovered? Go to a concert in a place that doesn't even have a Facebook page? See where this person's grand father used to fight for revolution? How exciting right?</p>
             <p>I'm sure you now understand why we wanted Welcomango to exist and what it really is. In a few words: <strong>It's about experiencing places through people and their perspective of the place they inhabit</strong></p>
+            <p>&nbsp;</p>
+            ]]>
+        </content>
+    </item>
+
+    <item>
+        <title>Experience refused?</title>
+        <category>How To</category>
+        <content>
+            <![CDATA[
+            <h3>Your experience has been refused? There must be a reason for that</h3>
+            <p>Because we care for the travelers</p>
+            <hr />
+            <p>&nbsp;We don't like to see ourselves as&nbsp;dictators with unlimited powers on this website. But we considered as necessary&nbsp;to be able to refuse an experience when we believe it&nbsp;overpass the borders of the concept.</p>
+            <p>In most of the case, refusing an experience is the result of a proposal which include&nbsp;very unrelated content to a pleasant travel experience between a local and a traveler. It might&nbsp;fall in one of these categories:</p>
+            <p>&nbsp;</p>
+            <ul>
+                <li>Advertising&nbsp;(for a bar, a transportation service, a tour guide company...)</li>
+                <li>Activities forbidden by the law of the country where the experience take place (including drugs, weapon, violence...)</li>
+                <li>Content encouraging&nbsp;to&nbsp;use a different communication mean (By email for example. We don't want our users to be abused of the website)</li>
+            </ul>
+            <p>&nbsp;</p>
+            <p>However, if you still feel that your experience&nbsp;should not have been refused and is really&nbsp;worth&nbsp;sharing with the community, do not hesitate to <a href="../../../contact">contact us </a>and we'll do our best to discuss the details of the rejection with you.</p>
+            <p>&nbsp;</p>
             ]]>
         </content>
     </item>

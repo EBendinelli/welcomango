@@ -33,7 +33,7 @@
                     <a href="{{ path('front_experience_edit', {'experience_id': experience.id}) }}" class="btn btn-bordered btn-black btn-cons m-b-10 "><i class="fa fa-pencil"></i> {{ 'profile.editExperience'|trans }}</a>
                     <button class="btn btn-danger btn-cons" data-toggle="modal" data-target=".modal-action" onClick="updateModal('{{ path('front_experience_delete', {'experience_id': experience.id}) }}')"><i class="fa fa-trash "></i> {{ 'profile.deleteExperience'|trans }}</button>
                 </div>
-                <div class="fs-11 m-t-10 text-center"><a href="">{{ 'experience.refusedWhy'|trans }}</a></div>
+                <div class="fs-11 m-t-10 text-center"><a href="{{ path('page_view_slug', {'slug': 'experience-refused'}) }}">{{ 'experience.refusedWhy'|trans }}</a></div>
             {% else %}
                 <div class="text-center"><a href="{{ path('booking_received_list', {'display': 'happened'}) }}" class="text-complete semi-bold">{{ 'experience.attended'|trans }}: {{ experience.getNumberOfTimeAttended }}<a/></div>
                 <div class="text-center"><a href="{{ path('booking_received_list', {'display': 'received'}) }}" class="text-complete semi-bold">{{ 'experience.pendingRequest'|trans }}: {{ experience.getPendingRequest }}</a></div>
