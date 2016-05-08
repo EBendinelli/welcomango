@@ -74,7 +74,7 @@ class Page
     /**
      * @var Media
      * @ORM\ManyToOne(targetEntity="Media")
-     * @ORM\JoinColumn(name="banner_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="banner_id", referencedColumnName="id", nullable=true)
      **/
     private $banner;
 

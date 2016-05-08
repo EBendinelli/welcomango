@@ -62,6 +62,7 @@ class AdminPageType extends AbstractType
         $builder->add('banner', 'entity', array(
             'class' => 'Model:Media',
             'property' => 'id',
+            'required' => false
         ));
 
     }

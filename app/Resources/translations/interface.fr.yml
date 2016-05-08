@@ -1,4 +1,4 @@
-generic.title.meta: Welcomango - Des lieux à travers leurs occupants
+﻿generic.title.meta: Welcomango - Des lieux à travers leurs occupants
 
 interface.edit: Editer
 interface.delete: Supprimer
@@ -14,10 +14,10 @@ interface.warning: Attention
 interface.send: Envoyer
 interface.clear: Reset
 interface.login: Login
-interface.username: Username
+interface.username: Pseudonyme
 interface.password: Mot de passe
 interface.first: Premier
-interface.previous: Precedent
+interface.previous: Précédent
 interface.next: Suivant
 interface.last: Dernier
 interface.save: Sauvegarder
@@ -40,9 +40,9 @@ login.resetting.successTitle: Email de réinitialisation envoyé
 login.resetting.successSubTitle: Essayez de ne pas l'oublier la prochaine fois !
 login.noAccount: Pas encore de compte ?
 
-menu.title.experiences: Experiences
+menu.title.experiences: Expériences
 menu.title.portraits: Portraits
-menu.title.howTo: Comment faire
+menu.title.howTo: Comment faire ?
 menu.title.signUp: S'inscrire
 
 global.viewProfile: Voir son profil
@@ -50,24 +50,24 @@ global.comments: Commentaires
 global.feedbacks: Réactions
 global.welcomeBack: Bienvenue
 global.backHome: Retour à l'accueil
-global.backExperiences: Retour aux experiences
-global.backToYourExperiences: Vos experiences
+global.backExperiences: Retour aux expériences
+global.backToYourExperiences: Vos expériences
 global.backProfile: Retour au profil
 global.joinNow: Nous rejoindre
-global.experience: Experience
+global.experience: Expérience
 global.date: Date
 global.meetingTime: Heure du rendez-vous
-global.status: Status
+global.status: Statut
 global.actions: Actions
 global.requestedTime: Heure demandée
 global.user: Utilisateur
-global.experience: Experience
-global.booking: Reservation
+global.experience: Expérience
+global.booking: Réservation
 global.registration: Inscription
 global.email: Email
 global.you: Vous
 global.theTeam: L'équipe
-global.feedbackButton: Un bug ? Une erreur ? <br/> Clickez et dites nous !
+global.feedbackButton: Un bug ? Une erreur ? <br/> Cliquez et dites-nous !
 global.explore: Explorer
 global.free: Gratuit
 global.contribution: Contribution
@@ -75,21 +75,21 @@ global.about: À propos
 global.spokenLanguages: Langues parlées
 
 homepage.title1: Des lieux à travers leurs occupants
-homepage.subTitle1: Trouvez des locaux prêts à vous montrez leur ville comme ils l'aiment
+homepage.subTitle1: Trouvez des locaux prêts à vous montrer leur ville comme ils l'aiment
 homepage.nextSubTitle1: Et ne voyagez plus jamais comme un touriste
 homepage.title2: Rejoignez la communauté
 homepage.subTitle2: Et montrez au monde à quel point votre lieu de vie est génial
 homepage.nextSubTitle2: Rencontrez des gens avec des intérêts communs, soyez surpris par votre destination et découvrez une autre facette des lieux que vous visitez
-homepage.featuredExperiences: Nos experiences préférées
-homepage.bestRated: Les experiences les mieux notées
+homepage.featuredExperiences: Nos expériences préférées
+homepage.bestRated: Les expériences les mieux notées
 homepage.howItWorks: Comment ça marche
 homepage.3steps: 3 étapes pour voyager différemment
 homepage.stepsText: Welcomango met en contact les locaux et les voyageurs pour vous permettre de découvrir des lieux à travers des personnes et leurs passions
 homepage.step1: Tapez votre destination
-homepage.step2: Réservez une experience avec un local
+homepage.step2: Réservez une expérience avec un local
 homepage.step3: Explorez la ville
-homepage.step1Note: Recherchez une experience sur votre prochain lieu de destination ou laissez vous surprendre par des experiences dans des lieux inconnus.
-homepage.step2Note: Trouvez une experience humaine avec une perception unique de la ville. Musique, nature, histoire, tout est possible.
+homepage.step1Note: Recherchez une expérience sur votre prochain lieu de destination ou laissez-vous surprendre par des expériences dans des lieux inconnus.
+homepage.step2Note: Trouvez une expérience humaine avec une perception unique de la ville. Musique, nature, histoire, tout est possible.
 homepage.step3Note: Découvrez un lieu avec un local et explorez votre destination d'une nouvelle manière.
 homepage.whereItStarts: C'est ici que tout commence
 homepage.bestOfBest: La crème de la crème
@@ -105,7 +105,7 @@ profile.menu: Menu
 profile.message: Messages
 profile.requestsFromTravelers: Demandes de voyageurs
 profile.yourRequests: Vos réservations
-profile.yourExperiences: Vos experiences
+profile.yourExperiences: Vos expériences
 profile.editProfile: Editer votre profil
 profile.editProfile2: Editez profil
 profile.feedbacks: Réactions
@@ -114,127 +114,127 @@ profile.noteLocal: Note en tant que local
 profile.welcomeBack: Salut %name% !
 profile.latestUpdate: Dernières nouvelles
 profile.mainInfo: Information
-profile.yourExperience: Votre experience phare
+profile.yourExperience: Votre expérience phare
 profile.aboutYou: A propos de vous
 profile.yourNextTrip: Votre prochain voyage
 profile.nextTripDetails: Sera <span class="text-primary">%experienceTitle%</span> à <span class="text-primary">%experienceCity%</span> avec <span class="text-primary">%experienceGuide%</span> à <span class="bold">%time%</span>
 profile.nextVisitGiven: Prochaine visite donnée
 profile.nextVisitDetails: Est une variante de <span class="text-primary">%experienceTitle%</span> dans laquelle vous embarquerez <span class="text-primary">%experienceTraveler%</span> à <span class="bold">%time%</span>
 profile.giveFeedbackToTitle: Faites un retour à <span class="text-primary">%user%</span>
-profile.giveFeedbackTitle: Donner votre avis sur la dernière experiences que vous avez vécu
-profile.rateAsLocal: Donner votre avis à %user% sur le moment que vous avez partagés !
+profile.giveFeedbackTitle: Donnez votre avis sur la dernière expérience que vous avez vécu
+profile.rateAsLocal: Donnez votre avis à %user% sur le moment que vous avez partagé !
 profile.rateMultipleAsLocal: Donner votre avis sur les voyageurs que vous avez accueilli dernièrement!
 profile.rateAsTraveler: Donner un retour sur le temps que vous avez passé à <span class="text-primary">%city%</span> !
 profile.rateMultipleAsTraveler: Faites un retour aux gens qui vous ont accueilli récemment !
 profile.newRequest: Vous avez une nouvelle demande
 profile.newRequestText: De la part de <span class="text-primary">%user%</span> pour <span class="text-primary">%experience%</span>
-profile.experienceAccepted: Votre experience à été publiée!
+profile.experienceAccepted: Votre expérience a été publiée!
 profile.experienceAcceptededText: <span class="text-primary">%experience%</span> est maintenant visible et réservable par tous!
-profile.experienceRefused: Votre expérience à été refusée
-profile.experienceRefusedText: %experience% à été refusé pour la raison suivante: <span class="text-danger">"%reason%"</span>
+profile.experienceRefused: Votre expérience a été refusée
+profile.experienceRefusedText: %experience% a été refusé pour la raison suivante: <span class="text-danger">"%reason%"</span>
 profile.occupation: Occupation
 profile.hometown: Ville de naissance
 profile.gender: Genre
 profile.spokenLanguages: Langues parlées
 profile.edit.emailNote: Votre adresse email ne peut pas être modifiée directement, merci de nous contacter si besoin.
-profile.edit.languageNote: Vous pouvez ici gérer les différentes langues que vous parlez ou comprenez. Sans aucun doute le meilleur moyen de communiquer avec votre prochaine rencontre !
+profile.edit.languageNote: Vous pouvez gérer ici les différentes langues que vous parlez ou comprenez. Sans aucun doute le meilleur moyen de communiquer avec votre prochaine rencontre !
 profile.edit.currentCityNote: Ce champ indique la ville dans laquelle vous vivez actuellement. La ville que vous pouvez faire découvrir. L’élue !
-profile.edit.descriptionNote: Donner une petite description de vous! Faites savoir aux autres utilisateurs ce que vous aimez, ce que vous détestez, ce qui vous inspire et pourquoi vous rencontrer est probablement la chose la plus incroyable qui puisse leur arriver !
-profile.edit.occupationNote: Votre activité actuelle. Vous pouvez être étudiant, architecte, jardinier, hédoniste ou même un dentiste. On vous aime quand même.
+profile.edit.descriptionNote: Donnez une petite description de vous! Faites savoir aux autres utilisateurs ce que vous aimez, ce que vous détestez, ce qui vous inspire et pourquoi vous rencontrer est probablement la chose la plus incroyable qui puisse leur arriver !
+profile.edit.occupationNote: Votre activité actuelle. Vous pouvez être étudiant, architecte, jardinier, hédoniste ou même dentiste. On vous aime quand même.
 profile.edit.usernameNote: Ce nom d'utilisateur est uniquement utilisé quand vous vous connectez. Il est comme vous: Unique.
-profile.edit.profilePictureNote: Nous savons déjà que vous êtes beau. Mais certaines personnes vont peut être vouloir vérifier. Ajoutez une photo, juste au cas où.
+profile.edit.profilePictureNote: Nous savons déjà que vous êtes beau. Mais certaines personnes vont peut-être vouloir vérifier. Ajoutez une photo, juste au cas où.
 profile.edit.phoneNote: Cette information ne sera pas diffusée publiquement. Nous ne l'utiliserons que pour vous envoyer des messages de rappels (si vous le voulez bien).
-profile.edit.birthdayNote: Nous n'avons pas encore de partenariat avec le père noel mais on peut toujours vous envoyer un petit mot gentil pour votre anniversaire
-profile.edit.topMessage: Ce section définit ce que les autres utilisateurs vont savoir de vous.<br/> Essayez de leur faire sentir comment vous vous percevez en tant que voyageur mais aussi en tant que local quand vous n'êtes pas en voyage !
-profile.lastExperiencesAttended: Dernières experiences à laquelle a participé %user%
-profile.bestAdventure: Meilleure experience
+profile.edit.birthdayNote: Nous n'avons pas encore de partenariat avec le père Noël mais on peut toujours vous envoyer un petit mot gentil pour votre anniversaire
+profile.edit.topMessage: Cette section définit ce que les autres utilisateurs vont savoir de vous.<br/> Essayez de leur faire sentir comment vous vous percevez en tant que voyageur mais aussi en tant que local quand vous n'êtes pas en voyage !
+profile.lastExperiencesAttended: Dernières expériences à laquelle a participé %user%
+profile.bestAdventure: Meilleure expérience
 profile.about: A propos de  %user%
-profile.picture.cropNote: Aidez nous à vous rendre encore plus beau et placez votre visage dans le carré
-profile.picture.saveAndCrop: Découper et sauver
+profile.picture.cropNote: Aidez-nous à vous rendre encore plus beau et placez votre visage dans le carré
+profile.picture.saveAndCrop: Découpez et sauvegardez
 profile.picture.mustBeSquare: Désolé, mais votre photo doit être dans un carré !
-profile.created.success: Votre compte à été créé avec succès
-profile.created.emailSent: Vous devriez recevoir un email de confirmation dans les plus brefs délais. Merci de vérifier votre compte en cliquant sur le lien inclus dans l'email
+profile.created.success: Votre compte a été créé avec succès
+profile.created.emailSent: Vous devriez recevoir un email de confirmation dans les plus brefs délais. Merci de valider votre compte en cliquant sur le lien inclus dans l'email
 profile.yourProfile: Votre profil
-profile.edit.picture: Editer votre photo
-profile.proposedExperiences: Experiences proposées
-profile.noExperienceProposed: Pas d'experience proposée
-profile.edit.clickUpload: Cliquer pour ajouter une photo
-profile.editExperience: Editer votre experience
-profile.deleteExperience: Supprimer votre experience
+profile.edit.picture: Editez votre photo
+profile.proposedExperiences: Expériences proposées
+profile.noExperienceProposed: Pas d'expériences proposées
+profile.edit.clickUpload: Cliquez pour ajouter une photo
+profile.editExperience: Editez votre expérience
+profile.deleteExperience: Supprimez votre expérience
 profile.hiThere: Salut!
-profile.completeProfile: Votre profil est un peu vide, et si vous ajoutiez deux trois infos ? Commencez par remplir votre description et renseigner les langues que vous maitrisez !
-profile.createExperience: Créer une <br/> expérience !
-profile.title.createExperience: Créer une expérience
+profile.completeProfile: Votre profil est un peu vide, et si vous ajoutiez deux ou trois infos ? Commencez par remplir votre description et renseignez les langues que vous maitrisez !
+profile.createExperience: Créez une <br/> expérience !
+profile.title.createExperience: Créez une expérience
 profile.atHome: A la maison ?
-profile.createExperienceSuggestion: Et si vous proposiez une visite de votre ville ? Suivez le lien et créez votre première experience ! (Pas d'idée ? <a href="%route%">Jetez un oeil à cet article !</a>)
+profile.createExperienceSuggestion: Et si vous proposiez une visite de votre ville ? Suivez le lien et créez votre première expérience ! (Pas d'idée ? <a href="%route%">Jetez un œil à cet article !</a>)
 
 experience.tags: Tags
 experience.list.subHeader: Il est temps de trouver votre prochaine rencontre
 experience.experienceShortText: Une aventure de %experienceDuration%h proposée par %experienceCreator%
-experience.details: Details
+experience.details: Détails
 experience.estimatedDuration: Durée estimée
 experience.minimunDuration: Durée minimum
 experience.maximumDuration: Durée maximum
 experience.maximumParticipants: Nombre maximum de participants
 experience.minimumParticipants: Nombre minimum de participants
-experience.happenedTimes: Experience déjà vécue <span class="text-black semi-bold">%number% fois</span>
+experience.happenedTimes: Expérience déjà vécue <span class="text-black semi-bold">%number% fois</span>
 experience.description: Description
 experience.pictures: Photos
-experience.sorryNoPictures: Désolé, il semble qu'il n'y a pas de photo pour cette experience...
-experience.refusedWhy: Pourquoi mon experience a-t-elle été refusée
+experience.sorryNoPictures: Désolé, il semble qu'il n'y a pas de photo pour cette expérience...
+experience.refusedWhy: Pourquoi mon expérience a-t-elle été refusée ?
 form.experience.keyword: Mots-clefs...
 form.experience.date: Dates disponibles
 form.experience.minParticipantsAccepted: Nombre minimum de participants
 form.experience.contribution: Contribution
 form.experience.endDate: Date de fin
 form.experience.startDate: Date de fin
-experience.list.title: Experiences partout dans le monde
+experience.list.title: Expériences partout dans le monde
 experience.noFeedbacksReceived: Cet utilisateur n'a pas encore reçu de retours
-experience.noNoteYet: Pas de notes reçu
-experience.attended: Experience proposée
+experience.noNoteYet: Pas de notes reçues
+experience.attended: Expérience proposée
 experience.pendingRequest: Requête en attente
-experience.sendRequest: Envoyer une demande
+experience.sendRequest: Envoyez une demande
 
-experience.create.titleNote: Ceci est le titre de votre experience, il doit décrire en quelques mots ce que vous voulez mettre en avant de votre experience. Essayez de le rendre simple et attirant comme "<i>"Une aventure magique à vélo"</i> pour une visite nature, <i>"Un ville assiégée"</i> pour une experience plus historique ou <i>"La face cachée d'une ville endormie"</i> pour une aventure plus underground. <span class="bold"> Essayez de faire sonner ça comme un titre de film !</span> <br/><br/>Notez <span class="bold">qu'il n'y pas besoin d'inclure le nom de la ville</span>.
-experience.create.descriptionNote: Maintenant passons aux choses sérieuses ! C'est ici le coeur de votre expérience. Cette section donne un aperçu de ce qu'un voyageur peut attendre d'une rencontre avec vous. Pas besoin de parler de votre ville, prenez plutôt le temps de parler de ce que votre experience va mettre en avant et comment elle représente la façon dont vous aimez et vivez votre ville.
-experience.create.mediaNote: Ajoutez quelques photos à votre experience. Cela donnera un certain charme à votre page tout en donnant un aperçu de ce que vous pouvez faire découvrir.
-experience.create.cityNote: Information utile n'est-ce pas ? On préfère demander, juste au cas ou... Où se passe votre experience?
-experience.create.tagsNote: Les tags sont les mots clefs qui définissent grossièrement votre experience. Ce sont des genres de catégories mais plus expressifs. Pas besoin d'en ajouter des dizaines, faites simplement en sorte que cela reflète le contenu de votre experience.
+experience.create.titleNote: Ceci est le titre de votre expérience, il doit décrire en quelques mots ce que vous voulez mettre en avant de votre expérience. Essayez de le rendre simple et attirant comme "<i>"Une aventure magique à vélo"</i> pour une visite nature, <i>"Un ville assiégée"</i> pour une expérience plus historique ou <i>"La face cachée d'une ville endormie"</i> pour une aventure plus underground. <span class="bold"> Essayez de faire sonner ça comme un titre de film !</span> <br/><br/>Notez <span class="bold">qu'il n'y pas besoin d'inclure le nom de la ville</span>.
+experience.create.descriptionNote: Maintenant passons aux choses sérieuses ! C'est ici le cœur de votre expérience. Cette section donne un aperçu de ce qu'un voyageur peut attendre d'une rencontre avec vous. Pas besoin de parler de votre ville, prenez plutôt le temps de parler de ce que votre expérience va mettre en avant et comment elle représente la façon dont vous aimez et vivez votre ville.
+experience.create.mediaNote: Ajoutez quelques photos à votre expérience. Cela donnera un certain charme à votre page tout en donnant un aperçu de ce que vous pouvez faire découvrir.
+experience.create.cityNote: Information utile n'est-ce pas ? On préfère demander, juste au cas où... Où se passe votre expérience?
+experience.create.tagsNote: Les tags sont les mots clefs qui définissent grossièrement votre expérience. Ce sont des genres de catégories mais plus expressifs. Pas besoin d'en ajouter des dizaines, faites simplement en sorte que cela reflète le contenu de votre expérience.
 experience.create.estimatedDurationNote: La durée parfaite de votre expérience selon vous
 experience.create.maximumParticipantsNote: Le nombre maximum de personnes que vous êtes prêt à emmener avec vous
-experience.create.minimumDurationNote: Combien de temps votre experience doit durer au minimum
+experience.create.minimumDurationNote: Combien de temps votre expérience doit durer au minimum
 experience.create.maximumDurationNote: Et combien de temps elle peut durer au maximum
-experience.create.pricePerHourNote: Oula ! Voilà des choses bien sérieuses... Vous êtes entièrement de libre de décider de ce que vous estimez mériter pour une heure de votre temps. Si vous n'avez vraiment pas d'idée, fixez un prix que vous seriez prêt à payer pour une expérience similaire dans une autre ville. Vous pouvez aussi rendre votre experience gratuite en mettant simplement zéro dans le champ !
+experience.create.pricePerHourNote: Oula ! Voilà des choses bien sérieuses... Vous êtes entièrement de libre de décider de ce que vous estimez mériter pour une heure de votre temps. Si vous n'avez vraiment pas d'idées, fixez un prix que vous seriez prêt à payer pour une expérience similaire dans une autre ville. Vous pouvez aussi rendre votre expérience gratuite en mettant simplement zéro dans le champ !
 experience.create.header.title: Créer votre expérience
 experience.create.header.message: Alors vous vous êtes décidé à faire le premier pas ? Génial, vous n'avez pas idée comme cela nous rend heureux ! Proposer une expérience n'est pas une chose aussi compliquée que vous pourriez le croire. Mais cela se doit d'être un minimum cohérent si vous voulez pouvoir accueillir du monde. Suivez les instructions et tout devrait bien se passer! Si vous n'avez vraiment aucune idée quant à ce que vous pouvez proposer, <a href="%route%">allez lire cet article</a>!
 availabilities.whichDays: Les jours où vous êtes disponible
-availabilities.whichDaysNote: Pas disponible 24h sur 24? C'est bien normal! Utilisez le sélecteur ci-dessous pour définir les jours et heures où vous avez du temps libre
+availabilities.whichDaysNote: Pas disponible 24h sur 24h? C'est bien normal! Utilisez le sélecteur ci-dessous pour définir les jours et heures où vous avez du temps libre
 availabilities.whatTime: Les moments de la journée où vous êtes disponible
-availabilities.whatTimeNote: Ce n'est pas parce que vous avez du temps le samedi que vous avez toute la journée à consacrer à des voyageurs. Utilisez ce sélecteur pour définir les moments de la journée où vous êtes disponible pour les dates sélectionnées au dessus.
+availabilities.whatTimeNote: Ce n'est pas parce que vous avez du temps le samedi que vous avez toute la journée à consacrer à des voyageurs. Utilisez ce sélecteur pour définir les moments de la journée où vous êtes disponible pour les dates sélectionnées au-dessus.
 availabilities.howLong: Pour combien de temps
-availabilities.howLongNote: Des vacances de prévues? Vous savez déjà que vous ne serez disponible que pour quelques mois? Les deux dates ci-dessous définissent la période sur laquelle vous êtes disponible. De cette manière, personne ne pourra vous importuner en dehors de vos disponibilités.
-availability.modal.removeText: Êtes vous sur de vouloir supprimer cette disponibilité?
+availabilities.howLongNote: Des vacances de prévues ? Vous savez déjà que vous ne serez disponible que pour quelques mois ? Les deux dates ci-dessous définissent la période sur laquelle vous êtes disponible. De cette manière, personne ne pourra vous importuner en dehors de vos disponibilités.
+availability.modal.removeText: Êtes-vous sûr de vouloir supprimer cette disponibilité?
 availability.error.oneRequired: Vous devez au moins ajouter une disponibilité! Si vous êtes disponible tout le temps, sélectionnez simplement l'option "Toujours" ;)
 availability.modal.remove: Supprimer disponibilité
 
-experience.manage.introductionText: Il se peut que vous viviez dans votre ville actuelle depuis plusieurs années et que vous trouviez le concept d'expériences thématiques un peu limité... Nous avons pensé à vous et vous avez la possibilité de proposer plusieurs experiences dans une seule et même ville, plusieurs saveur d'un même aliment en somme. Par exemple, si vous proposez déjà un experience orienté sur la culture et l'histoire, vous pouvez parfaitement créer une seconde experience plus débridée autour de la vie nocturne! laissez vos connaissances parler et tentez d'intriguer les visiteurs potentiels ;)
+experience.manage.introductionText: Il se peut que vous viviez dans votre ville actuelle depuis plusieurs années et que vous trouviez le concept d'expériences thématiques un peu limité... Nous avons pensé à vous et vous avez la possibilité de proposer plusieurs expériences dans une seule et même ville, plusieurs saveurs d'un même aliment en somme. Par exemple, si vous proposez déjà une expérience orientée sur la culture et l'histoire, vous pouvez parfaitement créer une seconde expérience plus débridée autour de la vie nocturne! Laissez vos connaissances parler et tentez d'intriguer les visiteurs potentiels ;)
 experience.manage.title: Une autre vision de votre ville
 
-experience.create.title: Votre experience à été créée avec succès !
-experience.create.subTitle: Nous allons simplement y jeter un oeil, elle devrait ensuite être publiée très rapidement
-experience.create.message: Un grand merci à vous de proposer cette experience ! Vous faites partie de notre communauté et vous nous aidez à faire du voyage quelque chose de plus humain. Jetez un oeil au résultat ou retournez simplement à votre profil.
-experience.booking.title: Votre demande à été envoyée avec succès! 
+experience.create.title: Votre expérience a été créée avec succès !
+experience.create.subTitle: Nous allons simplement y jeter un œil, elle devrait ensuite être publiée très rapidement
+experience.create.message: Un grand merci à vous pour proposer cette expérience ! Vous faites partie de notre communauté et vous nous aidez à faire du voyage quelque chose de plus humain. Jetez un œil au résultat ou retournez simplement à votre profil.
+experience.booking.title: Votre demande a été envoyée avec succès! 
 experience.booking.subTitle: Cela devient intéressant n'est-ce pas ?
 experience.booking.message: %user% vous répondra dès que possible et vous serez averti par email de sa réponse. Essayez d'être patient... ;)
-experience.createExperience: Créer une nouvelle experience
-experience.edit.messageTop: Plus disponible les mardis ? Vous voulez ajouter des détails ou des informations ?<br/> Vous pouvez éditer ici votre expérience pour la rendre encore meilleure ! <br/><br/><span class="bold">Note:</span> Si vous changez complètement votre expérience nous vous suggérons de supprimer celle ci et d'en créer une nouvelle.<br/><span class="bold">Note 2:</span>  Une fois sauvegardée, nous validerons votre expérience de la même manière que nous l'avons fait la première fois. Elle sera donc indisponible quelques heures.
-experience.edit.warningAlreadyBooked: Vous avez déjà %number% réservation(s) prévues pour cette experience. Merci de <a href="%route%">contacter les voyageurs</a> pour les avertir des changements que vous vous apprêtez à faire.
-experience.edit.success: Votre experience à été modifiée avec succès
+experience.createExperience: Créer une nouvelle expérience
+experience.edit.messageTop: Plus disponible les mardis ? Vous voulez ajouter des détails ou des informations ?<br/> Vous pouvez éditer ici votre expérience pour la rendre encore meilleure ! <br/><br/><span class="bold">Note:</span> Si vous changez complètement votre expérience nous vous suggérons de supprimer celle-ci et d'en créer une nouvelle.<br/><span class="bold">Note 2:</span>  Une fois sauvegardée, nous validerons votre expérience de la même manière que nous l'avons fait la première fois. Elle sera donc indisponible quelques heures.
+experience.edit.warningAlreadyBooked: Vous avez déjà %number% réservation(s) prévue(s) pour cette expérience. Merci de <a href="%route%">contacter les voyageurs</a> pour les avertir des changements que vous vous apprêtez à faire.
+experience.edit.success: Votre expérience a été modifiée avec succès
 experience.create.noPriceNote: Pas envie de demander de l'argent ? Faites les choses différemment ! Vous pouvez suggérer aux voyageurs de vous amener une contribution en nature plutôt que de l'argent. Cela peut être une spécialité de chez eux, un ticket de bus, n'importe quoi!
-experience.create.noPrice: Suggérer une contribution au lieu de l'argent
-experience.create.contributionNote: La contribution est moyen pour le voyageur de vous remercier sans vous donner de l'argent directement. Cela peut être en payant votre ticket pour le musée, en vous offrant un verre ou en amenant quelque chose de chez lui ! Laissez parler votre imagination :)
+experience.create.noPrice: Suggérez une contribution au lieu de l'argent
+experience.create.contributionNote: La contribution est un moyen pour le voyageur pour vous remercier sans vous donner de l'argent directement. Cela peut être en payant votre ticket pour le musée, en vous offrant un verre ou en amenant quelque chose de chez lui ! Laissez parler votre imagination :)
 experience.create.contribution: Contribution
-experience.noExperience: Zut ! il semble qu'aucune expérience ne corresponde à vos critères... <br/> Essayez d'être moins sélectif (dates, termes de la recherche...), être ouvert est toujours une bonne chose.
+experience.noExperience: Zut ! Il semble qu'aucune expérience ne corresponde à vos critères... <br/> Essayez d'être moins sélectif (dates, termes de la recherche...), être ouvert est toujours une bonne chose.
 
 
 booking.bookingFor: Votre réservation pour <span class="text-primary">%title%</span> à <span class="text-primary">%city%</span> avec <span class="text-primary">%user%</span>
@@ -246,8 +246,8 @@ booking.noComment: Pas encore de commentaire
 booking.yourFeedbackWaitingForApproval: Votre retour est en attente de validation, cela ne saurait tarder
 booking.thisUserFeedbackWaitingForApproval: Le retour de cet utilisateur est en attente de validation, cela devrait arriver rapidement
 booking.noFeedbackFrom: Désolé, pas de retour de la part de %user%
-booking.noExperienceCreated: Il semble que vous ne proposiez pas encore d'experience dans votre ville, quel dommage... <br/>Créer une expérience dès maintenant pour accueillir des voyageurs !
-feedbackRefusedText: Désolé, votre retour à été refusé, merci de faire un commentaire respectueux de notre charte
+booking.noExperienceCreated: Il semble que vous ne proposiez pas encore d'expérience dans votre ville, quel dommage... <br/>Créez une expérience dès maintenant pour accueillir des voyageurs !
+feedbackRefusedText: Désolé, votre retour a été refusé, merci de faire un commentaire respectueux de notre charte
 booking.requestsSent: Demande de réservation
 booking.requestSentExplanation: Résumé de vos réservations, récentes ou passées, pour des expériences proposées par d'autres welcomangers
 booking.participants: <span class="semi-bold">%number%</span>  participants
@@ -259,11 +259,11 @@ booking.viewRequest: Voir les détails pour cette demande
 booking.rateAdventure: Notez cette aventure
 booking.ratingText: Partagez votre sentiment vis à vis de cette expérience. Essayez d'être honnête et objectif
 booking.ratingNote: Merci de noter que nous nous réservons le droit de ne pas accepter ce retour s'il est offensif ou inapproprié
-booking.action.message: Cette demande à été %status% avec succès
-booking.requestReceivedFor: Demande reçues pour
+booking.action.message: Cette demande a été %status% avec succès
+booking.requestReceivedFor: Demandes reçues pour
 booking.noRequestFound: Pas de demandes trouvées
 booking.requestFrom: Demande <a href="%route%" class="text-primary semi-bold">%name%</a> pour </a> à <span class="text-primary">%time%</span>
-booking.action.acceptedMessage: Vous pouvez dès à présent écrire un message à %name% et lui donner plus détails à propos du point de rendez vous :)
+booking.action.acceptedMessage: Vous pouvez dès à présent écrire un message à %name% et lui donner plus détails à propos du point de rendez-vous :)
 booking.experience.deleted: Il semble que %name% ai supprimé cette expérience. Prenez contact avec lui/elle pour en savoir plus...
 booking.explore: Parcourir les expériences disponibles
 booking.status: Status:
@@ -275,29 +275,29 @@ page.writtenBy: Par %author%
 article.portraits: Portraits
 article.portraitHeader: Un regard sur notre extraordinaire communauté
 article.currentlyLivingIn: Vivant actuellement à <span class="text-primary">%city%</span>
-article.portraitIntro: Grâce à Welcomango, vous avez la possibilité de découvrir ne nouveaux lieux à travers les gens qui y vivent. Mais dans notre cas, nous ne vivons que grâce à ces gens. People comme vous et nous, avec des rêves, des peurs et des espoirs. Cette page vous donne l'opportunité d'en apprendre plus sur les membres de la communauté et vous encourage à faire un pas dans leur univers.
+article.portraitIntro: Grâce à Welcomango, vous avez la possibilité de découvrir de nouveaux lieux à travers les gens qui y vivent. Mais dans notre cas, nous ne vivons que grâce à ces gens. People comme vous et nous, avec des rêves, des peurs et des espoirs. Cette page vous donne l'opportunité d'en apprendre plus sur les membres de la communauté et vous encourage à faire un pas dans leur univers.
 article.portraitTitle: Une communauté. Plusieurs visages
 
 contact.pageTitle: Contact & Retours
 contact.text: Une question ? Un problème ? Une demande à notre équipe ? Nous sommes là pour vous, alors envoyez-nous un message ! Nous utiliserons notre Delorean pour vous répondre avant même que vous ayez posé votre question s'il le faut.
-contact.subText: Si votre message concerne un bug, n'hésitez pas à décrire votre problème le plus précisément possible. Le plus nous en savons, le plus rapidement nous pourrons corriger le problème !
+contact.subText: Si votre message concerne un bug, n'hésitez pas à décrire votre problème le plus précisément possible. Plus nous en savons, plus rapidement nous pourrons corriger le problème !
 contact.sent.title: Message envoyé avec succès !
 contact.sent.subTitle: Nous l'entendons déjà arriver...
-contact.sent.message: Merci de nous avoir contacté, nous ferons de notre mieux pour gérer votre demande aussi vite que possible
+contact.sent.message: Merci pour nous avoir contacté, nous ferons de notre mieux pour gérer votre demande aussi vite que possible
 content.portraits: Portraits
 
 registration.title: La première étape de votre prochaine aventure
-registration.joinWelcomango: Rejoignez la communauté de Welcomango pour découvrir une nouvelle façon de voyager et transformer votre expérience de l'inconnu
+registration.joinWelcomango: Rejoignez la communauté de Welcomango pour découvrir une nouvelle façon de voyager et transformez votre expérience de l'inconnu
 registration.meetLocals: Rencontrez des locaux, soyez un local, partagez votre vision sur un lieu avec les gens qui y vivent
-registration.confirmed: Félicitation ! Votre compte à été validé ! C'est le moment de vous balader sur le site et de profiter :)
+registration.confirmed: Félicitations ! Votre compte a été validé ! C'est le moment de vous balader sur le site et de profiter :)
 registration.confirmation.subTitle: C'est ici que tout commence
-registration.confirmation.message: Visitez votre profil pour l'améliorer ou commencer à parcourir le site pour trouver votre prochaine expérience!
+registration.confirmation.message: Visitez votre profil pour l'améliorer ou commencez à parcourir le site pour trouver votre prochaine expérience!
 
 message.noMessage: Il semble que personne ne vous ait contacté pour l'instant
 
 form.city: Ville
 form.rating.comment: Commentaire
-form.profile.uploadPhoto: Télécharger une photo
+form.profile.uploadPhoto: Téléchargez une photo
 
 form.experience.title: Titre de l'expérience
 form.experience.description: Description de l'expérience
@@ -315,7 +315,7 @@ form.user.description: Description
 form.user.occupation: Activité
 form.user.languages: Langues
 form.user.level: Niveau
-form.add.language: Ajouter une langue
+form.add.language: Ajoutez une langue
 form.user.username: Username
 form.user.firstname: Prénom
 form.user.lastname: Nom de famille
@@ -327,43 +327,43 @@ form.user.password.validate: Confirmation
 
 
 email.generic.lovelyMail: Un délicat email envoyé par
-email.generic.contactUs: Contactez nous:
+email.generic.contactUs: Contactez-nous:
 email.experience.requestSubject: Vous avez une nouvelle demande pour votre expérience %experience%
-email.message.subject: Votre demande de contact à été soumise
+email.message.subject: Votre demande de contact a été soumise
 email.message.title: Demande de contact
-email.message.coreTitle: Votre demande de contact à été soumis avec succès
+email.message.coreTitle: Votre demande de contact a été soumise avec succès
 email.message.subTitle: Merci d'avoir pris le temps de nous écrire <3
 email.message.message: Nous essayerons de vous répondre le plus rapidement possible. Nous vous invitons à savourer un thé (ou café !), quand vous reviendrez, un bel email tout chaud vous attendra dans votre boite de réception
-email.experience.creation.subject: Votre expérience à été soumise avec succès
+email.experience.creation.subject: Votre expérience a été soumise avec succès
 email.experience.creation.title: Votre belle expérience
 email.experience.creation.coreTitle: Votre expérience <i>"%title%"</i> a été soumise avec succès
 email.experience.creation.subTitle: Merci %name% pour votre participation
-email.experience.creation.message: Nous apprécions vraiment vos efforts pour faire partie de la communauté. Donnez nous juste quelques instants pour valider votre expérience (nous n'apportons aucun jugement, nous vérifions simplement qu'il n'y a rien d'insultant ou d’inapproprié) et vous pourrez la voir publiée sur Welcomango.
-email.experience.validation.subject: Votre expérience à été validée
-email.experience.validation.coreTitle: Votre expérience à été validée avec succès!
+email.experience.creation.message: Nous apprécions vraiment vos efforts pour faire partie de la communauté. Donnez-nous juste quelques instants pour valider votre expérience (nous n'apportons aucun jugement, nous vérifions simplement qu'il n'y a rien d'insultant ou d’inapproprié) et vous pourrez la voir publiée sur Welcomango.
+email.experience.validation.subject: Votre expérience a été validée
+email.experience.validation.coreTitle: Votre expérience a été validée avec succès!
 email.experience.validation.subTitle: Hey %name% , notre équipe viens juste de vérifier votre expérience!
 email.experience.validation.message: Outre le fait que nous ayons aimé ce que vous proposez, votre expérience est maintenant disponible en ligne ! Cliquez pour voir à quoi cela ressemble !
-email.experience.validation.btn: Jeter un oeil !
-email.booking.update.coreTitle: Votre requête à été %status%
+email.experience.validation.btn: Jeter un œil !
+email.booking.update.coreTitle: Votre requête a été %status%
 email.booking.update.subTitle: %user% a %status% votre demande pour l'expérience %title%
-email.booking.update.message: Cliquez sur le bouton ci-dessous pour plus de détails sur cette reservations. Vous pouvez maintenant contacter %user% directement via cette page.
+email.booking.update.message: Cliquez sur le bouton ci-dessous pour plus de détails sur cette réservation. Vous pouvez maintenant contacter %user% directement via cette page.
 email.booking.update.btn: Voir la réservation
 email.booking.new.coreTitle: Vous avez une nouvelle demande
 email.booking.new.subTitle: Vous avez une nouvelle demande de %name% pour %title%
-email.booking.new.message: Cliquez sur le bouton ci-dessous pour avoir plus de détail à propos de cette reservation
-email.booking.requestUpdated: Votre demande à été %status%
+email.booking.new.message: Cliquez sur le bouton ci-dessous pour avoir plus de détaila à propos de cette réservation
+email.booking.requestUpdated: Votre demande a été %status%
 email.registration.coreTitle: Confirmation d'inscription à Welcomango
 email.registration.subTitle: Merci pour votre inscription %user%!
-email.registration.message: Plus que quelques pa s! Cliquez simplement sur le bouton pour confirmer votre adresse email et valider votre inscription
-email.registration.btn: Valider votre compte
-email.resetting.coreTitle: Réinitialiser votre mot de passe
+email.registration.message: Plus que quelques pas! Cliquez simplement sur le bouton pour confirmer votre adresse email et valider votre inscription
+email.registration.btn: Validez votre compte
+email.resetting.coreTitle: Réinitialisez votre mot de passe
 email.resetting.subTitle: Salut %user%, il semble que vous ayez demandé un nouveau mot de passe
 email.resetting.message: Cliquez simplement sur le bouton pour être redirigé sur une page où vous pourrez renseigner votre nouveau mot de passe. Essayez de ne pas oublier celui la ;)
-email.resetting.btn: Réinitialiser mot de passe
-email.experience.creation.reminder.title: Hey! Ca fait un moment!
+email.resetting.btn: Réinitialisez le mot de passe
+email.experience.creation.reminder.title: Hey! Ça fait un moment!
 email.experience.creation.reminder.coreTitle: Alors %name%, comment ça va?
-email.experience.creation.reminder.subTitle: Nous regardions ton profil et on s'est rendu compte que tu ne proposais rien dans ta ville... Peut être que maintenant est un bon moment pour commencer?
-email.experience.creation.reminder.message: Salut %name%, ça fait déjà quelques temps que tu es inscrit(e) sur Welcomango et nous esperons que tu apprécies l'experience. Tu sais surement que ce site existe uniquement grâce aux utilisateurs qui prennent un peu de leur temps pour ouvrir les portes de leur monde aux voyageurs. Qu'en est-il de toi?<br/><br/> Tu peux créer une experience dans ta ville pour accueillir des voyageurs et leur montrer à quel point elle est génial à tes yeux. Cela prend à peine 3 étapes et en 10 minutes tu peux apporter ta contribution et faire vivre le site. Prêt? Clique sur le bouton et laisse toi guider!
+email.experience.creation.reminder.subTitle: Nous regardions ton profil et on s'est rendu compte que tu ne proposais rien dans ta ville... Peut-être que maintenant est un bon moment pour commencer?
+email.experience.creation.reminder.message: Salut %name%, ça fait déjà quelques temps que tu es inscrit(e) sur Welcomango et nous espérons que tu apprécies l'expérience. Tu sais sûrement que ce site existe uniquement grâce aux utilisateurs qui prennent un peu de leur temps pour ouvrir les portes de leur monde aux voyageurs. Qu'en est-il de toi ?<br/><br/> Tu peux créer une expérience dans ta ville pour accueillir des voyageurs et leur montrer à quel point elle est géniale à tes yeux. Cela prend à peine 3 étapes et en 10 minutes tu peux apporter ta contribution et faire vivre le site. Prêt? Clique sur le bouton et laisse-toi guider!
 email.experience.creation.reminder.subject: C'est l'heure de faire découvrir ta ville à la communauté!
 email.experience.creation.reminder.btn: Créer ton expérience
 
