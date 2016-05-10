@@ -52,6 +52,13 @@ class Media
     protected $experience;
 
     /**
+     * Especially for experiences, each experience can have one default/main media
+     *
+     * @ORM\Column(type="boolean", name="default_media_experience", nullable=true)
+     */
+    protected $default = false;
+
+    /**
      * The constructor
      */
     public function __construct()
@@ -201,5 +208,21 @@ class Media
     public function setExperience($experience)
     {
         $this->experience = $experience;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDefault()
+    {
+        return $this->default;
+    }
+
+    /**
+     * @param bool $default
+     */
+    public function setDefault($default)
+    {
+        $this->default = $default;
     }
 }
