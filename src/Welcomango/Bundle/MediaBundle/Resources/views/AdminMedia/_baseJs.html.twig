@@ -51,16 +51,22 @@
             $container.append('' +
             '<div class="tmp-file" ><div id="front_experience_medias_' + index + '"><input type="hidden" class="defaultImageInput" id="front_experience_medias_' + index + '_default" name="front_experience[medias][' + index + '][default]" value="0" /><input type="hidden" id="front_experience_medias_' + index + '_originalFilename" name="front_experience[medias][' + index + '][originalFilename]" value="' + file.name + '" /></div>');
             $container.data('index', index + 1);
+
             $('.dz-preview').on('click', function () {
-                $.each($('.dz-preview'), function(){
-                    this.style.backgroundColor = "white";
+                $('.defaultImageInput').each(function () {
+                    this.value = 0;
                 });
-                this.style.backgroundColor = "black";
-                this.value = defaultMediaTemplate;
+                $( ".dz-image" ).each(function() {
+                    $(this).css("border", "none");
+                    $(this).removeClass("text-success");
+                });
+                $(this).find('.dz-image').css("border", "solid 3px #F34B1F");
+                $(this).find('.dz-image').addClass("text-success");
                 var filename = this.childNodes[3].childNodes[3].childNodes[0].innerHTML;
                 var fileNameForm = document.querySelectorAll("input[value='"+filename+"']");
                 fileNameForm[0].parentNode.childNodes[0].value = 1;
             });
+
         }
 
         function deleteTmpMedia(filename) {
