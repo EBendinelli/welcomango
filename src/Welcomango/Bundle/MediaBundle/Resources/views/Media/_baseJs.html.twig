@@ -1,9 +1,16 @@
 <script src="{{ asset('js/Jcrop.min.js') }}" type="text/javascript"></script>
 <script type="text/javascript">
     var processDelete = true;
+    var input = $('#{{ file_input_id }}');
     var loader = '<div id="loaderImage" class="loaderImage" style=""><i class="fa fa-circle-o-notch fa-spin"></i></div>';
-    $('#{{ file_input_id }}').change(function () {
+
+    input.on('click', function () {
+        this.value = null;
+    });
+
+    input.on('change', (function () {
         processDelete = true;
+        removeMedia();
         var file = document.getElementById('{{ file_input_id }}').files[0];
         var filename = file.name;
         console.log(filename);
@@ -58,7 +65,7 @@
         } else {
             alert(fileValid);
         }
-    });
+    }));
 
     $('#deleteProfileMedia').click(function () {
         removeMediaField();
@@ -102,6 +109,7 @@
         if (processDelete) {
             var formData = new FormData();
             formData.append("file", getTempFileName(document.getElementById('{{ file_input_id }}').files[0].name));
+
             $.ajax({
                 url: '{{ path('media_delete') }}',  //Server script to process data
                 type: 'POST',
