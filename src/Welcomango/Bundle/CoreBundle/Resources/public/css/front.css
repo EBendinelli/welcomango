@@ -1691,3 +1691,9 @@ body .ui-autocomplete .ui-menu-item.ui-state-focus{
     margin-top: 15px;
     font-size: 150px;
 }
+
+/* ///////////  FIX DROPZONE ERROR MESSAGE HIDDING REMOVE BTN   //////////////// */
+
+.dropzone .dz-preview .dz-error-message {
+    top: 155px !important;
+}
