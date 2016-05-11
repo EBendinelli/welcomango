@@ -50,7 +50,7 @@
             {% set label = name|humanize %}
         {%- endif -%}
     {%- endif -%}
-    <button class="btn btn-complete btn-sm" type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ label|trans({}, translation_domain) }}</button>
+    <button class="btn btn-complete btn" type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ label|trans({}, translation_domain) }}</button>
 {% endblock button_widget %}
 
 {% block file_widget %}

@@ -39,6 +39,7 @@ login.password.passwordHint: Try to keep something strong with letter, special c
 login.resetting.successTitle: Reset email Sent
 login.resetting.successSubTitle: Try not to forget it the next time!
 login.noAccount: No account yet?
+login.noAccountNote: So you're telling me you're not registered yet? Hurry up, create your account and start your journey with the community!
 
 menu.title.experiences: Experiences
 menu.title.portraits: Portraits
@@ -206,6 +207,7 @@ experience.attended: Experience attended
 experience.pendingRequest: Pending request
 experience.sendRequest: Send a request
 experience.closeRequest: Cancel request
+experience.notLogged: Looks like you are not logged, please <a class="bold" href="%url%">login or create a profil</a> before sending your request
 
 experience.create.titleNote: This is the title of your experience, it should describe what will happen with you in your city in a few word. Try to make it appealing and simple like <i>"A fantastic bike journey"</i> for a bike tour, <i>"A city under siege"</i> for a history related experience or <i>"The crazy underground side of a business city"</i> for a tour of the underground places. <span class="bold">Make it sound like a movie title!</span> <br/><br/>There is <span class="bold">no need to include the name of the city</span>.
 experience.create.descriptionNote: Now we are talking! This is the core of your experience! This section must give a good overview of what a traveler should expect when meeting with you. No need to talk too much about the city, tell a bit more about what is the experience going to be about about and how it represents the way you live and love your city.

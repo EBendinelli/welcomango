@@ -2,6 +2,10 @@
 
 {% trans_default_domain "interface" %}
 
+{% block meta_title %}
+    {{ "interface.login"|trans({}, "interface") }}
+{% endblock %}
+
 {% block header_image %}
     {{ asset('bundles/welcomangocore/images/experience_default/places-0.jpg') }}
 {% endblock %}
@@ -71,7 +75,8 @@
 
                 <hr/>
                 <div class="text-center">
-                    <h4 class="m-t-30 m-b-30">{{ 'login.noAccount' }}</h4>
+                    <h4 class="m-t-30">{{ 'login.noAccount'|trans }}</h4>
+                    <p class="hint-text note-text m-b-30">{{ 'login.noAccountNote'|trans }}</p>
                     <a href="{{ path('fos_user_registration_register') }}" class="btn btn-lg btn-complete"><i class="fa fa-rocket fa-lg"></i> {{ 'global.register'|trans }}</a>
                 </div>
 
