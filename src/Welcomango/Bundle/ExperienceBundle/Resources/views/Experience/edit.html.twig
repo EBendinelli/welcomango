@@ -42,7 +42,7 @@
                     {{ form_row(form.title) }}
                     <div class="small hint-text m-t-30 note-text">{{ "experience.create.descriptionNote"|trans }}</div>
                     {{ form_row(form.description) }}
-                    <div class="small hint-text m-t-30 note-text">{{ "experience.create.mediaNote"|trans }}</div>
+                    <div class="small hint-text m-t-30 note-text">{{ "experience.create.mediaNote"|trans|raw }}</div>
                     <div id="medias" class="dropzone media-dropzone"></div>
                     <div class="small hint-text m-t-30 note-text">{{ "experience.create.tagsNote"|trans }}</div>
                     {{ form_row(form.tags) }}

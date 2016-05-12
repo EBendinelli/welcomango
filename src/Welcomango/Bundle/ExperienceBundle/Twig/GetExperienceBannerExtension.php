@@ -52,8 +52,12 @@ class GetExperienceBannerExtension extends \Twig_Extension
         if($experience->getMedias()->first()){
             //If the experience has a picture we use this one
             $medias = $experience->getMedias();
-            $firstMedia = $medias->first();
-            return $firstMedia->getPath().$firstMedia->getOriginalFilename();
+            foreach($medias as $media){
+                if($media->isDefault()){
+                    return $media->getPath().$media->getOriginalFilename();
+                }
+            }
+
         }else{
             //Here we define the default image
             //The default picture is related to the first tag selected (or city)
