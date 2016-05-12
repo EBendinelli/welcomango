@@ -82,7 +82,12 @@
                     {% block sidebar %}
                         {{ knp_menu_render('menu_front', { ancestorClass: 'open', lastClass: 'end', ancestorClass: 'open', currentClass: 'active', callingView:'front', allow_safe_labels: 'true'}) }}
                     {% endblock %}
-                    <a href="#" class="search-toggle hidden-xs hidden-sm" data-toggle="search"><i class="fs-14 pg-search"></i></a>
+                    <div style="display: inline-block">
+                        {% for locale in locales %}
+                            <a class="text-primary" href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': locale})) }}" >{{ ('language.'~ locale)|trans }}</a>
+                            {% if not loop.last %} | {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
                 <!-- END MENU ITEMS -->
             </div>

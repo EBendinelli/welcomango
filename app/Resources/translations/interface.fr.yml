@@ -25,8 +25,8 @@ interface.cancel: Annuler
 interface.remove: Supprimer
 interface.logout: Déconnexion
 
-language.english: Anglais
-language.french: Français
+language.en: EN
+language.fr: FR
 
 login.rememberMe: Se souvenir de moi
 login.forgotPassword: Mot de passe oublié ?

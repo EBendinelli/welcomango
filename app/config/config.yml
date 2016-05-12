@@ -41,6 +41,7 @@ twig:
         resources: ['bootstrap_3_layout.html.twig']
     globals:
         media_upload_temp_dir : %media_upload_temp_dir%
+        locales: [en,fr]
 
 # Assetic Configuration
 assetic:
@@ -247,6 +248,11 @@ stfalcon_tinymce:
             height: 400
             theme: "modern"
             browser_spellcheck: true
+
+jms_i18n_routing:
+    default_locale: %locale%
+    locales: [en, fr]
+    strategy: prefix_except_default
 
 welcomango_booking:
     available_status:

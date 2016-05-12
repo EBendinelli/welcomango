@@ -77,25 +77,6 @@ class CoreController extends BaseController
     /**
      * @param Request    $request
      *
-     * @Route("/language", name="front_change_language")
-     * @Method({"GET", "POST"})
-     * @Template()
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function languageAction(Request $request){
-        $newLanguage = $request->get('language');
-
-        $this->get('request')->attributes->set('_locale', null);
-        $this->get('session')->set('_locale', $newLanguage);
-
-        return $this->redirect($this->generateUrl('front_homepage'));
-    }
-
-
-    /**
-     * @param Request    $request
-     *
      * @Route("/contact", name="front_contact_us")
      * @Method({"GET", "POST"})
      * @Template()
