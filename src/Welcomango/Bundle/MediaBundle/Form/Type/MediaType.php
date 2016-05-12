@@ -23,9 +23,12 @@ class MediaType extends AbstractType
                 'required' => false,
                 'label'    => false,
             ])
-            ->add('default', CheckboxType::class, [
+            ->add('default', HiddenType::class, [
                 'required' => false,
                 'label'    => false,
+                'attr' => array(
+                    'class' => 'defaultImageInput',
+                ),
             ]);
     }
 

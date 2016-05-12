@@ -1696,3 +1696,9 @@ body .ui-autocomplete .ui-menu-item.ui-state-focus{
 .dropzone .dz-preview .dz-error-message {
     top: 155px !important;
 }
+
+/* //////////// CLASS MEDIA PAR DEFAUT //////////// */
+
+.borderMediaDefaut div.dz-image {
+    border: solid 3px #F34B1F
+}
