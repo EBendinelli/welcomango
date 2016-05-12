@@ -39,6 +39,7 @@ login.password.passwordHint: Essayez de garder un mot de passe solide avec des l
 login.resetting.successTitle: Email de réinitialisation envoyé
 login.resetting.successSubTitle: Essayez de ne pas l'oublier la prochaine fois !
 login.noAccount: Pas encore de compte ?
+login.noAccountNote: Alors comme ça vous n'êtes pas encore inscrit? Créez un compte et rejoignez vite la communauté!
 
 menu.title.experiences: Expériences
 menu.title.portraits: Portraits
@@ -73,6 +74,17 @@ global.free: Gratuit
 global.contribution: Contribution
 global.about: À propos
 global.spokenLanguages: Langues parlées
+global.sitemap: Sitemap
+global.news: News
+global.portraits: Portraits
+global.experiences: Experiences
+global.thanks: Remerciements
+global.legal: Legal
+global.giveUsFeedback: Donnez votre avis
+global.register: S'inscrire
+global.contactUs: Nous contacter
+global.discover: Découvrir
+global.currencyAndLanguage: Monnaie & langue
 
 homepage.title1: Des lieux à travers leurs occupants
 homepage.subTitle1: Trouvez des locaux prêts à vous montrer leur ville comme ils l'aiment
@@ -194,6 +206,8 @@ experience.noNoteYet: Pas de notes reçues
 experience.attended: Expérience proposée
 experience.pendingRequest: Requête en attente
 experience.sendRequest: Envoyez une demande
+experience.closeRequest: Annuler la demande
+experience.notLogged: Il semble que vous ne soyez pas connecté. Merci de vous <a class="bold" href="%url%">connecter ou de créer un profil</a> avant d'envoyer votre demande
 
 experience.create.titleNote: Ceci est le titre de votre expérience, il doit décrire en quelques mots ce que vous voulez mettre en avant de votre expérience. Essayez de le rendre simple et attirant comme "<i>"Une aventure magique à vélo"</i> pour une visite nature, <i>"Un ville assiégée"</i> pour une expérience plus historique ou <i>"La face cachée d'une ville endormie"</i> pour une aventure plus underground. <span class="bold"> Essayez de faire sonner ça comme un titre de film !</span> <br/><br/>Notez <span class="bold">qu'il n'y pas besoin d'inclure le nom de la ville</span>.
 experience.create.descriptionNote: Maintenant passons aux choses sérieuses ! C'est ici le cœur de votre expérience. Cette section donne un aperçu de ce qu'un voyageur peut attendre d'une rencontre avec vous. Pas besoin de parler de votre ville, prenez plutôt le temps de parler de ce que votre expérience va mettre en avant et comment elle représente la façon dont vous aimez et vivez votre ville.

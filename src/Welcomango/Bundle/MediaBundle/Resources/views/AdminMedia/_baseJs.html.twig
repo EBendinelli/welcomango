@@ -23,8 +23,12 @@
                 this.options.thumbnail.call(this, mockFile, "{{ asset(media.getPath() | imagine_filter('thumb120')) ~ media.originalFilename }}");
                 mockFile.previewElement.classList.add('dz-success');
                 mockFile.previewElement.classList.add('dz-complete');
+                {% if media.default %}
+                    mockFile.previewElement.classList.add("borderMediaDefaut");
+                {% endif %}
                 {% endfor %}
                 {% endif %}
+                initDefaultOption();
             }
         });
 
@@ -49,24 +53,9 @@
         function addPicture(file, $container) {
             var index = $container.data('index');
             $container.append('' +
-            '<div class="tmp-file" ><div id="front_experience_medias_' + index + '"><input type="hidden" class="defaultImageInput" id="front_experience_medias_' + index + '_default" name="front_experience[medias][' + index + '][default]" value="0" /><input type="hidden" id="front_experience_medias_' + index + '_originalFilename" name="front_experience[medias][' + index + '][originalFilename]" value="' + file.name + '" /></div>');
+            '<div class="tmp-file" ><div id="front_experience_medias_' + index + '"><input type="hidden" id="front_experience_medias_' + index + '_originalFilename" name="front_experience[medias][' + index + '][originalFilename]" value="' + file.name + '" /><input type="hidden" class="defaultImageInput" id="front_experience_medias_' + index + '_default" name="front_experience[medias][' + index + '][default]" value="0" /></div>');
             $container.data('index', index + 1);
-
-            $('.dz-preview').on('click', function () {
-                $('.defaultImageInput').each(function () {
-                    this.value = 0;
-                });
-                $( ".dz-image" ).each(function() {
-                    $(this).css("border", "none");
-                    $(this).removeClass("text-success");
-                });
-                $(this).find('.dz-image').css("border", "solid 3px #F34B1F");
-                $(this).find('.dz-image').addClass("text-success");
-                var filename = this.childNodes[3].childNodes[3].childNodes[0].innerHTML;
-                var fileNameForm = document.querySelectorAll("input[value='"+filename+"']");
-                fileNameForm[0].parentNode.childNodes[0].value = 1;
-            });
-
+            initDefaultOption();
         }
 
         function deleteTmpMedia(filename) {
@@ -89,6 +78,28 @@
             } else {
                 $('.dz-default').show();
             }
+        }
+
+        function initDefaultOption() {
+            $('.dz-preview').on('click', function () {
+                var filename = this.childNodes[3].childNodes[3].childNodes[0].innerHTML;
+                var fileNameForm = document.querySelectorAll("input[value='"+filename+"']");
+
+                $('.defaultImageInput').each(function () {
+                    console.log(this);
+                    this.value = 0;
+                });
+
+                $( ".dz-image" ).each(function() {
+                    $(this).css("border", "none");
+                    $(this).removeClass("text-success");
+                });
+
+                $(this).find('.dz-image').css("border", "solid 3px #F34B1F");
+                $(this).find('.dz-image').addClass("text-success");
+
+                fileNameForm[0].parentNode.childNodes[1].value = 1;
+            });
         }
 
     });
