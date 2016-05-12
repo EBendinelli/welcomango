@@ -57,6 +57,8 @@ class GetExperienceBannerExtension extends \Twig_Extension
                     return $media->getPath().$media->getOriginalFilename();
                 }
             }
+            $firstMedia = $medias->first();
+            return $firstMedia->getPath().$firstMedia->getOriginalFilename();
 
         }else{
             //Here we define the default image
