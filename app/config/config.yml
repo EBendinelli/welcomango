@@ -273,7 +273,7 @@ welcomango_booking:
 
 welcomango_user:
         language_levels:
-        - Beginner
-        - Good
-        - Great
-        - Fluent
+        - language.level.beginner
+        - language.level.good
+        - language.level.great
+        - language.level.fluent

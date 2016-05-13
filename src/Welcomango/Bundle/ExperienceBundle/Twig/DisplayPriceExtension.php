@@ -15,10 +15,10 @@ use Doctrine\ORM\EntityManager;
 class DisplayPriceExtension extends \Twig_Extension
 {
 
-    /**
-     * @var TranslatorInterface $translator
-     */
-    private $translator;
+        /**
+         * @var TranslatorInterface $translator
+         */
+        private $translator;
 
     /**
      * @var Doctrine\ORM\EntityManager entityManager

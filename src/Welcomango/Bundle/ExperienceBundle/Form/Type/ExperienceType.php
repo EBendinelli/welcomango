@@ -63,7 +63,8 @@ class ExperienceType extends AbstractType
             ->add('description', 'textarea', ['label' => 'form.experience.description'])
             ->add('tags', 'entity', array(
                 'class'    => 'Model:Tag',
-                'property' => 'name',
+                'choice_label'  => 'name',
+                'choice_translation_domain' => 'interface',
                 'multiple' => true,
             ))
             ->add('medias', 'collection', [

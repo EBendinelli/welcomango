@@ -7,6 +7,7 @@
     <services>
         <service id="tag.display_tag" class="Welcomango\Bundle\TagBundle\Twig\DisplayTagExtension">
             <tag name="twig.extension"/>
+            <argument type="service" id="translator"/>
         </service>
     </services>
 </container>

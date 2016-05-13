@@ -45,6 +45,7 @@
 
         <service id="user.display_langauge" class="Welcomango\Bundle\UserBundle\Twig\DisplayLanguageExtension">
             <argument>%language_levels%</argument>
+            <argument type="service" id="translator"/>
             <tag name="twig.extension"/>
         </service>
 

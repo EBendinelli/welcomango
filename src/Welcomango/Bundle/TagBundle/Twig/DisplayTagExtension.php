@@ -2,6 +2,7 @@
 
 namespace Welcomango\Bundle\TagBundle\Twig;
 
+use Symfony\Component\Translation\TranslatorInterface;
 use Welcomango\Model\SpokenLanguage;
 
 /**
@@ -9,6 +10,21 @@ use Welcomango\Model\SpokenLanguage;
  */
 class DisplayTagExtension extends \Twig_Extension
 {
+
+    /**
+     * @var TranslatorInterface $translator
+     */
+    private $translator;
+
+    /**
+     * __construct
+     *
+     */
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -41,7 +57,7 @@ class DisplayTagExtension extends \Twig_Extension
         $tagsResult = '<ul class="tags-container">';
         $icons = array();
         foreach($tags as $tag){
-            $icons[] = '<li><img class="tags-svg m-b-5" src="/bundles/welcomangocore/images/icons/v2/'.str_replace(' ','', strtolower($tag->getName())).'.svg"><br/>'.$tag->getName().'</li>';
+            $icons[] = '<li><img class="tags-svg m-b-5" src="/bundles/welcomangocore/images/icons/v2/'.str_replace(' ','', str_replace('tag.', '', strtolower($tag->getName()))).'.svg"><br/>'.$this->translator->trans($tag->getName(), [], 'interface').'</li>';
         }
         $tagsResult .= implode('', $icons).'</ul>';
         return $tagsResult;

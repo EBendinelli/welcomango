@@ -43,6 +43,51 @@ day.sunday: Sunday
 
 language.en: EN
 language.fr: FR
+language.french: French
+language.english: English
+language.german: German
+language.italian: Italian
+language.spanish: Spanish
+language.croatian: Croatian
+language.bulgarian: Bulgarian
+language.czech: Czech
+language.danish: Danish
+language.dutch: Dutch
+language.estonian: Estonian
+language.finnish: Finnish
+language.greek: Greek
+language.hungarian: Hungarian
+language.irish: Irish
+language.latvian: Latvian
+language.lithuanian: Lithuanian
+language.maltese: Maltese
+language.spanish: Spanish
+language.portuguese: Portuguese
+language.romanian: Romanian
+language.slovak: Slovak
+language.slovene: Slovene
+language.swedish: Swedish
+language.level.beginner: Beginner
+language.level.good: Good
+language.level.great: Great
+language.level.fluent: Fuent
+
+tag.photography: Photography
+tag.cinema: Cinema
+tag.music: Music
+tag.politics: Politics
+tag.culture: Culture
+tag.architecture: Architecture
+tag.food: Food
+tag.drinks: Drinks
+tag.nature: Nature
+tag.sport: Sport
+tag.nightlife: Nightlife
+tag.history: History
+tag.literature: Literature
+tag.mustSee: Must See
+tag.shopping: Shopping
+tag.unusual: Unusual
 
 login.rememberMe: Remember me
 login.forgotPassword: Forgot your password?

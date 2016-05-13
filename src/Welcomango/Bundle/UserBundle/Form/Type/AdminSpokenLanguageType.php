@@ -40,7 +40,8 @@ class AdminSpokenLanguageType extends AbstractType
         $builder
             ->add('language', 'entity', [
                 'label'         => 'form.user.languages',
-                'property'      => 'language',
+                'choice_label'      => 'language',
+                'choice_translation_domain' => 'interface',
                 'class'         => 'Welcomango\Model\Language',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('l');

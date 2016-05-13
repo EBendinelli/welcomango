@@ -69,7 +69,7 @@ class GetExperienceBannerExtension extends \Twig_Extension
 
             $tags = $experience->getTags();
             $firstTag =$tags->first();
-            return 'bundles/welcomangocore/images/experience_default/'.strtolower($firstTag->getName()).'.jpg';
+            return 'bundles/welcomangocore/images/experience_default/'.str_replace('tag.', '', strtolower($firstTag->getName())).'.jpg';
         }
 
     }

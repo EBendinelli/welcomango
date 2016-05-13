@@ -80,9 +80,10 @@ class ExperienceFilterType extends AbstractType
         ]);
 
         $builder->add('tags', 'entity', array(
-            'class'    => 'Model:Tag',
-            'property' => 'name',
-            'multiple' => true,
+            'class'                     => 'Model:Tag',
+            'choice_label'              => 'name',
+            'choice_translation_domain' => 'interface',
+            'multiple'                  => true,
         ));
     }
 

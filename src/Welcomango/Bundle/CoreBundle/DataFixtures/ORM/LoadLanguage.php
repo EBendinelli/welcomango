@@ -20,11 +20,30 @@ class LoadLanguageData extends AbstractFixture implements FixtureInterface, Orde
     public function load(ObjectManager $manager)
     {
         $languages = array(
-            ['French', 'FR', 'fr'],
-            ['English', 'EN', 'england'],
-            ['German', 'DE', 'de'],
-            ['Italian', 'IT', 'it'],
-            ['Spanish', 'ES', 'es'],
+            ['language.french', 'FR', 'fr'],
+            ['language.english', 'EN', 'england'],
+            ['language.german', 'DE', 'de'],
+            ['language.italian', 'IT', 'it'],
+            ['language.spanish', 'ES', 'es'],
+            ['language.croatian', 'HR', 'hr'],
+            ['language.bulgarian', 'BG', 'bg'],
+            ['language.czech', 'CS', 'cs'],
+            ['language.danish', 'DA', 'da'],
+            ['language.dutch', 'NL', 'nl'],
+            ['language.estonian', 'ET', 'et'],
+            ['language.finnish', 'FI', 'fi'],
+            ['language.greek', 'EL', 'el'],
+            ['language.hungarian', 'HU', 'hu'],
+            ['language.irish', 'GA', 'ga'],
+            ['language.latvian', 'LV', 'la'],
+            ['language.lithuanian', 'LT', 'lt'],
+            ['language.maltese', 'MT', 'mt'],
+            ['language.spanish', 'PL', 'pl'],
+            ['language.portuguese', 'PT', 'pt'],
+            ['language.romanian', 'RO', 'ro'],
+            ['language.slovak', 'SK', 'sk'],
+            ['language.slovene', 'SL', 'sl'],
+            ['language.swedish', 'SV', 'sv'],
         );
 
         foreach ($languages as $lang) {

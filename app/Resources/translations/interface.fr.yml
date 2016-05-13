@@ -43,6 +43,51 @@ day.sunday: Dimanche
 
 language.en: EN
 language.fr: FR
+language.french: Français
+language.english: Anglais
+language.german: Allemand
+language.italian: Italien
+language.spanish: Espagnol
+language.croatian: Croate
+language.bulgarian: Bulgare
+language.czech: Tchèque
+language.danish: Danois
+language.dutch: Flammand
+language.estonian: Estonien
+language.finnish: Finnois
+language.greek: Grèc
+language.hungarian: Hongrois
+language.irish: Irlandais
+language.latvian: Letton
+language.lithuanian: Lituanien
+language.maltese: Maltais
+language.spanish: Espagnol
+language.portuguese: Portuguais
+language.romanian: Roumain
+language.slovak: Slovaque
+language.slovene: Slovène
+language.swedish: Suédois
+language.level.beginner: Débutant
+language.level.good: Moyen
+language.level.great: Confirmé
+language.level.fluent: Bilingue
+
+tag.photography: Photographie
+tag.cinema: Cinéma
+tag.music: Musique
+tag.politics: Politique
+tag.culture: Culture
+tag.architecture: Architecture
+tag.food: Gastronomie
+tag.drinks: Vin et Bière
+tag.nature: Nature
+tag.sport: Sport
+tag.nightlife: Vie nocturne
+tag.history: Histoire
+tag.literature: Littérature
+tag.mustSee: Inévitable
+tag.shopping: Shopping
+tag.unusual: Improbable
 
 login.rememberMe: Se souvenir de moi
 login.forgotPassword: Mot de passe oublié ?

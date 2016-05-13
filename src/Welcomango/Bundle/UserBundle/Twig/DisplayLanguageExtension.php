@@ -3,6 +3,7 @@
 namespace Welcomango\Bundle\UserBundle\Twig;
 
 use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 use Welcomango\Model\User;
 
 /**
@@ -17,13 +18,19 @@ class DisplayLanguageExtension extends \Twig_Extension
     protected $levels;
 
     /**
+     * @var TranslatorInterface $translator
+     */
+    private $translator;
+
+    /**
      * __construct
      *
      * @param array                    $levels
      */
-    public function __construct($levels)
+    public function __construct($levels, TranslatorInterface $translator)
     {
         $this->levels = $levels;
+        $this->translator = $translator;
     }
 
     /**
@@ -50,7 +57,7 @@ class DisplayLanguageExtension extends \Twig_Extension
         //TODO: return the icon once they are done
         $icons = array();
         foreach($languages as $languages){
-            $icons[] = '<div class="m-b-5">'.$languages->getLanguage().' ('.$this->levels[$languages->getLevel()].')</div>';
+            $icons[] = '<div class="m-b-5">'.$this->translator->trans($languages->getLanguage(), [], 'interface').' ('.$this->translator->trans($this->levels[$languages->getLevel()], [], 'interface').')</div>';
         }
         $languageResult = implode('', $icons);
         return $languageResult;
