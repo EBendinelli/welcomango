@@ -19,7 +19,7 @@ class CreateMessageManager
     /**
      * @var Sender
      */
-    protected $repository;
+    protected $sender;
 
     /**
      * Constructor.
@@ -42,10 +42,11 @@ class CreateMessageManager
      */
     public function createThread($booking, $sender, $recipient, $body)
     {
+
         $message = $this->messageComposer->newThread()
             ->setSender($sender)
             ->addRecipient($recipient)
-            ->setSubject('Request for '.$booking->getExperience()->getTitle().' on '.$booking->getStartDatetime()->format('F j'))
+            ->setSubject('message.requestFor')
             ->setBody($body)
             ->setBooking($booking)
             ->getMessage();

@@ -23,8 +23,9 @@
                 <div class="col-md-6">{{ form_row(form.number_of_participants) }}</div>
                 <div class="col-md-12" style="padding-right: 7px">{{ form_row(form.message) }}</div>
                 {% if app.user %}
-                    <div class="col-md-12 text-right m-t-10" style="padding-right: 7px">{{ form_row(form.submit) }}</div>
+                    <div class="col-md-12 text-right m-t-10" style="padding-right: 7px">{{ form_rest(form   ) }}</div>
                 {% endif %}
+                {{ form_errors(form) }}
             </div>
         </div>
     </div>

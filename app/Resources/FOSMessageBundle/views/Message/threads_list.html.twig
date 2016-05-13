@@ -1,3 +1,5 @@
+{% trans_default_domain 'interface' %}
+
 <div class="row message-list">
     <ul class="bg-white">
     {% for thread in threads %}
@@ -23,7 +25,13 @@
                 <div class="col-md-11 p-l-30">
                     <div style="width:88%">
                         <p class="recipients no-margin ">{{ recipient.fullname }} ({{ recipient.currentCity.name }} - {{ recipient.currentCity.country.name }})</p>
-                        <p class="subject no-margin">{{ thread.subject }}{% if not fos_message_is_read(thread) %} <span class="text-complete">[New]</span>{% endif %}</p>
+                        <p class="subject no-margin">
+                            {% if thread.subject == 'message.requestFor' %}
+                                {{ 'message.requestFor'|trans({'%title%': thread.booking.experience.title ,'%date%':thread.booking.startDateTime|date('F j')}) }}
+                            {% else %}
+                                {{ thread.subject }}
+                            {% endif %}
+                            {% if not fos_message_is_read(thread) %} <span class="text-complete">[New]</span>{% endif %}</p>
                         <p class="body no-margin">{{ thread.lastMessage.body|truncate(100) }}</p>
                     </div>
                     {% if thread.lastMessage %}

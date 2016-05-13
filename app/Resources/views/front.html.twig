@@ -69,6 +69,19 @@
                     </div>
                 </div>
             </div>
+            <div id="language-selector-small" class="m-t-15  pull-right">
+                <div class="form-group" style="display: inline-block">
+                    <select name="language" class="full-width" data-init-plugin="select2" data-disable-search="true" onChange="window.location.href=this.value">
+                        {% set language = app.session.get('_locale') %}
+                        {% if not language %}
+                            {% set language = 'en' %}
+                        {% endif %}
+                        {% for locale in locales %}
+                            <option value="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': locale})) }}" {% if locale == language %}selected{% endif %}>{{ ('language.'~ locale)|trans }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
             <div class="menu-content  pull-right clearfix" data-pages-direction="slideRight" id="header">
                 <!-- BEGIN HEADER CLOSE TOGGLE FOR MOBILE -->
                 <div class="pull-right">
@@ -82,11 +95,16 @@
                     {% block sidebar %}
                         {{ knp_menu_render('menu_front', { ancestorClass: 'open', lastClass: 'end', ancestorClass: 'open', currentClass: 'active', callingView:'front', allow_safe_labels: 'true'}) }}
                     {% endblock %}
-                    <div style="display: inline-block">
-                        {% for locale in locales %}
-                            <a class="text-primary" href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': locale})) }}" >{{ ('language.'~ locale)|trans }}</a>
-                            {% if not loop.last %} | {% endif %}
-                        {% endfor %}
+                    <div id="language-selector-full" class="form-group" style="display: inline-block">
+                        <select name="language" class="full-width" data-init-plugin="select2" data-disable-search="true" onChange="window.location.href=this.value">
+                            {% set language = app.session.get('_locale') %}
+                            {% if not language %}
+                                {% set language = 'en' %}
+                            {% endif %}
+                            {% for locale in locales %}
+                                <option value="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': locale})) }}" {% if locale == language %}selected{% endif %}>{{ ('language.'~ locale)|trans }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
                 </div>
                 <!-- END MENU ITEMS -->

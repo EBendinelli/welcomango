@@ -25,6 +25,22 @@ interface.cancel: Annuler
 interface.remove: Supprimer
 interface.logout: Déconnexion
 
+period.earlyMorning: Aube
+period.morning: Matin
+period.lunchtime: Midi
+period.afternoon: Après-midi
+period.evening: Soirée
+period.night: Nuit
+global.always: Toujours
+
+day.monday: Lundi
+day.tuesday: Mardi
+day.wednesday: Mercredi
+day.thursday: Jeudi
+day.friday: Vendredi
+day.saturday: Samedi
+day.sunday: Dimanche
+
 language.en: EN
 language.fr: FR
 
@@ -85,6 +101,9 @@ global.register: S'inscrire
 global.contactUs: Nous contacter
 global.discover: Découvrir
 global.currencyAndLanguage: Monnaie & langue
+global.city: Ville
+global.travelers: Voyageurs
+global.availabilities: Disponibilités
 
 homepage.title1: Des lieux à travers leurs occupants
 homepage.subTitle1: Trouvez des locaux prêts à vous montrer leur ville comme ils l'aiment
@@ -200,6 +219,7 @@ form.experience.minParticipantsAccepted: Nombre minimum de participants
 form.experience.contribution: Contribution
 form.experience.endDate: Date de fin
 form.experience.startDate: Date de fin
+form.experience.currency: Monnaie
 experience.list.title: Expériences partout dans le monde
 experience.noFeedbacksReceived: Cet utilisateur n'a pas encore reçu de retours
 experience.noNoteYet: Pas de notes reçues
@@ -230,6 +250,7 @@ availabilities.howLongNote: Des vacances de prévues ? Vous savez déjà que vou
 availability.modal.removeText: Êtes-vous sûr de vouloir supprimer cette disponibilité?
 availability.error.oneRequired: Vous devez au moins ajouter une disponibilité! Si vous êtes disponible tout le temps, sélectionnez simplement l'option "Toujours" ;)
 availability.modal.remove: Supprimer disponibilité
+availability.add: Ajouté une disponibilité
 
 experience.manage.introductionText: Il se peut que vous viviez dans votre ville actuelle depuis plusieurs années et que vous trouviez le concept d'expériences thématiques un peu limité... Nous avons pensé à vous et vous avez la possibilité de proposer plusieurs expériences dans une seule et même ville, plusieurs saveurs d'un même aliment en somme. Par exemple, si vous proposez déjà une expérience orientée sur la culture et l'histoire, vous pouvez parfaitement créer une seconde expérience plus débridée autour de la vie nocturne! Laissez vos connaissances parler et tentez d'intriguer les visiteurs potentiels ;)
 experience.manage.title: Une autre vision de votre ville
@@ -269,6 +290,7 @@ booking.meetingAt: Rendez-vous à <span class="semi-bold">%time%</span>
 booking.duration: Durée demandée: <span class="semi-bold">%duration%</span>
 booking.experiencesAttendedBy: Expérience tentée par  <span class="semi-bold">%number%</span> personne(s)
 booking.sentTo: Demande de réservation envoyée à <a href="%route%" class="text-primary semi-bold">%name%</a>
+booking.view: Voir la réservation
 booking.viewRequest: Voir les détails pour cette demande
 booking.rateAdventure: Notez cette aventure
 booking.ratingText: Partagez votre sentiment vis à vis de cette expérience. Essayez d'être honnête et objectif
@@ -282,7 +304,7 @@ booking.experience.deleted: Il semble que %name% ai supprimé cette expérience.
 booking.explore: Parcourir les expériences disponibles
 booking.status: Status:
 booking.contribution: Contribution
-
+booking.meetingBookedOn: Réservation faite le %date%
 
 page.writtenBy: Par %author%
 
@@ -308,6 +330,8 @@ registration.confirmation.subTitle: C'est ici que tout commence
 registration.confirmation.message: Visitez votre profil pour l'améliorer ou commencez à parcourir le site pour trouver votre prochaine expérience!
 
 message.noMessage: Il semble que personne ne vous ait contacté pour l'instant
+message.requestFor: Demande de réservation pour "%title%" le %date%
+message.with: Avec <span class="text-primary">%user%</span>
 
 form.city: Ville
 form.rating.comment: Commentaire
@@ -339,6 +363,7 @@ form.user.gender: Sexe
 form.user.password: Mot de passe
 form.user.password.validate: Confirmation
 
+form.thread.body: Votre message
 
 email.generic.lovelyMail: Un délicat email envoyé par
 email.generic.contactUs: Contactez-nous:

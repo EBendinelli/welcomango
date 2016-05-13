@@ -25,6 +25,22 @@ interface.cancel: Cancel
 interface.remove: Remove
 interface.logout: Log out
 
+period.earlyMorning: Early Morning
+period.morning: Morning
+period.lunchtime: Lunchtime
+period.afternoon: Afternoon
+period.evening: Evening
+period.night: Night
+global.always: Always
+
+day.monday: Monday
+day.tuesday: Tuesday
+day.wednesday: Wednesday
+day.thursday: Thursday
+day.friday: Friday
+day.saturday: Saturday
+day.sunday: Sunday
+
 language.en: EN
 language.fr: FR
 
@@ -85,6 +101,9 @@ global.register: Register
 global.contactUs: Contact us
 global.discover: Discover
 global.currencyAndLanguage: Currency & Language
+global.city: City
+global.travelers: Travelers
+global.availabilities: Availabilities
 
 homepage.title1: Places Through People
 homepage.subTitle1: Find enthusiastic people willing to show you a different side of their city
@@ -200,6 +219,7 @@ form.experience.minParticipantsAccepted: Minimum number of participants
 form.experience.contribution: Contribution
 form.experience.endDate: End date
 form.experience.startDate: Start date
+form.experience.currency: Currency
 experience.list.title: Experiences over the world
 experience.noFeedbacksReceived: This user has not received any feedback yet
 experience.noNoteYet: No note received yet
@@ -230,6 +250,7 @@ availabilities.howLongNote: Vacations planned? You already know that you won't b
 availability.modal.removeText: Are you sure you want to remove this availability?
 availability.error.oneRequired: You need to specify at least one availabily! If you are available anytyme just check the Always option ;)
 availability.modal.remove: Remove availability
+availability.add: Add an availability
 
 experience.manage.introductionText: You may have lived in this current city for years and find the idea of a theme oriented experience a bit limitating... Well, here you can create a new experience with a different flavor to propose another version of your city to travelers. For example, if you already propose a culture oriented visit of your town, you can also propose a second experience about the nightlife and the different things happening by night! Let your knowledge of the city talk and try to intrigued the potential visitors ;)
 experience.manage.title: A different flavor of your city
@@ -269,6 +290,7 @@ booking.meetingAt: Meeting requested at <span class="semi-bold">%time%</span>
 booking.duration: Requested duration: <span class="semi-bold">%duration%</span>
 booking.experiencesAttendedBy: Experience attended by <span class="semi-bold">%number%</span> person(s)
 booking.sentTo: Booking request sent to <a href="%route%" class="text-primary semi-bold">%name%</a>
+booking.view: View booking
 booking.viewRequest: View details about this request
 booking.rateAdventure: Rate this adventure
 booking.ratingText: Give a feedback for the time you had during this experience. Try to be objective and honest
@@ -282,6 +304,7 @@ booking.experience.deleted: It's seems that %name% deleted this experience. Get 
 booking.explore: Explore experiences available
 booking.status: Status:
 booking.contribution: Contribution
+booking.meetingBookedOn: Meeting booked on %date%
 
 
 page.writtenBy: By %author%
@@ -306,6 +329,8 @@ registration.confirmation.subTitle: This is where it all starts
 registration.confirmation.message: Go visit your profile to enhance it or start browsing the website for experiences!
 
 message.noMessage: Looks like you haven't received a message yet
+message.requestFor: Booking request for "%title%" on %date%
+message.with: With <span class="text-primary">%user%</span>
 
 form.city: City
 form.rating.comment: Comment
@@ -337,6 +362,7 @@ form.user.gender: Gender
 form.user.password: Password
 form.user.password.validate: Confirm password
 
+form.thread.body: Your message
 
 email.generic.lovelyMail: A lovely mail sent by
 email.generic.contactUs: Contact us at:

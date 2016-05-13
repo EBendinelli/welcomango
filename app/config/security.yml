@@ -15,12 +15,13 @@ security:
        main:
            pattern: ^/
            form_login:
-               check_path: /login_check
+               check_path: fos_user_security_check
                login_path: /login
                provider: fos_userbundle
-               default_target_path: /profile
+               default_target_path:  /
+               use_referer: true
            logout:
-               path:    /logout
+               path: fos_user_security_logout
                target: /
               # provider: fos_userbundle
               # csrf_provider: form.csrf_provider

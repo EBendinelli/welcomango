@@ -10,16 +10,16 @@
     {% set recipient = '' %}
     {% for participant in thread.participants %}
         {% if app.user != participant %}
-            <h4 class="text-center m-b-20">With <span class="text-primary">{{ participant.fullname }}</span></h4>
+            <h4 class="text-center m-b-20">{{ 'message.with'|trans({'%user%': participant.fullname })|raw }}</h4>
             {% set recipient = participant %}
         {% endif %}
     {% endfor %}
 
-    <div class="text-center">
+    <div class="text-center m-b-10">
         {% if app.user ==  thread.booking.experience.getCreator %}
-            <a href="{{ path('booking_received_view', {'booking_id': thread.booking.id}) }}">{{ 'booking.view' }}</a>
+            <a href="{{ path('booking_received_view', {'booking_id': thread.booking.id}) }}">{{ 'booking.view'|trans }}</a>
         {% else %}
-            <a href="{{ path('booking_sent_list', {'booking_id': thread.booking.id}) }}">{{ 'booking.view' }}</a>
+            <a href="{{ path('booking_sent_list', {'booking_id': thread.booking.id}) }}">{{ 'booking.view'|trans }}</a>
         {% endif %}
     </div>
 
@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="col-md-6 text-center">
-            <div class="bold m-b-10">Meeting booked on {{ thread.booking.startDatetime|date('d-m-Y') }}</div>
+            <div class="bold m-b-10">{{ 'booking.meetingBookedOn'|trans({'%date%': thread.booking.startDatetime|date('d-m-Y')}) }}</div>
             <i class="fa fa-calendar-o fa-5x "></i>
         </div>
     </div>

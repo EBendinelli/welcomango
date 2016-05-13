@@ -36,6 +36,16 @@ class ThreadType extends AbstractType
     /**
      * {@inheritdoc}
      */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults([
+            'translation_domain' => 'interface',
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'new_thread';

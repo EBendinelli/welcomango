@@ -36,8 +36,8 @@ class AvailabilityType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-        $days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Always');
-        $hours = array('Early Morning', 'Morning', 'Lunchtime', 'Afternoon', 'Evening', 'Night', 'Always');
+        $days = array('day.monday', 'day.tuesday', 'day.wednesday', 'day.thursday', 'day.friday', 'day.saturday', 'day.sunday', 'global.always');
+        $hours = array('period.earlyMorning', 'period.morning', 'period.lunchtime', 'period.afternoon', 'period.evening', 'period.night', 'global.always');
         /*$months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');*/
         $today = new \Datetime;
         $aYearFromNow = new \Datetime;

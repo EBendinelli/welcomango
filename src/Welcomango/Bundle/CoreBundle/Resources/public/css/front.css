@@ -148,6 +148,16 @@ p{
     .menu-btn{
         margin: 0px 35px 0px 35px;
     }
+
+    #language-selector-full{
+        display:none !important;
+    }
+}
+
+@media (min-width: 992px){
+    #language-selector-small{
+        display:none !important;
+    }
 }
 
 @media (max-width: 335px){
@@ -1697,8 +1707,23 @@ body .ui-autocomplete .ui-menu-item.ui-state-focus{
     top: 155px !important;
 }
 
-/* //////////// CLASS MEDIA PAR DEFAUT //////////// */
+/* //////////// DEFAULT MEDIA CLASS //////////// */
 
 .borderMediaDefaut div.dz-image {
     border: solid 3px #F34B1F
+}
+
+/* //////////// LANGUAGE DROPDOWN ON TOP OF MENU BAR //////////// */
+
+#select2-drop{
+    z-index: 801;
+}
+
+
+/* //////////// BURGER FIX ON MENU BAR FOR SPECIFIC WIDTH  //////////// */
+
+@media (max-width: 992px) {
+    .header.bg-header .menu-toggler {
+        margin-top: 27.5px;
+    }
 }

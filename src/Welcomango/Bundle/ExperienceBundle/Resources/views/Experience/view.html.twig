@@ -42,16 +42,16 @@
             <div class="panel col-md-8 p-t-40" id="experience-main-large">
                 <ul class="nav nav-tabs nav-tabs-left nav-tabs-simple" id="experience-side-menu">
                     <li class="active">
-                        <a data-toggle="tab" data-href="#experience-city" class="experience-side-menu-item">City</a>
+                        <a data-toggle="tab" data-href="#experience-city" class="experience-side-menu-item">{{ 'global.city'|trans }}</a>
                     </li>
                     <li>
-                        <a data-toggle="tab" data-href="#experience-details" class="experience-side-menu-item">Details</a>
+                        <a data-toggle="tab" data-href="#experience-details" class="experience-side-menu-item">{{ 'experience.details'|trans }}</a>
                     </li>
                     <li>
-                        <a data-toggle="tab" data-href="#experience-description" class="experience-side-menu-item">Description</a>
+                        <a data-toggle="tab" data-href="#experience-description" class="experience-side-menu-item">{{ 'experience.description'|trans }}</a>
                     </li>
                     <li>
-                        <a data-toggle="tab" data-href="#experience-pictures" class="experience-side-menu-item">Pictures</a>
+                        <a data-toggle="tab" data-href="#experience-pictures" class="experience-side-menu-item">{{ 'experience.pictures'|trans }}</a>
                     </li>
                 </ul>
                 <div class="experience-content">
@@ -74,7 +74,7 @@
                                         {{ display_avatar(experience.getCreator, false, true, 'user-info-front') }}
                                         <div class="user-info-back bg-master-dark">
                                             <div class="m-t-60 text-center">
-                                                <span>View Profile</span>
+                                                <span>{{ 'global.viewProfile'|trans }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -157,7 +157,7 @@
         <div class="row">
             <div class="container">
                 <div class="m-b-40 m-t-40">
-                    <h2 class="text-center m-b-40">Comments</h2>
+                    <h2 class="text-center m-b-40">{{ 'global.comments'|trans }}</h2>
                     <div id="experience-comments">
                         {% if feedbacks  %}
                             {% include("WelcomangoBookingBundle:Feedback:list.html.twig") with { 'feedbacks': feedbacks } %}
@@ -288,12 +288,12 @@
         var forbidden = {{ forbiddenDates|json_encode|raw }};
         var availablePeriodsPerDate = {{ availablePeriodsPerDate|json_encode|raw }};
         var periodNames = [];
-        periodNames[0] = 'Early Morning';
-        periodNames[1] = 'Morning';
-        periodNames[2] = 'Lunchtime';
-        periodNames[3] = 'Afternoon';
-        periodNames[4] = 'Evening';
-        periodNames[5] = 'Night';
+        periodNames[0] = '{{ 'period.earlyMorning'|trans }}';
+        periodNames[1] = '{{ 'period.morning'|trans }}';
+        periodNames[2] = '{{ 'period.lunchtime'|trans }}';
+        periodNames[3] = '{{ 'period.afternoon'|trans }}';
+        periodNames[4] = '{{ 'period.evening'|trans }}';
+        periodNames[5] = '{{ 'period.night'|trans }}';
 
         //Remove the forbidden date from the datepicker
         $('#front_booking_desired_date').datepicker({
@@ -320,7 +320,6 @@
 
             //first we put the available periods for this day in a table
             var periods = availablePeriodsPerDate[date].split(',');
-            console.log(availablePeriodsPerDate[date]);
             //then we remove all the available periods in the dropdown
             $('#front_booking_desired_time').find('option').remove().end();
 
