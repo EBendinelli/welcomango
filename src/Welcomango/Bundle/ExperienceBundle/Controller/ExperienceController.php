@@ -327,7 +327,7 @@ class ExperienceController extends BaseController
                     'title'          => $this->trans('information.message.experienceYourself', [], 'interface'),
                     'message'        => $this->trans('information.message.editExperience', [], 'interface'),
                     'return_path'    => $this->get('router')->generate('front_experience_view', array('slug' => $experience->getSlug())),
-                    'return_message' => $this->trans('information.message.information.message.returnToExperience', [], 'interface'),
+                    'return_message' => $this->trans('information.message.returnToExperience', [], 'interface'),
                 ));
             }
 
@@ -338,7 +338,7 @@ class ExperienceController extends BaseController
                     'title'          => $this->trans('information.message.oops', [], 'interface'),
                     'message'        => $this->trans('information.message.notAvailable', [], 'interface'),
                     'return_path'    => $this->get('router')->generate('front_experience_view', array('slug' => $experience->getSlug())),
-                    'return_message' => $this->trans('information.message.information.message.returnToExperience', [], 'interface'),
+                    'return_message' => $this->trans('information.message.returnToExperience', [], 'interface'),
                 ));
             }
 
