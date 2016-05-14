@@ -149,6 +149,7 @@ global.currencyAndLanguage: Currency & Language
 global.city: City
 global.travelers: Travelers
 global.availabilities: Availabilities
+global.reportProblem: Report problem
 
 homepage.title1: Places Through People
 homepage.subTitle1: Find enthusiastic people willing to show you a different side of their city
