@@ -464,3 +464,9 @@ form.booking.desiredTime: Heure désirée
 form.booking.desiredDuration: Durée désirée
 form.booking.numberOfParticipants: Nombre de participants
 form.booking.message: Écrivez un petit mot pour vous présenter et donner quelques détails sur votre voyage
+
+information.message.oops: Oops, quelque chose a mal tourné
+information.message.notAvailable: Cette experience n'est pas disponible pour ce créneau... Essayez un autre jour ou un autre moment
+information.message.returnToExperience: Retourner à l'experience
+information.message.experienceYourself: Hm. Vous voulez partir à l'aventure avec vous même?
+information.message.editExperience: Ou peut-etre vouliez vous simplement modifier votre experience

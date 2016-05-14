@@ -324,10 +324,10 @@ class ExperienceController extends BaseController
             // If the user is trying to book his own experience
             if ($user == $experience->getCreator()) {
                 return $this->render('WelcomangoCoreBundle:CRUD:notAllowed.html.twig', array(
-                    'title'          => 'Hm. Want to go on an adventure with yourself? ',
-                    'message'        => 'Well maybe you just wanted to edit your experience',
+                    'title'          => $this->trans('information.message.experienceYourself', [], 'interface'),
+                    'message'        => $this->trans('information.message.editExperience', [], 'interface'),
                     'return_path'    => $this->get('router')->generate('front_experience_view', array('slug' => $experience->getSlug())),
-                    'return_message' => 'Return to experience',
+                    'return_message' => $this->trans('information.message.information.message.returnToExperience', [], 'interface'),
                 ));
             }
 
@@ -335,10 +335,10 @@ class ExperienceController extends BaseController
             $bookingManager = $this->get('welcomango.front.booking.manager');
             if (!$bookingManager->processBookingQuery($booking, $form)) {
                 return $this->render('WelcomangoCoreBundle:CRUD:notAllowed.html.twig', array(
-                    'title'          => 'Oops, something went wrong.',
-                    'message'        => 'This experience is not available at this time... Try another time or another day',
+                    'title'          => $this->trans('information.message.oops', [], 'interface'),
+                    'message'        => $this->trans('information.message.notAvailable', [], 'interface'),
                     'return_path'    => $this->get('router')->generate('front_experience_view', array('slug' => $experience->getSlug())),
-                    'return_message' => 'Return to experience',
+                    'return_message' => $this->trans('information.message.information.message.returnToExperience', [], 'interface'),
                 ));
             }
 

@@ -463,3 +463,9 @@ form.booking.desiredTime: Desired time
 form.booking.desiredDuration: Desired duration
 form.booking.numberOfParticipants: Number of participants
 form.booking.message: Write a message to introduce yourself and give some details about your trip
+
+information.message.oops: Oops, something went wrong
+information.message.notAvailable: This experience is not available at this time... Try another time or another day
+information.message.returnToExperience: Return to experience
+information.message.experienceYourself: Hm. Want to go on an adventure with yourself?
+information.message.editExperience: Well maybe you just wanted to edit your experience
