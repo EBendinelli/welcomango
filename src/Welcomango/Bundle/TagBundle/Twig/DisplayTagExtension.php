@@ -42,13 +42,14 @@ class DisplayTagExtension extends \Twig_Extension
      */
     public function displayTag($tags, $onlyText = false)
     {
+
         if($tags->isEmpty()){
             return '';
         }
 
         if($onlyText){
             foreach($tags as $tag){
-                $icons[] = $tag->getName();
+                $icons[] = $this->translator->trans($tag->getName(), [], 'interface');
             }
             $tagsResult = implode(' | ', $icons);
             return $tagsResult;
