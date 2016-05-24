@@ -2,8 +2,9 @@
 
 namespace Welcomango\Model\Repository;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\ResultSetMapping;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * ExperienceRepository
@@ -66,6 +67,42 @@ class ExperienceRepository extends EntityRepository
             }
         }
         return $feedbacks;
+    }
+
+    /**
+     * @return array
+     */
+    public function findExpiredExperiencesThatShouldBeExpired()
+    {
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('id', 'id');
+
+        $query = $this->getEntityManager()->createNativeQuery(
+            "select DISTINCT xp.id
+            from welcomango.wm_experience xp
+            INNER JOIN welcomango.wm_availability av ON xp.id = av.experience_id
+            WHERE (select id from welcomango.wm_availability av2 WHERE av2.id = av.id AND av2.endDate < :now)
+            AND xp.publication_status != :status;", $rsm
+        );
+
+        $query->setParameters([
+            'now' => new \DateTime(),
+            'status' => 'expired',
+        ]);
+
+        $results = $query->getResult();
+
+        $expercienceIds = array();
+        foreach ($results as $experience) {
+            $expercienceIds[] = $experience['id'];
+        }
+
+        $query = $this->createQueryBuilder('a')
+            ->where('a.id IN (:ids)')
+            ->setParameter('ids', $expercienceIds)
+            ->getQuery();
+
+        return $query->getResult();
     }
 
     /**
