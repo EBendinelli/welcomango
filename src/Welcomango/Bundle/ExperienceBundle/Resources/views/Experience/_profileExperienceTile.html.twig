@@ -27,13 +27,20 @@
         <div class="panel-body p-t-0 ">
             {% if experience.publicationStatus == 'refused' %}
                 <div class="text-center">
-                    <div class="text-danger bold m-t-10">Experience refused</div>
-                    <div class="m-b-20">{{ experience.refusedFor }}</div>
-                    <div class="hint-text m-b-20">Review this experience to fit our chart or delete it and start over on a fresh basis!</div>
+                    <div class="text-danger bold m-t-10">{{ 'experience.profileList.refused'|trans }}</div>
+                    <div class="m-b-20">{{ 'experience.profileList.refusedFor'|trans }}</div>
+                    <div class="hint-text m-b-20">{{ 'experience.profileList.refusedNote'|trans }}</div>
                     <a href="{{ path('front_experience_edit', {'experience_id': experience.id}) }}" class="btn btn-bordered btn-black btn-cons m-b-10 "><i class="fa fa-pencil"></i> {{ 'profile.editExperience'|trans }}</a>
                     <button class="btn btn-danger btn-cons" data-toggle="modal" data-target=".modal-action" onClick="updateModal('{{ path('front_experience_delete', {'experience_id': experience.id}) }}')"><i class="fa fa-trash "></i> {{ 'profile.deleteExperience'|trans }}</button>
                 </div>
                 <div class="fs-11 m-t-10 text-center"><a href="{{ path('page_view_slug', {'slug': 'experience-refused'}) }}">{{ 'experience.refusedWhy'|trans }}</a></div>
+            {% elseif experience.publicationStatus == 'expired' %}
+                <div class="text-center">
+                    <div class="text-hint bold m-t-10">{{ 'experience.profileList.expired'|trans }}</div>
+                    <div class="hint-text m-b-20">{{ 'experience.profileList.expiredNote'|trans }}</div>
+                    <a href="{{ path('front_experience_edit', {'experience_id': experience.id}) }}" class="btn btn-bordered btn-black btn-cons m-b-10 "><i class="fa fa-pencil"></i> {{ 'profile.editExperience'|trans }}</a>
+                    <button class="btn btn-danger btn-cons" data-toggle="modal" data-target=".modal-action" onClick="updateModal('{{ path('front_experience_delete', {'experience_id': experience.id}) }}')"><i class="fa fa-trash "></i> {{ 'profile.deleteExperience'|trans }}</button>
+                </div>
             {% else %}
                 <div class="text-center"><a href="{{ path('booking_received_list', {'display': 'happened'}) }}" class="text-complete semi-bold">{{ 'experience.attended'|trans }}: {{ experience.getNumberOfTimeAttended }}<a/></div>
                 <div class="text-center"><a href="{{ path('booking_received_list', {'display': 'received'}) }}" class="text-complete semi-bold">{{ 'experience.pendingRequest'|trans }}: {{ experience.getPendingRequest }}</a></div>

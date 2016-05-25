@@ -220,6 +220,10 @@ class ExperienceController extends BaseController
                 }
             }
 
+            //Check availabilities to determine if experience is still available
+            $experienceManager = $this->get('welcomango.front.experience.manager');
+            $experienceManager->checkIfStillAvailable($experience);
+
             //Bad tweak to avoid maximum duration to be higher than minimum
             if($experience->getMaximumDuration() < $experience->getMinimumDuration()){
                 $experience->setMaximumDuration($experience->getMinimumDuration()+1);
@@ -324,10 +328,10 @@ class ExperienceController extends BaseController
             // If the user is trying to book his own experience
             if ($user == $experience->getCreator()) {
                 return $this->render('WelcomangoCoreBundle:CRUD:notAllowed.html.twig', array(
-                    'title'          => $this->trans('information.message.experienceYourself', [], 'interface'),
-                    'message'        => $this->trans('information.message.editExperience', [], 'interface'),
+                    'title'          => 'Hm. Want to go on an adventure with yourself? ',
+                    'message'        => 'Well maybe you just wanted to edit your experience',
                     'return_path'    => $this->get('router')->generate('front_experience_view', array('slug' => $experience->getSlug())),
-                    'return_message' => $this->trans('information.message.returnToExperience', [], 'interface'),
+                    'return_message' => 'Return to experience',
                 ));
             }
 
@@ -335,10 +339,10 @@ class ExperienceController extends BaseController
             $bookingManager = $this->get('welcomango.front.booking.manager');
             if (!$bookingManager->processBookingQuery($booking, $form)) {
                 return $this->render('WelcomangoCoreBundle:CRUD:notAllowed.html.twig', array(
-                    'title'          => $this->trans('information.message.oops', [], 'interface'),
-                    'message'        => $this->trans('information.message.notAvailable', [], 'interface'),
+                    'title'          => 'Oops, something went wrong.',
+                    'message'        => 'This experience is not available at this time... Try another time or another day',
                     'return_path'    => $this->get('router')->generate('front_experience_view', array('slug' => $experience->getSlug())),
-                    'return_message' => $this->trans('information.message.returnToExperience', [], 'interface'),
+                    'return_message' => 'Return to experience',
                 ));
             }
 

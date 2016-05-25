@@ -8,6 +8,7 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Filesystem\Filesystem;
 use Doctrine\Common\Collections\ArrayCollection;
 
+use Symfony\Component\Validator\Constraints\DateTime;
 use Welcomango\Model\Media;
 use Welcomango\Model\Experience;
 use Welcomango\Model\User;
@@ -162,9 +163,40 @@ class ExperienceManager
         $availability   = new Availability();
         $availability->setDay(array('7'));
         $availability->setHour(array('6'));
+
+        //Set start and end date
+        $today = new \Datetime;
+        $aYearFromNow = new \Datetime;
+        $aYearFromNow->add(new \DateInterval('P6M'));
+        $availability->setStartDate($today);
+        $availability->setEndDate($aYearFromNow);
+
         $availability->setExperience($experience);
         $availabilities->add($availability);
         $experience->setAvailabilities($availabilities);
 
+    }
+
+    /**
+     * Check if the experience has availabities in the future
+     *
+     * @param Experience $experience
+     */
+    function checkIfStillAvailable($experience){
+        //Max is set to old date
+        $maxEndDate = new \DateTime('1990-03-01');
+
+        //if there is a later date, it replaces max
+        foreach($experience->getAvailabilities() as $availabilty){
+            dump($availabilty->getEndDate());
+            if($maxEndDate < $availabilty->getEndDate()){
+                $maxEndDate = $availabilty->getEndDate();
+            }
+        }
+
+        // if maxdate is inferior to today then the experience cannot be booked in the future so it's expired
+        if($maxEndDate < new \DateTime()){
+            $experience->setPublicationStatus('expired');
+        }
     }
 }
