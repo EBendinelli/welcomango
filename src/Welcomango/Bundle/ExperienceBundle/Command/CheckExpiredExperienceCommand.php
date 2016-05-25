@@ -9,6 +9,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
+use Welcomango\Model\Availability;
 use Welcomango\Model\User;
 use Welcomango\Model\Experience;
 
@@ -28,7 +29,8 @@ class CheckExpiredExperienceCommand extends ContainerAwareCommand
         $entityManager = $doctrine->getManager();
         $logger        = $this->getContainer()->get('logger');
 
-        $experiences = $doctrine->getRepository(Experience::class)->findExpiredExperiencesThatShouldBeExpired();
+        $experiencesIds = $doctrine->getRepository(Availability::class)->getExpiredExperiences();
+        $experiences = $doctrine->getRepository(Experience::class)->findById($experiencesIds);
 
         /** @var Experience $experience */
         foreach ($experiences as $experience) {
