@@ -25,8 +25,69 @@ interface.cancel: Cancel
 interface.remove: Remove
 interface.logout: Log out
 
-language.english: English
+period.earlyMorning: Early Morning
+period.morning: Morning
+period.lunchtime: Lunchtime
+period.afternoon: Afternoon
+period.evening: Evening
+period.night: Night
+global.always: Always
+
+day.monday: Monday
+day.tuesday: Tuesday
+day.wednesday: Wednesday
+day.thursday: Thursday
+day.friday: Friday
+day.saturday: Saturday
+day.sunday: Sunday
+
+language.en: EN
+language.fr: FR
 language.french: French
+language.english: English
+language.german: German
+language.italian: Italian
+language.spanish: Spanish
+language.croatian: Croatian
+language.bulgarian: Bulgarian
+language.czech: Czech
+language.danish: Danish
+language.dutch: Dutch
+language.estonian: Estonian
+language.finnish: Finnish
+language.greek: Greek
+language.hungarian: Hungarian
+language.irish: Irish
+language.latvian: Latvian
+language.lithuanian: Lithuanian
+language.maltese: Maltese
+language.spanish: Spanish
+language.portuguese: Portuguese
+language.romanian: Romanian
+language.slovak: Slovak
+language.slovene: Slovene
+language.swedish: Swedish
+language.level.beginner: Beginner
+language.level.good: Good
+language.level.great: Great
+language.level.fluent: Fuent
+
+tag.photography: Photography
+tag.cinema: Cinema
+tag.music: Music
+tag.politics: Politics
+tag.culture: Culture
+tag.architecture: Architecture
+tag.food: Food
+tag.drinks: Drinks
+tag.nature: Nature
+tag.sport: Sport
+tag.nightlife: Nightlife
+tag.history: History
+tag.literature: Literature
+tag.mustSee: Must See
+tag.shopping: Shopping
+tag.unusual: Unusual
 
 login.rememberMe: Remember me
 login.forgotPassword: Forgot your password?
@@ -85,6 +146,10 @@ global.register: Register
 global.contactUs: Contact us
 global.discover: Discover
 global.currencyAndLanguage: Currency & Language
+global.city: City
+global.travelers: Travelers
+global.availabilities: Availabilities
+global.reportProblem: Report problem
 
 homepage.title1: Places Through People
 homepage.subTitle1: Find enthusiastic people willing to show you a different side of their city
@@ -205,6 +270,7 @@ form.experience.minParticipantsAccepted: Minimum number of participants
 form.experience.contribution: Contribution
 form.experience.endDate: End date
 form.experience.startDate: Start date
+form.experience.currency: Currency
 experience.list.title: Experiences over the world
 experience.noFeedbacksReceived: This user has not received any feedback yet
 experience.noNoteYet: No note received yet
@@ -216,7 +282,7 @@ experience.notLogged: Looks like you are not logged, please <a class="bold" href
 
 experience.create.titleNote: This is the title of your experience, it should describe what will happen with you in your city in a few word. Try to make it appealing and simple like <i>"A fantastic bike journey"</i> for a bike tour, <i>"A city under siege"</i> for a history related experience or <i>"The crazy underground side of a business city"</i> for a tour of the underground places. <span class="bold">Make it sound like a movie title!</span> <br/><br/>There is <span class="bold">no need to include the name of the city</span>.
 experience.create.descriptionNote: Now we are talking! This is the core of your experience! This section must give a good overview of what a traveler should expect when meeting with you. No need to talk too much about the city, tell a bit more about what is the experience going to be about about and how it represents the way you live and love your city.
-experience.create.mediaNote: Add some photos to your experience. This give some falvor to your page while giving a snapshot of what the adventure with you will look like (5Mo max)
+experience.create.mediaNote: Add some photos to your experience. This give some falvor to your page while giving a snapshot of what the adventure with you will look like. <b>Note:</b> click on a picture to set it a the default image for your experience (marked with a red border).
 experience.create.cityNote: This can be usefull right? Better ask you just in case... So where is this happening?
 experience.create.tagsNote: The tags are the the keywords in which falls your experience. It's kind of the category but a bit more expressive. Don't add too many of them, just make sure it reflects the content of your experience
 experience.create.estimatedDurationNote: This is how long you think you experience should last
@@ -235,6 +301,7 @@ availabilities.howLongNote: Vacations planned? You already know that you won't b
 availability.modal.removeText: Are you sure you want to remove this availability?
 availability.error.oneRequired: You need to specify at least one availabily! If you are available anytyme just check the Always option ;)
 availability.modal.remove: Remove availability
+availability.add: Add an availability
 
 experience.manage.introductionText: You may have lived in this current city for years and find the idea of a theme oriented experience a bit limitating... Well, here you can create a new experience with a different flavor to propose another version of your city to travelers. For example, if you already propose a culture oriented visit of your town, you can also propose a second experience about the nightlife and the different things happening by night! Let your knowledge of the city talk and try to intrigued the potential visitors ;)
 experience.manage.title: A different flavor of your city
@@ -274,6 +341,7 @@ booking.meetingAt: Meeting requested at <span class="semi-bold">%time%</span>
 booking.duration: Requested duration: <span class="semi-bold">%duration%</span>
 booking.experiencesAttendedBy: Experience attended by <span class="semi-bold">%number%</span> person(s)
 booking.sentTo: Booking request sent to <a href="%route%" class="text-primary semi-bold">%name%</a>
+booking.view: View booking
 booking.viewRequest: View details about this request
 booking.rateAdventure: Rate this adventure
 booking.ratingText: Give a feedback for the time you had during this experience. Try to be objective and honest
@@ -287,6 +355,7 @@ booking.experience.deleted: It's seems that %name% deleted this experience. Get 
 booking.explore: Explore experiences available
 booking.status: Status:
 booking.contribution: Contribution
+booking.meetingBookedOn: Meeting booked on %date%
 
 
 page.writtenBy: By %author%
@@ -311,6 +380,8 @@ registration.confirmation.subTitle: This is where it all starts
 registration.confirmation.message: Go visit your profile to enhance it or start browsing the website for experiences!
 
 message.noMessage: Looks like you haven't received a message yet
+message.requestFor: Booking request for "%title%" on %date%
+message.with: With <span class="text-primary">%user%</span>
 
 form.city: City
 form.rating.comment: Comment
@@ -342,6 +413,7 @@ form.user.gender: Gender
 form.user.password: Password
 form.user.password.validate: Confirm password
 
+form.thread.body: Your message
 
 email.generic.lovelyMail: A lovely mail sent by
 email.generic.contactUs: Contact us at:
@@ -397,3 +469,9 @@ form.booking.desiredTime: Desired time
 form.booking.desiredDuration: Desired duration
 form.booking.numberOfParticipants: Number of participants
 form.booking.message: Write a message to introduce yourself and give some details about your trip
+
+information.message.oops: Oops, something went wrong
+information.message.notAvailable: This experience is not available at this time... Try another time or another day
+information.message.returnToExperience: Return to experience
+information.message.experienceYourself: Hm. Want to go on an adventure with yourself?
+information.message.editExperience: Well maybe you just wanted to edit your experience

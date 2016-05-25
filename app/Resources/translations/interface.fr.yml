@@ -25,8 +25,69 @@ interface.cancel: Annuler
 interface.remove: Supprimer
 interface.logout: Déconnexion
 
-language.english: Anglais
+period.earlyMorning: Aube
+period.morning: Matin
+period.lunchtime: Midi
+period.afternoon: Après-midi
+period.evening: Soirée
+period.night: Nuit
+global.always: Toujours
+
+day.monday: Lundi
+day.tuesday: Mardi
+day.wednesday: Mercredi
+day.thursday: Jeudi
+day.friday: Vendredi
+day.saturday: Samedi
+day.sunday: Dimanche
+
+language.en: EN
+language.fr: FR
 language.french: Français
+language.english: Anglais
+language.german: Allemand
+language.italian: Italien
+language.spanish: Espagnol
+language.croatian: Croate
+language.bulgarian: Bulgare
+language.czech: Tchèque
+language.danish: Danois
+language.dutch: Flammand
+language.estonian: Estonien
+language.finnish: Finnois
+language.greek: Grèc
+language.hungarian: Hongrois
+language.irish: Irlandais
+language.latvian: Letton
+language.lithuanian: Lituanien
+language.maltese: Maltais
+language.spanish: Espagnol
+language.portuguese: Portuguais
+language.romanian: Roumain
+language.slovak: Slovaque
+language.slovene: Slovène
+language.swedish: Suédois
+language.level.beginner: Débutant
+language.level.good: Moyen
+language.level.great: Confirmé
+language.level.fluent: Bilingue
+
+tag.photography: Photographie
+tag.cinema: Cinéma
+tag.music: Musique
+tag.politics: Politique
+tag.culture: Culture
+tag.architecture: Architecture
+tag.food: Gastronomie
+tag.drinks: Boisson
+tag.nature: Nature
+tag.sport: Sport
+tag.nightlife: Vie nocturne
+tag.history: Histoire
+tag.literature: Littérature
+tag.mustSee: Inévitable
+tag.shopping: Shopping
+tag.unusual: Improbable
 
 login.rememberMe: Se souvenir de moi
 login.forgotPassword: Mot de passe oublié ?
@@ -85,6 +146,10 @@ global.register: S'inscrire
 global.contactUs: Nous contacter
 global.discover: Découvrir
 global.currencyAndLanguage: Monnaie & langue
+global.city: Ville
+global.travelers: Voyageurs
+global.availabilities: Disponibilités
+global.reportProblem: Reporter un problème
 
 homepage.title1: Des lieux à travers leurs occupants
 homepage.subTitle1: Trouvez des locaux prêts à vous montrer leur ville comme ils l'aiment
@@ -107,7 +172,7 @@ homepage.whereItStarts: C'est ici que tout commence
 homepage.bestOfBest: La crème de la crème
 homepage.keepInTouch: Restez en contact
 homepage.newsletterText: Laissez votre email et restez informés de l'évolution de Welcomango
-homepage.subscribeNote: Nous tenons à votre <strong>vie privé</strong>. Aucun des détails fournis ne sera partagé avec qui que ce soit
+homepage.subscribeNote: Nous tenons à votre <strong>vie privée</strong>. Aucun des détails fournis ne sera partagé avec qui que ce soit
 homepage.learnMore: En savoir plus
 homage.shareEnjoy: Partagez/Profitez - Prenez/Donnez
 homepage.meAGuide: Moi, un guide?
@@ -205,6 +270,7 @@ form.experience.minParticipantsAccepted: Nombre minimum de participants
 form.experience.contribution: Contribution
 form.experience.endDate: Date de fin
 form.experience.startDate: Date de fin
+form.experience.currency: Monnaie
 experience.list.title: Expériences partout dans le monde
 experience.noFeedbacksReceived: Cet utilisateur n'a pas encore reçu de retours
 experience.noNoteYet: Pas de notes reçues
@@ -216,7 +282,7 @@ experience.notLogged: Il semble que vous ne soyez pas connecté. Merci de vous <
 
 experience.create.titleNote: Ceci est le titre de votre expérience, il doit décrire en quelques mots ce que vous voulez mettre en avant de votre expérience. Essayez de le rendre simple et attirant comme "<i>"Une aventure magique à vélo"</i> pour une visite nature, <i>"Un ville assiégée"</i> pour une expérience plus historique ou <i>"La face cachée d'une ville endormie"</i> pour une aventure plus underground. <span class="bold"> Essayez de faire sonner ça comme un titre de film !</span> <br/><br/>Notez <span class="bold">qu'il n'y pas besoin d'inclure le nom de la ville</span>.
 experience.create.descriptionNote: Maintenant passons aux choses sérieuses ! C'est ici le cœur de votre expérience. Cette section donne un aperçu de ce qu'un voyageur peut attendre d'une rencontre avec vous. Pas besoin de parler de votre ville, prenez plutôt le temps de parler de ce que votre expérience va mettre en avant et comment elle représente la façon dont vous aimez et vivez votre ville.
-experience.create.mediaNote: Ajoutez quelques photos à votre expérience. Cela donnera un certain charme à votre page tout en donnant un aperçu de ce que vous pouvez faire découvrir (5Mo max).
+experience.create.mediaNote: Ajoutez quelques photos à votre expérience. Cela donnera un certain charme à votre page tout en donnant un aperçu de ce que vous pouvez faire découvrir. . <b>Note:</b> Cliquez sur une des images pour en faire l'image par défaut de votre experience (visible grâce au cadre rouge)
 experience.create.cityNote: Information utile n'est-ce pas ? On préfère demander, juste au cas où... Où se passe votre expérience?
 experience.create.tagsNote: Les tags sont les mots clefs qui définissent grossièrement votre expérience. Ce sont des genres de catégories mais plus expressifs. Pas besoin d'en ajouter des dizaines, faites simplement en sorte que cela reflète le contenu de votre expérience.
 experience.create.estimatedDurationNote: La durée parfaite de votre expérience selon vous
@@ -235,6 +301,7 @@ availabilities.howLongNote: Des vacances de prévues ? Vous savez déjà que vou
 availability.modal.removeText: Êtes-vous sûr de vouloir supprimer cette disponibilité?
 availability.error.oneRequired: Vous devez au moins ajouter une disponibilité! Si vous êtes disponible tout le temps, sélectionnez simplement l'option "Toujours" ;)
 availability.modal.remove: Supprimer disponibilité
+availability.add: Ajouté une disponibilité
 
 experience.manage.introductionText: Il se peut que vous viviez dans votre ville actuelle depuis plusieurs années et que vous trouviez le concept d'expériences thématiques un peu limité... Nous avons pensé à vous et vous avez la possibilité de proposer plusieurs expériences dans une seule et même ville, plusieurs saveurs d'un même aliment en somme. Par exemple, si vous proposez déjà une expérience orientée sur la culture et l'histoire, vous pouvez parfaitement créer une seconde expérience plus débridée autour de la vie nocturne! Laissez vos connaissances parler et tentez d'intriguer les visiteurs potentiels ;)
 experience.manage.title: Une autre vision de votre ville
@@ -274,6 +341,7 @@ booking.meetingAt: Rendez-vous à <span class="semi-bold">%time%</span>
 booking.duration: Durée demandée: <span class="semi-bold">%duration%</span>
 booking.experiencesAttendedBy: Expérience tentée par  <span class="semi-bold">%number%</span> personne(s)
 booking.sentTo: Demande de réservation envoyée à <a href="%route%" class="text-primary semi-bold">%name%</a>
+booking.view: Voir la réservation
 booking.viewRequest: Voir les détails pour cette demande
 booking.rateAdventure: Notez cette aventure
 booking.ratingText: Partagez votre sentiment vis à vis de cette expérience. Essayez d'être honnête et objectif
@@ -287,6 +355,7 @@ booking.experience.deleted: Il semble que %name% ai supprimé cette expérience.
 booking.explore: Parcourir les expériences disponibles
 booking.status: Status:
 booking.contribution: Contribution
+booking.meetingBookedOn: Réservation faite le %date%
 
 
 page.writtenBy: Par %author%
@@ -313,6 +382,8 @@ registration.confirmation.subTitle: C'est ici que tout commence
 registration.confirmation.message: Visitez votre profil pour l'améliorer ou commencez à parcourir le site pour trouver votre prochaine expérience!
 
 message.noMessage: Il semble que personne ne vous ait contacté pour l'instant
+message.requestFor: Demande de réservation pour "%title%" le %date%
+message.with: Avec <span class="text-primary">%user%</span>
 
 form.city: Ville
 form.rating.comment: Commentaire
@@ -344,6 +415,7 @@ form.user.gender: Sexe
 form.user.password: Mot de passe
 form.user.password.validate: Confirmation
 
+form.thread.body: Votre message
 
 email.generic.lovelyMail: Un délicat email envoyé par
 email.generic.contactUs: Contactez-nous:
@@ -399,3 +471,9 @@ form.booking.desiredTime: Heure désirée
 form.booking.desiredDuration: Durée désirée
 form.booking.numberOfParticipants: Nombre de participants
 form.booking.message: Écrivez un petit mot pour vous présenter et donner quelques détails sur votre voyage
+
+information.message.oops: Oops, quelque chose a mal tourné
+information.message.notAvailable: Cette experience n'est pas disponible pour ce créneau... Essayez un autre jour ou un autre moment
+information.message.returnToExperience: Retourner à l'experience
+information.message.experienceYourself: Hm. Vous voulez partir à l'aventure avec vous même?
+information.message.editExperience: Ou peut-etre vouliez vous simplement modifier votre experience
