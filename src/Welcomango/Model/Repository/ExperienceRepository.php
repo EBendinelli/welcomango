@@ -2,8 +2,10 @@
 
 namespace Welcomango\Model\Repository;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\ResultSetMapping;
+use Doctrine\Common\Collections\ArrayCollection;
+use Proxies\__CG__\Welcomango\Model\Availability;
 
 /**
  * ExperienceRepository

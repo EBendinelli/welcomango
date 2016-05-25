@@ -70,7 +70,6 @@ class AvailabilityType extends AbstractType
         $builder->add('start_date', 'date', [
             'label'    => 'form.experience.startDate',
             'required' => true,
-            'data'     => $today,
             'years'    => range(date('Y'), date('Y') + 1),
             'months'   => range(date('m'), 12),
             'days'     => range(date('d'), 31),
@@ -86,7 +85,6 @@ class AvailabilityType extends AbstractType
         $builder->add('end_date', 'date', [
             'label'    => 'form.experience.endDate',
             'required' => true,
-            'data'     => $aYearFromNow,
             'years'    => range(date('Y'), date('Y') + 1),
             'months'   => range(date('m'), 12),
             'days'     => range(date('d'), 31),
@@ -98,6 +96,7 @@ class AvailabilityType extends AbstractType
                 'data-date-format' => 'dd-mm-yyyy',
             ],
         ]);
+
     }
 
     /**

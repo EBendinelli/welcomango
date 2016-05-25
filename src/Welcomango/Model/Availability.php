@@ -8,8 +8,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Availability
  *
+ * @ORM\Entity(repositoryClass="Welcomango\Model\Repository\AvailabilityRepository")
  * @ORM\Table(name="wm_availability")
- * @ORM\Entity
  */
 class Availability
 {
@@ -46,14 +46,14 @@ class Availability
     /**
      * @var dime
      *
-     * @ORM\Column(name="startDate", type="date", nullable=false)
+     * @ORM\Column(name="start_date", type="date", nullable=false)
      */
     private $startDate;
 
     /**
      * @var date
      *
-     * @ORM\Column(name="endDate", type="date", nullable=false)
+     * @ORM\Column(name="end_date", type="date", nullable=false)
      */
     private $endDate;
 
