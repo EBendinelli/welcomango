@@ -194,6 +194,11 @@ experience.description: Description
 experience.pictures: Pictures
 experience.sorryNoPictures: Sorry, it seems that this user did not add any photo...
 experience.refusedWhy: Why has my experience been refused?
+experience.profileList.refusedFor: Experience refused for:
+experience.profileList.expired: Experience expired
+experience.profileList.expiredNote: Apparently you have no availabilities for this experience in the future. How about adding a new availability?
+experience.profileList.refused: Experience refused
+experience.profileList.refusedNote: Review this experience to fit our chart or delete it and start over on a fresh basis!
 form.experience.keyword: Search terms...
 form.experience.date: Dates available
 form.experience.minParticipantsAccepted: Minimum number of participants

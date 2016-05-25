@@ -220,6 +220,10 @@ class ExperienceController extends BaseController
                 }
             }
 
+            //Check availabilities to determine if experience is still available
+            $experienceManager = $this->get('welcomango.front.experience.manager');
+            $experienceManager->checkIfStillAvailable($experience);
+
             //Bad tweak to avoid maximum duration to be higher than minimum
             if($experience->getMaximumDuration() < $experience->getMinimumDuration()){
                 $experience->setMaximumDuration($experience->getMinimumDuration()+1);

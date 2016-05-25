@@ -39,9 +39,6 @@ class AvailabilityType extends AbstractType
         $days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Always');
         $hours = array('Early Morning', 'Morning', 'Lunchtime', 'Afternoon', 'Evening', 'Night', 'Always');
         /*$months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');*/
-        $today = new \Datetime;
-        $aYearFromNow = new \Datetime;
-        $aYearFromNow->add(new \DateInterval('P1Y'));
 
         $builder->add('day', 'choice',[
             'required' => true,

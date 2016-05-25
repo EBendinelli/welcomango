@@ -194,6 +194,11 @@ experience.description: Description
 experience.pictures: Photos
 experience.sorryNoPictures: Désolé, il semble qu'il n'y a pas de photo pour cette expérience...
 experience.refusedWhy: Pourquoi mon expérience a-t-elle été refusée ?
+experience.profileList.refusedFor: Experience refusé pour la raison suivante:
+experience.profileList.expired: Experience expirée
+experience.profileList.expiredNote: Il semble que vous ne soyez plus disponible dans le futur pour cette experience. Et si vous ajoutiez de nouvelles disponibilitées?
+experience.profileList.refused: Experience refusée
+experience.profileList.refusedNote: Faites en sorte que votre experience correspondent aux critères de bienscéance ou partez sur une nouvelle base!
 form.experience.keyword: Mots-clefs...
 form.experience.date: Dates disponibles
 form.experience.minParticipantsAccepted: Nombre minimum de participants
