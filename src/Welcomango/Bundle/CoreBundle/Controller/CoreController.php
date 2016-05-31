@@ -123,7 +123,6 @@ class CoreController extends BaseController
                         'name' => $form->get('name')->getData(),
                         'message' => $form->get('message')->getData(),
                         'issue_url' => $feedbackUrl,
-                        'type' => 'Text',
                     ]),
                     'text/html'
                 );

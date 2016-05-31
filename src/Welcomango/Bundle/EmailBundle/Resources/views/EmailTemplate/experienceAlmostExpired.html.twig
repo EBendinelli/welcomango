@@ -1,0 +1,36 @@
+{% extends "WelcomangoEmailBundle:EmailTemplate:template" ~ type|default('') ~ ".html.twig" %}
+
+{% trans_default_domain 'interface' %}
+
+{% block mainTitle %}
+    {% autoescape false %}
+    {{ 'global.experience'|trans }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block coreTitle %}
+    {% autoescape false %}
+    {{ 'email.experience.almostExpired.coreTitle'|trans({'%title%': experience.title}) }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block subTitle %}
+    {% autoescape false %}
+    {{ 'email.experience.almostExpired.subTitle'|trans() }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block btn %}
+    {% autoescape false %}
+    <a style="font-family: 'Open Sans',sans-serif; font-size: 20px;  border-radius:3px; text-decoration: none; margin:auto; color: #fff; background-color: #F34B1F; border-color: #F34B1F; padding: 10px 20px 10px 20px;font-size: 14px; letter-spacing: 0.14px; line-height: 21px; text-transform: uppercase;  font-family: Montserrat; font-weight: 400;" href="{{ url('front_experience_create') }}" style="">{{ 'email.experience.update.btn'|trans }}</a>
+    {% endautoescape %}
+{% endblock %}
+
+{% block message %}
+    {% autoescape false %}
+    {{ 'email.experience.almostExpired.message'|trans }}
+    {% endautoescape %}
+{% endblock %}
+
+
+

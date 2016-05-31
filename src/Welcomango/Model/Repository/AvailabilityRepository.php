@@ -39,4 +39,28 @@ class AvailabilityRepository extends EntityRepository
         return $experiencesIds;
     }
 
+    /**
+     * @return array
+     */
+    public function getAlmostExpiredExperiences()
+    {
+
+        $queryBuilder = $this
+            ->createQueryBuilder('a')
+            ->select('(a.experience) as id')
+            ->addSelect('MAX(a.endDate) as maxEndDate')
+            ->groupBy('a.experience')
+            ->andHaving('maxEndDate = :end_date')
+            ->setParameter('end_date', date('Y-m-d', strtotime("-1 week")).'%')
+            ->getQuery();
+
+        $results = $queryBuilder->getArrayResult();
+        $experiencesIds = array();
+        foreach($results as $experience){
+            $experiencesIds[$experience['id']] = $experience['id'];
+        }
+
+        return $experiencesIds;
+    }
+
 }

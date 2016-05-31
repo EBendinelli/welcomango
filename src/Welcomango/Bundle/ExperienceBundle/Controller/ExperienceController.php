@@ -269,7 +269,7 @@ class ExperienceController extends BaseController
 
         //TODO: We might be able to do better...
         // Check that the experience is still available and not deleted
-        if ($experience->isDeleted()) {
+        if ($experience->isDeleted() || $experience->getPublicationStatus() == 'expired') {
             return $this->render('WelcomangoCoreBundle:CRUD:notAllowed.html.twig', array(
                 'title'          => 'This experience is not available anymore',
                 'message'        => 'Well, maybe it never existed...',

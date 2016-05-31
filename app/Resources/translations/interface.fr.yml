@@ -435,6 +435,15 @@ email.experience.validation.coreTitle: Votre expérience a été validée avec s
 email.experience.validation.subTitle: Hey %name% , notre équipe viens juste de vérifier votre expérience!
 email.experience.validation.message: Outre le fait que nous ayons aimé ce que vous proposez, votre expérience est maintenant disponible en ligne ! Cliquez pour voir à quoi cela ressemble !
 email.experience.validation.btn: Jeter un œil !
+email.experience.expired.subject: Votre expérience est expirée
+email.experience.expired.coreTitle: Votre expérience <i>"%title%"</i> est expirée!
+email.experience.expired.subTitle: Voulez vous vraiment que cela arrive?
+email.experience.expired.message: Il semble que les disponibilités que vous aviez définie pour votre expérience soient arrivées à terme. Cela signifie que cette expérience n'est plus disponible pour les voyageurs. Est-ce vraiment le cas? Si la réponse est non, éditez vite votre experience en ajoutant vos nouvelles disponibilités!
+email.experience.almostExpired.subject: Votre experience va bientôt expirer!
+email.experience.almostExpired.coreTitle: Votre expérience <i>"%title%"</i> va expirer prochainement!
+email.experience.almostExpired.subTitle: Est-ce vraiment ce que vous voulez?
+email.experience.almostExpired.message: Il semble que les disponibilités que vous aviez définie pour votre expérience arrivent bientôt à terme. Cela signifie que cette expérience ne sera plus disponible pour les voyageurs d'ici 7 jours. Est-ce vraiment le cas? Si la réponse est non, éditez vite votre experience en ajoutant vos nouvelles disponibilités!
+email.experience.update.btn: Mettre à jour votre expérience
 email.booking.update.coreTitle: Votre requête a été %status%
 email.booking.update.subTitle: %user% a %status% votre demande pour l'expérience %title%
 email.booking.update.message: Cliquez sur le bouton ci-dessous pour plus de détails sur cette réservation. Vous pouvez maintenant contacter %user% directement via cette page.

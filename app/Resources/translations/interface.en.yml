@@ -433,6 +433,15 @@ email.experience.validation.coreTitle: Your experience has been successfully val
 email.experience.validation.subTitle: Hey %name% , our team just review your experience!
 email.experience.validation.message: In addition to the fact that we loved what you proposed, you experience is now available online, click the button above to see what it looks like!
 email.experience.validation.btn: Check it out!
+email.experience.expired.subject: Your Experience is expired
+email.experience.expired.coreTitle: Your experience <i>"%title%"</i> is expired!
+email.experience.expired.subTitle: Do you really want that to happen?
+email.experience.expired.message: It seems that the availabilities you have defined for this experience have reached their end date. This mean your experience isn't bookable anymore. Is that really what you want? If not, click the button to edit your experience and add new availabilities!
+email.experience.almostExpired.subject: Your Experience is almost expired
+email.experience.almostExpired.coreTitle: Your experience <i>"%title%"</i> is almost expired!
+email.experience.almostExpired.subTitle: Do you really want that to happen?
+email.experience.almostExpired.message: It seems that the availabilities you have defined for this experience have almost reached their end date. This mean your experience will not be available for travelers anymore. Is that really what you want? If not, click the button to edit your experience and add new availabilities!
+email.experience.update.btn: Update your experience
 email.booking.update.coreTitle: Your request has been %status%
 email.booking.update.subTitle: %user% has %status% your request for his experience %title%
 email.booking.update.message: Click on the button above to see the detail about this booking. You should now be able to contact %user% directly via this page.

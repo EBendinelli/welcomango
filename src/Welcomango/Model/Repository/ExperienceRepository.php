@@ -116,9 +116,11 @@ class ExperienceRepository extends EntityRepository
             $queryBuilder->setParameter('day', '%,'.$date->format('w').',%');
         }
 
-        //Check that the experience end_date is not passed
-        $queryBuilder->andWhere('a.endDate >= :experience_end_date');
-        $queryBuilder->setParameter('experience_end_date', date('Y-m-d').'%');
+        if(!$admin){
+            //Check that the experience end_date is not passed
+            $queryBuilder->andWhere('a.endDate >= :experience_end_date');
+            $queryBuilder->setParameter('experience_end_date', date('Y-m-d').'%');
+        }
 
         if ($hour = $this->getFilter('hour', $filters)) {
             $queryBuilder->andWhere('a.hour LIKE :hour');
