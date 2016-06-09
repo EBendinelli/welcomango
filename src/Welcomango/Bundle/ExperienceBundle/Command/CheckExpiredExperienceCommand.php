@@ -36,29 +36,30 @@ class CheckExpiredExperienceCommand extends ContainerAwareCommand
 
         /** @var Experience $experience */
         foreach ($experiences as $experience) {
+            if($experience->getPublicationStatus() == 'published') {
+                $experience->setPublicationStatus('expired');
+                $entityManager->persist($experience);
 
-            $experience->setPublicationStatus('expired');
-            $entityManager->persist($experience);
+                $logger->info('Experience [{id} | {title}] has been set to expired', [
+                    'id' => $experience->getId(),
+                    'title' => $experience->getTitle(),
+                    'experience' => $experience
+                ]);
 
-            $logger->info('Experience [{id} | {title}] has been set to expired', [
-                'id'         => $experience->getId(),
-                'title'      => $experience->getTitle(),
-                'experience' => $experience
-            ]);
+                $message = \Swift_Message::newInstance()
+                    ->setSubject($translator->trans('email.experience.expired.subject', array(), 'interface'))
+                    ->setFrom(['no-reply@welcomango.com' => 'Welcomango Team'])
+                    ->setTo($experience->getCreator()->getEmail())
+                    ->setBody(
+                        $this->getContainer()->get('templating')->render('WelcomangoEmailBundle:EmailTemplate:experienceExpired.html.twig', array(
+                                'experience' => $experience,
+                                'type' => 'Text'
+                            )
+                        ), 'text/plain')
+                    ->addPart($this->getContainer()->get('templating')->render('WelcomangoEmailBundle:EmailTemplate:experienceExpired.html.twig', array('experience' => $experience)), 'text/html');
 
-            $message = \Swift_Message::newInstance()
-                ->setSubject($translator->trans('email.experience.expired.subject',array(), 'interface'))
-                ->setFrom(['no-reply@welcomango.com' => 'Welcomango Team'])
-                ->setTo($experience->getCreator()->getEmail())
-                ->setBody(
-                    $this->getContainer()->get('templating')->render('WelcomangoEmailBundle:EmailTemplate:experienceExpired.html.twig',array(
-                            'experience' => $experience,
-                            'type' => 'Text'
-                        )
-                    ),'text/plain')
-                ->addPart($this->getContainer()->get('templating')->render('WelcomangoEmailBundle:EmailTemplate:experienceExpired.html.twig',array('experience' => $experience)),'text/html');
-
-            $this->getContainer()->get('mailer')->send($message);
+                $this->getContainer()->get('mailer')->send($message);
+            }
         }
 
         $entityManager->flush();
@@ -66,17 +67,19 @@ class CheckExpiredExperienceCommand extends ContainerAwareCommand
         $reminderExperiencesIds = $doctrine->getRepository(Availability::class)->getAlmostExpiredExperiences();
         $reminderExperiences = $doctrine->getRepository(Experience::class)->findById($reminderExperiencesIds);
         foreach ($reminderExperiences as $experience) {
-            $message = \Swift_Message::newInstance()
-                ->setSubject($translator->trans('email.experience.almostExpired.subject',array(), 'interface'))
-                ->setFrom(['no-reply@welcomango.com' => 'Welcomango Team'])
-                ->setTo($experience->getCreator()->getEmail())
-                ->setBody($this->getContainer()->get('templating')->render('WelcomangoEmailBundle:EmailTemplate:experienceAlmostExpired.html.twig',array(
+            if($experience->getPublicationStatus() == 'published') {
+                $message = \Swift_Message::newInstance()
+                    ->setSubject($translator->trans('email.experience.almostExpired.subject', array(), 'interface'))
+                    ->setFrom(['no-reply@welcomango.com' => 'Welcomango Team'])
+                    ->setTo($experience->getCreator()->getEmail())
+                    ->setBody($this->getContainer()->get('templating')->render('WelcomangoEmailBundle:EmailTemplate:experienceAlmostExpired.html.twig', array(
                             'experience' => $experience,
                             'type' => 'Text'
                         )
-                    ),'text/plain')
-                ->addPart($this->getContainer()->get('templating')->render('WelcomangoEmailBundle:EmailTemplate:experienceAlmostExpired.html.twig',array('experience' => $experience)),'text/html');
-            $this->getContainer()->get('mailer')->send($message);
+                    ), 'text/plain')
+                    ->addPart($this->getContainer()->get('templating')->render('WelcomangoEmailBundle:EmailTemplate:experienceAlmostExpired.html.twig', array('experience' => $experience)), 'text/html');
+                $this->getContainer()->get('mailer')->send($message);
+            }
         }
 
     }
