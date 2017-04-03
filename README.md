@@ -13,15 +13,15 @@ Welcomango is a Symfony2 project and thus requires:
 
 We recommand using Nginx as your server engine.
 To install you local instance of Welcomango and run test or use specific feature of the project, run the following commands:
-`mkdir /www/welcomango`
-`php composer.phar install    //load dependencies `
-`app/console do:da:cr         // create database `
-`app/console do:sc:cr         // create database schema`
-`app/console do:fi:lo         // load fixtures`
-`app/console ass:in`
-`bower install`
-`gulp`
-`app/console server:run`
+* `mkdir /www/welcomango`
+* `php composer.phar install    //load dependencies `
+* `app/console do:da:cr         // create database `
+* `app/console do:sc:cr         // create database schema`
+* `app/console do:fi:lo         // load fixtures`
+* `app/console ass:in`
+* `bower install`
+* `gulp`
+* `app/console server:run`
 
 # Usage
 
