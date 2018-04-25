@@ -10,10 +10,11 @@ Welcomango is a Symfony2 project and thus requires:
 * Gulp
 * Bower
 * composer
+* Git
 
 We recommand using Nginx as your server engine.
 To install you local instance of Welcomango and run test or use specific feature of the project, run the following commands:
-* `mkdir /www/welcomango`
+* `git clone https://github.com/EBendinelli/welcomango
 * `php composer.phar install    //load dependencies `
 * `app/console do:da:cr         // create database `
 * `app/console do:sc:cr         // create database schema`
